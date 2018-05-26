@@ -83,12 +83,12 @@
 <meta name="keywords" content="-Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dynamic Programming">
-<meta property="og:url" content="http://yoursite.com/2018/05/23/DynamicProgramming/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/05/26/Dynamic-Programming/index.html">
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="动态规划入门如果我们有面值为1元、3元和5元的硬币若干枚，如何用最少的硬币凑够11元？ (表面上这道题可以用贪心算法，但贪心算法无法保证可以求出解，比如1元换成2元的时候)">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/knight.png">
-<meta property="og:updated_time" content="2018-05-26T04:53:41.888Z">
+<meta property="og:updated_time" content="2018-05-26T05:02:50.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Programming">
 <meta name="twitter:description" content="动态规划入门如果我们有面值为1元、3元和5元的硬币若干枚，如何用最少的硬币凑够11元？ (表面上这道题可以用贪心算法，但贪心算法无法保证可以求出解，比如1元换成2元的时候)">
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/23/DynamicProgramming/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/26/Dynamic-Programming/"/>
 
 
 
@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/DynamicProgramming/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/Dynamic-Programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -318,8 +318,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T16:43:43-05:00">
-                2018-05-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T00:00:36-05:00">
+                2018-05-26
               </time>
             
 
@@ -795,8 +795,6 @@
 </li>
 </ul>
 </blockquote>
-<blockquote>
-</blockquote>
 <h3 id="740-Delete-and-Earn"><a href="#740-Delete-and-Earn" class="headerlink" title="740. Delete and Earn"></a>740. Delete and Earn</h3><blockquote>
 <p>题目</p>
 <p>Given an array <code>nums</code> of integers, you can perform operations on the array.</p>
@@ -873,8 +871,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;   <span class="keyword">import</span> sys</span><br><span class="line">&gt;   <span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">&gt;       <span class="function"><span class="keyword">def</span> <span class="title">minimumDeleteSum</span><span class="params">(self, s1, s2)</span>:</span></span><br><span class="line">&gt;           mv = sys.maxsize</span><br><span class="line">&gt;           l1 = len(s1)</span><br><span class="line">&gt;           l2 = len(s2)</span><br><span class="line">&gt;           dp = [[ mv <span class="keyword">for</span> _ <span class="keyword">in</span> range(l2+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(l1+<span class="number">1</span>)]</span><br><span class="line">&gt;           dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">&gt;           <span class="keyword">for</span> i <span class="keyword">in</span> range(l1):</span><br><span class="line">&gt;               dp[i + <span class="number">1</span>][<span class="number">0</span>] = dp[i][<span class="number">0</span>]+ord(s1[i])</span><br><span class="line">&gt;           <span class="keyword">for</span> i <span class="keyword">in</span> range(l2):</span><br><span class="line">&gt;               dp[<span class="number">0</span>][i + <span class="number">1</span>] = dp[<span class="number">0</span>][i]+ord(s2[i])</span><br><span class="line">&gt;           <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,l1+<span class="number">1</span>):</span><br><span class="line">&gt;                <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,l2+<span class="number">1</span>):</span><br><span class="line">&gt;                   <span class="keyword">if</span> s1[i<span class="number">-1</span>]==s2[j<span class="number">-1</span>]:</span><br><span class="line">&gt;                       dp[i][j] = dp[i<span class="number">-1</span>][j<span class="number">-1</span>]</span><br><span class="line">&gt;                   <span class="keyword">else</span>:</span><br><span class="line">&gt;                       dp[i][j] = min(dp[i<span class="number">-1</span>][j]+ord(s1[i<span class="number">-1</span>]) , dp[i][j<span class="number">-1</span>]+ord(s2[j<span class="number">-1</span>]))</span><br><span class="line">&gt;           <span class="keyword">return</span> dp[<span class="number">-1</span>][<span class="number">-1</span>]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</blockquote>
-<blockquote>
 </blockquote>
 <h3 id="Knight-Probability-in-Chessboard-688"><a href="#Knight-Probability-in-Chessboard-688" class="headerlink" title="Knight Probability in Chessboard(688)"></a>Knight Probability in Chessboard(688)</h3><blockquote>
 <ul>
@@ -1063,15 +1059,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/05/25/Definition-of-Differential-Privacy/" rel="next" title="Definition of Differential Privacy">
+                <i class="fa fa-chevron-left"></i> Definition of Differential Privacy
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/23/Hexo-Commands/" rel="prev" title="Hexo Commands">
-                Hexo Commands <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
