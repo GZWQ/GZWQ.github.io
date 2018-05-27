@@ -283,6 +283,148 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/27/DP-Application-Location-Protection/" itemprop="url">DP Application - Location Protection</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T12:32:50-05:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
+                    <span itemprop="name">-Differential Privacy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/DP-Application-Private-Spatial-Decompositions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -519,8 +661,9 @@
       
         
           
-            <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the privacy of their locations.</p>
-<p><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is the first one to solve this problem.</p>
+            <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>In croudsourcing, workers with mobile devices to collect data and send it to task requester for rewards.</p>
+<p>While in the differential privacy croudsourcing, the goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the privacy of their locations.</p>
+<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><h3 id="2014-To"><a href="#2014-To" class="headerlink" title="[2014-To]"></a><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a></h3><p>it is the first one to solve this problem.</p>
 <blockquote>
 <ol>
 <li><p>Framework</p>
@@ -555,9 +698,9 @@
 </ul>
 </li>
 </ol>
-<pre><code>- s
+<pre><code>- 
 </code></pre></blockquote>
-<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a> criticizes that <a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is based on the assumption that workers are uniformly distributed within the domain and and the workers in each cell have the same acceptance rate. So they proposes a workers density-based method.</p>
+<h3 id="2018-Yang"><a href="#2018-Yang" class="headerlink" title="[2018-Yang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a></h3><p>it criticizes that <a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is based on the assumption that workers are uniformly distributed within the domain and and the workers in each cell have the same acceptance rate. So they proposes a workers density-based method.</p>
 <blockquote>
 <ol>
 <li>Framework<ul>
@@ -568,16 +711,46 @@
 </li>
 <li>Modules<ul>
 <li>Using quadtree to partition the region based on worker density.  But the authors change this method so that the partitioning is based on the worker density instead of choosing the middle point.</li>
-<li>Partitioning stop condition. Traditional quadtrees require the data publisher to specify the height of the partitioning. In this paper, the process stops if (1) no workers exist in the cell; (2) the area of cell is less than some threshold, The smaller the cell, the more uniform the distribution of workers within it; (3) the distribution of workers in a cell is relatively uniform， which is measures by the threshold of maximum density difference.</li>
 <li>Partitioning point selection. Before partitioning, <code>m</code> initial points are randomly generated within the cell, ==============================(TODO)</li>
 <li>Differential privacy data release. A noisy count of the number of workers in each cell is released to protect the privacy of worker locations, where whether or not a worker<br>within a specific cell cannot be identified.</li>
 <li>Task assignment. Firstly, teh geocast region is selected based on task assignment success rate and system overhead (the distance workers need to travel and the number of workers notified of the task).</li>
+</ul>
+</li>
+<li>Privacy Model<ul>
+<li>The basic idea of private data release is that the domain of worker locations is partitioned into small cells and Laplace noise is added to the count of workers in each cell to achieve a differential privacy guarantee.</li>
+<li>Pervious literature assumes the worker locations are distributed uniformly, and the workers in each cell have the same acceptance rate, which is not the case in real-world scenarios. Partitioning the data domain into a uniform grid would result in sizeable errors. Therefore, we propose a recursive partitioning process based on worker density. </li>
+<li>The aim is to identify dense regions and sparse regions and make the distribution of the workers in each smaller region as near to uniform as possible.</li>
+<li>Adopting data-independent quadtree into workers density-based data-independent technique. <ul>
+<li>Partitioning stop condition. Traditional quadtrees require the data publisher to specify the height of the partitioning. In this paper, the process stops if (1) no workers exist in the cell; (2) the area of cell is less than some threshold, The smaller the cell, the more uniform the distribution of workers within it; (3) the distribution of workers in a cell is relatively uniform， which is measures by the threshold of maximum density difference.</li>
+<li>First, $m$ initial partition points in the location domain need to be selected, where $m=\frac{\sqrt{area \ of \ cell}}{\alpha}$</li>
+<li>check condition (1) and (2), which is the number of points in cell is greater than 0 and the area of cell is greater than the threshold. If one of answers is no, stop partitioning.</li>
+<li>for each partitioning point, calculate the density of the subcells divided by this point. choose the point which has the maximum density difference bbetween subcells.</li>
+<li>If the biggest density difference is greater than the threshold β, the cell is partitioned at point. Otherwise, the cell will not be partitioned as the distribution of worker in the cell is already close to uniform. For example, the density of four subcells is 1, 2, 1, 2, which means in each subcells, there are 1, 2, 1 and 2 points in each subcell, which is kind of uniform distribution in the cell.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h3 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7837982" target="_blank" rel="noopener">[2016-Wang]</a></h3><p>In this paper, instead of studying task assignment, the author focuses on sparse croudsensing. Due to large target sensing area and limited budget which result in insufficient spatial coverage of mobile users, sparse mobile croudsensing impute information of the uncovered regions by combining historical records with available sensing data from nearby regions.</p>
+<blockquote>
+<ol>
+<li>Framework<ul>
+<li>location obfuscation.</li>
+<li>data adjustment. Due to location obfuscation, the uploaded region data is not actual value of this region, so adjustment is needed to decrease data utility loss. the data quality loss is determined by the difference of sensing data between the actual and the obfuscated locations, instead of the geographic distance. In other words, a participant’s location may be mapped to a place far away, as long as the sensing values of the two locations are close enough.</li>
+<li>data inference : modeled as a matrix completion problem, where each element in the matrix is the value like temperature of a region at time t. In this paper, they use compressive sensing theory for inference.</li>
+</ul>
+</li>
+<li>Privacy Model<ul>
+<li>Privacy leakage : In Sparse MCS, participants report the sensing data with time stamps and geographical coordinates, which may introduce serious privacy risks. </li>
+<li></li>
 </ul>
 </li>
 </ol>
 </blockquote>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To] A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
 <p>[2018-Yang] Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
+<p>[2016-Wang] Differential Location Privacy for Sparse Mobile Crowdsensing</p>
 
           
         
@@ -1241,7 +1414,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
