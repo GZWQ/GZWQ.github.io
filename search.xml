@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>DP Application</title>
+      <link href="/2018/05/26/DP-Application/"/>
+      <url>/2018/05/26/DP-Application/</url>
+      <content type="html"><![CDATA[<h1 id="CroudSourcing"><a href="#CroudSourcing" class="headerlink" title="CroudSourcing"></a>CroudSourcing</h1><p><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is the first one to solve this problem.</p>]]></content>
+      
+      <categories>
+          
+          <category> -Differential Privacy </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> -Differential Privacy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Dynamic Programming</title>
       <link href="/2018/05/26/Dynamic-Programming/"/>
       <url>/2018/05/26/Dynamic-Programming/</url>
