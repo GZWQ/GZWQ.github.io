@@ -325,6 +325,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
+                    <span itemprop="name">-Differential Privacy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -354,7 +376,9 @@
       
         
           
-            
+            <p><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> details the methods of Private Spatial Decompositions.</p>
+<p>[2014-To] A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
+
           
         
       
@@ -499,7 +523,18 @@
 <p><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is the first one to solve this problem.</p>
 <blockquote>
 <ol>
-<li>Framework</li>
+<li>Framework<ul>
+<li>Workers send their locations to a trusted cellular service provider(CSP) </li>
+<li>CSP collects updates and releases a PSD according to privacy budget </li>
+<li>When the SC-server receives a task t, it queries the PSD to determine a geocast region (GR), which is a unique feature of this work. Next, the SC-server initiates a geocast communication process to disseminate t to all workers within GR. Upon receiving request t, a worker w decides whether to perform the task or not.</li>
+</ul>
+</li>
+<li>Modules<ul>
+<li>CSP builds a PSD. Although Adaptive Grid (AG) over-partitions the space in sparse regionsand under-partition in dense regions, the authors assume uniform distribution of locations and use AG for partitioning.</li>
+<li>Task assignment. Once server get a task request, server needs to query PSD to find a geocast region, balancing between high task assignment success rate and system overload like worker traveling distance and the number of  noticed worker.  </li>
+</ul>
+</li>
+<li>Our specific objective is to protect both the location and<br>the identity of workers during task assignment.</li>
 </ol>
 </blockquote>
 <p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a> criticizes that <a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is based on the assumption that workers are uniformly distributed within the domain and and the workers in each cell have the same acceptance rate. So they proposes a workers density-based method.</p>
@@ -521,6 +556,8 @@
 </li>
 </ol>
 </blockquote>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To] A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
+<p>[2018-Yang] Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
 
           
         
@@ -809,12 +846,12 @@
         
           
             <p>This post is about the definition of Differential Privacy</p>
-<h2 id="Vector-DP"><a href="#Vector-DP" class="headerlink" title="Vector DP"></a>Vector DP</h2><p>This following details are from<a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">1To</a>.</p>
+<h2 id="Vector-DP"><a href="#Vector-DP" class="headerlink" title="Vector DP"></a>Vector DP</h2><p>This following details are from<a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a>.</p>
 <h2 id="DP-Utility-Analysis"><a href="#DP-Utility-Analysis" class="headerlink" title="DP Utility Analysis"></a>DP Utility Analysis</h2><p>This following details are from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a>.</p>
 <p><img src="/2018-YANG.png" alt="2018-YANG"></p>
 <p><img src="/2018-YANG1-7391264.png" alt="2018-YANG1-7391264"></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1To]A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
-<p>[2Yang]Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To]A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
+<p>[2018-Yang]Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
 
           
         
