@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="-Differential Privacy," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,14 @@
 
 
 
-<meta name="description" content="Problem SettingThe goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the">
-<meta name="keywords" content="-Differential Privacy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DP Application - CroudSourcing">
-<meta property="og:url" content="http://yoursite.com/2018/05/26/DP-CroudSourcing/index.html">
+<meta property="og:title" content="DP Application - Private Spatial Decompositions">
+<meta property="og:url" content="http://yoursite.com/2018/05/26/DP-Application-Private-Spatial-Decompositions/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Problem SettingThe goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-27T03:25:16.523Z">
+<meta property="og:updated_time" content="2018-05-27T03:36:58.504Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DP Application - CroudSourcing">
-<meta name="twitter:description" content="Problem SettingThe goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the">
+<meta name="twitter:title" content="DP Application - Private Spatial Decompositions">
 
 
 
@@ -120,13 +116,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/26/DP-CroudSourcing/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/26/DP-Application-Private-Spatial-Decompositions/"/>
 
 
 
 
 
-  <title>DP Application - CroudSourcing | Blog of Qing</title>
+  <title>DP Application - Private Spatial Decompositions | Blog of Qing</title>
   
 
 
@@ -287,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/DP-CroudSourcing/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/DP-Application-Private-Spatial-Decompositions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -304,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DP Application - CroudSourcing</h1>
+          <h1 class="post-title" itemprop="name headline">DP Application - Private Spatial Decompositions</h1>
         
 
         <div class="post-meta">
@@ -316,7 +312,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T16:59:09-05:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T22:36:58-05:00">
                 2018-05-26
               </time>
             
@@ -326,28 +322,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">-Differential Privacy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -376,33 +350,7 @@
       
 
       
-        <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the privacy of their locations.</p>
-<p><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is the first one to solve this problem.</p>
-<blockquote>
-<ol>
-<li>Framework</li>
-</ol>
-</blockquote>
-<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a> criticizes that <a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is based on the assumption that workers are uniformly distributed within the domain and and the workers in each cell have the same acceptance rate. So they proposes a workers density-based method.</p>
-<blockquote>
-<ol>
-<li>Framework<ul>
-<li>Workers must submit their location to the CSP, travel to the location designated for the task and collect data using their sensor-equipped device.</li>
-<li>The CSP collects locations from workers and releases data in sanitized form to the Server for task assignment. There is a trust relationship between CSP and workers.</li>
-<li>The Server queries the CSP for a sanitized dataset once it receives a task, where server chooses a geocast region GR to disseminate the task to the workers in GR. It then assigns the task to suitable workers, through the CSP, according to a task assignment algorithm.</li>
-</ul>
-</li>
-<li>Modules<ul>
-<li>Using quadtree to partition the region based on worker density.  But the authors change this method so that the partitioning is based on the worker density instead of choosing the middle point.</li>
-<li>Partitioning stop condition. Traditional quadtrees require the data publisher to specify the height of the partitioning. In this paper, the process stops if (1) no workers exist in the cell; (2) the area of cell is less than some threshold, The smaller the cell, the more uniform the distribution of workers within it; (3) the distribution of workers in a cell is relatively uniform， which is measures by the threshold of maximum density difference.</li>
-<li>Partitioning point selection. Before partitioning, <code>m</code> initial points are randomly generated within the cell, ==============================(TODO)</li>
-<li>Differential privacy data release. A noisy count of the number of workers in each cell is released to protect the privacy of worker locations, where whether or not a worker<br>within a specific cell cannot be identified.</li>
-<li>Task assignment. Firstly, teh geocast region is selected based on task assignment success rate and system overhead (the distance workers need to travel and the number of workers notified of the task).</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-
+        
       
     </div>
     
@@ -417,12 +365,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Differential-Privacy/" rel="tag"># -Differential Privacy</a>
-          
-        </div>
-      
 
       
       
@@ -432,8 +374,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/Dynamic-Programming/" rel="next" title="Dynamic Programming">
-                <i class="fa fa-chevron-left"></i> Dynamic Programming
+              <a href="/2018/05/26/DP Application-CroudSourcing/" rel="next" title="DP Application - CroudSourcing">
+                <i class="fa fa-chevron-left"></i> DP Application - CroudSourcing
               </a>
             
           </div>
@@ -492,17 +434,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -517,7 +450,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -562,22 +495,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">1.</span> <span class="nav-text">Problem Setting</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

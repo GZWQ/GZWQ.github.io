@@ -3,9 +3,18 @@
   
     
     <entry>
+      <title>DP Application - Private Spatial Decompositions</title>
+      <link href="/2018/05/26/DP-Application-Private-Spatial-Decompositions/"/>
+      <url>/2018/05/26/DP-Application-Private-Spatial-Decompositions/</url>
+      <content type="html"><![CDATA[]]></content>
+      
+      
+    </entry>
+    
+    <entry>
       <title>DP Application - CroudSourcing</title>
-      <link href="/2018/05/26/DP-CroudSourcing/"/>
-      <url>/2018/05/26/DP-CroudSourcing/</url>
+      <link href="/2018/05/26/DP%20Application-CroudSourcing/"/>
+      <url>/2018/05/26/DP%20Application-CroudSourcing/</url>
       <content type="html"><![CDATA[<h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the privacy of their locations.</p><p><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is the first one to solve this problem.</p><blockquote><ol><li>Framework</li></ol></blockquote><p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a> criticizes that <a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is based on the assumption that workers are uniformly distributed within the domain and and the workers in each cell have the same acceptance rate. So they proposes a workers density-based method.</p><blockquote><ol><li>Framework<ul><li>Workers must submit their location to the CSP, travel to the location designated for the task and collect data using their sensor-equipped device.</li><li>The CSP collects locations from workers and releases data in sanitized form to the Server for task assignment. There is a trust relationship between CSP and workers.</li><li>The Server queries the CSP for a sanitized dataset once it receives a task, where server chooses a geocast region GR to disseminate the task to the workers in GR. It then assigns the task to suitable workers, through the CSP, according to a task assignment algorithm.</li></ul></li><li>Modules<ul><li>Using quadtree to partition the region based on worker density.  But the authors change this method so that the partitioning is based on the worker density instead of choosing the middle point.</li><li>Partitioning stop condition. Traditional quadtrees require the data publisher to specify the height of the partitioning. In this paper, the process stops if (1) no workers exist in the cell; (2) the area of cell is less than some threshold, The smaller the cell, the more uniform the distribution of workers within it; (3) the distribution of workers in a cell is relatively uniform， which is measures by the threshold of maximum density difference.</li><li>Partitioning point selection. Before partitioning, <code>m</code> initial points are randomly generated within the cell, ==============================(TODO)</li><li>Differential privacy data release. A noisy count of the number of workers in each cell is released to protect the privacy of worker locations, where whether or not a worker<br>within a specific cell cannot be identified.</li><li>Task assignment. Firstly, teh geocast region is selected based on task assignment success rate and system overhead (the distance workers need to travel and the number of workers notified of the task).</li></ul></li></ol></blockquote>]]></content>
       
       <categories>
