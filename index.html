@@ -377,7 +377,9 @@
         
           
             <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
-<h3 id="2013-Miguel"><a href="#2013-Miguel" class="headerlink" title="[2013-Miguel]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Miguel]</a></h3><h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Miguel] Geo-indistinguishability: Differential privacy for location-based systems</p>
+<h3 id="2013-Andres"><a href="#2013-Andres" class="headerlink" title="[2013-Andres]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a></h3><p>It performs as a probabilistic geo-obfuscation process, i.e., a user first obfuscates his<br>real location to another one according to a pre-configured<br>probability function P (encoding the probability of mapping<br>arbitrary location l to l∗) and then uploads the obfuscated<br>location to the server. The probability function is the key to<br>ensure differential privacy. The basic idea is that, suppose<br>the obfuscated location is l∗, for any two locations l1, l2,<br>their probability of being mapped to l∗ are similar. Then,<br>if an adversary observes a user u in l∗, he/she cannot distinguish whether u is actually in l1 or l2, even if he/she knows<br>the obfuscation function P . With this intuition, differential<br>privacy formally defines such similarity between any two<br>locations l1, l2 for arbitrary l∗.</p>
+<p>The distance d(l1; l2) is introduced in the formulation to<br>reflect the intuition that if l1 and l2 are close to each other<br>(i.e., small d(l1; l2)), they should be more indistinguishable.Note that the set of locations L can be constructed by dividing the concerned area into a set of regions (of arbitrary<br>size) and selecting the representative locations of the regions<br>(e.g., geographic center)</p>
+<h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Andres] Geo-indistinguishability: Differential privacy for location-based systems</p>
 <p>[2014-Nicolas] Optimal geo-indistinguishable mechanisms for location privacy</p>
 
           
@@ -663,7 +665,8 @@
       
         
           
-            <h2 id="Task-Assignments-in-CroudSourcing"><a href="#Task-Assignments-in-CroudSourcing" class="headerlink" title="Task Assignments in CroudSourcing"></a>Task Assignments in CroudSourcing</h2><p>In croudsourcing, workers with mobile devices to collect data and send it to task requester for rewards.</p>
+            <p><a href="https://sigmodrecord.org/publications/sigmodRecord/1512/pdfs/05_surveys_Pournajaf.pdf" target="_blank" rel="noopener">[2015-Layla]</a> is a survey on the MobileCroudScoucing privacy.</p>
+<h2 id="Task-Assignments-in-CroudSourcing"><a href="#Task-Assignments-in-CroudSourcing" class="headerlink" title="Task Assignments in CroudSourcing"></a>Task Assignments in CroudSourcing</h2><p>In croudsourcing, workers with mobile devices to collect data and send it to task requester for rewards.</p>
 <p>In task assignment, organizers need participants’ precise locations for optimal task allocation. However, the exposure of their locations raises privacy concerns. Especially for those who are not eventually selected for any task, their location privacy is sacrificed in vain.</p>
 <p>So in the differential privacy task assignment croudsourcing, the goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the privacy of their locations.</p>
 <h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><h3 id="2014-To"><a href="#2014-To" class="headerlink" title="[2014-To]"></a><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a></h3><p>it is the first one to solve this problem.</p>
@@ -735,7 +738,7 @@
 </li>
 </ol>
 </blockquote>
-<h3 id="2017-Wang"><a href="#2017-Wang" class="headerlink" title="[2017-Wang]"></a><a href="http://delivery.acm.org/10.1145/3060000/3052696/p627-wang.pdf?ip=167.96.154.196&amp;id=3052696&amp;acc=ACTIVE%20SERVICE&amp;key=A79D83B43E50B5B8%2E43B53F8E9794E57B%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&amp;__acm__=1527473689_0256f5dd7e42a779989f37ef8867b66c" target="_blank" rel="noopener">[2017-Wang]</a></h3><blockquote>
+<h3 id="2017-Wang"><a href="#2017-Wang" class="headerlink" title="[2017-Wang]"></a><a href="http://papers.www2017.com.au.s3-website-ap-southeast-2.amazonaws.com/proceedings/p627.pdf" target="_blank" rel="noopener">[2017-Wang]</a></h3><blockquote>
 <ol>
 <li>Framework<ul>
 <li>Platform-side Geo-Obfuscation Function Generation</li>
@@ -745,7 +748,7 @@
 </li>
 </ol>
 </blockquote>
-<h2 id="in-CroudSourcing"><a href="#in-CroudSourcing" class="headerlink" title="in CroudSourcing"></a>in CroudSourcing</h2><h3 id="Solutions-1"><a href="#Solutions-1" class="headerlink" title="Solutions"></a>Solutions</h3><h3 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7837982" target="_blank" rel="noopener">[2016-Wang]</a></h3><p>In this paper, instead of studying task assignment, the author focuses on sparse croudsensing. Due to large target sensing area and limited budget which result in insufficient spatial coverage of mobile users, sparse mobile croudsensing impute information of the uncovered regions by combining historical records with available sensing data from nearby regions.</p>
+<h2 id="Data-Sensing-in-CroudSourcing"><a href="#Data-Sensing-in-CroudSourcing" class="headerlink" title="Data Sensing in CroudSourcing"></a>Data Sensing in CroudSourcing</h2><h3 id="Solutions-1"><a href="#Solutions-1" class="headerlink" title="Solutions"></a>Solutions</h3><h3 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7837982" target="_blank" rel="noopener">[2016-Wang]</a></h3><p>In this paper, instead of studying task assignment, the author focuses on sparse croudsensing. Due to large target sensing area and limited budget which result in insufficient spatial coverage of mobile users, sparse mobile croudsensing impute information of the uncovered regions by combining historical records with available sensing data from nearby regions.</p>
 <blockquote>
 <ol>
 <li>Framework<ul>
@@ -765,6 +768,7 @@
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To] A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
 <p>[2018-Yang] Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
 <p>[2016-Wang] Differential Location Privacy for Sparse Mobile Crowdsensing</p>
+<p>[2015-Layla] Participant privacy in mobile crowd sensing task management: A survey of methods and challenges</p>
 
           
         

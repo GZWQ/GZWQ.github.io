@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-28T02:52:46.166Z">
+<meta property="og:updated_time" content="2018-05-28T16:29:08.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Location Protection">
 <meta name="twitter:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
@@ -377,7 +377,9 @@
 
       
         <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
-<h3 id="2013-Miguel"><a href="#2013-Miguel" class="headerlink" title="[2013-Miguel]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Miguel]</a></h3><h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Miguel] Geo-indistinguishability: Differential privacy for location-based systems</p>
+<h3 id="2013-Andres"><a href="#2013-Andres" class="headerlink" title="[2013-Andres]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a></h3><p>It performs as a probabilistic geo-obfuscation process, i.e., a user first obfuscates his<br>real location to another one according to a pre-configured<br>probability function P (encoding the probability of mapping<br>arbitrary location l to l∗) and then uploads the obfuscated<br>location to the server. The probability function is the key to<br>ensure differential privacy. The basic idea is that, suppose<br>the obfuscated location is l∗, for any two locations l1, l2,<br>their probability of being mapped to l∗ are similar. Then,<br>if an adversary observes a user u in l∗, he/she cannot distinguish whether u is actually in l1 or l2, even if he/she knows<br>the obfuscation function P . With this intuition, differential<br>privacy formally defines such similarity between any two<br>locations l1, l2 for arbitrary l∗.</p>
+<p>The distance d(l1; l2) is introduced in the formulation to<br>reflect the intuition that if l1 and l2 are close to each other<br>(i.e., small d(l1; l2)), they should be more indistinguishable.Note that the set of locations L can be constructed by dividing the concerned area into a set of regions (of arbitrary<br>size) and selecting the representative locations of the regions<br>(e.g., geographic center)</p>
+<h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Andres] Geo-indistinguishability: Differential privacy for location-based systems</p>
 <p>[2014-Nicolas] Optimal geo-indistinguishable mechanisms for location privacy</p>
 
       
@@ -549,7 +551,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">1.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Miguel"><span class="nav-number">1.1.</span> <span class="nav-text">[2013-Miguel]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">1.2.</span> <span class="nav-text">[2014-Nicolas]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">1.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres"><span class="nav-number">1.1.</span> <span class="nav-text">[2013-Andres]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">1.2.</span> <span class="nav-text">[2014-Nicolas]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
