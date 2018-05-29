@@ -79,18 +79,27 @@
 
 
 
-<meta name="description" content="[2016-Atsushi] gives a comprehensive survey about random response shdsh $x_1 = 2$ Application[Location Obfuscation Algorithm SpotMe]Algorithm FrameworkLet $k$ be the number of locations on a map. Then">
+<meta name="description" content="[2016-Atsushi] gives a comprehensive survey about random response Random Response and its  VariantWarner VersionRandom response was first proposed by [1965-Warner]. The aim is to estimate the proporti">
 <meta name="keywords" content="-Differential Privacy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP Application - Random Response">
 <meta property="og:url" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="[2016-Atsushi] gives a comprehensive survey about random response shdsh $x_1 = 2$ Application[Location Obfuscation Algorithm SpotMe]Algorithm FrameworkLet $k$ be the number of locations on a map. Then">
+<meta property="og:description" content="[2016-Atsushi] gives a comprehensive survey about random response Random Response and its  VariantWarner VersionRandom response was first proposed by [1965-Warner]. The aim is to estimate the proporti">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-29T02:41:07.331Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%2012.40.16%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/myplot.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%201.08.31%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%201.08.51%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%201.10.11%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%201.11.13%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%201.12.13%20AM-7574379.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%201.12.36%20AM.png">
+<meta property="og:updated_time" content="2018-05-29T06:14:17.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Random Response">
-<meta name="twitter:description" content="[2016-Atsushi] gives a comprehensive survey about random response shdsh $x_1 = 2$ Application[Location Obfuscation Algorithm SpotMe]Algorithm FrameworkLet $k$ be the number of locations on a map. Then">
+<meta name="twitter:description" content="[2016-Atsushi] gives a comprehensive survey about random response Random Response and its  VariantWarner VersionRandom response was first proposed by [1965-Warner]. The aim is to estimate the proporti">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-05-29%20at%2012.40.16%20AM.png">
 
 
 
@@ -377,14 +386,51 @@
 
       
         <p><a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-45871-7_17.pdf" target="_blank" rel="noopener">[2016-Atsushi]</a> gives a comprehensive survey about random response</p>
-<p>shdsh</p>
-<p>$x_1 = 2$</p>
-<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><h4 id="Location-Obfuscation-Algorithm-SpotMe"><a href="#Location-Obfuscation-Algorithm-SpotMe" class="headerlink" title="[Location Obfuscation Algorithm SpotMe]"></a><a href="https://pdfs.semanticscholar.org/7e74/15857ddcc798affff74d7e615b0d29f6bf74.pdf" target="_blank" rel="noopener">[Location Obfuscation Algorithm SpotMe]</a></h4><h5 id="Algorithm-Framework"><a href="#Algorithm-Framework" class="headerlink" title="Algorithm Framework"></a>Algorithm Framework</h5><p>Let $k$ be the number of locations on a map. Then, the main part of SpotMe works as follows:</p>
+<h3 id="Random-Response-and-its-Variant"><a href="#Random-Response-and-its-Variant" class="headerlink" title="Random Response and its  Variant"></a>Random Response and its  Variant</h3><h4 id="Warner-Version"><a href="#Warner-Version" class="headerlink" title="Warner Version"></a>Warner Version</h4><p>Random response was first proposed by [1965-Warner]. The aim is to estimate the proportion $\pi(A)$ of people who have some attribute A.</p>
+<h5 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h5><ol>
+<li>There are red cards and non-red cards in a box, where the ratio of red cards among all the cards is $q$ with $0 &lt; q &lt; 1$ and $q \ne \frac{1}{2}$. And user draws a card.</li>
+<li>If red, answer truthfully to the question “I am a member of A”</li>
+<li>Otherwise, answer truthfully to the question “I am a member of A”</li>
+</ol>
+<h5 id="Utility"><a href="#Utility" class="headerlink" title="Utility"></a>Utility</h5><p>Let $\hat{T}$ be the proportion to which the respondents reply “True.” It is easy to see that the expectation of $\hat{T}$  is:</p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 12.40.16 AM.png" alt="Screen Shot 2018-05-29 at 12.40.16 AM"></p>
+<h5 id="Privacy-Analysis"><a href="#Privacy-Analysis" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p>According to the definition of Differential Privacy, the following ratio should be bounded,</p>
+<script type="math/tex; mode=display">
+P(A|A)\le{e^\epsilon{P(A|not \ A)}}\\
+P(A|not \ A)\le{e^\epsilon{P(A|A)}}</script><p>$P(A|A)=q​$</p>
+<p>$P(A| not \ A)=(1-q)$</p>
+<p>So combining the above two, we have:</p>
+<p>The randomized response satisfied $\epsilon$-Differential Privacy, where</p>
+<script type="math/tex; mode=display">
+\epsilon=max\{ln\frac{1-q}{q},ln\frac{q}{1-q}  \}</script><p><img src="/2018/05/28/DP-Application-Random-Response/myplot.jpeg" alt="myplot"></p>
+<h4 id="Kuk-Version"><a href="#Kuk-Version" class="headerlink" title="Kuk Version"></a>Kuk Version</h4><p>Kuk’s proposed another kind of randomized response mechanism to estimate the proportion $\pi_A$, the same as Warner’s mechanism. </p>
+<h5 id="Framework-1"><a href="#Framework-1" class="headerlink" title="Framework"></a>Framework</h5><ol>
+<li>There are two boxes, $BOX_1$ and $BOX_2$. There are red and non-red cards in each box and the ratio of red cards in each box is $q_1,q_2$ respectively, where $0&lt;q_1,q_2&lt;1, q_1\ne{q_2}$. User takes one card from each box.</li>
+<li>If this user is a member of A, then replies “red card” or “non-red card” in accordance<br>with the card taken from $BOX_1$</li>
+<li>Otherwise, he does the same as above except that he takes a card from $BOX_2$.</li>
+</ol>
+<h5 id="Privacy-Analysis-1"><a href="#Privacy-Analysis-1" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.08.31 AM.png" alt="Screen Shot 2018-05-29 at 1.08.31 AM"></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.08.51 AM.png" alt="Screen Shot 2018-05-29 at 1.08.51 AM"></p>
+<h4 id="Negative-Survey-Mechanism"><a href="#Negative-Survey-Mechanism" class="headerlink" title="Negative Survey Mechanism"></a>Negative Survey Mechanism</h4><h5 id="Framework-2"><a href="#Framework-2" class="headerlink" title="Framework"></a>Framework</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.10.11 AM.png" alt="Screen Shot 2018-05-29 at 1.10.11 AM"></p>
+<h5 id="Privacy-Analysis-2"><a href="#Privacy-Analysis-2" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.11.13 AM.png" alt="Screen Shot 2018-05-29 at 1.11.13 AM"></p>
+<h4 id="t-times-Negative-Survey"><a href="#t-times-Negative-Survey" class="headerlink" title="t-times Negative Survey"></a>t-times Negative Survey</h4><h5 id="Privacy-Analysis-3"><a href="#Privacy-Analysis-3" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.12.13 AM-7574379.png" alt="Screen Shot 2018-05-29 at 1.12.13 AM-7574379"></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.12.36 AM.png" alt="Screen Shot 2018-05-29 at 1.12.36 AM"></p>
+<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><h4 id="2011-Quercia"><a href="#2011-Quercia" class="headerlink" title="[2011-Quercia] "></a><a href="https://pdfs.semanticscholar.org/7e74/15857ddcc798affff74d7e615b0d29f6bf74.pdf" target="_blank" rel="noopener">[2011-Quercia] </a></h4><h5 id="Framework-3"><a href="#Framework-3" class="headerlink" title="Framework"></a>Framework</h5><p>[2011-Quercia] uses random response to obfuscate locations.</p>
+<p>Let $k$ be the number of locations on a map. Then, the main part of SpotMe works as follows:</p>
 <ol>
 <li>the mobile phone chooses the location k uniformly at random with probability $p$</li>
 <li>it chooses the true location with probability $1-p$</li>
 </ol>
-<h5 id="Privacy-Analysis"><a href="#Privacy-Analysis" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5>
+<h5 id="Privacy-Analysis-4"><a href="#Privacy-Analysis-4" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p>According to the definition of Differential Privacy, the following ratio should be bounded,</p>
+<script type="math/tex; mode=display">
+P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where $L_{true}$ is user’s actual location and $L^{‘}_{true}$ is the user’s location after making some changes while $L_{noise}$ is user’s obfuscated location.</p>
+<p>$P(L_{true}|L_{true})=(1-p)+p*\frac{1}{k}$</p>
+<p>$P(L_{true}|L^{‘}_{true})=p*\frac{1}{k}$</p>
+<p>so after combining above two formulations, we have privacy bugdet:</p>
+<script type="math/tex; mode=display">
+\epsilon=ln\frac{k-(k-1)p}{p}</script><p>[2011-Quercia] SpotME if you can: randomized responses for location obfuscation on mobile phones</p>
+<p>[1965-Warner] Randomized response: a survey technique for eliminating evasive answer bias</p>
+
       
     </div>
     
@@ -554,7 +600,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Application"><span class="nav-number">1.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Location-Obfuscation-Algorithm-SpotMe"><span class="nav-number">1.1.</span> <span class="nav-text">[Location Obfuscation Algorithm SpotMe]</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Algorithm-Framework"><span class="nav-number">1.1.1.</span> <span class="nav-text">Algorithm Framework</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Privacy-Analysis"><span class="nav-number">1.1.2.</span> <span class="nav-text">Privacy Analysis</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-Response-and-its-Variant"><span class="nav-number">1.</span> <span class="nav-text">Random Response and its  Variant</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Warner-Version"><span class="nav-number">1.1.</span> <span class="nav-text">Warner Version</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Framework"><span class="nav-number">1.1.1.</span> <span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Utility"><span class="nav-number">1.1.2.</span> <span class="nav-text">Utility</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Privacy-Analysis"><span class="nav-number">1.1.3.</span> <span class="nav-text">Privacy Analysis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kuk-Version"><span class="nav-number">1.2.</span> <span class="nav-text">Kuk Version</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Framework-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Privacy-Analysis-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Privacy Analysis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Negative-Survey-Mechanism"><span class="nav-number">1.3.</span> <span class="nav-text">Negative Survey Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Framework-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Privacy-Analysis-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">Privacy Analysis</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#t-times-Negative-Survey"><span class="nav-number">1.4.</span> <span class="nav-text">t-times Negative Survey</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Privacy-Analysis-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">Privacy Analysis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Application"><span class="nav-number">2.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2011-Quercia"><span class="nav-number">2.1.</span> <span class="nav-text">[2011-Quercia] </span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Framework-3"><span class="nav-number">2.1.1.</span> <span class="nav-text">Framework</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Privacy-Analysis-4"><span class="nav-number">2.1.2.</span> <span class="nav-text">Privacy Analysis</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
