@@ -88,7 +88,7 @@
 <meta property="og:description" content="动态规划这篇文章详细记录LeetCode上各种难度的动态规划题目。每道题我都给出题目，思路以及Python代码。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/knight.png">
-<meta property="og:updated_time" content="2018-05-29T03:06:47.998Z">
+<meta property="og:updated_time" content="2018-05-29T03:15:42.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Programming">
 <meta name="twitter:description" content="动态规划这篇文章详细记录LeetCode上各种难度的动态规划题目。每道题我都给出题目，思路以及Python代码。">
@@ -391,13 +391,9 @@
 <li><p>题目</p>
 <p>On a staircase, the <code>i</code>-th step has some non-negative cost <code>cost[i]</code> assigned (0 indexed).</p>
 <p>Once you pay the cost, you can either climb one or two steps. You need to find minimum cost to reach the top of the floor, and you can either start from the step with index 0, or the step with index 1.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;   Input: cost = [<span class="number">1</span>, <span class="number">100</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">100</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">100</span>, <span class="number">1</span>]</span><br><span class="line">&gt;   Output: <span class="number">6</span></span><br><span class="line">&gt;   Explanation: Cheapest <span class="keyword">is</span> start on cost[<span class="number">0</span>], <span class="keyword">and</span> only step on <span class="number">1</span>s, skipping cost[<span class="number">3</span>].</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;   Example1:</span><br><span class="line">&gt;   Input: cost = [<span class="number">1</span>, <span class="number">100</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">100</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">100</span>, <span class="number">1</span>]</span><br><span class="line">&gt;   Output: <span class="number">6</span></span><br><span class="line">&gt;   Explanation: Cheapest <span class="keyword">is</span> start on cost[<span class="number">0</span>], <span class="keyword">and</span> only step on <span class="number">1</span>s, skipping cost[<span class="number">3</span>].</span><br><span class="line">&gt;   Example2:</span><br><span class="line">&gt;   Input: cost = [<span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>]</span><br><span class="line">&gt;   Output: <span class="number">15</span></span><br><span class="line">&gt;   Explanation: Cheapest <span class="keyword">is</span> start on cost[<span class="number">1</span>], pay that cost <span class="keyword">and</span> go to the top.</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;   Input: cost = [<span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>]</span><br><span class="line">&gt;   Output: <span class="number">15</span></span><br><span class="line">&gt;   Explanation: Cheapest <span class="keyword">is</span> start on cost[<span class="number">1</span>], pay that cost <span class="keyword">and</span> go to the top.</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>&gt;</p>
 <blockquote>
