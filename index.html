@@ -931,10 +931,39 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 </blockquote>
 <h3 id="2017-Wang"><a href="#2017-Wang" class="headerlink" title="[2017-Wang]"></a><a href="http://papers.www2017.com.au.s3-website-ap-southeast-2.amazonaws.com/proceedings/p627.pdf" target="_blank" rel="noopener">[2017-Wang]</a></h3><blockquote>
 <ol>
-<li>Framework<ul>
+<li><p>Framework</p>
+<ul>
 <li>Platform-side Geo-Obfuscation Function Generation</li>
 <li>User-side Location Obfuscation</li>
 <li>Platform-side Obfuscation-aware Task Allocation</li>
+</ul>
+</li>
+<li><p>Privacy Model</p>
+<p>Overall, the aurhor models workers’ travel distance to task locations as the function of geo-obfuscation function and task allocation. And by calculating the optimal function, we can get the Geo-Obfuscation matrix which satisfies DP and task allocation schemes.</p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 10.06.41 AM.png" alt="Screen Shot 2018-05-30 at 10.06.41 AM"></p>
+<ul>
+<li><p>the expected travel distance of assigning a task at $l_t$ to a user at (obfuscated) $l*$ given the geo-obfuscation function $P$.</p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 10.18.25 AM.png" alt="Screen Shot 2018-05-30 at 10.18.25 AM"></p>
+</li>
+<li><p>optimal function</p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 10.55.21 AM.png" alt="Screen Shot 2018-05-30 at 10.55.21 AM"></p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 11.05.55 AM.png" alt="Screen Shot 2018-05-30 at 11.05.55 AM"></p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 10.56.24 AM.png" alt="Screen Shot 2018-05-30 at 10.56.24 AM"></p>
+</li>
+<li><p>task allocation</p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 11.07.06 AM.png" alt="Screen Shot 2018-05-30 at 11.07.06 AM"></p>
+</li>
+<li><p>Candidate Geo-Distribution Estimation</p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 11.10.54 AM.png" alt="Screen Shot 2018-05-30 at 11.10.54 AM"></p>
+</li>
+<li><p>Laplace</p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 11.27.15 AM.png" alt="Screen Shot 2018-05-30 at 11.27.15 AM"></p>
+</li>
+<li><p>Geo-distribution Estimation</p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 11.50.49 AM.png" alt="Screen Shot 2018-05-30 at 11.50.49 AM"></p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 11.50.57 AM.png" alt="Screen Shot 2018-05-30 at 11.50.57 AM"></p>
+<p><img src="/2018/05/26/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 11.51.05 AM.png" alt="Screen Shot 2018-05-30 at 11.51.05 AM"></p>
+</li>
 </ul>
 </li>
 </ol>
