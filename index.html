@@ -376,8 +376,9 @@
       
         
           
-            <p><a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-45871-7_17.pdf" target="_blank" rel="noopener">[2016-Atsushi]</a> gives a comprehensive survey about random response</p>
-<h3 id="Random-Response-and-its-Variant"><a href="#Random-Response-and-its-Variant" class="headerlink" title="Random Response and its  Variant"></a>Random Response and its  Variant</h3><h4 id="Warner-Version"><a href="#Warner-Version" class="headerlink" title="Warner Version"></a>Warner Version</h4><p>Random response was first proposed by [1965-Warner]. The aim is to estimate the proportion $\pi(A)$ of people who have some attribute A.</p>
+            <p><a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-45871-7_17.pdf" target="_blank" rel="noopener">[2016-Atsushi]</a> gives a comprehensive survey about random response. Randomized response tends to be used in data collection scenario.Randomized response is purely a client-based privacy solution. It does not<br>rely upon a trusted third-party server and puts control over data back to clients. The basic idea is answer truthfully with probability $p$, and answer randomly by picking a answer from the rest choices with probability $1-p$. And the rest choices include the true answer.</p>
+<h3 id="Random-Response-and-its-Variant"><a href="#Random-Response-and-its-Variant" class="headerlink" title="Random Response and its  Variant"></a>Random Response and its  Variant</h3><h4 id="Definition-2016-Wang"><a href="#Definition-2016-Wang" class="headerlink" title="Definition[2016-Wang]"></a>Definition<a href="http://ceur-ws.org/Vol-1558/paper35.pdf" target="_blank" rel="noopener">[2016-Wang]</a></h4><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 10.18.29 PM.png" alt="Screen Shot 2018-05-29 at 10.18.29 PM"></p>
+<h4 id="Warner-Version"><a href="#Warner-Version" class="headerlink" title="Warner Version"></a>Warner Version</h4><p>Random response was first proposed by [1965-Warner]. The aim is to estimate the proportion $\pi(A)$ of people who have some attribute A.</p>
 <h5 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h5><ol>
 <li>There are red cards and non-red cards in a box, where the ratio of red cards among all the cards is $q$ with $0 &lt; q &lt; 1$ and $q \ne \frac{1}{2}$. And user draws a card.</li>
 <li>If red, answer truthfully to the question “I am a member of A”</li>
@@ -421,6 +422,7 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 <script type="math/tex; mode=display">
 \epsilon=ln\frac{k-(k-1)p}{p}</script><p>[2011-Quercia] SpotME if you can: randomized responses for location obfuscation on mobile phones</p>
 <p>[1965-Warner] Randomized response: a survey technique for eliminating evasive answer bias</p>
+<p>[2016-Wang] Using Randomized Response for Differential Privacy Preserving Data Collection </p>
 
           
         
@@ -1250,8 +1252,12 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <h2 id="DP-Utility-Analysis"><a href="#DP-Utility-Analysis" class="headerlink" title="DP Utility Analysis"></a>DP Utility Analysis</h2><p>This following details are from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a>.</p>
 <p><img src="/2018/05/25/Definition-of-Differential-Privacy/2018-YANG.png" alt="2018-YANG"></p>
 <p><img src="/2018/05/25/Definition-of-Differential-Privacy/2018-YANG1.png" alt="2018-YANG1-7391264"></p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To]A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
-<p>[2018-Yang]Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
+<h2 id="Remarks"><a href="#Remarks" class="headerlink" title="Remarks"></a>Remarks</h2><h3 id="Prupose"><a href="#Prupose" class="headerlink" title="Prupose"></a>Prupose</h3><ul>
+<li>differential privacy aims to ensure that the output of the algorithm does not significantly depend on any particular individual’s data and ensures that an adversary should not be able to confidently infer whether a particular individual is present in a database even with access to every other entry in the database and an unbounded computational power. <a href="http://ceur-ws.org/Vol-1558/paper35.pdf" target="_blank" rel="noopener">[2016-Wang]</a></li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To] A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
+<p>[2018-Yang] Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
+<p>[2016-Wang] Using Randomized Response for Differential Privacy Preserving Data Collection </p>
 
           
         
