@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="-Differential Privacy," />
+  <meta name="keywords" content="-Probability and Statistic," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
-<meta name="keywords" content="-Differential Privacy">
+<meta name="description" content="Lecture 1: Probability and CountingDefinitionSample space: a set of all possible outcomes of an experiment Event: a subset of the sample space Lecture 12: Discrete vs. Continuous, the UniformDefinitio">
+<meta name="keywords" content="-Probability and Statistic">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DP Application - Location Protection">
-<meta property="og:url" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/index.html">
+<meta property="og:title" content="Statistic 110">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/Statistic-110/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
+<meta property="og:description" content="Lecture 1: Probability and CountingDefinitionSample space: a set of all possible outcomes of an experiment Event: a subset of the sample space Lecture 12: Discrete vs. Continuous, the UniformDefinitio">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-28T16:29:08.648Z">
+<meta property="og:updated_time" content="2018-05-30T22:49:15.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DP Application - Location Protection">
-<meta name="twitter:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
+<meta name="twitter:title" content="Statistic 110">
+<meta name="twitter:description" content="Lecture 1: Probability and CountingDefinitionSample space: a set of all possible outcomes of an experiment Event: a subset of the sample space Lecture 12: Discrete vs. Continuous, the UniformDefinitio">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/Statistic-110/"/>
 
 
 
 
 
-  <title>DP Application - Location Protection | Blog of Qing</title>
+  <title>Statistic 110 | Blog of Qing</title>
   
 
 
@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/Statistic-110/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -304,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DP Application - Location Protection</h1>
+          <h1 class="post-title" itemprop="name headline">Statistic 110</h1>
         
 
         <div class="post-meta">
@@ -316,8 +316,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T12:32:50-05:00">
-                2018-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T16:20:26-05:00">
+                2018-05-30
               </time>
             
 
@@ -326,28 +326,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">-Differential Privacy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -376,11 +354,18 @@
       
 
       
-        <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
-<h3 id="2013-Andres"><a href="#2013-Andres" class="headerlink" title="[2013-Andres]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a></h3><p>It performs as a probabilistic geo-obfuscation process, i.e., a user first obfuscates his<br>real location to another one according to a pre-configured<br>probability function P (encoding the probability of mapping<br>arbitrary location l to l∗) and then uploads the obfuscated<br>location to the server. The probability function is the key to<br>ensure differential privacy. The basic idea is that, suppose<br>the obfuscated location is l∗, for any two locations l1, l2,<br>their probability of being mapped to l∗ are similar. Then,<br>if an adversary observes a user u in l∗, he/she cannot distinguish whether u is actually in l1 or l2, even if he/she knows<br>the obfuscation function P . With this intuition, differential<br>privacy formally defines such similarity between any two<br>locations l1, l2 for arbitrary l∗.</p>
-<p>The distance d(l1; l2) is introduced in the formulation to<br>reflect the intuition that if l1 and l2 are close to each other<br>(i.e., small d(l1; l2)), they should be more indistinguishable.Note that the set of locations L can be constructed by dividing the concerned area into a set of regions (of arbitrary<br>size) and selecting the representative locations of the regions<br>(e.g., geographic center)</p>
-<h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Andres] Geo-indistinguishability: Differential privacy for location-based systems</p>
-<p>[2014-Nicolas] Optimal geo-indistinguishable mechanisms for location privacy</p>
+        <h1 id="Lecture-1-Probability-and-Counting"><a href="#Lecture-1-Probability-and-Counting" class="headerlink" title="Lecture 1: Probability and Counting"></a>Lecture 1: Probability and Counting</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><strong>Sample space</strong>: a set of all possible outcomes of an experiment</p>
+<p><strong>Event</strong>: a subset of the sample space</p>
+<h1 id="Lecture-12-Discrete-vs-Continuous-the-Uniform"><a href="#Lecture-12-Discrete-vs-Continuous-the-Uniform" class="headerlink" title="Lecture 12: Discrete vs. Continuous, the Uniform"></a>Lecture 12: Discrete vs. Continuous, the Uniform</h1><h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><p><strong>PDF (Probability Density Function)</strong> : $X$ has PDF $f(x)$ if $P(a\le{X}\le{b})=\int_{a}^{b}f(x)$</p>
+<p><strong>CDF (Cumulative Distribution Function)</strong> : if $X$ has PDF $f$, then the CDF is $F(X)=P(X\le{x})=\int_{-\infty}^{x}f(t)dt$</p>
+<p><strong>Expectation</strong>: $E(X)=\int_{-\infty}^{\infty}xf(x)dx$</p>
+<p><strong>Variance</strong>: $Var(X)=E(X-E(X))^2$</p>
+<blockquote>
+<p>$Var(X)=E(X^2-2X{E(X)}+E(X)^2)$</p>
+<p>in above formular, because $2E(X)$ is a constant, so it can be outside, same thing with $E(X)^2$</p>
+<p>$Var(X)=E(X^2)-2E(X)E(x)+E(X)^2=E(X^2)-E(X)^2$</p>
+</blockquote>
+<p><strong>Standard deviation</strong>: $SD(X)=\sqrt{Var(X)}$</p>
 
       
     </div>
@@ -398,7 +383,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Differential-Privacy/" rel="tag"># -Differential Privacy</a>
+            <a href="/tags/Probability-and-Statistic/" rel="tag"># -Probability and Statistic</a>
           
         </div>
       
@@ -411,8 +396,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/DP-Application-Private-Spatial-Decompositions/" rel="next" title="DP Application - Private Spatial Decompositions">
-                <i class="fa fa-chevron-left"></i> DP Application - Private Spatial Decompositions
+              <a href="/2018/05/28/DP-Application-Random-Response/" rel="next" title="DP Application - Random Response">
+                <i class="fa fa-chevron-left"></i> DP Application - Random Response
               </a>
             
           </div>
@@ -421,8 +406,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/28/DP-Application-Random-Response/" rel="prev" title="DP Application - Random Response">
-                DP Application - Random Response <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/30/Mechanism-of-Differential-Privacy/" rel="prev" title="Mechanism of Differential Privacy">
+                Mechanism of Differential Privacy <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -555,7 +540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">1.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres"><span class="nav-number">1.1.</span> <span class="nav-text">[2013-Andres]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">1.2.</span> <span class="nav-text">[2014-Nicolas]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-1-Probability-and-Counting"><span class="nav-number">1.</span> <span class="nav-text">Lecture 1: Probability and Counting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">1.1.</span> <span class="nav-text">Definition</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-12-Discrete-vs-Continuous-the-Uniform"><span class="nav-number">2.</span> <span class="nav-text">Lecture 12: Discrete vs. Continuous, the Uniform</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-1"><span class="nav-number">2.1.</span> <span class="nav-text">Definition</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1072,6 +1057,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

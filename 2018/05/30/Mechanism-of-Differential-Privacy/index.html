@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
+<meta name="description" content="Laplace DistributionThe following details are from Wikipedia. PDF  CDF">
 <meta name="keywords" content="-Differential Privacy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DP Application - Location Protection">
-<meta property="og:url" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/index.html">
+<meta property="og:title" content="Mechanism of Differential Privacy">
+<meta property="og:url" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
+<meta property="og:description" content="Laplace DistributionThe following details are from Wikipedia. PDF  CDF">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-28T16:29:08.648Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-30%20at%206.17.03%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_pdf-7722463.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-30%20at%206.18.29%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_cdf.png">
+<meta property="og:updated_time" content="2018-05-31T00:03:44.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DP Application - Location Protection">
-<meta name="twitter:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
+<meta name="twitter:title" content="Mechanism of Differential Privacy">
+<meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. PDF  CDF">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-30%20at%206.17.03%20PM.png">
 
 
 
@@ -120,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/"/>
 
 
 
 
 
-  <title>DP Application - Location Protection | Blog of Qing</title>
+  <title>Mechanism of Differential Privacy | Blog of Qing</title>
   
 
 
@@ -287,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -304,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DP Application - Location Protection</h1>
+          <h1 class="post-title" itemprop="name headline">Mechanism of Differential Privacy</h1>
         
 
         <div class="post-meta">
@@ -316,8 +321,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T12:32:50-05:00">
-                2018-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T18:10:21-05:00">
+                2018-05-30
               </time>
             
 
@@ -376,11 +381,11 @@
       
 
       
-        <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
-<h3 id="2013-Andres"><a href="#2013-Andres" class="headerlink" title="[2013-Andres]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a></h3><p>It performs as a probabilistic geo-obfuscation process, i.e., a user first obfuscates his<br>real location to another one according to a pre-configured<br>probability function P (encoding the probability of mapping<br>arbitrary location l to l∗) and then uploads the obfuscated<br>location to the server. The probability function is the key to<br>ensure differential privacy. The basic idea is that, suppose<br>the obfuscated location is l∗, for any two locations l1, l2,<br>their probability of being mapped to l∗ are similar. Then,<br>if an adversary observes a user u in l∗, he/she cannot distinguish whether u is actually in l1 or l2, even if he/she knows<br>the obfuscation function P . With this intuition, differential<br>privacy formally defines such similarity between any two<br>locations l1, l2 for arbitrary l∗.</p>
-<p>The distance d(l1; l2) is introduced in the formulation to<br>reflect the intuition that if l1 and l2 are close to each other<br>(i.e., small d(l1; l2)), they should be more indistinguishable.Note that the set of locations L can be constructed by dividing the concerned area into a set of regions (of arbitrary<br>size) and selecting the representative locations of the regions<br>(e.g., geographic center)</p>
-<h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Andres] Geo-indistinguishability: Differential privacy for location-based systems</p>
-<p>[2014-Nicolas] Optimal geo-indistinguishable mechanisms for location privacy</p>
+        <h1 id="Laplace-Distribution"><a href="#Laplace-Distribution" class="headerlink" title="Laplace Distribution"></a>Laplace Distribution</h1><p>The following details are from <a href="https://zh.wikipedia.org/wiki/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E5%88%86%E5%B8%83" target="_blank" rel="noopener">Wikipedia</a>.</p>
+<h2 id="PDF"><a href="#PDF" class="headerlink" title="PDF"></a>PDF</h2><p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-30 at 6.17.03 PM.png" alt="Screen Shot 2018-05-30 at 6.17.03 PM"></p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_pdf-7722463.png" alt="Laplace_distribution_pdf-7722463"></p>
+<h2 id="CDF"><a href="#CDF" class="headerlink" title="CDF"></a>CDF</h2><p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-30 at 6.18.29 PM.png" alt="Screen Shot 2018-05-30 at 6.18.29 PM"></p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_cdf.png" alt="Laplace_distribution_cdf"></p>
 
       
     </div>
@@ -411,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/DP-Application-Private-Spatial-Decompositions/" rel="next" title="DP Application - Private Spatial Decompositions">
-                <i class="fa fa-chevron-left"></i> DP Application - Private Spatial Decompositions
+              <a href="/2018/05/30/Statistic-110/" rel="next" title="Statistic 110">
+                <i class="fa fa-chevron-left"></i> Statistic 110
               </a>
             
           </div>
@@ -420,10 +425,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/28/DP-Application-Random-Response/" rel="prev" title="DP Application - Random Response">
-                DP Application - Random Response <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -555,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">1.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres"><span class="nav-number">1.1.</span> <span class="nav-text">[2013-Andres]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">1.2.</span> <span class="nav-text">[2014-Nicolas]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Distribution"><span class="nav-number">1.</span> <span class="nav-text">Laplace Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.1.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDF"><span class="nav-number">1.2.</span> <span class="nav-text">CDF</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1072,6 +1073,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
