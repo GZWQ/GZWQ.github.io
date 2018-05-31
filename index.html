@@ -382,10 +382,19 @@
 <blockquote>
 <ol>
 <li>概率密度函数反映了概率在$ x$点处的密集程度。</li>
+<li>x轴表示每一种取值，而y轴表示概率。</li>
 </ol>
 </blockquote>
 <h2 id="CDF"><a href="#CDF" class="headerlink" title="CDF"></a>CDF</h2><p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-30 at 6.18.29 PM.png" alt="Screen Shot 2018-05-30 at 6.18.29 PM"></p>
 <p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_cdf.png" alt="Laplace_distribution_cdf"></p>
+<blockquote>
+<ol>
+<li>CDF表示连续累积概率，即$F(0)=P(x\le{0})$，即所有非正值的概率和。</li>
+<li>PDF 表示某一点取值的概率$f(0)=P(x=0)=0.5$</li>
+</ol>
+</blockquote>
+<h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="http://www.cis.upenn.edu/~aaroth/courses/slides/Lecture4.pdf" target="_blank" rel="noopener">[2011-Aaron]</a></p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-31 at 3.10.30 PM.png" alt="Screen Shot 2018-05-31 at 3.10.30 PM"></p>
 
           
         
@@ -505,9 +514,9 @@
       
         
           
-            <h1 id="Lecture-1-Probability-and-Counting"><a href="#Lecture-1-Probability-and-Counting" class="headerlink" title="Lecture 1: Probability and Counting"></a>Lecture 1: Probability and Counting</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><strong>Sample space</strong>: a set of all possible outcomes of an experiment</p>
+            <h1 id="Probability-and-Counting"><a href="#Probability-and-Counting" class="headerlink" title="Probability and Counting"></a>Probability and Counting</h1><p><strong>Sample space</strong>: a set of all possible outcomes of an experiment</p>
 <p><strong>Event</strong>: a subset of the sample space</p>
-<h1 id="Lecture-12-Discrete-vs-Continuous-the-Uniform"><a href="#Lecture-12-Discrete-vs-Continuous-the-Uniform" class="headerlink" title="Lecture 12: Discrete vs. Continuous, the Uniform"></a>Lecture 12: Discrete vs. Continuous, the Uniform</h1><h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><p><strong>PDF (Probability Density Function)</strong> : $X$ has PDF $f(x)$ if $P(a\le{X}\le{b})=\int_{a}^{b}f(x)$</p>
+<h1 id="Discrete-vs-Continuous-the-Uniform"><a href="#Discrete-vs-Continuous-the-Uniform" class="headerlink" title="Discrete vs. Continuous, the Uniform"></a>Discrete vs. Continuous, the Uniform</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><strong>PDF (Probability Density Function)</strong> : $X$ has PDF $f(x)$ if $P(a\le{X}\le{b})=\int_{a}^{b}f(x)$</p>
 <p><strong>CDF (Cumulative Distribution Function)</strong> : if $X$ has PDF $f$, then the CDF is $F(X)=P(X\le{x})=\int_{-\infty}^{x}f(t)dt$</p>
 <p><strong>Expectation</strong>: $E(X)=\int_{-\infty}^{\infty}xf(x)dx$</p>
 <p><strong>Variance</strong>: $Var(X)=E(X-E(X))^2$</p>
@@ -517,6 +526,12 @@
 <p>$Var(X)=E(X^2)-2E(X)E(x)+E(X)^2=E(X^2)-E(X)^2$</p>
 </blockquote>
 <p><strong>Standard deviation</strong>: $SD(X)=\sqrt{Var(X)}$</p>
+<h1 id="Expectation-and-Variance"><a href="#Expectation-and-Variance" class="headerlink" title="Expectation and Variance"></a>Expectation and Variance</h1><h2 id="Expectation"><a href="#Expectation" class="headerlink" title="Expectation"></a>Expectation</h2><h3 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h3><ol>
+<li>$E(X_1+X_2+…+X_n)=E(X_1)+E(X_2)+…+E(X_n)$</li>
+<li>$E(X_1X_2…X_n)=E(X_1)E(X_2)…E(X_n)$  if $X_i$ is independent to each other.</li>
+<li>$E(cX)=cE(X)$ if c is a constant.</li>
+<li>$E(c)=c$  the expectation of constant is the constant itself.</li>
+</ol>
 
           
         
@@ -1174,9 +1189,9 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 <ul>
 <li><p>AG uses a two-level grid and variable cell granularity.</p>
 </li>
-<li><p>For the first-level, domain is divided into $m_1\times{m1}$ cells. For each level-1 cell, it is divided into $m_2\times{m2}$ subcells. </p>
+<li><p>For the first-level, domain is divided into $m_1\times{m1}$ cells. This heuristic method is data-independent, and thus does not consume any privacy budget. For each level-1 cell, it is divided into $m_2\times{m2}$ subcells. </p>
 <script type="math/tex; mode=display">
-m1 = max(10,\lceil{\frac{1}{4}\sqrt{\frac{N\times{\epsilon_1}}{k_1=10}}}\rceil)
+m1 = max(10,\lceil{\frac{1}{4}\sqrt{\frac{N\times{\epsilon}}{k_1=10}}}\rceil)
 \\
 m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <li><p>$k_2$ selection. $k_2$ controls the granularity of level-2 domain and small one leads to compactness in level-2 subcells. </p>
@@ -1261,6 +1276,9 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 </li>
 </ol>
 </blockquote>
+<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7296638" target="_blank" rel="noopener">[2015-Gong]</a></p>
+<p><a href="http://webhost.engr.illinois.edu/~hjin8/publications/mobihoc16.pdf" target="_blank" rel="noopener">[2016-Jin]</a></p>
+<p>This paper considers how to effectively incentivize worker participation. And proposes a system framework that integrates an incentive, a weighted  data aggregation, and a data perturbation mechanism.</p>
 <h2 id="Data-Sensing-in-CroudSourcing"><a href="#Data-Sensing-in-CroudSourcing" class="headerlink" title="Data Sensing in CroudSourcing"></a>Data Sensing in CroudSourcing</h2><h3 id="Solutions-1"><a href="#Solutions-1" class="headerlink" title="Solutions"></a>Solutions</h3><h3 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7837982" target="_blank" rel="noopener">[2016-Wang]</a></h3><p>In this paper, instead of studying task assignment, the author focuses on sparse croudsensing. Due to large target sensing area and limited budget which result in insufficient spatial coverage of mobile users, sparse mobile croudsensing impute information of the uncovered regions by combining historical records with available sensing data from nearby regions.</p>
 <blockquote>
 <ol>
@@ -1295,6 +1313,8 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <p>[2018-Yang] Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
 <p>[2016-Wang] Differential Location Privacy for Sparse Mobile Crowdsensing</p>
 <p>[2015-Layla] Participant privacy in mobile crowd sensing task management: A survey of methods and challenges</p>
+<p>[2015-Gong] Protecting Location Privacy for Task Allocation in Ad Hoc Mobile Cloud Computing</p>
+<p>[2016-Jin] INCEPTION: Incentivizing Privacy-Preserving Data Aggregation for Mobile Crowd Sensing Systems</p>
 
           
         

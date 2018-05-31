@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/26/DP%20Application-CroudSourcing/Screen%20Shot%202018-05-30%20at%2012.20.20%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/DP%20Application-CroudSourcing/Screen%20Shot%202018-05-30%20at%2012.22.12%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/DP%20Application-CroudSourcing/Screen%20Shot%202018-05-30%20at%2012.22.56%20PM.png">
-<meta property="og:updated_time" content="2018-05-31T00:41:44.209Z">
+<meta property="og:updated_time" content="2018-05-31T22:29:49.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - CroudSourcing">
 <meta name="twitter:description" content="[2015-Layla] is a survey on the MobileCroudScoucing privacy. Four factors in CroudSourcing:   sensing data quality, which tries to maximize the data quality measured by a certain metric (mostly used i">
@@ -434,9 +434,9 @@
 <ul>
 <li><p>AG uses a two-level grid and variable cell granularity.</p>
 </li>
-<li><p>For the first-level, domain is divided into $m_1\times{m1}$ cells. For each level-1 cell, it is divided into $m_2\times{m2}$ subcells. </p>
+<li><p>For the first-level, domain is divided into $m_1\times{m1}$ cells. This heuristic method is data-independent, and thus does not consume any privacy budget. For each level-1 cell, it is divided into $m_2\times{m2}$ subcells. </p>
 <script type="math/tex; mode=display">
-m1 = max(10,\lceil{\frac{1}{4}\sqrt{\frac{N\times{\epsilon_1}}{k_1=10}}}\rceil)
+m1 = max(10,\lceil{\frac{1}{4}\sqrt{\frac{N\times{\epsilon}}{k_1=10}}}\rceil)
 \\
 m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <li><p>$k_2$ selection. $k_2$ controls the granularity of level-2 domain and small one leads to compactness in level-2 subcells. </p>
@@ -521,6 +521,9 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 </li>
 </ol>
 </blockquote>
+<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7296638" target="_blank" rel="noopener">[2015-Gong]</a></p>
+<p><a href="http://webhost.engr.illinois.edu/~hjin8/publications/mobihoc16.pdf" target="_blank" rel="noopener">[2016-Jin]</a></p>
+<p>This paper considers how to effectively incentivize worker participation. And proposes a system framework that integrates an incentive, a weighted  data aggregation, and a data perturbation mechanism.</p>
 <h2 id="Data-Sensing-in-CroudSourcing"><a href="#Data-Sensing-in-CroudSourcing" class="headerlink" title="Data Sensing in CroudSourcing"></a>Data Sensing in CroudSourcing</h2><h3 id="Solutions-1"><a href="#Solutions-1" class="headerlink" title="Solutions"></a>Solutions</h3><h3 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7837982" target="_blank" rel="noopener">[2016-Wang]</a></h3><p>In this paper, instead of studying task assignment, the author focuses on sparse croudsensing. Due to large target sensing area and limited budget which result in insufficient spatial coverage of mobile users, sparse mobile croudsensing impute information of the uncovered regions by combining historical records with available sensing data from nearby regions.</p>
 <blockquote>
 <ol>
@@ -555,6 +558,8 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <p>[2018-Yang] Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
 <p>[2016-Wang] Differential Location Privacy for Sparse Mobile Crowdsensing</p>
 <p>[2015-Layla] Participant privacy in mobile crowd sensing task management: A survey of methods and challenges</p>
+<p>[2015-Gong] Protecting Location Privacy for Task Allocation in Ad Hoc Mobile Cloud Computing</p>
+<p>[2016-Jin] INCEPTION: Incentivizing Privacy-Preserving Data Aggregation for Mobile Crowd Sensing Systems</p>
 
       
     </div>
