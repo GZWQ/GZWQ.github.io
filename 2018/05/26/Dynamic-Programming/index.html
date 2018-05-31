@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/knight.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/Screen%20Shot%202018-05-29%20at%208.25.29%20PM.png">
-<meta property="og:updated_time" content="2018-05-30T02:23:06.952Z">
+<meta property="og:updated_time" content="2018-05-31T02:30:43.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Programming">
 <meta name="twitter:description" content="动态规划这篇文章详细记录LeetCode上各种难度的动态规划题目。每道题我都给出题目，思路以及Python代码。">
@@ -381,7 +381,7 @@
       
         <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><p>这篇文章详细记录<a href="https://leetcode.com/" target="_blank" rel="noopener">LeetCode</a>上各种难度的动态规划题目。每道题我都给出题目，思路以及Python代码。</p>
 <a id="more"></a>
-<h2 id="入门wq"><a href="#入门wq" class="headerlink" title="入门wq"></a>入门wq</h2><p>如果我们有面值为1元、3元和5元的硬币若干枚，如何用最少的硬币凑够11元？ (表面上这道题可以用贪心算法，但贪心算法无法保证可以求出解，比如1元换成2元的时候)</p>
+<h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><p>如果我们有面值为1元、3元和5元的硬币若干枚，如何用最少的硬币凑够11元？ (表面上这道题可以用贪心算法，但贪心算法无法保证可以求出解，比如1元换成2元的时候)</p>
 <p>首先我们思考一个问题，如何用最少的硬币凑够i元(i&lt;11)？为什么要这么问呢？ 两个原因：1.当我们遇到一个大问题时，总是习惯把问题的规模变小，这样便于分析讨论。 2.这个规模变小后的问题和原来的问题是同质的，除了规模变小，其它的都是一样的， 本质上它还是同一个问题(规模变小后的问题其实是原问题的子问题)。</p>
 <p>好了，让我们从最小的i开始吧。当i=0，即我们需要多少个硬币来凑够0元。 由于1，3，5都大于0，即没有比0小的币值，因此凑够0元我们最少需要0个硬币。 (这个分析很傻是不是？别着急，这个思路有利于我们理清动态规划究竟在做些什么。) 这时候我们发现用一个标记来表示这句“凑够0元我们最少需要0个硬币。”会比较方便， 如果一直用纯文字来表述，不出一会儿你就会觉得很绕了。那么， 我们用d(i)=j来表示凑够i元最少需要j个硬币。于是我们已经得到了d(0)=0， 表示凑够0元最小需要0个硬币。当i=1时，只有面值为1元的硬币可用， 因此我们拿起一个面值为1的硬币，接下来只需要凑够0元即可，而这个是已经知道答案的， 即d(0)=0。所以，d(1)=d(1-1)+1=d(0)+1=0+1=1。当i=2时， 仍然只有面值为1的硬币可用，于是我拿起一个面值为1的硬币， 接下来我只需要再凑够2-1=1元即可(记得要用最小的硬币数量)，而这个答案也已经知道了。 所以d(2)=d(2-1)+1=d(1)+1=1+1=2。一直到这里，你都可能会觉得，好无聊， 感觉像做小学生的题目似的。因为我们一直都只能操作面值为1的硬币！耐心点， 让我们看看i=3时的情况。当i=3时，我们能用的硬币就有两种了：1元的和3元的( 5元的仍然没用，因为你需要凑的数目是3元！5元太多了亲)。 既然能用的硬币有两种，我就有两种方案。如果我拿了一个1元的硬币，我的目标就变为了： 凑够3-1=2元需要的最少硬币数量。即d(3)=d(3-1)+1=d(2)+1=2+1=3。 这个方案说的是，我拿3个1元的硬币；第二种方案是我拿起一个3元的硬币， 我的目标就变成：凑够3-3=0元需要的最少硬币数量。即d(3)=d(3-3)+1=d(0)+1=0+1=1. 这个方案说的是，我拿1个3元的硬币。好了，这两种方案哪种更优呢？ 记得我们可是要用最少的硬币数量来凑够3元的。所以， 选择d(3)=1，怎么来的呢？具体是这样得到的：d(3)=min{d(3-1)+1, d(3-3)+1}。</p>
 <p>OK，码了这么多字讲具体的东西，让我们来点抽象的。从以上的文字中， 我们要抽出动态规划里非常重要的两个概念：状态和状态转移方程。</p>
@@ -2354,6 +2354,181 @@
 </pre></td></tr></table></figure>
 </li>
 </ul>
+<h3 id="Longest-Palindromic-Subsequence-516-—for-Length"><a href="#Longest-Palindromic-Subsequence-516-—for-Length" class="headerlink" title="Longest Palindromic Subsequence(516)—for(Length)"></a><em><u>Longest Palindromic Subsequence(516)—for(Length)</u></em></h3><ul>
+<li><p>题目</p>
+<p>Given a string s, find the longest palindromic subsequence’s length in s. You may assume that the maximum length of s is 1000.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">Example1:</div>
+<div class="line"></div>
+<div class="line">Input:<span class="string">"bbbab"</span> Output:<span class="number">4</span> </div>
+<div class="line">One possible longest palindromic subsequence is <span class="string">"bbbb"</span>.</div>
+<div class="line"></div>
+<div class="line">Example2:</div>
+<div class="line">Input:<span class="string">"cbbd"</span> Output:<span class="number">2</span> </div>
+<div class="line">One possible longest palindromic subsequence is <span class="string">"bb"</span>.</div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>思路</p>
+<p>dp[i][j]表示字符串s[i…j]的最长回文串长度。</p>
+<p>dp[i][j] = 1 表示单个单个字符s[i]就是一个回文串</p>
+<p>dp[i][j] = dp[i+1][j-1] + 2 if s[i]==s[j], else</p>
+<p>dp[i][j] = max (dp[i+1][j], dp[i][j-1])</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestPalindromeSubseq</span><span class="params">(self, s)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type s: str</span></div>
+<div class="line"><span class="string">        :rtype: int</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        l = len(s)</div>
+<div class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(l)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(l)]</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div>
+<div class="line">            dp[i][i] = <span class="number">1</span></div>
+<div class="line">        <span class="keyword">for</span> ll <span class="keyword">in</span> range(<span class="number">1</span>,l+<span class="number">1</span>):</div>
+<div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,l-ll):</div>
+<div class="line">                j = i+ll</div>
+<div class="line">                <span class="keyword">if</span> s[i]==s[j]:</div>
+<div class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j<span class="number">-1</span>] + <span class="number">2</span></div>
+<div class="line">                <span class="keyword">else</span>:</div>
+<div class="line">                    dp[i][j] = dp[i+<span class="number">1</span>][j] <span class="keyword">if</span> dp[i+<span class="number">1</span>][j] &gt; dp[i][j<span class="number">-1</span>] <span class="keyword">else</span> dp[i][j<span class="number">-1</span>]</div>
+<div class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][l<span class="number">-1</span>]</div>
+</pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Predict-the-Winner-486-—for-Length"><a href="#Predict-the-Winner-486-—for-Length" class="headerlink" title="Predict the Winner(486)—for(Length)"></a>Predict the Winner(486)—for(Length)</h3><ul>
+<li><p>题目</p>
+<p>Given an array of scores that are non-negative integers. Player 1 picks one of the numbers from either end of the array followed by the player 2 and then player 1 and so on. Each time a player picks a number, that number will not be available for the next player. This continues until all the scores have been chosen. The player with the maximum score wins.</p>
+<p>Given an array of scores, predict whether player 1 is the winner. You can assume each player plays to maximize his score.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line">Example1:</div>
+<div class="line"></div>
+<div class="line">Input: [<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>]</div>
+<div class="line">Output: False</div>
+<div class="line">Explanation: Initially, player <span class="number">1</span> can choose between <span class="number">1</span> and <span class="number">2</span>. </div>
+<div class="line">If he chooses <span class="number">2</span> (or <span class="number">1</span>), then player <span class="number">2</span> can choose from <span class="number">1</span> (or <span class="number">2</span>) and <span class="number">5</span>. If player <span class="number">2</span> chooses <span class="number">5</span>, then player <span class="number">1</span> will be left with <span class="number">1</span> (or <span class="number">2</span>). </div>
+<div class="line">So, <span class="keyword">final</span> score of player <span class="number">1</span> is <span class="number">1</span> + <span class="number">2</span> = <span class="number">3</span>, and player <span class="number">2</span> is <span class="number">5</span>. </div>
+<div class="line">Hence, player <span class="number">1</span> will never be the winner and you need to <span class="keyword">return</span> False.</div>
+<div class="line"></div>
+<div class="line">Example2:</div>
+<div class="line"></div>
+<div class="line">Input: [<span class="number">1</span>, <span class="number">5</span>, <span class="number">233</span>, <span class="number">7</span>]</div>
+<div class="line">Output: True</div>
+<div class="line">Explanation: Player <span class="number">1</span> first chooses <span class="number">1</span>. Then player <span class="number">2</span> have to choose between <span class="number">5</span> and <span class="number">7</span>. No matter which number player <span class="number">2</span> choose, player <span class="number">1</span> can choose <span class="number">233</span>.</div>
+<div class="line">Finally, player <span class="number">1</span> <span class="function">has more <span class="title">score</span> <span class="params">(<span class="number">234</span>)</span> than player 2 <span class="params">(<span class="number">12</span>)</span>, so you need to return True representing player1 can win.</span></div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>思路</p>
+<p>dp[i][j]表示子串s[i…j]供选择时两个玩家间的总分数差，无论是玩家1还是玩家2，都希望最大化差异，那么状态转移就是：</p>
+<p>dp[i][j] = max(nums[i] - dp[i+1][j] , nums[j] - dp[i][j-1])</p>
+</li>
+<li><p>代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">PredictTheWinner</span><span class="params">(self, nums)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type nums: List[int]</span></div>
+<div class="line"><span class="string">        :rtype: bool</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        l = len(nums)</div>
+<div class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(l)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(l)]</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div>
+<div class="line">            dp[i][i] = nums[i]</div>
+<div class="line">        <span class="keyword">for</span> dis <span class="keyword">in</span> range(<span class="number">1</span>,l):  <span class="comment">#the distance between index of i and j</span></div>
+<div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(l-dis):</div>
+<div class="line">                j = i+dis</div>
+<div class="line">                dp[i][j] = nums[i]-dp[i+<span class="number">1</span>][j] <span class="keyword">if</span> nums[i]-dp[i+<span class="number">1</span>][j]&gt;nums[j]-dp[i][j<span class="number">-1</span>] <span class="keyword">else</span> nums[j]-dp[i][j<span class="number">-1</span>]</div>
+<div class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][l<span class="number">-1</span>]&gt;=<span class="number">0</span></div>
+</pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Target-Sum-494"><a href="#Target-Sum-494" class="headerlink" title="Target Sum(494)"></a>Target Sum(494)</h3><ul>
+<li><p>题目</p>
+<p>You are given a list of non-negative integers, a1, a2, …, an, and a target, S. Now you have 2 symbols <code>+</code> and <code>-</code>. For each integer, you should choose one from <code>+</code> and <code>-</code> as its new symbol.</p>
+<p>Find out how many ways to assign symbols to make sum of integers equal to target S.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line">Input: nums is [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], S is <span class="number">3</span>. </div>
+<div class="line">Output: <span class="number">5</span></div>
+<div class="line">Explanation: </div>
+<div class="line"></div>
+<div class="line">-<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span> = <span class="number">3</span></div>
+<div class="line">+<span class="number">1</span>-<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span> = <span class="number">3</span></div>
+<div class="line">+<span class="number">1</span>+<span class="number">1</span>-<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span> = <span class="number">3</span></div>
+<div class="line">+<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span>-<span class="number">1</span>+<span class="number">1</span> = <span class="number">3</span></div>
+<div class="line">+<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span>+<span class="number">1</span>-<span class="number">1</span> = <span class="number">3</span></div>
+<div class="line"></div>
+<div class="line">There are <span class="number">5</span> ways to assign symbols to make the sum of nums be target <span class="number">3</span>.</div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>思路</p>
+</li>
+</ul>
+<ul>
+<li>代码</li>
+</ul>
 <h2 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h2><h3 id="801-Minimum-Swaps-To-Make-Sequences-Increasing"><a href="#801-Minimum-Swaps-To-Make-Sequences-Increasing" class="headerlink" title="801. Minimum Swaps To Make Sequences Increasing"></a><em><u>801. Minimum Swaps To Make Sequences Increasing</u></em></h3><blockquote>
 <ul>
 <li><p>题目</p>
@@ -3102,7 +3277,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划"><span class="nav-number">1.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门wq"><span class="nav-number">1.1.</span> <span class="nav-text">入门wq</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#746-Min-Cost-Climbing-Stairs"><span class="nav-number">1.1.1.</span> <span class="nav-text">746.Min Cost Climbing Stairs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#70-Climbing-Stairs"><span class="nav-number">1.1.2.</span> <span class="nav-text">70. Climbing Stairs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53-Maximum-Subarray"><span class="nav-number">1.1.3.</span> <span class="nav-text">53. Maximum Subarray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#198-House-Robber"><span class="nav-number">1.1.4.</span> <span class="nav-text">198. House Robber</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初级"><span class="nav-number">1.2.</span> <span class="nav-text">初级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#62-Unique-Paths"><span class="nav-number">1.2.1.</span> <span class="nav-text">62. Unique Paths</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63-Unique-Paths-II"><span class="nav-number">1.2.2.</span> <span class="nav-text">63. Unique Paths II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64-Minimum-Path-Sum"><span class="nav-number">1.2.3.</span> <span class="nav-text">64. Minimum Path Sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#120-Triangle"><span class="nav-number">1.2.4.</span> <span class="nav-text">120. Triangle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#213-House-Robber-II"><span class="nav-number">1.2.5.</span> <span class="nav-text">213. House Robber II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#279-Perfect-Squares"><span class="nav-number">1.2.6.</span> <span class="nav-text">279. Perfect Squares</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#300-Longest-Increasing-Subsequence"><span class="nav-number">1.2.7.</span> <span class="nav-text">300. Longest Increasing Subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#322-Coin-Change"><span class="nav-number">1.2.8.</span> <span class="nav-text">322. Coin Change</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#338-Counting-Bits"><span class="nav-number">1.2.9.</span> <span class="nav-text">338. Counting Bits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#377-Combination-Sum-IV"><span class="nav-number">1.2.10.</span> <span class="nav-text">377. Combination Sum IV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#343-Integer-Break"><span class="nav-number">1.2.11.</span> <span class="nav-text">343. Integer Break</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中级"><span class="nav-number">1.3.</span> <span class="nav-text">中级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#221-Maximal-Square"><span class="nav-number">1.3.1.</span> <span class="nav-text">221. Maximal Square</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#96-Unique-Binary-Search-Trees"><span class="nav-number">1.3.2.</span> <span class="nav-text">96. Unique Binary Search Trees</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#91-Decode-Ways"><span class="nav-number">1.3.3.</span> <span class="nav-text">91. Decode Ways</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#368-Largest-Divisible-Subset"><span class="nav-number">1.3.4.</span> <span class="nav-text">368. Largest Divisible Subset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#740-Delete-and-Earn"><span class="nav-number">1.3.5.</span> <span class="nav-text">740. Delete and Earn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#718-Maximum-Length-of-Repeated-Subarray"><span class="nav-number">1.3.6.</span> <span class="nav-text">718. Maximum Length of Repeated Subarray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-ASCII-Delete-Sum-for-Two-Strings-712"><span class="nav-number">1.3.7.</span> <span class="nav-text">Minimum ASCII Delete Sum for Two Strings(712)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knight-Probability-in-Chessboard-688"><span class="nav-number">1.3.8.</span> <span class="nav-text">Knight Probability in Chessboard(688)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number-of-Longest-Increasing-Subsequence-673"><span class="nav-number">1.3.9.</span> <span class="nav-text">Number of Longest Increasing Subsequence(673)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Keys-Keyboard"><span class="nav-number">1.3.10.</span> <span class="nav-text">2 Keys Keyboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Out-of-Boundary-Paths-576"><span class="nav-number">1.3.11.</span> <span class="nav-text">Out of Boundary Paths(576)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">1.4.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#801-Minimum-Swaps-To-Make-Sequences-Increasing"><span class="nav-number">1.4.1.</span> <span class="nav-text">801. Minimum Swaps To Make Sequences Increasing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#787-Cheapest-Flights-Within-K-Stops"><span class="nav-number">1.4.2.</span> <span class="nav-text">787. Cheapest Flights Within K Stops</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#790-Domino-and-Tromino-Tiling"><span class="nav-number">1.4.3.</span> <span class="nav-text">790. Domino and Tromino Tiling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Longest-Palindromic-Substring"><span class="nav-number">1.4.4.</span> <span class="nav-text">5. Longest Palindromic Substring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#764-Largest-Plus-Sign"><span class="nav-number">1.4.5.</span> <span class="nav-text">764. Largest Plus Sign</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划"><span class="nav-number">1.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#入门"><span class="nav-number">1.1.</span> <span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#746-Min-Cost-Climbing-Stairs"><span class="nav-number">1.1.1.</span> <span class="nav-text">746.Min Cost Climbing Stairs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#70-Climbing-Stairs"><span class="nav-number">1.1.2.</span> <span class="nav-text">70. Climbing Stairs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53-Maximum-Subarray"><span class="nav-number">1.1.3.</span> <span class="nav-text">53. Maximum Subarray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#198-House-Robber"><span class="nav-number">1.1.4.</span> <span class="nav-text">198. House Robber</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初级"><span class="nav-number">1.2.</span> <span class="nav-text">初级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#62-Unique-Paths"><span class="nav-number">1.2.1.</span> <span class="nav-text">62. Unique Paths</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63-Unique-Paths-II"><span class="nav-number">1.2.2.</span> <span class="nav-text">63. Unique Paths II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64-Minimum-Path-Sum"><span class="nav-number">1.2.3.</span> <span class="nav-text">64. Minimum Path Sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#120-Triangle"><span class="nav-number">1.2.4.</span> <span class="nav-text">120. Triangle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#213-House-Robber-II"><span class="nav-number">1.2.5.</span> <span class="nav-text">213. House Robber II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#279-Perfect-Squares"><span class="nav-number">1.2.6.</span> <span class="nav-text">279. Perfect Squares</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#300-Longest-Increasing-Subsequence"><span class="nav-number">1.2.7.</span> <span class="nav-text">300. Longest Increasing Subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#322-Coin-Change"><span class="nav-number">1.2.8.</span> <span class="nav-text">322. Coin Change</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#338-Counting-Bits"><span class="nav-number">1.2.9.</span> <span class="nav-text">338. Counting Bits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#377-Combination-Sum-IV"><span class="nav-number">1.2.10.</span> <span class="nav-text">377. Combination Sum IV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#343-Integer-Break"><span class="nav-number">1.2.11.</span> <span class="nav-text">343. Integer Break</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中级"><span class="nav-number">1.3.</span> <span class="nav-text">中级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#221-Maximal-Square"><span class="nav-number">1.3.1.</span> <span class="nav-text">221. Maximal Square</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#96-Unique-Binary-Search-Trees"><span class="nav-number">1.3.2.</span> <span class="nav-text">96. Unique Binary Search Trees</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#91-Decode-Ways"><span class="nav-number">1.3.3.</span> <span class="nav-text">91. Decode Ways</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#368-Largest-Divisible-Subset"><span class="nav-number">1.3.4.</span> <span class="nav-text">368. Largest Divisible Subset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#740-Delete-and-Earn"><span class="nav-number">1.3.5.</span> <span class="nav-text">740. Delete and Earn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#718-Maximum-Length-of-Repeated-Subarray"><span class="nav-number">1.3.6.</span> <span class="nav-text">718. Maximum Length of Repeated Subarray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-ASCII-Delete-Sum-for-Two-Strings-712"><span class="nav-number">1.3.7.</span> <span class="nav-text">Minimum ASCII Delete Sum for Two Strings(712)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knight-Probability-in-Chessboard-688"><span class="nav-number">1.3.8.</span> <span class="nav-text">Knight Probability in Chessboard(688)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number-of-Longest-Increasing-Subsequence-673"><span class="nav-number">1.3.9.</span> <span class="nav-text">Number of Longest Increasing Subsequence(673)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Keys-Keyboard"><span class="nav-number">1.3.10.</span> <span class="nav-text">2 Keys Keyboard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Out-of-Boundary-Paths-576"><span class="nav-number">1.3.11.</span> <span class="nav-text">Out of Boundary Paths(576)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Longest-Palindromic-Subsequence-516-—for-Length"><span class="nav-number">1.3.12.</span> <span class="nav-text">Longest Palindromic Subsequence(516)—for(Length)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Predict-the-Winner-486-—for-Length"><span class="nav-number">1.3.13.</span> <span class="nav-text">Predict the Winner(486)—for(Length)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Target-Sum-494"><span class="nav-number">1.3.14.</span> <span class="nav-text">Target Sum(494)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">1.4.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#801-Minimum-Swaps-To-Make-Sequences-Increasing"><span class="nav-number">1.4.1.</span> <span class="nav-text">801. Minimum Swaps To Make Sequences Increasing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#787-Cheapest-Flights-Within-K-Stops"><span class="nav-number">1.4.2.</span> <span class="nav-text">787. Cheapest Flights Within K Stops</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#790-Domino-and-Tromino-Tiling"><span class="nav-number">1.4.3.</span> <span class="nav-text">790. Domino and Tromino Tiling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Longest-Palindromic-Substring"><span class="nav-number">1.4.4.</span> <span class="nav-text">5. Longest Palindromic Substring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#764-Largest-Plus-Sign"><span class="nav-number">1.4.5.</span> <span class="nav-text">764. Largest Plus Sign</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
