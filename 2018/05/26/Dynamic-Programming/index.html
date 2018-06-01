@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/knight.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/Screen%20Shot%202018-05-29%20at%208.25.29%20PM.png">
-<meta property="og:updated_time" content="2018-05-31T02:30:43.641Z">
+<meta property="og:updated_time" content="2018-05-31T23:22:15.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Programming">
 <meta name="twitter:description" content="动态规划这篇文章详细记录LeetCode上各种难度的动态规划题目。每道题我都给出题目，思路以及Python代码。">
@@ -2524,10 +2524,20 @@
 </pre></td></tr></table></figure>
 </li>
 <li><p>思路</p>
+<p>经典动态规划。首先，将问题简单化，只考虑通过组合number，是否能组成得到target。</p>
+<p>$V_i$表示使用num[0],num[1],…,nums[i]个数字组成可以得到的所有可能数字</p>
+<p>那么$V_0={0}$，$V_i=\{V_{i-1}+num[i]\}\cup{\{V_{i-1}-num[i]\}}$</p>
+<p>则判断$target\in{V_n}$</p>
+<p>现在考虑数字组合得到target的方法数目，使用dp[i][j]来记录num[0],num[1],…,num[i-1]个数字组成得到sum=j的不同方式数。那么状态转移就是：</p>
+<p>dp[i][j] = dp[i-1][j+num[i]] + dp[i-1][j-num[i]]</p>
+<p>令num[0], num[1], num[2],…的和为TSUM，而所有可能的sum值，即dp第二维的长度是2*TSUM+1,即{-TSUM, -TSUM+1,…-1,0,1,…,TSUM-1,TSUM}。</p>
+<p>初始化：dp[-1][0] = 1 组合使和0有一种方式，即什么都不操作。而sum=0的index是TSUM即dp[-1][TSUM]=1</p>
 </li>
-</ul>
-<ul>
-<li>代码</li>
+<li><p>代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"> </div>
+</pre></td></tr></table></figure>
+</li>
 </ul>
 <h2 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h2><h3 id="801-Minimum-Swaps-To-Make-Sequences-Increasing"><a href="#801-Minimum-Swaps-To-Make-Sequences-Increasing" class="headerlink" title="801. Minimum Swaps To Make Sequences Increasing"></a><em><u>801. Minimum Swaps To Make Sequences Increasing</u></em></h3><blockquote>
 <ul>
