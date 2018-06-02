@@ -1662,8 +1662,42 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
       
         
           
-            <p>This post is about the definition of Differential Privacy. </p>
+            <p>This post is about the definition of Differential Privacy. DP ensures privacy by randomness. So before the definition of DP, we need to know what is randomized algorithms.</p>
+<h2 id="Randomized-algorithms"><a href="#Randomized-algorithms" class="headerlink" title="Randomized algorithms"></a>Randomized algorithms</h2><p>In general, a randomized algorithm with domain $A$ and (discrete) range $B$ will be associated with a mapping from $A$ to the probability simplex over $B$, denoted $\Delta(B)$:</p>
+<p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-02 at 10.25.01 AM.png" alt="Screen Shot 2018-06-02 at 10.25.01 AM"></p>
+<blockquote>
+<ol>
+<li></li>
+<li></li>
+</ol>
+</blockquote>
+<h2 id="Differential-Privacy"><a href="#Differential-Privacy" class="headerlink" title="Differential Privacy"></a>Differential Privacy</h2><p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-02 at 10.31.11 AM.png" alt="Screen Shot 2018-06-02 at 10.31.11 AM"></p>
+<blockquote>
+<p>Remarks:</p>
+<ol>
+<li><p>Assuming the existence of a trusted and trustworthy curator who holds the data of individuals in a database </p>
+</li>
+<li><p>For particitants, differential privacy promises to protect individuals from any additional harm that they might face due to their data being in the private database x that they would not have faced had their data not been part of x. </p>
+<p>For adversaries, differential privacy asserts that for all pairs of adjacent databases x, y and all outputs $o$, an adversary cannot distinguish which is the true database on the basis of observing $o$, which implies the adversary’s prior and posterior views about an individual should not be too different.</p>
+</li>
+<li></li>
+</ol>
+</blockquote>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><blockquote>
+<ol>
+<li>Post-Processing : Differential privacy is immune to post-processing</li>
+</ol>
+</blockquote>
 <h2 id="Vector-DP"><a href="#Vector-DP" class="headerlink" title="Vector DP"></a>Vector DP</h2><p>This following details are from<a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a>.</p>
+<h2 id="Group-DP"><a href="#Group-DP" class="headerlink" title="Group DP"></a>Group DP</h2><blockquote>
+<p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-02 at 9.41.37 AM.png" alt="Screen Shot 2018-06-02 at 9.41.37 AM"></p>
+<p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-05-17 at 10.07.34 AM.png" alt="Screen Shot 2018-05-17 at 10.07.34 AM"></p>
+<ol>
+<li>the strength of the privacy guarantee drops linearly with the size of the group</li>
+</ol>
+</blockquote>
+<h2 id="Non-interactive-VS-Interactive"><a href="#Non-interactive-VS-Interactive" class="headerlink" title="Non-interactive VS Interactive"></a>Non-interactive VS Interactive</h2><h3 id="Non-interactive"><a href="#Non-interactive" class="headerlink" title="Non-interactive"></a>Non-interactive</h3><p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-01 at 8.50.43 PM.png" alt="Screen Shot 2018-06-01 at 8.50.43 PM"></p>
+<h3 id="Interactive"><a href="#Interactive" class="headerlink" title="Interactive"></a>Interactive</h3><p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-01 at 8.51.55 PM.png" alt="Screen Shot 2018-06-01 at 8.51.55 PM"></p>
 <h2 id="DP-Utility-Analysis"><a href="#DP-Utility-Analysis" class="headerlink" title="DP Utility Analysis"></a>DP Utility Analysis</h2><p>This following details are from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a>.</p>
 <p><img src="/2018/05/25/Definition-of-Differential-Privacy/2018-YANG.png" alt="2018-YANG"></p>
 <p><img src="/2018/05/25/Definition-of-Differential-Privacy/2018-YANG1.png" alt="2018-YANG1-7391264"></p>

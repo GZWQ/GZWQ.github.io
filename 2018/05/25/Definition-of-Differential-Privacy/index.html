@@ -79,21 +79,27 @@
 
 
 
-<meta name="description" content="This post is about the definition of Differential Privacy.  Vector DPThis following details are from[2014-To]. DP Utility AnalysisThis following details are from [2018-Yang].   RemarksPrupose differen">
+<meta name="description" content="This post is about the definition of Differential Privacy. DP ensures privacy by randomness. So before the definition of DP, we need to know what is randomized algorithms. Randomized algorithmsIn gene">
 <meta name="keywords" content="-Differential Privacy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Definition of Differential Privacy">
 <meta property="og:url" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="This post is about the definition of Differential Privacy.  Vector DPThis following details are from[2014-To]. DP Utility AnalysisThis following details are from [2018-Yang].   RemarksPrupose differen">
+<meta property="og:description" content="This post is about the definition of Differential Privacy. DP ensures privacy by randomness. So before the definition of DP, we need to know what is randomized algorithms. Randomized algorithmsIn gene">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/Screen%20Shot%202018-06-02%20at%2010.25.01%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/Screen%20Shot%202018-06-02%20at%2010.31.11%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/Screen%20Shot%202018-06-02%20at%209.41.37%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/Screen%20Shot%202018-05-17%20at%2010.07.34%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/Screen%20Shot%202018-06-01%20at%208.50.43%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/Screen%20Shot%202018-06-01%20at%208.51.55%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/2018-YANG.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/2018-YANG1.png">
-<meta property="og:updated_time" content="2018-06-01T20:41:18.627Z">
+<meta property="og:updated_time" content="2018-06-02T15:33:04.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Definition of Differential Privacy">
-<meta name="twitter:description" content="This post is about the definition of Differential Privacy.  Vector DPThis following details are from[2014-To]. DP Utility AnalysisThis following details are from [2018-Yang].   RemarksPrupose differen">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/2018-YANG.png">
+<meta name="twitter:description" content="This post is about the definition of Differential Privacy. DP ensures privacy by randomness. So before the definition of DP, we need to know what is randomized algorithms. Randomized algorithmsIn gene">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/25/Definition-of-Differential-Privacy/Screen%20Shot%202018-06-02%20at%2010.25.01%20AM.png">
 
 
 
@@ -379,8 +385,42 @@
       
 
       
-        <p>This post is about the definition of Differential Privacy. </p>
+        <p>This post is about the definition of Differential Privacy. DP ensures privacy by randomness. So before the definition of DP, we need to know what is randomized algorithms.</p>
+<h2 id="Randomized-algorithms"><a href="#Randomized-algorithms" class="headerlink" title="Randomized algorithms"></a>Randomized algorithms</h2><p>In general, a randomized algorithm with domain $A$ and (discrete) range $B$ will be associated with a mapping from $A$ to the probability simplex over $B$, denoted $\Delta(B)$:</p>
+<p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-02 at 10.25.01 AM.png" alt="Screen Shot 2018-06-02 at 10.25.01 AM"></p>
+<blockquote>
+<ol>
+<li></li>
+<li></li>
+</ol>
+</blockquote>
+<h2 id="Differential-Privacy"><a href="#Differential-Privacy" class="headerlink" title="Differential Privacy"></a>Differential Privacy</h2><p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-02 at 10.31.11 AM.png" alt="Screen Shot 2018-06-02 at 10.31.11 AM"></p>
+<blockquote>
+<p>Remarks:</p>
+<ol>
+<li><p>Assuming the existence of a trusted and trustworthy curator who holds the data of individuals in a database </p>
+</li>
+<li><p>For particitants, differential privacy promises to protect individuals from any additional harm that they might face due to their data being in the private database x that they would not have faced had their data not been part of x. </p>
+<p>For adversaries, differential privacy asserts that for all pairs of adjacent databases x, y and all outputs $o$, an adversary cannot distinguish which is the true database on the basis of observing $o$, which implies the adversary’s prior and posterior views about an individual should not be too different.</p>
+</li>
+<li></li>
+</ol>
+</blockquote>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><blockquote>
+<ol>
+<li>Post-Processing : Differential privacy is immune to post-processing</li>
+</ol>
+</blockquote>
 <h2 id="Vector-DP"><a href="#Vector-DP" class="headerlink" title="Vector DP"></a>Vector DP</h2><p>This following details are from<a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a>.</p>
+<h2 id="Group-DP"><a href="#Group-DP" class="headerlink" title="Group DP"></a>Group DP</h2><blockquote>
+<p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-02 at 9.41.37 AM.png" alt="Screen Shot 2018-06-02 at 9.41.37 AM"></p>
+<p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-05-17 at 10.07.34 AM.png" alt="Screen Shot 2018-05-17 at 10.07.34 AM"></p>
+<ol>
+<li>the strength of the privacy guarantee drops linearly with the size of the group</li>
+</ol>
+</blockquote>
+<h2 id="Non-interactive-VS-Interactive"><a href="#Non-interactive-VS-Interactive" class="headerlink" title="Non-interactive VS Interactive"></a>Non-interactive VS Interactive</h2><h3 id="Non-interactive"><a href="#Non-interactive" class="headerlink" title="Non-interactive"></a>Non-interactive</h3><p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-01 at 8.50.43 PM.png" alt="Screen Shot 2018-06-01 at 8.50.43 PM"></p>
+<h3 id="Interactive"><a href="#Interactive" class="headerlink" title="Interactive"></a>Interactive</h3><p><img src="/2018/05/25/Definition-of-Differential-Privacy/Screen Shot 2018-06-01 at 8.51.55 PM.png" alt="Screen Shot 2018-06-01 at 8.51.55 PM"></p>
 <h2 id="DP-Utility-Analysis"><a href="#DP-Utility-Analysis" class="headerlink" title="DP Utility Analysis"></a>DP Utility Analysis</h2><p>This following details are from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a>.</p>
 <p><img src="/2018/05/25/Definition-of-Differential-Privacy/2018-YANG.png" alt="2018-YANG"></p>
 <p><img src="/2018/05/25/Definition-of-Differential-Privacy/2018-YANG1.png" alt="2018-YANG1-7391264"></p>
@@ -564,7 +604,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vector-DP"><span class="nav-number">1.</span> <span class="nav-text">Vector DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DP-Utility-Analysis"><span class="nav-number">2.</span> <span class="nav-text">DP Utility Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remarks"><span class="nav-number">3.</span> <span class="nav-text">Remarks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prupose"><span class="nav-number">3.1.</span> <span class="nav-text">Prupose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Randomized-algorithms"><span class="nav-number">1.</span> <span class="nav-text">Randomized algorithms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Differential-Privacy"><span class="nav-number">2.</span> <span class="nav-text">Differential Privacy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">3.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vector-DP"><span class="nav-number">4.</span> <span class="nav-text">Vector DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Group-DP"><span class="nav-number">5.</span> <span class="nav-text">Group DP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Non-interactive-VS-Interactive"><span class="nav-number">6.</span> <span class="nav-text">Non-interactive VS Interactive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-interactive"><span class="nav-number">6.1.</span> <span class="nav-text">Non-interactive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interactive"><span class="nav-number">6.2.</span> <span class="nav-text">Interactive</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DP-Utility-Analysis"><span class="nav-number">7.</span> <span class="nav-text">DP Utility Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remarks"><span class="nav-number">8.</span> <span class="nav-text">Remarks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prupose"><span class="nav-number">8.1.</span> <span class="nav-text">Prupose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">9.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -1081,6 +1121,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
