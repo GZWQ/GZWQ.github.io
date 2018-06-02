@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/knight.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/Screen%20Shot%202018-05-29%20at%208.25.29%20PM.png">
-<meta property="og:updated_time" content="2018-05-31T23:22:15.563Z">
+<meta property="og:updated_time" content="2018-06-01T23:29:18.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Programming">
 <meta name="twitter:description" content="动态规划这篇文章详细记录LeetCode上各种难度的动态规划题目。每道题我都给出题目，思路以及Python代码。">
@@ -2534,8 +2534,42 @@
 <p>初始化：dp[-1][0] = 1 组合使和0有一种方式，即什么都不操作。而sum=0的index是TSUM即dp[-1][TSUM]=1</p>
 </li>
 <li><p>代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"> </div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findTargetSumWays</span><span class="params">(self, nums, S)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type nums: List[int]</span></div>
+<div class="line"><span class="string">        :type S: int</span></div>
+<div class="line"><span class="string">        :rtype: int</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        sums = sum(nums)</div>
+<div class="line">        <span class="keyword">if</span> sums&lt;S:<span class="keyword">return</span> <span class="number">0</span></div>
+<div class="line">        l = len(nums)</div>
+<div class="line">        dp = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">2</span>*sums+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(l+<span class="number">1</span>)]</div>
+<div class="line">        dp[<span class="number">0</span>][sums] = <span class="number">1</span></div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div>
+<div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(nums[i],<span class="number">2</span>*sums+<span class="number">1</span>-nums[i]):</div>
+<div class="line">                <span class="keyword">if</span> (dp[i][j]!=<span class="number">0</span>): <span class="comment">#表示前i-1个数字可以组成(j-tsum),那么通过吸收+num[i]，dp[i][j]可以更新 dp[i+1][j+nums[i]] 和 dp[i+1][j-nums[i]]</span></div>
+<div class="line">                    dp[i+<span class="number">1</span>][j+nums[i]] += dp[i][j]</div>
+<div class="line">                    dp[i+<span class="number">1</span>][j-nums[i]] += dp[i][j]</div>
+<div class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>][S+sums]</div>
 </pre></td></tr></table></figure>
 </li>
 </ul>
@@ -3153,8 +3187,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/26/DP Application-CroudSourcing/" rel="prev" title="DP Application - CroudSourcing">
-                DP Application - CroudSourcing <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/26/DP Application-CrowdSourcing/" rel="prev" title="DP Application - CrowdSourcing">
+                DP Application - CrowdSourcing <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
