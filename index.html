@@ -283,6 +283,283 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/03/ML-Expectation-Maximization-Algorithm/" itemprop="url">ML - Expectation Maximization Algorithm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-03T16:19:45-05:00">
+                2018-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">-Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>下文资料参考了<a href="https://www.cnblogs.com/zlslch/p/6965374.html" target="_blank" rel="noopener">EM(期望最大化)算法初步认识</a></p>
+<p><strong>极大似然估计</strong>，是参数估计的方法之一。其基本思想是已知样本符合某种概率分布，但是分布的参数未知，于是通过采样的随机样本估计参数。其基本步骤是：</p>
+<ol>
+<li>求出似然函数：该样本集的概率，即每个样本出现的概率连积</li>
+<li>对似然函数取对数：将连乘变连加</li>
+<li>求导：使对数似然函数取最大值的参数便是结果</li>
+<li>求解方程：得到的参数即为所求。</li>
+</ol>
+<h1 id="极大似然估计-Maximum-Likelihood"><a href="#极大似然估计-Maximum-Likelihood" class="headerlink" title="极大似然估计(Maximum Likelihood)"></a>极大似然估计(Maximum Likelihood)</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
+<p>假设需要调查学校的男生身高分布，于是采用采样的方法在校园里随机的访问了100个男生。于是统计抽样得到了100个男生的身高，假设他们的身高服从正态分布，但是这个分布的均值$\mu$和方差$\delta^2$是未知的，即这两个参数是需要估计的，记作$\theta=[\mu,\delta]$。</p>
+<p>用数学的语言来说就是：在学校的男生中，独立地按照概率密度函数$p(x|\theta)$抽样了100个人的身高，组成样本集$X$,我们想通过样本集$X$来估计未知参数$\theta$。</p>
+</blockquote>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><blockquote>
+<p>由于每个样本都是独立地从$p(x|\theta)$中抽取的，换句话说这100个男生中的任何一个，都是随机抽取的，从我的角度来看这些男生之间是没有关系的。那么，我从学校那么多男生中为什么就恰好抽到了这100个人呢？抽到这100个人的概率是多少呢？因为这些男生（的身高）是服从同一个高斯分布$p(x|\theta)$的。那么我抽到男生A（的身高）的概率是$p(x_A|\theta)$，抽到男生B的概率是$p(x_B|\theta)$，那因为他们是独立的，所以很明显，我同时抽到男生A和男生B的概率是$p(x_A|\theta)\times{p(x_B|\theta)}$，同理，我同时抽到这100个男生的概率就是他们各自概率的乘积了。用数学家的口吻说就是从分布是$p(x|\theta)$的总体样本中抽取到这100个样本的概率，也就是样本集X中各个样本的联合概率，用下式表示：</p>
+<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 4.37.55 PM.png" alt="Screen Shot 2018-06-03 at 4.37.55 PM"></p>
+<p>这个概率反映了，在概率密度函数的参数是$theta$时，得到X这组样本的概率。因为这里X是已知的，也就是说我抽取到的这100个人的身高可以测出来，则每一种身高在该100个样本中可以计算$p(x_i;\theta)=\frac{身高为x_i的人数$}{100}$。而$\theta$是未知了，则上面这个公式只有θ是未知数，所以它是$\theta$的函数。这个函数放映的是在不同的参数$\theta$取值下，取得当前这个样本集的可能性，因此称为参数$\theta$相对于样本集X的似然函数（likehood function）。记为$L(\theta)$。</p>
+</blockquote>
+<h2 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h2><blockquote>
+<ol>
+<li><p>似然函数思想：抽取的样本的概率最大</p>
+<p>下课了，一群男女同学分别去厕所了。然后，你想知道课间是男生上厕所的人多还是女生上厕所的人比较多，然后你就跑去蹲在男厕和女厕的门口。蹲了五分钟，你跑过来告诉我，课间女生上厕所的人比较多。我问你是怎么知道的。你说：“5分钟了，出来的是女生，女生啊，那么女生出来的概率肯定是最大的了，或者说比男生要大，那么女厕所的人肯定比男厕所的人多”。看到了没，你已经运用最大似然估计了。你通过观察到女生先出来，那么什么情况下，女生会先出来呢？肯定是女生出来的概率最大的时候了，那什么时候女生出来的概率最大啊，那肯定是女厕所比男厕所多人的时候了，这个就是你估计到的参数了。</p>
+<p>回到男生身高那个例子。在学校那么男生中，我一抽就抽到这100个男生（表示身高），而不是其他人，那是不是表示在整个学校中，这100个人（的身高）出现的概率最大啊。那么这个概率怎么表示？就是上面那个似然函数$L(\theta)$。所以，我们就只需要找到一个参数θ，其对应的似然函数$L(\theta)$最大，也就是说抽到这100个男生（的身高）概率最大。这个叫做$\theta$的最大似然估计量，记为：</p>
+<script type="math/tex; mode=display">
+\hat{\theta}=arg maxL(\theta)</script><p>可以看到$L(\theta)$是连乘的，所以为了便于分析，还可以定义对数似然函数，将其变成连加的：</p>
+<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 4.44.37 PM.png" alt="Screen Shot 2018-06-03 at 4.44.37 PM"></p>
+<p>这样使似然函数取得最大值的$\theta$便是我们的估计。这里就回到了求最值的问题了。怎么求一个函数的最值？当然是求导，然后让导数为0，那么解这个方程得到的$\theta$就是了（当然，前提是函数$L(\theta)$连续可微）。那如果θ是包含多个参数的向量那怎么处理啊？当然是求$L(\theta)$对所有参数的偏导数，也就是梯度了，那么n个未知的参数，就有n个方程，方程组的解就是似然函数的极值点了，当然就得到这n个参数了。</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><a href="https://www.youtube.com/watch?v=cXHvC_FGx24" target="_blank" rel="noopener">SciPy.minimize</a></p>
+<ol>
+<li><p><a href="https://cosx.org/2009/07/maximum-likelihood-estimation-in-r" target="_blank" rel="noopener">题目</a></p>
+<p>采用geyser 数据，该数据采集自美国黄石公园内的一个名叫 Old Faithful 的喷泉。“waiting”就是喷泉两次喷发的间隔时间，“duration”当然就是指每次喷发的持续时间。在这里，我们只用到 “waiting” 数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">waiting  duration</div>
+<div class="line"><span class="number">1</span>        <span class="number">80</span> <span class="number">4.0166667</span></div>
+<div class="line"><span class="number">2</span>        <span class="number">71</span> <span class="number">2.1500000</span></div>
+<div class="line"><span class="number">3</span>        <span class="number">57</span> <span class="number">4.0000000</span></div>
+<div class="line"><span class="number">4</span>        <span class="number">80</span> <span class="number">4.0000000</span></div>
+<div class="line"><span class="number">5</span>        <span class="number">75</span> <span class="number">4.0000000</span></div>
+<div class="line">......</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 8.29.59 PM.png" alt="Screen Shot 2018-06-03 at 8.29.59 PM"></p>
+<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 8.30.27 PM.png" alt="Screen Shot 2018-06-03 at 8.30.27 PM"></p>
+</li>
+<li><p>代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> scipy.stats <span class="keyword">as</span> stats <span class="comment">#获取正态分布</span></div>
+<div class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> minimize <span class="comment">#目标优化</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#####数据存储于.txt文件中</span></div>
+<div class="line">data = np.loadtxt(<span class="string">'data'</span>)</div>
+<div class="line">values = []</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> data:</div>
+<div class="line">    values.append(i[<span class="number">2</span>])</div>
+<div class="line">values = np.array(values)</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#####定义极大似然函数</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">objective_func</span><span class="params">(params)</span>:</span><span class="comment">#优化函数，总共优化5个参数</span></div>
+<div class="line">    prob = params[<span class="number">0</span>]</div>
+<div class="line">    mu1 = params[<span class="number">1</span>]</div>
+<div class="line">    sigma1 = params[<span class="number">2</span>]</div>
+<div class="line">    mu2 = params[<span class="number">3</span>]</div>
+<div class="line">    sigma2 = params[<span class="number">4</span>]</div>
+<div class="line">    norm_dis1 = stats.norm.pdf(values,loc=mu1,scale=sigma1) <span class="comment">#将x轴数据输入，输出该样本的正态分布的概率密度</span></div>
+<div class="line">    norm_dis2 = stats.norm.pdf(values,loc=mu2,scale=sigma2)</div>
+<div class="line">    f = prob*norm_dis1+(<span class="number">1</span>-prob)*norm_dis2</div>
+<div class="line">    L = np.sum(np.log(f))</div>
+<div class="line">    <span class="keyword">return</span> -L <span class="comment">#minimize函数求解最小值，但是我们要最大化，所以加一个“-”</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#####求解</span></div>
+<div class="line">param = np.array([<span class="number">0.5</span>,<span class="number">50</span>,<span class="number">10</span>,<span class="number">80</span>,<span class="number">10</span>]) <span class="comment">#参数初始化</span></div>
+<div class="line">results = minimize(objective_func, param, method=<span class="string">'nelder-mead'</span>)</div>
+<div class="line">paramss = results.x <span class="comment">#[0.36088303 54.61479245  5.87121392 80.09109663  5.86777145]</span></div>
+<div class="line">prob = paramss[<span class="number">0</span>]</div>
+<div class="line">mu1 = paramss[<span class="number">1</span>]</div>
+<div class="line">sigma1 = paramss[<span class="number">2</span>]</div>
+<div class="line">mu2 = paramss[<span class="number">3</span>]</div>
+<div class="line">sigma2 = paramss[<span class="number">4</span>]</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#####数据可视化</span></div>
+<div class="line">x = np.linspace(<span class="number">40</span>,<span class="number">120</span>,<span class="number">100</span>)</div>
+<div class="line">f = prob*stats.norm.pdf(x,loc=mu1,scale=sigma1) + (<span class="number">1</span>-prob)*stats.norm.pdf(x,loc=mu2,scale=sigma2)</div>
+<div class="line">plt.plot(x,f,color=<span class="string">'r'</span>) <span class="comment">#将估计的参数函数代入原密度函数。</span></div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 8.44.22 PM.png" alt="Screen Shot 2018-06-03 at 8.44.22 PM"></p>
+</li>
+</ol>
+<h1 id="期望最大算法"><a href="#期望最大算法" class="headerlink" title="期望最大算法()"></a>期望最大算法()</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/DP-Application-Local-Privacy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -850,15 +1127,15 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 <p><u><strong>Randomized Response</strong></u> </p>
 <p>Without loss of generality, we assume the randomized response still favors the true value, i.e., $p_{00}, p_{11} &gt; 0.5$. Intuitively, under the same privacy standard, the mechanism with larger diagonal elements in the corresponding design matrix tends to achieve better utility.</p>
 <ul>
-<li><img src="/2018/05/28/DP-Application-Random-Response/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.09.06%20PM.png" alt="Screen Shot 2018-06-01 at 5.09.06 PM"></li>
+<li><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.09.06%20PM.png" alt="Screen Shot 2018-06-01 at 5.09.06 PM"></li>
 <li>What is the proportion of $X=1$? It aims to o learn the population distribution based on the collected randomized dataset. We use $\pi_1$to denote the true proportion of value 1 to be estimated in the original population. The observed proportion of value 1 in the collected dataset is denoted as $\lambda_1$. We denote the unbiased estimator for $\pi_1$ respectively as $\hat{\pi}_1$. </li>
-<li><p><img src="/2018/05/28/DP-Application-Random-Response/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.13.14%20PM.png" alt="Screen Shot 2018-06-01 at 5.13.14 PM"></p>
+<li><p><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.13.14%20PM.png" alt="Screen Shot 2018-06-01 at 5.13.14 PM"></p>
 <p><strong><u>Laplace Mechanism</u></strong></p>
 </li>
-<li><p><img src="/2018/05/28/DP-Application-Random-Response/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.22.11%20PM.png" alt="Screen Shot 2018-06-01 at 5.22.11 PM"></p>
+<li><p><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.22.11%20PM.png" alt="Screen Shot 2018-06-01 at 5.22.11 PM"></p>
 </li>
 <li><img src="/2018/05/28/DP-Application-Random-Response/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.23.19%20PM-7891843.png" alt="Screen Shot 2018-06-01 at 5.23.19 PM-7891843"></li>
-<li><img src="/2018/05/28/DP-Application-Random-Response/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.24.26%20PM.png" alt="Screen Shot 2018-06-01 at 5.24.26 PM"></li>
+<li><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.24.26%20PM.png" alt="Screen Shot 2018-06-01 at 5.24.26 PM"></li>
 <li></li>
 </ul>
 </blockquote>
@@ -1899,147 +2176,6 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/Greedy-Algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/23/Greedy-Algorithm/" itemprop="url">Greedy Algorithm</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T21:42:53-05:00">
-                2018-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">-Algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2090,7 +2226,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2101,7 +2237,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2112,7 +2248,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
