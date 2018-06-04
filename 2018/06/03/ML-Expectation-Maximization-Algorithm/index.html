@@ -94,7 +94,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%208.44.22%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%209.20.46%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%209.24.36%20PM.png">
-<meta property="og:updated_time" content="2018-06-04T02:26:23.381Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/20170321142254904.jpeg">
+<meta property="og:updated_time" content="2018-06-04T04:17:25.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - Expectation Maximization Algorithm">
 <meta name="twitter:description" content="下文资料参考了EM(期望最大化)算法初步认识 极大似然估计，是参数估计的方法之一。其基本思想是已知样本符合某种概率分布，但是分布的参数未知，于是通过采样的随机样本估计参数。其基本步骤是：  求出似然函数：该样本集的概率，即每个样本出现的概率连积 对似然函数取对数：将连乘变连加 求导：使对数似然函数取最大值的参数便是结果 求解方程：得到的参数即为所求。  期望最大算法，是一种从不完全数据或有数据丢失">
@@ -536,7 +537,16 @@
 <p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 9.20.46 PM.png" alt="Screen Shot 2018-06-03 at 9.20.46 PM"></p>
 <p>第一个sum是对样本，第二个sum是对每个样本可能属于的种类。</p>
 <p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 9.24.36 PM.png" alt="Screen Shot 2018-06-03 at 9.24.36 PM"></p>
-</blockquote>
+<p>E步骤，是在给定观测数据$Y$和当前参数$\theta$下对未观测数据$Z$的条件概率分布，计算时需要用到贝叶斯法则：</p>
+<script type="math/tex; mode=display">
+P(z_j|y_i,\theta)=\frac{P(z_j)P(y_i,\theta|z_j)}{P(y_i,\theta)}=\frac{P(z_j)P(y_i,\theta|z_j)}{\sum_{j=1}^{z种类数}P(z_j)P(y_i,\theta|z_j)}</script></blockquote>
+<h2 id="例子1：双硬币问题"><a href="#例子1：双硬币问题" class="headerlink" title="例子1：双硬币问题"></a><a href="https://blog.csdn.net/lilynothing/article/details/64443563" target="_blank" rel="noopener">例子1：双硬币问题</a></h2><ol>
+<li><p>问题</p>
+<p>假设有两枚硬币A、B，以相同的概率随机选择一个硬币，进行如下的抛硬币实验：共做5次实验，每次实验独立的抛十次，结果如图中a所示，例如某次实验产生了H、T、T、T、H、H、T、H、T、H，H代表正面朝上。  假设试验数据记录员可能是实习生，业务不一定熟悉，造成a和b两种情况  a表示实习生记录了详细的试验数据，我们可以观测到试验数据中每次选择的是A还是B  b表示实习生忘了记录每次试验选择的是A还是B，我们无法观测实验数据中选择的硬币是哪个  问在两种情况下分别如何估计两个硬币正面出现的概率？</p>
+<p>对于已知是A硬币还是B硬币抛出的结果的时候，可以直接采用概率的求法来进行求解。对于含有隐变量的情况，也就是不知道到底是A硬币抛出的结果还是B硬币抛出的结果的时候，就需要采用EM算法进行求解了。如下图：</p>
+<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/20170321142254904.jpeg" alt="20170321142254904"></p>
+</li>
+</ol>
 
       
     </div>
@@ -576,6 +586,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/04/Algorithm-Bloom-Filter/" rel="prev" title="Algorithm - Bloom Filter">
+                Algorithm - Bloom Filter <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -652,7 +666,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -707,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#极大似然估计-Maximum-Likelihood"><span class="nav-number">1.</span> <span class="nav-text">极大似然估计(Maximum Likelihood)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">1.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数估计"><span class="nav-number">1.3.</span> <span class="nav-text">参数估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.4.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#期望最大算法"><span class="nav-number">2.</span> <span class="nav-text">期望最大算法()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析-1"><span class="nav-number">2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EM算法推导"><span class="nav-number">2.3.</span> <span class="nav-text">EM算法推导</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#极大似然估计-Maximum-Likelihood"><span class="nav-number">1.</span> <span class="nav-text">极大似然估计(Maximum Likelihood)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">1.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数估计"><span class="nav-number">1.3.</span> <span class="nav-text">参数估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.4.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#期望最大算法"><span class="nav-number">2.</span> <span class="nav-text">期望最大算法()</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析-1"><span class="nav-number">2.2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EM算法推导"><span class="nav-number">2.3.</span> <span class="nav-text">EM算法推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子1：双硬币问题"><span class="nav-number">2.4.</span> <span class="nav-text">例子1：双硬币问题</span></a></li></ol></li></ol></div>
             
 
           </div>
