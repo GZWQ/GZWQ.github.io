@@ -92,10 +92,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%208.29.59%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%208.30.27%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%208.44.22%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%209.20.46%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen%20Shot%202018-06-03%20at%209.24.36%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/20170321142254904.jpeg">
-<meta property="og:updated_time" content="2018-06-05T03:46:23.403Z">
+<meta property="og:updated_time" content="2018-06-05T23:09:19.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - Expectation Maximization Algorithm">
 <meta name="twitter:description" content="下文资料参考了EM(期望最大化)算法初步认识 极大似然估计，是参数估计的方法之一。其基本思想是已知样本符合某种概率分布，但是分布的参数未知，于是通过采样的随机样本估计参数。其基本步骤是：  求出似然函数：该样本集的概率，即每个样本出现的概率连积 对似然函数取对数：将连乘变连加 求导：使对数似然函数取最大值的参数便是结果 求解方程：得到的参数即为所求。  期望最大算法，是一种从不完全数据或有数据丢失">
@@ -393,7 +391,7 @@
 <li>求导：使对数似然函数取最大值的参数便是结果</li>
 <li>求解方程：得到的参数即为所求。</li>
 </ol>
-<p><strong><a href="https://www.youtube.com/watch?v=REypj2sy_5U" target="_blank" rel="noopener">期望最大算法</a></strong>，是一种从不完全数据或有数据丢失的数据集（存在隐含变量）中求解概率模型参数的最大似然估计方法。在每一次的迭代过程中，主要分为两步：即求期望(Expectation)步骤和最大化(Maximization)步骤。</p>
+<p><strong>期望最大算法</strong>，是一种从不完全数据或有数据丢失的数据集（存在隐含变量）中求解概率模型参数的最大似然估计方法。在每一次的迭代过程中，主要分为两步：即求期望(Expectation)步骤和最大化(Maximization)步骤。</p>
 <a id="more"></a>
 <h1 id="极大似然估计-Maximum-Likelihood"><a href="#极大似然估计-Maximum-Likelihood" class="headerlink" title="极大似然估计(Maximum Likelihood)"></a>极大似然估计(Maximum Likelihood)</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
 <p>假设需要调查学校的男生身高分布，于是采用采样的方法在校园里随机的访问了100个男生。于是统计抽样得到了100个男生的身高，假设他们的身高服从正态分布，但是这个分布的均值$\mu$和方差$\delta^2$是未知的，即这两个参数是需要估计的，记作$\theta=[\mu,\delta]$。</p>
@@ -531,20 +529,36 @@
 <p>EM的意思是“Expectation Maximization”，在我们上面这个问题里面，我们是先随便猜一下男生（身高）的正态分布的参数：如均值和方差是多少。例如男生的均值是1米7，方差是0.1米（当然了，刚开始肯定没那么准），然后计算出每个人更可能属于第一个还是第二个正态分布中的（例如，这个人的身高是1米8，那很明显，他最大可能属于男生的那个分布），这个是属于Expectation一步。有了每个人的归属，或者说我们已经大概地按上面的方法将这200个人分为男生和女生两部分，我们就可以根据之前说的最大似然那样，通过这些被大概分为男生的n个人来重新估计第一个分布的参数，女生的那个分布同样方法重新估计。这个是Maximization。然后，当我们更新了这两个分布的时候，每一个属于这两个分布的概率又变了，那么我们就再需要调整E步……如此往复，直到参数基本不再发生变化为止。</p>
 <p>这里把每个人（样本）的完整描述看做是三元组yi={xi,zi1,zi2}，其中，xi是第i个样本的观测值，也就是对应的这个人的身高，是可以观测到的值。zi1和zi2表示男生和女生这两个高斯分布中哪个被用来产生值xi，就是说这两个值标记这个人到底是男生还是女生（的身高分布产生的）。这两个值我们是不知道的，是隐含变量。确切的说，zij在xi由第j个高斯分布产生时值为1，否则为0。例如一个样本的观测值为1.8，然后他来自男生的那个高斯分布，那么我们可以将这个样本表示为{1.8, 1, 0}。如果zi1和zi2的值已知，也就是说每个人我已经标记为男生或者女生了，那么我们就可以利用上面说的最大似然算法来估计他们各自高斯分布的参数。但是它们未知，因此我们只能用EM算法。</p>
 </blockquote>
-<h2 id="EM算法推导"><a href="#EM算法推导" class="headerlink" title="EM算法推导"></a>EM算法推导</h2><blockquote>
-<p>假设我们有一个样本集{x(1),…,x(m)}，包含m个独立的样本。但每个样本i对应的类别z(i)是未知的（相当于聚类），也即隐含变量。故我们需要估计概率模型p(x,z)的参数θ，但是由于里面包含隐含变量z，所以很难用最大似然求解，但如果z知道了，那我们就很容易求解了。</p>
-<p>对于参数估计，我们本质上还是想获得一个使似然函数最大化的那个参数θ，现在与最大似然不同的只是似然函数式中多了一个未知的变量z，见下式（1）。也就是说我们的目标是找到适合的θ和z让L(θ)最大。那我们也许会想，你就是多了一个未知的变量而已啊，我也可以分别对未知的θ和z分别求偏导，再令其等于0，求解出来不也一样吗？</p>
-<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 9.20.46 PM.png" alt="Screen Shot 2018-06-03 at 9.20.46 PM"></p>
-<p>第一个sum是对样本，第二个sum是对每个样本可能属于的种类。</p>
-<p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/Screen Shot 2018-06-03 at 9.24.36 PM.png" alt="Screen Shot 2018-06-03 at 9.24.36 PM"></p>
-<p>E步骤，是在给定观测数据$Y$和当前参数$\theta$下对未观测数据$Z$的条件概率分布，计算时需要用到贝叶斯法则：</p>
+<h2 id="EM算法推导"><a href="#EM算法推导" class="headerlink" title="EM算法推导"></a><a href="https://www.youtube.com/watch?v=REypj2sy_5U" target="_blank" rel="noopener">EM算法推导</a></h2><blockquote>
+<p>假设我们知道了样本$X=\{x_1,x_2,…,x_n\}$的分布，比如正态分布，那么我们需要估计的参数就是均值$\mu$和方差$\sigma^2$，即：</p>
 <script type="math/tex; mode=display">
-P(z_j|y_i,\theta)=\frac{P(z_j)P(y_i,\theta|z_j)}{P(y_i,\theta)}=\frac{P(z_j)P(y_i,\theta|z_j)}{\sum_{j=1}^{z种类数}P(z_j)P(y_i,\theta|z_j)}</script></blockquote>
+\mu=\frac{x_1+x_2+...+x_n}{n}\\
+\sigma^2=\frac{(x_1-\mu)^2+(x_2-\mu)^2+...+(x_n-\mu)^2}{n}</script><p>这样我们就可以估计样本分布参数了。</p>
+<p>但是对于给定的样本$X=\{x_1,x_2,…,x_n\}$,假设它们来自于两个正态分布$N_1(\mu_1,\sigma_1^2)$和$N_2(\mu_2,\sigma_2^2)$，但是我们不知道每一个样本$x_i$具体来自于哪一个分布，所以我们的额外需要估计的一个参数$\pi$，即每一个样本点来自于分布1的概率向量，那么每一个样本点来自于样本2的概率就是$1-\pi$。</p>
+<p>假设我们知道了两个分布，即两个正态分布的参数已知，那么对于每一个样本$x_i$，我们假设这个样本来自于$N_1$，那么我们可以计算出该样本的概率$\pi(i)=P_{N_1}(x_i)$；同理，我们也可以计算出该样本属于$N_2$的概率$P_{N_2}(x_i)$。这样，直觉上，概率越大，样本点越可能属于对应的那个分布。对所有的样本点进行这样的概率比较，我们就可以将样本点分成两类，一个是更可能属于分布1的样本点$X_{N_1}$，一个是更可能属于分布2的样本点$X_{N_2}$。这样，我们就可以使用<script type="math/tex">X_{N_1}</script>中的点去更新$N_1$中的参数：</p>
+<script type="math/tex; mode=display">
+\mu_1=\frac{\pi(1)x_1+\pi(2)x_2+...+\pi(n)x_n}{\pi(1)+\pi(2)+...+\pi(n)}\\
+\sigma_1^2=\frac{\pi(1)(x_1-\mu)^2+\pi(2)(x_2-\mu)^2+...+\pi(n)(x_n-\mu)^2}{\pi(1)+\pi(2)+...+\pi(n)}</script><p>同理，对于分布2的参数估计：</p>
+<script type="math/tex; mode=display">
+\mu_2=\frac{(1-pi(1))x_1+(1-\pi(2))x_2+...+(1-\pi(n))x_n}{(1-\pi(1))+(1-\pi(2))+...+(1-\pi(n))}\\
+\sigma_2^2=\frac{(1-\pi(1))(x_1-\mu)^2+(1-\pi(2))(x_2-\mu)^2+...+(1-\pi(n))(x_n-\mu)^2}{(1-\pi(1))+(1-\pi(2))+...+(1-\pi(n))}</script></blockquote>
 <h2 id="例子1：双硬币问题"><a href="#例子1：双硬币问题" class="headerlink" title="例子1：双硬币问题"></a><a href="https://blog.csdn.net/lilynothing/article/details/64443563" target="_blank" rel="noopener">例子1：双硬币问题</a></h2><ol>
-<li><p>问题</p>
+<li><p><strong>问题</strong></p>
 <p>假设有两枚硬币A、B，以相同的概率随机选择一个硬币，进行如下的抛硬币实验：共做5次实验，每次实验独立的抛十次，结果如图中a所示，例如某次实验产生了H、T、T、T、H、H、T、H、T、H，H代表正面朝上。  假设试验数据记录员可能是实习生，业务不一定熟悉，造成a和b两种情况  a表示实习生记录了详细的试验数据，我们可以观测到试验数据中每次选择的是A还是B  b表示实习生忘了记录每次试验选择的是A还是B，我们无法观测实验数据中选择的硬币是哪个  问在两种情况下分别如何估计两个硬币正面出现的概率？</p>
 <p>对于已知是A硬币还是B硬币抛出的结果的时候，可以直接采用概率的求法来进行求解。对于含有隐变量的情况，也就是不知道到底是A硬币抛出的结果还是B硬币抛出的结果的时候，就需要采用EM算法进行求解了。如下图：</p>
 <p><img src="/2018/06/03/ML-Expectation-Maximization-Algorithm/20170321142254904.jpeg" alt="20170321142254904"></p>
+</li>
+<li><p><strong>分析</strong></p>
+<p>对于已知样本来源，那么我们需要估计的参数，对于硬币A，其正面概率$\theta_A$，那么其反面概率即$1-\theta_A$；对于硬币B， 其正面概率$\theta_B$，那么其反面概率即$1-\theta_B$；那么$\theta_A=\frac{正面样本数}{硬币A的样本数}=\frac{24}{24+6}=0.8$</p>
+<p>那么对于不知道样本来源，我们先假设$\theta_A=0.6，\theta_B=0.5$,这样我们需要去估计每一个样本来自于硬币A的概率分布$\pi$，即由贝叶斯法则：</p>
+<script type="math/tex; mode=display">
+\pi(A|i)=\frac{p(A)p(i|A)}{p(i)}</script><p>比如对于第一行的第一个硬币结果是H，那么$p(i|A)=0.6$，即硬币A产生正面的概率是0.6；$p(A)=\frac{1}{2}$，即选择硬币A的概率是0.5；$p(i)=p(A)p(i|A)+p(B)p(i|B)$，即硬币A和B均可以产生正面。</p>
+<p>那么$\pi(1)=0.55$，即如果是正面向上的样本点，它有0.55可能性来自于样本A。同理可以计算出反面向上的样本点来自于A的概率是0.44，则所有样本点的$\pi=(H,T,T,T,H,…,H,T,H)=(0.55,0.44,0.44,0.44,0.55,…,0.55,0.44,0.55)$</p>
+<p>那么更新$\theta_A,\theta_B$:</p>
+<script type="math/tex; mode=display">
+\theta_A=\frac{正面次数}{总次数}=\frac{0.55*(5+9+8+4+7)}{0.55*33+0.44*17}=0.71\\
+\theta_B=\frac{(1-0.55)*(33)}{(1-0.55)*33+(1-0.44)*17}=0.61</script></li>
+<li><p><strong>代码</strong></p>
 </li>
 </ol>
 
@@ -666,7 +680,7 @@ P(z_j|y_i,\theta)=\frac{P(z_j)P(y_i,\theta|z_j)}{P(y_i,\theta)}=\frac{P(z_j)P(y_
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -677,7 +691,7 @@ P(z_j|y_i,\theta)=\frac{P(z_j)P(y_i,\theta|z_j)}{P(y_i,\theta)}=\frac{P(z_j)P(y_
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -688,7 +702,7 @@ P(z_j|y_i,\theta)=\frac{P(z_j)P(y_i,\theta|z_j)}{P(y_i,\theta)}=\frac{P(z_j)P(y_
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

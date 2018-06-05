@@ -91,8 +91,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_pdf-7722463.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-30%20at%206.18.29%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_cdf.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-05%20at%2010.10.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-31%20at%203.10.30%20PM.png">
-<meta property="og:updated_time" content="2018-06-01T19:58:05.494Z">
+<meta property="og:updated_time" content="2018-06-05T15:11:44.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mechanism of Differential Privacy">
 <meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。   CDF    CDF表示连续累积概率，即$F(0)=P(x\le{0})$，即所有非正值的概率和。 PDF">
@@ -400,9 +401,26 @@
 </ol>
 </blockquote>
 <h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
+<h2 id="KL-Divergence"><a href="#KL-Divergence" class="headerlink" title="KL-Divergence"></a>KL-Divergence</h2><blockquote>
+<p>又叫相对熵，是衡量分布间距离的一个度量。</p>
+</blockquote>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><blockquote>
+<p>设$P(i)​$和$Q(i)​$是$X​$取值的两个概率分布，则$P​$相对$Q​$的KL-Divergence是：</p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-05 at 10.10.43 AM.png" alt="Screen Shot 2018-06-05 at 10.10.43 AM"></p>
+</blockquote>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><blockquote>
+<ol>
+<li><p>非对称性</p>
+<script type="math/tex; mode=display">
+D(p||q)\ne{D(q||p)}</script></li>
+<li><p>非负性</p>
+<script type="math/tex; mode=display">
+D(p||q)\ge0</script></li>
+</ol>
+</blockquote>
 <p><a href="http://www.cis.upenn.edu/~aaroth/courses/slides/Lecture4.pdf" target="_blank" rel="noopener">[2011-Aaron]</a></p>
 <p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-31 at 3.10.30 PM.png" alt="Screen Shot 2018-05-31 at 3.10.30 PM"></p>
-<p>[2014-Dwork] The Algorithmic Foundations of Differential Privacy</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[2014-Dwork] The Algorithmic Foundations of Differential Privacy</p>
 
       
     </div>
@@ -522,7 +540,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -533,7 +551,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -544,7 +562,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -577,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Distribution"><span class="nav-number">1.</span> <span class="nav-text">Laplace Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.1.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDF"><span class="nav-number">1.2.</span> <span class="nav-text">CDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Composition-Theorems"><span class="nav-number">2.</span> <span class="nav-text">Composition Theorems</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Distribution"><span class="nav-number">1.</span> <span class="nav-text">Laplace Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.1.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDF"><span class="nav-number">1.2.</span> <span class="nav-text">CDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Composition-Theorems"><span class="nav-number">2.</span> <span class="nav-text">Composition Theorems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-Divergence"><span class="nav-number">2.1.</span> <span class="nav-text">KL-Divergence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">2.1.2.</span> <span class="nav-text">性质</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
