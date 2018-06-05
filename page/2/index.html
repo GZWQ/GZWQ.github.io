@@ -400,6 +400,13 @@
 </li>
 </ol>
 </blockquote>
+<h3 id="Understanding-of-DP-definition"><a href="#Understanding-of-DP-definition" class="headerlink" title="Understanding of DP definition"></a>Understanding of DP definition</h3><ol>
+<li><p>How DP mean by saying it can limit the knowledge of adversaries by quering the database?</p>
+<blockquote>
+<p>According to the definition, $Pr(o|D)\le{e^{\epsilon}Pr(o|D’)}$, by observing the output $o$, the adversary cannot reliably infer whether the database is $D$ or $D’$, which means it cannot know whether someone is added or removed to the database. Indeed, the smaller the $\epsilon$ is, the closer the likehood ratio of $D$ to $D’$ is to 1. Therefore, when $\epsilon$ is small, the adversary cannot distinguish the true database.</p>
+</blockquote>
+</li>
+</ol>
 <h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><blockquote>
 <ol>
 <li>Post-Processing : Differential privacy is immune to post-processing</li>
