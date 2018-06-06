@@ -79,24 +79,30 @@
 
 
 
-<meta name="description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。   CDF    CDF表示连续累积概率，即$F(0)=P(x\le{0})$，即所有非正值的概率和。 PDF">
+<meta name="description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
 <meta name="keywords" content="-Differential Privacy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mechanism of Differential Privacy">
 <meta property="og:url" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。   CDF    CDF表示连续累积概率，即$F(0)=P(x\le{0})$，即所有非正值的概率和。 PDF">
+<meta property="og:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-30%20at%206.17.03%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_pdf-7722463.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-30%20at%206.18.29%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Laplace_distribution_cdf.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-06%20at%203.41.25%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-06%20at%203.48.56%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-06%20at%204.04.09%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-06%20at%204.05.35%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-06%20at%204.12.18%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-06%20at%204.18.19%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-05%20at%2010.10.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-31%20at%203.10.30%20PM.png">
-<meta property="og:updated_time" content="2018-06-05T15:11:44.758Z">
+<meta property="og:updated_time" content="2018-06-06T21:34:22.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mechanism of Differential Privacy">
-<meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。   CDF    CDF表示连续累积概率，即$F(0)=P(x\le{0})$，即所有非正值的概率和。 PDF">
+<meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
 <meta name="twitter:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-30%20at%206.17.03%20PM.png">
 
 
@@ -390,6 +396,7 @@
 <ol>
 <li>概率密度函数反映了概率在$ x$点处的密集程度。</li>
 <li>x轴表示每一种取值，而y轴表示概率。</li>
+<li>the variance of this distribution is $\sigma^2=2b^2$, while its scale is $b$.</li>
 </ol>
 </blockquote>
 <h2 id="CDF"><a href="#CDF" class="headerlink" title="CDF"></a>CDF</h2><p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-30 at 6.18.29 PM.png" alt="Screen Shot 2018-05-30 at 6.18.29 PM"></p>
@@ -400,7 +407,50 @@
 <li>PDF 表示某一点取值的概率$f(0)=P(x=0)=0.5$</li>
 </ol>
 </blockquote>
-<h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
+<h1 id="Sensitivity"><a href="#Sensitivity" class="headerlink" title="Sensitivity"></a>Sensitivity</h1><h2 id="L1-sensitivity"><a href="#L1-sensitivity" class="headerlink" title="L1-sensitivity"></a>L1-sensitivity</h2><blockquote>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-06 at 3.41.25 PM.png" alt="Screen Shot 2018-06-06 at 3.41.25 PM"></p>
+<p><strong>Remarks</strong>:</p>
+<ol>
+<li>$N^{|X|}$ 表示数据库的大小是$|X|$, 即有$X$条记录；而$\mathbb{R}$表示real number，$\mathbb{R}^{k}$则表示$k$维空间，即数据是$k$维的，$k$维向量。</li>
+<li></li>
+</ol>
+</blockquote>
+<h1 id="Laplace-Mechanism"><a href="#Laplace-Mechanism" class="headerlink" title="Laplace Mechanism"></a>Laplace Mechanism</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><blockquote>
+<p>the Laplace mechanism will simply compute $f$, and perturb each coordinate with noise drawn from the Laplace distribution.</p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-06 at 3.48.56 PM.png" alt="Screen Shot 2018-06-06 at 3.48.56 PM"></p>
+<p>About the proof, the key is that :</p>
+<ol>
+<li><p>neighbourhood database:</p>
+<p> $x\in{N^{|X|}}$ and $y\in{N^{|X|}}$, such that $||x-y||_1=\le1$. </p>
+</li>
+<li><p>noise result:</p>
+<p>$\frac{P(f(x)=z)}{P(f(y)=z)}\le{e^{\epsilon}}$</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><blockquote>
+<p>We sometimes refer to the problem of responding to large numbers of (possibly arbitrary) queries as the query release problem.</p>
+<ol>
+<li><p>Counting Queries</p>
+<p>Since the sensitivity of a counting query is 1 (the addition or deletion of a single individual can change a count by at most 1), so $(\epsilon,0)$-differential privacy can be achieved for counting queries by the addition of noise scaled to $\frac{1}{\epsilon}$, that is, by adding noise drawn from Lap($\frac{1}{\epsilon}$). The expected distortion, or error, is $\frac{1}{\epsilon}$, independent of the size of the database.</p>
+<p>A fixed but arbitrary list of m counting queries can be viewed as a vector-valued query. Absent any further information about the set of queries a worst-case bound on the sensitivity of this vector-valued query is m, as a single individual might change every count. In this case $(\epsilon,0)$-differential privacy can be achieved by adding noise scaled to $\frac{m}{\epsilon}$ to the true answer to each query.</p>
+</li>
+<li><p>Histogram Queries</p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-06 at 4.04.09 PM.png" alt="Screen Shot 2018-06-06 at 4.04.09 PM"></p>
+</li>
+</ol>
+</blockquote>
+<h2 id="Utility"><a href="#Utility" class="headerlink" title="Utility"></a>Utility</h2><blockquote>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-06 at 4.05.35 PM.png" alt="Screen Shot 2018-06-06 at 4.05.35 PM"></p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-06 at 4.12.18 PM.png" alt="Screen Shot 2018-06-06 at 4.12.18 PM"></p>
+<p>Remarks:</p>
+<ol>
+<li>Theorem3.8中，Pr[]里面，左边表示Laplace mechanism产生的error，右边中的两项，$t=In(\frac{k}{\delta})$，$k$是query result的维度，$b=\frac{\Delta{f}}{\epsilon}$。</li>
+<li><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-06 at 4.18.19 PM.png" alt="Screen Shot 2018-06-06 at 4.18.19 PM"></li>
+</ol>
+</blockquote>
+<h1 id="Exponential-mechanism"><a href="#Exponential-mechanism" class="headerlink" title="Exponential mechanism"></a>Exponential mechanism</h1><p>The exponential mechanism was designed for situations in which we wish to choose the “best” response but adding noise directly to the computed quantity can completely destroy its value, such as setting a price in an auction, where the goal is to maximize revenue, and adding a small amount of positive noise to the optimal price (in order to protect the privacy of a bid) could dramatically reduce the resulting revenue.</p>
+<h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
 <h2 id="KL-Divergence"><a href="#KL-Divergence" class="headerlink" title="KL-Divergence"></a>KL-Divergence</h2><blockquote>
 <p>又叫相对熵，是衡量分布间距离的一个度量。</p>
 </blockquote>
@@ -595,7 +645,7 @@ D(p||q)\ge0</script></li>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Distribution"><span class="nav-number">1.</span> <span class="nav-text">Laplace Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.1.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDF"><span class="nav-number">1.2.</span> <span class="nav-text">CDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Composition-Theorems"><span class="nav-number">2.</span> <span class="nav-text">Composition Theorems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-Divergence"><span class="nav-number">2.1.</span> <span class="nav-text">KL-Divergence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">2.1.2.</span> <span class="nav-text">性质</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Distribution"><span class="nav-number">1.</span> <span class="nav-text">Laplace Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.1.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDF"><span class="nav-number">1.2.</span> <span class="nav-text">CDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sensitivity"><span class="nav-number">2.</span> <span class="nav-text">Sensitivity</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#L1-sensitivity"><span class="nav-number">2.1.</span> <span class="nav-text">L1-sensitivity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Mechanism"><span class="nav-number">3.</span> <span class="nav-text">Laplace Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">3.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">3.2.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utility"><span class="nav-number">3.3.</span> <span class="nav-text">Utility</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exponential-mechanism"><span class="nav-number">4.</span> <span class="nav-text">Exponential mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-1"><span class="nav-number">4.1.</span> <span class="nav-text">Definition</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Composition-Theorems"><span class="nav-number">5.</span> <span class="nav-text">Composition Theorems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-Divergence"><span class="nav-number">5.1.</span> <span class="nav-text">KL-Divergence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">5.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">5.1.2.</span> <span class="nav-text">性质</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>

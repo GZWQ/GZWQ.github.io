@@ -88,7 +88,7 @@
 <meta property="og:description" content="A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves an">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-04%20at%2011.16.07%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.06.11%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.06.11%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.12.44%20PM%202.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.15.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.22.05%20PM.png">
@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.13.26%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.27.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.28.02%20PM.png">
-<meta property="og:updated_time" content="2018-06-06T04:22:42.790Z">
+<meta property="og:updated_time" content="2018-06-06T17:14:18.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Local Privacy">
 <meta name="twitter:description" content="A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves an">
@@ -396,6 +396,7 @@
 
       
         <p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
+<p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release.</p>
 <a id="more"></a>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-04 at 11.16.07 AM.png" alt="Screen Shot 2018-06-04 at 11.16.07 AM"></p>
 <blockquote>
@@ -408,7 +409,7 @@
 <h3 id="Binary-Attribute"><a href="#Binary-Attribute" class="headerlink" title="Binary Attribute"></a>Binary Attribute</h3><h4 id="W-RR"><a href="#W-RR" class="headerlink" title="W-RR"></a>W-RR</h4><ol>
 <li><p><strong>Probelm setting</strong></p>
 <p>In the binary attribute setting, say each user has a data $x, x\in\{0,1\}$。Now the user ranodmly sends his data $x=0 \ or \  x=1$ with a probability.  </p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.06.11%20PM.png" alt="Screen Shot 2018-06-05 at 9.06.11 PM"></p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen%20Shot%202018-06-05%20at%209.06.11%20PM.png" alt="Screen Shot 2018-06-05 at 9.06.11 PM"></p>
 <p>Now we want $P$ to ensure Local-DP and at the same time achieve a good utility.</p>
 </li>
 <li><p><strong>Analysis</strong></p>
@@ -441,12 +442,17 @@
 <blockquote>
 <ol>
 <li><p>data representaion</p>
-<p>K-RAPPOR first maps the input $X$ of size $k$ to an output $Y$ of size $2^k$. For example, $k=3$, and the input $X=\{x_1,x_2,x_3\}$, then the output is $\{000, 001,010,011,100,101,110,111\}$,</p>
-<p>and $x_1$ is represented as 1st data in $Y$, which is 000, $x_2$ is 2ed one 001. $x_3$ is 3rd one 010.</p>
+<p>K-RAPPOR maps the input $X$ of size $k$ to an output $Y=\{0,1\}^k$ of size $2^k$. </p>
+<p>Firstly, we map $X$ deterministically to $\widetilde{X}=R^k$, the $k$-dimensional Euclidean space, where $X=x_i \ (1\le{x_i}\le{k})$ and $\widetilde{X}=e_i\in\{0,1\}^k$. Specifically, it deterministically maps $X=x_i$ to $\widetilde{X}=e_i$, where $e_i$ is the $i$-th standard basis vector.</p>
+<p>For example, $k=3$, and the input $X=\{x_1,x_2,x_3\}$, then $\widetilde{X}$  is $\{001,010,100\}$. And $x_1$ is represented as 1st data in $\widetilde{X}$, which is 001, $x_2$ is 2ed one 010. $x_3$ is 3rd one 100.</p>
 </li>
 <li><p>bit perturbation</p>
-<p>Then we randomize the coordinates of $X$ </p>
-</li>
+<p>In order to achieve $\epsilon$-locally differential privacy, we randomize the coordinates of $\widetilde{X}$ independently to obtain the private vector $Y\in\{0,1\}^k$. Formally, the $j^{th}$ coordinate of $Y$ is given by :</p>
+<script type="math/tex; mode=display">
+Y(i)=\begin{cases}
+\widetilde{X}(i) \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p=\frac{e^{\epsilon/2}}{1+e^{\epsilon/2}}
+\\1-\widetilde{X}(i) \ \ \ \ \ \ \ \ \ \ \ \ q=1-\frac{e^{\epsilon/2}}{1+e^{\epsilon/2}}
+\end{cases}</script></li>
 </ol>
 </blockquote>
 </li>
