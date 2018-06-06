@@ -818,76 +818,14 @@
 
       
         
-          
-            <p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-04 at 11.16.07 AM.png" alt="Screen Shot 2018-06-04 at 11.16.07 AM"></p>
-<blockquote>
-<ol>
-<li>According to the above definition, the aggregator, who receives the perturbed tuple $t*$ , cannot distinguish whether the true tuple is $t$ or another tuple $t$ with high confidence (controlled by parameter $\epsilon$), regardless of the background information of the aggregator.</li>
-<li>There is no neighbour databases in the local-DP; instead, for a local user, all pairs of his values should be undistinguished by using the mechanism.</li>
-</ol>
-</blockquote>
-<h2 id="Mechanism"><a href="#Mechanism" class="headerlink" title="Mechanism"></a>Mechanism</h2><p><a href="https://arxiv.org/pdf/1602.07387.pdf" target="_blank" rel="noopener">2016-Peter</a></p>
-<h3 id="K-ary-Randomized-Response"><a href="#K-ary-Randomized-Response" class="headerlink" title="K-ary Randomized Response"></a>K-ary Randomized Response</h3><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-05 at 4.51.03 PM.png" alt="Screen Shot 2018-06-05 at 4.51.03 PM"></p>
-<p><a href="Application of Local Differential Privacy to Collection of Indoor Positioning Data">[2018-Kim]</a></p>
-<p>The purpose of this research is to approximately compute the distribution of users in the indoor space. </p>
-<h3 id="Pricacy-model"><a href="#Pricacy-model" class="headerlink" title="Pricacy model"></a>Pricacy model</h3><ol>
-<li><p><strong>data representation</strong></p>
-<p>There are $n$ locations $B=\{b_1,b_2,…,b_n\}$, and the location of a user is in the form of a $n$-bit array, denoted as $L$, where the bit corresponding to the user’s location is set to 1 while the others are set to 0. So the input space size is $n$, the output space size is $2^n$.</p>
-</li>
-<li><p><strong>RAPPOR</strong></p>
-<p>The next step is to perturb L, where each bit in L is first perturbed by randomized response as follows:</p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.41.00 PM-8080101.png" alt="Screen Shot 2018-06-03 at 9.41.00 PM-8080101"></p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.42.49 PM.png" alt="Screen Shot 2018-06-03 at 9.42.49 PM"></p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.44.09 PM.png" alt="Screen Shot 2018-06-03 at 9.44.09 PM"></p>
-<p>The instantaneous randomized response, S, is transmitted to the data collector server.</p>
-<h3 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h3></li>
-</ol>
-<h4 id="STATISTIC-BASED-APPROACH"><a href="#STATISTIC-BASED-APPROACH" class="headerlink" title="STATISTIC-BASED APPROACH"></a>STATISTIC-BASED APPROACH</h4><ol>
-<li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.49.04 PM.png" alt="Screen Shot 2018-06-03 at 9.49.04 PM"></p>
-</li>
-<li><p>the number of the instantaneous randomized responses of which the i-th bit is expected to be set to 1, $num(S_i)$, is estimated as follows:</p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.55.59%20PM.png" alt="Screen Shot 2018-06-03 at 9.55.59 PM"></p>
-<p>$num(U_i)$ is estimated as follows:</p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.57.20%20PM.png" alt="Screen Shot 2018-06-03 at 9.57.20 PM"></p>
-<p>then the number of location i where users have been to can be calculated by combining above two formulas:</p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.04.58%20PM.png" alt="Screen Shot 2018-06-03 at 10.04.58 PM"></p>
-<p>Let $N_i$ denotes the total number of instantaneous randomized responses, S, of which the i-bit is set to 1 as well as which is received between $ts_{start}$ and $ts_{end}$. And $N_{total}$ denotes the total number of instantaneous randomized responses, S, that the data collection server received from the data contributors in the time interval between  $ts_{start}$ and $ts_{end}$. </p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.08.06 PM.png" alt="Screen Shot 2018-06-03 at 10.08.06 PM"></p>
-</li>
-<li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.08.45 PM.png" alt="Screen Shot 2018-06-03 at 10.08.45 PM"></p>
-</li>
-</ol>
-<h4 id="EM-BASED-APPROACH"><a href="#EM-BASED-APPROACH" class="headerlink" title="EM-BASED APPROACH"></a>EM-BASED APPROACH</h4><p>   Here we intend to estimate  $P(L=x_i)$.</p>
-<ol>
-<li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.13.26 PM.png" alt="Screen Shot 2018-06-03 at 10.13.26 PM"></p>
-</li>
-<li><p>Then we want to calculate $P(pos_r|L=x_y)$</p>
-</li>
-</ol>
-<pre><code>  - Given a $n$-bit array $L$, the probabilities that the k-th bit of the corresponding permanent randomized response, U, sets to 1 and 0 are respectively computed as follows:
-
-  ![Screen Shot 2018-06-03 at 10.21.19 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.21.19 PM.png)
-
-  - Then, Given $L_k=1$, the probabilities that the k-th bit of the instantaneous randomized response, S, sets to 1 and 0 are respectively computed as follows:
-
-  ![Screen Shot 2018-06-03 at 10.22.12 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.22.12 PM.png)
-
-  ![Screen Shot 2018-06-03 at 10.22.22 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.22.22 PM.png)
-
-
-
-  ![Screen Shot 2018-06-03 at 10.26.21 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.26.21 PM.png)
-</code></pre><ol>
-<li><p>The EM algorithm that computes $P(L =  x_i)$, 1 ≤ i ≤ n proceeds as follows:</p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.27.39 PM.png" alt="Screen Shot 2018-06-03 at 10.27.39 PM"></p>
-<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.28.02 PM.png" alt="Screen Shot 2018-06-03 at 10.28.02 PM"></p>
-</li>
-</ol>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p> [2018-Kim] Application of Local Differential Privacy to Collection of Indoor Positioning Data</p>
-<p>[2016-Peter]  Discrete Distribution Estimation under Local Privacy</p>
-
-          
+          <p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/02/DP-Application - Local-Privacy/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1207,6 +1145,13 @@ D(p||q)\ge0</script></li>
 <li>$E(cX)=cE(X)$ if c is a constant.</li>
 <li>$E(c)=c$  the expectation of constant is the constant itself.</li>
 </ol>
+<h1 id="Additive-Chernoff-Bound"><a href="#Additive-Chernoff-Bound" class="headerlink" title="Additive Chernoff Bound"></a>Additive Chernoff Bound</h1><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-05 at 8.35.00 PM.png" alt="Screen Shot 2018-06-05 at 8.35.00 PM"></p>
+<blockquote>
+<p>上式即</p>
+<script type="math/tex; mode=display">
+P(|S\ge{\mu}|\ge\epsilon)\le2e^{-2m\epsilon^2}</script><p><img src="/2018/05/30/Statistic-110/929166-20161116214202513-1545949382.png" alt="929166-20161116214202513-1545949382"></p>
+<p>Lemma说明我们用随机变量的均值$\hat{\phi}$取估计参数$\phi$, 估计的参数和实际参数的差超过一个特定数值的概率有一确定的上界，并且随着样本量m的增大，$\hat{\phi}$越接近$\phi$.</p>
+</blockquote>
 
           
         
@@ -1395,7 +1340,7 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 <script type="math/tex; mode=display">
 \epsilon=ln\frac{k-(k-1)p}{p}</script></blockquote>
 <h4 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="http://ceur-ws.org/Vol-1558/paper35.pdf" target="_blank" rel="noopener">[2016-Wang]</a></h4><blockquote>
-<p><a href="http://ceur-ws.org/Vol-1558/paper35.pdf" target="_blank" rel="noopener">Randomized Response vs. Laplace Mechanism</a></p>
+<p>Randomized Response vs. Laplace Mechanism</p>
 <p><u><strong>Randomized Response</strong></u> </p>
 <p>Without loss of generality, we assume the randomized response still favors the true value, i.e., $p_{00}, p_{11} &gt; 0.5$. Intuitively, under the same privacy standard, the mechanism with larger diagonal elements in the corresponding design matrix tends to achieve better utility.</p>
 <ul>
