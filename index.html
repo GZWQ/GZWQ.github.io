@@ -1027,7 +1027,19 @@
 </ol>
 </blockquote>
 <h1 id="Exponential-mechanism"><a href="#Exponential-mechanism" class="headerlink" title="Exponential mechanism"></a>Exponential mechanism</h1><p>The exponential mechanism was designed for situations in which we wish to choose the “best” response but adding noise directly to the computed quantity can completely destroy its value, such as setting a price in an auction, where the goal is to maximize revenue, and adding a small amount of positive noise to the optimal price (in order to protect the privacy of a bid) could dramatically reduce the resulting revenue.</p>
-<h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
+<h2 id="Define"><a href="#Define" class="headerlink" title="Define"></a>Define</h2><blockquote>
+<p>Say we have a discrete candidate output in a range $R$, and assume that the probability distribution of output is $u$, commonly uniform. The general mechanism is to design a query function $q:D^n(input \ database)\times{R(output)}\to{\mathbb{R}}$, which assign a real valued score to any pair $(d,r)$ from $D^n\times{R}$. With a prior distribution of candidate output $u$, we amplify the probability associated with each output by a factor of $e^{\epsilon{q(d,r)}}$:</p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-07 at 12.43.02 PM.png" alt="Screen Shot 2018-06-07 at 12.43.02 PM"></p>
+<script type="math/tex; mode=display">
+\Delta{q}=max_{r\in{R}}\ max_{x,y:||x-y||_1\le{1}}|q(x,r)-q(y-r)|</script><p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-07 at 12.47.15 PM.png" alt="Screen Shot 2018-06-07 at 12.47.15 PM"></p>
+<p>Remarks:</p>
+<ol>
+<li>by amplifying the probability, the sum of all output probability will not equal 1. So in order to bound the probability, we need a normalization term.</li>
+<li>the exponential mechanism defines a distribution over the output domain.</li>
+<li></li>
+</ol>
+</blockquote>
+<h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
 <h2 id="KL-Divergence"><a href="#KL-Divergence" class="headerlink" title="KL-Divergence"></a>KL-Divergence</h2><blockquote>
 <p>又叫相对熵，是衡量分布间距离的一个度量。</p>
 </blockquote>
@@ -1172,6 +1184,9 @@ D(p||q)\ge0</script></li>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>
 <li>$log_a{\frac{M}{N}}=log_a{M}-log_a{N}$</li>
 </ol>
+<h1 id="Unbiased-estimator"><a href="#Unbiased-estimator" class="headerlink" title="Unbiased estimator"></a><a href="https://www.zhihu.com/question/22983179/answer/23470969" target="_blank" rel="noopener">Unbiased estimator</a></h1><blockquote>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-06 at 9.20.56 PM.png" alt="Screen Shot 2018-06-06 at 9.20.56 PM"></p>
+</blockquote>
 <h1 id="Probability-and-Counting"><a href="#Probability-and-Counting" class="headerlink" title="Probability and Counting"></a>Probability and Counting</h1><p><strong>Sample space</strong>: a set of all possible outcomes of an experiment</p>
 <p><strong>Event</strong>: a subset of the sample space</p>
 <h1 id="Discrete-vs-Continuous-the-Uniform"><a href="#Discrete-vs-Continuous-the-Uniform" class="headerlink" title="Discrete vs. Continuous, the Uniform"></a>Discrete vs. Continuous, the Uniform</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><strong>PDF (Probability Density Function)</strong> : $X$ has PDF $f(x)$ if $P(a\le{X}\le{b})=\int_{a}^{b}f(x)$</p>
@@ -1196,6 +1211,15 @@ D(p||q)\ge0</script></li>
 <script type="math/tex; mode=display">
 P(|S\ge{\mu}|\ge\epsilon)\le2e^{-2m\epsilon^2}</script><p><img src="/2018/05/30/Statistic-110/929166-20161116214202513-1545949382.png" alt="929166-20161116214202513-1545949382"></p>
 <p>Lemma说明我们用随机变量的均值$\hat{\phi}$取估计参数$\phi$, 估计的参数和实际参数的差超过一个特定数值的概率有一确定的上界，并且随着样本量m的增大，$\hat{\phi}$越接近$\phi$.</p>
+</blockquote>
+<h1 id="Johnson-Lindenstrauss-Lemma"><a href="#Johnson-Lindenstrauss-Lemma" class="headerlink" title="Johnson-Lindenstrauss Lemma"></a><a href="https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma" target="_blank" rel="noopener">Johnson-Lindenstrauss Lemma</a></h1><blockquote>
+<p>The lemma states that a small set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are nearly preserved.</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-06 at 11.01.27 PM.png" alt="Screen Shot 2018-06-06 at 11.01.27 PM"></p>
+<p>Remarks:</p>
+<ol>
+<li>the new dimention $n$ is decided by data sample number $m$ and error bound $\epsilon$</li>
+<li>Johnson–Lindenstrauss 引理表明任何高维数据集均可以被随机投影到一个较低维度的欧氏空间,同时可以控制pairwise距离的失真.</li>
+</ol>
 </blockquote>
 
           
