@@ -93,6 +93,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.15.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.22.05%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%204.51.03%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-07%20at%205.47.34%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-07%20at%205.52.05%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-07%20at%205.52.09%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-07%20at%206.42.25%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.41.00%20PM-8080101.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.42.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.44.09%20PM.png">
@@ -105,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.13.26%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.27.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.28.02%20PM.png">
-<meta property="og:updated_time" content="2018-06-06T17:14:18.075Z">
+<meta property="og:updated_time" content="2018-06-07T23:43:01.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Local Privacy">
 <meta name="twitter:description" content="A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves an">
@@ -403,6 +407,7 @@
 <ol>
 <li>According to the above definition, the aggregator, who receives the perturbed tuple $t*$ , cannot distinguish whether the true tuple is $t$ or another tuple $t$ with high confidence (controlled by parameter $\epsilon$), regardless of the background information of the aggregator.</li>
 <li>There is no neighbour databases in the local-DP; instead, for a local user, all pairs of his values should be undistinguished by using the mechanism.</li>
+<li>While LDP provides rigorous privacy protection in the local setting, its drawback is on the utility side. In real-world applications, where the universe size $Dom(f)$ is large, achieving a reasonable trade-off between privacy and utility under LDP is almost a chimera. For example, in location protection, $Dom(f)$ is all possible locations of a user, which could be extremely large.</li>
 </ol>
 </blockquote>
 <h2 id="Mechanism"><a href="#Mechanism" class="headerlink" title="Mechanism"></a>Mechanism</h2><p><a href="https://arxiv.org/pdf/1602.07387.pdf" target="_blank" rel="noopener">2016-Peter</a></p>
@@ -453,6 +458,35 @@ Y(i)=\begin{cases}
 \widetilde{X}(i) \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p=\frac{e^{\epsilon/2}}{1+e^{\epsilon/2}}
 \\1-\widetilde{X}(i) \ \ \ \ \ \ \ \ \ \ \ \ q=1-\frac{e^{\epsilon/2}}{1+e^{\epsilon/2}}
 \end{cases}</script></li>
+</ol>
+</blockquote>
+</li>
+<li><p>Random Matrix Projection<a href="https://arxiv.org/pdf/1504.04686.pdf" target="_blank" rel="noopener">[2015-Bassily]</a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7498248" target="_blank" rel="noopener">[2016-Chen]</a><a href="https://arxiv.org/pdf/1705.04421.pdf" target="_blank" rel="noopener">[2017-Wang]</a></p>
+<blockquote>
+<p>Algorithm R: $\epsilon$-Basic Randomizer</p>
+<ol>
+<li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-07 at 5.47.34 PM.png" alt="Screen Shot 2018-06-07 at 5.47.34 PM"></p>
+</li>
+<li><p><strong>Encoding</strong></p>
+<p>Encode($x$)=$\Phi[r,j]$, where $r$ r is selected uniformly at random from $\{1,2,…,m\}$ and $j$ is the index of $x$ in original dataset $\{x_1,x_2,…,x_d\}$</p>
+</li>
+<li><p><strong>Perturbation</strong></p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-07 at 5.52.05 PM.png" alt="Screen Shot 2018-06-07 at 5.52.05 PM"></p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-07 at 5.52.09 PM.png" alt="Screen Shot 2018-06-07 at 5.52.09 PM"></p>
+</li>
+<li><p><strong>Aggregation</strong></p>
+<p>??????????????</p>
+</li>
+</ol>
+<p>Remarks:</p>
+<ol>
+<li><p>We map the input domain with size $d$ to output domain with size $m$, where $m$ is determined through Johnson-Lindenstrauss Lemma. And $m$ is calculated as:</p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-07 at 6.42.25 PM.png" alt="Screen Shot 2018-06-07 at 6.42.25 PM"></p>
+</li>
+<li><p>$R$ is $\epsilon$-LDP for every choice of the index $j$</p>
+</li>
+<li><p>$R(x)=z_j$ is an unbiased estimator of $x$. That is, $\mathbb{E}[R(x)]=x$</p>
+</li>
 </ol>
 </blockquote>
 </li>
@@ -516,6 +550,9 @@ Y(i)=\begin{cases}
 </ol>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p> [2018-Kim] Application of Local Differential Privacy to Collection of Indoor Positioning Data</p>
 <p>[2016-Peter]  Discrete Distribution Estimation under Local Privacy</p>
+<p>[2015-Bassily] Local, Private, Efficient Protocols for Succinct Histograms</p>
+<p>[2016-Chen] Private Spatial Data Aggregation in the Local Setting</p>
+<p>[2017-Wang] Optimizing Locally Differentially Private Protocols</p>
 
       
     </div>
