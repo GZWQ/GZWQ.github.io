@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-07%20at%2012.47.15%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-05%20at%2010.10.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-31%20at%203.10.30%20PM.png">
-<meta property="og:updated_time" content="2018-06-07T17:55:40.405Z">
+<meta property="og:updated_time" content="2018-06-08T15:21:52.384Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mechanism of Differential Privacy">
 <meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
@@ -459,9 +459,19 @@
 \Delta{q}=max_{r\in{R}}\ max_{x,y:||x-y||_1\le{1}}|q(x,r)-q(y-r)|</script><p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-07 at 12.47.15 PM.png" alt="Screen Shot 2018-06-07 at 12.47.15 PM"></p>
 <p>Remarks:</p>
 <ol>
-<li>by amplifying the probability, the sum of all output probability will not equal 1. So in order to bound the probability, we need a normalization term.</li>
-<li>the exponential mechanism defines a distribution over the output domain.</li>
-<li></li>
+<li><p>by amplifying the probability, the sum of all output probability will not equal 1. So in order to bound the probability, we need a normalization term.</p>
+</li>
+<li><p>the exponential mechanism defines a distribution over the output domain.</p>
+</li>
+<li><p>now we want to know how a small change in the database can affect the output. Say we have database $d$ and $d’$, where $||d-d’||=1$. And we assume $q(d,r)=q(d’,r)+\Delta{q}$. we want to bound the probability ratio $\frac{P(r|d)}{P(r|d’)}$</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\frac{P(r|d)}{P(r|d')}&=\frac{e^{\epsilon{q(d,r)}}}{\int{e^{\epsilon{q(d,r)}}}}\div\frac{e^{\epsilon{q(d',r)}}}{\int{e^{\epsilon{q(d',r)}}}}\\
+&=\frac{e^{\epsilon{q(d,r)}}}{e^{\epsilon{q(d',r)}}}\times\frac{\int{e^{\epsilon{q(d',r)}}}}{\int{e^{\epsilon{q(d,r)}}}}\\
+&\le{\frac{e^{\epsilon{(q(d',r)+\Delta{q})}}}{e^{\epsilon{q(d',r)}}}}\times\frac{\int{e^{\epsilon{q(d',r)}}}}{\int{e^{\epsilon{q(d,r)}}}}\\
+\end{aligned}
+\end{equation}</script></li>
 </ol>
 </blockquote>
 <h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
@@ -604,7 +614,7 @@ D(p||q)\ge0</script></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -626,7 +636,7 @@ D(p||q)\ge0</script></li>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
