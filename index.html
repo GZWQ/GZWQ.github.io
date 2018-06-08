@@ -522,7 +522,7 @@
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�4-->
+<!--�6-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
@@ -1618,7 +1618,7 @@
 </ol>
 </blockquote>
 <h1 id="Exponential-mechanism"><a href="#Exponential-mechanism" class="headerlink" title="Exponential mechanism"></a>Exponential mechanism</h1><p>The exponential mechanism was designed for situations in which we wish to choose the “best” response but adding noise directly to the computed quantity can completely destroy its value, such as setting a price in an auction, where the goal is to maximize revenue, and adding a small amount of positive noise to the optimal price (in order to protect the privacy of a bid) could dramatically reduce the resulting revenue.</p>
-<h2 id="Define"><a href="#Define" class="headerlink" title="Define"></a>Define</h2><blockquote>
+<h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><blockquote>
 <p>Say we have a discrete candidate output in a range $R$, and assume that the probability distribution of output is $u$, commonly uniform. The general mechanism is to design a query function $q:D^n(input \ database)\times{R(output)}\to{\mathbb{R}}$, which assign a real valued score to any pair $(d,r)$ from $D^n\times{R}$. With a prior distribution of candidate output $u$, we amplify the probability associated with each output by a factor of $e^{\epsilon{q(d,r)}}$:</p>
 <p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-07 at 12.43.02 PM.png" alt="Screen Shot 2018-06-07 at 12.43.02 PM"></p>
 <script type="math/tex; mode=display">
@@ -1626,6 +1626,8 @@
 <p>Remarks:</p>
 <ol>
 <li><p>by amplifying the probability, the sum of all output probability will not equal 1. So in order to bound the probability, we need a normalization term.</p>
+</li>
+<li><p>from the denifition, if we set the privacy parameter as $\epsilon$, then it will provide us $2\epsilon \Delta q$, which amptifies with a factor $2\Delta q$. </p>
 </li>
 <li><p>the exponential mechanism defines a distribution over the output domain.</p>
 </li>
@@ -1635,9 +1637,27 @@
 \begin{aligned}
 \frac{P(r|d)}{P(r|d')}&=\frac{e^{\epsilon{q(d,r)}}}{\int{e^{\epsilon{q(d,r)}}}}\div\frac{e^{\epsilon{q(d',r)}}}{\int{e^{\epsilon{q(d',r)}}}}\\
 &=\frac{e^{\epsilon{q(d,r)}}}{e^{\epsilon{q(d',r)}}}\times\frac{\int{e^{\epsilon{q(d',r)}}}}{\int{e^{\epsilon{q(d,r)}}}}\\
-&\le{\frac{e^{\epsilon{(q(d',r)+\Delta{q})}}}{e^{\epsilon{q(d',r)}}}}\times\frac{\int{e^{\epsilon{q(d',r)}}}}{\int{e^{\epsilon{q(d,r)}}}}\\
+for\ the\ left\ one,\ we\ replace\ q(d,r)=q(d',r)+\Delta{q} ,\\ for\ right\ since\ q(d',r)\le q(d,r)+\Delta q, we\ change\ equation
+\\
+&\le{\frac{e^{\epsilon{(q(d',r)+\Delta{q})}}}{e^{\epsilon{q(d',r)}}}}\times\frac{\int{e^{\epsilon{(q(d,r)}+\Delta{q})}}}{\int{e^{\epsilon{q(d,r)}}}}\\
+&=e^{\epsilon \Delta q}\times{e^{\epsilon{\Delta{q}}}}\\
+&=e^{2\epsilon \Delta q}
 \end{aligned}
 \end{equation}</script></li>
+</ol>
+</blockquote>
+<h2 id="Utility-1"><a href="#Utility-1" class="headerlink" title="Utility"></a>Utility</h2><p>The exponential mechanism can often give strong utility guarantees, because it discounts outcomes exponentially quickly as their quality score falls off.</p>
+<p>Let $OPT_{q}(d)=max_{r\in R}q(d,r)$ denote the maximum score of any candidate output $r\in R$ with respect to database $d$. </p>
+<p>Fixing a database $d$, let $R_{OPT}=\{r\in R:q(d,r)=OPT_{q}(x)\}$ denote the set of candidates in $R$ which attain maximum utility score $OPT_q(x)$. Then:</p>
+<p><strong>Theorem</strong>:</p>
+<script type="math/tex; mode=display">
+Pr[q(M_{E(d,q,R)}\le OPT_q(d)-\frac{2\Delta q}{\epsilon}(ln(\frac{|R|}{|R_{OPT}|})+t))]\le e^{-t}</script><p><strong>Corollary</strong>:</p>
+<script type="math/tex; mode=display">
+Pr[q(M_{E(d,q,R)}\le OPT_q(d)-\frac{2\Delta q}{\epsilon}(ln(|R|)+t))]\le e^{-t}</script><blockquote>
+<p>Remarks:</p>
+<ol>
+<li>We bound the probability that the exponential mechanism returns a “good” output of $R$, where good is measured in terms of $OPT_q(d)$.  The result is that it will be highly unlikely that the returned output $r$ has a utility score that is inferior to $OPT_q(x)$ by more than an additive factoc of $O(\frac{\Delta q}{\epsilon}log|R|)$</li>
+<li><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-08 at 11.08.54 AM.png" alt="Screen Shot 2018-06-08 at 11.08.54 AM"></li>
 </ol>
 </blockquote>
 <h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
