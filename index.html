@@ -283,6 +283,596 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/ML-SciPy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/07/ML-SciPy/" itemprop="url">ML - SciPy</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-07T23:41:31-05:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">-Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Scipy基于Numpy，提供了大量科学算法，它的不同子模块相应于不同的应用，本文参考了<a href="https://www.jianshu.com/p/1a3db06e786d" target="_blank" rel="noopener">1</a></p>
+<ol>
+<li>文件IO（scipy.io）：数据输入输出</li>
+<li>特殊函数（scipy.special）：特殊函数是先验函数，常用的有伽马函数scipy.special.gamma()</li>
+<li>线性代数运算（scipy.linalg）</li>
+<li>快速傅里叶变化（scipy.fftpack）</li>
+<li>优化和拟合（scipy.optimize）：提供了函数最小值(标量或多维)、曲线拟合和寻找等式的根的有用算法。</li>
+<li>统计和随机数（scipy.stats）</li>
+<li>数值积分（scipy.integrate Fusy）</li>
+</ol>
+<p>模块导入的标准方式是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io <span class="comment">#其他模块类似</span></div>
+</pre></td></tr></table></figure>
+<h2 id="文件输入-输出：scipy-io"><a href="#文件输入-输出：scipy-io" class="headerlink" title="文件输入/输出：scipy.io"></a>文件输入/输出：scipy.io</h2><h3 id="导入和保存matlab文件"><a href="#导入和保存matlab文件" class="headerlink" title="导入和保存matlab文件"></a>导入和保存matlab文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io <span class="keyword">as</span> spio</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.ones((<span class="number">3</span>,<span class="number">3</span>)) <span class="comment">#3*3的全1矩阵</span></div>
+<div class="line">spio.savemat(<span class="string">'file.mat'</span>,&#123;<span class="string">'a'</span>:a&#125;) <span class="comment">#以字典形式保存</span></div>
+<div class="line">data = spio.loadmat(<span class="string">'file.mat'</span>,struct_as_record=<span class="keyword">True</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="图片读取"><a href="#图片读取" class="headerlink" title="图片读取"></a>图片读取</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> misc</div>
+<div class="line"></div>
+<div class="line">x = misc.imread(<span class="string">"scipy.png"</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="txt-csv"><a href="#txt-csv" class="headerlink" title="txt/csv"></a>txt/csv</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">numpy.loadtxt()</div>
+<div class="line">numpy.savetxt()</div>
+<div class="line">numpy.genfromtxt() <span class="comment">#智能导入文本</span></div>
+<div class="line">numpy.recfromcsv() <span class="comment">#智能导入csv文件</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#高速，有效率但numpy特有的二进制格式：</span></div>
+<div class="line">numpy.save() </div>
+<div class="line">numpy.load()</div>
+</pre></td></tr></table></figure>
+<h2 id="线性代数运算：scipy-linalg"><a href="#线性代数运算：scipy-linalg" class="headerlink" title="线性代数运算：scipy.linalg"></a>线性代数运算：scipy.linalg</h2><h3 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</div>
+<div class="line"></div>
+<div class="line">x = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
+<div class="line">re = linalg.det(x) <span class="comment">#-2.0</span></div>
+</pre></td></tr></table></figure>
+<h3 id="逆矩阵"><a href="#逆矩阵" class="headerlink" title="逆矩阵"></a>逆矩阵</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</div>
+<div class="line"></div>
+<div class="line">x = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
+<div class="line">re = linalg.inv(x)</div>
+</pre></td></tr></table></figure>
+<h3 id="奇异值分解SVD"><a href="#奇异值分解SVD" class="headerlink" title="奇异值分解SVD"></a>奇异值分解SVD</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</div>
+<div class="line"></div>
+<div class="line">x = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
+<div class="line">uarr,spec,vharr = linalg.svd(x)</div>
+<div class="line"></div>
+<div class="line"><span class="comment">###原始矩阵可以由svd的输出用np.dot点乘重新组合得到</span></div>
+<div class="line">sarr = np.diag(spec)</div>
+<div class="line">svd_mat = uarr.dot(sarr).dot(vharr)</div>
+<div class="line">re = np.allclose(svd_mat,x) <span class="comment">#True</span></div>
+</pre></td></tr></table></figure>
+<h2 id="快速傅里叶变换：scipy-fftpack"><a href="#快速傅里叶变换：scipy-fftpack" class="headerlink" title="快速傅里叶变换：scipy.fftpack"></a>快速傅里叶变换：scipy.fftpack</h2><h2 id="优化和拟合：scipy-optimize"><a href="#优化和拟合：scipy-optimize" class="headerlink" title="优化和拟合：scipy.optimize"></a>优化和拟合：scipy.optimize</h2><h3 id="标量函数最小值"><a href="#标量函数最小值" class="headerlink" title="标量函数最小值"></a>标量函数最小值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
+<div class="line">x = np.arange(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
+<div class="line">plt.plot(x,f(x))</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/07/ML-SciPy/image-20180608001714621.png" alt="image-20180608001714621"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">####从上面图像可以看出x在-1.3附近有个全局最小值，在3.8附近有个局部最小</span></div>
+<div class="line"><span class="comment">####从初始点使用梯度下降法求解，BFGS算法</span></div>
+<div class="line">re = optimize.fmin_bfgs(f,<span class="number">0</span>) <span class="comment">##必须定义成函数</span></div>
+<div class="line">print(re)</div>
+<div class="line"><span class="comment">#Optimization terminated successfully.</span></div>
+<div class="line"><span class="comment">#Current function value: -7.945823</span></div>
+<div class="line"><span class="comment">#Iterations: 5</span></div>
+<div class="line"><span class="comment">#Function evaluations: 18</span></div>
+<div class="line"><span class="comment">#Gradient evaluations: 6</span></div>
+<div class="line"><span class="comment">#[-1.30644012]</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#这个方法一个可能的问题在于，如果函数有局部最小值，算法会因初始点不同找到这些局部最小而不是全局最小:</span></div>
+<div class="line">re = optimize.fmin_bfgs(f,<span class="number">3</span>) <span class="comment">#[3.83746709]</span></div>
+<div class="line"><span class="comment">#如果我们不知道全局最小值的邻近值来选定初始点，我们需要借助于耗费资源些的全局优化。为了找到全局最小点，最简单的算法是蛮力算法^2，该算法求出给定格点的每个函数值。</span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
+<div class="line">x = np.arange(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
+<div class="line"></div>
+<div class="line">grid = (<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
+<div class="line">re = optimize.brute(f,(grid,)) <span class="comment">##[-1.30641113]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">##为了找到局部最小，我们把变量限制在(0, 10)之间，使用scipy.optimize.fminbound():</span></div>
+<div class="line">re_local = optimize.fminbound(f,<span class="number">0</span>,<span class="number">10</span>) <span class="comment">##3.8374671194983834</span></div>
+</pre></td></tr></table></figure>
+<h3 id="标量函数的根"><a href="#标量函数的根" class="headerlink" title="标量函数的根"></a>标量函数的根</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#为了寻找根，例如令f(x)=0的点，对以上的用来示例的函数f我们可以使用scipy.optimize.fsolve()</span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
+<div class="line">x = np.arange(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
+<div class="line"></div>
+<div class="line">root = optimize.fsolve(f,<span class="number">1</span>)<span class="comment">#初始猜测是1</span></div>
+<div class="line">print(root) <span class="comment">#[0.]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#注意仅仅一个根被找到。检查f的图像在-2.5附近有第二个根。我们可以通过调整我们的初始猜测找到这一确切值</span></div>
+<div class="line">root = optimize.fsolve(f,<span class="number">-2.5</span>)</div>
+<div class="line">print(root)<span class="comment">#[-2.47948183]</span></div>
+</pre></td></tr></table></figure>
+<h3 id="曲线拟合"><a href="#曲线拟合" class="headerlink" title="曲线拟合"></a>曲线拟合</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
+<div class="line">xdata = np.linspace(<span class="number">-10</span>,<span class="number">10</span>,num=<span class="number">20</span>)</div>
+<div class="line"><span class="comment">#得到污染的数据</span></div>
+<div class="line">ydata = f(xdata) + np.random.randn(xdata.size)</div>
+<div class="line"><span class="comment">#我们知道xdata-ydata大致服从y=x^2 + sin(x),但是噪声的引入而又偏差，我们需要拟合找出系数a和b，即y=a*x^2 + b*sin(x)</span></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(x,a,b)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> a*x**<span class="number">2</span>+b*np.sin(x)</div>
+<div class="line">guess = [<span class="number">2</span>,<span class="number">2</span>]</div>
+<div class="line">params, params_covariance = optimize.curve_fit(f2,xdata,ydata,guess)</div>
+<div class="line"><span class="comment"># params = [0.98996991 9.87613168]</span></div>
+<div class="line"><span class="comment"># params_covariance = [[1.23238891e-05 1.30651701e-11] [1.30651701e-11 6.29408152e-02]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="统计和随机数：-scipy-stats"><a href="#统计和随机数：-scipy-stats" class="headerlink" title="统计和随机数： scipy.stats"></a>统计和随机数： scipy.stats</h2><h3 id="直方图和概率密度函数"><a href="#直方图和概率密度函数" class="headerlink" title="直方图和概率密度函数"></a>直方图和概率密度函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#给定一个随机过程的观察值，它们的直方图是随机过程的pdf(概率密度函数)的估计器</span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line">a = np.random.normal(size=<span class="number">1000</span>)</div>
+<div class="line">bins = np.arange(<span class="number">-4</span>,<span class="number">5</span>) <span class="comment"># bins=[-4, -3, -2, -1,  0,  1,  2,  3,  4]</span></div>
+<div class="line"></div>
+<div class="line">histogram = np.histogram(a,bins=bins,normed=<span class="keyword">True</span>)[<span class="number">0</span>]</div>
+<div class="line">bins = <span class="number">0.5</span>*(bins[<span class="number">1</span>:]+bins[:<span class="number">-1</span>]) <span class="comment">#bins=[-3.5, -2.5, -1.5, -0.5,  0.5,  1.5,  2.5,  3.5]</span></div>
+<div class="line"></div>
+<div class="line">b = stats.norm.pdf(bins)</div>
+<div class="line"></div>
+<div class="line">plt.plot(bins,histogram,color=<span class="string">'g'</span>)</div>
+<div class="line">plt.plot(bins,b,color=<span class="string">'b'</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/07/ML-SciPy/image-20180608005630507.png" alt="image-20180608005630507"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#如果我们知道随机过程属于给定的随机过程族，比如正态过程。我们可以对观测值进行最大似然拟合来估计基本分布参数。这里我们对观测值拟合一个正态过程：</span></div>
+<div class="line">loc,std = stats.norm.fit(a) <span class="comment">#loc= 0.007411672576925874 std= 1.005072454096087</span></div>
+</pre></td></tr></table></figure>
+<h3 id="百分位"><a href="#百分位" class="headerlink" title="百分位"></a>百分位</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#中位数,又叫作50百分位点，因为有50%的观测值在它之下,是来观测值之下一半之上一半的值。</span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line">a = np.random.normal(size=<span class="number">1000</span>)</div>
+<div class="line"></div>
+<div class="line">med = np.median(a)</div>
+<div class="line">med = stats.scoreatpercentile(a,<span class="number">50</span>) <span class="comment">#百分位是CDF的一个估计器</span></div>
+</pre></td></tr></table></figure>
+<h2 id="数值积分：scipy-integrate-Fusy"><a href="#数值积分：scipy-integrate-Fusy" class="headerlink" title="数值积分：scipy.integrate Fusy"></a>数值积分：scipy.integrate Fusy</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> quad</div>
+<div class="line"></div>
+<div class="line">re,err = quad(np.sin,<span class="number">0</span>,np.pi/<span class="number">2</span>)</div>
+<div class="line"><span class="comment">#re=0.9999999999999999, err=1.1102230246251564e-14</span></div>
+</pre></td></tr></table></figure>
+<p>上述计算$\int_{0}^{\frac{\pi}{2}}sin(x)dx=1$</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/ML-Sklearn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/07/ML-Sklearn/" itemprop="url">ML - Sklearn</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-07T23:32:12-05:00">
+                2018-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">-Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/Frequent-Itemset-Mining/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1623,490 +2213,6 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/DP-Application-Private-Spatial-Decompositions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/26/DP-Application-Private-Spatial-Decompositions/" itemprop="url">DP Application - Private Spatial Decompositions</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T22:36:58-05:00">
-                2018-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">-Differential Privacy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> details the methods of Private Spatial Decompositions.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To] A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/DP Application-CrowdSourcing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/26/DP Application-CrowdSourcing/" itemprop="url">DP Application - CrowdSourcing</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T16:59:09-05:00">
-                2018-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">-Differential Privacy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://sigmodrecord.org/publications/sigmodRecord/1512/pdfs/05_surveys_Pournajaf.pdf" target="_blank" rel="noopener">[2015-Layla]</a> is a survey on the MobileCrowdScoucing privacy.</p>
-<p>Four factors in CrowdSourcing:</p>
-<blockquote>
-<ol>
-<li>sensing data quality, which tries to maximize the data quality measured by a certain metric (mostly used in environmental monitoring tasks)</li>
-<li>incentive cost, which aims at minimizing the total budget (from the task organizer perspective)<br>for an MCS task with different incentive mechanisms, such as pay per participant or pay per task</li>
-<li>energy consumption, whose objective is to identify an optimal collaborative data sensing and uploading scheme with energy-saving techniques such as piggybacking</li>
-<li>travel distance, where the travel distance of a user for accomplishing a task is considered in task allocation, in order to minimize the overall travel distance for all the tasks.</li>
-</ol>
-</blockquote>
-<h2 id="Task-Assignments-in-CrowdSourcing"><a href="#Task-Assignments-in-CrowdSourcing" class="headerlink" title="Task Assignments in CrowdSourcing"></a>Task Assignments in CrowdSourcing</h2><p>In croudsourcing, workers with mobile devices to collect data and send it to task requester for rewards.</p>
-<p>In task assignment, organizers need participants’ precise locations for optimal task allocation. However, the exposure of their locations raises privacy concerns. Especially for those who are not eventually selected for any task, their location privacy is sacrificed in vain.</p>
-<p>So in the differential privacy task assignment croudsourcing, the goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the privacy of their locations.</p>
-<h2 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h2><h3 id="2014-To"><a href="#2014-To" class="headerlink" title="[2014-To]"></a><a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a></h3><p>it is the first one to solve this problem.</p>
-<blockquote>
-<ol>
-<li><p>Framework</p>
-<ul>
-<li>Workers send their locations to a trusted cellular service provider(CSP) </li>
-<li>CSP collects updates and releases a PSD according to privacy budget </li>
-<li>When the SC-server receives a task t, it queries the PSD to determine a geocast region (GR), which is a unique feature of this work. Next, the SC-server initiates a geocast communication process to disseminate t to all workers within GR. Upon receiving request t, a worker w decides whether to perform the task or not.</li>
-<li>Task assignment. <ul>
-<li>Once server get a task request, server needs to query PSD to find a geocast region, balancing between high task assignment success rate and system overload like worker traveling distance and the number of  noticed worker. The author calculate maximum travel distance, models acceptance rate as the function of distance.</li>
-<li>Geocast region construction. </li>
-<li>Optimization. Including Partial Cell Selection and Communication Cost.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Privacy Model</p>
-<ul>
-<li><p>Privacy leakage: (1) workers disclose information to the task requester once they consent to the task; (2) completion of a task discloses the fact that some worker must have been at that location; (3) but this paper focuses on what happens prior to consent, when worker location and identity must be protected from both task requesters and the SC server.</p>
-</li>
-<li><p>the specific objective is to protect both the location and the identity of workers during task assignment. </p>
-</li>
-<li><p>Private Spatial Decom</p>
-<ul>
-<li><p>AG uses a two-level grid and variable cell granularity.</p>
-</li>
-<li><p>For the first-level, domain is divided into $m_1\times{m1}$ cells. This heuristic method is data-independent, and thus does not consume any privacy budget. For each level-1 cell, it is divided into $m_2\times{m2}$ subcells. </p>
-<script type="math/tex; mode=display">
-m1 = max(10,\lceil{\frac{1}{4}\sqrt{\frac{N\times{\epsilon}}{k_1=10}}}\rceil)
-\\
-m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
-<li><p>$k_2$ selection. $k_2$ controls the granularity of level-2 domain and small one leads to compactness in level-2 subcells. </p>
-</li>
-<li><p>improving $m_2$</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 12.27.05 PM.png" alt="Screen Shot 2018-05-30 at 12.27.05 PM"></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<h3 id="2018-Yang"><a href="#2018-Yang" class="headerlink" title="[2018-Yang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8319407" target="_blank" rel="noopener">[2018-Yang]</a></h3><p>it criticizes that <a href="http://www.vldb.org/pvldb/vol7/p919-to.pdf" target="_blank" rel="noopener">[2014-To]</a> is based on the assumption that workers are uniformly distributed within the domain and and the workers in each cell have the same acceptance rate. So they proposes a workers density-based method.</p>
-<blockquote>
-<ol>
-<li>Framework<ul>
-<li>Workers must submit their location to the CSP, travel to the location designated for the task and collect data using their sensor-equipped device.</li>
-<li>The CSP collects locations from workers and releases data in sanitized form to the Server for task assignment. There is a trust relationship between CSP and workers.</li>
-<li>The Server queries the CSP for a sanitized dataset once it receives a task, where server chooses a geocast region GR to disseminate the task to the workers in GR. It then assigns the task to suitable workers, through the CSP, according to a task assignment algorithm.</li>
-</ul>
-</li>
-<li>Modules<ul>
-<li>Using quadtree to partition the region based on worker density.  But the authors change this method so that the partitioning is based on the worker density instead of choosing the middle point.</li>
-<li>Partitioning point selection. Before partitioning, <code>m</code> initial points are randomly generated within the cell, ==============================(TODO)</li>
-<li>Differential privacy data release. A noisy count of the number of workers in each cell is released to protect the privacy of worker locations, where whether or not a worker<br>within a specific cell cannot be identified.</li>
-<li>Task assignment. Firstly, teh geocast region is selected based on task assignment success rate and system overhead (the distance workers need to travel and the number of workers notified of the task).</li>
-</ul>
-</li>
-<li>Privacy Model<ul>
-<li>The basic idea of private data release is that the domain of worker locations is partitioned into small cells and Laplace noise is added to the count of workers in each cell to achieve a differential privacy guarantee.</li>
-<li>Pervious literature assumes the worker locations are distributed uniformly, and the workers in each cell have the same acceptance rate, which is not the case in real-world scenarios. Partitioning the data domain into a uniform grid would result in sizeable errors. Therefore, we propose a recursive partitioning process based on worker density. </li>
-<li>The aim is to identify dense regions and sparse regions and make the distribution of the workers in each smaller region as near to uniform as possible.</li>
-<li>Adopting data-independent quadtree into workers density-based data-independent technique. <ul>
-<li>Partitioning stop condition. Traditional quadtrees require the data publisher to specify the height of the partitioning. In this paper, the process stops if (1) no workers exist in the cell; (2) the area of cell is less than some threshold, The smaller the cell, the more uniform the distribution of workers within it; (3) the distribution of workers in a cell is relatively uniform， which is measures by the threshold of maximum density difference.</li>
-<li>First, $m$ initial partition points in the location domain need to be selected, where $m=\frac{\sqrt{area \ of \ cell}}{\alpha}$</li>
-<li>check condition (1) and (2), which is the number of points in cell is greater than 0 and the area of cell is greater than the threshold. If one of answers is no, stop partitioning.</li>
-<li>for each partitioning point, calculate the density of the subcells divided by this point. choose the point which has the maximum density difference bbetween subcells.</li>
-<li>If the biggest density difference is greater than the threshold β, the cell is partitioned at point. Otherwise, the cell will not be partitioned as the distribution of worker in the cell is already close to uniform. For example, the density of four subcells is 1, 2, 1, 2, which means in each subcells, there are 1, 2, 1 and 2 points in each subcell, which is kind of uniform distribution in the cell.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<h3 id="2017-Wang"><a href="#2017-Wang" class="headerlink" title="[2017-Wang]"></a><a href="http://papers.www2017.com.au.s3-website-ap-southeast-2.amazonaws.com/proceedings/p627.pdf" target="_blank" rel="noopener">[2017-Wang]</a></h3><blockquote>
-<ol>
-<li><p>Framework</p>
-<ul>
-<li>Platform-side Geo-Obfuscation Function Generation</li>
-<li>User-side Location Obfuscation</li>
-<li>Platform-side Obfuscation-aware Task Allocation</li>
-</ul>
-</li>
-<li><p>Privacy Model</p>
-<p>Overall, the aurhor models workers’ travel distance to task locations as the function of geo-obfuscation function and task allocation. And by calculating the optimal function, we can get the Geo-Obfuscation matrix which satisfies DP and task allocation schemes.</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 10.06.41 AM.png" alt="Screen Shot 2018-05-30 at 10.06.41 AM"></p>
-<ul>
-<li><p>the expected travel distance of assigning a task at $l_t$ to a user at (obfuscated) $l*$ given the geo-obfuscation function $P$.</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 10.18.25 AM.png" alt="Screen Shot 2018-05-30 at 10.18.25 AM"></p>
-</li>
-<li><p>optimal function</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 10.55.21 AM.png" alt="Screen Shot 2018-05-30 at 10.55.21 AM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 11.05.55 AM.png" alt="Screen Shot 2018-05-30 at 11.05.55 AM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 10.56.24 AM.png" alt="Screen Shot 2018-05-30 at 10.56.24 AM"></p>
-</li>
-<li><p>task allocation</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 11.07.06 AM.png" alt="Screen Shot 2018-05-30 at 11.07.06 AM"></p>
-</li>
-<li><p>Candidate Geo-Distribution Estimation</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 11.10.54 AM.png" alt="Screen Shot 2018-05-30 at 11.10.54 AM"></p>
-</li>
-<li><p>Laplace</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 11.27.15 AM.png" alt="Screen Shot 2018-05-30 at 11.27.15 AM"></p>
-</li>
-<li><p>Geo-distribution Estimation</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 11.50.49 AM.png" alt="Screen Shot 2018-05-30 at 11.50.49 AM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 11.50.57 AM.png" alt="Screen Shot 2018-05-30 at 11.50.57 AM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 11.51.05 AM.png" alt="Screen Shot 2018-05-30 at 11.51.05 AM"></p>
-</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<h3 id="2015-Gong"><a href="#2015-Gong" class="headerlink" title="[2015-Gong]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7296638" target="_blank" rel="noopener">[2015-Gong]</a></h3><h3 id="2016-Jin"><a href="#2016-Jin" class="headerlink" title="[2016-Jin]"></a><a href="http://webhost.engr.illinois.edu/~hjin8/publications/mobihoc16.pdf" target="_blank" rel="noopener">[2016-Jin]</a></h3><p>This paper considers how to effectively incentivize worker participation. And proposes a system framework that integrates an incentive, a weighted  data aggregation, and a data perturbation mechanism which protects the sensing data.</p>
-<blockquote>
-<ol>
-<li><p>Framework</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-06-01 at 11.00.21 AM.png" alt="Screen Shot 2018-06-01 at 11.00.21 AM"></p>
-<ul>
-<li><p>Aggregation Mechanism</p>
-<p>To guarantee that the perturbed results have satisfactory accuracy, the original aggregated results before perturbation need to be accurate enough in the first place. Therefore, we reasonably assume that the platform uses a weighted aggregation method to calculate the aggregated result $x_j$ for each task $\tau_j$ based on workers’ data.</p>
-<p>The motivation for utilizing weighted aggregation is to capture the effect of workers’ diverse skill levels on the calculation of the aggregated results.</p>
-</li>
-<li><p>Incentive Mechanism</p>
-<p>aim to design a pSRC auction that minimizes the platform’s total payment with satisfactory data aggregation</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-06-01 at 11.51.45 AM.png" alt="Screen Shot 2018-06-01 at 11.51.45 AM"></p>
-<p>where $y_i$ means worker is seleted for a task, $\alpha_j$ is the error threshold for task j, $\theta_{i,j}$ is error of  worker i for task j.</p>
-</li>
-</ul>
-</li>
-<li><p>Privacy model</p>
-<ul>
-<li><p>workers locally sense a specific object or phenomenon and server aggregrate the uploaded data and publish a noise aggregated results to protect worker’s privacy.</p>
-</li>
-<li><p>the noise scale is deviated from the $(\alpha,\beta)-accuracy$.</p>
-</li>
-<li><p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-06-01 at 12.09.47 PM-7873006.png" alt="Screen Shot 2018-06-01 at 12.09.47 PM-7873006"></p>
-</li>
-<li><p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-06-01 at 12.25.25 PM.png" alt="Screen Shot 2018-06-01 at 12.25.25 PM"></p>
-</li>
-<li><p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-06-01 at 12.19.28 PM.png" alt="Screen Shot 2018-06-01 at 12.19.28 PM"></p>
-<p><strong>Remarks</strong>:</p>
-<p>$Pr(|N_j|\ge\alpha_j)=Pr(N_j\ge\alpha_j)+Pr(-N_j\le-\alpha_j)$</p>
-<p>according to the symmetry of PDF, $Pr(N_j\ge\alpha_j)=Pr(-N_j\le-\alpha_j)$</p>
-<p>so $Pr(|N_j|\ge\alpha_j)=2Pr(N_j\ge\alpha_j)$</p>
-</li>
-<li></li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<h2 id="Data-Sensing-in-CrowdSourcing"><a href="#Data-Sensing-in-CrowdSourcing" class="headerlink" title="Data Sensing in CrowdSourcing"></a>Data Sensing in CrowdSourcing</h2><h3 id="Solutions-1"><a href="#Solutions-1" class="headerlink" title="Solutions"></a>Solutions</h3><h3 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7837982" target="_blank" rel="noopener">[2016-Wang]</a></h3><p>In this paper, instead of studying task assignment, the author focuses on sparse croudsensing. Due to large target sensing area and limited budget which result in insufficient spatial coverage of mobile users, sparse mobile croudsensing impute information of the uncovered regions by combining historical records with available sensing data from nearby regions.</p>
-<blockquote>
-<ol>
-<li>Framework<ul>
-<li>The server side generates probabilistic obfuscation matrix and data adjustment function in an offline way.</li>
-<li>user sider senses its actual location and then maps the associated region to another region according to probabilistic obfuscation matrix. After that, the data adjustment function alters the original sensing data to fit the properties of the obfuscated region. Finally, mobile client then uploads the modified region and data to the server.</li>
-<li>The server side does data inference : modeled as a matrix completion problem, where each element in the matrix is the value like temperature of a region at time t. In this paper, they use compressive sensing theory for inference.</li>
-</ul>
-</li>
-<li><p>Privacy Model</p>
-<ul>
-<li><p>Privacy leakage : In Sparse MCS, participants report the sensing data with time stamps and geographical coordinates, which may introduce serious privacy risks. </p>
-</li>
-<li><p>Data utility: Due to location obfuscation, the uploaded region data is not actual value of this region, so adjustment is needed to decrease data utility loss. the data quality loss is determined by the difference of sensing data between the actual and the obfuscated locations, instead of the geographic distance. In other words, a participant’s location may be mapped to a place far away, as long as the sensing values of the two locations are close enough.</p>
-</li>
-<li><p>Adversary model - Bayesian attack</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 12.10.00 PM.png" alt="Screen Shot 2018-05-30 at 12.10.00 PM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 12.10.48 PM.png" alt="Screen Shot 2018-05-30 at 12.10.48 PM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 12.11.49 PM.png" alt="Screen Shot 2018-05-30 at 12.11.49 PM"></p>
-</li>
-<li><p>optimal function</p>
-<p>The authors model the sensing data quality loss as the function of location obfuscation matrix.</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 12.20.20 PM.png" alt="Screen Shot 2018-05-30 at 12.20.20 PM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 12.22.12 PM.png" alt="Screen Shot 2018-05-30 at 12.22.12 PM"></p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 12.22.56 PM.png" alt="Screen Shot 2018-05-30 at 12.22.56 PM"></p>
-</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2014-To] A Framework for Protecting Worker Location Privacy in Spatial Crowdsourcing</p>
-<p>[2018-Yang] Density-Based Location Preservation for Mobile Crowdsensing With Differential Privacy</p>
-<p>[2016-Wang] Differential Location Privacy for Sparse Mobile Crowdsensing</p>
-<p>[2015-Layla] Participant privacy in mobile crowd sensing task management: A survey of methods and challenges</p>
-<p>[2015-Gong] Protecting Location Privacy for Task Allocation in Ad Hoc Mobile Cloud Computing</p>
-<p>[2016-Jin] INCEPTION: Incentivizing Privacy-Preserving Data Aggregation for Mobile Crowd Sensing Systems</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2157,7 +2263,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
