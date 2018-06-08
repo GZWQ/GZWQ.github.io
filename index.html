@@ -283,6 +283,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/ML-Pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/08/ML-Pandas/" itemprop="url">ML - Pandas</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T01:16:54-05:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">-Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
+<p>pandas导入</p>
+<!--�3-->
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/07/ML-SciPy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,8 +523,7 @@
 
       
         
-          
-            <p>Scipy基于Numpy，提供了大量科学算法，它的不同子模块相应于不同的应用，本文参考了<a href="https://www.jianshu.com/p/1a3db06e786d" target="_blank" rel="noopener">1</a></p>
+          <p>Scipy基于Numpy，提供了大量科学算法，它的不同子模块相应于不同的应用，本文参考了<a href="https://www.jianshu.com/p/1a3db06e786d" target="_blank" rel="noopener">1</a></p>
 <ol>
 <li>文件IO（scipy.io）：数据输入输出</li>
 <li>特殊函数（scipy.special）：特殊函数是先验函数，常用的有伽马函数scipy.special.gamma()</li>
@@ -387,305 +534,14 @@
 <li>数值积分（scipy.integrate Fusy）</li>
 </ol>
 <p>模块导入的标准方式是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io <span class="comment">#其他模块类似</span></div>
-</pre></td></tr></table></figure>
-<h2 id="文件输入-输出：scipy-io"><a href="#文件输入-输出：scipy-io" class="headerlink" title="文件输入/输出：scipy.io"></a>文件输入/输出：scipy.io</h2><h3 id="导入和保存matlab文件"><a href="#导入和保存matlab文件" class="headerlink" title="导入和保存matlab文件"></a>导入和保存matlab文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> io <span class="keyword">as</span> spio</div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"></div>
-<div class="line">a = np.ones((<span class="number">3</span>,<span class="number">3</span>)) <span class="comment">#3*3的全1矩阵</span></div>
-<div class="line">spio.savemat(<span class="string">'file.mat'</span>,&#123;<span class="string">'a'</span>:a&#125;) <span class="comment">#以字典形式保存</span></div>
-<div class="line">data = spio.loadmat(<span class="string">'file.mat'</span>,struct_as_record=<span class="keyword">True</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="图片读取"><a href="#图片读取" class="headerlink" title="图片读取"></a>图片读取</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> misc</div>
-<div class="line"></div>
-<div class="line">x = misc.imread(<span class="string">"scipy.png"</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="txt-csv"><a href="#txt-csv" class="headerlink" title="txt/csv"></a>txt/csv</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-</pre></td><td class="code"><pre><div class="line">numpy.loadtxt()</div>
-<div class="line">numpy.savetxt()</div>
-<div class="line">numpy.genfromtxt() <span class="comment">#智能导入文本</span></div>
-<div class="line">numpy.recfromcsv() <span class="comment">#智能导入csv文件</span></div>
-<div class="line"></div>
-<div class="line"><span class="comment">#高速，有效率但numpy特有的二进制格式：</span></div>
-<div class="line">numpy.save() </div>
-<div class="line">numpy.load()</div>
-</pre></td></tr></table></figure>
-<h2 id="线性代数运算：scipy-linalg"><a href="#线性代数运算：scipy-linalg" class="headerlink" title="线性代数运算：scipy.linalg"></a>线性代数运算：scipy.linalg</h2><h3 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</div>
-<div class="line"></div>
-<div class="line">x = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
-<div class="line">re = linalg.det(x) <span class="comment">#-2.0</span></div>
-</pre></td></tr></table></figure>
-<h3 id="逆矩阵"><a href="#逆矩阵" class="headerlink" title="逆矩阵"></a>逆矩阵</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</div>
-<div class="line"></div>
-<div class="line">x = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
-<div class="line">re = linalg.inv(x)</div>
-</pre></td></tr></table></figure>
-<h3 id="奇异值分解SVD"><a href="#奇异值分解SVD" class="headerlink" title="奇异值分解SVD"></a>奇异值分解SVD</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> linalg</div>
-<div class="line"></div>
-<div class="line">x = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
-<div class="line">uarr,spec,vharr = linalg.svd(x)</div>
-<div class="line"></div>
-<div class="line"><span class="comment">###原始矩阵可以由svd的输出用np.dot点乘重新组合得到</span></div>
-<div class="line">sarr = np.diag(spec)</div>
-<div class="line">svd_mat = uarr.dot(sarr).dot(vharr)</div>
-<div class="line">re = np.allclose(svd_mat,x) <span class="comment">#True</span></div>
-</pre></td></tr></table></figure>
-<h2 id="快速傅里叶变换：scipy-fftpack"><a href="#快速傅里叶变换：scipy-fftpack" class="headerlink" title="快速傅里叶变换：scipy.fftpack"></a>快速傅里叶变换：scipy.fftpack</h2><h2 id="优化和拟合：scipy-optimize"><a href="#优化和拟合：scipy-optimize" class="headerlink" title="优化和拟合：scipy.optimize"></a>优化和拟合：scipy.optimize</h2><h3 id="标量函数最小值"><a href="#标量函数最小值" class="headerlink" title="标量函数最小值"></a>标量函数最小值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
-<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
-<div class="line">x = np.arange(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
-<div class="line">plt.plot(x,f(x))</div>
-<div class="line">plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/06/07/ML-SciPy/image-20180608001714621.png" alt="image-20180608001714621"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment">####从上面图像可以看出x在-1.3附近有个全局最小值，在3.8附近有个局部最小</span></div>
-<div class="line"><span class="comment">####从初始点使用梯度下降法求解，BFGS算法</span></div>
-<div class="line">re = optimize.fmin_bfgs(f,<span class="number">0</span>) <span class="comment">##必须定义成函数</span></div>
-<div class="line">print(re)</div>
-<div class="line"><span class="comment">#Optimization terminated successfully.</span></div>
-<div class="line"><span class="comment">#Current function value: -7.945823</span></div>
-<div class="line"><span class="comment">#Iterations: 5</span></div>
-<div class="line"><span class="comment">#Function evaluations: 18</span></div>
-<div class="line"><span class="comment">#Gradient evaluations: 6</span></div>
-<div class="line"><span class="comment">#[-1.30644012]</span></div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment">#这个方法一个可能的问题在于，如果函数有局部最小值，算法会因初始点不同找到这些局部最小而不是全局最小:</span></div>
-<div class="line">re = optimize.fmin_bfgs(f,<span class="number">3</span>) <span class="comment">#[3.83746709]</span></div>
-<div class="line"><span class="comment">#如果我们不知道全局最小值的邻近值来选定初始点，我们需要借助于耗费资源些的全局优化。为了找到全局最小点，最简单的算法是蛮力算法^2，该算法求出给定格点的每个函数值。</span></div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
-<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
-<div class="line">x = np.arange(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
-<div class="line"></div>
-<div class="line">grid = (<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
-<div class="line">re = optimize.brute(f,(grid,)) <span class="comment">##[-1.30641113]</span></div>
-<div class="line"></div>
-<div class="line"><span class="comment">##为了找到局部最小，我们把变量限制在(0, 10)之间，使用scipy.optimize.fminbound():</span></div>
-<div class="line">re_local = optimize.fminbound(f,<span class="number">0</span>,<span class="number">10</span>) <span class="comment">##3.8374671194983834</span></div>
-</pre></td></tr></table></figure>
-<h3 id="标量函数的根"><a href="#标量函数的根" class="headerlink" title="标量函数的根"></a>标量函数的根</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment">#为了寻找根，例如令f(x)=0的点，对以上的用来示例的函数f我们可以使用scipy.optimize.fsolve()</span></div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
-<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
-<div class="line">x = np.arange(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">0.1</span>)</div>
-<div class="line"></div>
-<div class="line">root = optimize.fsolve(f,<span class="number">1</span>)<span class="comment">#初始猜测是1</span></div>
-<div class="line">print(root) <span class="comment">#[0.]</span></div>
-<div class="line"></div>
-<div class="line"><span class="comment">#注意仅仅一个根被找到。检查f的图像在-2.5附近有第二个根。我们可以通过调整我们的初始猜测找到这一确切值</span></div>
-<div class="line">root = optimize.fsolve(f,<span class="number">-2.5</span>)</div>
-<div class="line">print(root)<span class="comment">#[-2.47948183]</span></div>
-</pre></td></tr></table></figure>
-<h3 id="曲线拟合"><a href="#曲线拟合" class="headerlink" title="曲线拟合"></a>曲线拟合</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> optimize</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></div>
-<div class="line">    <span class="keyword">return</span> x**<span class="number">2</span> + <span class="number">10</span>*np.sin(x)</div>
-<div class="line">xdata = np.linspace(<span class="number">-10</span>,<span class="number">10</span>,num=<span class="number">20</span>)</div>
-<div class="line"><span class="comment">#得到污染的数据</span></div>
-<div class="line">ydata = f(xdata) + np.random.randn(xdata.size)</div>
-<div class="line"><span class="comment">#我们知道xdata-ydata大致服从y=x^2 + sin(x),但是噪声的引入而又偏差，我们需要拟合找出系数a和b，即y=a*x^2 + b*sin(x)</span></div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">f2</span><span class="params">(x,a,b)</span>:</span></div>
-<div class="line">    <span class="keyword">return</span> a*x**<span class="number">2</span>+b*np.sin(x)</div>
-<div class="line">guess = [<span class="number">2</span>,<span class="number">2</span>]</div>
-<div class="line">params, params_covariance = optimize.curve_fit(f2,xdata,ydata,guess)</div>
-<div class="line"><span class="comment"># params = [0.98996991 9.87613168]</span></div>
-<div class="line"><span class="comment"># params_covariance = [[1.23238891e-05 1.30651701e-11] [1.30651701e-11 6.29408152e-02]]</span></div>
-</pre></td></tr></table></figure>
-<h2 id="统计和随机数：-scipy-stats"><a href="#统计和随机数：-scipy-stats" class="headerlink" title="统计和随机数： scipy.stats"></a>统计和随机数： scipy.stats</h2><h3 id="直方图和概率密度函数"><a href="#直方图和概率密度函数" class="headerlink" title="直方图和概率密度函数"></a>直方图和概率密度函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment">#给定一个随机过程的观察值，它们的直方图是随机过程的pdf(概率密度函数)的估计器</span></div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"></div>
-<div class="line">a = np.random.normal(size=<span class="number">1000</span>)</div>
-<div class="line">bins = np.arange(<span class="number">-4</span>,<span class="number">5</span>) <span class="comment"># bins=[-4, -3, -2, -1,  0,  1,  2,  3,  4]</span></div>
-<div class="line"></div>
-<div class="line">histogram = np.histogram(a,bins=bins,normed=<span class="keyword">True</span>)[<span class="number">0</span>]</div>
-<div class="line">bins = <span class="number">0.5</span>*(bins[<span class="number">1</span>:]+bins[:<span class="number">-1</span>]) <span class="comment">#bins=[-3.5, -2.5, -1.5, -0.5,  0.5,  1.5,  2.5,  3.5]</span></div>
-<div class="line"></div>
-<div class="line">b = stats.norm.pdf(bins)</div>
-<div class="line"></div>
-<div class="line">plt.plot(bins,histogram,color=<span class="string">'g'</span>)</div>
-<div class="line">plt.plot(bins,b,color=<span class="string">'b'</span>)</div>
-<div class="line">plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/06/07/ML-SciPy/image-20180608005630507.png" alt="image-20180608005630507"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment">#如果我们知道随机过程属于给定的随机过程族，比如正态过程。我们可以对观测值进行最大似然拟合来估计基本分布参数。这里我们对观测值拟合一个正态过程：</span></div>
-<div class="line">loc,std = stats.norm.fit(a) <span class="comment">#loc= 0.007411672576925874 std= 1.005072454096087</span></div>
-</pre></td></tr></table></figure>
-<h3 id="百分位"><a href="#百分位" class="headerlink" title="百分位"></a>百分位</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment">#中位数,又叫作50百分位点，因为有50%的观测值在它之下,是来观测值之下一半之上一半的值。</span></div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> stats</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"></div>
-<div class="line">a = np.random.normal(size=<span class="number">1000</span>)</div>
-<div class="line"></div>
-<div class="line">med = np.median(a)</div>
-<div class="line">med = stats.scoreatpercentile(a,<span class="number">50</span>) <span class="comment">#百分位是CDF的一个估计器</span></div>
-</pre></td></tr></table></figure>
-<h2 id="数值积分：scipy-integrate-Fusy"><a href="#数值积分：scipy-integrate-Fusy" class="headerlink" title="数值积分：scipy.integrate Fusy"></a>数值积分：scipy.integrate Fusy</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> quad</div>
-<div class="line"></div>
-<div class="line">re,err = quad(np.sin,<span class="number">0</span>,np.pi/<span class="number">2</span>)</div>
-<div class="line"><span class="comment">#re=0.9999999999999999, err=1.1102230246251564e-14</span></div>
-</pre></td></tr></table></figure>
-<p>上述计算$\int_{0}^{\frac{\pi}{2}}sin(x)dx=1$</p>
-
-          
+<!--�14-->
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/07/ML-SciPy/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2067,152 +1923,6 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/27/DP-Application-Location-Protection/" itemprop="url">DP Application - Location Protection</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T12:32:50-05:00">
-                2018-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">-Differential Privacy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
-<h3 id="2013-Andres"><a href="#2013-Andres" class="headerlink" title="[2013-Andres]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a></h3><p>It performs as a probabilistic geo-obfuscation process, i.e., a user first obfuscates his<br>real location to another one according to a pre-configured<br>probability function P (encoding the probability of mapping<br>arbitrary location l to l∗) and then uploads the obfuscated<br>location to the server. The probability function is the key to<br>ensure differential privacy. The basic idea is that, suppose<br>the obfuscated location is l∗, for any two locations l1, l2,<br>their probability of being mapped to l∗ are similar. Then,<br>if an adversary observes a user u in l∗, he/she cannot distinguish whether u is actually in l1 or l2, even if he/she knows<br>the obfuscation function P . With this intuition, differential<br>privacy formally defines such similarity between any two<br>locations l1, l2 for arbitrary l∗.</p>
-<p>The distance d(l1; l2) is introduced in the formulation to<br>reflect the intuition that if l1 and l2 are close to each other<br>(i.e., small d(l1; l2)), they should be more indistinguishable.Note that the set of locations L can be constructed by dividing the concerned area into a set of regions (of arbitrary<br>size) and selecting the representative locations of the regions<br>(e.g., geographic center)</p>
-<h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Andres] Geo-indistinguishability: Differential privacy for location-based systems</p>
-<p>[2014-Nicolas] Optimal geo-indistinguishable mechanisms for location privacy</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2263,7 +1973,7 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
