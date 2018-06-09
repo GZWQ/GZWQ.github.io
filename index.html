@@ -641,7 +641,7 @@
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�6-->
+<!--�22-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
@@ -798,7 +798,7 @@
 <li>数值积分（scipy.integrate Fusy）</li>
 </ol>
 <p>模块导入的标准方式是：</p>
-<!--�34-->
+<!--�6-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/07/ML-SciPy/#more" rel="contents">
@@ -1491,7 +1491,7 @@
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">-Differential Privacy</span>
+                    <span itemprop="name">Differential Privacy</span>
                   </a>
                 </span>
 
@@ -1528,7 +1528,8 @@
 
       
         
-          <p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
+          <p>Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predictors by analyzing large amounts of such randomized data.</p>
+<p>Unlike other models of differential privacy, which publish randomized aggregates but still collect the exact sensitive data, LDP avoids collecting exact personal information in the first place, thus providing a stronger assurance to the users and to the aggregator.</p>
 <p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release.</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1702,7 +1703,7 @@
 <li></li>
 </ol>
 </blockquote>
-<h1 id="Laplace-Mechanism"><a href="#Laplace-Mechanism" class="headerlink" title="Laplace Mechanism"></a>Laplace Mechanism</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><blockquote>
+<h1 id="Laplace-Mechanism"><a href="#Laplace-Mechanism" class="headerlink" title="Laplace Mechanism"></a><a href="https://link.springer.com/content/pdf/10.1007%2F11681878_14.pdf" target="_blank" rel="noopener">Laplace Mechanism</a></h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><blockquote>
 <p>the Laplace mechanism will simply compute $f$, and perturb each coordinate with noise drawn from the Laplace distribution.</p>
 <p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-06 at 3.48.56 PM.png" alt="Screen Shot 2018-06-06 at 3.48.56 PM"></p>
 <p>About the proof, the key is that :</p>
@@ -1858,6 +1859,7 @@ D(p||q)\ge0</script></li>
 <p><a href="http://www.cis.upenn.edu/~aaroth/courses/slides/Lecture4.pdf" target="_blank" rel="noopener">[2011-Aaron]</a></p>
 <p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-31 at 3.10.30 PM.png" alt="Screen Shot 2018-05-31 at 3.10.30 PM"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[2014-Dwork] The Algorithmic Foundations of Differential Privacy</p>
+<p>[2006-Dwork] Calibrating Noise to Sensitivity in Private Data Analysis</p>
 
           
         
@@ -1954,7 +1956,7 @@ D(p||q)\ge0</script></li>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1965,7 +1967,7 @@ D(p||q)\ge0</script></li>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

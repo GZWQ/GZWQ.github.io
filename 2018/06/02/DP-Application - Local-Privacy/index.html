@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="-Differential Privacy," />
+  <meta name="keywords" content="Differential Privacy," />
 
 
 
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves an">
-<meta name="keywords" content="-Differential Privacy">
+<meta name="description" content="Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predicto">
+<meta name="keywords" content="Differential Privacy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP Application - Local Privacy">
 <meta property="og:url" content="http://yoursite.com/2018/06/02/DP-Application - Local-Privacy/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves an">
+<meta property="og:description" content="Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predicto">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-04%20at%2011.16.07%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-05%20at%209.06.11%20PM.png">
@@ -107,12 +107,15 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.08.06%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.08.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.13.26%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.21.19%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.22.12%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.22.22%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.27.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.28.02%20PM.png">
-<meta property="og:updated_time" content="2018-06-08T03:15:33.748Z">
+<meta property="og:updated_time" content="2018-06-09T20:40:11.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Local Privacy">
-<meta name="twitter:description" content="A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves an">
+<meta name="twitter:description" content="Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predicto">
 <meta name="twitter:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-04%20at%2011.16.07%20AM.png">
 
 
@@ -363,7 +366,7 @@
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">-Differential Privacy</span>
+                    <span itemprop="name">Differential Privacy</span>
                   </a>
                 </span>
 
@@ -399,7 +402,8 @@
       
 
       
-        <p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
+        <p>Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predictors by analyzing large amounts of such randomized data.</p>
+<p>Unlike other models of differential privacy, which publish randomized aggregates but still collect the exact sensitive data, LDP avoids collecting exact personal information in the first place, thus providing a stronger assurance to the users and to the aggregator.</p>
 <p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release.</p>
 <a id="more"></a>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-04 at 11.16.07 AM.png" alt="Screen Shot 2018-06-04 at 11.16.07 AM"></p>
@@ -494,6 +498,7 @@ Y(i)=\begin{cases}
 </li>
 </ol>
 <h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><p><a href="Application of Local Differential Privacy to Collection of Indoor Positioning Data">[2018-Kim]</a></p>
+<p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
 <p>The purpose of this research is to approximately compute the distribution of users in the indoor space. </p>
 <h3 id="Pricacy-model"><a href="#Pricacy-model" class="headerlink" title="Pricacy model"></a>Pricacy model</h3><ol>
 <li><p><strong>data representation</strong></p>
@@ -527,21 +532,15 @@ Y(i)=\begin{cases}
 <li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.13.26 PM.png" alt="Screen Shot 2018-06-03 at 10.13.26 PM"></p>
 </li>
 <li><p>Then we want to calculate $P(pos_r|L=x_y)$</p>
+<p>​    </p>
+<p>Given a $n$-bit array $L$, the probabilities that the k-th bit of the corresponding permanent randomized response, U, sets to 1 and 0 are respectively computed as follows:</p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.21.19 PM.png" alt="Screen Shot 2018-06-03 at 10.21.19 PM"></p>
+<p>Then, Given $L_k=1$, the probabilities that the k-th bit of the instantaneous randomized response, S, sets to 1 and 0 are respectively computed as follows:</p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.22.12 PM.png" alt="Screen Shot 2018-06-03 at 10.22.12 PM"></p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.22.22 PM.png" alt="Screen Shot 2018-06-03 at 10.22.22 PM"></p>
 </li>
 </ol>
-<pre><code>  Given a $n$-bit array $L$, the probabilities that the k-th bit of the corresponding permanent randomized response, U, sets to 1 and 0 are respectively computed as follows:
-
-  ![Screen Shot 2018-06-03 at 10.21.19 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.21.19 PM.png)
-
-  Then, Given $L_k=1$, the probabilities that the k-th bit of the instantaneous randomized response, S, sets to 1 and 0 are respectively computed as follows:
-
-  ![Screen Shot 2018-06-03 at 10.22.12 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.22.12 PM.png)
-
-  ![Screen Shot 2018-06-03 at 10.22.22 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.22.22 PM.png)
-
-
-
-  ![Screen Shot 2018-06-03 at 10.26.21 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.26.21 PM.png)
+<pre><code>  ![Screen Shot 2018-06-03 at 10.26.21 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.26.21 PM.png)
 </code></pre><ol>
 <li><p>The EM algorithm that computes $P(L =  x_i)$, 1 ≤ i ≤ n proceeds as follows:</p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.27.39 PM.png" alt="Screen Shot 2018-06-03 at 10.27.39 PM"></p>
@@ -571,7 +570,7 @@ Y(i)=\begin{cases}
       
         <div class="post-tags">
           
-            <a href="/tags/Differential-Privacy/" rel="tag"># -Differential Privacy</a>
+            <a href="/tags/Differential-Privacy/" rel="tag"># Differential Privacy</a>
           
         </div>
       
@@ -684,7 +683,7 @@ Y(i)=\begin{cases}
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -695,7 +694,7 @@ Y(i)=\begin{cases}
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
