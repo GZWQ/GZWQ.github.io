@@ -103,9 +103,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-08%20at%204.21.48%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-08%20at%2011.08.54%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-08%20at%203.37.36%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-09%20at%2012.02.40%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-09%20at%2012.02.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-05%20at%2010.10.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-31%20at%203.10.30%20PM.png">
-<meta property="og:updated_time" content="2018-06-08T21:27:08.811Z">
+<meta property="og:updated_time" content="2018-06-09T17:23:42.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mechanism of Differential Privacy">
 <meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
@@ -510,8 +512,52 @@ Pr[q(M_{E(d,q,R)}\le OPT_q(d)-\frac{2\Delta q}{\epsilon}(ln(|R|)+t))]\le e^{-t}<
 <li></li>
 </ol>
 </blockquote>
-<h2 id="Laplace-vs-Exponential"><a href="#Laplace-vs-Exponential" class="headerlink" title="Laplace vs Exponential"></a><a href="http://www.cs.bu.edu/~goldbe/teaching/HW55812/exponential.pdf" target="_blank" rel="noopener">Laplace vs Exponential</a></h2><p>Exponential mechasi</p>
+<h2 id="Laplace-vs-Exponential"><a href="#Laplace-vs-Exponential" class="headerlink" title="Laplace vs Exponential"></a><a href="http://www.cs.bu.edu/~goldbe/teaching/HW55812/exponential.pdf" target="_blank" rel="noopener">Laplace vs Exponential</a></h2><p>Exponential mechanism is an instance of the exponential mechanism.</p>
+<ol>
+<li><p><strong>candidate output domain</strong></p>
+<p>Say we have the output domian $r\in R$, and the query function is $f$ which works over the database $d$ and $d’$ such that $|d\otimes{d’}|=1$.</p>
+</li>
+<li><p><strong>utility function</strong></p>
+<script type="math/tex; mode=display">
+q(d,r)=-|f(d)-r|</script><p>To see how this works, notice first that with this scoring function, the exponential mechanism becomes:</p>
+<p>$M(d,q,\epsilon)$=output $r$ with probability proportional to $e^{\epsilon q(d,r)}$</p>
+<p>which provides $2\epsilon \Delta q$-DP.</p>
+</li>
+<li><p><strong>sensitivity</strong></p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\Delta q &=max|q(d,r)-q(d',r)|\\
+&=max||f(d')-r|-|f(d,r)||\\
+&\le max|f(d',r)-f(d,r)| \ \ \ \ \ \ \ \ \ \ \ \ \ \ (triangle inequlity)\\
+\end{aligned}
+\end{equation}</script><blockquote>
+<p>So based on above details, for query function with sensitivity 1 and with privacy parameter $\epsilon$, exponential mechanism provides $2\epsilon$-DP, while Laplace mechanism provides $\epsilon$-DP. This is because we’ve used the general analysis of the exponential mechanism, so our result is less “tight”.</p>
+<p>This means that to provide the same privacy level $\epsilon$, laplace mechanism is $\epsilon-$DP while exponential mechanism is  $\frac{\epsilon}{2}$-DP, meaning more noise.</p>
+</blockquote>
+</li>
+</ol>
 <h2 id="Examples-1"><a href="#Examples-1" class="headerlink" title="Examples"></a>Examples</h2><p><strong>The median mechanism</strong></p>
+<p>Recall that the median of a list numbers $d=\{1,2,4,5,6\}$ is 4; so we write $med(d)=4$</p>
+<ol>
+<li><p><strong>candidate ooutputs</strong></p>
+<p>every element in $d$ is the possilble output of the median query.</p>
+</li>
+<li><p><strong>utility function</strong></p>
+<p>For the median example, our scoring function will be:</p>
+<p>$q(d,r)=-min|d\otimes d’|$ such that $med(d’)=r$</p>
+<blockquote>
+<p>What does it mean? The idea is that we take in a database $d$ and a candidate median $r$, and we look for a $d’$ that is as similar as possible to $d$, such that $med(d’)=r$.</p>
+<p>For example, $d=\{1,2,3,4,5\}$ and candidate output $r=4$. What we want to do is to change $d$ to $d’$ so that  $med(d’)=4$. To do so, we can remove $1$ and $2$ from the $d$ to get $d’=\{3,4,5\}$. so $q(\{1,2,3,4,5\},4)=-2$. If $r=3$, $q(\{1,2,3,4,5\},4)=0$ becasue $3$ is the true median and we needn’t change anything about database $d$. </p>
+</blockquote>
+</li>
+<li><p><strong>sensitivity</strong> </p>
+<p>We can get $|q(d,r)-q(d’,r)|\le 1$. It is obvious because the input database is added or removed one element, for the unchanged database, the change you make to make $r$ median is $x$ step.  Now we have already help you make a step. So the best situation is you only need to maek (x-1) step for x as median. The utility change is 1. While the worst situation is the addition or removal in the original database don’t help you at all, so you still need $x$ step. So the utility change is 0.</p>
+<p><strong>There is the mathametical proof.</strong></p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-09 at 12.02.40 PM.png" alt="Screen Shot 2018-06-09 at 12.02.40 PM"></p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-09 at 12.02.49 PM.png" alt="Screen Shot 2018-06-09 at 12.02.49 PM"></p>
+</li>
+</ol>
 <h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
 <h2 id="KL-Divergence"><a href="#KL-Divergence" class="headerlink" title="KL-Divergence"></a>KL-Divergence</h2><blockquote>
 <p>又叫相对熵，是衡量分布间距离的一个度量。</p>
