@@ -283,6 +283,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/Statistic-110/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/30/Statistic-110/" itemprop="url">Statistic 110</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T16:20:26-05:00">
+                2018-05-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
+<ol>
+<li>$log_a(MN)=log_a{M}+log_a{N}$</li>
+<li>$log_a{\frac{M}{N}}=log_a{M}-log_a{N}$</li>
+</ol>
+<h1 id="Unbiased-estimator"><a href="#Unbiased-estimator" class="headerlink" title="Unbiased estimator"></a><a href="https://www.zhihu.com/question/22983179/answer/23470969" target="_blank" rel="noopener">Unbiased estimator</a></h1><blockquote>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-06 at 9.20.56 PM.png" alt="Screen Shot 2018-06-06 at 9.20.56 PM"></p>
+</blockquote>
+<h1 id="Probability-and-Counting"><a href="#Probability-and-Counting" class="headerlink" title="Probability and Counting"></a>Probability and Counting</h1><p><strong>Sample space</strong>: a set of all possible outcomes of an experiment</p>
+<p><strong>Event</strong>: a subset of the sample space</p>
+<h1 id="Discrete-vs-Continuous-the-Uniform"><a href="#Discrete-vs-Continuous-the-Uniform" class="headerlink" title="Discrete vs. Continuous, the Uniform"></a>Discrete vs. Continuous, the Uniform</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><strong>PDF (Probability Density Function)</strong> : $X$ has PDF $f(x)$ if $P(a\le{X}\le{b})=\int_{a}^{b}f(x)$</p>
+<p><strong>CDF (Cumulative Distribution Function)</strong> : if $X$ has PDF $f$, then the CDF is $F(X)=P(X\le{x})=\int_{-\infty}^{x}f(t)dt$</p>
+<p><strong>Expectation</strong>: $E(X)=\int_{-\infty}^{\infty}xf(x)dx$</p>
+<p><strong>Variance</strong>: $Var(X)=E(X-E(X))^2$</p>
+<blockquote>
+<p>$Var(X)=E(X^2-2X{E(X)}+E(X)^2)$</p>
+<p>in above formular, because $2E(X)$ is a constant, so it can be outside, same thing with $E(X)^2$</p>
+<p>$Var(X)=E(X^2)-2E(X)E(x)+E(X)^2=E(X^2)-E(X)^2$</p>
+</blockquote>
+<p><strong>Standard deviation</strong>: $SD(X)=\sqrt{Var(X)}$</p>
+<h1 id="Expectation-and-Variance"><a href="#Expectation-and-Variance" class="headerlink" title="Expectation and Variance"></a>Expectation and Variance</h1><h2 id="Expectation"><a href="#Expectation" class="headerlink" title="Expectation"></a>Expectation</h2><h3 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h3><ol>
+<li>$E(X_1+X_2+…+X_n)=E(X_1)+E(X_2)+…+E(X_n)$</li>
+<li>$E(X_1X_2…X_n)=E(X_1)E(X_2)…E(X_n)$  if $X_i$ is independent to each other.</li>
+<li>$E(cX)=cE(X)$ if c is a constant.</li>
+<li>$E(c)=c$  the expectation of constant is the constant itself.</li>
+</ol>
+<h1 id="Additive-Chernoff-Bound"><a href="#Additive-Chernoff-Bound" class="headerlink" title="Additive Chernoff Bound"></a>Additive Chernoff Bound</h1><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-05 at 8.35.00 PM.png" alt="Screen Shot 2018-06-05 at 8.35.00 PM"></p>
+<blockquote>
+<p>上式即</p>
+<script type="math/tex; mode=display">
+P(|S\ge{\mu}|\ge\epsilon)\le2e^{-2m\epsilon^2}</script><p><img src="/2018/05/30/Statistic-110/929166-20161116214202513-1545949382.png" alt="929166-20161116214202513-1545949382"></p>
+<p>Lemma说明我们用随机变量的均值$\hat{\phi}$取估计参数$\phi$, 估计的参数和实际参数的差超过一个特定数值的概率有一确定的上界，并且随着样本量m的增大，$\hat{\phi}$越接近$\phi$.</p>
+</blockquote>
+<h1 id="Johnson-Lindenstrauss-Lemma"><a href="#Johnson-Lindenstrauss-Lemma" class="headerlink" title="Johnson-Lindenstrauss Lemma"></a><a href="https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma" target="_blank" rel="noopener">Johnson-Lindenstrauss Lemma</a></h1><blockquote>
+<p>The lemma states that a small set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are nearly preserved.</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-06 at 11.01.27 PM.png" alt="Screen Shot 2018-06-06 at 11.01.27 PM"></p>
+<p>Remarks:</p>
+<ol>
+<li>the new dimention $n$ is decided by data sample number $m$ and error bound $\epsilon$; less error (small $\epsilon$) and more sample points require more dimensions, meaning the new dimension $n$ should not be too small; </li>
+<li>Johnson–Lindenstrauss 引理表明任何高维数据集均可以被随机投影到一个较低维度的欧氏空间,同时可以控制pairwise距离的失真.</li>
+</ol>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/28/DP-Application-Random-Response/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1753,7 +1914,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

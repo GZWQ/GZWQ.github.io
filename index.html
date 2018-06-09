@@ -283,6 +283,125 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/TWICE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/08/TWICE/" itemprop="url">TWICE</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T15:30:57-05:00">
+                2018-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/Latex/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -522,7 +641,7 @@
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�6-->
+<!--�5-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
@@ -679,7 +798,7 @@
 <li>数值积分（scipy.integrate Fusy）</li>
 </ol>
 <p>模块导入的标准方式是：</p>
-<!--�15-->
+<!--�14-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/07/ML-SciPy/#more" rel="contents">
@@ -1618,18 +1737,24 @@
 </ol>
 </blockquote>
 <h1 id="Exponential-mechanism"><a href="#Exponential-mechanism" class="headerlink" title="Exponential mechanism"></a>Exponential mechanism</h1><p>The exponential mechanism was designed for situations in which we wish to choose the “best” response but adding noise directly to the computed quantity can completely destroy its value, such as setting a price in an auction, where the goal is to maximize revenue, and adding a small amount of positive noise to the optimal price (in order to protect the privacy of a bid) could dramatically reduce the resulting revenue.</p>
-<h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><blockquote>
-<p>Say we have a discrete candidate output in a range $R$, and assume that the probability distribution of output is $u$, commonly uniform. The general mechanism is to design a query function $q:D^n(input \ database)\times{R(output)}\to{\mathbb{R}}$, which assign a real valued score to any pair $(d,r)$ from $D^n\times{R}$. With a prior distribution of candidate output $u$, we amplify the probability associated with each output by a factor of $e^{\epsilon{q(d,r)}}$:</p>
+<h2 id="Definition-1"><a href="#Definition-1" class="headerlink" title="Definition"></a>Definition</h2><p>The sensitivity of score function $q$ tells us the maximum change in the scoring function for any pair of datasets $d$ and $d’$ such that $|d\otimes d’|=1$:</p>
+<script type="math/tex; mode=display">
+\Delta q = max_{r,d,d' where |d\otimes d'|=1 }|q(d,r)-q(d',r)|</script><blockquote>
+<p>Say we have a discrete candidate output in a range $R$, and assume that the probability distribution of output is $u$, commonly uniform. The general mechanism is to design a query function $q:D^n(input)\times{R(output)}\to{\mathbb{R}}$, which assign a real valued score to any pair $(d,r)$ from $D^n\times{R}$. With a prior distribution of candidate output $u$, we amplify the probability associated with each output by a factor of $e^{\epsilon{q(d,r)}}$:</p>
 <p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-07 at 12.43.02 PM.png" alt="Screen Shot 2018-06-07 at 12.43.02 PM"></p>
 <script type="math/tex; mode=display">
 \Delta{q}=max_{r\in{R}}\ max_{x,y:||x-y||_1\le{1}}|q(x,r)-q(y-r)|</script><p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-07 at 12.47.15 PM.png" alt="Screen Shot 2018-06-07 at 12.47.15 PM"></p>
+</blockquote>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-08 at 4.21.27 PM.png" alt="Screen Shot 2018-06-08 at 4.21.27 PM"></p>
+<p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-08 at 4.21.48 PM.png" alt="Screen Shot 2018-06-08 at 4.21.48 PM"></p>
+<blockquote>
 <p>Remarks:</p>
 <ol>
 <li><p>by amplifying the probability, the sum of all output probability will not equal 1. So in order to bound the probability, we need a normalization term.</p>
 </li>
-<li><p>from the denifition, if we set the privacy parameter as $\epsilon$, then it will provide us $2\epsilon \Delta q$, which amptifies with a factor $2\Delta q$. </p>
+<li><p>from the denifition, if we set the probability factor as $\epsilon$, then it will provide us $2\epsilon \Delta q$, which amptifies with a factor $2\Delta q$. SO if we want $\epsilon$-DP, then the probability factor should be $\frac{\epsilon}{2\Delta q}$</p>
 </li>
-<li><p>the exponential mechanism defines a distribution over the output domain.</p>
+<li><p>the exponential mechanism defines a distribution over the output domain and samples from this distribution.</p>
 </li>
 <li><p>now we want to know how a small change in the database can affect the output. Say we have database $d$ and $d’$, where $||d-d’||=1$. And we assume $q(d,r)=q(d’,r)+\Delta{q}$. we want to bound the probability ratio $\frac{P(r|d)}{P(r|d’)}$</p>
 <script type="math/tex; mode=display">
@@ -1637,9 +1762,12 @@
 \begin{aligned}
 \frac{P(r|d)}{P(r|d')}&=\frac{e^{\epsilon{q(d,r)}}}{\int{e^{\epsilon{q(d,r)}}}}\div\frac{e^{\epsilon{q(d',r)}}}{\int{e^{\epsilon{q(d',r)}}}}\\
 &=\frac{e^{\epsilon{q(d,r)}}}{e^{\epsilon{q(d',r)}}}\times\frac{\int{e^{\epsilon{q(d',r)}}}}{\int{e^{\epsilon{q(d,r)}}}}\\
-for\ the\ left\ one,\ we\ replace\ q(d,r)=q(d',r)+\Delta{q} ,\\ for\ right\ since\ q(d',r)\le q(d,r)+\Delta q, we\ change\ equation
+for\ the\ left\ one,\ we\ replace\ q(d,r)=q(d',r)+\Delta{q} ,\\ for\ right\ since\ q(d',r)= q(d',r)-q(d,r)+q(d,r)
 \\
-&\le{\frac{e^{\epsilon{(q(d',r)+\Delta{q})}}}{e^{\epsilon{q(d',r)}}}}\times\frac{\int{e^{\epsilon{(q(d,r)}+\Delta{q})}}}{\int{e^{\epsilon{q(d,r)}}}}\\
+&={\frac{e^{\epsilon{(q(d',r)+\Delta{q})}}}{e^{\epsilon{q(d',r)}}}}\times\frac{\int{e^{\epsilon{(q(d',r)}-\epsilon{(q(d,r)+\epsilon{(q(d,r)}})}}}
+{\int{e^{\epsilon{q(d,r)}}}}\\
+since\ |q(d',r)-q(d,r)|\le \Delta q,\ so\ we\ have \\
+&\le  e^{\epsilon \Delta q} \times \int{e^{\epsilon \Delta q}}\\
 &=e^{\epsilon \Delta q}\times{e^{\epsilon{\Delta{q}}}}\\
 &=e^{2\epsilon \Delta q}
 \end{aligned}
@@ -1657,9 +1785,14 @@ Pr[q(M_{E(d,q,R)}\le OPT_q(d)-\frac{2\Delta q}{\epsilon}(ln(|R|)+t))]\le e^{-t}<
 <p>Remarks:</p>
 <ol>
 <li>We bound the probability that the exponential mechanism returns a “good” output of $R$, where good is measured in terms of $OPT_q(d)$.  The result is that it will be highly unlikely that the returned output $r$ has a utility score that is inferior to $OPT_q(x)$ by more than an additive factoc of $O(\frac{\Delta q}{\epsilon}log|R|)$</li>
+<li>from the utility theorem, we can find that utility of the mechanism only depends on log(|Outputs|), leading to the fact that sampling an output may not be computationally efficient if output space is large. </li>
 <li><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-08 at 11.08.54 AM.png" alt="Screen Shot 2018-06-08 at 11.08.54 AM"></li>
+<li><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-06-08 at 3.37.36 PM.png" alt="Screen Shot 2018-06-08 at 3.37.36 PM"></li>
+<li></li>
 </ol>
 </blockquote>
+<h2 id="Laplace-vs-Exponential"><a href="#Laplace-vs-Exponential" class="headerlink" title="Laplace vs Exponential"></a><a href="http://www.cs.bu.edu/~goldbe/teaching/HW55812/exponential.pdf" target="_blank" rel="noopener">Laplace vs Exponential</a></h2><p>Exponential mechasi</p>
+<h2 id="Examples-1"><a href="#Examples-1" class="headerlink" title="Examples"></a>Examples</h2><p><strong>The median mechanism</strong></p>
 <h1 id="Composition-Theorems"><a href="#Composition-Theorems" class="headerlink" title="Composition Theorems"></a>Composition Theorems</h1><p><a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">[2014-Dwork]</a>The combination of two differentially private algorithms is differentially private itself. But the parameters $\epsilon$ and $\delta$ will necessarily degrade —- consider repeatedly computing the same statistic using the Laplace<br>mechanism. The average of the answer given by each instance of the mechanism will eventually converge to the true value of the statistic, and so we cannot avoid that the strength of our privacy guarantee will degrade with repeated use.</p>
 <h2 id="KL-Divergence"><a href="#KL-Divergence" class="headerlink" title="KL-Divergence"></a>KL-Divergence</h2><blockquote>
 <p>又叫相对熵，是衡量分布间距离的一个度量。</p>
@@ -1681,167 +1814,6 @@ D(p||q)\ge0</script></li>
 <p><a href="http://www.cis.upenn.edu/~aaroth/courses/slides/Lecture4.pdf" target="_blank" rel="noopener">[2011-Aaron]</a></p>
 <p><img src="/2018/05/30/Mechanism-of-Differential-Privacy/Screen Shot 2018-05-31 at 3.10.30 PM.png" alt="Screen Shot 2018-05-31 at 3.10.30 PM"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[2014-Dwork] The Algorithmic Foundations of Differential Privacy</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/30/Statistic-110/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/30/Statistic-110/" itemprop="url">Statistic 110</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-30T16:20:26-05:00">
-                2018-05-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
-<ol>
-<li>$log_a(MN)=log_a{M}+log_a{N}$</li>
-<li>$log_a{\frac{M}{N}}=log_a{M}-log_a{N}$</li>
-</ol>
-<h1 id="Unbiased-estimator"><a href="#Unbiased-estimator" class="headerlink" title="Unbiased estimator"></a><a href="https://www.zhihu.com/question/22983179/answer/23470969" target="_blank" rel="noopener">Unbiased estimator</a></h1><blockquote>
-<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-06 at 9.20.56 PM.png" alt="Screen Shot 2018-06-06 at 9.20.56 PM"></p>
-</blockquote>
-<h1 id="Probability-and-Counting"><a href="#Probability-and-Counting" class="headerlink" title="Probability and Counting"></a>Probability and Counting</h1><p><strong>Sample space</strong>: a set of all possible outcomes of an experiment</p>
-<p><strong>Event</strong>: a subset of the sample space</p>
-<h1 id="Discrete-vs-Continuous-the-Uniform"><a href="#Discrete-vs-Continuous-the-Uniform" class="headerlink" title="Discrete vs. Continuous, the Uniform"></a>Discrete vs. Continuous, the Uniform</h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p><strong>PDF (Probability Density Function)</strong> : $X$ has PDF $f(x)$ if $P(a\le{X}\le{b})=\int_{a}^{b}f(x)$</p>
-<p><strong>CDF (Cumulative Distribution Function)</strong> : if $X$ has PDF $f$, then the CDF is $F(X)=P(X\le{x})=\int_{-\infty}^{x}f(t)dt$</p>
-<p><strong>Expectation</strong>: $E(X)=\int_{-\infty}^{\infty}xf(x)dx$</p>
-<p><strong>Variance</strong>: $Var(X)=E(X-E(X))^2$</p>
-<blockquote>
-<p>$Var(X)=E(X^2-2X{E(X)}+E(X)^2)$</p>
-<p>in above formular, because $2E(X)$ is a constant, so it can be outside, same thing with $E(X)^2$</p>
-<p>$Var(X)=E(X^2)-2E(X)E(x)+E(X)^2=E(X^2)-E(X)^2$</p>
-</blockquote>
-<p><strong>Standard deviation</strong>: $SD(X)=\sqrt{Var(X)}$</p>
-<h1 id="Expectation-and-Variance"><a href="#Expectation-and-Variance" class="headerlink" title="Expectation and Variance"></a>Expectation and Variance</h1><h2 id="Expectation"><a href="#Expectation" class="headerlink" title="Expectation"></a>Expectation</h2><h3 id="Property"><a href="#Property" class="headerlink" title="Property"></a>Property</h3><ol>
-<li>$E(X_1+X_2+…+X_n)=E(X_1)+E(X_2)+…+E(X_n)$</li>
-<li>$E(X_1X_2…X_n)=E(X_1)E(X_2)…E(X_n)$  if $X_i$ is independent to each other.</li>
-<li>$E(cX)=cE(X)$ if c is a constant.</li>
-<li>$E(c)=c$  the expectation of constant is the constant itself.</li>
-</ol>
-<h1 id="Additive-Chernoff-Bound"><a href="#Additive-Chernoff-Bound" class="headerlink" title="Additive Chernoff Bound"></a>Additive Chernoff Bound</h1><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-05 at 8.35.00 PM.png" alt="Screen Shot 2018-06-05 at 8.35.00 PM"></p>
-<blockquote>
-<p>上式即</p>
-<script type="math/tex; mode=display">
-P(|S\ge{\mu}|\ge\epsilon)\le2e^{-2m\epsilon^2}</script><p><img src="/2018/05/30/Statistic-110/929166-20161116214202513-1545949382.png" alt="929166-20161116214202513-1545949382"></p>
-<p>Lemma说明我们用随机变量的均值$\hat{\phi}$取估计参数$\phi$, 估计的参数和实际参数的差超过一个特定数值的概率有一确定的上界，并且随着样本量m的增大，$\hat{\phi}$越接近$\phi$.</p>
-</blockquote>
-<h1 id="Johnson-Lindenstrauss-Lemma"><a href="#Johnson-Lindenstrauss-Lemma" class="headerlink" title="Johnson-Lindenstrauss Lemma"></a><a href="https://en.wikipedia.org/wiki/Johnson%E2%80%93Lindenstrauss_lemma" target="_blank" rel="noopener">Johnson-Lindenstrauss Lemma</a></h1><blockquote>
-<p>The lemma states that a small set of points in a high-dimensional space can be embedded into a space of much lower dimension in such a way that distances between the points are nearly preserved.</p>
-<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-06 at 11.01.27 PM.png" alt="Screen Shot 2018-06-06 at 11.01.27 PM"></p>
-<p>Remarks:</p>
-<ol>
-<li>the new dimention $n$ is decided by data sample number $m$ and error bound $\epsilon$; less error (small $\epsilon$) and more sample points require more dimensions, meaning the new dimension $n$ should not be too small; </li>
-<li>Johnson–Lindenstrauss 引理表明任何高维数据集均可以被随机投影到一个较低维度的欧氏空间,同时可以控制pairwise距离的失真.</li>
-</ol>
-</blockquote>
 
           
         
@@ -1927,7 +1899,7 @@ P(|S\ge{\mu}|\ge\epsilon)\le2e^{-2m\epsilon^2}</script><p><img src="/2018/05/30/
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
