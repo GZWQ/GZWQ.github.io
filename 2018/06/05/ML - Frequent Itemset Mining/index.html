@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="-Algorithm -Data Mining -Machine Learning," />
+  <meta name="keywords" content="Machine Learning," />
 
 
 
@@ -79,20 +79,23 @@
 
 
 
-<meta name="description" content="The Apriori Algorithm … How The Apriori Algorithm Works 基本概念">
-<meta name="keywords" content="-Algorithm -Data Mining -Machine Learning">
+<meta name="description" content="An association rule is a pattern that states when an event occurs, another event occurs with certain probability. Association relus find all sets of items that have support count greater than the mimi">
+<meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Frequent Itemset Mining">
-<meta property="og:url" content="http://yoursite.com/2018/06/05/Frequent-Itemset-Mining/index.html">
+<meta property="og:title" content="ML - Frequent Itemset Mining">
+<meta property="og:url" content="http://yoursite.com/2018/06/05/ML - Frequent Itemset Mining/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="The Apriori Algorithm … How The Apriori Algorithm Works 基本概念">
+<meta property="og:description" content="An association rule is a pattern that states when an event occurs, another event occurs with certain probability. Association relus find all sets of items that have support count greater than the mimi">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/06/05/Frequent-Itemset-Mining/Screen%20Shot%202018-06-05%20at%204.44.19%20PM.png">
-<meta property="og:updated_time" content="2018-06-10T03:59:16.067Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/ML%20-%20Frequent%20Itemset%20Mining/Screen%20Shot%202018-06-05%20at%204.44.19%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/ML%20-%20Frequent%20Itemset%20Mining/Screen%20Shot%202018-06-09%20at%2011.38.24%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/ML%20-%20Frequent%20Itemset%20Mining/Screen%20Shot%202018-06-09%20at%2011.39.28%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/05/ML%20-%20Frequent%20Itemset%20Mining/Screen%20Shot%202018-06-09%20at%2011.40.39%20PM.png">
+<meta property="og:updated_time" content="2018-06-10T05:24:41.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Frequent Itemset Mining">
-<meta name="twitter:description" content="The Apriori Algorithm … How The Apriori Algorithm Works 基本概念">
-<meta name="twitter:image" content="http://yoursite.com/2018/06/05/Frequent-Itemset-Mining/Screen%20Shot%202018-06-05%20at%204.44.19%20PM.png">
+<meta name="twitter:title" content="ML - Frequent Itemset Mining">
+<meta name="twitter:description" content="An association rule is a pattern that states when an event occurs, another event occurs with certain probability. Association relus find all sets of items that have support count greater than the mimi">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/05/ML%20-%20Frequent%20Itemset%20Mining/Screen%20Shot%202018-06-05%20at%204.44.19%20PM.png">
 
 
 
@@ -122,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/05/Frequent-Itemset-Mining/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/05/ML - Frequent Itemset Mining/"/>
 
 
 
 
 
-  <title>Frequent Itemset Mining | Blog of Qing</title>
+  <title>ML - Frequent Itemset Mining | Blog of Qing</title>
   
 
 
@@ -289,7 +292,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/Frequent-Itemset-Mining/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/ML - Frequent Itemset Mining/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -306,7 +309,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Frequent Itemset Mining</h1>
+          <h1 class="post-title" itemprop="name headline">ML - Frequent Itemset Mining</h1>
         
 
         <div class="post-meta">
@@ -341,8 +344,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm-Data-Mining-Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">-Algorithm -Data Mining -Machine Learning</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -378,8 +381,265 @@
       
 
       
-        <p><a href="https://www.youtube.com/watch?v=Hk1zFOMLTrw" target="_blank" rel="noopener">The Apriori Algorithm … How The Apriori Algorithm Works</a></p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><img src="/2018/06/05/Frequent-Itemset-Mining/Screen Shot 2018-06-05 at 4.44.19 PM.png" alt="Screen Shot 2018-06-05 at 4.44.19 PM"></p>
+        <p>An association rule is a pattern that states when an event occurs, another event occurs with certain probability. Association relus find all sets of items that have support count greater than the mimimum support; then using the large itemsets to generate the desired rules that have confidence greater than the minimum confidence. For frequent itemset mining, we use Apriori algorithm.</p>
+<p>The following details are from <a href="https://www.youtube.com/watch?v=Hk1zFOMLTrw" target="_blank" rel="noopener">The Apriori Algorithm … How The Apriori Algorithm Works</a>.</p>
+<a id="more"></a>
+<h2 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h2><blockquote>
+<ol>
+<li><p>A set of all items in a store $I=\{i_1,i_2,…,i_m\}$</p>
+</li>
+<li><p>A set of all transactions (Transaction Database T)</p>
+<p>$T={t_1,t_2,…,t_n}$</p>
+</li>
+<li><p>Each $t_i$ is a set of items s.t. $t\subseteq I$</p>
+</li>
+<li><p>Each transaction $t_i$ has a transaction ID(TID)</p>
+</li>
+</ol>
+</blockquote>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><img src="/2018/06/05/ML - Frequent Itemset Mining/Screen Shot 2018-06-05 at 4.44.19 PM.png" alt="Screen Shot 2018-06-05 at 4.44.19 PM"></p>
+<h2 id="Apriori-Algorithm"><a href="#Apriori-Algorithm" class="headerlink" title="Apriori Algorithm"></a>Apriori Algorithm</h2><p><img src="/2018/06/05/ML - Frequent Itemset Mining/Screen Shot 2018-06-09 at 11.38.24 PM.png" alt="Screen Shot 2018-06-09 at 11.38.24 PM"></p>
+<p><img src="/2018/06/05/ML - Frequent Itemset Mining/Screen Shot 2018-06-09 at 11.39.28 PM.png" alt="Screen Shot 2018-06-09 at 11.39.28 PM"></p>
+<p><img src="/2018/06/05/ML - Frequent Itemset Mining/Screen Shot 2018-06-09 at 11.40.39 PM.png" alt="Screen Shot 2018-06-09 at 11.40.39 PM"></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Say we have a transaction database and the minimum support count is $sc=2$.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">TID</th>
+<th style="text-align:center">Items</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">100</td>
+<td style="text-align:center">1 , 3 , 4</td>
+</tr>
+<tr>
+<td style="text-align:center">200</td>
+<td style="text-align:center">2 , 3 , 5</td>
+</tr>
+<tr>
+<td style="text-align:center">300</td>
+<td style="text-align:center">1, 2, 3, 5</td>
+</tr>
+<tr>
+<td style="text-align:center">400</td>
+<td style="text-align:center">2, 5</td>
+</tr>
+<tr>
+<td style="text-align:center">500</td>
+<td style="text-align:center">1, 3, 5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Step One : 1-itemset</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Itemset</th>
+<th style="text-align:center">Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>so we delete itemset = 4 because its support is less than 2, after prunning:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Itemset</th>
+<th style="text-align:center">Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Step 2 : 2-itemset</strong></p>
+<p>we build 2-itemset based on 1-itemset, where we get {1,2},{1,3},{1,5},{2,3},{2,5},}{3,5}</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Itemset</th>
+<th style="text-align:center">Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{1,2}</td>
+<td style="text-align:center">1</td>
+</tr>
+<tr>
+<td style="text-align:center">{1,3}</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">{1,5}</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">{2,3}</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">{2,5}</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">{3,5}</td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>delete itemset { 1,2 } because its support is 1.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Itemset</th>
+<th style="text-align:center">Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{1,3}</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">{1,5}</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">{2,3}</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">{2,5}</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">{3,5}</td>
+<td style="text-align:center">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Step 3 : 3-itemset</strong></p>
+<p>we build 3-itemset based on 2-itemset, where we get{1,3,5},{1,2,3},{1,2,5},{2,3,5}</p>
+<p>Before counting each itemset’s support, we do some prunning.</p>
+<p>For {1,3,5} : {1,3},{1,5},{3,5}, and according to the fact that any frequent itemsets’ subset must be frequent itemset, so {1,3,5} may be frequent itemset because all of its subsets are frequent itemset.</p>
+<p>For {1,2,3} : {1,2},{1,3},{2,3}. Because {1,2} is not frequent itemset, {1,2,3} is not frequent itemset and we don’t need to calculate its support.</p>
+<p>Same rule to {1,2,5} and {2,3,5}, we can say that {1,2,5} is not frequent itemset but {2,3,5} may be frequent itemset.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Itemset</th>
+<th style="text-align:center">Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{1,3,5}</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">{2,3,5}</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Step 4 : 4-itemset</strong></p>
+<p>we get 4-itemset : {1,2,3,5}.</p>
+<p>Prune ：{1,2,3},{1,2,5},{1,3,5},{2,3,5}. because {1,2,5} and {1,2,3} are not frequent itemsets, {1,2,3,5} is not frequent itemset.</p>
+<p>Then we end up with empty. We return 3-itemset {1,3,5} and {2,3,5} for rule generation.</p>
+<h2 id="Association-rule-generation"><a href="#Association-rule-generation" class="headerlink" title="Association rule generation"></a>Association rule generation</h2><p>Now we have the list of frequent itemsets</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Itemset</th>
+<th style="text-align:center">Support</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">{1,3,5}</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">{2,3,5}</td>
+<td style="text-align:center">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Generate all nonempty subsets for each frequent itemset $I$</p>
+<blockquote>
+<ul>
+<li>For {1,3,5}, we have {1},{3},{5},{1,3},{1,5},{3,5}</li>
+<li>For {2,3,5}, we have {2},{3},{5},{2,3},{2,5},{3,5}</li>
+</ul>
+</blockquote>
+<p>For every subset $s$ of frequent itemset $I$, with the minimum confidence threshold, we generate the rule:</p>
+<script type="math/tex; mode=display">
+s\to(I-s) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ if \ \ \ \  \ \frac{sc(I)}{sc(s)}\ge min\_conf</script><blockquote>
+<p>Let us assume the minimum confidence threshold is 60%,</p>
+<p>For frequent itemset {1,3,5}:</p>
+<ul>
+<li>Rule1: $\{1\}\to \{3,5\}$, confidence = $\frac{sc\{1,3,5\}}{sc\{1\}}=\frac{2}{3}=66.66\%$ <strong>Selected</strong></li>
+<li>Rule2: $\{3\}\to \{1,5\}$, confidence = $\frac{sc\{1,3,5\}}{sc\{3\}}=\frac{2}{4}=50\%$ <strong>Rejected</strong></li>
+<li>Rule3: $\{5\}\to \{1,3\}$, confidence = $\frac{sc\{1,3,5\}}{sc\{5\}}=\frac{2}{4}=50\%$ <strong>Rejected</strong></li>
+<li>Rule4: $\{1,3\}\to \{5\}$, confidence = $\frac{sc\{1,3,5\}}{sc\{1,3\}}=\frac{2}{3}=66.66\%$ <strong>Selected</strong></li>
+<li>Rule5: $\{1,5\}\to \{3\}$, confidence = $\frac{sc\{1,3,5\}}{sc\{1,5\}}=\frac{2}{2}=100\%$ <strong>Selected</strong></li>
+<li>Rule6: $\{3,5\}\to \{1\}$, confidence = $\frac{sc\{1,3,5\}}{sc\{3,5\}}=\frac{2}{3}=66.66\%$ <strong>Selected</strong></li>
+</ul>
+<p>Same operations on {2,3,5}.</p>
+</blockquote>
 
       
     </div>
@@ -397,7 +657,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Algorithm-Data-Mining-Machine-Learning/" rel="tag"># -Algorithm -Data Mining -Machine Learning</a>
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
         </div>
       
@@ -554,7 +814,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Concepts"><span class="nav-number">1.</span> <span class="nav-text">Concepts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apriori-Algorithm"><span class="nav-number">3.</span> <span class="nav-text">Apriori Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">4.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Association-rule-generation"><span class="nav-number">5.</span> <span class="nav-text">Association rule generation</span></a></li></ol></div>
             
 
           </div>
