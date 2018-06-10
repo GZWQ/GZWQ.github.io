@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-09%20at%2012.02.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-06-05%20at%2010.10.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Mechanism-of-Differential-Privacy/Screen%20Shot%202018-05-31%20at%203.10.30%20PM.png">
-<meta property="og:updated_time" content="2018-06-09T21:12:08.735Z">
+<meta property="og:updated_time" content="2018-06-09T23:07:19.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mechanism of Differential Privacy">
 <meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
@@ -434,6 +434,17 @@
 <li><p>noise result:</p>
 <p>$\frac{P(f(x)=z)}{P(f(y)=z)}\le{e^{\epsilon}}$</p>
 </li>
+</ol>
+<p>Remarks:</p>
+<ol>
+<li><p>Let $\hat{f(x)}$ be the output of Laplace mechanism with zero mean given an input $x$. Then, for ant $x$, $\mathbb{E}[\hat{f(x)}]=f(x)$, where $f(x)$ is true query result without any perturbation.</p>
+<p>$\mathbb{E}[\hat{f(x)}]=\int{P(x)}\hat{f(x)}dx=\int{P(x)(f(x)+n(x))}dx=f(x)\int{P(x)}dx+\int{P(x)n(x)}dx$</p>
+<p>Obviously, $\int{P(x)}dx=1$, since the distribution of $n$ has zero mean so it is symmetric. For any $Pr(x)$, there are always two variables $n_1$ and $n_2$ such that $n_2=-n_1$, resulting in $P(n_1)n_1+P(n_2)n_2=0$. So $\int{P(x)n(x)}dx=0$.</p>
+<p>SO $\mathbb{E}[\hat{f(x)}]=f(x)$</p>
+</li>
+</ol>
+<ol>
+<li></li>
 </ol>
 </blockquote>
 <h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><blockquote>

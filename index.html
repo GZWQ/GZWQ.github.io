@@ -488,16 +488,37 @@
 <div class="line">\end&#123;aligned&#125;</div>
 <div class="line">\end&#123;equation&#125;</div>
 </pre></td></tr></table></figure>
-</li>
-</ol>
 <script type="math/tex; mode=display">
-   \begin{equation}
-   \begin{aligned}
-   Y&=2*(x+3)\\
-   &=2*x+6
-   \end{aligned}
-   \end{equation}</script><ol>
-<li></li>
+\begin{equation}
+\begin{aligned}
+Y&=2*(x+3)\\
+&=2*x+6
+\end{aligned}
+\end{equation}</script></li>
+<li><p>联立方程组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">t^*=</div>
+<div class="line">\left\&#123;</div>
+<div class="line">\begin&#123;align&#125; </div>
+<div class="line">x&amp;=eq1 &amp; \text&#123;if x=1&#125;\\</div>
+<div class="line">y&amp;=eq2 &amp;\text&#123;if x=2&#125;</div>
+<div class="line">\end&#123;align&#125;</div>
+<div class="line">\right.</div>
+</pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+t^*=
+\left\{
+\begin{align} 
+x&=eq1 & \text{if x=1}\\
+y&=eq2 &\text{if x=2}
+\end{align}
+\right.</script></li>
 </ol>
 
           
@@ -641,7 +662,7 @@
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�22-->
+<!--�7-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
@@ -798,7 +819,7 @@
 <li>数值积分（scipy.integrate Fusy）</li>
 </ol>
 <p>模块导入的标准方式是：</p>
-<!--�6-->
+<!--�35-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/07/ML-SciPy/#more" rel="contents">
@@ -1086,7 +1107,8 @@
       
         
           
-            <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><img src="/2018/06/05/Frequent-Itemset-Mining/Screen Shot 2018-06-05 at 4.44.19 PM.png" alt="Screen Shot 2018-06-05 at 4.44.19 PM"></p>
+            <p><a href="https://www.youtube.com/watch?v=Hk1zFOMLTrw" target="_blank" rel="noopener">The Apriori Algorithm … How The Apriori Algorithm Works</a></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><img src="/2018/06/05/Frequent-Itemset-Mining/Screen Shot 2018-06-05 at 4.44.19 PM.png" alt="Screen Shot 2018-06-05 at 4.44.19 PM"></p>
 
           
         
@@ -1714,6 +1736,17 @@
 <li><p>noise result:</p>
 <p>$\frac{P(f(x)=z)}{P(f(y)=z)}\le{e^{\epsilon}}$</p>
 </li>
+</ol>
+<p>Remarks:</p>
+<ol>
+<li><p>Let $\hat{f(x)}$ be the output of Laplace mechanism with zero mean given an input $x$. Then, for ant $x$, $\mathbb{E}[\hat{f(x)}]=f(x)$, where $f(x)$ is true query result without any perturbation.</p>
+<p>$\mathbb{E}[\hat{f(x)}]=\int{P(x)}\hat{f(x)}dx=\int{P(x)(f(x)+n(x))}dx=f(x)\int{P(x)}dx+\int{P(x)n(x)}dx$</p>
+<p>Obviously, $\int{P(x)}dx=1$, since the distribution of $n$ has zero mean so it is symmetric. For any $Pr(x)$, there are always two variables $n_1$ and $n_2$ such that $n_2=-n_1$, resulting in $P(n_1)n_1+P(n_2)n_2=0$. So $\int{P(x)n(x)}dx=0$.</p>
+<p>SO $\mathbb{E}[\hat{f(x)}]=f(x)$</p>
+</li>
+</ol>
+<ol>
+<li></li>
 </ol>
 </blockquote>
 <h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><blockquote>
