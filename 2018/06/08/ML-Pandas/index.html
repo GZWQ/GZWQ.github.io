@@ -90,7 +90,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-08%20at%2011.56.57%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-09%20at%2012.15.51%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-10%20at%2010.34.06%20AM.png">
-<meta property="og:updated_time" content="2018-06-11T14:40:18.796Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-11%20at%203.17.18%20PM.png">
+<meta property="og:updated_time" content="2018-06-11T20:27:49.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - Pandas">
 <meta name="twitter:description" content="本文参考1 last pandas导入">
@@ -381,7 +382,7 @@
 
       
         <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
-<p><a href="https://www.yiibai.com/pandas/python_pandas_sorting.html" target="_blank" rel="noopener">last</a></p>
+<p><a href="https://www.yiibai.com/pandas/python_pandas_indexing_and_selecting_data.html" target="_blank" rel="noopener">last</a></p>
 <p>pandas导入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
@@ -2061,6 +2062,385 @@
 <div class="line"><span class="comment"># Pandas(Index=2, col1=-0.13830132314512975, col2=0.7835337994714413, col3=-0.6998806104325761)</span></div>
 <div class="line"><span class="comment"># Pandas(Index=3, col1=-1.003694634971743, col2=-0.4854728772237874, col3=-0.651522414077405)</span></div>
 </pre></td></tr></table></figure>
+<h1 id="Pandas排序"><a href="#Pandas排序" class="headerlink" title="Pandas排序"></a>Pandas排序</h1><p><em>Pandas</em>有两种排序方式，它们分别是 -</p>
+<ul>
+<li>按标签</li>
+<li>按实际值</li>
+</ul>
+<h2 id="以标签排序"><a href="#以标签排序" class="headerlink" title="以标签排序"></a>以标签排序</h2><p>使用<code>sort_index()</code>方法，通过传递<code>axis</code>参数和排序顺序，可以对<code>DataFrame</code>进行排序。 默认情况下，按照升序对行标签进行排序。</p>
+<p>通过传递<code>axis</code>参数值为<code>0</code>或<code>1</code>，可以对列标签进行排序。 默认情况下，<code>axis = 0</code>，逐行排列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">unsorted_df=pd.DataFrame(np.random.randn(<span class="number">10</span>,<span class="number">2</span>),index=[<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">7</span>],columns=[<span class="string">'col2'</span>,<span class="string">'col1'</span>])</div>
+<div class="line"><span class="keyword">print</span> (unsorted_df)</div>
+<div class="line"><span class="comment">#        col2      col1</span></div>
+<div class="line"><span class="comment"># 1  1.013623  0.889024</span></div>
+<div class="line"><span class="comment"># 4  1.058798 -0.076676</span></div>
+<div class="line"><span class="comment"># 6 -0.277161  0.665921</span></div>
+<div class="line"><span class="comment"># 2  0.019196  0.636835</span></div>
+<div class="line"><span class="comment"># 3  0.776214 -0.178358</span></div>
+<div class="line"><span class="comment"># 5  0.112524  3.321190</span></div>
+<div class="line"><span class="comment"># 9 -1.172484 -1.609542</span></div>
+<div class="line"><span class="comment"># 8  0.081354  0.878184</span></div>
+<div class="line"><span class="comment"># 0 -1.336118 -0.085982</span></div>
+<div class="line"><span class="comment"># 7  1.398648  0.750015</span></div>
+<div class="line"></div>
+<div class="line">sorted_df=unsorted_df.sort_index() <span class="comment"># sorted_df = unsorted_df.sort_index(ascending=False)降序排序</span></div>
+<div class="line"><span class="keyword">print</span> (sorted_df)</div>
+<div class="line"><span class="comment">#        col2      col1</span></div>
+<div class="line"><span class="comment"># 0 -1.336118 -0.085982</span></div>
+<div class="line"><span class="comment"># 1  1.013623  0.889024</span></div>
+<div class="line"><span class="comment"># 2  0.019196  0.636835</span></div>
+<div class="line"><span class="comment"># 3  0.776214 -0.178358</span></div>
+<div class="line"><span class="comment"># 4  1.058798 -0.076676</span></div>
+<div class="line"><span class="comment"># 5  0.112524  3.321190</span></div>
+<div class="line"><span class="comment"># 6 -0.277161  0.665921</span></div>
+<div class="line"><span class="comment"># 7  1.398648  0.750015</span></div>
+<div class="line"><span class="comment"># 8  0.081354  0.878184</span></div>
+<div class="line"><span class="comment"># 9 -1.172484 -1.609542</span></div>
+</pre></td></tr></table></figure>
+<h2 id="以值排序"><a href="#以值排序" class="headerlink" title="以值排序"></a>以值排序</h2><p>像索引排序一样，<code>sort_values()</code>是按值排序的方法。它接受一个<code>by</code>参数，它将使用要与其排序值的<code>DataFrame</code>的列名称。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">unsorted_df = pd.DataFrame(&#123;<span class="string">'col1'</span>:[<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],<span class="string">'col2'</span>:[<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>]&#125;)</div>
+<div class="line">print(unsorted_df)</div>
+<div class="line"><span class="comment">#    col1  col2</span></div>
+<div class="line"><span class="comment"># 0     2     1</span></div>
+<div class="line"><span class="comment"># 1     1     3</span></div>
+<div class="line"><span class="comment"># 2     1     2</span></div>
+<div class="line"><span class="comment"># 3     1     4</span></div>
+<div class="line">sorted_df = unsorted_df.sort_values(by=<span class="string">'col1'</span>)</div>
+<div class="line"><span class="keyword">print</span> (sorted_df) <span class="comment"># col1值被排序，相应的col2值和行索引将随col1一起改变。</span></div>
+<div class="line"><span class="comment">#    col1  col2</span></div>
+<div class="line"><span class="comment"># 1     1     3</span></div>
+<div class="line"><span class="comment"># 2     1     2</span></div>
+<div class="line"><span class="comment"># 3     1     4</span></div>
+<div class="line"><span class="comment"># 0     2     1</span></div>
+</pre></td></tr></table></figure>
+<p>通过<code>by</code>参数指定需要列值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">sorted_df = unsorted_df.sort_values(by=[<span class="string">'col1'</span>,<span class="string">'col2'</span>])</div>
+<div class="line"><span class="keyword">print</span> (sorted_df)</div>
+<div class="line"><span class="comment">#    col1  col2</span></div>
+<div class="line"><span class="comment"># 2     1     2</span></div>
+<div class="line"><span class="comment"># 1     1     3</span></div>
+<div class="line"><span class="comment"># 3     1     4</span></div>
+<div class="line"><span class="comment"># 0     2     1</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>先对col1列排序，使该列有序，同时col2也对应变化为3，2，4，1.接着对col2列排序，这时对前一列相同的值情况下再排序，即3，2，4排序为2，3，4.这样前一列还是有序的</p>
+</blockquote>
+<h1 id="Pandas索引和数据选择"><a href="#Pandas索引和数据选择" class="headerlink" title="Pandas索引和数据选择"></a>Pandas索引和数据选择</h1><p><img src="/2018/06/08/ML-Pandas/Screen Shot 2018-06-11 at 3.17.18 PM.png" alt="Screen Shot 2018-06-11 at 3.17.18 PM"></p>
+<h2 id="loc"><a href="#loc" class="headerlink" title=".loc()"></a>.loc()</h2><p><code>.loc()</code>具有多种访问方式，如 -</p>
+<ul>
+<li>单个标量标签</li>
+<li>标签列表</li>
+<li>切片对象</li>
+<li>一个布尔数组</li>
+</ul>
+<p><code>loc</code>需要两个单/列表/范围运算符，用<code>&quot;,&quot;</code>分隔。第一个表示行，第二个表示列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#import the pandas library and aliasing as pd</span></div>
+<div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">df = pd.DataFrame(np.random.randn(<span class="number">8</span>, <span class="number">4</span>),</div>
+<div class="line">index = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>,<span class="string">'g'</span>,<span class="string">'h'</span>], columns = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>])</div>
+<div class="line">print(df)</div>
+<div class="line"><span class="comment">#           A         B         C         D</span></div>
+<div class="line"><span class="comment"># a  1.411390  0.307114 -0.988168 -1.757327</span></div>
+<div class="line"><span class="comment"># b  1.723277 -0.494447  1.372176  0.486670</span></div>
+<div class="line"><span class="comment"># c  1.511763  0.132625 -1.242458  0.457793</span></div>
+<div class="line"><span class="comment"># d  0.709051  0.361528  0.366901 -0.565920</span></div>
+<div class="line"><span class="comment"># e -0.030279  1.160672  0.275871 -1.063416</span></div>
+<div class="line"><span class="comment"># f -0.265881 -0.087183  0.313044  1.348987</span></div>
+<div class="line"><span class="comment"># g  1.049137 -1.490819  1.085902  0.857283</span></div>
+<div class="line"><span class="comment"># h -2.894211  0.086263  0.474841 -0.876164</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#select all rows for a specific column</span></div>
+<div class="line"><span class="keyword">print</span> (df.loc[:,<span class="string">'A'</span>])</div>
+<div class="line"><span class="comment"># a    1.411390</span></div>
+<div class="line"><span class="comment"># b    1.723277</span></div>
+<div class="line"><span class="comment"># c    1.511763</span></div>
+<div class="line"><span class="comment"># d    0.709051</span></div>
+<div class="line"><span class="comment"># e   -0.030279</span></div>
+<div class="line"><span class="comment"># f   -0.265881</span></div>
+<div class="line"><span class="comment"># g    1.049137</span></div>
+<div class="line"><span class="comment"># h   -2.894211</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Select all rows for multiple columns, say list[]</span></div>
+<div class="line"><span class="keyword">print</span> (df.loc[:,[<span class="string">'A'</span>,<span class="string">'C'</span>]])</div>
+<div class="line"><span class="comment">#           A         C</span></div>
+<div class="line"><span class="comment"># a  1.411390 -0.988168</span></div>
+<div class="line"><span class="comment"># b  1.723277  1.372176</span></div>
+<div class="line"><span class="comment"># c  1.511763 -1.242458</span></div>
+<div class="line"><span class="comment"># d  0.709051  0.366901</span></div>
+<div class="line"><span class="comment"># e -0.030279  0.275871</span></div>
+<div class="line"><span class="comment"># f -0.265881  0.313044</span></div>
+<div class="line"><span class="comment"># g  1.049137  1.085902</span></div>
+<div class="line"><span class="comment"># h -2.894211  0.474841</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Select few rows for multiple columns, say list[]</span></div>
+<div class="line"><span class="keyword">print</span> (df.loc[[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'f'</span>,<span class="string">'h'</span>],[<span class="string">'A'</span>,<span class="string">'C'</span>]])</div>
+<div class="line"><span class="comment">#           A         C</span></div>
+<div class="line"><span class="comment"># a  1.411390 -0.988168</span></div>
+<div class="line"><span class="comment"># b  1.723277  1.372176</span></div>
+<div class="line"><span class="comment"># f -0.265881  0.313044</span></div>
+<div class="line"><span class="comment"># h -2.894211  0.474841</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Select range of rows for all columns</span></div>
+<div class="line"><span class="keyword">print</span> (df.loc[<span class="string">'a'</span>:<span class="string">'c'</span>])</div>
+<div class="line"><span class="comment">#           A         B         C         D</span></div>
+<div class="line"><span class="comment"># a  1.411390  0.307114 -0.988168 -1.757327</span></div>
+<div class="line"><span class="comment"># b  1.723277 -0.494447  1.372176  0.486670</span></div>
+<div class="line"><span class="comment"># c  1.511763  0.132625 -1.242458  0.457793</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># for getting values with a boolean array</span></div>
+<div class="line"><span class="keyword">print</span> (df.loc[<span class="string">'a'</span>]&gt;<span class="number">0</span>) <span class="comment">#选择行‘a’，并判断这一行的每一个值是否大于0</span></div>
+<div class="line"><span class="comment"># A     True</span></div>
+<div class="line"><span class="comment"># B     True</span></div>
+<div class="line"><span class="comment"># C    False</span></div>
+<div class="line"><span class="comment"># D    False</span></div>
+</pre></td></tr></table></figure>
+<h2 id="iloc"><a href="#iloc" class="headerlink" title=".iloc()"></a>.iloc()</h2><p><em>Pandas</em>提供了各种方法，以获得纯整数索引。像python和numpy一样，第一个位置是基于<code>0</code>的索引。</p>
+<p>各种访问方式如下 -</p>
+<ul>
+<li>整数</li>
+<li>整数列表</li>
+<li>系列值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">df = pd.DataFrame(np.random.randn(<span class="number">8</span>, <span class="number">4</span>), columns = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>, <span class="string">'D'</span>])</div>
+<div class="line">print(df)</div>
+<div class="line"><span class="comment">#           A         B         C         D</span></div>
+<div class="line"><span class="comment"># 0 -1.097794 -0.343903 -0.545227  0.693677</span></div>
+<div class="line"><span class="comment"># 1  0.748052 -0.800368  0.391323  0.079908</span></div>
+<div class="line"><span class="comment"># 2  1.395456 -0.622070  0.431188  0.321310</span></div>
+<div class="line"><span class="comment"># 3 -0.133916  0.723562 -2.708785  1.397269</span></div>
+<div class="line"><span class="comment"># 4  0.998216  0.229914  1.551281 -0.279701</span></div>
+<div class="line"><span class="comment"># 5 -0.747833 -0.557234 -0.309676 -0.222850</span></div>
+<div class="line"><span class="comment"># 6  1.034332  0.240854  0.730528 -0.825282</span></div>
+<div class="line"><span class="comment"># 7 -0.095764 -0.899946 -0.616187  2.121193</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># select all rows for a specific column</span></div>
+<div class="line"><span class="keyword">print</span> (df.iloc[:<span class="number">4</span>])</div>
+<div class="line"><span class="comment">#           A         B         C         D</span></div>
+<div class="line"><span class="comment"># 0 -1.097794 -0.343903 -0.545227  0.693677</span></div>
+<div class="line"><span class="comment"># 1  0.748052 -0.800368  0.391323  0.079908</span></div>
+<div class="line"><span class="comment"># 2  1.395456 -0.622070  0.431188  0.321310</span></div>
+<div class="line"><span class="comment"># 3 -0.133916  0.723562 -2.708785  1.397269</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Integer slicing</span></div>
+<div class="line"><span class="keyword">print</span> (df.iloc[:<span class="number">4</span>])</div>
+<div class="line"><span class="comment">#           A         B         C         D</span></div>
+<div class="line"><span class="comment"># 0 -1.097794 -0.343903 -0.545227  0.693677</span></div>
+<div class="line"><span class="comment"># 1  0.748052 -0.800368  0.391323  0.079908</span></div>
+<div class="line"><span class="comment"># 2  1.395456 -0.622070  0.431188  0.321310</span></div>
+<div class="line"><span class="comment"># 3 -0.133916  0.723562 -2.708785  1.397269</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">print</span> (df.iloc[<span class="number">1</span>:<span class="number">5</span>, <span class="number">2</span>:<span class="number">4</span>])</div>
+<div class="line"><span class="comment">#           C         D</span></div>
+<div class="line"><span class="comment"># 1  0.391323  0.079908</span></div>
+<div class="line"><span class="comment"># 2  0.431188  0.321310</span></div>
+<div class="line"><span class="comment"># 3 -2.708785  1.397269</span></div>
+<div class="line"><span class="comment"># 4  1.551281 -0.279701</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Slicing through list of values</span></div>
+<div class="line"><span class="keyword">print</span> (df.iloc[[<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>], [<span class="number">1</span>, <span class="number">3</span>]])</div>
+<div class="line"><span class="comment">#           B         D</span></div>
+<div class="line"><span class="comment"># 1 -0.800368  0.079908</span></div>
+<div class="line"><span class="comment"># 3  0.723562  1.397269</span></div>
+<div class="line"><span class="comment"># 5 -0.557234 -0.222850</span></div>
+<div class="line"><span class="keyword">print</span> (df.iloc[<span class="number">1</span>:<span class="number">3</span>, :])</div>
+<div class="line"><span class="comment">#           A         B         C         D</span></div>
+<div class="line"><span class="comment"># 1  0.748052 -0.800368  0.391323  0.079908</span></div>
+<div class="line"><span class="comment"># 2  1.395456 -0.622070  0.431188  0.321310</span></div>
+<div class="line"><span class="keyword">print</span> (df.iloc[:,<span class="number">1</span>:<span class="number">3</span>])</div>
+<div class="line"><span class="comment">#           B         C</span></div>
+<div class="line"><span class="comment"># 0 -0.343903 -0.545227</span></div>
+<div class="line"><span class="comment"># 1 -0.800368  0.391323</span></div>
+<div class="line"><span class="comment"># 2 -0.622070  0.431188</span></div>
+<div class="line"><span class="comment"># 3  0.723562 -2.708785</span></div>
+<div class="line"><span class="comment"># 4  0.229914  1.551281</span></div>
+<div class="line"><span class="comment"># 5 -0.557234 -0.309676</span></div>
+<div class="line"><span class="comment"># 6  0.240854  0.730528</span></div>
+<div class="line"><span class="comment"># 7 -0.899946 -0.616187</span></div>
+</pre></td></tr></table></figure>
 
       
     </div>
@@ -2180,7 +2560,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2235,7 +2615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系列（Series"><span class="nav-number">1.0.1.</span> <span class="nav-text">系列（Series)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建系列"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">创建系列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个空的系列"><span class="nav-number">1.0.1.1.1.</span> <span class="nav-text">创建一个空的系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ndarray创建一个系列"><span class="nav-number">1.0.1.1.2.</span> <span class="nav-text">ndarray创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从字典创建一个系列"><span class="nav-number">1.0.1.1.3.</span> <span class="nav-text">从字典创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从标量创建一个系列"><span class="nav-number">1.0.1.1.4.</span> <span class="nav-text">从标量创建一个系列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系列访问"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">系列访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用位置index访问"><span class="nav-number">1.0.1.2.1.</span> <span class="nav-text">使用位置index访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用标签检索"><span class="nav-number">1.0.1.2.2.</span> <span class="nav-text">使用标签检索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据帧-DataFrame"><span class="nav-number">1.0.2.</span> <span class="nav-text">数据帧(DataFrame)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据帧"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">创建数据帧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过列表创建"><span class="nav-number">1.0.2.1.1.</span> <span class="nav-text">通过列表创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过ndarrays-Lists的字典创建"><span class="nav-number">1.0.2.1.2.</span> <span class="nav-text">通过ndarrays/Lists的字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过字典创建"><span class="nav-number">1.0.2.1.3.</span> <span class="nav-text">通过字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过系列创建"><span class="nav-number">1.0.2.1.4.</span> <span class="nav-text">通过系列创建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据帧访问"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">数据帧访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#列选择"><span class="nav-number">1.0.2.2.1.</span> <span class="nav-text">列选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列添加"><span class="nav-number">1.0.2.2.2.</span> <span class="nav-text">列添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列删除"><span class="nav-number">1.0.2.2.3.</span> <span class="nav-text">列删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行选择"><span class="nav-number">1.0.2.2.4.</span> <span class="nav-text">行选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行切片"><span class="nav-number">1.0.2.2.5.</span> <span class="nav-text">行切片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#附加行"><span class="nav-number">1.0.2.2.6.</span> <span class="nav-text">附加行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除行"><span class="nav-number">1.0.2.2.7.</span> <span class="nav-text">删除行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面板-Panel"><span class="nav-number">1.0.3.</span> <span class="nav-text">面板(Panel)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas基本功能"><span class="nav-number">2.</span> <span class="nav-text">Pandas基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列基本功能"><span class="nav-number">2.1.</span> <span class="nav-text">系列基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#axes"><span class="nav-number">2.1.1.</span> <span class="nav-text">axes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#empty"><span class="nav-number">2.1.2.</span> <span class="nav-text">empty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndim"><span class="nav-number">2.1.3.</span> <span class="nav-text">ndim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#size"><span class="nav-number">2.1.4.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#values"><span class="nav-number">2.1.5.</span> <span class="nav-text">values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head-tail"><span class="nav-number">2.1.6.</span> <span class="nav-text">head-tail</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame基本功能"><span class="nav-number">2.2.</span> <span class="nav-text">DataFrame基本功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas描述性统计"><span class="nav-number">3.</span> <span class="nav-text">Pandas描述性统计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sum"><span class="nav-number">3.1.</span> <span class="nav-text">sum()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mean"><span class="nav-number">3.2.</span> <span class="nav-text">mean()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std"><span class="nav-number">3.3.</span> <span class="nav-text">std()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据汇总"><span class="nav-number">3.4.</span> <span class="nav-text">数据汇总</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas函数"><span class="nav-number">4.</span> <span class="nav-text">Pandas函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pipe表格函数"><span class="nav-number">4.1.</span> <span class="nav-text">pipe表格函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appy行或列智能函数应用"><span class="nav-number">4.2.</span> <span class="nav-text">appy行或列智能函数应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#applymap元素智能函数"><span class="nav-number">4.3.</span> <span class="nav-text">applymap元素智能函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas重建索引"><span class="nav-number">5.</span> <span class="nav-text">Pandas重建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重建索引与其他对象对齐"><span class="nav-number">5.1.</span> <span class="nav-text">重建索引与其他对象对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#填充时重新加注"><span class="nav-number">5.2.</span> <span class="nav-text">填充时重新加注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重建索引时的填充限制"><span class="nav-number">5.2.1.</span> <span class="nav-text">重建索引时的填充限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名"><span class="nav-number">5.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas迭代"><span class="nav-number">6.</span> <span class="nav-text">Pandas迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame迭代"><span class="nav-number">6.1.</span> <span class="nav-text">DataFrame迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iteritems"><span class="nav-number">6.1.1.</span> <span class="nav-text">iteritems()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iterrows"><span class="nav-number">6.1.2.</span> <span class="nav-text">iterrows()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#itertuples"><span class="nav-number">6.1.3.</span> <span class="nav-text">itertuples()</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系列（Series"><span class="nav-number">1.0.1.</span> <span class="nav-text">系列（Series)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建系列"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">创建系列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个空的系列"><span class="nav-number">1.0.1.1.1.</span> <span class="nav-text">创建一个空的系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ndarray创建一个系列"><span class="nav-number">1.0.1.1.2.</span> <span class="nav-text">ndarray创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从字典创建一个系列"><span class="nav-number">1.0.1.1.3.</span> <span class="nav-text">从字典创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从标量创建一个系列"><span class="nav-number">1.0.1.1.4.</span> <span class="nav-text">从标量创建一个系列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系列访问"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">系列访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用位置index访问"><span class="nav-number">1.0.1.2.1.</span> <span class="nav-text">使用位置index访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用标签检索"><span class="nav-number">1.0.1.2.2.</span> <span class="nav-text">使用标签检索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据帧-DataFrame"><span class="nav-number">1.0.2.</span> <span class="nav-text">数据帧(DataFrame)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据帧"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">创建数据帧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过列表创建"><span class="nav-number">1.0.2.1.1.</span> <span class="nav-text">通过列表创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过ndarrays-Lists的字典创建"><span class="nav-number">1.0.2.1.2.</span> <span class="nav-text">通过ndarrays/Lists的字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过字典创建"><span class="nav-number">1.0.2.1.3.</span> <span class="nav-text">通过字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过系列创建"><span class="nav-number">1.0.2.1.4.</span> <span class="nav-text">通过系列创建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据帧访问"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">数据帧访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#列选择"><span class="nav-number">1.0.2.2.1.</span> <span class="nav-text">列选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列添加"><span class="nav-number">1.0.2.2.2.</span> <span class="nav-text">列添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列删除"><span class="nav-number">1.0.2.2.3.</span> <span class="nav-text">列删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行选择"><span class="nav-number">1.0.2.2.4.</span> <span class="nav-text">行选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行切片"><span class="nav-number">1.0.2.2.5.</span> <span class="nav-text">行切片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#附加行"><span class="nav-number">1.0.2.2.6.</span> <span class="nav-text">附加行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除行"><span class="nav-number">1.0.2.2.7.</span> <span class="nav-text">删除行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面板-Panel"><span class="nav-number">1.0.3.</span> <span class="nav-text">面板(Panel)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas基本功能"><span class="nav-number">2.</span> <span class="nav-text">Pandas基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列基本功能"><span class="nav-number">2.1.</span> <span class="nav-text">系列基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#axes"><span class="nav-number">2.1.1.</span> <span class="nav-text">axes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#empty"><span class="nav-number">2.1.2.</span> <span class="nav-text">empty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndim"><span class="nav-number">2.1.3.</span> <span class="nav-text">ndim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#size"><span class="nav-number">2.1.4.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#values"><span class="nav-number">2.1.5.</span> <span class="nav-text">values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head-tail"><span class="nav-number">2.1.6.</span> <span class="nav-text">head-tail</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame基本功能"><span class="nav-number">2.2.</span> <span class="nav-text">DataFrame基本功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas描述性统计"><span class="nav-number">3.</span> <span class="nav-text">Pandas描述性统计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sum"><span class="nav-number">3.1.</span> <span class="nav-text">sum()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mean"><span class="nav-number">3.2.</span> <span class="nav-text">mean()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std"><span class="nav-number">3.3.</span> <span class="nav-text">std()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据汇总"><span class="nav-number">3.4.</span> <span class="nav-text">数据汇总</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas函数"><span class="nav-number">4.</span> <span class="nav-text">Pandas函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pipe表格函数"><span class="nav-number">4.1.</span> <span class="nav-text">pipe表格函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appy行或列智能函数应用"><span class="nav-number">4.2.</span> <span class="nav-text">appy行或列智能函数应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#applymap元素智能函数"><span class="nav-number">4.3.</span> <span class="nav-text">applymap元素智能函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas重建索引"><span class="nav-number">5.</span> <span class="nav-text">Pandas重建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重建索引与其他对象对齐"><span class="nav-number">5.1.</span> <span class="nav-text">重建索引与其他对象对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#填充时重新加注"><span class="nav-number">5.2.</span> <span class="nav-text">填充时重新加注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重建索引时的填充限制"><span class="nav-number">5.2.1.</span> <span class="nav-text">重建索引时的填充限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名"><span class="nav-number">5.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas迭代"><span class="nav-number">6.</span> <span class="nav-text">Pandas迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame迭代"><span class="nav-number">6.1.</span> <span class="nav-text">DataFrame迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iteritems"><span class="nav-number">6.1.1.</span> <span class="nav-text">iteritems()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iterrows"><span class="nav-number">6.1.2.</span> <span class="nav-text">iterrows()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#itertuples"><span class="nav-number">6.1.3.</span> <span class="nav-text">itertuples()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas排序"><span class="nav-number">7.</span> <span class="nav-text">Pandas排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以标签排序"><span class="nav-number">7.1.</span> <span class="nav-text">以标签排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以值排序"><span class="nav-number">7.2.</span> <span class="nav-text">以值排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas索引和数据选择"><span class="nav-number">8.</span> <span class="nav-text">Pandas索引和数据选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loc"><span class="nav-number">8.1.</span> <span class="nav-text">.loc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iloc"><span class="nav-number">8.2.</span> <span class="nav-text">.iloc()</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -101,6 +101,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%206.16.58%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%206.20.05%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%2010.21.40%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-11%20at%2011.28.05%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-11%20at%2011.29.58%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.41.00%20PM-8080101.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.42.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%209.44.09%20PM.png">
@@ -114,9 +116,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.21.19%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.22.12%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.22.22%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.26.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.27.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.28.02%20PM.png">
-<meta property="og:updated_time" content="2018-06-11T02:34:42.530Z">
+<meta property="og:updated_time" content="2018-06-11T16:33:56.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Local Privacy">
 <meta name="twitter:description" content="Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predicto">
@@ -550,15 +553,22 @@ Y(i)=\begin{cases}
 </ul>
 </li>
 </ol>
-<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen"><a href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen" class="headerlink" title="Multiple Attributes Mean or Frequencies Estimation 2016-Nguyen"></a>Multiple Attributes Mean or Frequencies Estimation <a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">2016-Nguyen</a></h3><p>They propose the Harmony method, which can handle multiple numeric or categorical attributes. </p>
+<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><a href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code" class="headerlink" title="Multiple Attributes Mean or Frequencies Estimation 2016-Nguyen Code"></a>Multiple Attributes Mean or Frequencies Estimation <a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">2016-Nguyen</a> <a href="https://github.com/pokhym/LDP" target="_blank" rel="noopener">Code</a></h3><blockquote>
+<p>They propose the Harmony method, which can handle multiple numeric or categorical attributes. </p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-09 at 10.21.40 PM.png" alt="Screen Shot 2018-06-09 at 10.21.40 PM"></p>
-<blockquote>
 <p>Remarks:</p>
 <ol>
 <li>Algorithm2 is [Harmony-for-numeric] algorithm.</li>
 <li>Algorithm3 is [Bassily and Smith’s method]</li>
 <li>Each user randomly selects one attribute to submit.</li>
 </ol>
+</blockquote>
+<h3 id="Stochastic-Gradient-Descent"><a href="#Stochastic-Gradient-Descent" class="headerlink" title="Stochastic Gradient Descent"></a>Stochastic Gradient Descent</h3><blockquote>
+<p>Since the gradient is the numeric number, so the author user <strong>[Harmony-for-numeric]</strong> algorithm for randomized operation. But the error by this method is $\sqrt{dlog(d)/\epsilon}$, where $d$ is the number of attributes (the length of input vector $x$).</p>
+<p>For logistic regression and SVM, they use min-batch gradient descent with the batch size $k$, reducing error to $\sqrt{dlog(d)/(\epsilon k)}$.</p>
+<p>For linear regression, they introduce <strong>Dimension reduction</strong>, which introdcues error $\sqrt{rlog(r)/(\epsilon k)}$</p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-11 at 11.28.05 AM.png" alt="Screen Shot 2018-06-11 at 11.28.05 AM"></p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-11 at 11.29.58 AM.png" alt="Screen Shot 2018-06-11 at 11.29.58 AM"></p>
 </blockquote>
 <h3 id="Locations-Density-Estimation-2018-Kim"><a href="#Locations-Density-Estimation-2018-Kim" class="headerlink" title="Locations Density Estimation [2018-Kim]"></a>Locations Density Estimation <a href="Application of Local Differential Privacy to Collection of Indoor Positioning Data">[2018-Kim]</a></h3><p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
 <p>The purpose of this research is to approximately compute the distribution of users in the indoor space. </p>
@@ -574,7 +584,8 @@ Y(i)=\begin{cases}
 <p>The instantaneous randomized response, S, is transmitted to the data collector server.</p>
 <h3 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h3></li>
 </ol>
-<h4 id="STATISTIC-BASED-APPROACH"><a href="#STATISTIC-BASED-APPROACH" class="headerlink" title="STATISTIC-BASED APPROACH"></a>STATISTIC-BASED APPROACH</h4><ol>
+<h4 id="STATISTIC-BASED-APPROACH"><a href="#STATISTIC-BASED-APPROACH" class="headerlink" title="STATISTIC-BASED APPROACH"></a>STATISTIC-BASED APPROACH</h4><blockquote>
+<ol>
 <li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.49.04 PM.png" alt="Screen Shot 2018-06-03 at 9.49.04 PM"></p>
 </li>
 <li><p>the number of the instantaneous randomized responses of which the i-th bit is expected to be set to 1, $num(S_i)$, is estimated as follows:</p>
@@ -589,7 +600,9 @@ Y(i)=\begin{cases}
 <li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.08.45 PM.png" alt="Screen Shot 2018-06-03 at 10.08.45 PM"></p>
 </li>
 </ol>
-<h4 id="EM-BASED-APPROACH"><a href="#EM-BASED-APPROACH" class="headerlink" title="EM-BASED APPROACH"></a>EM-BASED APPROACH</h4><p>   Here we intend to estimate  $P(L=x_i)$.</p>
+</blockquote>
+<h4 id="EM-BASED-APPROACH"><a href="#EM-BASED-APPROACH" class="headerlink" title="EM-BASED APPROACH"></a>EM-BASED APPROACH</h4><blockquote>
+<p>Here we intend to estimate  $P(L=x_i)$.</p>
 <ol>
 <li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.13.26 PM.png" alt="Screen Shot 2018-06-03 at 10.13.26 PM"></p>
 </li>
@@ -602,13 +615,14 @@ Y(i)=\begin{cases}
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.22.22 PM.png" alt="Screen Shot 2018-06-03 at 10.22.22 PM"></p>
 </li>
 </ol>
-<pre><code>  ![Screen Shot 2018-06-03 at 10.26.21 PM](DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.26.21 PM.png)
-</code></pre><ol>
+<p>   <img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.26.21 PM.png" alt="Screen Shot 2018-06-03 at 10.26.21 PM"></p>
+<ol>
 <li><p>The EM algorithm that computes $P(L =  x_i)$, 1 ≤ i ≤ n proceeds as follows:</p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.27.39 PM.png" alt="Screen Shot 2018-06-03 at 10.27.39 PM"></p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.28.02 PM.png" alt="Screen Shot 2018-06-03 at 10.28.02 PM"></p>
 </li>
 </ol>
+</blockquote>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p> [2018-Kim] Application of Local Differential Privacy to Collection of Indoor Positioning Data</p>
 <p>[2016-Peter]  Discrete Distribution Estimation under Local Privacy</p>
 <p>[2015-Bassily] Local, Private, Efficient Protocols for Succinct Histograms</p>
@@ -645,7 +659,7 @@ Y(i)=\begin{cases}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/30/Mechanism-of-Differential-Privacy/" rel="next" title="Mechanism of Differential Privacy">
+              <a href="/2018/05/30/DP-Mechanism/" rel="next" title="Mechanism of Differential Privacy">
                 <i class="fa fa-chevron-left"></i> Mechanism of Differential Privacy
               </a>
             
@@ -734,7 +748,7 @@ Y(i)=\begin{cases}
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -789,7 +803,7 @@ Y(i)=\begin{cases}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mechanism"><span class="nav-number">1.</span> <span class="nav-text">Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Values"><span class="nav-number">1.1.</span> <span class="nav-text">Binary Values</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#W-RR-Categorical-data"><span class="nav-number">1.1.1.</span> <span class="nav-text">W-RR-Categorical data</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Polychotomous-Values"><span class="nav-number">1.2.</span> <span class="nav-text">Polychotomous Values</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">2.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen"><span class="nav-number">2.1.</span> <span class="nav-text">Multiple Attributes Mean or Frequencies Estimation 2016-Nguyen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Locations-Density-Estimation-2018-Kim"><span class="nav-number">2.2.</span> <span class="nav-text">Locations Density Estimation [2018-Kim]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pricacy-model"><span class="nav-number">2.3.</span> <span class="nav-text">Pricacy model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Estimation"><span class="nav-number">2.4.</span> <span class="nav-text">Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#STATISTIC-BASED-APPROACH"><span class="nav-number">2.4.1.</span> <span class="nav-text">STATISTIC-BASED APPROACH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EM-BASED-APPROACH"><span class="nav-number">2.4.2.</span> <span class="nav-text">EM-BASED APPROACH</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number"></span> <span class="nav-text">Reference</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mechanism"><span class="nav-number">1.</span> <span class="nav-text">Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Values"><span class="nav-number">1.1.</span> <span class="nav-text">Binary Values</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#W-RR-Categorical-data"><span class="nav-number">1.1.1.</span> <span class="nav-text">W-RR-Categorical data</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Polychotomous-Values"><span class="nav-number">1.2.</span> <span class="nav-text">Polychotomous Values</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">2.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><span class="nav-number">2.1.</span> <span class="nav-text">Multiple Attributes Mean or Frequencies Estimation 2016-Nguyen Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stochastic-Gradient-Descent"><span class="nav-number">2.2.</span> <span class="nav-text">Stochastic Gradient Descent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Locations-Density-Estimation-2018-Kim"><span class="nav-number">2.3.</span> <span class="nav-text">Locations Density Estimation [2018-Kim]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pricacy-model"><span class="nav-number">2.4.</span> <span class="nav-text">Pricacy model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Estimation"><span class="nav-number">2.5.</span> <span class="nav-text">Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#STATISTIC-BASED-APPROACH"><span class="nav-number">2.5.1.</span> <span class="nav-text">STATISTIC-BASED APPROACH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EM-BASED-APPROACH"><span class="nav-number">2.5.2.</span> <span class="nav-text">EM-BASED APPROACH</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number"></span> <span class="nav-text">Reference</span></a></div>
             
 
           </div>
