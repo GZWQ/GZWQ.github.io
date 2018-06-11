@@ -78,12 +78,18 @@
       <title>Latex</title>
       <link href="/2018/06/08/Latex/"/>
       <url>/2018/06/08/Latex/</url>
-      <content type="html"><![CDATA[<ol><li><p>公式换行使等号对齐</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">\begin&#123;equation&#125;</div><div class="line">\begin&#123;aligned&#125;</div><div class="line">Y&amp;=2*(x+3)\\</div><div class="line">&amp;=2*x+6</div><div class="line">\end&#123;aligned&#125;</div><div class="line">\end&#123;equation&#125;</div></pre></td></tr></table></figure><script type="math/tex; mode=display">\begin{equation}\begin{aligned}Y&=2*(x+3)\\&=2*x+6\end{aligned}\end{equation}</script></li><li><p>联立方程组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">t^*=</div><div class="line">\left\&#123;</div><div class="line">\begin&#123;align&#125; </div><div class="line">x&amp;=eq1 &amp; \text&#123;if x=1&#125;\\</div><div class="line">y&amp;=eq2 &amp;\text&#123;if x=2&#125;</div><div class="line">\end&#123;align&#125;</div><div class="line">\right.</div></pre></td></tr></table></figure><script type="math/tex; mode=display">t^*=\left\{\begin{align} x&=eq1 & \text{if x=1}\\y&=eq2 &\text{if x=2}\end{align}\right.</script></li></ol>]]></content>
+      <content type="html"><![CDATA[<ol><li><p>公式换行使等号对齐</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">\begin&#123;equation&#125;</div><div class="line">\begin&#123;aligned&#125;</div><div class="line">Y&amp;=2*(x+3)\\</div><div class="line">&amp;=2*x+6</div><div class="line">\end&#123;aligned&#125;</div><div class="line">\end&#123;equation&#125;</div></pre></td></tr></table></figure></li></ol><script type="math/tex; mode=display">   \begin{equation}   \begin{aligned}   Y&=2*(x+3)\\   &=2*x+6   \end{aligned}   \end{equation}</script><ol><li><p>联立方程组</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">t^*=</div><div class="line">\left\&#123;</div><div class="line">\begin&#123;align&#125; </div><div class="line">x&amp;=eq1 &amp; \text&#123;if x=1&#125;\\</div><div class="line">y&amp;=eq2 &amp;\text&#123;if x=2&#125;</div><div class="line">\end&#123;align&#125;</div><div class="line">\right.</div></pre></td></tr></table></figure><script type="math/tex; mode=display">t^*=\left\{\begin{align} x&=eq1 & \text{if x=1}\\y&=eq2 &\text{if x=2}\end{align}\right.</script></li></ol>]]></content>
+      
+      <categories>
+          
+          <category> Latex </category>
+          
+      </categories>
       
       
         <tags>
             
-            <tag> -Latex </tag>
+            <tag> Latex </tag>
             
         </tags>
       
@@ -97,14 +103,14 @@
       
       <categories>
           
-          <category> -Machine Learning </category>
+          <category> Machine Learning </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> -Machine Learning </tag>
+            <tag> Machine Learning </tag>
             
         </tags>
       
@@ -118,14 +124,14 @@
       
       <categories>
           
-          <category> -Machine Learning </category>
+          <category> Machine Learning </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> -Machine Learning </tag>
+            <tag> Machine Learning </tag>
             
         </tags>
       
@@ -139,14 +145,14 @@
       
       <categories>
           
-          <category> -Machine Learning </category>
+          <category> Machine Learning </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> -Machine Learning </tag>
+            <tag> Machine Learning </tag>
             
         </tags>
       
@@ -202,14 +208,14 @@
       
       <categories>
           
-          <category> -Machine Learning </category>
+          <category> Machine Learning </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> -Machine Learning </tag>
+            <tag> Machine Learning </tag>
             
         </tags>
       
@@ -244,14 +250,14 @@
       
       <categories>
           
-          <category> -Differential Privacy </category>
+          <category> Differential Privacy </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> -Differential Privacy </tag>
+            <tag> Differential Privacy </tag>
             
         </tags>
       
@@ -266,7 +272,7 @@
       
         <tags>
             
-            <tag> -Probability and Statistic </tag>
+            <tag> Probability and Statistic </tag>
             
         </tags>
       
@@ -427,14 +433,14 @@
       
       <categories>
           
-          <category> -Personal Website </category>
+          <category> Hexo </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> -hexo </tag>
+            <tag> Hexo </tag>
             
         </tags>
       
