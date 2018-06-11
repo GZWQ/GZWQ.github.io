@@ -283,6 +283,160 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/ML-Expectation-Maximization-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/03/ML-Expectation-Maximization-Algorithm/" itemprop="url">ML - Expectation Maximization Algorithm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-03T16:19:45-05:00">
+                2018-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">-Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>下文资料参考了<a href="https://www.cnblogs.com/zlslch/p/6965374.html" target="_blank" rel="noopener">EM(期望最大化)算法初步认识</a></p>
+<p><strong>极大似然估计</strong>，是参数估计的方法之一。其基本思想是已知样本符合某种概率分布，但是分布的参数未知，于是通过采样的随机样本估计参数。其基本步骤是：</p>
+<ol>
+<li>求出似然函数：该样本集的概率，即每个样本出现的概率连积</li>
+<li>对似然函数取对数：将连乘变连加</li>
+<li>求导：使对数似然函数取最大值的参数便是结果</li>
+<li>求解方程：得到的参数即为所求。</li>
+</ol>
+<p><strong>期望最大算法</strong>，是一种从不完全数据或有数据丢失的数据集（存在隐含变量）中求解概率模型参数的最大似然估计方法。在每一次的迭代过程中，主要分为两步：即求期望(Expectation)步骤和最大化(Maximization)步骤。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/03/ML-Expectation-Maximization-Algorithm/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/02/DP-Application - Local-Privacy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -377,7 +531,7 @@
         
           <p>Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predictors by analyzing large amounts of such randomized data.</p>
 <p>Unlike other models of differential privacy, which publish randomized aggregates but still collect the exact sensitive data, LDP avoids collecting exact personal information in the first place, thus providing a stronger assurance to the users and to the aggregator.</p>
-<p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release.</p>
+<p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release. But unlike the laplace mechanism where we can use the noisy output directly, we need to do some estimation on the randomized output to get the estimator in LDP.</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/02/DP-Application - Local-Privacy/#more" rel="contents">
@@ -838,6 +992,12 @@ D(p||q)\ge0</script></li>
         
           
             <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/" target="_blank" rel="noopener">Probabilistic Systems Analysis and Applied Probability</a></p>
+<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><blockquote>
+<p><strong>Definition</strong>:</p>
+<script type="math/tex; mode=display">
+P(AB)=P(A)P(B)</script><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-10 at 11.04.20 PM.png" alt="Screen Shot 2018-06-10 at 11.04.20 PM"></p>
+<p>Based on the pic, $P(AB)\ne P(A)P(B)$, so event A and event B are not independent event.</p>
+</blockquote>
 <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
 <ol>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>
@@ -1098,10 +1258,15 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 <blockquote>
 <p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-06-02 at 4.20.01 PM.png" alt="Screen Shot 2018-06-02 at 4.20.01 PM"></p>
 </blockquote>
+<h4 id="2014-Sun"><a href="#2014-Sun" class="headerlink" title="[2014-Sun]"></a><a href="https://pdfs.semanticscholar.org/ff20/5884c8e34f8a1d6616809ca532e6ed801393.pdf?_ga=2.49109027.44169730.1528666244-1946321552.1526143877" target="_blank" rel="noopener">[2014-Sun]</a></h4><blockquote>
+<p>The problem setting is how to find frequent itemset with privacy. Say we have the item set $I={I_1,I_2,..,I_n}$. Before each user sends out their transaction which is $n$-dimention vector and ithe entry being 1 means this user has this item or else, he does the the randomized selection for each item. That is, keep true answer with probability $p_i$ for item i and  perturb the answer with $1-p$. And p controls the privacy level.</p>
+<p>For k-itemset, we want to find out its support, which comes from the estimator based on the perturbed data. Say we want to calculate the support of $2$-itemset. And the item set is $\{A,B,C,D\}$. And the candidate domain is $\{AB,AC,AD,BC,BD,CD\}$. The aim is to get the true count of $AB, \ c(AB)$, which is $11$ and may comes from $\{00,01,10,11\}$, with the probability matrix $P=\matrix{p_{00},p_{01}\\p_{10},p_{11}}$. so based on the observed count of $[A=0,B=0],[A=0,B=1],[A=1,B=0],[A=1,B=1]$ we can get estimator count matrix by $C_{observed}=PC_{estimator}\to C_{estimator}=P^{-1}C_{observed}$. And the support for $AB$ is $C_{estimator}[-1]$.</p>
+</blockquote>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[2011-Quercia] SpotME if you can: randomized responses for location obfuscation on mobile phones</p>
 <p>[1965-Warner] Randomized response: a survey technique for eliminating evasive answer bias</p>
 <p>[2016-Wang] Using Randomized Response for Differential Privacy Preserving Data Collection </p>
 <p>[2006-Huseyin] Achieving Private Recommendations Using Randomized Response Techniques</p>
+<p>[2014-Sun] Personalized Privacy-Preserving Frequent Itemset Mining Using Randomized Response</p>
 
           
         
@@ -2061,147 +2226,6 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/Greedy-Algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/23/Greedy-Algorithm/" itemprop="url">Greedy Algorithm</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T21:42:53-05:00">
-                2018-05-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">-Algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2252,7 +2276,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
