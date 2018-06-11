@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="How kNN algorithm works k nearest neighbor (kNN): how it works How K-Nearest Neighbors (kNN) Classifier Works kNN (k-Nearest Neighbors) is a classification algorithm.">
+<meta name="description" content="How kNN algorithm works k nearest neighbor (kNN): how it works How K-Nearest Neighbors (kNN) Classifier Works kNN (k-Nearest Neighbors) is a classification algorithm. It is a simple algorithm that sto">
 <meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ML - K-Nearest Neighbors">
 <meta property="og:url" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="How kNN algorithm works k nearest neighbor (kNN): how it works How K-Nearest Neighbors (kNN) Classifier Works kNN (k-Nearest Neighbors) is a classification algorithm.">
+<meta property="og:description" content="How kNN algorithm works k nearest neighbor (kNN): how it works How K-Nearest Neighbors (kNN) Classifier Works kNN (k-Nearest Neighbors) is a classification algorithm. It is a simple algorithm that sto">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-10T05:57:16.298Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/Screen%20Shot%202018-06-10%20at%2011.48.30%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/Screen%20Shot%202018-06-11%20at%2012.29.41%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/Screen%20Shot%202018-06-11%20at%2012.34.40%20AM.png">
+<meta property="og:updated_time" content="2018-06-11T05:35:38.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - K-Nearest Neighbors">
-<meta name="twitter:description" content="How kNN algorithm works k nearest neighbor (kNN): how it works How K-Nearest Neighbors (kNN) Classifier Works kNN (k-Nearest Neighbors) is a classification algorithm.">
+<meta name="twitter:description" content="How kNN algorithm works k nearest neighbor (kNN): how it works How K-Nearest Neighbors (kNN) Classifier Works kNN (k-Nearest Neighbors) is a classification algorithm. It is a simple algorithm that sto">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/Screen%20Shot%202018-06-10%20at%2011.48.30%20PM.png">
 
 
 
@@ -379,7 +383,96 @@
         <p><a href="https://www.youtube.com/watch?v=UqYde-LULfs" target="_blank" rel="noopener">How kNN algorithm works</a></p>
 <p><a href="https://www.youtube.com/watch?v=k_7gMp5wh5A" target="_blank" rel="noopener">k nearest neighbor (kNN): how it works</a></p>
 <p><a href="https://www.youtube.com/watch?v=v6278Cjf_qA" target="_blank" rel="noopener">How K-Nearest Neighbors (kNN) Classifier Works</a></p>
-<p>kNN (k-Nearest Neighbors) is a classification algorithm.</p>
+<p>kNN (k-Nearest Neighbors) is a classification algorithm. It is a simple algorithm that stores all available cases and classifies new cases based on a similarity measure (e.g., distance functions).</p>
+<h2 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h2><p>For a new case to be classified, we calculate the distance between this case and each training sample. And we rank the distance in an ascending way and pick the top-k samples with smallest distance with the new case as its k-nearest neighbour. And this case is classified by a majority vote of its neighbors, with the case being assigned to the class most common amongst its K nearest neighbors. If K = 1, then the case is simply assigned to the class of its nearest neighbor. </p>
+<h3 id="distance"><a href="#distance" class="headerlink" title="distance"></a>distance</h3><p><img src="/2018/06/10/ML-K-Nearest-Neighbors/Screen Shot 2018-06-10 at 11.48.30 PM.png" alt="Screen Shot 2018-06-10 at 11.48.30 PM"></p>
+<p>It should also be noted that all three distance measures are valid for continuous variables. In the instance of <strong>categorical variables</strong> the Hamming distance must be used. </p>
+<blockquote>
+<p>Say we have a categorical attribute gender and its domain is $\{male, female\}$. And for a new case $x$ and its gender is $male$. For all the training sample, we calculate the gender distance between each sample and the new case. If their gender is same, then the distance is 0; else the distance is 1.  </p>
+</blockquote>
+<h3 id="normalization"><a href="#normalization" class="headerlink" title="normalization"></a>normalization</h3><p>Because the distance of categorical attribute is either 0 or 1, standardization of the numerical variables between 0 and 1 is needed when there is a mixture of numerical and categorical variables in the dataset.</p>
+<h3 id="K-choice"><a href="#K-choice" class="headerlink" title="K choice"></a>K choice</h3><p>Choosing the optimal value for K is best done by first inspecting the data. In general, a large K value is more precise as it reduces the overall noise but there is no guarantee. Cross-validation is another way to retrospectively determine a good K value by using an independent dataset to validate the K value. Historically, the optimal K for most datasets has been between 3-10. That produces much better results than 1NN.</p>
+<h2 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h2><p>Say we have the training sample database concerning credit default as follows, Age and Loan are two numerical variables (predictors) and Default is the target.        </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Age</th>
+<th style="text-align:center">Loan</th>
+<th style="text-align:center">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">25</td>
+<td style="text-align:center">$40,000</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">35</td>
+<td style="text-align:center">$60,000</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">45</td>
+<td style="text-align:center">$80,000</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">20</td>
+<td style="text-align:center">$20,000</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">35</td>
+<td style="text-align:center">$120,000</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">52</td>
+<td style="text-align:center">$18,000</td>
+<td style="text-align:center">N</td>
+</tr>
+<tr>
+<td style="text-align:center">23</td>
+<td style="text-align:center">$95,000</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td style="text-align:center">40</td>
+<td style="text-align:center">$62,000</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td style="text-align:center">60</td>
+<td style="text-align:center">$100,000</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td style="text-align:center">48</td>
+<td style="text-align:center">$220,000</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td style="text-align:center">33</td>
+<td style="text-align:center">$150,000</td>
+<td style="text-align:center">Y</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Now we have an unknown case (Age=48 and Loan=$142,000). And we want to predict the credit default for this case using Euclidean distance. So using the following formula to calculate the distance:</p>
+<script type="math/tex; mode=display">
+d =\sqrt{(x_1-y_1)^2+(x_2-y_2)^2}</script><p>We can get the following:</p>
+<p><img src="/2018/06/10/ML-K-Nearest-Neighbors/Screen Shot 2018-06-11 at 12.29.41 AM.png" alt="Screen Shot 2018-06-11 at 12.29.41 AM"></p>
+<p>With k=3, there are two Default=Y and one Default=N out of the three closest neighbors. So the prediction for this case is Default=Y.</p>
+<h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><p>One major drawback in calculating distance measures directly from the training set is in the case where variables have different measurement scales or there is a mixture of numerical and categorical variables. For example, if one variable is based on annual income in dollars, and the other is based on age in years then income will have a much higher influence on the distance calculated. One solution is to standardize the training set as shown below.</p>
+<script type="math/tex; mode=display">
+X_s=\frac{X-X_{min}}{X_{max}-X_{min}}</script><p><img src="/2018/06/10/ML-K-Nearest-Neighbors/Screen Shot 2018-06-11 at 12.34.40 AM.png" alt="Screen Shot 2018-06-11 at 12.34.40 AM"></p>
 
       
     </div>
@@ -474,8 +567,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -535,6 +637,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#distance"><span class="nav-number">1.1.</span> <span class="nav-text">distance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#normalization"><span class="nav-number">1.2.</span> <span class="nav-text">normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-choice"><span class="nav-number">1.3.</span> <span class="nav-text">K choice</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example1"><span class="nav-number">2.</span> <span class="nav-text">Example1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example2"><span class="nav-number">3.</span> <span class="nav-text">Example2</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
