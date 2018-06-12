@@ -679,6 +679,7 @@
           <p>Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predictors by analyzing large amounts of such randomized data.</p>
 <p>Unlike other models of differential privacy, which publish randomized aggregates but still collect the exact sensitive data, LDP avoids collecting exact personal information in the first place, thus providing a stronger assurance to the users and to the aggregator.</p>
 <p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release. But unlike the laplace mechanism where we can use the noisy output directly, we need to do some estimation on the randomized output to get the estimator in LDP.</p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-11 at 10.16.20 PM.png" alt="Screen Shot 2018-06-11 at 10.16.20 PM"></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/02/DP-Application - Local-Privacy/#more" rel="contents">
@@ -851,7 +852,14 @@
 <li></li>
 </ol>
 </blockquote>
-<h1 id="Laplace-Mechanism"><a href="#Laplace-Mechanism" class="headerlink" title="Laplace Mechanism"></a><a href="https://link.springer.com/content/pdf/10.1007%2F11681878_14.pdf" target="_blank" rel="noopener">Laplace Mechanism</a></h1><h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><blockquote>
+<h1 id="Laplace-Mechanism"><a href="#Laplace-Mechanism" class="headerlink" title="Laplace Mechanism"></a><a href="https://link.springer.com/content/pdf/10.1007%2F11681878_14.pdf" target="_blank" rel="noopener">Laplace Mechanism</a></h1><p>TO DO QUESTION??</p>
+<ol>
+<li><p>WHY LAPLACE DISTRIBUTION????</p>
+</li>
+<li><p>WHY SENSITIVITY IN THE SCALE????</p>
+</li>
+</ol>
+<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><blockquote>
 <p>the Laplace mechanism will simply compute $f$, and perturb each coordinate with noise drawn from the Laplace distribution.</p>
 <p><img src="/2018/05/30/DP-Mechanism/Screen Shot 2018-06-06 at 3.48.56 PM.png" alt="Screen Shot 2018-06-06 at 3.48.56 PM"></p>
 <p>About the proof, the key is that :</p>
