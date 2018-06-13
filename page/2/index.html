@@ -678,7 +678,7 @@
         
           <p>Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predictors by analyzing large amounts of such randomized data.</p>
 <p>Unlike other models of differential privacy, which publish randomized aggregates but still collect the exact sensitive data, LDP avoids collecting exact personal information in the first place, thus providing a stronger assurance to the users and to the aggregator.</p>
-<p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release. But unlike the laplace mechanism where we can use the noisy output directly, we need to do some estimation on the randomized output to get the estimator in LDP.</p>
+<p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release and laplace noise may introduce too much noise.  But unlike the laplace mechanism where we can use the noisy output directly, we need to do some estimation on the randomized output to get the estimator in LDP.<a href="">2016-Zhan</a></p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-11 at 10.16.20 PM.png" alt="Screen Shot 2018-06-11 at 10.16.20 PM"></p>
           <!--noindex-->
           <div class="post-button text-center">

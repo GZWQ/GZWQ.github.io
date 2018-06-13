@@ -101,6 +101,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%206.14.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%206.16.58%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%206.20.05%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-12%20at%205.46.13%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-12%20at%206.09.06%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-12%20at%206.14.59%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%2010.21.40%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-11%20at%2011.28.05%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-11%20at%2011.29.58%20AM.png">
@@ -120,7 +123,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.26.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.27.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.28.02%20PM.png">
-<meta property="og:updated_time" content="2018-06-12T14:46:33.768Z">
+<meta property="og:updated_time" content="2018-06-12T23:24:39.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Local Privacy">
 <meta name="twitter:description" content="Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predicto">
@@ -412,7 +415,7 @@
       
         <p>Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predictors by analyzing large amounts of such randomized data.</p>
 <p>Unlike other models of differential privacy, which publish randomized aggregates but still collect the exact sensitive data, LDP avoids collecting exact personal information in the first place, thus providing a stronger assurance to the users and to the aggregator.</p>
-<p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release. But unlike the laplace mechanism where we can use the noisy output directly, we need to do some estimation on the randomized output to get the estimator in LDP.</p>
+<p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release and laplace noise may introduce too much noise.  But unlike the laplace mechanism where we can use the noisy output directly, we need to do some estimation on the randomized output to get the estimator in LDP.<a href="">2016-Zhan</a></p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-11 at 10.16.20 PM.png" alt="Screen Shot 2018-06-11 at 10.16.20 PM"></p>
 <a id="more"></a>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-04 at 11.16.07 AM.png" alt="Screen Shot 2018-06-04 at 11.16.07 AM"></p>
@@ -499,8 +502,15 @@ Y(i)=\begin{cases}
 </ol>
 <p>Remarks:</p>
 <ul>
+<li>for two input, take $\{001.010,100\}$ as the example, the sensitivity is 2. Because for any two different input, the difference is 2 bits.</li>
+<li>using w-rr as bit perturbation method</li>
 <li>k-RAPPOR is a optimal privacy-preserving mechanism in high privacy regime while suboptimal in low privacy regime.</li>
 </ul>
+<p>Pros:</p>
+<p>Cons:</p>
+<ol>
+<li>A main drawback of RAPPOR is its high communication overhead, i.e., each user needs to transmit d bits to the data collector, which can be expensive when the number of possible items d is large.</li>
+</ol>
 </blockquote>
 </li>
 <li><p>Random Matrix Projection<a href="https://arxiv.org/pdf/1504.04686.pdf" target="_blank" rel="noopener">[2015-Bassily]</a><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7498248" target="_blank" rel="noopener">[2016-Chen]</a><a href="https://arxiv.org/pdf/1705.04421.pdf" target="_blank" rel="noopener">[2017-Wang]</a><a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">[2016-Nguyen]</a>-Categorical data</p>
@@ -523,12 +533,17 @@ Y(i)=\begin{cases}
 </ol>
 <p>Remarks:</p>
 <ol>
-<li><p>We map the input domain with size $d$ to output domain with size $m$, where $m$ is determined through Johnson-Lindenstrauss Lemma.</p>
-</li>
-<li><p>$R$ is $\epsilon$-LDP for every choice of the index $s$</p>
-</li>
+<li>We map the input domain with size $d$ to output domain with size $m$, where $m$ is determined through Johnson-Lindenstrauss Lemma.</li>
+<li>$R$ is $\epsilon$-LDP for every choice of the index $s$</li>
 <li>$R(x)=z_j$ is an unbiased estimator of $x$. That is, $\mathbb{E}[R(x)]=x$</li>
+<li>when $d\ge n$, SH applies random projection on the data to reduce its dimensionality from d to $m = O(n)$ in a preprocessing step.</li>
+<li>Assuming each user only has one item.</li>
 </ol>
+<p>Pros:</p>
+<ol>
+<li>the communication cost of SH between each user and the data collector is $O(1)$ rather than $O(d)$ as in RAPPOR.</li>
+</ol>
+<p>Cons:</p>
 </blockquote>
 </li>
 <li><p><a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">Harmony-for-numeric</a>-Numeric data</p>
@@ -555,7 +570,25 @@ Y(i)=\begin{cases}
 </ul>
 </li>
 </ol>
-<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><a href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code" class="headerlink" title="Multiple Attributes Mean or Frequencies Estimation 2016-Nguyen Code"></a>Multiple Attributes Mean or Frequencies Estimation <a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">2016-Nguyen</a> <a href="https://github.com/pokhym/LDP" target="_blank" rel="noopener">Code</a></h3><blockquote>
+<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Heavy-Hitter-Estimation-for-Set-Valued-Data-2016-Zhan"><a href="#Heavy-Hitter-Estimation-for-Set-Valued-Data-2016-Zhan" class="headerlink" title="Heavy Hitter Estimation for Set-Valued Data[2016-Zhan]"></a>Heavy Hitter Estimation for Set-Valued Data<a href="https://davidyinyang.weebly.com/uploads/9/8/6/2/9862052/ccs16-ldp.pdf" target="_blank" rel="noopener">[2016-Zhan]</a></h3><h4 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h4><blockquote>
+<p>In this paper, they aims to solve the problem of heavy hitters over set-valued, where each user has a set of up to l items and they try to identify the top-k most frequent items among all users. There are $d$ items and $n$ users, and each uesr has $l$ items and try to find  top-$k$ frequent items, where $k\ll\ l$ and $k\ll d$. </p>
+<p>And each user has his own data which we call a record and every record is a set of items.</p>
+</blockquote>
+<h4 id="Naive-solutions"><a href="#Naive-solutions" class="headerlink" title="Naive solutions"></a>Naive solutions</h4><h5 id="Rappor-for-set-valued-data"><a href="#Rappor-for-set-valued-data" class="headerlink" title="Rappor for set-valued data"></a>Rappor for set-valued data</h5><blockquote>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-12 at 5.46.13 PM.png" alt="Screen Shot 2018-06-12 at 5.46.13 PM"></p>
+</blockquote>
+<h5 id="Bassily-and-Smith-Method-for-set-valued-data"><a href="#Bassily-and-Smith-Method-for-set-valued-data" class="headerlink" title="Bassily and Smith Method for set-valued data"></a>Bassily and Smith Method for set-valued data</h5><blockquote>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-12 at 6.09.06 PM.png" alt="Screen Shot 2018-06-12 at 6.09.06 PM"></p>
+<p>REMARKS:</p>
+<p>For the $\epsilon /l$, because each user only have a record although it has many items, we want $\epsilon$ privacy for this record. And we run algorithm $l$ times. So for overall $\epsilon$ privacy, each run should have only $\epsilon / l$ privacy budget.</p>
+</blockquote>
+<h4 id="Two-Phase-Framework"><a href="#Two-Phase-Framework" class="headerlink" title="Two-Phase Framework"></a>Two-Phase Framework</h4><h5 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h5><blockquote>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-12 at 6.14.59 PM.png" alt="Screen Shot 2018-06-12 at 6.14.59 PM"></p>
+</blockquote>
+<h5 id="Phase-I"><a href="#Phase-I" class="headerlink" title="Phase I"></a>Phase I</h5><blockquote>
+<p>XX</p>
+</blockquote>
+<h5 id="Phase-II"><a href="#Phase-II" class="headerlink" title="Phase II"></a>Phase II</h5><h3 id="Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><a href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code" class="headerlink" title="Multiple Attributes Mean or Frequencies Estimation [2016-Nguyen] [Code]"></a>Multiple Attributes Mean or Frequencies Estimation <a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">[2016-Nguyen]</a> <a href="https://github.com/pokhym/LDP" target="_blank" rel="noopener">[Code]</a></h3><blockquote>
 <p>They propose the Harmony method, which can handle multiple numeric or categorical attributes. </p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-09 at 10.21.40 PM.png" alt="Screen Shot 2018-06-09 at 10.21.40 PM"></p>
 <p>Remarks:</p>
@@ -574,7 +607,7 @@ Y(i)=\begin{cases}
 </blockquote>
 <h3 id="Locations-Density-Estimation-2018-Kim"><a href="#Locations-Density-Estimation-2018-Kim" class="headerlink" title="Locations Density Estimation [2018-Kim]"></a>Locations Density Estimation <a href="Application of Local Differential Privacy to Collection of Indoor Positioning Data">[2018-Kim]</a></h3><p>A number of studies have recently been made on discrete distribution estimation in the local model, in which users obfuscate their personal data (e.g., location, response in a survey) by themselves and a data collector estimates a distribution of the original personal data from the obfuscated data.</p>
 <p>The purpose of this research is to approximately compute the distribution of users in the indoor space. </p>
-<h3 id="Pricacy-model"><a href="#Pricacy-model" class="headerlink" title="Pricacy model"></a>Pricacy model</h3><ol>
+<h4 id="Pricacy-model"><a href="#Pricacy-model" class="headerlink" title="Pricacy model"></a>Pricacy model</h4><ol>
 <li><p><strong>data representation</strong></p>
 <p>There are $n$ locations $B=\{b_1,b_2,…,b_n\}$, and the location of a user is in the form of a $n$-bit array, denoted as $L$, where the bit corresponding to the user’s location is set to 1 while the others are set to 0. So the input space size is $n$, the output space size is $2^n$.</p>
 </li>
@@ -584,9 +617,9 @@ Y(i)=\begin{cases}
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.42.49 PM.png" alt="Screen Shot 2018-06-03 at 9.42.49 PM"></p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.44.09 PM.png" alt="Screen Shot 2018-06-03 at 9.44.09 PM"></p>
 <p>The instantaneous randomized response, S, is transmitted to the data collector server.</p>
-<h3 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h3></li>
+</li>
 </ol>
-<h4 id="STATISTIC-BASED-APPROACH"><a href="#STATISTIC-BASED-APPROACH" class="headerlink" title="STATISTIC-BASED APPROACH"></a>STATISTIC-BASED APPROACH</h4><blockquote>
+<h4 id="Estimation"><a href="#Estimation" class="headerlink" title="Estimation"></a>Estimation</h4><h5 id="STATISTIC-BASED-APPROACH"><a href="#STATISTIC-BASED-APPROACH" class="headerlink" title="STATISTIC-BASED APPROACH"></a>STATISTIC-BASED APPROACH</h5><blockquote>
 <ol>
 <li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 9.49.04 PM.png" alt="Screen Shot 2018-06-03 at 9.49.04 PM"></p>
 </li>
@@ -603,7 +636,7 @@ Y(i)=\begin{cases}
 </li>
 </ol>
 </blockquote>
-<h4 id="EM-BASED-APPROACH"><a href="#EM-BASED-APPROACH" class="headerlink" title="EM-BASED APPROACH"></a>EM-BASED APPROACH</h4><blockquote>
+<h5 id="EM-BASED-APPROACH"><a href="#EM-BASED-APPROACH" class="headerlink" title="EM-BASED APPROACH"></a>EM-BASED APPROACH</h5><blockquote>
 <p>Here we intend to estimate  $P(L=x_i)$.</p>
 <ol>
 <li><p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-03 at 10.13.26 PM.png" alt="Screen Shot 2018-06-03 at 10.13.26 PM"></p>
@@ -631,6 +664,8 @@ Y(i)=\begin{cases}
 <p>[2016-Chen] Private Spatial Data Aggregation in the Local Setting</p>
 <p>[2017-Wang] Optimizing Locally Differentially Private Protocols</p>
 <p>[2016-Nguyen] Collecting and Analyzing Data from Smart Device Users with Local Differential Privacy</p>
+<p>[2016-Zhan] Heavy Hitter Estimation over Set-Valued Data with Local Differential Privacy</p>
+<p><a href="https://pdfs.semanticscholar.org/presentation/e610/b59b829bec396eab4b49fa748fd33b88d5c2.pdf" target="_blank" rel="noopener">[2017-PPT]</a> Local differential privacy</p>
 <p>​          </p>
 
       
@@ -806,7 +841,7 @@ Y(i)=\begin{cases}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mechanism"><span class="nav-number">1.</span> <span class="nav-text">Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Values"><span class="nav-number">1.1.</span> <span class="nav-text">Binary Values</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#W-RR-Categorical-data"><span class="nav-number">1.1.1.</span> <span class="nav-text">W-RR-Categorical data</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Polychotomous-Values"><span class="nav-number">1.2.</span> <span class="nav-text">Polychotomous Values</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">2.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><span class="nav-number">2.1.</span> <span class="nav-text">Multiple Attributes Mean or Frequencies Estimation 2016-Nguyen Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stochastic-Gradient-Descent"><span class="nav-number">2.2.</span> <span class="nav-text">Stochastic Gradient Descent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Locations-Density-Estimation-2018-Kim"><span class="nav-number">2.3.</span> <span class="nav-text">Locations Density Estimation [2018-Kim]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pricacy-model"><span class="nav-number">2.4.</span> <span class="nav-text">Pricacy model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Estimation"><span class="nav-number">2.5.</span> <span class="nav-text">Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#STATISTIC-BASED-APPROACH"><span class="nav-number">2.5.1.</span> <span class="nav-text">STATISTIC-BASED APPROACH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EM-BASED-APPROACH"><span class="nav-number">2.5.2.</span> <span class="nav-text">EM-BASED APPROACH</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number"></span> <span class="nav-text">Reference</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mechanism"><span class="nav-number">1.</span> <span class="nav-text">Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Values"><span class="nav-number">1.1.</span> <span class="nav-text">Binary Values</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#W-RR-Categorical-data"><span class="nav-number">1.1.1.</span> <span class="nav-text">W-RR-Categorical data</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Polychotomous-Values"><span class="nav-number">1.2.</span> <span class="nav-text">Polychotomous Values</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">2.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Heavy-Hitter-Estimation-for-Set-Valued-Data-2016-Zhan"><span class="nav-number">2.1.</span> <span class="nav-text">Heavy Hitter Estimation for Set-Valued Data[2016-Zhan]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">2.1.1.</span> <span class="nav-text">Problem Setting</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Naive-solutions"><span class="nav-number">2.1.2.</span> <span class="nav-text">Naive solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Rappor-for-set-valued-data"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Rappor for set-valued data</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bassily-and-Smith-Method-for-set-valued-data"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Bassily and Smith Method for set-valued data</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Two-Phase-Framework"><span class="nav-number">2.1.3.</span> <span class="nav-text">Two-Phase Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Motivation"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Phase-I"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">Phase I</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Phase-II"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">Phase II</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><span class="nav-number">2.2.</span> <span class="nav-text">Multiple Attributes Mean or Frequencies Estimation [2016-Nguyen] [Code]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stochastic-Gradient-Descent"><span class="nav-number">2.3.</span> <span class="nav-text">Stochastic Gradient Descent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Locations-Density-Estimation-2018-Kim"><span class="nav-number">2.4.</span> <span class="nav-text">Locations Density Estimation [2018-Kim]</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pricacy-model"><span class="nav-number">2.4.1.</span> <span class="nav-text">Pricacy model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Estimation"><span class="nav-number">2.4.2.</span> <span class="nav-text">Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#STATISTIC-BASED-APPROACH"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">STATISTIC-BASED APPROACH</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EM-BASED-APPROACH"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">EM-BASED APPROACH</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number"></span> <span class="nav-text">Reference</span></a></div>
             
 
           </div>
