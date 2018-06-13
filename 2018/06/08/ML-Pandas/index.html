@@ -94,7 +94,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-12%20at%209.18.14%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-12%20at%209.40.29%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-12%20at%203.45.43%20PM.png">
-<meta property="og:updated_time" content="2018-06-12T20:55:06.663Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/08/ML-Pandas/Screen%20Shot%202018-06-13%20at%209.46.32%20AM.png">
+<meta property="og:updated_time" content="2018-06-13T14:53:17.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - Pandas">
 <meta name="twitter:description" content="本文参考1 last pandas导入">
@@ -385,7 +386,7 @@
 
       
         <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
-<p><a href="https://www.yiibai.com/pandas/python_pandas_groupby.html#article-start" target="_blank" rel="noopener">last</a></p>
+<p><a href="https://www.yiibai.com/pandas/python_pandas_concatenation.html" target="_blank" rel="noopener">last</a></p>
 <p>pandas导入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
@@ -3514,7 +3515,461 @@
 <div class="line"><span class="comment"># 4     741     3   Kings  2014</span></div>
 <div class="line"><span class="comment"># 9     701     4  Royals  2014</span></div>
 </pre></td></tr></table></figure>
-<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2>
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p>聚合函数为每个组返回单个聚合值。当创建了分组(<em>group by</em>)对象，就可以对分组数据执行多个聚合操作。一个比较常用的是通过聚合或等效的<code>agg</code>方法聚合 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">ipl_data = &#123;<span class="string">'Team'</span>: [<span class="string">'Riders'</span>, <span class="string">'Riders'</span>, <span class="string">'Devils'</span>, <span class="string">'Devils'</span>, <span class="string">'Kings'</span>,</div>
+<div class="line">         <span class="string">'kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Riders'</span>, <span class="string">'Royals'</span>, <span class="string">'Royals'</span>, <span class="string">'Riders'</span>],</div>
+<div class="line">         <span class="string">'Rank'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>,<span class="number">4</span> ,<span class="number">1</span> ,<span class="number">1</span>,<span class="number">2</span> , <span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>],</div>
+<div class="line">         <span class="string">'Year'</span>: [<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2016</span>,<span class="number">2017</span>,<span class="number">2016</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2017</span>],</div>
+<div class="line">         <span class="string">'Points'</span>:[<span class="number">876</span>,<span class="number">789</span>,<span class="number">863</span>,<span class="number">673</span>,<span class="number">741</span>,<span class="number">812</span>,<span class="number">756</span>,<span class="number">788</span>,<span class="number">694</span>,<span class="number">701</span>,<span class="number">804</span>,<span class="number">690</span>]&#125;</div>
+<div class="line">df = pd.DataFrame(ipl_data)</div>
+<div class="line">print(df)</div>
+<div class="line"><span class="comment">#     Points  Rank    Team  Year</span></div>
+<div class="line"><span class="comment"># 0      876     1  Riders  2014</span></div>
+<div class="line"><span class="comment"># 1      789     2  Riders  2015</span></div>
+<div class="line"><span class="comment"># 2      863     2  Devils  2014</span></div>
+<div class="line"><span class="comment"># 3      673     3  Devils  2015</span></div>
+<div class="line"><span class="comment"># 4      741     3   Kings  2014</span></div>
+<div class="line"><span class="comment"># 5      812     4   kings  2015</span></div>
+<div class="line"><span class="comment"># 6      756     1   Kings  2016</span></div>
+<div class="line"><span class="comment"># 7      788     1   Kings  2017</span></div>
+<div class="line"><span class="comment"># 8      694     2  Riders  2016</span></div>
+<div class="line"><span class="comment"># 9      701     4  Royals  2014</span></div>
+<div class="line"><span class="comment"># 10     804     1  Royals  2015</span></div>
+<div class="line"><span class="comment"># 11     690     2  Riders  2017</span></div>
+<div class="line">grouped = df.groupby(<span class="string">'Year'</span>)</div>
+<div class="line"><span class="keyword">print</span> (grouped[<span class="string">'Points'</span>].agg(np.mean))</div>
+<div class="line"><span class="comment"># Year</span></div>
+<div class="line"><span class="comment"># 2014    795.25</span></div>
+<div class="line"><span class="comment"># 2015    769.50</span></div>
+<div class="line"><span class="comment"># 2016    725.00</span></div>
+<div class="line"><span class="comment"># 2017    739.00</span></div>
+</pre></td></tr></table></figure>
+<p>另一种查看每个分组的大小的方法是应用<code>size()</code>函数 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">ipl_data = &#123;<span class="string">'Team'</span>: [<span class="string">'Riders'</span>, <span class="string">'Riders'</span>, <span class="string">'Devils'</span>, <span class="string">'Devils'</span>, <span class="string">'Kings'</span>,</div>
+<div class="line">         <span class="string">'kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Riders'</span>, <span class="string">'Royals'</span>, <span class="string">'Royals'</span>, <span class="string">'Riders'</span>],</div>
+<div class="line">         <span class="string">'Rank'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>,<span class="number">4</span> ,<span class="number">1</span> ,<span class="number">1</span>,<span class="number">2</span> , <span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>],</div>
+<div class="line">         <span class="string">'Year'</span>: [<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2016</span>,<span class="number">2017</span>,<span class="number">2016</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2017</span>],</div>
+<div class="line">         <span class="string">'Points'</span>:[<span class="number">876</span>,<span class="number">789</span>,<span class="number">863</span>,<span class="number">673</span>,<span class="number">741</span>,<span class="number">812</span>,<span class="number">756</span>,<span class="number">788</span>,<span class="number">694</span>,<span class="number">701</span>,<span class="number">804</span>,<span class="number">690</span>]&#125;</div>
+<div class="line">df = pd.DataFrame(ipl_data)</div>
+<div class="line">grouped = df.groupby(<span class="string">'Team'</span>)</div>
+<div class="line"><span class="keyword">print</span> (grouped.agg(np.size))</div>
+<div class="line"><span class="comment">#         Points  Rank  Year</span></div>
+<div class="line"><span class="comment"># Team                      </span></div>
+<div class="line"><span class="comment"># Devils       2     2     2</span></div>
+<div class="line"><span class="comment"># Kings        3     3     3</span></div>
+<div class="line"><span class="comment"># Riders       4     4     4</span></div>
+<div class="line"><span class="comment"># Royals       2     2     2</span></div>
+<div class="line"><span class="comment"># kings        1     1     1</span></div>
+</pre></td></tr></table></figure>
+<p>一次应用多个聚合函数, 通过分组系列，还可以传递函数的列表或字典来进行聚合，并生成<code>DataFrame</code>作为输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">ipl_data = &#123;<span class="string">'Team'</span>: [<span class="string">'Riders'</span>, <span class="string">'Riders'</span>, <span class="string">'Devils'</span>, <span class="string">'Devils'</span>, <span class="string">'Kings'</span>,</div>
+<div class="line">         <span class="string">'kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Riders'</span>, <span class="string">'Royals'</span>, <span class="string">'Royals'</span>, <span class="string">'Riders'</span>],</div>
+<div class="line">         <span class="string">'Rank'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>,<span class="number">4</span> ,<span class="number">1</span> ,<span class="number">1</span>,<span class="number">2</span> , <span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>],</div>
+<div class="line">         <span class="string">'Year'</span>: [<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2016</span>,<span class="number">2017</span>,<span class="number">2016</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2017</span>],</div>
+<div class="line">         <span class="string">'Points'</span>:[<span class="number">876</span>,<span class="number">789</span>,<span class="number">863</span>,<span class="number">673</span>,<span class="number">741</span>,<span class="number">812</span>,<span class="number">756</span>,<span class="number">788</span>,<span class="number">694</span>,<span class="number">701</span>,<span class="number">804</span>,<span class="number">690</span>]&#125;</div>
+<div class="line">df = pd.DataFrame(ipl_data)</div>
+<div class="line"></div>
+<div class="line">grouped = df.groupby(<span class="string">'Team'</span>)</div>
+<div class="line">agg = grouped[<span class="string">'Points'</span>].agg([np.sum, np.mean, np.std])</div>
+<div class="line"><span class="keyword">print</span> (agg)</div>
+<div class="line"><span class="comment">#          sum        mean         std</span></div>
+<div class="line"><span class="comment"># Team                                </span></div>
+<div class="line"><span class="comment"># Devils  1536  768.000000  134.350288</span></div>
+<div class="line"><span class="comment"># Kings   2285  761.666667   24.006943</span></div>
+<div class="line"><span class="comment"># Riders  3049  762.250000   88.567771</span></div>
+<div class="line"><span class="comment"># Royals  1505  752.500000   72.831998</span></div>
+<div class="line"><span class="comment"># kings    812  812.000000         NaN</span></div>
+</pre></td></tr></table></figure>
+<p>转换：分组或列上的转换返回索引大小与被分组的索引相同的对象。因此，转换应该返回与组块大小相同的结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">ipl_data = &#123;<span class="string">'Team'</span>: [<span class="string">'Riders'</span>, <span class="string">'Riders'</span>, <span class="string">'Devils'</span>, <span class="string">'Devils'</span>, <span class="string">'Kings'</span>,</div>
+<div class="line">         <span class="string">'kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Riders'</span>, <span class="string">'Royals'</span>, <span class="string">'Royals'</span>, <span class="string">'Riders'</span>],</div>
+<div class="line">         <span class="string">'Rank'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>,<span class="number">4</span> ,<span class="number">1</span> ,<span class="number">1</span>,<span class="number">2</span> , <span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>],</div>
+<div class="line">         <span class="string">'Year'</span>: [<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2016</span>,<span class="number">2017</span>,<span class="number">2016</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2017</span>],</div>
+<div class="line">         <span class="string">'Points'</span>:[<span class="number">876</span>,<span class="number">789</span>,<span class="number">863</span>,<span class="number">673</span>,<span class="number">741</span>,<span class="number">812</span>,<span class="number">756</span>,<span class="number">788</span>,<span class="number">694</span>,<span class="number">701</span>,<span class="number">804</span>,<span class="number">690</span>]&#125;</div>
+<div class="line">df = pd.DataFrame(ipl_data)</div>
+<div class="line">print(df)</div>
+<div class="line"><span class="comment">#     Points  Rank    Team  Year</span></div>
+<div class="line"><span class="comment"># 0      876     1  Riders  2014</span></div>
+<div class="line"><span class="comment"># 1      789     2  Riders  2015</span></div>
+<div class="line"><span class="comment"># 2      863     2  Devils  2014</span></div>
+<div class="line"><span class="comment"># 3      673     3  Devils  2015</span></div>
+<div class="line"><span class="comment"># 4      741     3   Kings  2014</span></div>
+<div class="line"><span class="comment"># 5      812     4   kings  2015</span></div>
+<div class="line"><span class="comment"># 6      756     1   Kings  2016</span></div>
+<div class="line"><span class="comment"># 7      788     1   Kings  2017</span></div>
+<div class="line"><span class="comment"># 8      694     2  Riders  2016</span></div>
+<div class="line"><span class="comment"># 9      701     4  Royals  2014</span></div>
+<div class="line"><span class="comment"># 10     804     1  Royals  2015</span></div>
+<div class="line"><span class="comment"># 11     690     2  Riders  2017</span></div>
+<div class="line"></div>
+<div class="line">grouped = df.groupby(<span class="string">'Team'</span>)</div>
+<div class="line">score = <span class="keyword">lambda</span> x: x+<span class="number">10</span></div>
+<div class="line"><span class="keyword">print</span> (grouped.transform(score))</div>
+<div class="line"><span class="comment">#     Points  Rank  Year</span></div>
+<div class="line"><span class="comment"># 0      886    11  2024</span></div>
+<div class="line"><span class="comment"># 1      799    12  2025</span></div>
+<div class="line"><span class="comment"># 2      873    12  2024</span></div>
+<div class="line"><span class="comment"># 3      683    13  2025</span></div>
+<div class="line"><span class="comment"># 4      751    13  2024</span></div>
+<div class="line"><span class="comment"># 5      822    14  2025</span></div>
+<div class="line"><span class="comment"># 6      766    11  2026</span></div>
+<div class="line"><span class="comment"># 7      798    11  2027</span></div>
+<div class="line"><span class="comment"># 8      704    12  2026</span></div>
+<div class="line"><span class="comment"># 9      711    14  2024</span></div>
+<div class="line"><span class="comment"># 10     814    11  2025</span></div>
+<div class="line"><span class="comment"># 11     700    12  2027</span></div>
+</pre></td></tr></table></figure>
+<p>过滤：过滤根据定义的标准过滤数据并返回数据的子集。<code>filter()</code>函数用于过滤数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">ipl_data = &#123;<span class="string">'Team'</span>: [<span class="string">'Riders'</span>, <span class="string">'Riders'</span>, <span class="string">'Devils'</span>, <span class="string">'Devils'</span>, <span class="string">'Kings'</span>,</div>
+<div class="line">         <span class="string">'kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Kings'</span>, <span class="string">'Riders'</span>, <span class="string">'Royals'</span>, <span class="string">'Royals'</span>, <span class="string">'Riders'</span>],</div>
+<div class="line">         <span class="string">'Rank'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>,<span class="number">4</span> ,<span class="number">1</span> ,<span class="number">1</span>,<span class="number">2</span> , <span class="number">4</span>,<span class="number">1</span>,<span class="number">2</span>],</div>
+<div class="line">         <span class="string">'Year'</span>: [<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2016</span>,<span class="number">2017</span>,<span class="number">2016</span>,<span class="number">2014</span>,<span class="number">2015</span>,<span class="number">2017</span>],</div>
+<div class="line">         <span class="string">'Points'</span>:[<span class="number">876</span>,<span class="number">789</span>,<span class="number">863</span>,<span class="number">673</span>,<span class="number">741</span>,<span class="number">812</span>,<span class="number">756</span>,<span class="number">788</span>,<span class="number">694</span>,<span class="number">701</span>,<span class="number">804</span>,<span class="number">690</span>]&#125;</div>
+<div class="line">df = pd.DataFrame(ipl_data)</div>
+<div class="line">filter = df.groupby(<span class="string">'Team'</span>).filter(<span class="keyword">lambda</span> x: len(x) &gt;= <span class="number">3</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">print</span> (filter) <span class="comment"># 在上述过滤条件下，要求返回三次以上参加IPL的队伍。</span></div>
+<div class="line"><span class="comment">#  Points  Rank    Team  Year</span></div>
+<div class="line"><span class="number">0</span>      <span class="number">876</span>     <span class="number">1</span>  Riders  <span class="number">2014</span></div>
+<div class="line"><span class="number">1</span>      <span class="number">789</span>     <span class="number">2</span>  Riders  <span class="number">2015</span></div>
+<div class="line"><span class="number">4</span>      <span class="number">741</span>     <span class="number">3</span>   Kings  <span class="number">2014</span></div>
+<div class="line"><span class="number">6</span>      <span class="number">756</span>     <span class="number">1</span>   Kings  <span class="number">2016</span></div>
+<div class="line"><span class="number">7</span>      <span class="number">788</span>     <span class="number">1</span>   Kings  <span class="number">2017</span></div>
+<div class="line"><span class="number">8</span>      <span class="number">694</span>     <span class="number">2</span>  Riders  <span class="number">2016</span></div>
+<div class="line"><span class="number">11</span>     <span class="number">690</span>     <span class="number">2</span>  Riders  <span class="number">2017</span></div>
+</pre></td></tr></table></figure>
+<h1 id="Pandas合并-连接"><a href="#Pandas合并-连接" class="headerlink" title="Pandas合并/连接"></a>Pandas合并/连接</h1><p>Pandas具有功能全面的高性能内存中连接操作，与SQL等关系数据库非常相似。 Pandas提供了一个单独的<code>merge()</code>函数，作为DataFrame对象之间所有标准数据库连接操作的入口</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">pd.merge(left, right, how=<span class="string">'inner'</span>, on=<span class="keyword">None</span>, left_on=<span class="keyword">None</span>, right_on=<span class="keyword">None</span>,</div>
+<div class="line">left_index=<span class="keyword">False</span>, right_index=<span class="keyword">False</span>, sort=<span class="keyword">True</span>)</div>
+</pre></td></tr></table></figure>
+<p>在这里，有以下几个参数可以使用 -</p>
+<ul>
+<li><em>left</em> - 一个DataFrame对象。</li>
+<li><em>right</em> - 另一个DataFrame对象。</li>
+<li><em>on</em> - 列(名称)连接，必须在左和右DataFrame对象中存在(找到)。</li>
+<li><em>left_on</em> - 左侧DataFrame中的列用作键，可以是列名或长度等于DataFrame长度的数组。</li>
+<li><em>right_on</em> - 来自右的DataFrame的列作为键，可以是列名或长度等于DataFrame长度的数组。</li>
+<li><em>left_index</em> - 如果为<code>True</code>，则使用左侧DataFrame中的索引(行标签)作为其连接键。 在具有MultiIndex(分层)的DataFrame的情况下，级别的数量必须与来自右DataFrame的连接键的数量相匹配。</li>
+<li><em>right_index</em> - 与右DataFrame的<em>left_index</em>具有相同的用法。</li>
+<li><em>how</em> - 它是<em>left</em>, <em>right</em>, <em>outer</em>以及<em>inner</em>之中的一个，默认为内<em>inner</em>。 下面将介绍每种方法的用法。</li>
+<li><em>sort</em> - 按照字典顺序通过连接键对结果DataFrame进行排序。默认为<code>True</code>，设置为<code>False</code>时，在很多情况下大大提高性能。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line">left = pd.DataFrame(&#123;</div>
+<div class="line">         <span class="string">'id'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],</div>
+<div class="line">         <span class="string">'Name'</span>: [<span class="string">'Alex'</span>, <span class="string">'Amy'</span>, <span class="string">'Allen'</span>, <span class="string">'Alice'</span>, <span class="string">'Ayoung'</span>],</div>
+<div class="line">         <span class="string">'subject_id'</span>:[<span class="string">'sub1'</span>,<span class="string">'sub2'</span>,<span class="string">'sub4'</span>,<span class="string">'sub6'</span>,<span class="string">'sub5'</span>]&#125;)</div>
+<div class="line">right = pd.DataFrame(</div>
+<div class="line">         &#123;<span class="string">'id'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],</div>
+<div class="line">         <span class="string">'Name'</span>: [<span class="string">'Billy'</span>, <span class="string">'Brian'</span>, <span class="string">'Bran'</span>, <span class="string">'Bryce'</span>, <span class="string">'Betty'</span>],</div>
+<div class="line">         <span class="string">'subject_id'</span>:[<span class="string">'sub2'</span>,<span class="string">'sub4'</span>,<span class="string">'sub3'</span>,<span class="string">'sub6'</span>,<span class="string">'sub5'</span>]&#125;)</div>
+<div class="line"><span class="keyword">print</span> (left)</div>
+<div class="line">print(<span class="string">"========================================"</span>)</div>
+<div class="line"><span class="keyword">print</span> (right)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line">     Name  id subject_id</div>
+<div class="line">0    Alex   1       sub1</div>
+<div class="line">1     Amy   2       sub2</div>
+<div class="line">2   Allen   3       sub4</div>
+<div class="line">3   Alice   4       sub6</div>
+<div class="line">4  Ayoung   5       sub5</div>
+<div class="line">========================================</div>
+<div class="line">    Name  id subject_id</div>
+<div class="line">0  Billy   1       sub2</div>
+<div class="line">1  Brian   2       sub4</div>
+<div class="line">2   Bran   3       sub3</div>
+<div class="line">3  Bryce   4       sub6</div>
+<div class="line">4  Betty   5       sub5</div>
+</pre></td></tr></table></figure>
+<h2 id="on参数"><a href="#on参数" class="headerlink" title="on参数"></a>on参数</h2><p><strong>在一个键上合并两个数据帧</strong></p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line">left = pd.DataFrame(&#123;</div>
+<div class="line">         <span class="string">'id'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],</div>
+<div class="line">         <span class="string">'Name'</span>: [<span class="string">'Alex'</span>, <span class="string">'Amy'</span>, <span class="string">'Allen'</span>, <span class="string">'Alice'</span>, <span class="string">'Ayoung'</span>],</div>
+<div class="line">         <span class="string">'subject_id'</span>:[<span class="string">'sub1'</span>,<span class="string">'sub2'</span>,<span class="string">'sub4'</span>,<span class="string">'sub6'</span>,<span class="string">'sub5'</span>]&#125;)</div>
+<div class="line">right = pd.DataFrame(</div>
+<div class="line">         &#123;<span class="string">'id'</span>:[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],</div>
+<div class="line">         <span class="string">'Name'</span>: [<span class="string">'Billy'</span>, <span class="string">'Brian'</span>, <span class="string">'Bran'</span>, <span class="string">'Bryce'</span>, <span class="string">'Betty'</span>],</div>
+<div class="line">         <span class="string">'subject_id'</span>:[<span class="string">'sub2'</span>,<span class="string">'sub4'</span>,<span class="string">'sub3'</span>,<span class="string">'sub6'</span>,<span class="string">'sub5'</span>]&#125;)</div>
+<div class="line">rs = pd.merge(left,right,on=<span class="string">'id'</span>)</div>
+<div class="line">print(rs)</div>
+<div class="line"><span class="comment">#    Name_x  id subject_id_x Name_y subject_id_y</span></div>
+<div class="line"><span class="comment"># 0    Alex   1         sub1  Billy         sub2</span></div>
+<div class="line"><span class="comment"># 1     Amy   2         sub2  Brian         sub4</span></div>
+<div class="line"><span class="comment"># 2   Allen   3         sub4   Bran         sub3</span></div>
+<div class="line"><span class="comment"># 3   Alice   4         sub6  Bryce         sub6</span></div>
+<div class="line"><span class="comment"># 4  Ayoung   5         sub5  Betty         sub5</span></div>
+</pre></td></tr></table></figure>
+<p><strong>合并多个键上的两个数据框</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">rs = pd.merge(left,right,on=[<span class="string">'id'</span>,<span class="string">'subject_id'</span>])</div>
+<div class="line">print(rs)</div>
+<div class="line"><span class="comment">#    Name_x  id subject_id Name_y</span></div>
+<div class="line"><span class="comment"># 0   Alice   4       sub6  Bryce</span></div>
+<div class="line"><span class="comment"># 1  Ayoung   5       sub5  Betty</span></div>
+</pre></td></tr></table></figure>
+<h2 id="how参数"><a href="#how参数" class="headerlink" title="how参数"></a>how参数</h2><p><img src="/2018/06/08/ML-Pandas/Screen Shot 2018-06-13 at 9.46.32 AM.png" alt="Screen Shot 2018-06-13 at 9.46.32 AM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+</pre></td><td class="code"><pre><div class="line">rs = pd.merge(left, right, on=<span class="string">'subject_id'</span>, how=<span class="string">'left'</span>)</div>
+<div class="line"><span class="keyword">print</span> (rs)</div>
+<div class="line"><span class="comment">#    Name_x  id_x subject_id Name_y  id_y</span></div>
+<div class="line"><span class="comment"># 0    Alex     1       sub1    NaN   NaN</span></div>
+<div class="line"><span class="comment"># 1     Amy     2       sub2  Billy   1.0</span></div>
+<div class="line"><span class="comment"># 2   Allen     3       sub4  Brian   2.0</span></div>
+<div class="line"><span class="comment"># 3   Alice     4       sub6  Bryce   4.0</span></div>
+<div class="line"><span class="comment"># 4  Ayoung     5       sub5  Betty   5.0</span></div>
+<div class="line"></div>
+<div class="line">rs = pd.merge(left, right, on=<span class="string">'subject_id'</span>, how=<span class="string">'right'</span>)</div>
+<div class="line"><span class="keyword">print</span> (rs)</div>
+<div class="line"><span class="comment">#    Name_x  id_x subject_id Name_y  id_y</span></div>
+<div class="line"><span class="comment"># 0     Amy   2.0       sub2  Billy     1</span></div>
+<div class="line"><span class="comment"># 1   Allen   3.0       sub4  Brian     2</span></div>
+<div class="line"><span class="comment"># 2   Alice   4.0       sub6  Bryce     4</span></div>
+<div class="line"><span class="comment"># 3  Ayoung   5.0       sub5  Betty     5</span></div>
+<div class="line"><span class="comment"># 4     NaN   NaN       sub3   Bran     3</span></div>
+<div class="line"></div>
+<div class="line">rs = pd.merge(left, right, how=<span class="string">'outer'</span>, on=<span class="string">'subject_id'</span>)</div>
+<div class="line"><span class="keyword">print</span> (rs)</div>
+<div class="line"><span class="comment">#    Name_x  id_x subject_id Name_y  id_y</span></div>
+<div class="line"><span class="comment"># 0    Alex   1.0       sub1    NaN   NaN</span></div>
+<div class="line"><span class="comment"># 1     Amy   2.0       sub2  Billy   1.0</span></div>
+<div class="line"><span class="comment"># 2   Allen   3.0       sub4  Brian   2.0</span></div>
+<div class="line"><span class="comment"># 3   Alice   4.0       sub6  Bryce   4.0</span></div>
+<div class="line"><span class="comment"># 4  Ayoung   5.0       sub5  Betty   5.0</span></div>
+<div class="line"><span class="comment"># 5     NaN   NaN       sub3   Bran   3.0</span></div>
+<div class="line"></div>
+<div class="line">rs = pd.merge(left, right, on=<span class="string">'subject_id'</span>, how=<span class="string">'inner'</span>)</div>
+<div class="line"><span class="keyword">print</span> (rs)</div>
+<div class="line"><span class="comment">#    Name_x  id_x subject_id Name_y  id_y</span></div>
+<div class="line"><span class="comment"># 0     Amy     2       sub2  Billy     1</span></div>
+<div class="line"><span class="comment"># 1   Allen     3       sub4  Brian     2</span></div>
+<div class="line"><span class="comment"># 2   Alice     4       sub6  Bryce     4</span></div>
+<div class="line"><span class="comment"># 3  Ayoung     5       sub5  Betty     5</span></div>
+</pre></td></tr></table></figure>
+
       
     </div>
     
@@ -3688,7 +4143,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系列（Series"><span class="nav-number">1.0.1.</span> <span class="nav-text">系列（Series)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建系列"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">创建系列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个空的系列"><span class="nav-number">1.0.1.1.1.</span> <span class="nav-text">创建一个空的系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ndarray创建一个系列"><span class="nav-number">1.0.1.1.2.</span> <span class="nav-text">ndarray创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从字典创建一个系列"><span class="nav-number">1.0.1.1.3.</span> <span class="nav-text">从字典创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从标量创建一个系列"><span class="nav-number">1.0.1.1.4.</span> <span class="nav-text">从标量创建一个系列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系列访问"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">系列访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用位置index访问"><span class="nav-number">1.0.1.2.1.</span> <span class="nav-text">使用位置index访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用标签检索"><span class="nav-number">1.0.1.2.2.</span> <span class="nav-text">使用标签检索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据帧-DataFrame"><span class="nav-number">1.0.2.</span> <span class="nav-text">数据帧(DataFrame)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据帧"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">创建数据帧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过列表创建"><span class="nav-number">1.0.2.1.1.</span> <span class="nav-text">通过列表创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过ndarrays-Lists的字典创建"><span class="nav-number">1.0.2.1.2.</span> <span class="nav-text">通过ndarrays/Lists的字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过字典创建"><span class="nav-number">1.0.2.1.3.</span> <span class="nav-text">通过字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过系列创建"><span class="nav-number">1.0.2.1.4.</span> <span class="nav-text">通过系列创建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据帧访问"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">数据帧访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#列选择"><span class="nav-number">1.0.2.2.1.</span> <span class="nav-text">列选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列添加"><span class="nav-number">1.0.2.2.2.</span> <span class="nav-text">列添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列删除"><span class="nav-number">1.0.2.2.3.</span> <span class="nav-text">列删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行选择"><span class="nav-number">1.0.2.2.4.</span> <span class="nav-text">行选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行切片"><span class="nav-number">1.0.2.2.5.</span> <span class="nav-text">行切片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#附加行"><span class="nav-number">1.0.2.2.6.</span> <span class="nav-text">附加行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除行"><span class="nav-number">1.0.2.2.7.</span> <span class="nav-text">删除行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面板-Panel"><span class="nav-number">1.0.3.</span> <span class="nav-text">面板(Panel)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas基本功能"><span class="nav-number">2.</span> <span class="nav-text">Pandas基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列基本功能"><span class="nav-number">2.1.</span> <span class="nav-text">系列基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#axes"><span class="nav-number">2.1.1.</span> <span class="nav-text">axes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#empty"><span class="nav-number">2.1.2.</span> <span class="nav-text">empty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndim"><span class="nav-number">2.1.3.</span> <span class="nav-text">ndim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#size"><span class="nav-number">2.1.4.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#values"><span class="nav-number">2.1.5.</span> <span class="nav-text">values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head-tail"><span class="nav-number">2.1.6.</span> <span class="nav-text">head-tail</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame基本功能"><span class="nav-number">2.2.</span> <span class="nav-text">DataFrame基本功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas描述性统计"><span class="nav-number">3.</span> <span class="nav-text">Pandas描述性统计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sum"><span class="nav-number">3.1.</span> <span class="nav-text">sum()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mean"><span class="nav-number">3.2.</span> <span class="nav-text">mean()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std"><span class="nav-number">3.3.</span> <span class="nav-text">std()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据汇总"><span class="nav-number">3.4.</span> <span class="nav-text">数据汇总</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas函数"><span class="nav-number">4.</span> <span class="nav-text">Pandas函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pipe表格函数"><span class="nav-number">4.1.</span> <span class="nav-text">pipe表格函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appy行或列智能函数应用"><span class="nav-number">4.2.</span> <span class="nav-text">appy行或列智能函数应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#applymap元素智能函数"><span class="nav-number">4.3.</span> <span class="nav-text">applymap元素智能函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas重建索引"><span class="nav-number">5.</span> <span class="nav-text">Pandas重建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重建索引与其他对象对齐"><span class="nav-number">5.1.</span> <span class="nav-text">重建索引与其他对象对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#填充时重新加注"><span class="nav-number">5.2.</span> <span class="nav-text">填充时重新加注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重建索引时的填充限制"><span class="nav-number">5.2.1.</span> <span class="nav-text">重建索引时的填充限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名"><span class="nav-number">5.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas迭代"><span class="nav-number">6.</span> <span class="nav-text">Pandas迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame迭代"><span class="nav-number">6.1.</span> <span class="nav-text">DataFrame迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iteritems"><span class="nav-number">6.1.1.</span> <span class="nav-text">iteritems()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iterrows"><span class="nav-number">6.1.2.</span> <span class="nav-text">iterrows()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#itertuples"><span class="nav-number">6.1.3.</span> <span class="nav-text">itertuples()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas排序"><span class="nav-number">7.</span> <span class="nav-text">Pandas排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以标签排序"><span class="nav-number">7.1.</span> <span class="nav-text">以标签排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以值排序"><span class="nav-number">7.2.</span> <span class="nav-text">以值排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas索引和数据选择"><span class="nav-number">8.</span> <span class="nav-text">Pandas索引和数据选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loc"><span class="nav-number">8.1.</span> <span class="nav-text">.loc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iloc"><span class="nav-number">8.2.</span> <span class="nav-text">.iloc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ix"><span class="nav-number">8.3.</span> <span class="nav-text">.ix()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多轴索引"><span class="nav-number">8.4.</span> <span class="nav-text">多轴索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#统计函数"><span class="nav-number">9.</span> <span class="nav-text">统计函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pct-change-函数"><span class="nav-number">9.1.</span> <span class="nav-text">pct_change()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cov-协方差"><span class="nav-number">9.2.</span> <span class="nav-text">cov()协方差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关性函数"><span class="nav-number">9.3.</span> <span class="nav-text">相关性函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据排名"><span class="nav-number">9.4.</span> <span class="nav-text">数据排名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas窗口函数"><span class="nav-number">10.</span> <span class="nav-text">Pandas窗口函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rolling"><span class="nav-number">10.1.</span> <span class="nav-text">.rolling()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expanding"><span class="nav-number">10.2.</span> <span class="nav-text">.expanding()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ewm"><span class="nav-number">10.3.</span> <span class="nav-text">.ewm()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas聚合"><span class="nav-number">11.</span> <span class="nav-text">Pandas聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在整个数据框上应用聚合"><span class="nav-number">11.1.</span> <span class="nav-text">在整个数据框上应用聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在数据框的单个列上应用聚合"><span class="nav-number">11.2.</span> <span class="nav-text">在数据框的单个列上应用聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在DataFrame的多列上应用聚合"><span class="nav-number">11.3.</span> <span class="nav-text">在DataFrame的多列上应用聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在DataFrame的单个列上应用多个函数"><span class="nav-number">11.4.</span> <span class="nav-text">在DataFrame的单个列上应用多个函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在DataFrame的多列上应用多个函数"><span class="nav-number">11.5.</span> <span class="nav-text">在DataFrame的多列上应用多个函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将不同的函数应用于DataFrame的不同列"><span class="nav-number">11.6.</span> <span class="nav-text">将不同的函数应用于DataFrame的不同列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas缺失数据"><span class="nav-number">12.</span> <span class="nav-text">Pandas缺失数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检查缺失值"><span class="nav-number">12.1.</span> <span class="nav-text">检查缺失值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失数据的计算"><span class="nav-number">12.2.</span> <span class="nav-text">缺失数据的计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失数据清理-填充"><span class="nav-number">12.3.</span> <span class="nav-text">缺失数据清理/填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#放弃缺失值"><span class="nav-number">12.4.</span> <span class="nav-text">放弃缺失值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值替换"><span class="nav-number">12.5.</span> <span class="nav-text">值替换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas分组"><span class="nav-number">13.</span> <span class="nav-text">Pandas分组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据拆分成组"><span class="nav-number">13.1.</span> <span class="nav-text">数据拆分成组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代遍历分组"><span class="nav-number">13.1.1.</span> <span class="nav-text">迭代遍历分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择一个分组"><span class="nav-number">13.1.2.</span> <span class="nav-text">选择一个分组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合"><span class="nav-number">13.2.</span> <span class="nav-text">聚合</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系列（Series"><span class="nav-number">1.0.1.</span> <span class="nav-text">系列（Series)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建系列"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">创建系列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个空的系列"><span class="nav-number">1.0.1.1.1.</span> <span class="nav-text">创建一个空的系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ndarray创建一个系列"><span class="nav-number">1.0.1.1.2.</span> <span class="nav-text">ndarray创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从字典创建一个系列"><span class="nav-number">1.0.1.1.3.</span> <span class="nav-text">从字典创建一个系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从标量创建一个系列"><span class="nav-number">1.0.1.1.4.</span> <span class="nav-text">从标量创建一个系列</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系列访问"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">系列访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用位置index访问"><span class="nav-number">1.0.1.2.1.</span> <span class="nav-text">使用位置index访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用标签检索"><span class="nav-number">1.0.1.2.2.</span> <span class="nav-text">使用标签检索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据帧-DataFrame"><span class="nav-number">1.0.2.</span> <span class="nav-text">数据帧(DataFrame)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建数据帧"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">创建数据帧</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过列表创建"><span class="nav-number">1.0.2.1.1.</span> <span class="nav-text">通过列表创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过ndarrays-Lists的字典创建"><span class="nav-number">1.0.2.1.2.</span> <span class="nav-text">通过ndarrays/Lists的字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过字典创建"><span class="nav-number">1.0.2.1.3.</span> <span class="nav-text">通过字典创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过系列创建"><span class="nav-number">1.0.2.1.4.</span> <span class="nav-text">通过系列创建</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据帧访问"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">数据帧访问</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#列选择"><span class="nav-number">1.0.2.2.1.</span> <span class="nav-text">列选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列添加"><span class="nav-number">1.0.2.2.2.</span> <span class="nav-text">列添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列删除"><span class="nav-number">1.0.2.2.3.</span> <span class="nav-text">列删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行选择"><span class="nav-number">1.0.2.2.4.</span> <span class="nav-text">行选择</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#行切片"><span class="nav-number">1.0.2.2.5.</span> <span class="nav-text">行切片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#附加行"><span class="nav-number">1.0.2.2.6.</span> <span class="nav-text">附加行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除行"><span class="nav-number">1.0.2.2.7.</span> <span class="nav-text">删除行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面板-Panel"><span class="nav-number">1.0.3.</span> <span class="nav-text">面板(Panel)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas基本功能"><span class="nav-number">2.</span> <span class="nav-text">Pandas基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系列基本功能"><span class="nav-number">2.1.</span> <span class="nav-text">系列基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#axes"><span class="nav-number">2.1.1.</span> <span class="nav-text">axes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#empty"><span class="nav-number">2.1.2.</span> <span class="nav-text">empty</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ndim"><span class="nav-number">2.1.3.</span> <span class="nav-text">ndim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#size"><span class="nav-number">2.1.4.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#values"><span class="nav-number">2.1.5.</span> <span class="nav-text">values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head-tail"><span class="nav-number">2.1.6.</span> <span class="nav-text">head-tail</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame基本功能"><span class="nav-number">2.2.</span> <span class="nav-text">DataFrame基本功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas描述性统计"><span class="nav-number">3.</span> <span class="nav-text">Pandas描述性统计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sum"><span class="nav-number">3.1.</span> <span class="nav-text">sum()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mean"><span class="nav-number">3.2.</span> <span class="nav-text">mean()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std"><span class="nav-number">3.3.</span> <span class="nav-text">std()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据汇总"><span class="nav-number">3.4.</span> <span class="nav-text">数据汇总</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas函数"><span class="nav-number">4.</span> <span class="nav-text">Pandas函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pipe表格函数"><span class="nav-number">4.1.</span> <span class="nav-text">pipe表格函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#appy行或列智能函数应用"><span class="nav-number">4.2.</span> <span class="nav-text">appy行或列智能函数应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#applymap元素智能函数"><span class="nav-number">4.3.</span> <span class="nav-text">applymap元素智能函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas重建索引"><span class="nav-number">5.</span> <span class="nav-text">Pandas重建索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重建索引与其他对象对齐"><span class="nav-number">5.1.</span> <span class="nav-text">重建索引与其他对象对齐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#填充时重新加注"><span class="nav-number">5.2.</span> <span class="nav-text">填充时重新加注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重建索引时的填充限制"><span class="nav-number">5.2.1.</span> <span class="nav-text">重建索引时的填充限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名"><span class="nav-number">5.3.</span> <span class="nav-text">重命名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas迭代"><span class="nav-number">6.</span> <span class="nav-text">Pandas迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DataFrame迭代"><span class="nav-number">6.1.</span> <span class="nav-text">DataFrame迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iteritems"><span class="nav-number">6.1.1.</span> <span class="nav-text">iteritems()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iterrows"><span class="nav-number">6.1.2.</span> <span class="nav-text">iterrows()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#itertuples"><span class="nav-number">6.1.3.</span> <span class="nav-text">itertuples()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas排序"><span class="nav-number">7.</span> <span class="nav-text">Pandas排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以标签排序"><span class="nav-number">7.1.</span> <span class="nav-text">以标签排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以值排序"><span class="nav-number">7.2.</span> <span class="nav-text">以值排序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas索引和数据选择"><span class="nav-number">8.</span> <span class="nav-text">Pandas索引和数据选择</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#loc"><span class="nav-number">8.1.</span> <span class="nav-text">.loc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iloc"><span class="nav-number">8.2.</span> <span class="nav-text">.iloc()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ix"><span class="nav-number">8.3.</span> <span class="nav-text">.ix()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多轴索引"><span class="nav-number">8.4.</span> <span class="nav-text">多轴索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#统计函数"><span class="nav-number">9.</span> <span class="nav-text">统计函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pct-change-函数"><span class="nav-number">9.1.</span> <span class="nav-text">pct_change()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cov-协方差"><span class="nav-number">9.2.</span> <span class="nav-text">cov()协方差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关性函数"><span class="nav-number">9.3.</span> <span class="nav-text">相关性函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据排名"><span class="nav-number">9.4.</span> <span class="nav-text">数据排名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas窗口函数"><span class="nav-number">10.</span> <span class="nav-text">Pandas窗口函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rolling"><span class="nav-number">10.1.</span> <span class="nav-text">.rolling()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expanding"><span class="nav-number">10.2.</span> <span class="nav-text">.expanding()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ewm"><span class="nav-number">10.3.</span> <span class="nav-text">.ewm()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas聚合"><span class="nav-number">11.</span> <span class="nav-text">Pandas聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在整个数据框上应用聚合"><span class="nav-number">11.1.</span> <span class="nav-text">在整个数据框上应用聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在数据框的单个列上应用聚合"><span class="nav-number">11.2.</span> <span class="nav-text">在数据框的单个列上应用聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在DataFrame的多列上应用聚合"><span class="nav-number">11.3.</span> <span class="nav-text">在DataFrame的多列上应用聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在DataFrame的单个列上应用多个函数"><span class="nav-number">11.4.</span> <span class="nav-text">在DataFrame的单个列上应用多个函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在DataFrame的多列上应用多个函数"><span class="nav-number">11.5.</span> <span class="nav-text">在DataFrame的多列上应用多个函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将不同的函数应用于DataFrame的不同列"><span class="nav-number">11.6.</span> <span class="nav-text">将不同的函数应用于DataFrame的不同列</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas缺失数据"><span class="nav-number">12.</span> <span class="nav-text">Pandas缺失数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#检查缺失值"><span class="nav-number">12.1.</span> <span class="nav-text">检查缺失值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失数据的计算"><span class="nav-number">12.2.</span> <span class="nav-text">缺失数据的计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺失数据清理-填充"><span class="nav-number">12.3.</span> <span class="nav-text">缺失数据清理/填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#放弃缺失值"><span class="nav-number">12.4.</span> <span class="nav-text">放弃缺失值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#值替换"><span class="nav-number">12.5.</span> <span class="nav-text">值替换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas分组"><span class="nav-number">13.</span> <span class="nav-text">Pandas分组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据拆分成组"><span class="nav-number">13.1.</span> <span class="nav-text">数据拆分成组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代遍历分组"><span class="nav-number">13.1.1.</span> <span class="nav-text">迭代遍历分组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择一个分组"><span class="nav-number">13.1.2.</span> <span class="nav-text">选择一个分组</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚合"><span class="nav-number">13.2.</span> <span class="nav-text">聚合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas合并-连接"><span class="nav-number">14.</span> <span class="nav-text">Pandas合并/连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#on参数"><span class="nav-number">14.1.</span> <span class="nav-text">on参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how参数"><span class="nav-number">14.2.</span> <span class="nav-text">how参数</span></a></li></ol></li></ol></div>
             
 
           </div>
