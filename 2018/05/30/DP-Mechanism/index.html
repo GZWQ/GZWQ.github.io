@@ -93,7 +93,6 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Laplace_distribution_cdf.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-06%20at%203.41.25%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-06%20at%203.48.56%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-11%20at%2010.30.20%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-06%20at%204.04.09%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-06%20at%204.05.35%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-06%20at%204.12.18%20PM.png">
@@ -111,7 +110,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-11%20at%209.58.34%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-05%20at%2010.10.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-05-31%20at%203.10.30%20PM.png">
-<meta property="og:updated_time" content="2018-06-12T00:52:15.171Z">
+<meta property="og:updated_time" content="2018-06-14T03:16:34.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mechanism of Differential Privacy">
 <meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
@@ -453,9 +452,10 @@
 <p>Obviously, $\int{P(x)}dx=1$, since the distribution of $n$ has zero mean so it is symmetric. For any $Pr(x)$, there are always two variables $n_1$ and $n_2$ such that $n_2=-n_1$, resulting in $P(n_1)n_1+P(n_2)n_2=0$. So $\int{P(x)n(x)}dx=0$.</p>
 <p>SO $\mathbb{E}[\hat{f(x)}]=f(x)$</p>
 </li>
-</ol>
-<ol>
-<li><img src="/2018/05/30/DP-Mechanism/Screen Shot 2018-06-11 at 10.30.20 AM.png" alt="Screen Shot 2018-06-11 at 10.30.20 AM"></li>
+<li><p>The error introduced by $Lap(0,\frac 1 \epsilon) \ is\  \frac 1 \epsilon​$</p>
+<p>Assume $X$ is true answer and $Y=X+n$ is the noise output. $Error^2=E((Y-X)^2)=E(n^2)=E((n-E(n))^2)=E((n-0)^2)=Var(n)$</p>
+<p>so the variance of noise distribution is the error, which is $\sqrt 2 b=\sqrt 2 \frac{1}{\epsilon}$ </p>
+</li>
 </ol>
 </blockquote>
 <h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><blockquote>

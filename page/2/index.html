@@ -878,9 +878,10 @@
 <p>Obviously, $\int{P(x)}dx=1$, since the distribution of $n$ has zero mean so it is symmetric. For any $Pr(x)$, there are always two variables $n_1$ and $n_2$ such that $n_2=-n_1$, resulting in $P(n_1)n_1+P(n_2)n_2=0$. So $\int{P(x)n(x)}dx=0$.</p>
 <p>SO $\mathbb{E}[\hat{f(x)}]=f(x)$</p>
 </li>
-</ol>
-<ol>
-<li><img src="/2018/05/30/DP-Mechanism/Screen Shot 2018-06-11 at 10.30.20 AM.png" alt="Screen Shot 2018-06-11 at 10.30.20 AM"></li>
+<li><p>The error introduced by $Lap(0,\frac 1 \epsilon) \ is\  \frac 1 \epsilon​$</p>
+<p>Assume $X$ is true answer and $Y=X+n$ is the noise output. $Error^2=E((Y-X)^2)=E(n^2)=E((n-E(n))^2)=E((n-0)^2)=Var(n)$</p>
+<p>so the variance of noise distribution is the error, which is $\sqrt 2 b=\sqrt 2 \frac{1}{\epsilon}$ </p>
+</li>
 </ol>
 </blockquote>
 <h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><blockquote>
@@ -1166,12 +1167,14 @@ D(p||q)\ge0</script></li>
         
           
             <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/" target="_blank" rel="noopener">Probabilistic Systems Analysis and Applied Probability</a></p>
-<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/lecture-7/" target="_blank" rel="noopener">last time</a></p>
+<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-ii/" target="_blank" rel="noopener">last time</a></p>
 <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
 <li><p><strong>Definition</strong>:</p>
 <script type="math/tex; mode=display">
 P(AB)=P(A)P(B)</script><p><img src="/2018/05/30/Statistic-110/Screen%20Shot%202018-06-10%20at%2011.04.20%20PM.png" alt="Screen Shot 2018-06-10 at 11.04.20 PM"></p>
 <p>Based on the pic, $P(AB)\ne P(A)P(B)$, so event A and event B are not independent event.</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-13 at 9.26.43 PM.png" alt="Screen Shot 2018-06-13 at 9.26.43 PM"></p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-13 at 9.26.49 PM.png" alt="Screen Shot 2018-06-13 at 9.26.49 PM"></p>
 </li>
 </ol>
 <h1 id="Discrete-Random-Variables"><a href="#Discrete-Random-Variables" class="headerlink" title="Discrete Random Variables"></a>Discrete Random Variables</h1><ol>
@@ -1209,8 +1212,7 @@ E(AB)&=\sum_A\sum_B(ab)P_{A,B}(a,b)\\
 \\&=E(A)E(B)
 \end{aligned}
 
-\end{equation}</script><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-13 at 7.04.48 PM.png" alt="Screen Shot 2018-06-13 at 7.04.48 PM"></p>
-</li>
+\end{equation}</script></li>
 <li><p><strong>Variance</strong></p>
 <p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-11 at 5.32.18 PM.png" alt="Screen Shot 2018-06-11 at 5.32.18 PM"></p>
 <blockquote>
@@ -1229,7 +1231,68 @@ E(AB)&=\sum_A\sum_B(ab)P_{A,B}(a,b)\\
 <script type="math/tex; mode=display">
 \sigma_X=\sqrt{var(X)}</script></li>
 </ol>
-<h1 id="Binomial-Random-Variable"><a href="#Binomial-Random-Variable" class="headerlink" title="Binomial Random Variable"></a>Binomial Random Variable</h1><h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
+<h1 id="Binomial-Random-Variable"><a href="#Binomial-Random-Variable" class="headerlink" title="Binomial Random Variable"></a>Binomial Random Variable</h1><ol>
+<li><p><strong>Definition</strong></p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-13 at 9.10.33 PM.png" alt="Screen Shot 2018-06-13 at 9.10.33 PM"></p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-13 at 9.10.40 PM.png" alt="Screen Shot 2018-06-13 at 9.10.40 PM"></p>
+</li>
+<li><p><strong>Binomial mean and variance</strong></p>
+<p>$X= # $ of successes in $n$ independent trials</p>
+<p>$X_i=\left\{\begin{align} 1&amp; &amp; \text{if success in trial i}\\0&amp;&amp;\text{otherwise}\end{align}\right.$ </p>
+<ul>
+<li><p>$E(X_i)=p$</p>
+<blockquote>
+<p>$E(X_i)=p<em>1+(1-p)</em>0$</p>
+</blockquote>
+</li>
+<li><p>$E(X)=np$</p>
+<blockquote>
+<p>$E(X)=E(x_1,x_2,…,x_n)=E(x_1)+E(x_2)+…+E(x_n)=np$</p>
+</blockquote>
+</li>
+<li><p>$Var(X_i)=p-p^2$</p>
+<blockquote>
+<p>$Var(X_i)=E(X_i^2)-E(X_i)^2$</p>
+<p>$X_i^2=\left\{\begin{align} 1&amp; &amp; \text{if success in trial i}\\0&amp;&amp;\text{otherwise}\end{align}\right.$</p>
+<p>So $E(X_i^2)=1<em>p+0</em>(1-p)=p$</p>
+<p>$Var(X_i)=E(X_i^2)-E(X_i)^2=p-p^2$</p>
+</blockquote>
+</li>
+<li><p>$Var(X)=n(p-p^2)$</p>
+<blockquote>
+<p>$Var(X)=Var(X_i,X_2,…,X_n)$</p>
+<p>because $X_i$ is independent to each other, so</p>
+<p>$Var(X)=Var(X_i,X_2,…,X_n)=Var(X_1)+Var(X_2)+…+Var(X_n)=nVar(X_i)$</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><strong>Example-Hat Problem</strong></p>
+<ul>
+<li><p>$n$ people throw their hats in a box and then pick one at random.</p>
+<p>Let $X$ be the number of people who get their own hat. We want to find out $E(X)$. This is Binomial distribution:</p>
+<p>$X_i=\left\{\begin{align} 1&amp; &amp; \text{if i selects his hat}\\0&amp;&amp;\text{otherwise}\end{align}\right.$</p>
+</li>
+<li><p>$P(X_i)=\frac{1}{n}$</p>
+</li>
+<li><p>$E(X_i)=1<em>\frac{1}{n}+0</em>(1-\frac{1}{n})=\frac{1}{n}$</p>
+</li>
+<li><p>the $X_i$ are not independent</p>
+</li>
+<li><p>$E(X)=E(X_1)+E(X_2)+…+E(X_n)$ is always true no matter whether $X_i$ are independent or not.</p>
+<p>$E(X)=E(X_1)+E(X_2)+…+E(X_n)=n*\frac{1}{n}=1$</p>
+</li>
+<li><p>$Var(X)=E(X^2)-E(X)^2=E(X^2)-1$</p>
+<p>because $X$ is the number of people who has his hat, so $X=X_1+X_2+…+X_n$, then $X^2=\sum_i X_i^2+\sum_{i,j}X_iX_j$</p>
+<p>$Var(X)=E(X^2)-1=nE(X_i^2)+n(n-1)E(X_iX_j)-1$</p>
+<p>$E(X_i^2)=E(X_i)=\frac{1}{n}$</p>
+<p>$P(X_iX_j=1)=P(X_i=1)P(X_J=1|X_i=1)=\frac{1}{n}\frac{1}{n-1}=E(X_iX_j)$</p>
+<p>$Var(X)=E(X^2)-1=nE(X_i^2)+n(n-1)E(X_iX_j)-1=n\frac{1}{n}+n(n-1)\frac{1}{n}\frac{1}{n-1}-1=1$</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
 <ol>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>
 <li>$log_a{\frac{M}{N}}=log_a{M}-log_a{N}$</li>
