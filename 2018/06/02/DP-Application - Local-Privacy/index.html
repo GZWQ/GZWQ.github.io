@@ -104,6 +104,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-12%20at%205.46.13%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-12%20at%206.09.06%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-12%20at%206.14.59%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-13%20at%2010.56.36%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-13%20at%2010.58.24%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-13%20at%2010.59.18%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-09%20at%2010.21.40%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-11%20at%2011.28.05%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-11%20at%2011.29.58%20AM.png">
@@ -123,7 +126,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.26.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.27.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/02/DP-Application%20-%20Local-Privacy/Screen%20Shot%202018-06-03%20at%2010.28.02%20PM.png">
-<meta property="og:updated_time" content="2018-06-12T23:24:39.766Z">
+<meta property="og:updated_time" content="2018-06-13T16:15:50.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Local Privacy">
 <meta name="twitter:description" content="Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predicto">
@@ -571,6 +574,7 @@ Y(i)=\begin{cases}
 </li>
 </ol>
 <h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Heavy-Hitter-Estimation-for-Set-Valued-Data-2016-Zhan"><a href="#Heavy-Hitter-Estimation-for-Set-Valued-Data-2016-Zhan" class="headerlink" title="Heavy Hitter Estimation for Set-Valued Data[2016-Zhan]"></a>Heavy Hitter Estimation for Set-Valued Data<a href="https://davidyinyang.weebly.com/uploads/9/8/6/2/9862052/ccs16-ldp.pdf" target="_blank" rel="noopener">[2016-Zhan]</a></h3><h4 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h4><blockquote>
+<p>The basic LDP frequent oracle protocol enables the aggregator to estimate the frequency of any value. But when the domain of input values is large, finding the most frequent values, also known as the heavy hitters, by estimating the frequencies of all possible values, is computationally infeasible.</p>
 <p>In this paper, they aims to solve the problem of heavy hitters over set-valued, where each user has a set of up to l items and they try to identify the top-k most frequent items among all users. There are $d$ items and $n$ users, and each uesr has $l$ items and try to find  top-$k$ frequent items, where $k\ll\ l$ and $k\ll d$. </p>
 <p>And each user has his own data which we call a record and every record is a set of items.</p>
 </blockquote>
@@ -580,15 +584,23 @@ Y(i)=\begin{cases}
 <h5 id="Bassily-and-Smith-Method-for-set-valued-data"><a href="#Bassily-and-Smith-Method-for-set-valued-data" class="headerlink" title="Bassily and Smith Method for set-valued data"></a>Bassily and Smith Method for set-valued data</h5><blockquote>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-12 at 6.09.06 PM.png" alt="Screen Shot 2018-06-12 at 6.09.06 PM"></p>
 <p>REMARKS:</p>
-<p>For the $\epsilon /l$, because each user only have a record although it has many items, we want $\epsilon$ privacy for this record. And we run algorithm $l$ times. So for overall $\epsilon$ privacy, each run should have only $\epsilon / l$ privacy budget.</p>
+<p>For the $\frac{\epsilon}{l}$, because each user only have a record although it has many items, we want $\epsilon$ privacy for this record. And we run algorithm $l$ times. So for overall $\epsilon$ privacy, each run should have only $\epsilon / l$ privacy budget.</p>
 </blockquote>
 <h4 id="Two-Phase-Framework"><a href="#Two-Phase-Framework" class="headerlink" title="Two-Phase Framework"></a>Two-Phase Framework</h4><h5 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h5><blockquote>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-12 at 6.14.59 PM.png" alt="Screen Shot 2018-06-12 at 6.14.59 PM"></p>
 </blockquote>
 <h5 id="Phase-I"><a href="#Phase-I" class="headerlink" title="Phase I"></a>Phase I</h5><blockquote>
-<p>XX</p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-13 at 10.56.36 AM.png" alt="Screen Shot 2018-06-13 at 10.56.36 AM"></p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-13 at 10.58.24 AM.png" alt="Screen Shot 2018-06-13 at 10.58.24 AM"></p>
+<p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-13 at 10.59.18 AM.png" alt="Screen Shot 2018-06-13 at 10.59.18 AM"></p>
+<p>Remarks:</p>
+<ul>
+<li></li>
+</ul>
 </blockquote>
-<h5 id="Phase-II"><a href="#Phase-II" class="headerlink" title="Phase II"></a>Phase II</h5><h3 id="Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><a href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code" class="headerlink" title="Multiple Attributes Mean or Frequencies Estimation [2016-Nguyen] [Code]"></a>Multiple Attributes Mean or Frequencies Estimation <a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">[2016-Nguyen]</a> <a href="https://github.com/pokhym/LDP" target="_blank" rel="noopener">[Code]</a></h3><blockquote>
+<h5 id="Phase-II"><a href="#Phase-II" class="headerlink" title="Phase II"></a>Phase II</h5><blockquote>
+</blockquote>
+<h3 id="Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code"><a href="#Multiple-Attributes-Mean-or-Frequencies-Estimation-2016-Nguyen-Code" class="headerlink" title="Multiple Attributes Mean or Frequencies Estimation [2016-Nguyen] [Code]"></a>Multiple Attributes Mean or Frequencies Estimation <a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">[2016-Nguyen]</a> <a href="https://github.com/pokhym/LDP" target="_blank" rel="noopener">[Code]</a></h3><blockquote>
 <p>They propose the Harmony method, which can handle multiple numeric or categorical attributes. </p>
 <p><img src="/2018/06/02/DP-Application - Local-Privacy/Screen Shot 2018-06-09 at 10.21.40 PM.png" alt="Screen Shot 2018-06-09 at 10.21.40 PM"></p>
 <p>Remarks:</p>

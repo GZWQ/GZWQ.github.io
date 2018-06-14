@@ -1167,12 +1167,13 @@ D(p||q)\ge0</script></li>
           
             <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/" target="_blank" rel="noopener">Probabilistic Systems Analysis and Applied Probability</a></p>
 <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/lecture-7/" target="_blank" rel="noopener">last time</a></p>
-<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><blockquote>
-<p><strong>Definition</strong>:</p>
+<h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
+<li><p><strong>Definition</strong>:</p>
 <script type="math/tex; mode=display">
-P(AB)=P(A)P(B)</script><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-10 at 11.04.20 PM.png" alt="Screen Shot 2018-06-10 at 11.04.20 PM"></p>
+P(AB)=P(A)P(B)</script><p><img src="/2018/05/30/Statistic-110/Screen%20Shot%202018-06-10%20at%2011.04.20%20PM.png" alt="Screen Shot 2018-06-10 at 11.04.20 PM"></p>
 <p>Based on the pic, $P(AB)\ne P(A)P(B)$, so event A and event B are not independent event.</p>
-</blockquote>
+</li>
+</ol>
 <h1 id="Discrete-Random-Variables"><a href="#Discrete-Random-Variables" class="headerlink" title="Discrete Random Variables"></a>Discrete Random Variables</h1><ol>
 <li><p><strong>Probability mass function (PMF)</strong></p>
 <p>it is the probability of a discrete random variable; while in continus setting, the probability of a random variable is called PDF.</p>
@@ -1196,7 +1197,20 @@ E(X)=\sum_{x}xp_X(x)</script><blockquote>
 <script type="math/tex; mode=display">
 E(\alpha)=\alpha\\
 E(\alpha X)=\alpha E(X)\\
-E(\alpha X+\beta)=\alpha E(X)+\beta</script></li>
+E(\alpha X+\beta)=\alpha E(X)+\beta</script><p>But if A and B are two independent variables, then</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+
+\begin{aligned}
+
+E(AB)&=\sum_A\sum_B(ab)P_{A,B}(a,b)\\
+
+&=\sum_A\sum_B(ab)P_A(a)P_B(b)
+\\&=E(A)E(B)
+\end{aligned}
+
+\end{equation}</script><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-13 at 7.04.48 PM.png" alt="Screen Shot 2018-06-13 at 7.04.48 PM"></p>
+</li>
 <li><p><strong>Variance</strong></p>
 <p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-11 at 5.32.18 PM.png" alt="Screen Shot 2018-06-11 at 5.32.18 PM"></p>
 <blockquote>
@@ -1206,12 +1220,16 @@ E(\alpha X+\beta)=\alpha E(X)+\beta</script></li>
 <li>a big variance means the variable are far away from the center while a small one means the variables are tightly concentrated around the mean value.</li>
 </ul>
 </blockquote>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-13 at 7.09.01 PM.png" alt="Screen Shot 2018-06-13 at 7.09.01 PM"></p>
+<blockquote>
+<p>In the example, since $X=Y$, then $X$ and $Y$ are not independent, so ..</p>
+</blockquote>
 </li>
 <li><p><strong>Standard deviation</strong></p>
 <script type="math/tex; mode=display">
 \sigma_X=\sqrt{var(X)}</script></li>
 </ol>
-<h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
+<h1 id="Binomial-Random-Variable"><a href="#Binomial-Random-Variable" class="headerlink" title="Binomial Random Variable"></a>Binomial Random Variable</h1><h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
 <ol>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>
 <li>$log_a{\frac{M}{N}}=log_a{M}-log_a{N}$</li>

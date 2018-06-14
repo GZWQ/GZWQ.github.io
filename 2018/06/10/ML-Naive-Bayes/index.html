@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="How Naive Bayes Classifier Works[1] How Naive Bayes Classifier Works[2] The Naive Bayesian classifier is based on Bayes’ theorem with the independence assumptions between predictors (data attributes).">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-12T18:14:41.614Z">
+<meta property="og:updated_time" content="2018-06-13T23:38:33.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - Naive Bayes">
 <meta name="twitter:description" content="How Naive Bayes Classifier Works[1] How Naive Bayes Classifier Works[2] The Naive Bayesian classifier is based on Bayes’ theorem with the independence assumptions between predictors (data attributes).">
@@ -382,9 +382,25 @@
 <a id="more"></a>
 <h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>The classifer uses bayes rule to make predictions. Bayes classifier assume that the effect of the value of a predictor (attribute <em>x</em>) on a given class (<em>c</em>) is independent of the values of other predictors.</p>
 <script type="math/tex; mode=display">
-p(c|x)=\frac{P(c)P(x|c)}{P(x)}\\
-P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)</script><blockquote>
-<p>Since each record $x$ may have many attributes $\{x_1,x_2,…,x_n\}$ where first attribute is $x_i$, the second attribute is $x_2$ and the last attribiute is $x_n$. So for a given unknown case $X$ which we want to predict, we calculate the posterior probability $P(x_i|c)$ for each attribute $x_i$ and then th probability of $X$ belonging to class $c$ $P(c|X)$ is the product of all attributes probability.</p>
+p(c|X)=\frac{P(c)P(X|c)}{P(X)}\\</script><p>Assuming that $X$ has $n$ independent attributes, that is, $X=\{x_1,x_2,…,x_n\}$, so, we can write above formula as:</p>
+<script type="math/tex; mode=display">
+P(X|c)=P(x_1|c)P(x_2|c)...P(x_n|c)\\
+P(X)=\sum_{i=1}^{m}P(C_i)P(X|c_i)</script><p>so using above two to replace：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+
+\begin{aligned}
+
+p(c|X)&==\frac{P(c)P(X|c)}{P(X)}\\
+
+&=\frac{P(c)P(x_1|c)P(x_2|c)...P(x_n|c)}{\sum_{i=1}^{m}P(C_i)P(X|c_i)}
+
+\end{aligned}
+
+\end{equation}</script><p>And we can find that the denominator is same to all class $c_i$, so</p>
+<script type="math/tex; mode=display">
+P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><blockquote>
+<p>So whenever we want to predict a unknown $X=\{x_i,x_2,…,x_n\}$, we only need to calculate $P(c_j)$ for each class label and $P(x_i|c_j)$ for each attribute.</p>
 </blockquote>
 <h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>We use the same simple Weather dataset here.</p>
 <div class="table-container">
@@ -470,7 +486,7 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)</script><bloc
 <td style="text-align:center">y</td>
 </tr>
 <tr>
-<td style="text-align:center">rainny</td>
+<td style="text-align:center">rainy</td>
 <td style="text-align:center">mild</td>
 <td style="text-align:center">normal</td>
 <td style="text-align:center">t</td>
@@ -525,42 +541,22 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)</script><bloc
 </div>
 <ol>
 <li><p>For first class play golf = Yes:</p>
+<p>Among the total 14 records, the number of play-golf-yes is 9, so $P(Yes)=\frac{9}{14}$</p>
 <ul>
 <li><p>For first arrtribute <strong>outlook</strong>:</p>
-<p>$P(outlook=rainy|Yes)=\frac{P(outlook=rainy)P(Yes|outlook=rainy)}{P(Yes)}$</p>
-<ul>
-<li>Among the total 14 records, the number of play-golf-yes is 9, so $P(Yes)=\frac{9}{14}$</li>
-<li>Among the total 14 records, the outlook=rainy number is 5, so $P(outlook=rainy)=\frac{5}{14}$</li>
-<li>Among the 5 records where outlook is rainy, Yes records consist of 2, so $P(Yes|outlook=rainy)=\frac{2}{5}$</li>
-</ul>
-<p>$P(outlook=rainy|Yes)=\frac{P(outlook=rainy)P(Yes|outlook=rainy)}{P(Yes)}=\frac{\frac{5}{14}\frac{2}{5}}{\frac{9}{14}}=\frac{2}{9}$</p>
+<p>Among 9 yes records, there are 2 records where outlook is rainy, so </p>
+<p>$P(outlook=rainy|Yes)=\frac{2}{9}$</p>
 </li>
 <li><p>For second attribute <strong>temperature</strong>:</p>
-<p>$P(mild|Yes)=\frac{P(mild)P(Yes|mild)}{P(Yes)}$</p>
-<ul>
-<li>$P(Yes)=\frac{9}{14}$</li>
-<li>$P(mild)=\frac{6}{14}$</li>
-<li>$P(Yes|mild)=\frac{4}{6}$</li>
-</ul>
-<p>$P(mild|Yes)=\frac{P(mild)P(Yes|mild)}{P(Yes)}=\frac{4}{9}$</p>
+<p>Among 9 yes records, there are 4 records where temperature is mild, so $P(mild|Yes)=\frac{4}{9}$</p>
 </li>
 <li><p>For second attribute <strong>Humidity</strong>:</p>
-<p>$P(normal|Yes)=\frac{P(normal)P(Yes|normal)}{P(Yes)}$</p>
-<ul>
-<li>$P(Yes)=\frac{9}{14}$</li>
-<li>$P(normal)=\frac{7}{14}$</li>
-<li>$P(Yes|normal)=\frac{6}{7}$</li>
-</ul>
-<p>$P(normal|Yes)=\frac{P(normal)P(Yes|normal)}{P(Yes)}=\frac{6}{9}$</p>
+<p>Among 9 yes records, there are 6 records where humidity is normal, so</p>
+<p>$P(normal|Yes)=\frac{6}{9}$</p>
 </li>
 <li><p>For second attribute <strong>windy</strong>:</p>
-<p>$P(windy|Yes)=\frac{P(windy)P(Yes|windy)}{P(Yes)}$</p>
-<ul>
-<li>$P(Yes)=\frac{9}{14}$</li>
-<li>$P(windy)=\frac{6}{14}$</li>
-<li>$P(Yes|windy)=\frac{3}{6}$</li>
-</ul>
-<p>$P(windy|Yes)=\frac{P(windy)P(Yes|windy)}{P(Yes)}=\frac{3}{9}$</p>
+<p>Among 9 yes records, there are 3 records where windy is true, so</p>
+<p>$P(windy|Yes)=\frac{3}{9}$</p>
 </li>
 </ul>
 <p>So $P(Yes|X)=P(rainy|Yes)P(mild|Yes)P(normal|Yes)P(windy|Yes)P(Yes)=\frac{2}{9}\frac{4}{9}\frac{6}{9}\frac{3}{9}\frac{9}{14}=0.0141099347$</p>
@@ -573,7 +569,14 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)</script><bloc
 <p>$P(Yes)=\frac{0.0141099347}{0.0141099347+0.010285714}=0.578368999$</p>
 <p>$P(No)=\frac{0.010285714}{0.0141099347+0.010285714}=0.421631001$</p>
 <p>So we can predict it is ok to play golf when outlook is rainy, temperature is mild, the humidity is normal and it is windy.</p>
-
+<h1 id="Zero-frequency-problem"><a href="#Zero-frequency-problem" class="headerlink" title="Zero-frequency problem"></a>Zero-frequency problem</h1><p>See the prediction formula again:</p>
+<script type="math/tex; mode=display">
+P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><p>if one of the $P(x_i|c)$ is zero, then the probability of $P(c|X)$ is zero, no matter how higher probability of other $P(x_j|c)$. </p>
+<p>One of the solutions is to add a small positive number to all counts:</p>
+<p>For example, $N$ is the number of all classes in the training data $D$, in the above example $N=2$, Yes or No. And $N_i$ is the number of under one of class, the numebr of records which have attribute $x_i$.</p>
+<script type="math/tex; mode=display">
+\hat{P}(c)=\frac{|D_c|+1}{|D|+N}\\
+\hat{P}(x_i|c)=\frac{|D_{c,x_i}|+1}{|D_c|+N_i}</script><h1 id="Numerical-Attributes"><a href="#Numerical-Attributes" class="headerlink" title="Numerical Attributes"></a>Numerical Attributes</h1>
       
     </div>
     
@@ -747,7 +750,7 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)</script><bloc
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">2.</span> <span class="nav-text">Example</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Zero-frequency-problem"><span class="nav-number">3.</span> <span class="nav-text">Zero-frequency problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numerical-Attributes"><span class="nav-number">4.</span> <span class="nav-text">Numerical Attributes</span></a></li></ol></div>
             
 
           </div>
