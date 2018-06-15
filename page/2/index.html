@@ -828,6 +828,11 @@
 <li>the communication cost of $n$ users for k-rr is $log_2d$</li>
 <li><a href="https://arxiv.org/pdf/1705.04421.pdf" target="_blank" rel="noopener">[Optimizing Locally Differentially Private Protocols]</a> remains : what is pure? THE protocol? BLH? Threshold $T_s$ in experiment and true/false positive?</li>
 </ol>
+<h1 id="T"><a href="#T" class="headerlink" title="T!"></a>T!</h1><ol>
+<li>in order to optimize ldp protocol, tends to optimize encoding step,</li>
+<li>using domain knowledge to elimate impossible candidates to narrow down the size of encoded input.<a href="https://arxiv.org/pdf/1708.06674.pdf" target="_blank" rel="noopener">Locally Differentially Private Heavy Hitter Identification</a></li>
+<li></li>
+</ol>
 <p>Local differential privacy (LDP) techniques collects randomized answers from each user, with guarantees of plausible deniability; meanwhile, the aggregator can still build accurate models and predictors by analyzing large amounts of such randomized data.</p>
 <p>Unlike other models of differential privacy, which publish randomized aggregates but still collect the exact sensitive data, LDP avoids collecting exact personal information in the first place, thus providing a stronger assurance to the users and to the aggregator.</p>
 <p>The well-established Laplace mechanism and exponential mechanism are no longer suitable to the local setting in which a user may have only a single element to release and laplace noise may introduce too much noise.  But unlike the laplace mechanism where we can use the noisy output directly, we need to do some estimation on the randomized output to get the estimator in LDP.<a href="">2016-Zhan</a></p>
@@ -1319,7 +1324,7 @@ D(p||q)\ge0</script></li>
         
           
             <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/" target="_blank" rel="noopener">Probabilistic Systems Analysis and Applied Probability</a></p>
-<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-ii/lecture-9/" target="_blank" rel="noopener">last time</a></p>
+<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-ii/lecture-10/" target="_blank" rel="noopener">last time</a></p>
 <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
 <li><p><strong>Definition</strong>:</p>
 <script type="math/tex; mode=display">
@@ -1494,6 +1499,31 @@ E(AB)&=\sum_A\sum_B(ab)P_{A,B}(a,b)\\
 </ul>
 </li>
 </ol>
+<h1 id="Multiple-Continuous-Random-Variables"><a href="#Multiple-Continuous-Random-Variables" class="headerlink" title="Multiple Continuous Random Variables"></a>Multiple Continuous Random Variables</h1><h2 id="Joint-PDF"><a href="#Joint-PDF" class="headerlink" title="Joint PDF"></a>Joint PDF</h2><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 5.57.12 PM.png" alt="Screen Shot 2018-06-15 at 5.57.12 PM"></p>
+<ul>
+<li><p>From the joint to the marginal:</p>
+<p>$f_X(x)=\int_{-\infin}^{\infin}f_{X,Y}(x,y)dy$</p>
+</li>
+<li><p>$X$ and $Y$ are called <strong>independent</strong> if:</p>
+<p>$f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)$ </p>
+</li>
+</ul>
+<h2 id="Buffon’s-needle"><a href="#Buffon’s-needle" class="headerlink" title="Buffon’s needle"></a>Buffon’s needle</h2><ol>
+<li><p><strong>problem setting</strong></p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.10.37 PM.png" alt="Screen Shot 2018-06-15 at 6.10.37 PM"></p>
+</li>
+<li><p><strong>analysis</strong></p>
+<p>$X$, $\Theta$ are uniform and independent to each other</p>
+<p>$f_{X,\Theta}(x,\theta)=f_X(x)f_{\Theta}(\theta)=\frac{2}{d}\frac{2}{\pi}$, where $0\le x \le \frac{d}{2}$, $0\le \theta \le\frac{\pi}{2}$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.15.39 PM.png" alt="Screen Shot 2018-06-15 at 6.15.39 PM"></p>
+</li>
+</ol>
+<h2 id="conditioning"><a href="#conditioning" class="headerlink" title="conditioning"></a>conditioning</h2><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.21.18 PM.png" alt="Screen Shot 2018-06-15 at 6.21.18 PM"></p>
+<h2 id="Stick-breaking-example"><a href="#Stick-breaking-example" class="headerlink" title="Stick-breaking example"></a>Stick-breaking example</h2><h3 id="problem-setting"><a href="#problem-setting" class="headerlink" title="problem setting"></a>problem setting</h3><p>Break a stick of length $l$ twice: break at $X$ uniformly in $[0,l]$; then break at $Y$ uniformly in $[0,X]$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.26.23 PM.png" alt="Screen Shot 2018-06-15 at 6.26.23 PM"></p>
+<h3 id="analysis"><a href="#analysis" class="headerlink" title="analysis"></a>analysis</h3><p>$f_{X,Y}(x,y)=f_{X}(x)f_{Y|X}(y|x)=\frac{1}{l}\frac{1}{x}$</p>
+<p>$E(Y|X=x)=\int yf_{Y|X}(y|X=x)dy=\int_{0}^{x}y\frac{1}{x}dy=\frac{x}{2}$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.35.34 PM.png" alt="Screen Shot 2018-06-15 at 6.35.34 PM"></p>
 <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
 <ol>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>

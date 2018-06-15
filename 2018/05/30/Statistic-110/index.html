@@ -102,11 +102,17 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-14%20at%206.31.09%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-14%20at%206.37.15%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-14%20at%206.44.55%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-15%20at%205.57.12%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-15%20at%206.10.37%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-15%20at%206.15.39%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-15%20at%206.21.18%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-15%20at%206.26.23%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-15%20at%206.35.34%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-06%20at%209.20.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-05%20at%208.35.00%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/929166-20161116214202513-1545949382.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-06%20at%2011.01.27%20PM.png">
-<meta property="og:updated_time" content="2018-06-14T23:46:33.829Z">
+<meta property="og:updated_time" content="2018-06-15T23:36:33.449Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Statistic 110">
 <meta name="twitter:description" content="Probabilistic Systems Analysis and Applied Probability last time Independence Definition:  P(AB)=P(A)P(B) Based on the pic, $P(AB)\ne P(A)P(B)$, so event A and event B are not independent event.     D">
@@ -375,7 +381,7 @@
 
       
         <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/" target="_blank" rel="noopener">Probabilistic Systems Analysis and Applied Probability</a></p>
-<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-ii/lecture-9/" target="_blank" rel="noopener">last time</a></p>
+<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-ii/lecture-10/" target="_blank" rel="noopener">last time</a></p>
 <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
 <li><p><strong>Definition</strong>:</p>
 <script type="math/tex; mode=display">
@@ -550,6 +556,31 @@ E(AB)&=\sum_A\sum_B(ab)P_{A,B}(a,b)\\
 </ul>
 </li>
 </ol>
+<h1 id="Multiple-Continuous-Random-Variables"><a href="#Multiple-Continuous-Random-Variables" class="headerlink" title="Multiple Continuous Random Variables"></a>Multiple Continuous Random Variables</h1><h2 id="Joint-PDF"><a href="#Joint-PDF" class="headerlink" title="Joint PDF"></a>Joint PDF</h2><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 5.57.12 PM.png" alt="Screen Shot 2018-06-15 at 5.57.12 PM"></p>
+<ul>
+<li><p>From the joint to the marginal:</p>
+<p>$f_X(x)=\int_{-\infin}^{\infin}f_{X,Y}(x,y)dy$</p>
+</li>
+<li><p>$X$ and $Y$ are called <strong>independent</strong> if:</p>
+<p>$f_{X,Y}(x,y)=f_{X}(x)f_{Y}(y)$ </p>
+</li>
+</ul>
+<h2 id="Buffon’s-needle"><a href="#Buffon’s-needle" class="headerlink" title="Buffon’s needle"></a>Buffon’s needle</h2><ol>
+<li><p><strong>problem setting</strong></p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.10.37 PM.png" alt="Screen Shot 2018-06-15 at 6.10.37 PM"></p>
+</li>
+<li><p><strong>analysis</strong></p>
+<p>$X$, $\Theta$ are uniform and independent to each other</p>
+<p>$f_{X,\Theta}(x,\theta)=f_X(x)f_{\Theta}(\theta)=\frac{2}{d}\frac{2}{\pi}$, where $0\le x \le \frac{d}{2}$, $0\le \theta \le\frac{\pi}{2}$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.15.39 PM.png" alt="Screen Shot 2018-06-15 at 6.15.39 PM"></p>
+</li>
+</ol>
+<h2 id="conditioning"><a href="#conditioning" class="headerlink" title="conditioning"></a>conditioning</h2><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.21.18 PM.png" alt="Screen Shot 2018-06-15 at 6.21.18 PM"></p>
+<h2 id="Stick-breaking-example"><a href="#Stick-breaking-example" class="headerlink" title="Stick-breaking example"></a>Stick-breaking example</h2><h3 id="problem-setting"><a href="#problem-setting" class="headerlink" title="problem setting"></a>problem setting</h3><p>Break a stick of length $l$ twice: break at $X$ uniformly in $[0,l]$; then break at $Y$ uniformly in $[0,X]$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.26.23 PM.png" alt="Screen Shot 2018-06-15 at 6.26.23 PM"></p>
+<h3 id="analysis"><a href="#analysis" class="headerlink" title="analysis"></a>analysis</h3><p>$f_{X,Y}(x,y)=f_{X}(x)f_{Y|X}(y|x)=\frac{1}{l}\frac{1}{x}$</p>
+<p>$E(Y|X=x)=\int yf_{Y|X}(y|X=x)dy=\int_{0}^{x}y\frac{1}{x}dy=\frac{x}{2}$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.35.34 PM.png" alt="Screen Shot 2018-06-15 at 6.35.34 PM"></p>
 <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
 <ol>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>
@@ -748,7 +779,7 @@ P(|S\ge{\mu}|\ge\epsilon)\le2e^{-2m\epsilon^2}</script><p><img src="/2018/05/30/
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Independence"><span class="nav-number">1.</span> <span class="nav-text">Independence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discrete-Random-Variables"><span class="nav-number">2.</span> <span class="nav-text">Discrete Random Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binomial-Random-Variable"><span class="nav-number">3.</span> <span class="nav-text">Binomial Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Continuous-Random-Variable"><span class="nav-number">4.</span> <span class="nav-text">Continuous Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log"><span class="nav-number">5.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unbiased-estimator"><span class="nav-number">6.</span> <span class="nav-text">Unbiased estimator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Additive-Chernoff-Bound"><span class="nav-number">7.</span> <span class="nav-text">Additive Chernoff Bound</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Johnson-Lindenstrauss-Lemma"><span class="nav-number">8.</span> <span class="nav-text">Johnson-Lindenstrauss Lemma</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Independence"><span class="nav-number">1.</span> <span class="nav-text">Independence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discrete-Random-Variables"><span class="nav-number">2.</span> <span class="nav-text">Discrete Random Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binomial-Random-Variable"><span class="nav-number">3.</span> <span class="nav-text">Binomial Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Continuous-Random-Variable"><span class="nav-number">4.</span> <span class="nav-text">Continuous Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiple-Continuous-Random-Variables"><span class="nav-number">5.</span> <span class="nav-text">Multiple Continuous Random Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Joint-PDF"><span class="nav-number">5.1.</span> <span class="nav-text">Joint PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffon’s-needle"><span class="nav-number">5.2.</span> <span class="nav-text">Buffon’s needle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conditioning"><span class="nav-number">5.3.</span> <span class="nav-text">conditioning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stick-breaking-example"><span class="nav-number">5.4.</span> <span class="nav-text">Stick-breaking example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-setting"><span class="nav-number">5.4.1.</span> <span class="nav-text">problem setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#analysis"><span class="nav-number">5.4.2.</span> <span class="nav-text">analysis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log"><span class="nav-number">6.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unbiased-estimator"><span class="nav-number">7.</span> <span class="nav-text">Unbiased estimator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Additive-Chernoff-Bound"><span class="nav-number">8.</span> <span class="nav-text">Additive Chernoff Bound</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Johnson-Lindenstrauss-Lemma"><span class="nav-number">9.</span> <span class="nav-text">Johnson-Lindenstrauss Lemma</span></a></li></ol></div>
             
 
           </div>
