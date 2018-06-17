@@ -376,7 +376,7 @@
       
         
           
-            <p><a href="https://www.yiibai.com/numpy/numpy_array_creation_routines.html#article-start" target="_blank" rel="noopener">last</a></p>
+            <p><a href="https://www.yiibai.com/numpy/numpy_indexing_and_slicing.html#article-start" target="_blank" rel="noopener">last</a></p>
 <h1 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h1><p>NumPy 中定义的最重要的对象是称为 <code>ndarray</code> 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。</p>
 <p><code>ndarray</code>中的每个元素在内存中使用相同大小的块。 <code>ndarray</code>中的每个元素是数据类型对象的对象(称为 <code>dtype</code>)。</p>
 <p> 基本的<code>ndarray</code>是使用 NumPy 中的数组函数创建的</p>
@@ -450,7 +450,255 @@
 </pre></td><td class="code"><pre><div class="line">numpy.empty(shape, dtype = float, order = <span class="string">'C'</span>)</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-15 at 4.14.21 PM.png" alt="Screen Shot 2018-06-15 at 4.14.21 PM"></p>
-
+<blockquote>
+<p>shape参数以”( )”或者“[ ]”传递整数元组</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.empty([<span class="number">3</span>,<span class="number">2</span>], dtype =  int)</div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [[-9223372036854775808  1152930269942935736]</span></div>
+<div class="line"><span class="comment">#  [ 3401169227572248579  7795500255900756322]</span></div>
+<div class="line"><span class="comment">#  [          4298072681      844429423207176]]</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>数组元素为随机值，因为它们未初始化。</p>
+</blockquote>
+<h2 id="numpy-zeros"><a href="#numpy-zeros" class="headerlink" title="numpy.zeros()"></a>numpy.zeros()</h2><p>返回特定大小，以 0 填充的新数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.zeros(shape, dtype = float, order = <span class="string">'C'</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># 含有 5 个 0 的数组，默认类型为 float  </span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </div>
+<div class="line">x = np.zeros(<span class="number">5</span>)  </div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [0. 0. 0. 0. 0.]</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.zeros((<span class="number">5</span>,), dtype = np.int)</div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [0 0 0 0 0]</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.zeros((<span class="number">5</span>,<span class="number">2</span>), dtype = np.int)</div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [[0 0]</span></div>
+<div class="line"><span class="comment">#  [0 0]</span></div>
+<div class="line"><span class="comment">#  [0 0]</span></div>
+<div class="line"><span class="comment">#  [0 0]</span></div>
+<div class="line"><span class="comment">#  [0 0]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-ones"><a href="#numpy-ones" class="headerlink" title="numpy.ones()"></a>numpy.ones()</h2><p>返回特定大小，以 1 填充的新数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.ones(<span class="number">5</span>)</div>
+<div class="line">print(x)</div>
+<div class="line"><span class="comment"># [1. 1. 1. 1. 1.]</span></div>
+<div class="line"></div>
+<div class="line">x = np.ones([<span class="number">2</span>,<span class="number">2</span>], dtype =  int)</div>
+<div class="line">print(x)</div>
+<div class="line"><span class="comment"># [[1 1]</span></div>
+<div class="line"><span class="comment">#  [1 1]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-asarray"><a href="#numpy-asarray" class="headerlink" title="numpy.asarray()"></a>numpy.asarray()</h2><p>此函数类似于<code>numpy.array</code>，除了它有较少的参数。 这个例程对于将 Python 序列转换为<code>ndarray</code>非常有用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.asarray(a, dtype = <span class="keyword">None</span>, order = <span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p><code>a</code> 任意形式的输入参数，比如列表、列表的元组、元组、元组的元组、元组的列表</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># 将列表转换为 ndarray </span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </div>
+<div class="line"></div>
+<div class="line">x =  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] </div>
+<div class="line">a = np.asarray(x)  </div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"><span class="comment"># [1 2 3]</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置了 dtype</span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">x =  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div>
+<div class="line">a = np.asarray(x, dtype =  float)</div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"><span class="comment"># [1. 2. 3.]</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># 来自元组的 ndarray</span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">x =  (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div>
+<div class="line">a = np.asarray(x)</div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"><span class="comment"># [1 2 3]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-fromiter"><a href="#numpy-fromiter" class="headerlink" title="numpy.fromiter()"></a>numpy.fromiter()</h2><p>此函数从任何可迭代对象构建一个<code>ndarray</code>对象，返回一个新的一维数组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.fromiter(iterable, dtype, count = <span class="number">-1</span>)</div>
+</pre></td></tr></table></figure>
+<p>以下示例展示了如何使用内置的<code>range()</code>函数返回列表对象。 此列表的迭代器用于形成<code>ndarray</code>对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># 使用 range 函数创建列表对象  </span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </div>
+<div class="line">list = range(<span class="number">5</span>)  </div>
+<div class="line"><span class="keyword">print</span> (list)</div>
+<div class="line"><span class="comment"># range(0, 5)</span></div>
+<div class="line"></div>
+<div class="line">it = iter(list)</div>
+<div class="line"><span class="comment"># 使用迭代器创建 ndarray</span></div>
+<div class="line">x = np.fromiter(it, dtype =  float)</div>
+<div class="line">print(x)</div>
+<div class="line"><span class="comment"># [0. 1. 2. 3. 4.]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-arange"><a href="#numpy-arange" class="headerlink" title="numpy.arange()"></a>numpy.arange()</h2><p>这个函数返回<code>ndarray</code>对象，包含给定范围内的等间隔值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.arange(start, stop, step, dtype)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-17 at 10.23.27 AM.png" alt="Screen Shot 2018-06-17 at 10.23.27 AM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.arange(<span class="number">5</span>)  </div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [0 1 2 3 4]</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="comment"># 设置了 dtype</span></div>
+<div class="line">x = np.arange(<span class="number">5</span>, dtype =  float)  </div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [0.  1.  2.  3.  4.]</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置了起始值和终止值参数  </span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.arange(<span class="number">10</span>,<span class="number">20</span>,<span class="number">2</span>)  </div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [10  12  14  16  18]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-linspace"><a href="#numpy-linspace" class="headerlink" title="numpy.linspace"></a>numpy.linspace</h2><p>此函数类似于<code>arange()</code>函数。 在此函数中，指定了范围之间的均匀间隔数量，而不是步长。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.linspace(start, stop, num, endpoint, retstep, dtype)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-17 at 10.27.52 AM.png" alt="Screen Shot 2018-06-17 at 10.27.52 AM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.linspace(<span class="number">10</span>,<span class="number">20</span>,<span class="number">5</span>)</div>
+<div class="line"><span class="keyword">print</span> (x)</div>
+<div class="line"><span class="comment"># [10.  12.5 15.  17.5 20. ]</span></div>
+<div class="line"></div>
+<div class="line">x = np.linspace(<span class="number">10</span>,<span class="number">20</span>,  <span class="number">5</span>, endpoint =  <span class="keyword">False</span>)  </div>
+<div class="line"><span class="comment"># [10.   12.   14.   16.   18.]</span></div>
+<div class="line"></div>
+<div class="line">x = np.linspace(<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>, retstep =  <span class="keyword">True</span>)</div>
+<div class="line"><span class="comment"># (array([ 1.  ,  1.25,  1.5 ,  1.75,  2.  ]), 0.25)</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-logspace"><a href="#numpy-logspace" class="headerlink" title="numpy.logspace()"></a>numpy.logspace()</h2><p>此函数返回一个<code>ndarray</code>对象，其中包含在对数刻度上均匀分布的数字。 刻度的开始和结束端点是某个底数的幂，通常为 10。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.logscale(start, stop, num, endpoint, base, dtype)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-17 at 10.31.34 AM.png" alt="Screen Shot 2018-06-17 at 10.31.34 AM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="comment"># 默认底数是 10</span></div>
+<div class="line">a = np.logspace(<span class="number">1.0</span>,  <span class="number">2.0</span>, num =  <span class="number">10</span>)</div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"><span class="comment"># [ 10.          12.91549665  16.68100537  21.5443469   27.82559402</span></div>
+<div class="line"><span class="comment">#   35.93813664  46.41588834  59.94842503  77.42636827 100.        ]</span></div>
+<div class="line"></div>
+<div class="line">a = np.logspace(<span class="number">1</span>,<span class="number">10</span>,num =  <span class="number">10</span>,  base  =  <span class="number">2</span>)  </div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"><span class="comment"># [   2.    4.    8.   16.   32.   64.  128.  256.  512. 1024.]</span></div>
+</pre></td></tr></table></figure>
+<h1 id="切片和索引"><a href="#切片和索引" class="headerlink" title="切片和索引"></a>切片和索引</h1>
           
         
       
@@ -1541,7 +1789,7 @@ y&=eq2 &\text{if x=2}
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�117-->
+<!--�137-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
@@ -1698,7 +1946,7 @@ y&=eq2 &\text{if x=2}
 <li>数值积分（scipy.integrate Fusy）</li>
 </ol>
 <p>模块导入的标准方式是：</p>
-<!--�14-->
+<!--�34-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/07/ML-SciPy/#more" rel="contents">

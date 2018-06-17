@@ -105,7 +105,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-02%20at%204.16.55%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-02%20at%204.17.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-02%20at%204.20.01%20PM.png">
-<meta property="og:updated_time" content="2018-06-11T13:42:47.518Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-17%20at%2011.08.18%20AM.png">
+<meta property="og:updated_time" content="2018-06-17T16:09:29.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Random Response">
 <meta name="twitter:description" content="[2016-Atsushi] gives a comprehensive survey about random response. Randomized response tends to be used in data collection scenario.Randomized response is purely a client-based privacy solution. It do">
@@ -476,11 +477,17 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 <p>The problem setting is how to find frequent itemset with privacy. Say we have the item set $I={I_1,I_2,..,I_n}$. Before each user sends out their transaction which is $n$-dimention vector and ithe entry being 1 means this user has this item or else, he does the the randomized selection for each item. That is, keep true answer with probability $p_i$ for item i and  perturb the answer with $1-p$. And p controls the privacy level.</p>
 <p>For k-itemset, we want to find out its support, which comes from the estimator based on the perturbed data. Say we want to calculate the support of $2$-itemset. And the item set is $\{A,B,C,D\}$. And the candidate domain is $\{AB,AC,AD,BC,BD,CD\}$. The aim is to get the true count of $AB, \ c(AB)$, which is $11$ and may comes from $\{00,01,10,11\}$, with the probability matrix $P=\matrix{p_{00},p_{01}\\p_{10},p_{11}}$. so based on the observed count of $[A=0,B=0],[A=0,B=1],[A=1,B=0],[A=1,B=1]$ we can get estimator count matrix by $C_{observed}=PC_{estimator}\to C_{estimator}=P^{-1}C_{observed}$. And the support for $AB$ is $C_{estimator}[-1]$.</p>
 </blockquote>
+<p>Basic RAPPOR</p>
+<blockquote>
+<p><a href="https://arxiv.org/pdf/1503.01214.pdf" target="_blank" rel="noopener">[Building a RAPPOR with the Unknown: Privacy-Preserving Learning of Associations and Data Dictionaries]</a></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-06-17 at 11.08.18 AM.png" alt="Screen Shot 2018-06-17 at 11.08.18 AM"></p>
+</blockquote>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[2011-Quercia] SpotME if you can: randomized responses for location obfuscation on mobile phones</p>
 <p>[1965-Warner] Randomized response: a survey technique for eliminating evasive answer bias</p>
 <p>[2016-Wang] Using Randomized Response for Differential Privacy Preserving Data Collection </p>
 <p>[2006-Huseyin] Achieving Private Recommendations Using Randomized Response Techniques</p>
 <p>[2014-Sun] Personalized Privacy-Preserving Frequent Itemset Mining Using Randomized Response</p>
+<p>[]</p>
 
       
     </div>
