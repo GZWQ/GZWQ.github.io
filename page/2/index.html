@@ -2225,6 +2225,7 @@ P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where 
 <li>travel distance, where the travel distance of a user for accomplishing a task is considered in task allocation, in order to minimize the overall travel distance for all the tasks.</li>
 </ol>
 </blockquote>
+<p><a href="https://arxiv.org/pdf/1805.08418.pdf" target="_blank" rel="noopener">[2018-Wang Jiangtao]</a> provides the comprehensive survey on MCS(MobileCrowdScoucing) task allocation.</p>
 <h2 id="Task-Assignments-in-CrowdSourcing"><a href="#Task-Assignments-in-CrowdSourcing" class="headerlink" title="Task Assignments in CrowdSourcing"></a>Task Assignments in CrowdSourcing</h2><p>In croudsourcing, workers with mobile devices to collect data and send it to task requester for rewards.</p>
 <p>In task assignment, organizers need participants’ precise locations for optimal task allocation. However, the exposure of their locations raises privacy concerns. Especially for those who are not eventually selected for any task, their location privacy is sacrificed in vain.</p>
 <p>So in the differential privacy task assignment croudsourcing, the goal is to design a data release method that accurately represents the distribution of the workers and helps the Server efficiently match workers with tasks without compromising the privacy of their locations.</p>
@@ -2262,7 +2263,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <li><p>$k_2$ selection. $k_2$ controls the granularity of level-2 domain and small one leads to compactness in level-2 subcells. </p>
 </li>
 <li><p>improving $m_2$</p>
-<p><img src="/2018/05/26/DP Application-CrowdSourcing/DP Application-CroudSourcing/Screen Shot 2018-05-30 at 12.27.05 PM.png" alt="Screen Shot 2018-05-30 at 12.27.05 PM"></p>
+<p><img src="/2018/05/26/DP Application-CrowdSourcing/Screen Shot 2018-05-30 at 12.27.05 PM.png" alt="Screen Shot 2018-05-30 at 12.27.05 PM"></p>
 </li>
 </ul>
 </li>
@@ -2306,9 +2307,9 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <ol>
 <li><p>Framework</p>
 <ul>
-<li>Platform-side Geo-Obfuscation Function Generation</li>
-<li>User-side Location Obfuscation</li>
-<li>Platform-side Obfuscation-aware Task Allocation</li>
+<li>Platform-side : Geo-Obfuscation Function Generation</li>
+<li>User-side : Location Obfuscation</li>
+<li>Platform-side : Obfuscation-aware Task Allocation</li>
 </ul>
 </li>
 <li><p>Privacy Model</p>
@@ -2415,6 +2416,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <p>[2015-Layla] Participant privacy in mobile crowd sensing task management: A survey of methods and challenges</p>
 <p>[2015-Gong] Protecting Location Privacy for Task Allocation in Ad Hoc Mobile Cloud Computing</p>
 <p>[2016-Jin] INCEPTION: Incentivizing Privacy-Preserving Data Aggregation for Mobile Crowd Sensing Systems</p>
+<p>[2018-Wang Jiangtao] Task Allocation in Mobile Crowd Sensing: State of the Art and Future Opportunities</p>
 
           
         

@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-17%20at%2010.23.27%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-17%20at%2010.27.52%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-17%20at%2010.31.34%20AM.png">
-<meta property="og:updated_time" content="2018-06-17T15:34:22.611Z">
+<meta property="og:updated_time" content="2018-06-17T20:38:31.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - NumPy">
 <meta name="twitter:description" content="last Ndarray对象NumPy 中定义的最重要的对象是称为 ndarray 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。 ndarray中的每个元素在内存中使用相同大小的块。 ndarray中的每个元素是数据类型对象的对象(称为 dtype)。  基本的ndarray是使用 NumPy 中的数组函数创建的 1 numpy.array(object">
@@ -382,7 +382,7 @@
       
 
       
-        <p><a href="https://www.yiibai.com/numpy/numpy_indexing_and_slicing.html#article-start" target="_blank" rel="noopener">last</a></p>
+        <p><a href="https://www.yiibai.com/numpy/numpy_advanced_indexing.html#article-start" target="_blank" rel="noopener">last</a></p>
 <h1 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h1><p>NumPy 中定义的最重要的对象是称为 <code>ndarray</code> 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。</p>
 <p><code>ndarray</code>中的每个元素在内存中使用相同大小的块。 <code>ndarray</code>中的每个元素是数据类型对象的对象(称为 <code>dtype</code>)。</p>
 <p> 基本的<code>ndarray</code>是使用 NumPy 中的数组函数创建的</p>
@@ -704,7 +704,149 @@
 <div class="line"><span class="keyword">print</span> (a)</div>
 <div class="line"><span class="comment"># [   2.    4.    8.   16.   32.   64.  128.  256.  512. 1024.]</span></div>
 </pre></td></tr></table></figure>
-<h1 id="切片和索引"><a href="#切片和索引" class="headerlink" title="切片和索引"></a>切片和索引</h1>
+<h1 id="切片和索引"><a href="#切片和索引" class="headerlink" title="切片和索引"></a>切片和索引</h1><h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p><code>ndarray</code>对象的内容可以通过索引或切片来访问和修改, <code>ndarray</code>对象中的元素遵循基于零的索引。 有三种可用的索引方法类型： <strong>字段访问，基本切片</strong>和<strong>高级索引</strong>。</p>
+<p>基本切片是 Python 中基本切片概念到 n 维的扩展。 通过将<code>start</code>，<code>stop</code>和<code>step</code>参数提供给内置的<code>slice</code>函数来构造一个 Python <code>slice</code>对象。 此<code>slice</code>对象被传递给数组来提取数组的一部分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.arange(<span class="number">10</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [0 1 2 3 4 5 6 7 8 9]</span></div>
+<div class="line">s = slice(<span class="number">2</span>,<span class="number">7</span>,<span class="number">2</span>)</div>
+<div class="line"><span class="keyword">print</span> (a[s])</div>
+<div class="line"><span class="comment"># [2 4 6]</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>在上面的例子中，<code>ndarray</code>对象由<code>arange()</code>函数创建。 然后，分别用起始，终止和步长值<code>2</code>，<code>7</code>和<code>2</code>定义切片对象。 当这个切片对象传递给<code>ndarray</code>时，会对它的一部分进行切片，从索引<code>2</code>到<code>7</code>，步长为<code>2</code>。</p>
+</blockquote>
+<p>通过将由冒号分隔的切片参数(<code>start:stop:step</code>)直接提供给<code>ndarray</code>对象，也可以获得相同的结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.arange(<span class="number">10</span>)</div>
+<div class="line">b = a[<span class="number">2</span>:<span class="number">7</span>:<span class="number">2</span>]</div>
+<div class="line"><span class="keyword">print</span> (b)</div>
+<div class="line"><span class="comment"># [2 4 6]</span></div>
+</pre></td></tr></table></figure>
+<p>如果只输入一个参数，则将返回与索引对应的单个项目。 如果使用<code>a:</code>，则从该索引向后的所有项目将被提取。 如果使用两个参数(以<code>:</code>分隔)，则对两个索引(不包括停止索引)之间的元素以默认步骤进行切片。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># 对单个元素进行切片  </span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.arange(<span class="number">10</span>)</div>
+<div class="line">b = a[<span class="number">5</span>]  </div>
+<div class="line"><span class="keyword">print</span> (b)</div>
+<div class="line"><span class="comment"># 5</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 对始于索引的元素进行切片</span></div>
+<div class="line">a = np.arange(<span class="number">10</span>)</div>
+<div class="line"><span class="keyword">print</span> (a[<span class="number">2</span>:])</div>
+<div class="line"><span class="comment"># [2 3 4 5 6 7 8 9]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 对索引之间的元素进行切片</span></div>
+<div class="line">a = np.arange(<span class="number">10</span>)</div>
+<div class="line"><span class="keyword">print</span> (a[<span class="number">2</span>:<span class="number">5</span>])</div>
+<div class="line"><span class="comment"># [2  3  4]</span></div>
+</pre></td></tr></table></figure>
+<p>上面的描述也可用于多维<code>ndarray</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])  </div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"><span class="comment"># [[1 2 3]</span></div>
+<div class="line"><span class="comment">#  [3 4 5]</span></div>
+<div class="line"><span class="comment">#  [4 5 6]]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 对始于索引的元素进行切片</span></div>
+<div class="line"><span class="keyword">print</span> (a[<span class="number">1</span>:])</div>
+<div class="line"><span class="comment"># [[3 4 5]</span></div>
+<div class="line"><span class="comment">#  [4 5 6]]</span></div>
+</pre></td></tr></table></figure>
+<p>切片还可以包括省略号(<code>...</code>)，来使选择元组的长度与数组的维度相同。 如果在行位置使用省略号，它将返回包含行中元素的<code>ndarray</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])  </div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"><span class="comment"># [[1 2 3]</span></div>
+<div class="line"><span class="comment">#  [3 4 5]</span></div>
+<div class="line"><span class="comment">#  [4 5 6]]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 这会返回第二列元素的数组：</span></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">'第二列的元素是：'</span>)</div>
+<div class="line"><span class="keyword">print</span> (a[...,<span class="number">1</span>])</div>
+<div class="line"><span class="comment"># [2 4 5]</span></div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 现在我们从第二行切片所有元素：</span></div>
+<div class="line"><span class="keyword">print</span>  (<span class="string">'第二行的元素是：'</span> )</div>
+<div class="line"><span class="keyword">print</span> (a[<span class="number">1</span>,...])</div>
+<div class="line"><span class="comment"># [3 4 5]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 现在我们从第二列向后切片所有元素：</span></div>
+<div class="line"><span class="keyword">print</span>  (<span class="string">'第二列及其剩余元素是：'</span> )</div>
+<div class="line"><span class="keyword">print</span> (a[...,<span class="number">1</span>:])</div>
+<div class="line"><span class="comment"># [[2 3]</span></div>
+<div class="line"><span class="comment">#  [4 5]</span></div>
+<div class="line"><span class="comment">#  [5 6]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="高级索引"><a href="#高级索引" class="headerlink" title="高级索引"></a>高级索引</h2>
       
     </div>
     
@@ -874,7 +1016,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ndarray对象"><span class="nav-number">1.</span> <span class="nav-text">Ndarray对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">1.1.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组"><span class="nav-number">1.2.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组属性"><span class="nav-number">1.3.</span> <span class="nav-text">数组属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray-shape"><span class="nav-number">1.3.1.</span> <span class="nav-text">ndarray.shape</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组创建"><span class="nav-number">2.</span> <span class="nav-text">数组创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-empty"><span class="nav-number">2.1.</span> <span class="nav-text">numpy.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">2.2.</span> <span class="nav-text">numpy.zeros()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-ones"><span class="nav-number">2.3.</span> <span class="nav-text">numpy.ones()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">2.4.</span> <span class="nav-text">numpy.asarray()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">2.5.</span> <span class="nav-text">numpy.fromiter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-arange"><span class="nav-number">2.6.</span> <span class="nav-text">numpy.arange()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">2.7.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">2.8.</span> <span class="nav-text">numpy.logspace()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切片和索引"><span class="nav-number">3.</span> <span class="nav-text">切片和索引</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ndarray对象"><span class="nav-number">1.</span> <span class="nav-text">Ndarray对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">1.1.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组"><span class="nav-number">1.2.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组属性"><span class="nav-number">1.3.</span> <span class="nav-text">数组属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray-shape"><span class="nav-number">1.3.1.</span> <span class="nav-text">ndarray.shape</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组创建"><span class="nav-number">2.</span> <span class="nav-text">数组创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-empty"><span class="nav-number">2.1.</span> <span class="nav-text">numpy.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">2.2.</span> <span class="nav-text">numpy.zeros()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-ones"><span class="nav-number">2.3.</span> <span class="nav-text">numpy.ones()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">2.4.</span> <span class="nav-text">numpy.asarray()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">2.5.</span> <span class="nav-text">numpy.fromiter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-arange"><span class="nav-number">2.6.</span> <span class="nav-text">numpy.arange()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">2.7.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">2.8.</span> <span class="nav-text">numpy.logspace()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切片和索引"><span class="nav-number">3.</span> <span class="nav-text">切片和索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#切片"><span class="nav-number">3.1.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级索引"><span class="nav-number">3.2.</span> <span class="nav-text">高级索引</span></a></li></ol></li></ol></div>
             
 
           </div>
