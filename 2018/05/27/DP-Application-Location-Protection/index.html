@@ -87,10 +87,22 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-11T13:42:32.574Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.24.24%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.41.01%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.35.06%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.49.49%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.57.09%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.57.58%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%204.32.21%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.27.01%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.37.57%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.55.09%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.58.43%20PM.png">
+<meta property="og:updated_time" content="2018-06-19T23:31:36.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Location Protection">
 <meta name="twitter:description" content="Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability f">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.24.24%20PM.png">
 
 
 
@@ -377,8 +389,46 @@
 
       
         <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
-<h3 id="2013-Andres"><a href="#2013-Andres" class="headerlink" title="[2013-Andres]"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a></h3><p>It performs as a probabilistic geo-obfuscation process, i.e., a user first obfuscates his<br>real location to another one according to a pre-configured<br>probability function P (encoding the probability of mapping<br>arbitrary location l to l∗) and then uploads the obfuscated<br>location to the server. The probability function is the key to<br>ensure differential privacy. The basic idea is that, suppose<br>the obfuscated location is l∗, for any two locations l1, l2,<br>their probability of being mapped to l∗ are similar. Then,<br>if an adversary observes a user u in l∗, he/she cannot distinguish whether u is actually in l1 or l2, even if he/she knows<br>the obfuscation function P . With this intuition, differential<br>privacy formally defines such similarity between any two<br>locations l1, l2 for arbitrary l∗.</p>
-<p>The distance d(l1; l2) is introduced in the formulation to<br>reflect the intuition that if l1 and l2 are close to each other<br>(i.e., small d(l1; l2)), they should be more indistinguishable.Note that the set of locations L can be constructed by dividing the concerned area into a set of regions (of arbitrary<br>size) and selecting the representative locations of the regions<br>(e.g., geographic center)</p>
+<a id="more"></a>
+<h3 id="2013-Andres-Geo-indistinguishability"><a href="#2013-Andres-Geo-indistinguishability" class="headerlink" title="[2013-Andres]:Geo-indistinguishability"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a>:Geo-indistinguishability</h3><h3 id="A-motivating-scenario"><a href="#A-motivating-scenario" class="headerlink" title="A motivating scenario"></a>A motivating scenario</h3><p>A user visiting Paris, currently located at a point $x$ close to the Eiffel Tower, and wishing to discover nearby restaurants with good reviews. To achieve this goal, the user can query a service provider (for instance, an LBS server); however, to maintain his privacy, the user does not wish to disclose his exact location. Instead, he can provide some approximate information that still allows him to obtain a useful service, for instance, a randomly chosen point $z$ close to his location. </p>
+<p>We fix a circle of radius $r$ centered at the user’s location, and we reason about the user’s level of privacy within this radius.</p>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.24.24 PM.png" alt="Screen Shot 2018-06-19 at 12.24.24 PM"></p>
+<h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><h4 id="Adversary-model"><a href="#Adversary-model" class="headerlink" title="Adversary model"></a>Adversary model</h4><p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.41.01 PM.png" alt="Screen Shot 2018-06-19 at 12.41.01 PM"></p>
+<h4 id="informal-one"><a href="#informal-one" class="headerlink" title="informal one"></a>informal one</h4><p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.35.06 PM.png" alt="Screen Shot 2018-06-19 at 12.35.06 PM"></p>
+<h4 id="Geo-indistinguishability-I"><a href="#Geo-indistinguishability-I" class="headerlink" title="Geo-indistinguishability-I"></a>Geo-indistinguishability-I</h4><p>A mechanism satisfies $\epsilon$ -geoindistinguishability iff for all priors $P_X$ and all observations $S \subseteq Z:$</p>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.49.49 PM.png" alt="Screen Shot 2018-06-19 at 12.49.49 PM"></p>
+<blockquote>
+<ol>
+<li>This definition considers that after observing $S$, the attacker assigns similar probabilities to the user being located in $x$ or $x’$.</li>
+<li>the distance is the Euclidean distance between points.</li>
+</ol>
+</blockquote>
+<h4 id="Geo-indistinguishability-II"><a href="#Geo-indistinguishability-II" class="headerlink" title="Geo-indistinguishability-II"></a>Geo-indistinguishability-II</h4><p>A mechanism satisfies $\epsilon$-geoindistinguishability iff for all priors $P_X$ and all observations $S \subseteq Z:$</p>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.57.09 PM.png" alt="Screen Shot 2018-06-19 at 12.57.09 PM"></p>
+<blockquote>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.57.58 PM.png" alt="Screen Shot 2018-06-19 at 12.57.58 PM"></p>
+</blockquote>
+<h4 id="Geo-indistinguishability-III"><a href="#Geo-indistinguishability-III" class="headerlink" title="Geo-indistinguishability-III"></a>Geo-indistinguishability-III</h4><p>A mechanism satisfies $\epsilon$-geoindistinguishability iff for all observations $S \subseteq Z:$</p>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 4.32.21 PM.png" alt="Screen Shot 2018-06-19 at 4.32.21 PM"></p>
+<blockquote>
+<ol>
+<li>This definition requires that points within distance $l$ produce observations with similar probabilities</li>
+</ol>
+</blockquote>
+<p>In above three definition, the privacy level is $l$ while $\epsilon$ can be considered as unit of distance measurement, where $l=\epsilon r$. For example, the user specifies his desired level of privacy, say $l=ln(4)$ within $r=0.2$km, then the $\frac{In(4)}{0.2}$-geo-indistinguishability ensures the user that by revealing his approximate location, the adversary cannot infer his real location with probability 4 times higher than without revealing his location among all locations within 200 meters.</p>
+<h3 id="Mechanism-for-Geo-indistinguishability"><a href="#Mechanism-for-Geo-indistinguishability" class="headerlink" title="Mechanism for Geo-indistinguishability"></a>Mechanism for Geo-indistinguishability</h3><p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.27.01 PM.png" alt="Screen Shot 2018-06-19 at 5.27.01 PM"></p>
+<blockquote>
+<ol>
+<li>We explore how to define a geoindistinguishable mechanism on the continuous plane.</li>
+<li>we call this function planar laplacian centered in $x_0$</li>
+<li></li>
+</ol>
+</blockquote>
+<h3 id="Random-point-generation"><a href="#Random-point-generation" class="headerlink" title="Random point generation"></a>Random point generation</h3><p>It will be convenient, therefore, to transform the reference system into a system of polar coordinates with origin in $x_0$. </p>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.37.57 PM.png" alt="Screen Shot 2018-06-19 at 5.37.57 PM"></p>
+<p>Since $r$ and $\theta$ are independent, so</p>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.55.09 PM.png" alt="Screen Shot 2018-06-19 at 5.55.09 PM"></p>
+<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.58.43 PM.png" alt="Screen Shot 2018-06-19 at 5.58.43 PM"></p>
 <h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Andres] Geo-indistinguishability: Differential privacy for location-based systems</p>
 <p>[2014-Nicolas] Optimal geo-indistinguishable mechanisms for location privacy</p>
 
@@ -555,7 +605,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">1.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres"><span class="nav-number">1.1.</span> <span class="nav-text">[2013-Andres]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">1.2.</span> <span class="nav-text">[2014-Nicolas]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">1.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres-Geo-indistinguishability"><span class="nav-number">1.1.</span> <span class="nav-text">[2013-Andres]:Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-motivating-scenario"><span class="nav-number">1.2.</span> <span class="nav-text">A motivating scenario</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">1.3.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Adversary-model"><span class="nav-number">1.3.1.</span> <span class="nav-text">Adversary model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#informal-one"><span class="nav-number">1.3.2.</span> <span class="nav-text">informal one</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-I"><span class="nav-number">1.3.3.</span> <span class="nav-text">Geo-indistinguishability-I</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-II"><span class="nav-number">1.3.4.</span> <span class="nav-text">Geo-indistinguishability-II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-III"><span class="nav-number">1.3.5.</span> <span class="nav-text">Geo-indistinguishability-III</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mechanism-for-Geo-indistinguishability"><span class="nav-number">1.4.</span> <span class="nav-text">Mechanism for Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-point-generation"><span class="nav-number">1.5.</span> <span class="nav-text">Random point generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">1.6.</span> <span class="nav-text">[2014-Nicolas]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -1072,6 +1122,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

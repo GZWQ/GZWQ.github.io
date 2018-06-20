@@ -95,7 +95,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-18%20at%203.53.25%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-18%20at%204.01.08%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-18%20at%204.11.26%20PM.png">
-<meta property="og:updated_time" content="2018-06-18T21:12:01.280Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-19%20at%203.32.30%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-19%20at%203.43.35%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-19%20at%203.50.55%20PM.png">
+<meta property="og:updated_time" content="2018-06-19T20:59:05.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - NumPy">
 <meta name="twitter:description" content="last Ndarray对象NumPy 中定义的最重要的对象是称为 ndarray 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。 ndarray中的每个元素在内存中使用相同大小的块。 ndarray中的每个元素是数据类型对象的对象(称为 dtype)。  基本的ndarray是使用 NumPy 中的数组函数创建的 1 numpy.array(object">
@@ -1245,6 +1248,381 @@
 <div class="line"><span class="comment"># [ 2  6 10 14  4  8 12 16]</span></div>
 </pre></td></tr></table></figure>
 <h2 id="数组翻转"><a href="#数组翻转" class="headerlink" title="数组翻转"></a>数组翻转</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-18 at 4.11.26 PM.png" alt="Screen Shot 2018-06-18 at 4.11.26 PM"></p>
+<h3 id="numpy-transpose"><a href="#numpy-transpose" class="headerlink" title="numpy.transpose()"></a>numpy.transpose()</h3><p>这个函数翻转给定数组的维度。如果可能的话它会返回一个视图。函数接受下列参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.transpose(arr, axes)</div>
+</pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>arr</code>：要转置的数组</li>
+<li><code>axes</code>：整数的列表，对应维度，通常所有维度都会翻转。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.array([<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>,<span class="number">12</span>,<span class="number">14</span>,<span class="number">16</span>]).reshape(<span class="number">4</span>,<span class="number">2</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[ 2  4]</span></div>
+<div class="line"><span class="comment">#  [ 6  8]</span></div>
+<div class="line"><span class="comment">#  [10 12]</span></div>
+<div class="line"><span class="comment">#  [14 16]]</span></div>
+<div class="line"></div>
+<div class="line">print(np.transpose(a))</div>
+<div class="line"><span class="comment"># [[ 2  6 10 14]</span></div>
+<div class="line"><span class="comment">#  [ 4  8 12 16]]</span></div>
+</pre></td></tr></table></figure>
+<h3 id="numpy-ndarray-T"><a href="#numpy-ndarray-T" class="headerlink" title="numpy.ndarray.T"></a>numpy.ndarray.T</h3><p>该函数属于<code>ndarray</code>类，行为类似于<code>numpy.transpose</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.array([<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">10</span>,<span class="number">12</span>,<span class="number">14</span>,<span class="number">16</span>]).reshape(<span class="number">4</span>,<span class="number">2</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[ 2  4]</span></div>
+<div class="line"><span class="comment">#  [ 6  8]</span></div>
+<div class="line"><span class="comment">#  [10 12]</span></div>
+<div class="line"><span class="comment">#  [14 16]]</span></div>
+<div class="line"></div>
+<div class="line">print(a.T)</div>
+<div class="line"><span class="comment"># [[ 2  6 10 14]</span></div>
+<div class="line"><span class="comment">#  [ 4  8 12 16]]</span></div>
+</pre></td></tr></table></figure>
+<h3 id="numpy-rollaxis"><a href="#numpy-rollaxis" class="headerlink" title="numpy.rollaxis()"></a>numpy.rollaxis()</h3><p>该函数向后滚动特定的轴，直到一个特定位置。这个函数接受三个参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.rollaxis(arr, axis, start)</div>
+</pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>arr</code>：输入数组</li>
+<li><code>axis</code>：要向后滚动的轴，其它轴的相对位置不会改变</li>
+<li><code>start</code>：默认为零，表示完整的滚动。会滚动到特定位置。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#有些数据集的图片默认图片格式是[chanel][height][width], 然而有些地方显示图片是[height][width][chanel], 这就需要改变一下图片轴的次序。</span></div>
+<div class="line"><span class="comment"># old_img是3*32*32的，new_img是32*32*3的</span></div>
+<div class="line">newimg = np.rollaxis(old_img, <span class="number">0</span>, <span class="number">3</span>)  <span class="comment"># 把轴0放到轴3的位置</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.arange(<span class="number">8</span>)</div>
+<div class="line">a = a.reshape(<span class="number">2</span>,<span class="number">4</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[0 1 2 3]</span></div>
+<div class="line"><span class="comment">#  [4 5 6 7]]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#将轴1滚动到轴0，(2,4)-&gt;(4,2)</span></div>
+<div class="line">print(np.rollaxis(a,<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [[0 4]</span></div>
+<div class="line"><span class="comment">#  [1 5]</span></div>
+<div class="line"><span class="comment">#  [2 6]</span></div>
+<div class="line"><span class="comment">#  [3 7]]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#即轴1滚动到轴1，不变</span></div>
+<div class="line">print(np.rollaxis(a,<span class="number">1</span>,<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [[0 1 2 3]</span></div>
+<div class="line"><span class="comment">#  [4 5 6 7]]</span></div>
+</pre></td></tr></table></figure>
+<h3 id="numpy-swapaxes"><a href="#numpy-swapaxes" class="headerlink" title="numpy.swapaxes()"></a>numpy.swapaxes()</h3><p>该函数交换数组的两个轴。对于 1.10 之前的 NumPy 版本，会返回交换后数组的试图。这个函数接受下列参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.swapaxes(arr, axis1, axis2)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li><code>arr</code>：要交换其轴的输入数组</li>
+<li><code>axis1</code>：对应第一个轴的整数</li>
+<li><p><code>axis2</code>：对应第二个轴的整数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.arange(<span class="number">16</span>)</div>
+<div class="line">a = a.reshape(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[[ 0  1  2  3]</span></div>
+<div class="line"><span class="comment">#   [ 4  5  6  7]]</span></div>
+<div class="line"><span class="comment">#</span></div>
+<div class="line"><span class="comment">#  [[ 8  9 10 11]</span></div>
+<div class="line"><span class="comment">#   [12 13 14 15]]]</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#就是将第三个维度和第二个维度交换,</span></div>
+<div class="line"><span class="comment"># 数字7来说，之前的索引是(0,1,3),那么交换之后，就应该是(0,3,1)</span></div>
+<div class="line">print(np.swapaxes(a,<span class="number">2</span>,<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [[[ 0  4]</span></div>
+<div class="line"><span class="comment">#   [ 1  5]</span></div>
+<div class="line"><span class="comment">#   [ 2  6]</span></div>
+<div class="line"><span class="comment">#   [ 3  7]]</span></div>
+<div class="line"><span class="comment">#</span></div>
+<div class="line"><span class="comment">#  [[ 8 12]</span></div>
+<div class="line"><span class="comment">#   [ 9 13]</span></div>
+<div class="line"><span class="comment">#   [10 14]</span></div>
+<div class="line"><span class="comment">#   [11 15]]]</span></div>
+</pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="修改维度"><a href="#修改维度" class="headerlink" title="修改维度"></a>修改维度</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-19 at 3.32.30 PM.png" alt="Screen Shot 2018-06-19 at 3.32.30 PM"></p>
+<h3 id="numpy-expand-dims"><a href="#numpy-expand-dims" class="headerlink" title="numpy.expand_dims()"></a>numpy.expand_dims()</h3><p>函数通过在指定位置插入新的轴来扩展数组形状。该函数需要两个参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.expand_dims(arr, axis)</div>
+</pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>arr</code>：输入数组</li>
+<li><code>axis</code>：新轴插入的位置</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">x = np.array([<span class="number">1</span>,<span class="number">2</span>])</div>
+<div class="line">print(x,x.shape)</div>
+<div class="line"><span class="comment"># [1 2],(2,)</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#</span></div>
+<div class="line">y = np.expand_dims(x,axis=<span class="number">0</span>)</div>
+<div class="line">print(y,y.shape)</div>
+<div class="line"><span class="comment"># [[1 2]],(1, 2)</span></div>
+<div class="line"></div>
+<div class="line">y = np.expand_dims(x,axis=<span class="number">1</span>)</div>
+<div class="line">print(y,y.shape)</div>
+<div class="line"><span class="comment"># [[1]</span></div>
+<div class="line"><span class="comment">#  [2]]  (2, 1)</span></div>
+</pre></td></tr></table></figure>
+<h3 id="numpy-squeeze"><a href="#numpy-squeeze" class="headerlink" title="numpy.squeeze()"></a>numpy.squeeze()</h3><p>函数从给定数组的形状中删除一维条目,即shape=(x,..,1,…y),那么就会变成（x,.,y）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.squeeze(arr, axis)</div>
+</pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>arr</code>：输入数组</li>
+<li><code>axis</code>：整数或整数元组，用于选择形状中单一维度条目的子集</li>
+</ul>
+<h2 id="数组连接"><a href="#数组连接" class="headerlink" title="数组连接"></a>数组连接</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-19 at 3.43.35 PM.png" alt="Screen Shot 2018-06-19 at 3.43.35 PM"></p>
+<h3 id="numpy-concatenate"><a href="#numpy-concatenate" class="headerlink" title="numpy.concatenate()"></a>numpy.concatenate()</h3><p>数组的连接是指连接。 此函数用于沿指定轴连接相同形状的两个或多个数组。 该函数接受以下参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.concatenate((a1, a2, ...), axis)</div>
+</pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>a1, a2, ...</code>：相同类型的数组序列</li>
+<li><code>axis</code>：沿着它连接数组的轴，默认为 0，即添加在下方；axis=1使添加在右方</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[1 2]</span></div>
+<div class="line"><span class="comment">#  [3 4]]</span></div>
+<div class="line"></div>
+<div class="line">b = np.array([[<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>]])</div>
+<div class="line">print(b)</div>
+<div class="line"><span class="comment"># [[5 6]</span></div>
+<div class="line"><span class="comment">#  [7 8]]</span></div>
+<div class="line"></div>
+<div class="line">print(np.concatenate((a,b)))</div>
+<div class="line"><span class="comment"># [[1 2]</span></div>
+<div class="line"><span class="comment">#  [3 4]</span></div>
+<div class="line"><span class="comment">#  [5 6]</span></div>
+<div class="line"><span class="comment">#  [7 8]]</span></div>
+<div class="line"></div>
+<div class="line">print(np.concatenate((a,b),axis=<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [[1 2 5 6]</span></div>
+<div class="line"><span class="comment">#  [3 4 7 8]]</span></div>
+</pre></td></tr></table></figure>
+<h3 id="numpy-stack"><a href="#numpy-stack" class="headerlink" title="numpy.stack()"></a>numpy.stack()</h3><p>此函数沿新轴连接数组序列。 此功能添加自 NumPy 版本 1.10.0。 需要提供以下参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.stack(arrays, axis)</div>
+</pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>arrays</code>：相同形状的数组序列</li>
+<li><code>axis</code>：返回数组中的轴，输入数组沿着它来堆叠</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div>
+<div class="line"></div>
+<div class="line">b = np.array([<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</div>
+<div class="line"></div>
+<div class="line">print(np.stack((a,b)))</div>
+<div class="line"><span class="comment"># [[1 2 3]</span></div>
+<div class="line"><span class="comment">#  [4 5 6]]</span></div>
+<div class="line"><span class="comment"># shape = (2,3)</span></div>
+<div class="line"></div>
+<div class="line">print(np.stack((a,b),axis=<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [[1 4]</span></div>
+<div class="line"><span class="comment">#  [2 5]</span></div>
+<div class="line"><span class="comment">#  [3 6]]</span></div>
+<div class="line"><span class="comment"># shape = (3,2)</span></div>
+</pre></td></tr></table></figure>
+<h2 id="数组分割"><a href="#数组分割" class="headerlink" title="数组分割"></a>数组分割</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-19 at 3.50.55 PM.png" alt="Screen Shot 2018-06-19 at 3.50.55 PM"></p>
+<h3 id="numpy-split"><a href="#numpy-split" class="headerlink" title="numpy.split()"></a>numpy.split()</h3><p>该函数沿特定的轴将数组分割为子数组。函数接受三个参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.split(ary, indices_or_sections, axis)</div>
+</pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li><code>ary</code>：被分割的输入数组</li>
+<li><code>indices_or_sections</code>：可以是整数，表明要从输入数组创建的，等大小的子数组的数量。 如果此参数是一维数组，则其元素表明要创建新子数组的点。</li>
+<li><code>axis</code>：默认为 0</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.arange(<span class="number">9</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">'第一个数组：'</span>)</div>
+<div class="line"><span class="keyword">print</span> (a)</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">'将数组分为三个大小相等的子数组：'</span>)</div>
+<div class="line">b = np.split(a,<span class="number">3</span>)</div>
+<div class="line"><span class="keyword">print</span> (b)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">'将数组在一维数组中表明的位置分割：'</span>)</div>
+<div class="line">b = np.split(a,[<span class="number">4</span>,<span class="number">7</span>])</div>
+<div class="line"><span class="keyword">print</span> (b)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 第一个数组：</span></div>
+<div class="line"><span class="comment"># [0 1 2 3 4 5 6 7 8]</span></div>
+<div class="line"><span class="comment"># 将数组分为三个大小相等的子数组：</span></div>
+<div class="line"><span class="comment"># [array([0, 1, 2]), array([3, 4, 5]), array([6, 7, 8])]</span></div>
+<div class="line"><span class="comment"># 将数组在一维数组中表明的位置分割：</span></div>
+<div class="line"><span class="comment"># [array([0, 1, 2, 3]), array([4, 5, 6]), array([7, 8])]</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>如果之前的shape是(x,y)，那么分割之后是(x/2 , y) 或者 (x , y/2)</p>
+</blockquote>
 
       
     </div>
@@ -1415,7 +1793,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ndarray对象"><span class="nav-number">1.</span> <span class="nav-text">Ndarray对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">1.1.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组"><span class="nav-number">1.2.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组属性"><span class="nav-number">1.3.</span> <span class="nav-text">数组属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray-shape"><span class="nav-number">1.3.1.</span> <span class="nav-text">ndarray.shape</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组创建"><span class="nav-number">2.</span> <span class="nav-text">数组创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-empty"><span class="nav-number">2.1.</span> <span class="nav-text">numpy.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">2.2.</span> <span class="nav-text">numpy.zeros()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-ones"><span class="nav-number">2.3.</span> <span class="nav-text">numpy.ones()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">2.4.</span> <span class="nav-text">numpy.asarray()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">2.5.</span> <span class="nav-text">numpy.fromiter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-arange"><span class="nav-number">2.6.</span> <span class="nav-text">numpy.arange()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">2.7.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">2.8.</span> <span class="nav-text">numpy.logspace()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切片和索引"><span class="nav-number">3.</span> <span class="nav-text">切片和索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#切片"><span class="nav-number">3.1.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级索引"><span class="nav-number">3.2.</span> <span class="nav-text">高级索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数索引"><span class="nav-number">3.3.</span> <span class="nav-text">整数索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔索引"><span class="nav-number">3.4.</span> <span class="nav-text">布尔索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy广播"><span class="nav-number">4.</span> <span class="nav-text">NumPy广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组迭代"><span class="nav-number">5.</span> <span class="nav-text">NumPy数组迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代顺序"><span class="nav-number">5.1.</span> <span class="nav-text">迭代顺序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组操作"><span class="nav-number">6.</span> <span class="nav-text">NumPy数组操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改数组形状"><span class="nav-number">6.1.</span> <span class="nav-text">修改数组形状</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-reshape"><span class="nav-number">6.1.1.</span> <span class="nav-text">numpy.reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flat"><span class="nav-number">6.1.2.</span> <span class="nav-text">numpy.ndarray.flat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flatten"><span class="nav-number">6.1.3.</span> <span class="nav-text">numpy.ndarray.flatten</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ravel"><span class="nav-number">6.1.4.</span> <span class="nav-text">numpy.ravel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组翻转"><span class="nav-number">6.2.</span> <span class="nav-text">数组翻转</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ndarray对象"><span class="nav-number">1.</span> <span class="nav-text">Ndarray对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">1.1.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组"><span class="nav-number">1.2.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组属性"><span class="nav-number">1.3.</span> <span class="nav-text">数组属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray-shape"><span class="nav-number">1.3.1.</span> <span class="nav-text">ndarray.shape</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组创建"><span class="nav-number">2.</span> <span class="nav-text">数组创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-empty"><span class="nav-number">2.1.</span> <span class="nav-text">numpy.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">2.2.</span> <span class="nav-text">numpy.zeros()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-ones"><span class="nav-number">2.3.</span> <span class="nav-text">numpy.ones()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">2.4.</span> <span class="nav-text">numpy.asarray()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">2.5.</span> <span class="nav-text">numpy.fromiter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-arange"><span class="nav-number">2.6.</span> <span class="nav-text">numpy.arange()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">2.7.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">2.8.</span> <span class="nav-text">numpy.logspace()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切片和索引"><span class="nav-number">3.</span> <span class="nav-text">切片和索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#切片"><span class="nav-number">3.1.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级索引"><span class="nav-number">3.2.</span> <span class="nav-text">高级索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数索引"><span class="nav-number">3.3.</span> <span class="nav-text">整数索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔索引"><span class="nav-number">3.4.</span> <span class="nav-text">布尔索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy广播"><span class="nav-number">4.</span> <span class="nav-text">NumPy广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组迭代"><span class="nav-number">5.</span> <span class="nav-text">NumPy数组迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代顺序"><span class="nav-number">5.1.</span> <span class="nav-text">迭代顺序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组操作"><span class="nav-number">6.</span> <span class="nav-text">NumPy数组操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改数组形状"><span class="nav-number">6.1.</span> <span class="nav-text">修改数组形状</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-reshape"><span class="nav-number">6.1.1.</span> <span class="nav-text">numpy.reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flat"><span class="nav-number">6.1.2.</span> <span class="nav-text">numpy.ndarray.flat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flatten"><span class="nav-number">6.1.3.</span> <span class="nav-text">numpy.ndarray.flatten</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ravel"><span class="nav-number">6.1.4.</span> <span class="nav-text">numpy.ravel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组翻转"><span class="nav-number">6.2.</span> <span class="nav-text">数组翻转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-transpose"><span class="nav-number">6.2.1.</span> <span class="nav-text">numpy.transpose()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-T"><span class="nav-number">6.2.2.</span> <span class="nav-text">numpy.ndarray.T</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-rollaxis"><span class="nav-number">6.2.3.</span> <span class="nav-text">numpy.rollaxis()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-swapaxes"><span class="nav-number">6.2.4.</span> <span class="nav-text">numpy.swapaxes()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改维度"><span class="nav-number">6.3.</span> <span class="nav-text">修改维度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-expand-dims"><span class="nav-number">6.3.1.</span> <span class="nav-text">numpy.expand_dims()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-squeeze"><span class="nav-number">6.3.2.</span> <span class="nav-text">numpy.squeeze()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组连接"><span class="nav-number">6.4.</span> <span class="nav-text">数组连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-concatenate"><span class="nav-number">6.4.1.</span> <span class="nav-text">numpy.concatenate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-stack"><span class="nav-number">6.4.2.</span> <span class="nav-text">numpy.stack()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组分割"><span class="nav-number">6.5.</span> <span class="nav-text">数组分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-split"><span class="nav-number">6.5.1.</span> <span class="nav-text">numpy.split()</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
