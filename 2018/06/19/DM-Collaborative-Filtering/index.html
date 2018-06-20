@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Differential Privacy," />
+  <meta name="keywords" content="Data Mining," />
 
 
 
@@ -79,30 +79,30 @@
 
 
 
-<meta name="description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.    Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of t">
-<meta name="keywords" content="Differential Privacy">
+<meta name="description" content="参考 协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物">
+<meta name="keywords" content="Data Mining">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DP Application - Location Protection">
-<meta property="og:url" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/index.html">
+<meta property="og:title" content="DM-Collaborative Filtering">
+<meta property="og:url" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.    Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of t">
+<meta property="og:description" content="参考 协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.24.24%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.41.01%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.35.06%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.49.49%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.57.09%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.57.58%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%204.32.21%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.27.01%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.37.57%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.55.09%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%205.58.43%20PM.png">
-<meta property="og:updated_time" content="2018-06-20T02:01:12.738Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/image-20180619224529974.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.43.42%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.41.21%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.48.33%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.51.04%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.52.16%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.52.50%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.53.19%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.10%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.16%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.25%20PM.png">
+<meta property="og:updated_time" content="2018-06-20T03:55:06.692Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DP Application - Location Protection">
-<meta name="twitter:description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.    Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of t">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.24.24%20PM.png">
+<meta name="twitter:title" content="DM-Collaborative Filtering">
+<meta name="twitter:description" content="参考 协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/image-20180619224529974.png">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/"/>
 
 
 
 
 
-  <title>DP Application - Location Protection | Blog of Qing</title>
+  <title>DM-Collaborative Filtering | Blog of Qing</title>
   
 
 
@@ -299,7 +299,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -316,7 +316,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DP Application - Location Protection</h1>
+          <h1 class="post-title" itemprop="name headline">DM-Collaborative Filtering</h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-27T12:32:50-05:00">
-                2018-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-19T21:43:57-05:00">
+                2018-06-19
               </time>
             
 
@@ -351,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">Differential Privacy</span>
+                  <a href="/categories/Data-Mining/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Mining</span>
                   </a>
                 </span>
 
@@ -388,55 +388,241 @@
       
 
       
-        <h2 id="Q"><a href="#Q" class="headerlink" title="Q?"></a>Q?</h2><ol>
-<li><p>WHY $r$?</p>
-<p>The author investegate the $l$-privacy within $r$.</p>
-</li>
-<li></li>
-</ol>
-<h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
+        <p><a href="https://blog.csdn.net/yimingsilence/article/details/54934302" target="_blank" rel="noopener">参考</a></p>
+<p>协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物以群分。</p>
 <a id="more"></a>
-<h3 id="2013-Andres-Geo-indistinguishability"><a href="#2013-Andres-Geo-indistinguishability" class="headerlink" title="[2013-Andres]:Geo-indistinguishability"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a>:Geo-indistinguishability</h3><h3 id="A-motivating-scenario"><a href="#A-motivating-scenario" class="headerlink" title="A motivating scenario"></a>A motivating scenario</h3><p>A user visiting Paris, currently located at a point $x$ close to the Eiffel Tower, and wishing to discover nearby restaurants with good reviews. To achieve this goal, the user can query a service provider (for instance, an LBS server); however, to maintain his privacy, the user does not wish to disclose his exact location. Instead, he can provide some approximate information that still allows him to obtain a useful service, for instance, a randomly chosen point $z$ close to his location. </p>
-<p>We fix a circle of radius $r$ centered at the user’s location, and we reason about the user’s level of privacy within this radius.</p>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.24.24 PM.png" alt="Screen Shot 2018-06-19 at 12.24.24 PM"></p>
-<h3 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h3><h4 id="Adversary-model"><a href="#Adversary-model" class="headerlink" title="Adversary model"></a>Adversary model</h4><p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.41.01 PM.png" alt="Screen Shot 2018-06-19 at 12.41.01 PM"></p>
-<h4 id="informal-one"><a href="#informal-one" class="headerlink" title="informal one"></a>informal one</h4><p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.35.06 PM.png" alt="Screen Shot 2018-06-19 at 12.35.06 PM"></p>
-<h4 id="Geo-indistinguishability-I"><a href="#Geo-indistinguishability-I" class="headerlink" title="Geo-indistinguishability-I"></a>Geo-indistinguishability-I</h4><p>A mechanism satisfies $\epsilon$ -geoindistinguishability iff for all priors $P_X$ and all observations $S \subseteq Z:$</p>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.49.49 PM.png" alt="Screen Shot 2018-06-19 at 12.49.49 PM"></p>
-<blockquote>
+<h1 id="基于用户"><a href="#基于用户" class="headerlink" title="基于用户"></a>基于用户</h1><p>基于用户的协同过滤算法是通过用户的历史行为数据发现用户对商品或内容的喜欢(如商品购买，收藏，内容评论或分享)，并对这些喜好进行度量和打分。根据不同用户对相同商品或内容的态度和偏好程度计算用户之间的关系。在有相同喜好的用户间进行商品推荐。简单的说就是如果A,B两个用户都购买了x,y,z三本图书，并且给出了5星的好评。那么A和B就属于同一类用户。可以将A看过的图书w也推荐给用户B。</p>
+<h2 id="寻找相似用户"><a href="#寻找相似用户" class="headerlink" title="寻找相似用户"></a>寻找相似用户</h2><p>我们模拟了5个用户对两件商品的评分，来说明如何通过用户对不同商品的态度和偏好寻找相似的用户。在示例中，5个用户分别对两件商品进行了评分。这里的分值可能表示真实的购买，也可以是用户对商品不同行为的量化指标。例如，浏览商品的次数，向朋友推荐商品，收藏，分享，或评论等等。这些行为都可以表示用户对商品的态度和偏好程度。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">商品1</th>
+<th style="text-align:center">商品2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">用户A</td>
+<td style="text-align:center">3.3</td>
+<td style="text-align:center">6.5</td>
+</tr>
+<tr>
+<td style="text-align:center">用户B</td>
+<td style="text-align:center">5.8</td>
+<td style="text-align:center">2.6</td>
+</tr>
+<tr>
+<td style="text-align:center">用户C</td>
+<td style="text-align:center">3.6</td>
+<td style="text-align:center">6.3</td>
+</tr>
+<tr>
+<td style="text-align:center">用户D</td>
+<td style="text-align:center">3.4</td>
+<td style="text-align:center">5.8</td>
+</tr>
+<tr>
+<td style="text-align:center">用户E</td>
+<td style="text-align:center">5.2</td>
+<td style="text-align:center">3.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>从表格中很难直观发现5个用户间的联系，我们将5个用户对两件商品的评分用散点图表示出来后，用户间的关系就很容易发现了。在散点图中，Y轴是商品1的评分，X轴是商品2的评分，通过用户的分布情况可以发现，A,C,D三个用户距离较近。用户A(3.3 6.5)和用户C(3.6 6.3)，用户D(3.4 5.8)对两件商品的评分较为接近。而用户E和用户B则形成了另一个群体。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/image-20180619224529974.png" alt="image-20180619224529974"></p>
+<p>散点图虽然直观，但无法投入实际的应用，也不能准确的度量用户间的关系。因此我们需要通过数字对用户的关系进行准确的度量，并依据这些关系完成商品的推荐。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"></div>
+<div class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>]=[<span class="string">'SimHei'</span>]</div>
+<div class="line"></div>
+<div class="line">data = [[<span class="number">3.3</span>,<span class="number">6.5</span>],[<span class="number">5.8</span>,<span class="number">2.6</span>],[<span class="number">3.6</span>,<span class="number">6.3</span>],[<span class="number">3.4</span>,<span class="number">5.8</span>],[<span class="number">5.2</span>,<span class="number">3.1</span>]]</div>
+<div class="line">x = [<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>,<span class="string">'E'</span>]</div>
+<div class="line">df = pd.DataFrame(data,</div>
+<div class="line">                  columns=[<span class="string">'商品1'</span>,<span class="string">'商品2'</span>],</div>
+<div class="line">                  index=x)</div>
+<div class="line">df.plot.scatter(x=<span class="string">'商品1'</span>,y=<span class="string">'商品2'</span>,c=[<span class="string">'r'</span>,<span class="string">'g'</span>,<span class="string">'y'</span>,<span class="string">'b'</span>,<span class="string">'black'</span>])</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(x)):</div>
+<div class="line">    plt.text(data[i][<span class="number">0</span>],data[i][<span class="number">1</span>]+<span class="number">0.05</span>,x[i])</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h3 id="相似度衡量指标"><a href="#相似度衡量指标" class="headerlink" title="相似度衡量指标"></a>相似度衡量指标</h3><h4 id="欧几里得距离"><a href="#欧几里得距离" class="headerlink" title="欧几里得距离"></a>欧几里得距离</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">欧氏距离</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">用户A-B</td>
+<td style="text-align:center">4.632493928760188</td>
+</tr>
+<tr>
+<td style="text-align:center">用户A-C</td>
+<td style="text-align:center">0.36055512754639923</td>
+</tr>
+<tr>
+<td style="text-align:center">用户A-D</td>
+<td style="text-align:center">0.7071067811865478</td>
+</tr>
+<tr>
+<td style="text-align:center">用户A-E</td>
+<td style="text-align:center">3.8948684188300895</td>
+</tr>
+<tr>
+<td style="text-align:center">用户B-C</td>
+<td style="text-align:center">4.304648650006176</td>
+</tr>
+<tr>
+<td style="text-align:center">用户B-D</td>
+<td style="text-align:center">3.9999999999999996</td>
+</tr>
+<tr>
+<td style="text-align:center">用户B-E</td>
+<td style="text-align:center">0.7810249675906652</td>
+</tr>
+<tr>
+<td style="text-align:center">用户C-D</td>
+<td style="text-align:center">0.5385164807134505</td>
+</tr>
+<tr>
+<td style="text-align:center">用户C-F</td>
+<td style="text-align:center">3.5777087639996634</td>
+</tr>
+<tr>
+<td style="text-align:center">用户D-F</td>
+<td style="text-align:center">3.24499614791759</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>通过公式我们获得了5个用户相互间的欧几里德系数，也就是用户间的距离。系数越小表示两个用户间的距离越近。可以发现，用户A&amp;C用户A&amp;D和用户C&amp;D距离较近。同时用户B&amp;E的距离也较为接近。与我们前面在散点图中看到的情况一致。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line">import numpy as np</div>
+<div class="line"></div>
+<div class="line">data = np.array([[3.3,6.5],[5.8,2.6],[3.6,6.3],[3.4,5.8],[5.2,3.1]])</div>
+<div class="line">l = len(data)</div>
+<div class="line">for i in range(l-1):</div>
+<div class="line">    for j in range(i+1,l):</div>
+<div class="line">        dis = np.linalg.norm(data[i]-data[j])</div>
+<div class="line"></div>
+<div class="line"># 4.632493928760188</div>
+<div class="line"># 0.36055512754639923</div>
+<div class="line"># 0.7071067811865478</div>
+<div class="line"># 3.8948684188300895</div>
+<div class="line"># 4.304648650006176</div>
+<div class="line"># 3.9999999999999996</div>
+<div class="line"># 0.7810249675906652</div>
+<div class="line"># 0.5385164807134505</div>
+<div class="line"># 3.5777087639996634</div>
+<div class="line"># 3.24499614791759</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="皮尔逊相关度"><a href="#皮尔逊相关度" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h4><p>皮尔逊相关度评价是另一种计算用户间关系的方法。他比欧几里德距离评价的计算要复杂一些，但对于评分数据不规范时皮尔逊相关度评价能够给出更好的结果。以下是一个多用户对多个商品进行评分的示例。这个示例比之前的两个商品的情况要复杂一些，但也更接近真实的情况。我们通过皮尔逊相关度评价对用户进行分组，并推荐商品。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.43.42 PM.png" alt="Screen Shot 2018-06-19 at 10.43.42 PM"></p>
+<p>皮尔逊相关系数的计算公式如下，结果是一个在-1与1之间的系数。该系数用来说明两个用户间联系的强弱程度。</p>
+<p>　　相关系数的分类</p>
 <ol>
-<li>This definition considers that after observing $S$, the attacker assigns similar probabilities to the user being located in $x$ or $x’$.</li>
-<li>the distance is the Euclidean distance between points.</li>
+<li>0.8-1.0 极强相关</li>
+<li>0.6-0.8 强相关</li>
+<li>0.4-0.6 中等程度相关</li>
+<li>0.2-0.4 弱相关</li>
+<li>0.0-0.2 极弱相关或无相关</li>
 </ol>
-</blockquote>
-<h4 id="Geo-indistinguishability-II"><a href="#Geo-indistinguishability-II" class="headerlink" title="Geo-indistinguishability-II"></a>Geo-indistinguishability-II</h4><p>A mechanism satisfies $\epsilon$-geoindistinguishability iff for all priors $P_X$ and all observations $S \subseteq Z:$</p>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.57.09 PM.png" alt="Screen Shot 2018-06-19 at 12.57.09 PM"></p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.41.21 PM.png" alt="Screen Shot 2018-06-19 at 10.41.21 PM"></p>
+<p>通过计算5个用户对5件商品的评分我们获得了用户间的相似度数据。这里可以看到用户A&amp;B，C&amp;D，C&amp;E和D&amp;E之间相似度较高。下一步，我们可以依照相似度对用户进行商品推荐。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">data = np.array([[<span class="number">3.3</span>,<span class="number">6.5</span>,<span class="number">2.8</span>,<span class="number">3.4</span>,<span class="number">5.5</span>],[<span class="number">3.5</span>,<span class="number">5.8</span>,<span class="number">3.1</span>,<span class="number">3.6</span>,<span class="number">5.1</span>],</div>
+<div class="line">        [<span class="number">5.6</span>,<span class="number">3.3</span>,<span class="number">4.5</span>,<span class="number">5.2</span>,<span class="number">3.2</span>],[<span class="number">5.4</span>,<span class="number">2.8</span>,<span class="number">4.1</span>,<span class="number">4.9</span>,<span class="number">2.8</span>],</div>
+<div class="line">        [<span class="number">5.2</span>,<span class="number">3.1</span>,<span class="number">4.7</span>,<span class="number">5.3</span>,<span class="number">3.1</span>]])</div>
+<div class="line"></div>
+<div class="line">cof = np.corrcoef(data)</div>
+<div class="line">print(cof)</div>
+<div class="line"><span class="comment"># [[ 1.          0.99977352 -0.84775831 -0.8418164  -0.91523671]</span></div>
+<div class="line"><span class="comment">#  [ 0.99977352  1.         -0.84174116 -0.83531995 -0.90997534]</span></div>
+<div class="line"><span class="comment">#  [-0.84775831 -0.84174116  1.          0.99898728  0.97627199]</span></div>
+<div class="line"><span class="comment">#  [-0.8418164  -0.83531995  0.99898728  1.          0.96978216]</span></div>
+<div class="line"><span class="comment">#  [-0.91523671 -0.90997534  0.97627199  0.96978216  1.        ]]</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="基于相似用户推荐"><a href="#基于相似用户推荐" class="headerlink" title="基于相似用户推荐"></a>基于相似用户推荐</h2><p>当我们需要对用户C推荐商品时，首先我们检查之前的相似度列表，发现用户C和用户D和E的相似度较高。换句话说这三个用户是一个群体，拥有相同的偏好。因此，我们可以对用户C推荐D和E的商品。但这里有一个问题。我们不能直接推荐前面商品1-商品5的商品。因为这这些商品用户C以及浏览或者购买过了。不能重复推荐。因此我们要推荐用户C还没有浏览或购买过的商品。</p>
+<h3 id="加权排序推荐"><a href="#加权排序推荐" class="headerlink" title="加权排序推荐"></a>加权排序推荐</h3><p>我们提取了用户D和用户E评价过的另外5件商品A—商品F的商品。并对不同商品的评分进行相似度加权。按加权后的结果对5件商品进行排序，然后推荐给用户C。这样，用户C就获得了与他偏好相似的用户D和E评价的商品。而在具体的推荐顺序和展示上我们依照用户D和用户E与用户C的相似度进行排序。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.48.33 PM.png" alt="Screen Shot 2018-06-19 at 10.48.33 PM"></p>
 <blockquote>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.57.58 PM.png" alt="Screen Shot 2018-06-19 at 12.57.58 PM"></p>
+<p>这个算法依靠用户的历史行为数据来计算相关度。也就是说必须要有一定的数据积累(冷启动问题)。对于新网站或数据量较少的网站，还有一种方法是基于物品的协同过滤算法。</p>
 </blockquote>
-<h4 id="Geo-indistinguishability-III"><a href="#Geo-indistinguishability-III" class="headerlink" title="Geo-indistinguishability-III"></a>Geo-indistinguishability-III</h4><p>A mechanism satisfies $\epsilon$-geoindistinguishability iff for all observations $S \subseteq Z:$</p>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 4.32.21 PM.png" alt="Screen Shot 2018-06-19 at 4.32.21 PM"></p>
-<blockquote>
-<ol>
-<li>This definition requires that points within distance $l$ produce observations with similar probabilities</li>
-</ol>
-</blockquote>
-<p>In above three definition, the privacy level is $l$ while $\epsilon$ can be considered as unit of distance measurement, where $l=\epsilon r$. For example, the user specifies his desired level of privacy, say $l=ln(4)$ within $r=0.2$km, then the $\frac{In(4)}{0.2}$-geo-indistinguishability ensures the user that by revealing his approximate location, the adversary cannot infer his real location with probability 4 times higher than without revealing his location among all locations within 200 meters.</p>
-<h3 id="Mechanism-for-Geo-indistinguishability"><a href="#Mechanism-for-Geo-indistinguishability" class="headerlink" title="Mechanism for Geo-indistinguishability"></a>Mechanism for Geo-indistinguishability</h3><p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.27.01 PM.png" alt="Screen Shot 2018-06-19 at 5.27.01 PM"></p>
-<blockquote>
-<ol>
-<li>We explore how to define a geoindistinguishable mechanism on the continuous plane.</li>
-<li>we call this function planar laplacian centered in $x_0$</li>
-<li></li>
-</ol>
-</blockquote>
-<h3 id="Random-point-generation"><a href="#Random-point-generation" class="headerlink" title="Random point generation"></a>Random point generation</h3><p>It will be convenient, therefore, to transform the reference system into a system of polar coordinates with origin in $x_0$. </p>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.37.57 PM.png" alt="Screen Shot 2018-06-19 at 5.37.57 PM"></p>
-<p>Since $r$ and $\theta$ are independent, so</p>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.55.09 PM.png" alt="Screen Shot 2018-06-19 at 5.55.09 PM"></p>
-<p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 5.58.43 PM.png" alt="Screen Shot 2018-06-19 at 5.58.43 PM"></p>
-<h3 id="2014-Nicolas"><a href="#2014-Nicolas" class="headerlink" title="[2014-Nicolas]"></a><a href="https://arxiv.org/pdf/1402.5029.pdf" target="_blank" rel="noopener">[2014-Nicolas]</a></h3><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[2013-Andres] Geo-indistinguishability: Differential privacy for location-based systems</p>
-<p>[2014-Nicolas] Optimal geo-indistinguishable mechanisms for location privacy</p>
+<h1 id="基于物品"><a href="#基于物品" class="headerlink" title="基于物品"></a>基于物品</h1><p>基于物品的协同过滤算法与基于用户的协同过滤算法很像，将商品和用户互换。通过计算不同用户对不同物品的评分获得物品间的关系。基于物品间的关系对用户进行相似物品的推荐。这里的评分代表用户对商品的态度和偏好。简单来说就是如果用户A同时购买了商品1和商品2，那么说明商品1和商品2的相关度较高。当用户B也购买了商品1时，可以推断他也有购买商品2的需求。</p>
+<h2 id="寻找相似物品"><a href="#寻找相似物品" class="headerlink" title="寻找相似物品"></a>寻找相似物品</h2><p>表格中是两个用户对5件商品的评分。在这个表格中我们用户和商品的位置进行了互换，通过两个用户的评分来获得5件商品之间的相似度情况。单从表格中我们依然很难发现其中的联系，因此我们选择通过散点图进行展示。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.51.04 PM.png" alt="Screen Shot 2018-06-19 at 10.51.04 PM"></p>
+<p>在散点图中，X轴和Y轴分别是两个用户的评分。5件商品按照所获的评分值分布在散点图中。我们可以发现，商品1,3,4在用户A和B中有着近似的评分，说明这三件商品的相关度较高。而商品5和2则在另一个群体中。</p>
+<h3 id="欧式距离"><a href="#欧式距离" class="headerlink" title="欧式距离"></a>欧式距离</h3><p>在基于物品的协同过滤算法中，我们依然可以使用欧几里德距离评价来计算不同商品间的距离和关系。以下是计算公式。通过欧几里德系数可以发现，商品间的距离和关系与前面散点图中的表现一致，商品1,3,4距离较近关系密切。商品2和商品5距离较近。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.52.16 PM.png" alt="Screen Shot 2018-06-19 at 10.52.16 PM"></p>
+<h3 id="皮尔逊相关度-1"><a href="#皮尔逊相关度-1" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h3><p>我们选择使用皮尔逊相关度评价来计算多用户与多商品的关系计算。下面是5个用户对5件商品的评分表。我们通过这些评分计算出商品间的相关度。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.52.50 PM.png" alt="Screen Shot 2018-06-19 at 10.52.50 PM"></p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.53.19 PM.png" alt="Screen Shot 2018-06-19 at 10.53.19 PM"></p>
+<p>通过计算可以发现，商品1&amp;2，商品3&amp;4，商品3&amp;5和商品4&amp;5相似度较高。下一步我们可以依据这些商品间的相关度对用户进行商品推荐。</p>
+<h2 id="基于相似物品推荐"><a href="#基于相似物品推荐" class="headerlink" title="基于相似物品推荐"></a>基于相似物品推荐</h2><p>这里我们遇到了和基于用户进行商品推荐相同的问题，当需要对用户C基于商品3推荐商品时，需要一张新的商品与已有商品间的相似度列表。在前面的相似度计算中，商品3与商品4和商品5相似度较高，因此我们计算并获得了商品4,5与其他商品的相似度列表。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.54.10 PM.png" alt="Screen Shot 2018-06-19 at 10.54.10 PM"> </p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.54.16 PM.png" alt="Screen Shot 2018-06-19 at 10.54.16 PM"></p>
+<p>这里是用户C已经购买过的商品4,5与新商品A,B,C直接的相似程度。我们将用户C对商品4,5的评分作为权重。对商品A,B,C进行加权排序。用户C评分较高并且与之相似度较高的商品被优先推荐。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.54.25 PM.png" alt="Screen Shot 2018-06-19 at 10.54.25 PM"></p>
 
       
     </div>
@@ -454,7 +640,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Differential-Privacy/" rel="tag"># Differential Privacy</a>
+            <a href="/tags/Data-Mining/" rel="tag"># Data Mining</a>
           
         </div>
       
@@ -467,8 +653,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/DP-Application-Private-Spatial-Decompositions/" rel="next" title="DP Application - Private Spatial Decompositions">
-                <i class="fa fa-chevron-left"></i> DP Application - Private Spatial Decompositions
+              <a href="/2018/06/15/ML-NumPy/" rel="next" title="ML - NumPy">
+                <i class="fa fa-chevron-left"></i> ML - NumPy
               </a>
             
           </div>
@@ -476,10 +662,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/28/DP-Application-Random-Response/" rel="prev" title="DP Application - Random Response">
-                DP Application - Random Response <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -611,7 +793,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">2.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres-Geo-indistinguishability"><span class="nav-number">2.1.</span> <span class="nav-text">[2013-Andres]:Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-motivating-scenario"><span class="nav-number">2.2.</span> <span class="nav-text">A motivating scenario</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">2.3.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Adversary-model"><span class="nav-number">2.3.1.</span> <span class="nav-text">Adversary model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#informal-one"><span class="nav-number">2.3.2.</span> <span class="nav-text">informal one</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-I"><span class="nav-number">2.3.3.</span> <span class="nav-text">Geo-indistinguishability-I</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-II"><span class="nav-number">2.3.4.</span> <span class="nav-text">Geo-indistinguishability-II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-III"><span class="nav-number">2.3.5.</span> <span class="nav-text">Geo-indistinguishability-III</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mechanism-for-Geo-indistinguishability"><span class="nav-number">2.4.</span> <span class="nav-text">Mechanism for Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-point-generation"><span class="nav-number">2.5.</span> <span class="nav-text">Random point generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">2.6.</span> <span class="nav-text">[2014-Nicolas]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于用户"><span class="nav-number">1.</span> <span class="nav-text">基于用户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找相似用户"><span class="nav-number">1.1.</span> <span class="nav-text">寻找相似用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相似度衡量指标"><span class="nav-number">1.1.1.</span> <span class="nav-text">相似度衡量指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#欧几里得距离"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">欧几里得距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#皮尔逊相关度"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">皮尔逊相关度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于相似用户推荐"><span class="nav-number">1.2.</span> <span class="nav-text">基于相似用户推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加权排序推荐"><span class="nav-number">1.2.1.</span> <span class="nav-text">加权排序推荐</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于物品"><span class="nav-number">2.</span> <span class="nav-text">基于物品</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找相似物品"><span class="nav-number">2.1.</span> <span class="nav-text">寻找相似物品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#欧式距离"><span class="nav-number">2.1.1.</span> <span class="nav-text">欧式距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#皮尔逊相关度-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">皮尔逊相关度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于相似物品推荐"><span class="nav-number">2.2.</span> <span class="nav-text">基于相似物品推荐</span></a></li></ol></li></ol></div>
             
 
           </div>
