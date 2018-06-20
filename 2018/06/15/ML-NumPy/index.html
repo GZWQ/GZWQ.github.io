@@ -99,7 +99,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-19%20at%203.43.35%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-19%20at%203.50.55%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-20%20at%209.10.44%20AM.png">
-<meta property="og:updated_time" content="2018-06-20T14:43:03.543Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-20%20at%203.24.42%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/15/ML-NumPy/Screen%20Shot%202018-06-20%20at%203.34.40%20PM.png">
+<meta property="og:updated_time" content="2018-06-20T20:52:48.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - NumPy">
 <meta name="twitter:description" content="last Ndarray对象NumPy 中定义的最重要的对象是称为 ndarray 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。 ndarray中的每个元素在内存中使用相同大小的块。 ndarray中的每个元素是数据类型对象的对象(称为 dtype)。  基本的ndarray是使用 NumPy 中的数组函数创建的 1 numpy.array(object">
@@ -389,7 +391,7 @@
       
 
       
-        <p><a href="https://www.yiibai.com/numpy/numpy_binary_operators.html#article-start" target="_blank" rel="noopener">last</a></p>
+        <p><a href="https://www.yiibai.com/numpy/numpy_mathematical_functions.html#article-start" target="_blank" rel="noopener">last</a></p>
 <h1 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h1><p>NumPy 中定义的最重要的对象是称为 <code>ndarray</code> 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。</p>
 <p><code>ndarray</code>中的每个元素在内存中使用相同大小的块。 <code>ndarray</code>中的每个元素是数据类型对象的对象(称为 <code>dtype</code>)。</p>
 <p> 基本的<code>ndarray</code>是使用 NumPy 中的数组函数创建的</p>
@@ -1884,7 +1886,145 @@
 <div class="line">print(counts)</div>
 <div class="line"><span class="comment"># [3 2 2 1 1 1]</span></div>
 </pre></td></tr></table></figure>
-
+<h1 id="NumPy位操作"><a href="#NumPy位操作" class="headerlink" title="NumPy位操作"></a>NumPy位操作</h1><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-20 at 3.24.42 PM.png" alt="Screen Shot 2018-06-20 at 3.24.42 PM"></p>
+<h2 id="bitwise-and"><a href="#bitwise-and" class="headerlink" title="bitwise_and()"></a>bitwise_and()</h2><p>通过<code>np.bitwise_and()</code>函数对输入数组中的整数的二进制表示的相应位执行位与运算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = <span class="number">13</span></div>
+<div class="line">b =<span class="number">17</span></div>
+<div class="line">print(bin(a))</div>
+<div class="line"><span class="comment"># 0b1101</span></div>
+<div class="line">print(bin(b))</div>
+<div class="line"><span class="comment"># 0b10001</span></div>
+<div class="line"></div>
+<div class="line">print(np.bitwise_and(<span class="number">13</span>,<span class="number">17</span>))</div>
+<div class="line"><span class="comment"># 1</span></div>
+</pre></td></tr></table></figure>
+<h2 id="bitwise-or"><a href="#bitwise-or" class="headerlink" title="bitwise_or()"></a>bitwise_or()</h2><p>通过<code>np.bitwise_or()</code>函数对输入数组中的整数的二进制表示的相应位执行位或运算。</p>
+<h2 id="left-shift"><a href="#left-shift" class="headerlink" title="left_shift()"></a>left_shift()</h2><p>将数组元素的二进制表示中的位向左移动到指定位置，右侧附加相等数量的 0。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">a = <span class="number">13</span></div>
+<div class="line">print(bin(a))</div>
+<div class="line"><span class="comment"># 0b1101</span></div>
+<div class="line">a_ = np.left_shift(a,<span class="number">2</span>)</div>
+<div class="line">print(bin(a_),a_)</div>
+<div class="line"><span class="comment"># 0b110100 52</span></div>
+</pre></td></tr></table></figure>
+<h2 id="right-shift"><a href="#right-shift" class="headerlink" title="right_shift()"></a>right_shift()</h2><p>将数组元素的二进制表示中的位向右移动到指定位置，左侧附加相等数量的 0。</p>
+<h1 id="NumPy字符串函数"><a href="#NumPy字符串函数" class="headerlink" title="NumPy字符串函数"></a>NumPy字符串函数</h1><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-20 at 3.34.40 PM.png" alt="Screen Shot 2018-06-20 at 3.34.40 PM"></p>
+<p>这些函数在字符数组类(<code>numpy.char</code>)中定义。 <code>numpy.char</code>类中的上述函数在执行向量化字符串操作时非常有用。</p>
+<h2 id="numpy-char-add"><a href="#numpy-char-add" class="headerlink" title="numpy.char.add()"></a>numpy.char.add()</h2><p>函数执行按元素的字符串连接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">print(np.char.add([<span class="string">'hello'</span>],[<span class="string">'xyz'</span>]))</div>
+<div class="line"><span class="comment"># ['helloxyz']</span></div>
+<div class="line">print(np.char.add([<span class="string">'hello'</span>,<span class="string">'why'</span>],[<span class="string">'xyz'</span>,<span class="string">'like this'</span>]))</div>
+<div class="line"><span class="comment"># ['helloxyz' 'whylike this']</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-multiply"><a href="#numpy-char-multiply" class="headerlink" title="numpy.char.multiply()"></a>numpy.char.multiply()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">print(np.char.multiply(<span class="string">"Wq"</span>,<span class="number">3</span>))</div>
+<div class="line"><span class="comment"># WqWqWq</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-center"><a href="#numpy-char-center" class="headerlink" title="numpy.char.center()"></a>numpy.char.center()</h2><p>此函数返回所需宽度的数组，以便输入字符串位于中心，并使用<code>fillchar</code>在左侧和右侧进行填充。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">print(np.char.center(<span class="string">'hello'</span>,<span class="number">10</span>,fillchar=<span class="string">"@"</span>))</div>
+<div class="line"><span class="comment"># @@hello@@@</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-capitalize"><a href="#numpy-char-capitalize" class="headerlink" title="numpy.char.capitalize()"></a>numpy.char.capitalize()</h2><p>函数返回字符串的副本，其中第一个字母大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> np.char.capitalize(<span class="string">'hello world'</span>)</div>
+<div class="line"><span class="comment"># Hello world</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-title"><a href="#numpy-char-title" class="headerlink" title="numpy.char.title()"></a>numpy.char.title()</h2><p>返回输入字符串的按元素标题转换版本，其中每个单词的首字母都大写。</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> np.char.title(<span class="string">'hello how are you?'</span>)</div>
+<div class="line"><span class="comment"># Hello How Are You?</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-lower"><a href="#numpy-char-lower" class="headerlink" title="numpy.char.lower()"></a>numpy.char.lower()</h2><p>函数返回一个数组，其元素转换为小写。它对每个元素调用<code>str.lower</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">print(np.char.lower(<span class="string">'HeLLo'</span>))</div>
+<div class="line"><span class="comment"># hello</span></div>
+<div class="line">print(np.char.lower([<span class="string">"HeLLO"</span>,<span class="string">'WORld'</span>]))</div>
+<div class="line"><span class="comment"># ['hello' 'world']</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-upper"><a href="#numpy-char-upper" class="headerlink" title="numpy.char.upper()"></a>numpy.char.upper()</h2><p>函数返回一个数组，其元素转换为大写。它对每个元素调用<code>str.upper</code>。</p>
+<h2 id="numpy-char-split"><a href="#numpy-char-split" class="headerlink" title="numpy.char.split()"></a>numpy.char.split()</h2><p>此函数返回输入字符串中的单词列表。 默认情况下，空格用作分隔符。 否则，指定的分隔符字符用于分割字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> (np.char.split (<span class="string">'hello how are you?'</span>) )</div>
+<div class="line"><span class="comment"># ['hello', 'how', 'are', 'you?']</span></div>
+<div class="line"><span class="keyword">print</span> (np.char.split (<span class="string">'YiibaiPoint,Hyderabad,Telangana'</span>, sep = <span class="string">','</span>))</div>
+<div class="line"><span class="comment"># ['YiibaiPoint', 'Hyderabad', 'Telangana']</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-splitlines"><a href="#numpy-char-splitlines" class="headerlink" title="numpy.char.splitlines()"></a>numpy.char.splitlines()</h2><p>函数返回数组中元素的单词列表，以换行符分割。<code>&#39;\n&#39;</code>，<code>&#39;\r&#39;</code>，<code>&#39;\r\n&#39;</code>都会用作换行符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> (np.char.splitlines(<span class="string">'hello\nhow are you?'</span>) )</div>
+<div class="line"><span class="comment"># ['hello', 'how are you?']</span></div>
+<div class="line"><span class="keyword">print</span> (np.char.splitlines(<span class="string">'hello\rhow are you?'</span>))</div>
+<div class="line"><span class="comment"># ['hello', 'how are you?']</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-strip"><a href="#numpy-char-strip" class="headerlink" title="numpy.char.strip()"></a>numpy.char.strip()</h2><p>函数返回数组的副本，其中元素移除了开头或结尾处的特定字符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> np.char.strip(<span class="string">'ashok arora'</span>,<span class="string">'a'</span>) </div>
+<div class="line"><span class="comment"># shok aror</span></div>
+<div class="line"><span class="keyword">print</span> np.char.strip([<span class="string">'arora'</span>,<span class="string">'admin'</span>,<span class="string">'java'</span>],<span class="string">'a'</span>)</div>
+<div class="line"><span class="comment"># ['ror' 'dmin' 'jav']</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-join"><a href="#numpy-char-join" class="headerlink" title="numpy.char.join()"></a>numpy.char.join()</h2><p>这个函数返回一个字符串，其中单个字符由特定的分隔符连接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> np.char.join(<span class="string">':'</span>,<span class="string">'dmy'</span>) </div>
+<div class="line"><span class="keyword">print</span> np.char.join([<span class="string">':'</span>,<span class="string">'-'</span>],[<span class="string">'dmy'</span>,<span class="string">'ymd'</span>])</div>
+<div class="line"><span class="comment"># d:m:y</span></div>
+<div class="line"><span class="comment"># ['d:m:y' 'y-m-d']</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-char-replace"><a href="#numpy-char-replace" class="headerlink" title="numpy.char.replace()"></a>numpy.char.replace()</h2><p>这个函数返回字符串副本，其中所有字符序列的出现位置都被另一个给定的字符序列取代。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </div>
+<div class="line"><span class="keyword">print</span> np.char.replace (<span class="string">'He is a good boy'</span>, <span class="string">'is'</span>, <span class="string">'was'</span>)</div>
+<div class="line"><span class="comment"># He was a good boy</span></div>
+</pre></td></tr></table></figure>
       
     </div>
     
@@ -2058,7 +2198,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ndarray对象"><span class="nav-number">1.</span> <span class="nav-text">Ndarray对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">1.1.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组"><span class="nav-number">1.2.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组属性"><span class="nav-number">1.3.</span> <span class="nav-text">数组属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray-shape"><span class="nav-number">1.3.1.</span> <span class="nav-text">ndarray.shape</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组创建"><span class="nav-number">2.</span> <span class="nav-text">数组创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-empty"><span class="nav-number">2.1.</span> <span class="nav-text">numpy.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">2.2.</span> <span class="nav-text">numpy.zeros()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-ones"><span class="nav-number">2.3.</span> <span class="nav-text">numpy.ones()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">2.4.</span> <span class="nav-text">numpy.asarray()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">2.5.</span> <span class="nav-text">numpy.fromiter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-arange"><span class="nav-number">2.6.</span> <span class="nav-text">numpy.arange()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">2.7.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">2.8.</span> <span class="nav-text">numpy.logspace()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切片和索引"><span class="nav-number">3.</span> <span class="nav-text">切片和索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#切片"><span class="nav-number">3.1.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级索引"><span class="nav-number">3.2.</span> <span class="nav-text">高级索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数索引"><span class="nav-number">3.3.</span> <span class="nav-text">整数索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔索引"><span class="nav-number">3.4.</span> <span class="nav-text">布尔索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy广播"><span class="nav-number">4.</span> <span class="nav-text">NumPy广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组迭代"><span class="nav-number">5.</span> <span class="nav-text">NumPy数组迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代顺序"><span class="nav-number">5.1.</span> <span class="nav-text">迭代顺序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组操作"><span class="nav-number">6.</span> <span class="nav-text">NumPy数组操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改数组形状"><span class="nav-number">6.1.</span> <span class="nav-text">修改数组形状</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-reshape"><span class="nav-number">6.1.1.</span> <span class="nav-text">numpy.reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flat"><span class="nav-number">6.1.2.</span> <span class="nav-text">numpy.ndarray.flat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flatten"><span class="nav-number">6.1.3.</span> <span class="nav-text">numpy.ndarray.flatten</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ravel"><span class="nav-number">6.1.4.</span> <span class="nav-text">numpy.ravel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组翻转"><span class="nav-number">6.2.</span> <span class="nav-text">数组翻转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-transpose"><span class="nav-number">6.2.1.</span> <span class="nav-text">numpy.transpose()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-T"><span class="nav-number">6.2.2.</span> <span class="nav-text">numpy.ndarray.T</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-rollaxis"><span class="nav-number">6.2.3.</span> <span class="nav-text">numpy.rollaxis()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-swapaxes"><span class="nav-number">6.2.4.</span> <span class="nav-text">numpy.swapaxes()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改维度"><span class="nav-number">6.3.</span> <span class="nav-text">修改维度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-expand-dims"><span class="nav-number">6.3.1.</span> <span class="nav-text">numpy.expand_dims()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-squeeze"><span class="nav-number">6.3.2.</span> <span class="nav-text">numpy.squeeze()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组连接"><span class="nav-number">6.4.</span> <span class="nav-text">数组连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-concatenate"><span class="nav-number">6.4.1.</span> <span class="nav-text">numpy.concatenate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-stack"><span class="nav-number">6.4.2.</span> <span class="nav-text">numpy.stack()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组分割"><span class="nav-number">6.5.</span> <span class="nav-text">数组分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-split"><span class="nav-number">6.5.1.</span> <span class="nav-text">numpy.split()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素添加-删除"><span class="nav-number">6.6.</span> <span class="nav-text">元素添加/删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-resize"><span class="nav-number">6.6.1.</span> <span class="nav-text">numpy.resize()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-append"><span class="nav-number">6.6.2.</span> <span class="nav-text">numpy.append()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-insert"><span class="nav-number">6.6.3.</span> <span class="nav-text">numpy.insert()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-delete"><span class="nav-number">6.6.4.</span> <span class="nav-text">numpy.delete()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-unique"><span class="nav-number">6.6.5.</span> <span class="nav-text">numpy.unique()</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ndarray对象"><span class="nav-number">1.</span> <span class="nav-text">Ndarray对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一维数组"><span class="nav-number">1.1.</span> <span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二维数组"><span class="nav-number">1.2.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组属性"><span class="nav-number">1.3.</span> <span class="nav-text">数组属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ndarray-shape"><span class="nav-number">1.3.1.</span> <span class="nav-text">ndarray.shape</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组创建"><span class="nav-number">2.</span> <span class="nav-text">数组创建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-empty"><span class="nav-number">2.1.</span> <span class="nav-text">numpy.empty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-zeros"><span class="nav-number">2.2.</span> <span class="nav-text">numpy.zeros()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-ones"><span class="nav-number">2.3.</span> <span class="nav-text">numpy.ones()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-asarray"><span class="nav-number">2.4.</span> <span class="nav-text">numpy.asarray()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-fromiter"><span class="nav-number">2.5.</span> <span class="nav-text">numpy.fromiter()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-arange"><span class="nav-number">2.6.</span> <span class="nav-text">numpy.arange()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-linspace"><span class="nav-number">2.7.</span> <span class="nav-text">numpy.linspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-logspace"><span class="nav-number">2.8.</span> <span class="nav-text">numpy.logspace()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切片和索引"><span class="nav-number">3.</span> <span class="nav-text">切片和索引</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#切片"><span class="nav-number">3.1.</span> <span class="nav-text">切片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级索引"><span class="nav-number">3.2.</span> <span class="nav-text">高级索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整数索引"><span class="nav-number">3.3.</span> <span class="nav-text">整数索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布尔索引"><span class="nav-number">3.4.</span> <span class="nav-text">布尔索引</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy广播"><span class="nav-number">4.</span> <span class="nav-text">NumPy广播</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组迭代"><span class="nav-number">5.</span> <span class="nav-text">NumPy数组迭代</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代顺序"><span class="nav-number">5.1.</span> <span class="nav-text">迭代顺序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy数组操作"><span class="nav-number">6.</span> <span class="nav-text">NumPy数组操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改数组形状"><span class="nav-number">6.1.</span> <span class="nav-text">修改数组形状</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-reshape"><span class="nav-number">6.1.1.</span> <span class="nav-text">numpy.reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flat"><span class="nav-number">6.1.2.</span> <span class="nav-text">numpy.ndarray.flat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-flatten"><span class="nav-number">6.1.3.</span> <span class="nav-text">numpy.ndarray.flatten</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ravel"><span class="nav-number">6.1.4.</span> <span class="nav-text">numpy.ravel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组翻转"><span class="nav-number">6.2.</span> <span class="nav-text">数组翻转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-transpose"><span class="nav-number">6.2.1.</span> <span class="nav-text">numpy.transpose()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-ndarray-T"><span class="nav-number">6.2.2.</span> <span class="nav-text">numpy.ndarray.T</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-rollaxis"><span class="nav-number">6.2.3.</span> <span class="nav-text">numpy.rollaxis()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-swapaxes"><span class="nav-number">6.2.4.</span> <span class="nav-text">numpy.swapaxes()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改维度"><span class="nav-number">6.3.</span> <span class="nav-text">修改维度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-expand-dims"><span class="nav-number">6.3.1.</span> <span class="nav-text">numpy.expand_dims()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-squeeze"><span class="nav-number">6.3.2.</span> <span class="nav-text">numpy.squeeze()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组连接"><span class="nav-number">6.4.</span> <span class="nav-text">数组连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-concatenate"><span class="nav-number">6.4.1.</span> <span class="nav-text">numpy.concatenate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-stack"><span class="nav-number">6.4.2.</span> <span class="nav-text">numpy.stack()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组分割"><span class="nav-number">6.5.</span> <span class="nav-text">数组分割</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-split"><span class="nav-number">6.5.1.</span> <span class="nav-text">numpy.split()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素添加-删除"><span class="nav-number">6.6.</span> <span class="nav-text">元素添加/删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-resize"><span class="nav-number">6.6.1.</span> <span class="nav-text">numpy.resize()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-append"><span class="nav-number">6.6.2.</span> <span class="nav-text">numpy.append()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-insert"><span class="nav-number">6.6.3.</span> <span class="nav-text">numpy.insert()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-delete"><span class="nav-number">6.6.4.</span> <span class="nav-text">numpy.delete()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy-unique"><span class="nav-number">6.6.5.</span> <span class="nav-text">numpy.unique()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy位操作"><span class="nav-number">7.</span> <span class="nav-text">NumPy位操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bitwise-and"><span class="nav-number">7.1.</span> <span class="nav-text">bitwise_and()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bitwise-or"><span class="nav-number">7.2.</span> <span class="nav-text">bitwise_or()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#left-shift"><span class="nav-number">7.3.</span> <span class="nav-text">left_shift()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#right-shift"><span class="nav-number">7.4.</span> <span class="nav-text">right_shift()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NumPy字符串函数"><span class="nav-number">8.</span> <span class="nav-text">NumPy字符串函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-add"><span class="nav-number">8.1.</span> <span class="nav-text">numpy.char.add()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-multiply"><span class="nav-number">8.2.</span> <span class="nav-text">numpy.char.multiply()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-center"><span class="nav-number">8.3.</span> <span class="nav-text">numpy.char.center()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-capitalize"><span class="nav-number">8.4.</span> <span class="nav-text">numpy.char.capitalize()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-title"><span class="nav-number">8.5.</span> <span class="nav-text">numpy.char.title()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-lower"><span class="nav-number">8.6.</span> <span class="nav-text">numpy.char.lower()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-upper"><span class="nav-number">8.7.</span> <span class="nav-text">numpy.char.upper()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-split"><span class="nav-number">8.8.</span> <span class="nav-text">numpy.char.split()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-splitlines"><span class="nav-number">8.9.</span> <span class="nav-text">numpy.char.splitlines()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-strip"><span class="nav-number">8.10.</span> <span class="nav-text">numpy.char.strip()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-join"><span class="nav-number">8.11.</span> <span class="nav-text">numpy.char.join()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#numpy-char-replace"><span class="nav-number">8.12.</span> <span class="nav-text">numpy.char.replace()</span></a></li></ol></li></ol></div>
             
 
           </div>

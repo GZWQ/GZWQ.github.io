@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.10%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.16%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.25%20PM.png">
-<meta property="og:updated_time" content="2018-06-20T17:17:43.209Z">
+<meta property="og:updated_time" content="2018-06-20T17:38:35.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DM-Collaborative Filtering">
 <meta name="twitter:description" content="参考 协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物">
@@ -642,6 +642,52 @@
 </div></div>
 <h3 id="欧式距离"><a href="#欧式距离" class="headerlink" title="欧式距离"></a>欧式距离</h3><p>在基于物品的协同过滤算法中，我们依然可以使用欧几里德距离评价来计算不同商品间的距离和关系。以下是计算公式。通过欧几里德系数可以发现，商品间的距离和关系与前面散点图中的表现一致，商品1,3,4距离较近关系密切。商品2和商品5距离较近。</p>
 <p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.52.16 PM.png" alt="Screen Shot 2018-06-19 at 10.52.16 PM"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line">data = [[<span class="number">3.3</span>,<span class="number">6.5</span>],[<span class="number">5.8</span>,<span class="number">2.6</span>],[<span class="number">3.6</span>,<span class="number">6.3</span>],[<span class="number">3.4</span>,<span class="number">5.8</span>],[<span class="number">5.2</span>,<span class="number">3.1</span>]]</div>
+<div class="line">data = np.array(data)</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(data)<span class="number">-1</span>):</div>
+<div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,len(data)):</div>
+<div class="line">        print(np.linalg.norm(data[i]-data[j]))</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 4.632493928760188</span></div>
+<div class="line"><span class="comment"># 0.36055512754639923</span></div>
+<div class="line"><span class="comment"># 0.7071067811865478</span></div>
+<div class="line"><span class="comment"># 3.8948684188300895</span></div>
+<div class="line"><span class="comment"># 4.304648650006176</span></div>
+<div class="line"><span class="comment"># 3.9999999999999996</span></div>
+<div class="line"><span class="comment"># 0.7810249675906652</span></div>
+<div class="line"><span class="comment"># 0.5385164807134505</span></div>
+<div class="line"><span class="comment"># 3.5777087639996634</span></div>
+<div class="line"><span class="comment"># 3.24499614791759</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h3 id="皮尔逊相关度-1"><a href="#皮尔逊相关度-1" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h3><p>我们选择使用皮尔逊相关度评价来计算多用户与多商品的关系计算。下面是5个用户对5件商品的评分表。我们通过这些评分计算出商品间的相关度。</p>
 <p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.52.50 PM.png" alt="Screen Shot 2018-06-19 at 10.52.50 PM"></p>
 <p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.53.19 PM.png" alt="Screen Shot 2018-06-19 at 10.53.19 PM"></p>
