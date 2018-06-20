@@ -92,13 +92,14 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.41.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.48.33%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.51.04%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/image-20180620121631981.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.52.16%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.52.50%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.53.19%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.10%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.16%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.25%20PM.png">
-<meta property="og:updated_time" content="2018-06-20T03:55:06.692Z">
+<meta property="og:updated_time" content="2018-06-20T17:17:43.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DM-Collaborative Filtering">
 <meta name="twitter:description" content="参考 协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物">
@@ -612,6 +613,33 @@
 <h2 id="寻找相似物品"><a href="#寻找相似物品" class="headerlink" title="寻找相似物品"></a>寻找相似物品</h2><p>表格中是两个用户对5件商品的评分。在这个表格中我们用户和商品的位置进行了互换，通过两个用户的评分来获得5件商品之间的相似度情况。单从表格中我们依然很难发现其中的联系，因此我们选择通过散点图进行展示。</p>
 <p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.51.04 PM.png" alt="Screen Shot 2018-06-19 at 10.51.04 PM"></p>
 <p>在散点图中，X轴和Y轴分别是两个用户的评分。5件商品按照所获的评分值分布在散点图中。我们可以发现，商品1,3,4在用户A和B中有着近似的评分，说明这三件商品的相关度较高。而商品5和2则在另一个群体中。</p>
+<p><img src="/2018/06/19/DM-Collaborative-Filtering/image-20180620121631981.png" alt="image-20180620121631981"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line">data = [[<span class="number">3.3</span>,<span class="number">6.5</span>],[<span class="number">5.8</span>,<span class="number">2.6</span>],[<span class="number">3.6</span>,<span class="number">6.3</span>],[<span class="number">3.4</span>,<span class="number">5.8</span>],[<span class="number">5.2</span>,<span class="number">3.1</span>]]</div>
+<div class="line">x=[<span class="string">'item1'</span>,<span class="string">'item2'</span>,<span class="string">'item3'</span>,<span class="string">'item4'</span>,<span class="string">'item5'</span>]</div>
+<div class="line">pd_data = pd.DataFrame(data,columns=[<span class="string">'user-A'</span>,<span class="string">'user-B'</span>],index=x)</div>
+<div class="line">pd_data.plot.scatter(x=<span class="string">'user-A'</span>,y=<span class="string">'user-B'</span>,c=[<span class="string">'r'</span>,<span class="string">'g'</span>,<span class="string">'y'</span>,<span class="string">'b'</span>,<span class="string">'black'</span>])</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(data)):</div>
+<div class="line">    plt.text(data[i][<span class="number">0</span>],data[i][<span class="number">1</span>]+<span class="number">0.05</span>,x[i])</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h3 id="欧式距离"><a href="#欧式距离" class="headerlink" title="欧式距离"></a>欧式距离</h3><p>在基于物品的协同过滤算法中，我们依然可以使用欧几里德距离评价来计算不同商品间的距离和关系。以下是计算公式。通过欧几里德系数可以发现，商品间的距离和关系与前面散点图中的表现一致，商品1,3,4距离较近关系密切。商品2和商品5距离较近。</p>
 <p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.52.16 PM.png" alt="Screen Shot 2018-06-19 at 10.52.16 PM"></p>
 <h3 id="皮尔逊相关度-1"><a href="#皮尔逊相关度-1" class="headerlink" title="皮尔逊相关度"></a>皮尔逊相关度</h3><p>我们选择使用皮尔逊相关度评价来计算多用户与多商品的关系计算。下面是5个用户对5件商品的评分表。我们通过这些评分计算出商品间的相关度。</p>
@@ -662,6 +690,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/20/DP-Recommendation/" rel="prev" title="DP-Recommendation">
+                DP-Recommendation <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -738,7 +770,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
