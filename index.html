@@ -668,7 +668,7 @@
       
         
           
-            <p><a href="https://www.yiibai.com/numpy/numpy_mathematical_functions.html#article-start" target="_blank" rel="noopener">last</a></p>
+            <p><a href="https://www.yiibai.com/numpy/numpy_statistical_functions.html#article-start" target="_blank" rel="noopener">last</a></p>
 <h1 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h1><p>NumPy 中定义的最重要的对象是称为 <code>ndarray</code> 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。</p>
 <p><code>ndarray</code>中的每个元素在内存中使用相同大小的块。 <code>ndarray</code>中的每个元素是数据类型对象的对象(称为 <code>dtype</code>)。</p>
 <p> 基本的<code>ndarray</code>是使用 NumPy 中的数组函数创建的</p>
@@ -2302,6 +2302,196 @@
 <div class="line"><span class="keyword">print</span> np.char.replace (<span class="string">'He is a good boy'</span>, <span class="string">'is'</span>, <span class="string">'was'</span>)</div>
 <div class="line"><span class="comment"># He was a good boy</span></div>
 </pre></td></tr></table></figure>
+<h1 id="NumPy算数函数"><a href="#NumPy算数函数" class="headerlink" title="NumPy算数函数"></a>NumPy算数函数</h1><p>NumPy 提供标准的三角函数，算术运算的函数，复数处理函数等。</p>
+<h2 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h2><p><a href="https://www.yiibai.com/numpy/numpy_mathematical_functions.html#article-start" target="_blank" rel="noopener">参考</a></p>
+<h2 id="舍入函数"><a href="#舍入函数" class="headerlink" title="舍入函数"></a>舍入函数</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-21 at 9.31.30 AM.png" alt="Screen Shot 2018-06-21 at 9.31.30 AM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.array([<span class="number">1.0</span>,<span class="number">5.55</span>,  <span class="number">123</span>,  <span class="number">0.567</span>,  <span class="number">25.532</span>])</div>
+<div class="line"></div>
+<div class="line">print(np.around(a))</div>
+<div class="line"><span class="comment"># [1.  6.  123.   1.  26.]</span></div>
+<div class="line">print(np.around(a,decimals=<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [1.  5.6 123.   0.6  25.5]</span></div>
+<div class="line">print(np.around(a,decimals=<span class="number">-1</span>))</div>
+<div class="line"><span class="comment"># [0.  10. 120.   0.  30.]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-floor-ceil"><a href="#numpy-floor-ceil" class="headerlink" title="numpy.floor()/.ceil()"></a>numpy.floor()/.ceil()</h2><p>floor() 此函数返回不大于输入参数的最大整数</p>
+<p>ceil() 返回输入值的上限</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([<span class="number">-1.7</span>,  <span class="number">1.5</span>,  <span class="number">-0.2</span>,  <span class="number">0.6</span>,  <span class="number">10</span>])</div>
+<div class="line">print(np.floor(a))</div>
+<div class="line"><span class="comment"># [-2.  1. -1.  0. 10.]</span></div>
+<div class="line">print(np.ceil(a))</div>
+<div class="line"><span class="comment"># [-1.  2. -0.  1. 10.]</span></div>
+</pre></td></tr></table></figure>
+<h1 id="NumPy算数运算"><a href="#NumPy算数运算" class="headerlink" title="NumPy算数运算"></a>NumPy算数运算</h1><p>用于执行算术运算(如<code>add()</code>，<code>subtract()</code>，<code>multiply()</code>和<code>divide()</code>)的输入数组必须具有相同的形状或符合数组广播规则。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.arange(<span class="number">9</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[0 1 2]</span></div>
+<div class="line"><span class="comment">#  [3 4 5]</span></div>
+<div class="line"><span class="comment">#  [6 7 8]]</span></div>
+<div class="line">b = np.array([<span class="number">10</span>,<span class="number">10</span>,<span class="number">10</span>])</div>
+<div class="line">print(a+b) <span class="comment">#等价于np.add(a,b)</span></div>
+<div class="line"><span class="comment"># [[10 11 12]</span></div>
+<div class="line"><span class="comment">#  [13 14 15]</span></div>
+<div class="line"><span class="comment">#  [16 17 18]]</span></div>
+<div class="line">print(a-b) <span class="comment">#等价于np.subtract(a,b)</span></div>
+<div class="line"><span class="comment"># [[-10  -9  -8]</span></div>
+<div class="line"><span class="comment">#  [ -7  -6  -5]</span></div>
+<div class="line"><span class="comment">#  [ -4  -3  -2]]</span></div>
+<div class="line">print(a*b) <span class="comment">#等价于np.multiply(a,b)</span></div>
+<div class="line"><span class="comment"># [[ 0 10 20]</span></div>
+<div class="line"><span class="comment">#  [30 40 50]</span></div>
+<div class="line"><span class="comment">#  [60 70 80]]</span></div>
+<div class="line">print(a/b) <span class="comment">#等价于np.divide(a,b)</span></div>
+<div class="line"><span class="comment"># [[0.  0.1 0.2]</span></div>
+<div class="line"><span class="comment">#  [0.3 0.4 0.5]</span></div>
+<div class="line"><span class="comment">#  [0.6 0.7 0.8]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-reciprocal"><a href="#numpy-reciprocal" class="headerlink" title="numpy.reciprocal()"></a>numpy.reciprocal()</h2><p>此函数返回参数逐元素的倒数，。 由于 Python 处理整数除法的方式，对于绝对值大于 1 的整数元素，结果始终为 0， 对于整数 0，则发出溢出警告。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([<span class="number">0.25</span>,  <span class="number">1.33</span>,  <span class="number">1</span>,  <span class="number">0</span>,  <span class="number">100</span>])</div>
+<div class="line">print(np.reciprocal(a))</div>
+<div class="line"><span class="comment"># [4.  0.7518797   1.   inf   0.01 ]</span></div>
+<div class="line">b = np.array([<span class="number">100</span>],dtype=int)</div>
+<div class="line">print(np.reciprocal(b))</div>
+<div class="line"><span class="comment"># [0]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-power"><a href="#numpy-power" class="headerlink" title="numpy.power()"></a>numpy.power()</h2><p>此函数将第一个输入数组中的元素作为底数，计算它与第二个输入数组中相应元素的幂。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</div>
+<div class="line">print(np.power(a,<span class="number">2</span>))</div>
+<div class="line"><span class="comment"># [ 4  9 16]</span></div>
+<div class="line">b = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</div>
+<div class="line">print(np.power(a,b))</div>
+<div class="line"><span class="comment"># [ 2  9 64]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-mod"><a href="#numpy-mod" class="headerlink" title="numpy.mod()"></a>numpy.mod()</h2><p>此函数返回输入数组中相应元素的除法余数。 函数<code>numpy.remainder()</code>也产生相同的结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>])</div>
+<div class="line">b = np.array([<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>])</div>
+<div class="line">print(np.mod(a,b))</div>
+<div class="line"><span class="comment"># [1 0 2]</span></div>
+<div class="line">print(np.remainder(a,b))</div>
+<div class="line"><span class="comment"># [1 0 2]</span></div>
+</pre></td></tr></table></figure>
+<h1 id="NumPy统计函数"><a href="#NumPy统计函数" class="headerlink" title="NumPy统计函数"></a>NumPy统计函数</h1><p>NumPy 有很多有用的统计函数，用于从数组中给定的元素中查找最小，最大，百分标准差和方差等。</p>
+<h2 id="numpy-amin-amax"><a href="#numpy-amin-amax" class="headerlink" title="numpy.amin()/.amax()"></a>numpy.amin()/.amax()</h2><p>从给定数组中的元素沿指定轴返回最小值和最大值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([[<span class="number">3</span>,<span class="number">7</span>,<span class="number">5</span>],[<span class="number">8</span>,<span class="number">4</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">9</span>]])</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[3 7 5]</span></div>
+<div class="line"><span class="comment">#  [8 4 3]</span></div>
+<div class="line"><span class="comment">#  [2 4 9]]</span></div>
+<div class="line">print(np.amin(a,<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [3 3 2]</span></div>
+<div class="line">print(np.amin(a,<span class="number">0</span>))</div>
+<div class="line"><span class="comment"># [2 4 3]</span></div>
+<div class="line">print(np.amin(a))</div>
+<div class="line"><span class="comment"># 2</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-ptp"><a href="#numpy-ptp" class="headerlink" title="numpy.ptp()"></a>numpy.ptp()</h2><p>返回沿轴的值的范围(最大值 - 最小值)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([[<span class="number">3</span>,<span class="number">7</span>,<span class="number">5</span>],[<span class="number">8</span>,<span class="number">4</span>,<span class="number">3</span>],[<span class="number">2</span>,<span class="number">4</span>,<span class="number">9</span>]])</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[3 7 5]</span></div>
+<div class="line"><span class="comment">#  [8 4 3]</span></div>
+<div class="line"><span class="comment">#  [2 4 9]]</span></div>
+<div class="line">print(np.ptp(a))</div>
+<div class="line"><span class="comment"># 7 (9-2)</span></div>
+<div class="line">print(np.ptp(a,axis=<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [4 5 7]</span></div>
+<div class="line">print(np.ptp(a,<span class="number">0</span>))</div>
+<div class="line"><span class="comment"># [6 3 6]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-percentile"><a href="#numpy-percentile" class="headerlink" title="numpy.percentile()"></a>numpy.percentile()</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-21 at 9.56.48 AM.png" alt="Screen Shot 2018-06-21 at 9.56.48 AM"></p>
+
           
         
       
@@ -3399,7 +3589,7 @@ y&=eq2 &\text{if x=2}
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�211-->
+<!--�220-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
