@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.10%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.16%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/19/DM-Collaborative-Filtering/Screen%20Shot%202018-06-19%20at%2010.54.25%20PM.png">
-<meta property="og:updated_time" content="2018-06-20T17:38:35.842Z">
+<meta property="og:updated_time" content="2018-06-21T02:24:10.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DM-Collaborative Filtering">
 <meta name="twitter:description" content="参考 协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物">
@@ -391,6 +391,7 @@
       
         <p><a href="https://blog.csdn.net/yimingsilence/article/details/54934302" target="_blank" rel="noopener">参考</a></p>
 <p>协同过滤推荐算法主要的功能是预测和推荐。算法通过对用户历史行为数据的挖掘发现用户的偏好，基于不同的偏好对用户进行群组划分并推荐品味相似的商品。协同过滤推荐算法分为两类，分别是基于用户的协同过滤算法(user-based collaboratIve filtering)，和基于物品的协同过滤算法(item-based collaborative filtering)。简单的说就是：人以类聚，物以群分。</p>
+<p><a href="https://blog.csdn.net/qq_20282263/article/details/52692318" target="_blank" rel="noopener">code</a></p>
 <a id="more"></a>
 <h1 id="基于用户"><a href="#基于用户" class="headerlink" title="基于用户"></a>基于用户</h1><p>基于用户的协同过滤算法是通过用户的历史行为数据发现用户对商品或内容的喜欢(如商品购买，收藏，内容评论或分享)，并对这些喜好进行度量和打分。根据不同用户对相同商品或内容的态度和偏好程度计算用户之间的关系。在有相同喜好的用户间进行商品推荐。简单的说就是如果A,B两个用户都购买了x,y,z三本图书，并且给出了5星的好评。那么A和B就属于同一类用户。可以将A看过的图书w也推荐给用户B。</p>
 <h2 id="寻找相似用户"><a href="#寻找相似用户" class="headerlink" title="寻找相似用户"></a>寻找相似用户</h2><p>我们模拟了5个用户对两件商品的评分，来说明如何通过用户对不同商品的态度和偏好寻找相似的用户。在示例中，5个用户分别对两件商品进行了评分。这里的分值可能表示真实的购买，也可以是用户对商品不同行为的量化指标。例如，浏览商品的次数，向朋友推荐商品，收藏，分享，或评论等等。这些行为都可以表示用户对商品的态度和偏好程度。</p>
@@ -401,6 +402,9 @@
 <th style="text-align:center"></th>
 <th style="text-align:center">商品1</th>
 <th style="text-align:center">商品2</th>
+<th></th>
+<th></th>
+<th></th>
 </tr>
 </thead>
 <tbody>
@@ -408,26 +412,40 @@
 <td style="text-align:center">用户A</td>
 <td style="text-align:center">3.3</td>
 <td style="text-align:center">6.5</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:center">用户B</td>
 <td style="text-align:center">5.8</td>
 <td style="text-align:center">2.6</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:center">用户C</td>
 <td style="text-align:center">3.6</td>
 <td style="text-align:center">6.3</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:center">用户D</td>
 <td style="text-align:center">3.4</td>
 <td style="text-align:center">5.8</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td style="text-align:center">用户E</td>
 <td style="text-align:center">5.2</td>
 <td style="text-align:center">3.1</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -603,7 +621,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h2 id="基于相似用户推荐"><a href="#基于相似用户推荐" class="headerlink" title="基于相似用户推荐"></a>基于相似用户推荐</h2><p>当我们需要对用户C推荐商品时，首先我们检查之前的相似度列表，发现用户C和用户D和E的相似度较高。换句话说这三个用户是一个群体，拥有相同的偏好。因此，我们可以对用户C推荐D和E的商品。但这里有一个问题。我们不能直接推荐前面商品1-商品5的商品。因为这这些商品用户C以及浏览或者购买过了。不能重复推荐。因此我们要推荐用户C还没有浏览或购买过的商品。</p>
+<h2 id="物品推荐计算"><a href="#物品推荐计算" class="headerlink" title="物品推荐计算"></a>物品推荐计算</h2><p>当我们需要对用户C推荐商品时，首先我们检查之前的相似度列表，发现用户C和用户D和E的相似度较高。换句话说这三个用户是一个群体，拥有相同的偏好。因此，我们可以对用户C推荐D和E的商品。但这里有一个问题。我们不能直接推荐前面商品1-商品5的商品。因为这这些商品用户C以及浏览或者购买过了。不能重复推荐。因此我们要推荐用户C还没有浏览或购买过的商品。</p>
 <h3 id="加权排序推荐"><a href="#加权排序推荐" class="headerlink" title="加权排序推荐"></a>加权排序推荐</h3><p>我们提取了用户D和用户E评价过的另外5件商品A—商品F的商品。并对不同商品的评分进行相似度加权。按加权后的结果对5件商品进行排序，然后推荐给用户C。这样，用户C就获得了与他偏好相似的用户D和E评价的商品。而在具体的推荐顺序和展示上我们依照用户D和用户E与用户C的相似度进行排序。</p>
 <p><img src="/2018/06/19/DM-Collaborative-Filtering/Screen Shot 2018-06-19 at 10.48.33 PM.png" alt="Screen Shot 2018-06-19 at 10.48.33 PM"></p>
 <blockquote>
@@ -871,7 +889,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于用户"><span class="nav-number">1.</span> <span class="nav-text">基于用户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找相似用户"><span class="nav-number">1.1.</span> <span class="nav-text">寻找相似用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相似度衡量指标"><span class="nav-number">1.1.1.</span> <span class="nav-text">相似度衡量指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#欧几里得距离"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">欧几里得距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#皮尔逊相关度"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">皮尔逊相关度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于相似用户推荐"><span class="nav-number">1.2.</span> <span class="nav-text">基于相似用户推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加权排序推荐"><span class="nav-number">1.2.1.</span> <span class="nav-text">加权排序推荐</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于物品"><span class="nav-number">2.</span> <span class="nav-text">基于物品</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找相似物品"><span class="nav-number">2.1.</span> <span class="nav-text">寻找相似物品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#欧式距离"><span class="nav-number">2.1.1.</span> <span class="nav-text">欧式距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#皮尔逊相关度-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">皮尔逊相关度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于相似物品推荐"><span class="nav-number">2.2.</span> <span class="nav-text">基于相似物品推荐</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于用户"><span class="nav-number">1.</span> <span class="nav-text">基于用户</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找相似用户"><span class="nav-number">1.1.</span> <span class="nav-text">寻找相似用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相似度衡量指标"><span class="nav-number">1.1.1.</span> <span class="nav-text">相似度衡量指标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#欧几里得距离"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">欧几里得距离</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#皮尔逊相关度"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">皮尔逊相关度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#物品推荐计算"><span class="nav-number">1.2.</span> <span class="nav-text">物品推荐计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加权排序推荐"><span class="nav-number">1.2.1.</span> <span class="nav-text">加权排序推荐</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于物品"><span class="nav-number">2.</span> <span class="nav-text">基于物品</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#寻找相似物品"><span class="nav-number">2.1.</span> <span class="nav-text">寻找相似物品</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#欧式距离"><span class="nav-number">2.1.1.</span> <span class="nav-text">欧式距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#皮尔逊相关度-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">皮尔逊相关度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于相似物品推荐"><span class="nav-number">2.2.</span> <span class="nav-text">基于相似物品推荐</span></a></li></ol></li></ol></div>
             
 
           </div>

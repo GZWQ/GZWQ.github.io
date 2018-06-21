@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="简单Jump Game 题目 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at that position. De">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-20T22:07:19.370Z">
+<meta property="og:updated_time" content="2018-06-20T22:43:03.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="简单Jump Game 题目 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at that position. De">
@@ -426,12 +426,210 @@
 </li>
 </ol>
 <h3 id="Gas-Station"><a href="#Gas-Station" class="headerlink" title="Gas Station"></a><a href="https://leetcode.com/problems/gas-station/description/" target="_blank" rel="noopener">Gas Station</a></h3><ol>
-<li>题目</li>
-</ol>
-<ol>
-<li><p>思路</p>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+</pre></td><td class="code"><pre><div class="line">There are N gas stations along a circular route, where the amount of gas at station i <span class="keyword">is</span> gas[i].</div>
+<div class="line"></div>
+<div class="line">You have a car <span class="keyword">with</span> an unlimited gas tank <span class="keyword">and</span> it costs cost[i] of gas to travel <span class="keyword">from</span> station i to its next station (i+<span class="number">1</span>). You begin the journey <span class="keyword">with</span> an empty tank at one of the gas stations.</div>
+<div class="line"></div>
+<div class="line">Return the starting gas station<span class="string">'s index if you can travel around the circuit once in the clockwise direction, otherwise return -1.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Note:</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">If there exists a solution, it is guaranteed to be unique.</span></div>
+<div class="line"><span class="string">Both input arrays are non-empty and have the same length.</span></div>
+<div class="line"><span class="string">Each element in the input arrays is a non-negative integer.</span></div>
+<div class="line"><span class="string">Example 1:</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Input: </span></div>
+<div class="line"><span class="string">gas  = [1,2,3,4,5]</span></div>
+<div class="line"><span class="string">cost = [3,4,5,1,2]</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Output: 3</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Explanation:</span></div>
+<div class="line"><span class="string">Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4</span></div>
+<div class="line"><span class="string">Travel to station 4. Your tank = 4 - 1 + 5 = 8</span></div>
+<div class="line"><span class="string">Travel to station 0. Your tank = 8 - 2 + 1 = 7</span></div>
+<div class="line"><span class="string">Travel to station 1. Your tank = 7 - 3 + 2 = 6</span></div>
+<div class="line"><span class="string">Travel to station 2. Your tank = 6 - 4 + 3 = 5</span></div>
+<div class="line"><span class="string">Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.</span></div>
+<div class="line"><span class="string">Therefore, return 3 as the starting index.</span></div>
+<div class="line"><span class="string">Example 2:</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Input: </span></div>
+<div class="line"><span class="string">gas  = [2,3,4]</span></div>
+<div class="line"><span class="string">cost = [3,4,3]</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Output: -1</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Explanation:</span></div>
+<div class="line"><span class="string">You can'</span>t start at station <span class="number">0</span> <span class="keyword">or</span> <span class="number">1</span>, <span class="keyword">as</span> there <span class="keyword">is</span> <span class="keyword">not</span> enough gas to travel to the next station.</div>
+<div class="line">Let<span class="string">'s start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4</span></div>
+<div class="line"><span class="string">Travel to station 0. Your tank = 4 - 3 + 2 = 3</span></div>
+<div class="line"><span class="string">Travel to station 1. Your tank = 3 - 3 + 3 = 3</span></div>
+<div class="line"><span class="string">You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.</span></div>
+<div class="line"><span class="string">Therefore, you can'</span>t travel around the circuit once no matter where you start.</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://blog.csdn.net/qq508618087/article/details/50990076" target="_blank" rel="noopener">思路</a></p>
+<p>从index=0的位置出发，如果left = gas[index]-cost[index]大于等于0，说明可以到达下一个地点。那么从下一个地点计算left = left + gas[index]-cost[index]，表示用上一次剩下的油和当前地点提供的油，是否可以到达下一个地点，如果大于等于0，则可以。</p>
+<p>如果left一直是大于0，那么就可以一直走下去。否则，如果left小于0，那么说明不能继续往下走了，那么记录当前lack=left，将欠下来的油记录下来，同时left=0，从下一个位置重新走，如果最终遍历完数组剩下的油能够弥补之前欠下的，那么可以到达，并返回最后一次开始的位置。</p>
 </li>
 <li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">canCompleteCircuit</span><span class="params">(self, gas, cost)</span>:</span></div>
+<div class="line">        left = <span class="number">0</span></div>
+<div class="line">        lack = <span class="number">0</span></div>
+<div class="line">        begin = <span class="number">0</span></div>
+<div class="line">        l = len(gas)</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div>
+<div class="line">            left += gas[i]-cost[i]</div>
+<div class="line">            <span class="keyword">if</span> left&lt;<span class="number">0</span>:</div>
+<div class="line">                lack += left</div>
+<div class="line">                left = <span class="number">0</span></div>
+<div class="line">                begin = i+<span class="number">1</span></div>
+<div class="line">        <span class="keyword">return</span> begin <span class="keyword">if</span> lack+left&gt;=<span class="number">0</span> <span class="keyword">else</span> <span class="number">-1</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="Best-Time-to-Buy-and-Sell-Stock-II"><a href="#Best-Time-to-Buy-and-Sell-Stock-II" class="headerlink" title="Best Time to Buy and Sell Stock II"></a><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock II</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+</pre></td><td class="code"><pre><div class="line">Say you have an array <span class="keyword">for</span> which the ith element <span class="keyword">is</span> the price of a given stock on day i.</div>
+<div class="line"></div>
+<div class="line">Design an algorithm to find the maximum profit. You may complete <span class="keyword">as</span> many transactions <span class="keyword">as</span> you like (i.e., buy one <span class="keyword">and</span> sell one share of the stock multiple times).</div>
+<div class="line"></div>
+<div class="line">Note: You may <span class="keyword">not</span> engage <span class="keyword">in</span> multiple transactions at the same time (i.e., you must sell the stock before you buy again).</div>
+<div class="line"></div>
+<div class="line">Example <span class="number">1</span>:</div>
+<div class="line"></div>
+<div class="line">Input: [<span class="number">7</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">4</span>]</div>
+<div class="line">Output: <span class="number">7</span></div>
+<div class="line">Explanation: Buy on day <span class="number">2</span> (price = <span class="number">1</span>) <span class="keyword">and</span> sell on day <span class="number">3</span> (price = <span class="number">5</span>), profit = <span class="number">5</span><span class="number">-1</span> = <span class="number">4.</span></div>
+<div class="line">             Then buy on day <span class="number">4</span> (price = <span class="number">3</span>) <span class="keyword">and</span> sell on day <span class="number">5</span> (price = <span class="number">6</span>), profit = <span class="number">6</span><span class="number">-3</span> = <span class="number">3.</span></div>
+<div class="line">Example <span class="number">2</span>:</div>
+<div class="line"></div>
+<div class="line">Input: [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div>
+<div class="line">Output: <span class="number">4</span></div>
+<div class="line">Explanation: Buy on day <span class="number">1</span> (price = <span class="number">1</span>) <span class="keyword">and</span> sell on day <span class="number">5</span> (price = <span class="number">5</span>), profit = <span class="number">5</span><span class="number">-1</span> = <span class="number">4.</span></div>
+<div class="line">             Note that you cannot buy on day <span class="number">1</span>, buy on day <span class="number">2</span> <span class="keyword">and</span> sell them later, <span class="keyword">as</span> you are</div>
+<div class="line">             engaging multiple transactions at the same time. You must sell before buying again.</div>
+<div class="line">Example <span class="number">3</span>:</div>
+<div class="line"></div>
+<div class="line">Input: [<span class="number">7</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>]</div>
+<div class="line">Output: <span class="number">0</span></div>
+<div class="line">Explanation: In this case, no transaction <span class="keyword">is</span> done, i.e. max profit = <span class="number">0.</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://www.jianshu.com/p/34bbb0594bd9" target="_blank" rel="noopener">思路</a></p>
+<p>股票买卖，当然是低价买入，高价卖出。那么如果今天的价格高于前一天，那么我们就可以赚钱，因为可以前一天买入，今天卖出。如果明日的价格更高，那么可以今日再买入，明天再卖出。</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices)</span>:</span></div>
+<div class="line">        profit = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)<span class="number">-1</span>):</div>
+<div class="line">            <span class="keyword">if</span> prices[i]&lt;prices[i+<span class="number">1</span>]:</div>
+<div class="line">                profit += prices[i+<span class="number">1</span>] - prices[i]</div>
+<div class="line">        <span class="keyword">return</span> profit</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 </li>
 </ol>
 
@@ -608,7 +806,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.1.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.2.</span> <span class="nav-text">Gas Station</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.1.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.2.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.3.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li></ol></li></ol></div>
             
 
           </div>
