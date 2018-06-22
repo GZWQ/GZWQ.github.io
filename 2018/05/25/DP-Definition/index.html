@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/25/DP-Definition/2018-YANG1.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/25/DP-Definition/Screen%20Shot%202018-06-04%20at%2010.31.07%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/25/DP-Definition/Screen%20Shot%202018-06-06%20at%2012.11.08%20PM.png">
-<meta property="og:updated_time" content="2018-06-21T03:54:36.496Z">
+<meta property="og:updated_time" content="2018-06-21T23:19:54.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Definition of Differential Privacy">
 <meta name="twitter:description" content="This post is about the definition of Differential Privacy. DP ensures privacy by randomness. So before the definition of DP, we need to know what is randomized algorithms. In this post, Domain is repr">
@@ -453,10 +453,12 @@
 <h3 id="Interactive"><a href="#Interactive" class="headerlink" title="Interactive"></a>Interactive</h3><blockquote>
 <p><img src="/2018/05/25/DP-Definition/Screen Shot 2018-06-01 at 8.51.55 PM.png" alt="Screen Shot 2018-06-01 at 8.51.55 PM"></p>
 </blockquote>
-<h2 id="Geo-indistinguishability"><a href="#Geo-indistinguishability" class="headerlink" title="Geo-indistinguishability"></a>Geo-indistinguishability</h2><blockquote>
+<h2 id="Geo-indistinguishability"><a href="#Geo-indistinguishability" class="headerlink" title="Geo-indistinguishability"></a>Geo-indistinguishability</h2><p>Enjoying $l$-privacy within $r$ means that for any two locations $x_1$ and $x_2$ $s.t. d_2(x_1,x_2)\le r$, the probability of generating the same perturbed location $z$ should be similar, where $\frac{P(z|x_1)}{P(z|x_2)}\le e^{\epsilon d_2(x_1,x_2)}$ and $l=\epsilon r$.</p>
+<blockquote>
 <ol>
 <li>It guarantees that obfuscated locations are statistically indistinguishable from other locations within a radius around the users’ real location.</li>
-<li>And the parameter $\epsilon$ is no longer considered as the privacy budget; actually it is determined as $\epsilon=\frac{l}{r}$, where $l$ is the privacy level and $r$ is the privacy radius. This ensures that, when Alice is in location $x$ and releases a perturbed location $z$, her location is statistically indistinguishable from all the other locations $x’$ within a radius of $r$ around her, i.e., $\frac{P(z|x)}{P(z|x’)}\le {e^l}$.</li>
+<li>And the parameter $\epsilon$ is no longer considered as the privacy budget; actually it is determined as $\epsilon=\frac{l}{r}$, where $l$ is the privacy level and $r$ is the privacy radius. This ensures that, when Alice is in location $x$ and releases a perturbed location $z$, her location is statistically indistinguishable from all the other locations $x’$ within a radius of $r$ around her, i.e., $\frac{P(z|x)}{P(z|x’)}\le {e^{\epsilon d(x,x’)}}\le {e^l}$.</li>
+<li>Note also that standard differential privacy simply corresponds to $\epsilon d_h(x, x’ )$-privacy, where $d_h$ is the Hamming distance between databases $x,x’$ , i.e. the number of individuals in which they differ. And standard differential privacy is too strong because it aims at completely protecting the value of a single individual; while in geo-indistinguishability the user’s secret is a single location.</li>
 </ol>
 </blockquote>
 <h2 id="Privacy-loss"><a href="#Privacy-loss" class="headerlink" title="Privacy loss"></a>Privacy loss</h2><blockquote>

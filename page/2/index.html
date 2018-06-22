@@ -1627,7 +1627,7 @@ D(p||q)\ge0</script></li>
         
           
             <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-i/" target="_blank" rel="noopener">Probabilistic Systems Analysis and Applied Probability</a></p>
-<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-ii/lecture-10/" target="_blank" rel="noopener">last time</a></p>
+<p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/unit-ii/lecture-11/" target="_blank" rel="noopener">last time</a></p>
 <h1 id="Independence"><a href="#Independence" class="headerlink" title="Independence"></a>Independence</h1><ol>
 <li><p><strong>Definition</strong>:</p>
 <script type="math/tex; mode=display">
@@ -1827,6 +1827,86 @@ E(AB)&=\sum_A\sum_B(ab)P_{A,B}(a,b)\\
 <h3 id="analysis"><a href="#analysis" class="headerlink" title="analysis"></a>analysis</h3><p>$f_{X,Y}(x,y)=f_{X}(x)f_{Y|X}(y|x)=\frac{1}{l}\frac{1}{x}$</p>
 <p>$E(Y|X=x)=\int yf_{Y|X}(y|X=x)dy=\int_{0}^{x}y\frac{1}{x}dy=\frac{x}{2}$</p>
 <p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-15 at 6.35.34 PM.png" alt="Screen Shot 2018-06-15 at 6.35.34 PM"></p>
+<h1 id="Derived-Distribution"><a href="#Derived-Distribution" class="headerlink" title="Derived Distribution"></a>Derived Distribution</h1><ol>
+<li><p>The discrete value bayes</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-21 at 6.52.10 PM.png" alt="Screen Shot 2018-06-21 at 6.52.10 PM"></p>
+<p>The continuous counterpart</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-21 at 6.53.27 PM.png" alt="Screen Shot 2018-06-21 at 6.53.27 PM"></p>
+<p>discrete $x$ and continuous $y$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-21 at 6.58.50 PM.png" alt="Screen Shot 2018-06-21 at 6.58.50 PM"></p>
+<p>continuous $x$ and discrete $y$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-21 at 6.58.55 PM.png" alt="Screen Shot 2018-06-21 at 6.58.55 PM"></p>
+</li>
+<li><p>Example One</p>
+<p>Say $X : $ uniform on $[0,2]$. And we want to the PDF of $Y=X^3$.</p>
+<blockquote>
+<p>Firstly, we calculate the PMF of $Y$, $F_Y(y)$, where $y\in[0,8]$. According to the definition of PMF, </p>
+<script type="math/tex; mode=display">
+F_Y(y)=P(Y\le y)</script><p>And $Y=X^3$, so we have:</p>
+<script type="math/tex; mode=display">
+F_Y(y)=P(Y\le y)=P(X^3 \le y)=P(X\le y^{\frac{1}{3}})</script><p>Now we want to calculate the mass probability of $X\le y^{\frac{1}{3}}$. We know that $X$ is uniform, and according to the following pic,  $P(X\le y^{\frac{1}{3}})$ is the area of length=$ y^{\frac{1}{3}}$ and height=$\frac{1}{2}$</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-21 at 9.15.25 PM.png" alt="Screen Shot 2018-06-21 at 9.15.25 PM"></p>
+<p>so we have</p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-21 at 9.15.54 PM.png" alt="Screen Shot 2018-06-21 at 9.15.54 PM"></p>
+</blockquote>
+</li>
+<li><p>Example Two</p>
+<p>Calculate the PDF of $Y=aX+b$.</p>
+<blockquote>
+<script type="math/tex; mode=display">
+F_Y(y)=P(Y\le y)=P(aX+b \le y)=P(aX \le y-b)\\
+
+
+F_Y(y)=
+\left\{
+
+\begin{align} 
+
+&P(X\le \frac{y-b}{a})  & \text{if a >=0 }\\
+
+&P(X\ge \frac{y-b}{a})=1- P(X\le \frac{y-b}{a})&\text{if a <=0}
+
+\end{align}
+
+\right.</script><p>Then the PDF is:</p>
+<script type="math/tex; mode=display">
+F_Y(y)=
+\left\{
+
+\begin{align} 
+
+&P(X\le \frac{y-b}{a})  & \text{if a >=0 }\\
+
+&P(X\ge \frac{y-b}{a})=1- P(X\le \frac{y-b}{a})&\text{if a <=0}
+
+\end{align}
+
+\right.</script><p>Because the $P(X\le x)=F_X(x)$,</p>
+<script type="math/tex; mode=display">
+F_Y(y)=
+\left\{
+
+\begin{align} 
+
+&F_X( \frac{y-b}{a})  & \text{if a >=0 }\\
+
+&1- F_X( \frac{y-b}{a}) &\text{if a <=0}
+
+\end{align}
+
+\right.</script><p>Then the PDF is </p>
+<script type="math/tex; mode=display">
+f_Y(y)=
+\left\{
+\begin{align} 
+&\frac{1}{a}f_X( \frac{y-b}{a})  & \text{if a >=0 }\\
+&- \frac{1}{a}f_X( \frac{y-b}{a}) &\text{if a <=0}
+\end{align}
+\right.</script><p>So overall,</p>
+<script type="math/tex; mode=display">
+f_Y(y)=\frac{1}{|a|}f_X( \frac{y-b}{a})</script></blockquote>
+</li>
+</ol>
 <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
 <ol>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>
