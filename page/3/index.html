@@ -1412,6 +1412,73 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 </div></div>
 </li>
 </ol>
+<h2 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h2><h3 id="Queue-Reconstruction-by-Height"><a href="#Queue-Reconstruction-by-Height" class="headerlink" title="Queue Reconstruction by Height"></a><a href="https://leetcode.com/problems/queue-reconstruction-by-height/description/" target="_blank" rel="noopener">Queue Reconstruction by Height</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line">Suppose you have a random list of people standing in a queue. <span class="function">Each person is described by a pair of <span class="title">integers</span> <span class="params">(h, k)</span>, where h is the height of the person and k is the number of people in front of <span class="keyword">this</span> person who have a height greater than or equal to h. Write an algorithm to reconstruct the queue.</span></div>
+<div class="line"><span class="function"></span></div>
+<div class="line"><span class="function">Note:</span></div>
+<div class="line"><span class="function">The number of people is less than 1,100.</span></div>
+<div class="line"><span class="function"></span></div>
+<div class="line"><span class="function"></span></div>
+<div class="line"><span class="function">Example</span></div>
+<div class="line"><span class="function"></span></div>
+<div class="line"><span class="function">Input:</span></div>
+<div class="line"><span class="function">[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]</span></div>
+<div class="line"><span class="function"></span></div>
+<div class="line"><span class="function">Output:</span></div>
+<div class="line"><span class="function">[[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://leetcode.com/problems/queue-reconstruction-by-height/discuss/89345/Easy-concept-with-PythonC++Java-Solution" target="_blank" rel="noopener">思路</a></p>
+<p>题目大致的意思是：每一个由一组整数(h, k)表示，h是其身高，k是队列之中身高不低于h的人数。现在要重构这个队列。</p>
+<p>首先，这个题目类似于作业调度，需要根据（h，k）排序，问题是先根据哪一个排序呢？答案是以h排序，使身高从大到小排序，即先为身高有优势的在队列中找到位置，这样，身高比较矮的人在队列中的位置就是任意了，因为无论他们不会对身高高的人造成影响，即已经找到位置的身高优势的人，不会因为矮的人的插入而重新排列。而对于身高相同的人，显然是k值小的先插入。</p>
+<p>所以，先根据h排序，h相同时根据k排序。</p>
+<p>针对上述例子：</p>
+<p>根据h排序之后，[7,0], [7,1], [6,1], [5,0], [5,2], [4,4]</p>
+<p>根据k排序之后，已经有序</p>
+<p>对于第一个人[7,0]，根据k值插入数组[ [7,0] ]</p>
+<p>[7,1]，k=1插入[ [7,0] , [7,1] ]</p>
+<p>[6,1], k=1插入[[7,0],[6,1],[7,1]]需要注意的是，无论[6,1]插入位置，都不会对已经插入的元素造成影响</p>
+<p>…</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reconstructQueue</span><span class="params">(self, people)</span>:</span></div>
+<div class="line">        new_people = sorted(people,key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</div>
+<div class="line">        new_people = sorted(new_people,key=<span class="keyword">lambda</span> x:x[<span class="number">0</span>],reverse=<span class="keyword">True</span>)</div>
+<div class="line">        queue = []</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> new_people:</div>
+<div class="line">            queue.insert(i[<span class="number">1</span>],i)</div>
+<div class="line">        <span class="keyword">return</span> queue</div>
+</pre></td></tr></table></figure>
+
+</div></div></li>
+</ol>
 
           
         
