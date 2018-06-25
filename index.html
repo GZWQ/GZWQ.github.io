@@ -283,6 +283,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/25/Experiment-Metric/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/25/Experiment-Metric/" itemprop="url">Experiment-Metric</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-25T12:29:24-05:00">
+                2018-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Experiment/" itemprop="url" rel="index">
+                    <span itemprop="name">Experiment</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a><a href="https://blog.csdn.net/zhanghongju/article/details/18446131" target="_blank" rel="noopener">箱线图</a></h2><p>箱线图（Boxplot）也称箱须图（Box-whisker Plot），可以用于异常值检测。它是用一组数据中的最小值、第一四分位数、中位数、第三四分位数和最大值来反映数据分布的中心位置和散布范围，可以粗略地看出数据是否具有对称性。通过将多组数据的箱线图画在同一坐标上，则可以清晰地显示各组数据的分布差异，为发现问题、改进流程提供线索。</p>
+<p><img src="/2018/06/25/Experiment-Metric/2009624114634640.JPG" alt="2009624114634640"></p>
+<h3 id="四分位数"><a href="#四分位数" class="headerlink" title="四分位数"></a>四分位数</h3><p>所谓四分位数，就是把组中所有数据由小到大排列并分成四等份，处于三个分割点位置的数字就是四分位数。</p>
+<ul>
+<li>第一四分位数（Q1），又称“较小四分位数”或“下四分位数”，等于该样本中所有数值由小到大排列后第25%的数字。</li>
+<li>第二四分位数（Q2），又称“中位数”，等于该样本中所有数值由小到大排列后第50%的数字。</li>
+<li>第三四分位数（Q3），又称“较大四分位数”或“上四分位数”，等于该样本中所有数值由小到大排列后第75%的数字。</li>
+<li>第三四分位数与第一四分位数的差距又称四分位间距（InterQuartile Range，IQR）。</li>
+</ul>
+<h4 id="四分位数计算"><a href="#四分位数计算" class="headerlink" title="四分位数计算"></a>四分位数计算</h4><ol>
+<li><p>确定Q1、Q2、Q3的位置（n表示数字的总个数）</p>
+<ul>
+<li>Q1的位置=（n+1）/4</li>
+<li>Q2的位置=（n+1）/2</li>
+<li>Q3的位置=3（n+1）/4</li>
+</ul>
+<p>对于数字个数为奇数的，其四分位数比较容易确定。例如，数字“5、47、48、15、42、41、7、39、45、40、35”共有11项，由小到大排列的结果为“5、7、15、35、39、40、41、42、45、47、48”，计算结果如下：</p>
+<ul>
+<li>Q1的位置=（11+1）/4=3，该位置的数字是15。</li>
+<li>Q2的位置=（11+1）/2=6，该位置的数字是40。</li>
+<li>Q3的位置=3（11+1）/4=9，该位置的数字是45。</li>
+</ul>
+<p>而对于数字个数为偶数的，其四分位数确定起来稍微繁琐一点。例如，数字“8、17、38、39、42、44”共有6项，位置计算结果如下：</p>
+<ul>
+<li>Q1的位置=（6+1）/4=1.75</li>
+<li>Q2的位置=（6+1）/2=3.5</li>
+<li>Q3的位置=3（6+1）/4=5.25</li>
+</ul>
+<p>这时的数字以数据连续为前提，由所确定位置的前后两个数字共同确定。例如，Q2的位置为3.5，则由第3个数字38和第4个数字39共同确定，计算方法是：38+（39-38）×3.5的小数部分，即38+1×0.5=38.5。该结果实际上是38和39的平均数。</p>
+<p>同理，Q1、Q3的计算结果如下：</p>
+<ul>
+<li>Q1 = 8+（17-8）×0.75=14.75</li>
+<li>Q3 = 42+（44-42）×0.25=42.5</li>
+</ul>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/20/DP-Recommendation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -668,7 +845,7 @@
       
         
           
-            <p><a href="https://www.yiibai.com/numpy/numpy_sort_search_counting_functions.html#article-start" target="_blank" rel="noopener">last</a></p>
+            <p><a href="https://www.yiibai.com/numpy/numpy_matrix_library.html#article-start" target="_blank" rel="noopener">last</a></p>
 <h1 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h1><p>NumPy 中定义的最重要的对象是称为 <code>ndarray</code> 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。</p>
 <p><code>ndarray</code>中的每个元素在内存中使用相同大小的块。 <code>ndarray</code>中的每个元素是数据类型对象的对象(称为 <code>dtype</code>)。</p>
 <p> 基本的<code>ndarray</code>是使用 NumPy 中的数组函数创建的</p>
@@ -2610,6 +2787,155 @@
 <div class="line">print([surnames[i] + <span class="string">", "</span> + first_names[i] <span class="keyword">for</span> i <span class="keyword">in</span> ind])</div>
 <div class="line"><span class="comment"># ['Galilei, Galileo', 'Hertz, Gustav', 'Hertz, Heinrich']</span></div>
 </pre></td></tr></table></figure>
+<h2 id="numpy-argmax-argmin"><a href="#numpy-argmax-argmin" class="headerlink" title="numpy.argmax()/.argmin()"></a>numpy.argmax()/.argmin()</h2><p>这两个函数分别沿给定轴返回最大和最小元素的<strong>索引</strong>。</p>
+<h2 id="numpy-nonzero"><a href="#numpy-nonzero" class="headerlink" title="numpy.nonzero()"></a>numpy.nonzero()</h2><p>返回输入数组中非零元素的索引。</p>
+<h2 id="numpy-where"><a href="#numpy-where" class="headerlink" title="numpy.where()"></a>numpy.where()</h2><p>函数返回输入数组中满足给定条件的元素的<strong>索引</strong>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.arange(<span class="number">9.</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</div>
+<div class="line">print(x)</div>
+<div class="line"><span class="comment"># [[0. 1. 2.]</span></div>
+<div class="line"><span class="comment">#  [3. 4. 5.]</span></div>
+<div class="line"><span class="comment">#  [6. 7. 8.]]</span></div>
+<div class="line">y = np.where(x&gt;<span class="number">3</span>)</div>
+<div class="line">print(y) <span class="comment">#总共有5个，第一个array是横坐标，第二个array是纵坐标</span></div>
+<div class="line"><span class="comment"># (array([1, 1, 2, 2, 2]), array([1, 2, 0, 1, 2]))</span></div>
+<div class="line">print(x[y])</div>
+<div class="line"><span class="comment"># [4. 5. 6. 7. 8.]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-extract"><a href="#numpy-extract" class="headerlink" title="numpy.extract()"></a>numpy.extract()</h2><p>返回满足任何条件的元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">x = np.arange(<span class="number">9.</span>).reshape(<span class="number">3</span>,<span class="number">3</span>)</div>
+<div class="line">print(x)</div>
+<div class="line"><span class="comment"># [[0. 1. 2.]</span></div>
+<div class="line"><span class="comment">#  [3. 4. 5.]</span></div>
+<div class="line"><span class="comment">#  [6. 7. 8.]]</span></div>
+<div class="line">con = np.mod(x,<span class="number">2</span>)==<span class="number">0</span></div>
+<div class="line">print(np.extract(con,x))</div>
+<div class="line"><span class="comment"># [0. 2. 4. 6. 8.]</span></div>
+</pre></td></tr></table></figure>
+<h1 id="NumPy副本和视图"><a href="#NumPy副本和视图" class="headerlink" title="NumPy副本和视图"></a>NumPy副本和视图</h1><p>在执行函数时，其中一些返回输入数组的副本，而另一些返回视图。 当内容物理存储在另一个位置时，称为<strong>副本</strong>。 另一方面，如果提供了相同内存内容的不同视图，我们将其称为<strong>视图</strong>。</p>
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><p>简单的赋值不会创建数组对象的副本，一个数组的任何变化都反映在另一个数组上。 例如，一个数组的形状改变也会改变另一个数组的形状。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.arange(<span class="number">6</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [0 1 2 3 4 5]</span></div>
+<div class="line">b=a</div>
+<div class="line">b[<span class="number">0</span>] = <span class="number">111</span></div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [111   1   2   3   4   5]</span></div>
+<div class="line">b.shape=<span class="number">3</span>,<span class="number">2</span></div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[0 1]</span></div>
+<div class="line"><span class="comment">#  [2 3]</span></div>
+<div class="line"><span class="comment">#  [4 5]]</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>改变值，改变维度</p>
+</blockquote>
+<h2 id="浅复制"><a href="#浅复制" class="headerlink" title="浅复制"></a>浅复制</h2><p>NumPy 拥有<code>ndarray.view()</code>方法，它是一个新的数组对象，并<strong>可查看原始数组的相同数据</strong>。 与前一种情况不同，新数组的维数更改不会更改原始数据的维数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>,<span class="number">3</span>)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[0 1 2]</span></div>
+<div class="line"><span class="comment">#  [3 4 5]]</span></div>
+<div class="line">b=a.view()</div>
+<div class="line">b[<span class="number">0</span>] = <span class="number">111</span></div>
+<div class="line">b.shape=<span class="number">3</span>,<span class="number">2</span></div>
+<div class="line">print(b)</div>
+<div class="line"><span class="comment"># [[111 111]</span></div>
+<div class="line"><span class="comment">#  [111   3]</span></div>
+<div class="line"><span class="comment">#  [  4   5]]</span></div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[111 111 111]</span></div>
+<div class="line"><span class="comment">#  [  3   4   5]]</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>改变值，不改变维度</p>
+</blockquote>
+<p>数组的切片也会创建视图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([[<span class="number">10</span>,<span class="number">10</span>],  [<span class="number">2</span>,<span class="number">3</span>],  [<span class="number">4</span>,<span class="number">5</span>]])</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[10 10]</span></div>
+<div class="line"><span class="comment">#  [ 2  3]</span></div>
+<div class="line"><span class="comment">#  [ 4  5]]</span></div>
+<div class="line">s = a[:<span class="number">2</span>,:]</div>
+<div class="line">s[<span class="number">0</span>]=<span class="number">-111</span></div>
+<div class="line">print(s)</div>
+<div class="line"><span class="comment"># [[-111 -111]</span></div>
+<div class="line"><span class="comment">#  [   2    3]]</span></div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[-111 -111]</span></div>
+<div class="line"><span class="comment">#  [   2    3]</span></div>
+<div class="line"><span class="comment">#  [   4    5]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="深复制"><a href="#深复制" class="headerlink" title="深复制"></a>深复制</h2><p><code>ndarray.copy()</code>函数创建一个深层副本。 它是数组及其数据的完整副本，不与原始数组共享。</p>
+<p><code>b=a.copy()</code>:不改变数据，不改变维度</p>
+<h1 id="NumPy矩阵库"><a href="#NumPy矩阵库" class="headerlink" title="NumPy矩阵库"></a>NumPy矩阵库</h1><p>NumPy 包包含一个 Matrix库<code>numpy.matlib</code>。此模块的函数返回矩阵而不是返回<code>ndarray</code>对象。</p>
+<h2 id="numpy-matlib-empty"><a href="#numpy-matlib-empty" class="headerlink" title="numpy.matlib.empty()"></a>numpy.matlib.empty()</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-25 at 12.11.39 PM.png" alt="Screen Shot 2018-06-25 at 12.11.39 PM"></p>
 
           
         
@@ -3601,154 +3927,6 @@ y&=eq2 &\text{if x=2}
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/ML-Pandas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/08/ML-Pandas/" itemprop="url">ML - Pandas</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T01:16:54-05:00">
-                2018-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
-<p>pandas导入</p>
-<!--�240-->
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3799,7 +3977,7 @@ y&=eq2 &\text{if x=2}
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3810,7 +3988,7 @@ y&=eq2 &\text{if x=2}
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -3821,7 +3999,7 @@ y&=eq2 &\text{if x=2}
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

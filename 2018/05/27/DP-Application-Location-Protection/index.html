@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.    Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of t">
+<meta name="description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.  [2013-Andres] paper don’t understand “polar mechanism is discretized and truncated?”   Problem SettingThe goal of location with DP is th">
 <meta name="keywords" content="Differential Privacy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP Application - Location Protection">
 <meta property="og:url" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.    Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of t">
+<meta property="og:description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.  [2013-Andres] paper don’t understand “polar mechanism is discretized and truncated?”   Problem SettingThe goal of location with DP is th">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.24.24%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.41.01%20PM.png">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-22%20at%208.35.38%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-22%20at%208.36.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-22%20at%208.37.47%20PM.png">
-<meta property="og:updated_time" content="2018-06-23T01:38:38.171Z">
+<meta property="og:updated_time" content="2018-06-25T16:12:34.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Location Protection">
-<meta name="twitter:description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.    Problem SettingThe goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of t">
+<meta name="twitter:description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.  [2013-Andres] paper don’t understand “polar mechanism is discretized and truncated?”   Problem SettingThe goal of location with DP is th">
 <meta name="twitter:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-19%20at%2012.24.24%20PM.png">
 
 
@@ -397,10 +397,12 @@
 <li><p>WHY $r$?</p>
 <p>The author investegate the $l$-privacy within $r$.</p>
 </li>
-<li></li>
+<li><p>[2013-Andres] paper don’t understand “polar mechanism is discretized and truncated?”</p>
+</li>
 </ol>
 <h2 id="Problem-Setting"><a href="#Problem-Setting" class="headerlink" title="Problem Setting"></a>Problem Setting</h2><p>The goal of location with DP is that the chance of users being mapped to one specific obfuscated location from any of the actual locations is similar. The more similar the probability for each region is, the harder it is to infer users’ original positions, leading to better privacy protection.</p>
 <a id="more"></a>
+<h2 id="Development-Traces"><a href="#Development-Traces" class="headerlink" title="Development Traces"></a>Development Traces</h2><p><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a> is the first one to propose geo-indistinguishability to protect locations and </p>
 <h3 id="2013-Andres-Geo-indistinguishability"><a href="#2013-Andres-Geo-indistinguishability" class="headerlink" title="[2013-Andres]:Geo-indistinguishability"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a>:Geo-indistinguishability</h3><h3 id="A-motivating-scenario"><a href="#A-motivating-scenario" class="headerlink" title="A motivating scenario"></a>A motivating scenario</h3><p>A user visiting Paris, currently located at a point $x$ close to the Eiffel Tower, and wishing to discover nearby restaurants with good reviews. To achieve this goal, the user can query a service provider (for instance, an LBS server); however, to maintain his privacy, the user does not wish to disclose his exact location. Instead, he can provide some approximate information that still allows him to obtain a useful service, for instance, a randomly chosen point $z$ close to his location. </p>
 <p>We fix a circle of radius $r$ centered at the user’s location, and we reason about the user’s level of privacy within this radius.</p>
 <p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.24.24 PM.png" alt="Screen Shot 2018-06-19 at 12.24.24 PM"></p>
@@ -576,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -587,7 +589,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -598,7 +600,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -631,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">2.</span> <span class="nav-text">Problem Setting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres-Geo-indistinguishability"><span class="nav-number">2.1.</span> <span class="nav-text">[2013-Andres]:Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-motivating-scenario"><span class="nav-number">2.2.</span> <span class="nav-text">A motivating scenario</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">2.3.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Adversary-model"><span class="nav-number">2.3.1.</span> <span class="nav-text">Adversary model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#informal-one"><span class="nav-number">2.3.2.</span> <span class="nav-text">informal one</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-I"><span class="nav-number">2.3.3.</span> <span class="nav-text">Geo-indistinguishability-I</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-II"><span class="nav-number">2.3.4.</span> <span class="nav-text">Geo-indistinguishability-II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-III"><span class="nav-number">2.3.5.</span> <span class="nav-text">Geo-indistinguishability-III</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mechanism-for-Geo-indistinguishability"><span class="nav-number">2.4.</span> <span class="nav-text">Mechanism for Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-point-generation"><span class="nav-number">2.5.</span> <span class="nav-text">Random point generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">2.6.</span> <span class="nav-text">[2014-Nicolas]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geo-indistinguishability-with-expected-inference-error"><span class="nav-number">2.7.</span> <span class="nav-text">Geo-indistinguishability with expected inference error</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Utility-Cost"><span class="nav-number">2.7.1.</span> <span class="nav-text">Utility Cost</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Inference-Attack"><span class="nav-number">2.7.2.</span> <span class="nav-text">Inference Attack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-Setting"><span class="nav-number">2.</span> <span class="nav-text">Problem Setting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Development-Traces"><span class="nav-number">3.</span> <span class="nav-text">Development Traces</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2013-Andres-Geo-indistinguishability"><span class="nav-number">3.1.</span> <span class="nav-text">[2013-Andres]:Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-motivating-scenario"><span class="nav-number">3.2.</span> <span class="nav-text">A motivating scenario</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">3.3.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Adversary-model"><span class="nav-number">3.3.1.</span> <span class="nav-text">Adversary model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#informal-one"><span class="nav-number">3.3.2.</span> <span class="nav-text">informal one</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-I"><span class="nav-number">3.3.3.</span> <span class="nav-text">Geo-indistinguishability-I</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-II"><span class="nav-number">3.3.4.</span> <span class="nav-text">Geo-indistinguishability-II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Geo-indistinguishability-III"><span class="nav-number">3.3.5.</span> <span class="nav-text">Geo-indistinguishability-III</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mechanism-for-Geo-indistinguishability"><span class="nav-number">3.4.</span> <span class="nav-text">Mechanism for Geo-indistinguishability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-point-generation"><span class="nav-number">3.5.</span> <span class="nav-text">Random point generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2014-Nicolas"><span class="nav-number">3.6.</span> <span class="nav-text">[2014-Nicolas]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Geo-indistinguishability-with-expected-inference-error"><span class="nav-number">3.7.</span> <span class="nav-text">Geo-indistinguishability with expected inference error</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Utility-Cost"><span class="nav-number">3.7.1.</span> <span class="nav-text">Utility Cost</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Inference-Attack"><span class="nav-number">3.7.2.</span> <span class="nav-text">Inference Attack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
