@@ -386,7 +386,7 @@
 <li>数值积分（scipy.integrate Fusy）</li>
 </ol>
 <p>模块导入的标准方式是：</p>
-<!--�28-->
+<!--�135-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/07/ML-SciPy/#more" rel="contents">
@@ -1913,6 +1913,32 @@ f_Y(y)=
 \right.</script><p>So overall,</p>
 <script type="math/tex; mode=display">
 f_Y(y)=\frac{1}{|a|}f_X( \frac{y-b}{a})</script></blockquote>
+</li>
+</ol>
+<h1 id="Bernoulli-process"><a href="#Bernoulli-process" class="headerlink" title="Bernoulli process"></a><a href="http://zhouyichu.com/randomized-algorithm/Randomized-Algorithms-2/" target="_blank" rel="noopener">Bernoulli process</a></h1><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-24 at 10.29.40 PM.png" alt="Screen Shot 2018-06-24 at 10.29.40 PM"></p>
+<ol>
+<li><p><strong>Definition</strong></p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-24 at 9.52.34 PM.png" alt="Screen Shot 2018-06-24 at 9.52.34 PM"></p>
+</li>
+<li><p><strong>Properties</strong></p>
+<p>There is a random process and the sequence of random variables is $X_1, X_2,…$</p>
+<script type="math/tex; mode=display">
+E(X_t)=1\times p+0\times (1-p)=p\\
+Var(X_t)=E(X_t^2)-E^2(X_t)=p-p^2</script><p>And for the infinite sequence and no matter what the variable value is, the probability of infinite sequence is :</p>
+<script type="math/tex; mode=display">
+P=P(X_1)P(X_2)...P(X_\infin)=p^k (1-p)^g\\
+lim_{k\to\infin,g_\to \infin}p^k (1-p)^g=0\\
+P=0</script><p>Number of success $S$ in $n$ time slots</p>
+<script type="math/tex; mode=display">
+P(S=k)=(_{k}^{n})p(1-p)\\
+E[S]=kp\\
+Var(S)=kp(1-p)</script><p>Let $T_1$ be the number of trials until first success:</p>
+<blockquote>
+<script type="math/tex; mode=display">
+P(T_1=t)=(1-p)^{(t-1)}p</script><p>Memoryless peoperty: what happens in the past has no effect on the future random provess</p>
+<script type="math/tex; mode=display">
+E[T_1]=\frac{1}p{}\\
+Var(T_1)=\frac{1-p}{p^2}</script></blockquote>
 </li>
 </ol>
 <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>

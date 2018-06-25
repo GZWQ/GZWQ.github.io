@@ -116,11 +116,13 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-21%20at%206.58.55%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-21%20at%209.15.25%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-21%20at%209.15.54%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-24%20at%2010.29.40%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-24%20at%209.52.34%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-06%20at%209.20.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-05%20at%208.35.00%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/929166-20161116214202513-1545949382.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/Statistic-110/Screen%20Shot%202018-06-06%20at%2011.01.27%20PM.png">
-<meta property="og:updated_time" content="2018-06-23T02:31:30.736Z">
+<meta property="og:updated_time" content="2018-06-25T03:35:42.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Statistic 110">
 <meta name="twitter:description" content="Probabilistic Systems Analysis and Applied Probability last time Independence Definition:  P(AB)=P(A)P(B) Based on the pic, $P(AB)\ne P(A)P(B)$, so event A and event B are not independent event.     D">
@@ -677,6 +679,32 @@ f_Y(y)=
 f_Y(y)=\frac{1}{|a|}f_X( \frac{y-b}{a})</script></blockquote>
 </li>
 </ol>
+<h1 id="Bernoulli-process"><a href="#Bernoulli-process" class="headerlink" title="Bernoulli process"></a><a href="http://zhouyichu.com/randomized-algorithm/Randomized-Algorithms-2/" target="_blank" rel="noopener">Bernoulli process</a></h1><p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-24 at 10.29.40 PM.png" alt="Screen Shot 2018-06-24 at 10.29.40 PM"></p>
+<ol>
+<li><p><strong>Definition</strong></p>
+<p><img src="/2018/05/30/Statistic-110/Screen Shot 2018-06-24 at 9.52.34 PM.png" alt="Screen Shot 2018-06-24 at 9.52.34 PM"></p>
+</li>
+<li><p><strong>Properties</strong></p>
+<p>There is a random process and the sequence of random variables is $X_1, X_2,…$</p>
+<script type="math/tex; mode=display">
+E(X_t)=1\times p+0\times (1-p)=p\\
+Var(X_t)=E(X_t^2)-E^2(X_t)=p-p^2</script><p>And for the infinite sequence and no matter what the variable value is, the probability of infinite sequence is :</p>
+<script type="math/tex; mode=display">
+P=P(X_1)P(X_2)...P(X_\infin)=p^k (1-p)^g\\
+lim_{k\to\infin,g_\to \infin}p^k (1-p)^g=0\\
+P=0</script><p>Number of success $S$ in $n$ time slots</p>
+<script type="math/tex; mode=display">
+P(S=k)=(_{k}^{n})p(1-p)\\
+E[S]=kp\\
+Var(S)=kp(1-p)</script><p>Let $T_1$ be the number of trials until first success:</p>
+<blockquote>
+<script type="math/tex; mode=display">
+P(T_1=t)=(1-p)^{(t-1)}p</script><p>Memoryless peoperty: what happens in the past has no effect on the future random provess</p>
+<script type="math/tex; mode=display">
+E[T_1]=\frac{1}p{}\\
+Var(T_1)=\frac{1-p}{p^2}</script></blockquote>
+</li>
+</ol>
 <h1 id="Log"><a href="#Log" class="headerlink" title="Log"></a>Log</h1><p>乘除 —&gt; 加减</p>
 <ol>
 <li>$log_a(MN)=log_a{M}+log_a{N}$</li>
@@ -875,7 +903,7 @@ P(|S\ge{\mu}|\ge\epsilon)\le2e^{-2m\epsilon^2}</script><p><img src="/2018/05/30/
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Independence"><span class="nav-number">1.</span> <span class="nav-text">Independence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discrete-Random-Variables"><span class="nav-number">2.</span> <span class="nav-text">Discrete Random Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binomial-Random-Variable"><span class="nav-number">3.</span> <span class="nav-text">Binomial Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Continuous-Random-Variable"><span class="nav-number">4.</span> <span class="nav-text">Continuous Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiple-Continuous-Random-Variables"><span class="nav-number">5.</span> <span class="nav-text">Multiple Continuous Random Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Joint-PDF"><span class="nav-number">5.1.</span> <span class="nav-text">Joint PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffon’s-needle"><span class="nav-number">5.2.</span> <span class="nav-text">Buffon’s needle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conditioning"><span class="nav-number">5.3.</span> <span class="nav-text">conditioning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stick-breaking-example"><span class="nav-number">5.4.</span> <span class="nav-text">Stick-breaking example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-setting"><span class="nav-number">5.4.1.</span> <span class="nav-text">problem setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#analysis"><span class="nav-number">5.4.2.</span> <span class="nav-text">analysis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Derived-Distribution"><span class="nav-number">6.</span> <span class="nav-text">Derived Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">6.1.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">6.2.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log"><span class="nav-number">7.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unbiased-estimator"><span class="nav-number">8.</span> <span class="nav-text">Unbiased estimator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Additive-Chernoff-Bound"><span class="nav-number">9.</span> <span class="nav-text">Additive Chernoff Bound</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Johnson-Lindenstrauss-Lemma"><span class="nav-number">10.</span> <span class="nav-text">Johnson-Lindenstrauss Lemma</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Independence"><span class="nav-number">1.</span> <span class="nav-text">Independence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Discrete-Random-Variables"><span class="nav-number">2.</span> <span class="nav-text">Discrete Random Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Binomial-Random-Variable"><span class="nav-number">3.</span> <span class="nav-text">Binomial Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Continuous-Random-Variable"><span class="nav-number">4.</span> <span class="nav-text">Continuous Random Variable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multiple-Continuous-Random-Variables"><span class="nav-number">5.</span> <span class="nav-text">Multiple Continuous Random Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Joint-PDF"><span class="nav-number">5.1.</span> <span class="nav-text">Joint PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffon’s-needle"><span class="nav-number">5.2.</span> <span class="nav-text">Buffon’s needle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conditioning"><span class="nav-number">5.3.</span> <span class="nav-text">conditioning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stick-breaking-example"><span class="nav-number">5.4.</span> <span class="nav-text">Stick-breaking example</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-setting"><span class="nav-number">5.4.1.</span> <span class="nav-text">problem setting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#analysis"><span class="nav-number">5.4.2.</span> <span class="nav-text">analysis</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Derived-Distribution"><span class="nav-number">6.</span> <span class="nav-text">Derived Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">6.1.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">6.2.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bernoulli-process"><span class="nav-number">7.</span> <span class="nav-text">Bernoulli process</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Log"><span class="nav-number">8.</span> <span class="nav-text">Log</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unbiased-estimator"><span class="nav-number">9.</span> <span class="nav-text">Unbiased estimator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Additive-Chernoff-Bound"><span class="nav-number">10.</span> <span class="nav-text">Additive Chernoff Bound</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Johnson-Lindenstrauss-Lemma"><span class="nav-number">11.</span> <span class="nav-text">Johnson-Lindenstrauss Lemma</span></a></li></ol></div>
             
 
           </div>

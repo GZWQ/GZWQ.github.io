@@ -1158,6 +1158,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
           
             <h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Jump-Game"><a href="#Jump-Game" class="headerlink" title="Jump Game"></a><a href="https://leetcode.com/problems/jump-game/description/" target="_blank" rel="noopener">Jump Game</a></h3><ol>
 <li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
 <p>Each element in the array represents your maximum jump length at that position.</p>
 <p>Determine if you are able to reach the last index.</p>
@@ -1179,11 +1180,14 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <div class="line">Explanation: You will always arrive at index <span class="number">3</span> no matter what. Its maximum</div>
 <div class="line">             jump length is <span class="number">0</span>, which makes it impossible to reach the last index.</div>
 </pre></td></tr></table></figure>
+
+</div></div>
 </li>
 <li><p>思路</p>
 <p>从index=i的位置出发，其能到达的最远位置是 i+nums[i]。那么我们设置一个青蛙能达到的最远位置为reach，如果最后reach大于等于数组的长度，那么可以到达。可是如何更新reach呢？因为reach表示最远可到达，那么我们一遍扫描数组nums，pos从0开始，表示初始位置，那么如果青蛙从当前位置可以达到的下一个位置是pos+nums[pos]，那么reach=max(reach, pos+nums[pos])。但是在比较之前，注意reach要大于等于pos，否则青蛙无法跳跃到pos，则肯定无法成功跳跃到最后一步。</p>
 </li>
 <li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1203,6 +1207,8 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <div class="line">            pos += <span class="number">1</span></div>
 <div class="line">        <span class="keyword">return</span> reach&gt;=l<span class="number">-1</span></div>
 </pre></td></tr></table></figure>
+
+</div></div>
 </li>
 </ol>
 <h3 id="Gas-Station"><a href="#Gas-Station" class="headerlink" title="Gas Station"></a><a href="https://leetcode.com/problems/gas-station/description/" target="_blank" rel="noopener">Gas Station</a></h3><ol>
@@ -1627,7 +1633,78 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 <div class="line">        <span class="keyword">return</span> str(int(re)) <span class="keyword">if</span> re <span class="keyword">else</span> str(<span class="number">0</span>)</div>
 </pre></td></tr></table></figure>
 
-</div></div></li>
+</div></div>
+</li>
+</ol>
+<h3 id="Monotone-Increasing-Digits"><a href="#Monotone-Increasing-Digits" class="headerlink" title="Monotone Increasing Digits"></a><a href="https://leetcode.com/problems/monotone-increasing-digits/description/" target="_blank" rel="noopener">Monotone Increasing Digits</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given a non-negative integer <code>N</code>, find the largest number that is less than or equal to <code>N</code> with monotone increasing digits.</p>
+<p>(Recall that an integer has <em>monotone increasing digits</em> if and only if each pair of adjacent digits <code>x</code> and <code>y</code>satisfy <code>x &lt;= y</code>.)</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: N = 10</div>
+<div class="line">Output: 9</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: N = 1234</div>
+<div class="line">Output: 1234</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: N = 332</div>
+<div class="line">Output: 299</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p>思路</p>
+<p>首先，题目有一个模棱两可的地方， <strong>monotone increasing</strong>意思是单调递增，即不减，所以相等也可以。即<code>22</code>也是满足 <strong>monotone increasing</strong>的。</p>
+<p>所以我们扫描一次input，找到第一个下降的位置，比如<code>668841</code>，开始下降的index=3。正常是num[index] = num[index]-1，然后后面全部变成9,即<code>668799</code>。显然有问题，因<code>88</code>的存在and减法操作使出现下降。所以，在找到开始下降的index之后，往前扫描，直到找到第一个num[index]的数字，然后将该数字减法1，后面的全部翻转为<code>9</code>。</p>
+<p>编程的时候，遇到一个问题就是Python中string的操作。如果num_str = str(num)，那么num_str就是常量，常量不可以修改，即num_str[i] = ‘a’,是会报错的。可以使用string连接操作<code>+</code>，或者replace等。</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">monotoneIncreasingDigits</span><span class="params">(self, N)</span>:</span></div>
+<div class="line">        num = list(str(N))</div>
+<div class="line">        end = len(num)</div>
+<div class="line">        flag = <span class="keyword">True</span></div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(num)<span class="number">-1</span>):</div>
+<div class="line">            <span class="keyword">if</span> num[i]&gt;num[i+<span class="number">1</span>]:</div>
+<div class="line">                flag=<span class="keyword">False</span></div>
+<div class="line">                end = i</div>
+<div class="line">                <span class="keyword">break</span></div>
+<div class="line">        <span class="keyword">if</span> flag:<span class="keyword">return</span> N</div>
+<div class="line">        <span class="keyword">while</span> end&gt;<span class="number">0</span> <span class="keyword">and</span> num[end]==num[end<span class="number">-1</span>]:</div>
+<div class="line">            end-=<span class="number">1</span></div>
+<div class="line">        num[end] = str(int(num[end]) - <span class="number">1</span>)</div>
+<div class="line">        num = <span class="string">''</span>.join(num[:end+<span class="number">1</span>]) + <span class="string">'9'</span>*(len(num)-end<span class="number">-1</span>)</div>
+<div class="line">        <span class="keyword">return</span> int(num)</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
 </ol>
 
           
