@@ -668,7 +668,7 @@
       
         
           
-            <p><a href="https://www.yiibai.com/numpy/numpy_statistical_functions.html#article-start" target="_blank" rel="noopener">last</a></p>
+            <p><a href="https://www.yiibai.com/numpy/numpy_sort_search_counting_functions.html#article-start" target="_blank" rel="noopener">last</a></p>
 <h1 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h1><p>NumPy 中定义的最重要的对象是称为 <code>ndarray</code> 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。</p>
 <p><code>ndarray</code>中的每个元素在内存中使用相同大小的块。 <code>ndarray</code>中的每个元素是数据类型对象的对象(称为 <code>dtype</code>)。</p>
 <p> 基本的<code>ndarray</code>是使用 NumPy 中的数组函数创建的</p>
@@ -2491,6 +2491,125 @@
 <div class="line"><span class="comment"># [6 3 6]</span></div>
 </pre></td></tr></table></figure>
 <h2 id="numpy-percentile"><a href="#numpy-percentile" class="headerlink" title="numpy.percentile()"></a>numpy.percentile()</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-21 at 9.56.48 AM.png" alt="Screen Shot 2018-06-21 at 9.56.48 AM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.array([[<span class="number">30</span>,<span class="number">40</span>,<span class="number">70</span>],[<span class="number">80</span>,<span class="number">20</span>,<span class="number">10</span>]])</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[30 40 70]</span></div>
+<div class="line"><span class="comment">#  [80 20 10]</span></div>
+<div class="line">print(np.percentile(a,<span class="number">50</span>))<span class="comment"># #50%的分位数，就是a里排序之后的中位数</span></div>
+<div class="line"><span class="comment"># 35.0</span></div>
+<div class="line">print(np.percentile(a,<span class="number">50</span>,axis=<span class="number">1</span>))</div>
+<div class="line"><span class="comment"># [40. 20.]</span></div>
+<div class="line">print(np.percentile(a,<span class="number">50</span>,axis=<span class="number">0</span>))</div>
+<div class="line"><span class="comment"># [55. 30. 40.]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-median"><a href="#numpy-median" class="headerlink" title="numpy.median()"></a>numpy.median()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.median(a,axis)</div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-mean"><a href="#numpy-mean" class="headerlink" title="numpy.mean()"></a>numpy.mean()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.mean(a,axis)</div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-average"><a href="#numpy-average" class="headerlink" title="numpy.average()"></a>numpy.average()</h2><p>加权平均值是由每个分量乘以反映其重要性的因子得到的平均值。 <code>numpy.average()</code>函数根据在另一个数组中给出的各自的权重计算数组中元素的加权平均值。 该函数可以接受一个轴参数。 如果没有指定轴，则数组会被展开。</p>
+<p>考虑数组<code>[1,2,3,4]</code>和相应的权重<code>[4,3,2,1]</code>，通过将相应元素的乘积相加，并将和除以权重的和，来计算加权平均值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">加权平均值 = (<span class="number">1</span>*<span class="number">4</span>+<span class="number">2</span>*<span class="number">3</span>+<span class="number">3</span>*<span class="number">2</span>+<span class="number">4</span>*<span class="number">1</span>)/(<span class="number">4</span>+<span class="number">3</span>+<span class="number">2</span>+<span class="number">1</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</div>
+<div class="line">print(np.mean(a))</div>
+<div class="line"><span class="comment"># 2.5</span></div>
+<div class="line">weight = np.array([<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>])</div>
+<div class="line">print(np.average(a,weights=weight))</div>
+<div class="line"><span class="comment"># 2.0</span></div>
+<div class="line">print(np.average(a,weights=weight,returned=<span class="keyword">True</span>))  <span class="comment"># 如果 returned 参数设为 true，则返回权重的和</span></div>
+<div class="line"><span class="comment"># (2.0, 10.0)</span></div>
+</pre></td></tr></table></figure>
+<p>在多维数组中，可以使用axis，指定用于计算的轴。</p>
+<h2 id="numpy-std"><a href="#numpy-std" class="headerlink" title="numpy.std()"></a>numpy.std()</h2><p>标准差</p>
+<h2 id="numpy-var"><a href="#numpy-var" class="headerlink" title="numpy.var()"></a>numpy.var()</h2><p>方差</p>
+<h1 id="NumPy排序、搜索和计数"><a href="#NumPy排序、搜索和计数" class="headerlink" title="NumPy排序、搜索和计数"></a>NumPy排序、搜索和计数</h1><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-24 at 8.37.20 PM.png" alt="Screen Shot 2018-06-24 at 8.37.20 PM"></p>
+<h2 id="numpy-sort"><a href="#numpy-sort" class="headerlink" title="numpy.sort()"></a>numpy.sort()</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-24 at 8.38.05 PM.png" alt="Screen Shot 2018-06-24 at 8.38.05 PM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">a = np.array([[<span class="number">3</span>,<span class="number">7</span>],[<span class="number">9</span>,<span class="number">1</span>]])</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [[3 7]</span></div>
+<div class="line"><span class="comment">#  [9 1]]</span></div>
+<div class="line">print(np.sort(a))</div>
+<div class="line"><span class="comment"># [[3 7]</span></div>
+<div class="line"><span class="comment">#  [1 9]]</span></div>
+<div class="line">print(np.sort(a,axis=<span class="number">0</span>))</div>
+<div class="line"><span class="comment"># [[3 1]</span></div>
+<div class="line"><span class="comment">#  [9 7]]</span></div>
+<div class="line">dt = np.dtype([(<span class="string">'name'</span>,  <span class="string">'S10'</span>),(<span class="string">'age'</span>,  int)])</div>
+<div class="line">a = np.array([(<span class="string">"raju"</span>,<span class="number">21</span>),(<span class="string">"anil"</span>,<span class="number">25</span>),(<span class="string">"ravi"</span>,  <span class="number">17</span>),  (<span class="string">"amar"</span>,<span class="number">27</span>)], dtype = dt)</div>
+<div class="line">print(a)</div>
+<div class="line"><span class="comment"># [(b'raju', 21) (b'anil', 25) (b'ravi', 17) (b'amar', 27)]</span></div>
+<div class="line">print(np.sort(a,order=<span class="string">'name'</span>))</div>
+<div class="line"><span class="comment"># [(b'amar', 27) (b'anil', 25) (b'raju', 21) (b'ravi', 17)]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-argsort"><a href="#numpy-argsort" class="headerlink" title="numpy.argsort()"></a>numpy.argsort()</h2><p><code>numpy.argsort()</code>函数对输入数组沿给定轴执行间接排序，并使用指定排序类型返回数据的索引数组。 这个索引数组用于构造排序后的数组。</p>
+<p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-24 at 8.42.56 PM.png" alt="Screen Shot 2018-06-24 at 8.42.56 PM"></p>
+<h2 id="numpy-lexsort"><a href="#numpy-lexsort" class="headerlink" title="numpy.lexsort()"></a>numpy.lexsort()</h2><p>用于对多个序列进行排序。把它想象成对电子表格进行排序，每一列代表一个序列，排序时优先照顾靠后的列。这里举一个应用场景：小升初考试，重点班录取学生按照总成绩录取。在总成绩相同时，数学成绩高的优先录取，在总成绩和数学成绩都相同时，按照英语成绩录取…… 这里，总成绩排在电子表格的最后一列，数学成绩在倒数第二列，英语成绩在倒数第三列。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">surnames =    (<span class="string">'Hertz'</span>,    <span class="string">'Galilei'</span>, <span class="string">'Hertz'</span>)</div>
+<div class="line">first_names = (<span class="string">'Heinrich'</span>, <span class="string">'Galileo'</span>, <span class="string">'Gustav'</span>)</div>
+<div class="line">ind = np.lexsort((first_names, surnames))</div>
+<div class="line">print(ind)</div>
+<div class="line"><span class="comment"># [1 2 0]</span></div>
+<div class="line">print([surnames[i] + <span class="string">", "</span> + first_names[i] <span class="keyword">for</span> i <span class="keyword">in</span> ind])</div>
+<div class="line"><span class="comment"># ['Galilei, Galileo', 'Hertz, Gustav', 'Hertz, Heinrich']</span></div>
+</pre></td></tr></table></figure>
 
           
         
@@ -3589,7 +3708,7 @@ y&=eq2 &\text{if x=2}
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�227-->
+<!--�234-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">
