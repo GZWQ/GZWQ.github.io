@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="简单Jump Game 题目 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at that position. De">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-22T20:53:00.632Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
+<meta property="og:updated_time" content="2018-06-25T02:34:05.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="简单Jump Game 题目 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at that position. De">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
 
 
 
@@ -632,6 +634,70 @@
 </div></div>
 </li>
 </ol>
+<h2 id="Partition-Labels"><a href="#Partition-Labels" class="headerlink" title="Partition Labels"></a><a href="https://leetcode.com/problems/partition-labels/description/" target="_blank" rel="noopener">Partition Labels</a></h2><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>A string <code>S</code> of lowercase letters is given. We want to partition this string into as many parts as possible so that each letter appears in at most one part, and return a list of integers representing the size of these parts.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">Input: S = <span class="string">"ababcbacadefegdehijhklij"</span></div>
+<div class="line">Output: [<span class="number">9</span>,<span class="number">7</span>,<span class="number">8</span>]</div>
+<div class="line">Explanation:</div>
+<div class="line">The partition is <span class="string">"ababcbaca"</span>, <span class="string">"defegde"</span>, <span class="string">"hijhklij"</span>.</div>
+<div class="line">This is a partition so that each letter appears in at most one part.</div>
+<div class="line">A partition like <span class="string">"ababcbacadefegde"</span>, <span class="string">"hijhklij"</span> is incorrect, because it splits S into less part</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="http://zxi.mytechroad.com/blog/string/leetcode-763-partition-labels/" target="_blank" rel="noopener">思路</a></p>
+<p>å题目大意：把字符串分割成尽量多的不重叠子串，输出子串的长度数组。要求相同字符只能出现在一个子串中。</p>
+<p><img src="/2018/05/23/Greedy-Algorithm/Screen Shot 2018-06-24 at 9.04.01 PM.png" alt="Screen Shot 2018-06-24 at 9.04.01 PM"></p>
+<p><strong>解法一</strong>是暴力检索。从第一个字符开始<code>a</code>, 因为<code>a</code>只能出现在当前子串中，所以我们就要找到<code>a</code>最后出现的位置，这样我们就有了暂时的第一个子串start=0，end=9.继续扫描，发现<code>b</code>的结束位置是5，所以<code>b</code>被包含在start=0，end=9子串中，继续下去，我们就找到了第一个子串start=0，end=9。</p>
+<p>同样start=start+1，重新扫描，找下一个子串。start=10，end=15. 继续扫描，发现<code>e</code>的结束位置是end=17，则更新子串start=10，end=17。以此类推。</p>
+<p>可以发现，我们需要双重循环，外循环扫描一次input字符串，内循环扫描candidate子串，所以是$O(n^2)$的时间复杂度，但是我们没有使用额外空间。</p>
+<p><strong>解法二</strong>借用哈希表，使用空间代价获取时间效用。可以发现，内循环用于找到每个字符串的结束位置，所以我们使用哈希表将结束位置存储起来，这样时间复杂度就降为$O(n)$. 至于空间复杂度，如果哈希表使用26个字母表示，则空间复杂度是$O(26)$。如果使用ASCII表示，则是$O(128)$.</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">partitionLabels</span><span class="params">(self, S)</span>:</span></div>
+<div class="line">        end_pos = &#123;&#125;</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(S)):</div>
+<div class="line">            end_pos[S[i]] = i</div>
+<div class="line">        start = <span class="number">0</span></div>
+<div class="line">        end = <span class="number">0</span></div>
+<div class="line">        re = []</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(S)):</div>
+<div class="line">            end=max(end,end_pos[S[i]])</div>
+<div class="line">            <span class="keyword">if</span> end==i:</div>
+<div class="line">                re.append(end-start+<span class="number">1</span>)</div>
+<div class="line">                start = end+<span class="number">1</span></div>
+<div class="line">        <span class="keyword">return</span> re</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
 <h2 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h2><h3 id="Queue-Reconstruction-by-Height"><a href="#Queue-Reconstruction-by-Height" class="headerlink" title="Queue Reconstruction by Height"></a><a href="https://leetcode.com/problems/queue-reconstruction-by-height/description/" target="_blank" rel="noopener">Queue Reconstruction by Height</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
@@ -959,7 +1025,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.1.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.2.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.3.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.1.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.2.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.3.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">2.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">3.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">3.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">3.2.</span> <span class="nav-text">Remove K Digits</span></a></li></ol></li></ol></div>
             
 
           </div>
