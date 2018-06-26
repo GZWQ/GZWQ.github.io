@@ -1722,6 +1722,114 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
 </div></div>
 </li>
 </ol>
+<h3 id="Split-Array-into-Consecutive-Subsequences"><a href="#Split-Array-into-Consecutive-Subsequences" class="headerlink" title="Split Array into Consecutive Subsequences"></a><a href="https://leetcode.com/problems/split-array-into-consecutive-subsequences/description/" target="_blank" rel="noopener">Split Array into Consecutive Subsequences</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>You are given an integer array sorted in ascending order (may contain duplicates), you need to split them into several subsequences, where each subsequences consist of at least 3 consecutive integers. Return whether you can make such a split.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">Input: [1,2,3,3,4,5]</div>
+<div class="line">Output: True</div>
+<div class="line">Explanation:</div>
+<div class="line">You can split them into two consecutive subsequences : </div>
+<div class="line">1, 2, 3</div>
+<div class="line">3, 4, 5</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">Input: [1,2,3,3,4,4,5,5]</div>
+<div class="line">Output: True</div>
+<div class="line">Explanation:</div>
+<div class="line">You can split them into two consecutive subsequences : </div>
+<div class="line">1, 2, 3, 4, 5</div>
+<div class="line">3, 4, 5</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: [1,2,3,4,4,5]</div>
+<div class="line">Output: False</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://blog.csdn.net/Jack_CJZ/article/details/78306831" target="_blank" rel="noopener">思路</a></p>
+</li>
+</ol>
+<ol>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"> </div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="Dota2-Senate"><a href="#Dota2-Senate" class="headerlink" title="Dota2 Senate"></a><a href="https://leetcode.com/problems/dota2-senate/description/" target="_blank" rel="noopener">Dota2 Senate</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>In the world of Dota2, there are two parties: the <code>Radiant</code> and the <code>Dire</code>.</p>
+<p>The Dota2 senate consists of senators coming from two parties. Now the senate wants to make a decision about a change in the Dota2 game. The voting for this change is a round-based procedure. In each round, each senator can exercise <code>one</code> of the two rights:</p>
+<ol>
+<li><code>Ban one senator&#39;s right</code>:<br>A senator can make another senator lose <strong>all his rights</strong> in this and all the following rounds.</li>
+<li><code>Announce the victory</code>:<br>If this senator found the senators who still have rights to vote are all from <strong>the same party</strong>, he can announce the victory and make the decision about the change in the game.</li>
+</ol>
+<p>Given a string representing each senator’s party belonging. The character ‘R’ and ‘D’ represent the <code>Radiant</code>party and the <code>Dire</code> party respectively. Then if there are <code>n</code> senators, the size of the given string will be <code>n</code>.</p>
+<p>The round-based procedure starts from the first senator to the last senator in the given order. This procedure will last until the end of voting. All the senators who have lost their rights will be skipped during the procedure.</p>
+<p>Suppose every senator is smart enough and will play the best strategy for his own party, you need to predict which party will finally announce the victory and make the change in the Dota2 game. The output should be <code>Radiant</code> or <code>Dire</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">Input: &quot;RD&quot;</div>
+<div class="line">Output: &quot;Radiant&quot;</div>
+<div class="line">Explanation: The first senator comes from Radiant and he can just ban the next senator&apos;s right in the round 1. </div>
+<div class="line">And the second senator can&apos;t exercise any rights any more since his right has been banned. </div>
+<div class="line">And in the round 2, the first senator can just announce the victory since he is the only guy in the senate who can vote.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input: &quot;RDD&quot;</div>
+<div class="line">Output: &quot;Dire&quot;</div>
+<div class="line">Explanation: </div>
+<div class="line">The first senator comes from Radiant and he can just ban the next senator&apos;s right in the round 1. </div>
+<div class="line">And the second senator can&apos;t exercise any rights anymore since his right has been banned. </div>
+<div class="line">And the third senator comes from Dire and he can ban the first senator&apos;s right in the round 1. </div>
+<div class="line">And in the round 2, the third senator can just announce the victory since he is the only</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p>思路</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"> </div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
 <h2 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h2><h3 id="Queue-Reconstruction-by-Height"><a href="#Queue-Reconstruction-by-Height" class="headerlink" title="Queue Reconstruction by Height"></a><a href="https://leetcode.com/problems/queue-reconstruction-by-height/description/" target="_blank" rel="noopener">Queue Reconstruction by Height</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">

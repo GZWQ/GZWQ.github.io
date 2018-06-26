@@ -845,7 +845,7 @@
       
         
           
-            <p><a href="https://www.yiibai.com/numpy/numpy_matrix_library.html#article-start" target="_blank" rel="noopener">last</a></p>
+            <p><a href="https://www.yiibai.com/numpy/numpy_linear_algebra.html#article-start" target="_blank" rel="noopener">last</a></p>
 <h1 id="Ndarray对象"><a href="#Ndarray对象" class="headerlink" title="Ndarray对象"></a>Ndarray对象</h1><p>NumPy 中定义的最重要的对象是称为 <code>ndarray</code> 的 N 维数组类型。 它描述相同类型的元素集合。 可以使用基于零的索引访问集合中的项目。</p>
 <p><code>ndarray</code>中的每个元素在内存中使用相同大小的块。 <code>ndarray</code>中的每个元素是数据类型对象的对象(称为 <code>dtype</code>)。</p>
 <p> 基本的<code>ndarray</code>是使用 NumPy 中的数组函数创建的</p>
@@ -2936,6 +2936,117 @@
 <p><code>b=a.copy()</code>:不改变数据，不改变维度</p>
 <h1 id="NumPy矩阵库"><a href="#NumPy矩阵库" class="headerlink" title="NumPy矩阵库"></a>NumPy矩阵库</h1><p>NumPy 包包含一个 Matrix库<code>numpy.matlib</code>。此模块的函数返回矩阵而不是返回<code>ndarray</code>对象。</p>
 <h2 id="numpy-matlib-empty"><a href="#numpy-matlib-empty" class="headerlink" title="numpy.matlib.empty()"></a>numpy.matlib.empty()</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-25 at 12.11.39 PM.png" alt="Screen Shot 2018-06-25 at 12.11.39 PM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> numpy.matlib</div>
+<div class="line">print(np.matlib.empty((<span class="number">2</span>,<span class="number">3</span>)))</div>
+<div class="line"><span class="comment"># [[-1.72723371e-077  3.11109888e+231  1.48219694e-323]</span></div>
+<div class="line"><span class="comment">#  [ 0.00000000e+000  0.00000000e+000  4.17201348e-309]]</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>填充随机值</p>
+</blockquote>
+<h2 id="numpy-matlib-zeros"><a href="#numpy-matlib-zeros" class="headerlink" title="numpy.matlib.zeros()"></a>numpy.matlib.zeros()</h2><p>以零填充矩阵</p>
+<h2 id="numpy-matlib-ones"><a href="#numpy-matlib-ones" class="headerlink" title="numpy.matlib.ones()"></a>numpy.matlib.ones()</h2><p>以一填充矩阵</p>
+<h2 id="numpy-matlib-eye"><a href="#numpy-matlib-eye" class="headerlink" title="numpy.matlib.eye()"></a>numpy.matlib.eye()</h2><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-26 at 9.35.31 AM.png" alt="Screen Shot 2018-06-26 at 9.35.31 AM"></p>
+<p><code>k</code>:Index of the diagonal: 0 refers to the main diagonal, a positive value refers to an upper diagonal, and a negative value to a lower diagonal. k的值设置对角元素的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> numpy.matlib</div>
+<div class="line">print(np.matlib.eye(n =  <span class="number">3</span>, M =  <span class="number">4</span>, k=<span class="number">0</span>,dtype =  float))</div>
+<div class="line"><span class="comment"># [[1. 0. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 1. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 0. 1. 0.]]</span></div>
+<div class="line">print(np.matlib.eye(n =  <span class="number">3</span>, M =  <span class="number">4</span>, k=<span class="number">1</span>,dtype =  float))</div>
+<div class="line"><span class="comment"># [[0. 1. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 0. 1. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 0. 0. 1.]]</span></div>
+<div class="line">print(np.matlib.eye(n =  <span class="number">3</span>, M =  <span class="number">4</span>, k=<span class="number">-1</span>,dtype =  float))</div>
+<div class="line"><span class="comment"># [[0. 0. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [1. 0. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 1. 0. 0.]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-matlib-identity"><a href="#numpy-matlib-identity" class="headerlink" title="numpy.matlib.identity()"></a>numpy.matlib.identity()</h2><p>返回给定大小的单位矩阵。单位矩阵是主对角线元素都为 1 的方阵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> numpy.matlib</div>
+<div class="line">print(np.matlib.identity(<span class="number">5</span>))</div>
+<div class="line"><span class="comment"># [[1. 0. 0. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 1. 0. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 0. 1. 0. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 0. 0. 1. 0.]</span></div>
+<div class="line"><span class="comment">#  [0. 0. 0. 0. 1.]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-matlib-rand"><a href="#numpy-matlib-rand" class="headerlink" title="numpy.matlib.rand()"></a>numpy.matlib.rand()</h2><p>返回给定大小的填充随机值的矩阵。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> numpy.matlib</div>
+<div class="line">print(np.matlib.rand(<span class="number">3</span>,<span class="number">3</span>))</div>
+<div class="line"><span class="comment"># [[0.72845877 0.93067466 0.57828842]</span></div>
+<div class="line"><span class="comment">#  [0.6117656  0.29529873 0.62999305]</span></div>
+<div class="line"><span class="comment">#  [0.76468178 0.18484781 0.96084426]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="矩阵与数组互换"><a href="#矩阵与数组互换" class="headerlink" title="矩阵与数组互换"></a>矩阵与数组互换</h2><p>np.asarray()和np.asmatrix()</p>
+<h1 id="NumPy线性代数"><a href="#NumPy线性代数" class="headerlink" title="NumPy线性代数"></a>NumPy线性代数</h1><p><img src="/2018/06/15/ML-NumPy/Screen Shot 2018-06-26 at 9.50.26 AM.png" alt="Screen Shot 2018-06-26 at 9.50.26 AM"></p>
+<blockquote>
+<p>wise_element乘法：</p>
+<p>矩阵乘法：numpy.dot()</p>
+</blockquote>
+<h2 id="numpy-dot"><a href="#numpy-dot" class="headerlink" title="numpy.dot()"></a>numpy.dot()</h2><p>此函数返回两个数组的点积。 对于二维向量，其等效于矩阵乘法。 对于一维数组，它是向量的内积。 对于 N 维数组，它是<code>a</code>的最后一个轴上的和与<code>b</code>的倒数第二个轴的乘积。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
+<div class="line">b = np.array([[<span class="number">11</span>,<span class="number">12</span>],[<span class="number">13</span>,<span class="number">14</span>]])</div>
+<div class="line">print(np.dot(a,b))</div>
+<div class="line"><span class="comment"># [[37 40]</span></div>
+<div class="line"><span class="comment">#  [85 92]]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="numpy-vdot"><a href="#numpy-vdot" class="headerlink" title="numpy.vdot()"></a>numpy.vdot()</h2><p>此函数返回两个向量的点积。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]])</div>
+<div class="line">b = np.array([[<span class="number">11</span>,<span class="number">12</span>],[<span class="number">13</span>,<span class="number">14</span>]])</div>
+<div class="line">print(np.vdot(a,b))</div>
+<div class="line"><span class="comment"># 130</span></div>
+</pre></td></tr></table></figure>
 
           
         
