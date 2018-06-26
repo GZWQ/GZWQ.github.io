@@ -88,7 +88,7 @@
 <meta property="og:description" content="简单Jump Game 题目 点击显/隐内容 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at that posi">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
-<meta property="og:updated_time" content="2018-06-25T20:36:31.619Z">
+<meta property="og:updated_time" content="2018-06-26T02:09:05.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="简单Jump Game 题目 点击显/隐内容 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at that posi">
@@ -640,7 +640,7 @@
 </div></div>
 </li>
 </ol>
-<h2 id="Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><a href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee" class="headerlink" title="Best Time to Buy and Sell Stock with Transaction Fee"></a><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock with Transaction Fee</a></h2><ol>
+<h3 id="Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><a href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee" class="headerlink" title="Best Time to Buy and Sell Stock with Transaction Fee"></a><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock with Transaction Fee</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Your are given an array of integers <code>prices</code>, for which the <code>i</code>-th element is the price of a given stock on day <code>i</code>; and a non-negative integer <code>fee</code> representing a transaction fee.</p>
@@ -660,17 +660,76 @@
 </div></div>
 </li>
 <li><p>思路</p>
+<p>解法1：题意大概是，可以进行无限次的交易(买入-卖出算一次交易)，但是每一次交易需要代价fee。完全就是<a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/description/" target="_blank" rel="noopener">Best Time to Buy and Sell Stock II</a>，只是多了交易费用。会想用动态规划求解，因为贪心算法比较不明显，dp[i]表示第i天的最大收益，对于每一天，都有两种选择，买进，卖出或者没有操作。说到这里，有点像题目<a href="https://leetcode.com/problems/wiggle-subsequence/description/" target="_blank" rel="noopener">Wiggle Subsequence</a> 设置两个dp数组, dp_buy[i]和dp_sell[i]：</p>
+<p>dp_buy[i]表示以当前价格买进stock，可以获取的最大利润</p>
+<p>dp_sell[i]表示以当前价格卖出stock，可以获取的最大利润</p>
+<p>dp_buy[i] = max( dp_buy[i] , dp_sell[j] - price[i] )</p>
+<p>dp_sell[i] = max( dp_sell[i] , dp_buy[j] + price[i] + fee )</p>
+<p>解法2：</p>
+<p>上述方法的时间复杂度是$O(n^2)$,最终超时。所以，必须只能扫描一遍，$O(n)$复杂度。设置两个全局变量，dp_buy和dp_sell，分别表示在操作prices[i]之前，当前买进和卖出最大的获利，状态更新不变。</p>
 </li>
 <li><p>代码</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">####超时</span></div>
+<div class="line"><span class="keyword">import</span> sys</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices, fee)</span>:</span></div>
+<div class="line">        l = len(prices)</div>
+<div class="line">        dp_buy = [-sys.maxsize]*l</div>
+<div class="line">        dp_sell = [<span class="number">0</span>]*l</div>
+<div class="line">        dp_buy[<span class="number">0</span>] = -prices[<span class="number">0</span>]</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,l):</div>
+<div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i):</div>
+<div class="line">                dp_buy[i] = max( dp_buy[i] , dp_sell[j] - prices[i] )</div>
+<div class="line">                dp_sell[i] = max( dp_sell[i] , dp_buy[j] + prices[i] - fee )</div>
+<div class="line">        print(dp_buy,dp_sell)</div>
+<div class="line">        <span class="keyword">return</span> max(dp_sell)</div>
+<div class="line">    </div>
+<div class="line">    </div>
+<div class="line">    </div>
+<div class="line"><span class="keyword">import</span> sys</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxProfit</span><span class="params">(self, prices, fee)</span>:</span></div>
+<div class="line">        dp_buy = -sys.maxsize</div>
+<div class="line">        dp_sell = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(prices)):</div>
+<div class="line">            dp_buy = max(dp_buy,dp_sell-prices[i])</div>
+<div class="line">            dp_sell = max(dp_sell,dp_buy + prices[i]-fee)</div>
+<div class="line">        <span class="keyword">return</span> dp_sell</div>
+</pre></td></tr></table></figure>
 
 </div></div>
-
-## [Partition Labels](https://leetcode.com/problems/partition-labels/description/)
-
-1. 题目
-
-   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+</li>
+</ol>
+<h3 id="Partition-Labels"><a href="#Partition-Labels" class="headerlink" title="Partition Labels"></a><a href="https://leetcode.com/problems/partition-labels/description/" target="_blank" rel="noopener">Partition Labels</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>A string <code>S</code> of lowercase letters is given. We want to partition this string into as many parts as possible so that each letter appears in at most one part, and return a list of integers representing the size of these parts.</p>
 <p><strong>Example 1:</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -1130,7 +1189,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.1.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.2.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.3.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">2.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">3.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">3.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">3.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">3.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.1.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.2.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.3.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.5.</span> <span class="nav-text">Partition Labels</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li></ol></li></ol></div>
             
 
           </div>
