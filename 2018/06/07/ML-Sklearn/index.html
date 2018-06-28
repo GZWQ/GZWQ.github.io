@@ -90,7 +90,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%209.34.12%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628094729828.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628094801799.png">
-<meta property="og:updated_time" content="2018-06-28T14:57:49.748Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%203.53.28%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%204.05.38%20PM.png">
+<meta property="og:updated_time" content="2018-06-28T21:08:22.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python - Sklearn">
 <meta name="twitter:description" content="本文参考了1">
@@ -475,7 +477,113 @@
 </pre></td></tr></table></figure>
 <p><img src="/2018/06/07/ML-Sklearn/image-20180628094729828.png" alt="image-20180628094729828"></p>
 <p><img src="/2018/06/07/ML-Sklearn/image-20180628094801799.png" alt="image-20180628094801799"></p>
-<h1 id="Sklearn常用属性和功能"><a href="#Sklearn常用属性和功能" class="headerlink" title="Sklearn常用属性和功能"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/2-4-model-attributes/" target="_blank" rel="noopener">Sklearn常用属性和功能</a></h1>
+<h1 id="Sklearn常用属性和功能"><a href="#Sklearn常用属性和功能" class="headerlink" title="Sklearn常用属性和功能"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/2-4-model-attributes/" target="_blank" rel="noopener">Sklearn常用属性和功能</a></h1><p>以<strong><a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html" target="_blank" rel="noopener">LinearRegression</a></strong>方法为例</p>
+<ol>
+<li><p>导入：包、数据和模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div>
+<div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</div>
+<div class="line"></div>
+<div class="line">loaded_data = datasets.load_boston()</div>
+<div class="line">data_X = loaded_data.data</div>
+<div class="line">data_y = loaded_data.target</div>
+<div class="line"></div>
+<div class="line">model = LinearRegression()</div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>模型训练与预测</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">model.fit(data_X, data_y)</div>
+<div class="line"></div>
+<div class="line">print(model.predict(data_X[:<span class="number">4</span>, :]))</div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>模型参数</p>
+<p>模型：$f(x) = w_1x_1+w_2x_2+…+x_nw_n+w_0$</p>
+<p><code>model.coef_</code> 和 <code>model.intercept_</code>属于 Model 的属性</p>
+<p><code>model.coef_</code>：模型权重，$(w_1,w_2,…,w_n)$</p>
+<p><code>model.intercept_</code>：$w_0$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line">print(model.coef_)</div>
+<div class="line">print(model.intercept_)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="string">"""</span></div>
+<div class="line"><span class="string">[ -1.07170557e-01   4.63952195e-02   2.08602395e-02   2.68856140e+00</span></div>
+<div class="line"><span class="string">  -1.77957587e+01   3.80475246e+00   7.51061703e-04  -1.47575880e+00</span></div>
+<div class="line"><span class="string">   3.05655038e-01  -1.23293463e-02  -9.53463555e-01   9.39251272e-03</span></div>
+<div class="line"><span class="string">  -5.25466633e-01]</span></div>
+<div class="line"><span class="string">36.4911032804</span></div>
+<div class="line"><span class="string">"""</span></div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>预测效果评分</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">print(model.score(data_X, data_y)) <span class="comment"># R^2 coefficient of determination</span></div>
+<div class="line"></div>
+<div class="line"><span class="string">"""</span></div>
+<div class="line"><span class="string">0.740607742865</span></div>
+<div class="line"><span class="string">"""</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>$R^2$计算方法：</p>
+<p><img src="/2018/06/07/ML-Sklearn/Screen Shot 2018-06-28 at 3.53.28 PM.png" alt="Screen Shot 2018-06-28 at 3.53.28 PM"></p>
+</blockquote>
+</li>
+</ol>
+<h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/3-1-normalization/" target="_blank" rel="noopener">正则化</a></h1><p><img src="/2018/06/07/ML-Sklearn/Screen Shot 2018-06-28 at 4.05.38 PM.png" alt="Screen Shot 2018-06-28 at 4.05.38 PM"></p>
+<p>sklearn中模块preprocessing提供了scale功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing <span class="comment">#标准化数据模块</span></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#建立Array</span></div>
+<div class="line">a = np.array([[<span class="number">10</span>, <span class="number">2.7</span>, <span class="number">3.6</span>],</div>
+<div class="line">              [<span class="number">-100</span>, <span class="number">5</span>, <span class="number">-2</span>],</div>
+<div class="line">              [<span class="number">120</span>, <span class="number">20</span>, <span class="number">40</span>]], dtype=np.float64)</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#将normalized后的a打印出</span></div>
+<div class="line">print(preprocessing.scale(a)) <span class="comment">#对每列进行单独的正则化</span></div>
+<div class="line"><span class="comment"># [[ 0.         -0.85170713 -0.55138018]</span></div>
+<div class="line"><span class="comment">#  [-1.22474487 -0.55187146 -0.852133  ]</span></div>
+<div class="line"><span class="comment">#  [ 1.22474487  1.40357859  1.40351318]]</span></div>
+</pre></td></tr></table></figure>
+
       
     </div>
     
@@ -649,7 +757,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn常用属性和功能"><span class="nav-number">3.</span> <span class="nav-text">Sklearn常用属性和功能</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn常用属性和功能"><span class="nav-number">3.</span> <span class="nav-text">Sklearn常用属性和功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化"><span class="nav-number">4.</span> <span class="nav-text">正则化</span></a></li></ol></div>
             
 
           </div>
