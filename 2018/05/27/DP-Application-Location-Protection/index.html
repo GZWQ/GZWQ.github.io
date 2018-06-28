@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-22%20at%208.35.38%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-22%20at%208.36.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/Screen%20Shot%202018-06-22%20at%208.37.47%20PM.png">
-<meta property="og:updated_time" content="2018-06-25T21:27:20.506Z">
+<meta property="og:updated_time" content="2018-06-28T03:50:19.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP Application - Location Protection">
 <meta name="twitter:description" content="Q? WHY $r$? The author investegate the $l$-privacy within $r$.  [2013-Andres] paper don’t understand “polar mechanism is discretized and truncated?”   Problem SettingThe goal of location with DP is th">
@@ -405,6 +405,8 @@
 <a id="more"></a>
 <h2 id="Development-Traces"><a href="#Development-Traces" class="headerlink" title="Development Traces"></a>Development Traces</h2><p><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a> is the first one to propose geo-indistinguishability to protect locations.</p>
 <p>However, the protection of geo-indistinguishability is unifrom in space and generate the same amount of noise independently of the real location on the map, i.e., the same protection is applied in a dense city and in a sparse countryside. Also, multiple uses of geo-indistinguishability will result in the disclosure of true locations. Based on these problems, <a href="https://petsymposium.org/2015/papers/13_Chatzikokolakis.pdf" target="_blank" rel="noopener">[2015-Konstantinos Chatzikokolakis]</a> try to solve them.</p>
+<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8125751" target="_blank" rel="noopener">[2017-Jingyu Hua]</a> try to solve the problem that the privacy level decreases quikly when the number of queries increases.</p>
+<p>$d_x$-DP is proposed in <a href="https://arxiv.org/pdf/1806.02389.pdf" target="_blank" rel="noopener">[2018-Parameswaran Kamalaruban]</a>, <a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-06880-0_16.pdf" target="_blank" rel="noopener">[2014-Ehab ElSalamouny]</a></p>
 <h2 id="2013-Andres-Geo-indistinguishability"><a href="#2013-Andres-Geo-indistinguishability" class="headerlink" title="[2013-Andres]:Geo-indistinguishability"></a><a href="http://www.lix.polytechnique.fr/~catuscia/papers/Geolocation/geo.pdf" target="_blank" rel="noopener">[2013-Andres]</a>:Geo-indistinguishability</h2><h3 id="A-motivating-scenario"><a href="#A-motivating-scenario" class="headerlink" title="A motivating scenario"></a>A motivating scenario</h3><p>A user visiting Paris, currently located at a point $x$ close to the Eiffel Tower, and wishing to discover nearby restaurants with good reviews. To achieve this goal, the user can query a service provider (for instance, an LBS server); however, to maintain his privacy, the user does not wish to disclose his exact location. Instead, he can provide some approximate information that still allows him to obtain a useful service, for instance, a randomly chosen point $z$ close to his location. </p>
 <p>We fix a circle of radius $r$ centered at the user’s location, and we reason about the user’s level of privacy within this radius.</p>
 <p><img src="/2018/05/27/DP-Application-Location-Protection/Screen Shot 2018-06-19 at 12.24.24 PM.png" alt="Screen Shot 2018-06-19 at 12.24.24 PM"></p>
@@ -463,6 +465,9 @@
 <p>[2014-Reza Shokri] Privacy Games: Optimal User-Centric Data Obfuscation</p>
 <p>[2014-Nicolás E. Bordenabe] Optimal geo-indistinguishable mechanisms for location privacy</p>
 <p>[2015-Konstantinos Chatzikokolakis] Constructing elastic distinguishability metrics for location privacy</p>
+<p>[2017-Jingyu Hua] A Geo-Indistinguishable Location Perturbation Mechanism for Location-Based Services Supporting Frequent Queries</p>
+<p>[2018-Parameswaran Kamalaruban] $d_x$ -Private Mechanisms for Linear Queries</p>
+<p>[2014-Ehab ElSalamouny] Generalized Differential Privacy: Regions of Priors That Admit Robust Optimal Mechanisms</p>
 
       
     </div>
