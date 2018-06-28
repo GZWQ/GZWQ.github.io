@@ -87,10 +87,14 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="本文参考了1">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T00:14:48.973Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%209.34.12%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628094729828.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628094801799.png">
+<meta property="og:updated_time" content="2018-06-28T14:57:49.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python - Sklearn">
 <meta name="twitter:description" content="本文参考了1">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%209.34.12%20AM.png">
 
 
 
@@ -406,7 +410,72 @@
 <div class="line">result = knn.predict(x_train)</div>
 </pre></td></tr></table></figure>
 <h1 id="Sklearn中数据集"><a href="#Sklearn中数据集" class="headerlink" title="Sklearn中数据集"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/2-3-database/" target="_blank" rel="noopener">Sklearn中数据集</a></h1><p>sklearn的<a href="http://scikit-learn.org/stable/modules/classes.html#module-sklearn.datasets" target="_blank" rel="noopener">[数据集]</a> <a href="http://scikit-learn.org/stable/datasets/index.html" target="_blank" rel="noopener">[官方说明]</a> </p>
-
+<p><img src="/2018/06/07/ML-Sklearn/Screen Shot 2018-06-28 at 9.34.12 AM.png" alt="Screen Shot 2018-06-28 at 9.34.12 AM"></p>
+<p>生成样本数据，按照函数的形式，输入 <code>sample，feature，target</code> 的个数等等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">sklearn.datasets.make_regression(n_samples=<span class="number">100</span>, n_features=<span class="number">100</span>, n_informative=<span class="number">10</span>, n_targets=<span class="number">1</span>, bias=<span class="number">0.0</span>, effective_rank=<span class="keyword">None</span>, tail_strength=<span class="number">0.5</span>, noise=<span class="number">0.0</span>, shuffle=<span class="keyword">True</span>, coef=<span class="keyword">False</span>, random_state=<span class="keyword">None</span>)[source]</div>
+</pre></td></tr></table></figure>
+<p><strong>Example</strong>: 房价预测</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div>
+<div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="comment">#数据导入</span></div>
+<div class="line">loaded_data = datasets.load_boston()</div>
+<div class="line">data_x = loaded_data.data</div>
+<div class="line">data_y = loaded_data.target</div>
+<div class="line"><span class="comment">#定义模型 and 训练模型</span></div>
+<div class="line">model = LinearRegression()</div>
+<div class="line">model.fit(data_x,data_y)</div>
+<div class="line"><span class="comment">#预测</span></div>
+<div class="line">result = model.predict(data_x[:<span class="number">4</span>,:])<span class="comment">#预测前四个样本</span></div>
+<div class="line">print(result)</div>
+<div class="line"><span class="comment"># [30.00821269 25.0298606  30.5702317  28.60814055]</span></div>
+<div class="line">print(data_y[:<span class="number">4</span>]) <span class="comment"># 打印真实值，作为对比，可以看到是有些误差的。</span></div>
+<div class="line"><span class="comment"># [24.  21.6 34.7 33.4]</span></div>
+</pre></td></tr></table></figure>
+<p><strong>Example</strong>：生成样本数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div>
+<div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LinearRegression</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="comment"># 建立 100 个 sample，有一个 feature，和一个 target的样本数据集</span></div>
+<div class="line">x,y = datasets.make_regression(n_samples=<span class="number">100</span>,n_features=<span class="number">1</span>,n_targets=<span class="number">1</span>,noise=<span class="number">10</span>)</div>
+<div class="line">plt.scatter(x,y)</div>
+<div class="line">plt.show()</div>
+<div class="line"><span class="comment"># noise 越大的话，点就会越来越离散，例如 noise 由 10 变为 50.</span></div>
+<div class="line">x,y = datasets.make_regression(n_samples=<span class="number">100</span>,n_features=<span class="number">1</span>,n_targets=<span class="number">1</span>,noise=<span class="number">50</span>)</div>
+<div class="line">plt.scatter(x,y)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/07/ML-Sklearn/image-20180628094729828.png" alt="image-20180628094729828"></p>
+<p><img src="/2018/06/07/ML-Sklearn/image-20180628094801799.png" alt="image-20180628094801799"></p>
+<h1 id="Sklearn常用属性和功能"><a href="#Sklearn常用属性和功能" class="headerlink" title="Sklearn常用属性和功能"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/2-4-model-attributes/" target="_blank" rel="noopener">Sklearn常用属性和功能</a></h1>
       
     </div>
     
@@ -525,7 +594,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -580,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn常用属性和功能"><span class="nav-number">3.</span> <span class="nav-text">Sklearn常用属性和功能</span></a></li></ol></div>
             
 
           </div>
