@@ -92,7 +92,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628094801799.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%203.53.28%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%204.05.38%20PM.png">
-<meta property="og:updated_time" content="2018-06-28T21:08:22.777Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628212803165.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628213057808.png">
+<meta property="og:updated_time" content="2018-06-29T02:45:38.203Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python - Sklearn">
 <meta name="twitter:description" content="本文参考了1">
@@ -583,7 +585,62 @@
 <div class="line"><span class="comment">#  [-1.22474487 -0.55187146 -0.852133  ]</span></div>
 <div class="line"><span class="comment">#  [ 1.22474487  1.40357859  1.40351318]]</span></div>
 </pre></td></tr></table></figure>
-
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> preprocessing</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> sklearn. model_selection <span class="keyword">import</span> train_test_split</div>
+<div class="line"><span class="keyword">from</span> sklearn.datasets.samples_generator <span class="keyword">import</span> make_classification</div>
+<div class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="comment">##分类数据生成</span></div>
+<div class="line">x,y = make_classification(n_samples=<span class="number">300</span>,n_features=<span class="number">2</span>,</div>
+<div class="line">                          n_redundant=<span class="number">0</span>,n_informative=<span class="number">2</span>,</div>
+<div class="line">                          random_state=<span class="number">2</span>,scale=<span class="number">100</span>,</div>
+<div class="line">                          n_clusters_per_class=<span class="number">1</span>)</div>
+<div class="line">plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>],c=y)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/07/ML-Sklearn/image-20180628212803165.png" alt="image-20180628212803165"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=<span class="number">0.3</span>)</div>
+<div class="line">clf = SVC()</div>
+<div class="line">clf.fit(x_train,y_train)</div>
+<div class="line">print(clf.score(x_test,y_test))</div>
+<div class="line"><span class="comment"># 0.5111111111111111</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">x = preprocessing.scale(x)</div>
+<div class="line">plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>],c=y)</div>
+<div class="line">plt.show() <span class="comment">#可以看到坐标范围缩小了</span></div>
+<div class="line">x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=<span class="number">0.3</span>)</div>
+<div class="line">clf = SVC()</div>
+<div class="line">clf.fit(x_train,y_train)</div>
+<div class="line">print(clf.score(x_test,y_test))</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/07/ML-Sklearn/image-20180628213057808.png" alt="image-20180628213057808"></p>
+<h1 id="交叉验证cross-validation"><a href="#交叉验证cross-validation" class="headerlink" title="交叉验证cross-validation"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/3-2-cross-validation1/" target="_blank" rel="noopener">交叉验证cross-validation</a></h1>
       
     </div>
     
@@ -757,7 +814,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn常用属性和功能"><span class="nav-number">3.</span> <span class="nav-text">Sklearn常用属性和功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化"><span class="nav-number">4.</span> <span class="nav-text">正则化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn常用属性和功能"><span class="nav-number">3.</span> <span class="nav-text">Sklearn常用属性和功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化"><span class="nav-number">4.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交叉验证cross-validation"><span class="nav-number">5.</span> <span class="nav-text">交叉验证cross-validation</span></a></li></ol></div>
             
 
           </div>

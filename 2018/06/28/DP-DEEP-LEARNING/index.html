@@ -87,10 +87,13 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Deep learning is the process of learning nonlinear features and functions from complex data. Deep learning has been shown to outperform traditional techniques for speech recognition, image recognition">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T17:05:31.770Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/28/DP-DEEP-LEARNING/Screen%20Shot%202018-06-28%20at%205.04.15%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/28/DP-DEEP-LEARNING/Screen%20Shot%202018-06-28%20at%205.04.27%20PM.png">
+<meta property="og:updated_time" content="2018-06-29T01:52:52.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-DEEP LEARNING">
 <meta name="twitter:description" content="Deep learning is the process of learning nonlinear features and functions from complex data. Deep learning has been shown to outperform traditional techniques for speech recognition, image recognition">
+<meta name="twitter:image" content="http://yoursite.com/2018/06/28/DP-DEEP-LEARNING/Screen%20Shot%202018-06-28%20at%205.04.15%20PM.png">
 
 
 
@@ -379,10 +382,22 @@
         <p>Deep learning is the process of learning nonlinear features and functions from complex data. Deep learning has been shown to outperform traditional techniques for speech recognition, image recognition, and face detection. Deep learning aims to extract complex features from high-dimensional data and use them to build a model that relates inputs to outputs (e.g., classes). Deep learning architectures are usually constructed as multi-layer networks so that more abstract features are computed as nonlinear functions of lower-level features.</p>
 <p>Privacy in deep learning consists of three aspects: privacy of the data used for learning a model or as input to an existing model, privacy of the model, and privacy of the model’s output.</p>
 <a id="more"></a>
-<p>This paper provides a <strong>detailed and clear background</strong>. <a href="https://www.cs.cornell.edu/~shmat/shmat_ccs15.pdf" target="_blank" rel="noopener">[2015-Reza Shokri]</a> design, implement, and evaluate a practical system that enables multiple parties to jointly learn an accurate neural network model for a given objective without sharing their input datasets, their system achieves all three privacy objectives in the context of collaborative neural-network training: it protects privacy of the training data, enables participants to control the learning objective and how much to reveal about their individual models, and lets them apply the jointly learned model to their own inputs without revealing the inputs or the outputs.</p>
+<p>This paper provides a <strong>detailed and clear background</strong>. <a href="https://www.cs.cornell.edu/~shmat/shmat_ccs15.pdf" target="_blank" rel="noopener">[2015-Reza Shokri]</a> design, implement, and evaluate a practical system that enables multiple parties to jointly learn an accurate neural network model for a given objective without sharing their input datasets, their system achieves all three privacy objectives in the context of collaborative neural-network training: it protects privacy of the training data, enables participants to control the learning objective and how much to reveal about their individual models, and lets them apply the jointly learned model to their own inputs without revealing the inputs or the outputs. </p>
 <p><a href="https://arxiv.org/pdf/1607.00133.pdf" target="_blank" rel="noopener">[2016-Martín Abadi]</a> develop differential privacy SGD for neural network by applying gaussian noise with tighter error bounds in centralized setting.</p>
+<p><a href="">[2016-NhatHai Phan]</a> </p>
+<p><a href="https://arxiv.org/pdf/1709.05750.pdf" target="_blank" rel="noopener">[2017-NhatHai Phan]</a> criticizes all three methods above and aiming at following three objects:</p>
+<ol>
+<li>It is totally independent of the number of training epochs in consuming privacy budget</li>
+<li>It has the ability to adaptively inject noise into features based on the contribution of each to the model output</li>
+<li>It can be applied in a variety of deep neural networks</li>
+</ol>
+<h1 id="2016-Martin-Abadi"><a href="#2016-Martin-Abadi" class="headerlink" title="[2016-Martín Abadi]"></a>[2016-Martín Abadi]</h1><p>The following summary is from paper <a href="https://arxiv.org/pdf/1709.05750.pdf" target="_blank" rel="noopener">[2017-NhatHai Phan]</a>. </p>
+<p><img src="/2018/06/28/DP-DEEP-LEARNING/Screen Shot 2018-06-28 at 5.04.15 PM.png" alt="Screen Shot 2018-06-28 at 5.04.15 PM"></p>
+<p><img src="/2018/06/28/DP-DEEP-LEARNING/Screen Shot 2018-06-28 at 5.04.27 PM.png" alt="Screen Shot 2018-06-28 at 5.04.27 PM"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[2015-Reza Shokri] Privacy-Preserving Deep Learning</p>
 <p>[2016-Martín Abadi] Deep Learning with Differential Privacy</p>
+<p>[2016-NhatHai Phan] Differential privacy preservation for deep auto-encoders: an application of human behavior prediction</p>
+<p>[2017-NhatHai Phan] Adaptive Laplace Mechanism: Differential Privacy<br>Preservation in Deep Learning</p>
 
       
     </div>
@@ -553,7 +568,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">1.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2016-Martin-Abadi"><span class="nav-number">1.</span> <span class="nav-text">[2016-Martín Abadi]</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>

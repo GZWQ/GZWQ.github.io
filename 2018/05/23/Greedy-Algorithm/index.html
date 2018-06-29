@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
-<meta property="og:updated_time" content="2018-06-28T20:38:34.189Z">
+<meta property="og:updated_time" content="2018-06-29T02:19:31.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="从零开始学贪心算法 简单Jump Game 题目 点击显/隐内容 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at">
@@ -438,9 +438,60 @@
 </ol>
 <p><a href="https://leetcode.com/problems/jump-game-ii/description/" target="_blank" rel="noopener">Jump Game II</a></p>
 <ol>
-<li>题目</li>
-<li><a href="https://blog.csdn.net/makuiyu/article/details/43698969" target="_blank" rel="noopener">思路</a></li>
-<li>代码</li>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p>Each element in the array represents your maximum jump length at that position.</p>
+<p>Your goal is to reach the last index in the minimum number of jumps.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>]</div>
+<div class="line">Output: <span class="number">2</span></div>
+<div class="line">Explanation: The minimum number of jumps to reach the last index <span class="keyword">is</span> <span class="number">2.</span></div>
+<div class="line">    Jump <span class="number">1</span> step <span class="keyword">from</span> index <span class="number">0</span> to <span class="number">1</span>, then <span class="number">3</span> steps to the last index.</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://blog.csdn.net/makuiyu/article/details/43698969" target="_blank" rel="noopener">思路</a></p>
+<p>上一道题目的拓展，思路不变，扫描一次，查看当前的pos是否在reach里面。那么这道题的重点是扫描时候需要跳跃？青蛙从pos=0出发，跳跃一次，其一次能到达的最大位置是reach = nums[pos]+pos，那么当前的位置pos大于reach，说明一次跳跃不够，需要再一次跳跃。所以跳跃的条件是 pos&gt;reach。那么第二次跳跃的最大reach是多少呢？青蛙一次跳跃可以到达的地点是pos从1至reach，那么二次跳跃的最大reach是</p>
+<p>max_reach = max( max_reach ,  nums[pos]+pos )  when 1&lt;=pos&lt;=reach</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">jump</span><span class="params">(self, nums)</span>:</span></div>
+<div class="line">        reach = <span class="number">0</span></div>
+<div class="line">        pos = <span class="number">0</span></div>
+<div class="line">        l = len(nums)</div>
+<div class="line">        step = <span class="number">0</span></div>
+<div class="line">        last = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">for</span> cur <span class="keyword">in</span> range(l):</div>
+<div class="line">            <span class="keyword">if</span> cur&gt;last:</div>
+<div class="line">                step += <span class="number">1</span></div>
+<div class="line">                last = reach</div>
+<div class="line">            reach = max(reach, nums[cur]+cur)</div>
+<div class="line">        <span class="keyword">return</span> step</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
 </ol>
 <h3 id="Gas-Station"><a href="#Gas-Station" class="headerlink" title="Gas Station"></a><a href="https://leetcode.com/problems/gas-station/description/" target="_blank" rel="noopener">Gas Station</a></h3><ol>
 <li><p>题目</p>
@@ -738,10 +789,93 @@
 </ol>
 <h3 id="Non-overlapping-Intervals"><a href="#Non-overlapping-Intervals" class="headerlink" title="Non-overlapping Intervals"></a><a href="https://leetcode.com/problems/non-overlapping-intervals/description/" target="_blank" rel="noopener">Non-overlapping Intervals</a></h3><ol>
 <li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<ol>
+<li><p>Given a collection of intervals, find the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.</p>
+<p><strong>Note:</strong></p>
+<ol>
+<li>You may assume the interval’s end point is always bigger than its start point.</li>
+<li>Intervals like [1,2] and [2,3] have borders “touching” but they don’t overlap each other.</li>
+</ol>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: [ [<span class="number">1</span>,<span class="number">2</span>], [<span class="number">2</span>,<span class="number">3</span>], [<span class="number">3</span>,<span class="number">4</span>], [<span class="number">1</span>,<span class="number">3</span>] ]</div>
+<div class="line">Output: <span class="number">1</span></div>
+<div class="line">Explanation: [<span class="number">1</span>,<span class="number">3</span>] can be removed <span class="keyword">and</span> the rest of intervals are non-overlapping.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: [ [<span class="number">1</span>,<span class="number">2</span>], [<span class="number">1</span>,<span class="number">2</span>], [<span class="number">1</span>,<span class="number">2</span>] ]</div>
+<div class="line">Output: <span class="number">2</span></div>
+<div class="line">Explanation: You need to remove two [<span class="number">1</span>,<span class="number">2</span>] to make the rest of intervals non-overlapping.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: [ [<span class="number">1</span>,<span class="number">2</span>], [<span class="number">2</span>,<span class="number">3</span>] ]</div>
+<div class="line">Output: <span class="number">0</span></div>
+<div class="line">Explanation: You don<span class="string">'t need to remove any of the intervals since they'</span>re already non-overla</div>
+</pre></td></tr></table></figure>
+</li>
+</ol>
+
+</div></div>
 </li>
 <li><p><a href="https://blog.csdn.net/a921122/article/details/56829047" target="_blank" rel="noopener">思路</a></p>
+<p>这道题实际上是活动选择问题，这个题可以转化为：给定一些任务，以及它们的开始时间和结束时间。并且给定一段时间，尽可能安排多的任务。很容易想到，我们希望尽可能的安排比较早结束的任务（也就是end比较小的），然后是考虑start紧跟上一个end的任务，最后，总任务数量，减去排好的任务，就是要删除的任务。</p>
 </li>
 <li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for an interval.</span></div>
+<div class="line"><span class="comment"># class Interval:</span></div>
+<div class="line"><span class="comment">#     def __init__(self, s=0, e=0):</span></div>
+<div class="line"><span class="comment">#         self.start = s</span></div>
+<div class="line"><span class="comment">#         self.end = e</span></div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eraseOverlapIntervals</span><span class="params">(self, intervals)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type intervals: List[Interval]</span></div>
+<div class="line"><span class="string">        :rtype: int</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> intervals: <span class="keyword">return</span> <span class="number">0</span></div>
+<div class="line">        sort_intervals = sorted(intervals,key=<span class="keyword">lambda</span> x:x.end)</div>
+<div class="line">        count = <span class="number">1</span></div>
+<div class="line">        end = sort_intervals[<span class="number">0</span>].end</div>
+<div class="line">        <span class="keyword">for</span> interval <span class="keyword">in</span> sort_intervals:</div>
+<div class="line">            <span class="keyword">if</span> interval.start &gt;= end:</div>
+<div class="line">                count += <span class="number">1</span></div>
+<div class="line">                end = interval.end</div>
+<div class="line">        <span class="keyword">return</span> len(intervals)-count</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 </li>
 </ol>
 <h3 id="Partition-Labels"><a href="#Partition-Labels" class="headerlink" title="Partition Labels"></a><a href="https://leetcode.com/problems/partition-labels/description/" target="_blank" rel="noopener">Partition Labels</a></h3><ol>
