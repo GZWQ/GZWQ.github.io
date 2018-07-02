@@ -96,7 +96,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628213057808.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180629095455584.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180629095709851.png">
-<meta property="og:updated_time" content="2018-06-29T15:06:19.671Z">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180701102341647.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180701104019906.png">
+<meta property="og:updated_time" content="2018-07-01T15:42:56.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python - Sklearn">
 <meta name="twitter:description" content="本文参考了1">
@@ -755,7 +757,209 @@
 <p>一般来说<code>准确率(accuracy)</code>会用于判断分类(Classification)模型的好坏。</p>
 <p><code>平均方差(Mean squared error)</code>会用于判断回归(Regression)模型的好坏。</p>
 </blockquote>
-<h1 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/3-3-cross-validation2/" target="_blank" rel="noopener">Overfitting</a></h1>
+<h1 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/3-3-cross-validation2/" target="_blank" rel="noopener">Overfitting</a></h1><ol>
+<li><p>overfitting检查</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> learning_curve</div>
+<div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</div>
+<div class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">digits = load_digits()</div>
+<div class="line">x = digits.data</div>
+<div class="line">y = digits.target</div>
+<div class="line"></div>
+<div class="line">train_sizes,train_loss,test_loss = learning_curve(</div>
+<div class="line">    SVC(gamma=<span class="number">0.001</span>),x,y,cv=<span class="number">10</span>,</div>
+<div class="line">    scoring=<span class="string">'mean_squared_error'</span>,</div>
+<div class="line">    train_sizes=[<span class="number">0.1</span>,<span class="number">0.25</span>,<span class="number">0.5</span>,<span class="number">0.75</span>,<span class="number">1</span>])</div>
+<div class="line">train_loss_mean = -np.mean(train_loss,axis=<span class="number">1</span>)</div>
+<div class="line">test_loss_mean = -np.mean(test_loss,axis=<span class="number">1</span>)</div>
+<div class="line"></div>
+<div class="line">plt.plot(train_sizes, train_loss_mean, <span class="string">'o-'</span>, color=<span class="string">"r"</span>,</div>
+<div class="line">         label=<span class="string">"Training"</span>)</div>
+<div class="line">plt.plot(train_sizes, test_loss_mean, <span class="string">'o-'</span>, color=<span class="string">"g"</span>,</div>
+<div class="line">        label=<span class="string">"Cross-validation"</span>)</div>
+<div class="line"></div>
+<div class="line">plt.xlabel(<span class="string">"Training examples"</span>)</div>
+<div class="line">plt.ylabel(<span class="string">"Loss"</span>)</div>
+<div class="line">plt.legend(loc=<span class="string">"best"</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/07/ML-Sklearn/image-20180701102341647.png" alt="image-20180701102341647"></p>
+<blockquote>
+<ul>
+<li>加载digits数据集，其包含的是手写体的数字，从0到9。数据集总共有1797个样本，每个样本由64个特征组成， 分别为其手写体对应的8×8像素表示，每个特征取值0~16。</li>
+<li>采用K折交叉验证 <code>cv=10</code>, 选择平均方差检视模型效能 <code>scoring=&#39;mean_squared_error&#39;</code>, 样本由小到大分成5轮检视学习曲线<code>(10%, 25%, 50%, 75%, 100%)</code></li>
+<li>从图中可以看出，随着训练样本的变大，训练误差和测试误差同时变小，说明模型的准确度因为样本增多而增高；</li>
+</ul>
+</blockquote>
+</li>
+<li><p>这次我们来验证<code>SVC</code>中的一个参数 <code>gamma</code> 在什么范围内能使 model 产生好的结果. 以及过拟合和 <code>gamma</code> 取值的关系.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> validation_curve</div>
+<div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</div>
+<div class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> SVC</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line">digits = load_digits()</div>
+<div class="line">x = digits.data</div>
+<div class="line">y = digits.target</div>
+<div class="line"></div>
+<div class="line">param_range = np.logspace(<span class="number">-6</span>,<span class="number">-2.3</span>,<span class="number">5</span>)</div>
+<div class="line"></div>
+<div class="line">train_loss,test_loss = validation_curve(</div>
+<div class="line">    SVC(),x,y,param_name=<span class="string">'gamma'</span>,</div>
+<div class="line">    param_range=param_range,cv=<span class="number">10</span>,</div>
+<div class="line">    scoring=<span class="string">'mean_squared_error'</span>)</div>
+<div class="line">train_loss_mean = -np.mean(train_loss,axis=<span class="number">1</span>)</div>
+<div class="line">test_loss_mean = -np.mean(test_loss,axis=<span class="number">1</span>)</div>
+<div class="line"></div>
+<div class="line">plt.plot(param_range, train_loss_mean, <span class="string">'o-'</span>, color=<span class="string">"r"</span>,</div>
+<div class="line">         label=<span class="string">"Training"</span>)</div>
+<div class="line">plt.plot(param_range, test_loss_mean, <span class="string">'o-'</span>, color=<span class="string">"g"</span>,</div>
+<div class="line">        label=<span class="string">"Cross-validation"</span>)</div>
+<div class="line"></div>
+<div class="line">plt.xlabel(<span class="string">"gamma"</span>)</div>
+<div class="line">plt.ylabel(<span class="string">"Loss"</span>)</div>
+<div class="line">plt.legend(loc=<span class="string">"best"</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/07/ML-Sklearn/image-20180701104019906.png" alt="image-20180701104019906"></p>
+<blockquote>
+<p>从图中可以看到，当gamma从0到0.0005左右，training error和test error都在减小，说明模型效果随着gamma的最大而变好；但是当gamma继续增大，test error 却开始增加，说明gamma大于0.001时模型过拟合了。</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="模型保存"><a href="#模型保存" class="headerlink" title="模型保存"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/3-5-save/" target="_blank" rel="noopener">模型保存</a></h1><ol>
+<li><p>pickle</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> svm</div>
+<div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div>
+<div class="line"></div>
+<div class="line">clf = svm.SVC()</div>
+<div class="line">iris = datasets.load_iris()</div>
+<div class="line">X, y = iris.data, iris.target</div>
+<div class="line">clf.fit(X,y)</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">import</span> pickle <span class="comment">#pickle模块</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#保存Model(注:save文件夹要预先建立，否则会报错)</span></div>
+<div class="line"><span class="keyword">with</span> open(<span class="string">'save/clf.pickle'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</div>
+<div class="line">    pickle.dump(clf, f)</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#读取Model</span></div>
+<div class="line"><span class="keyword">with</span> open(<span class="string">'save/clf.pickle'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</div>
+<div class="line">    clf2 = pickle.load(f)</div>
+<div class="line">    <span class="comment">#测试读取后的Model</span></div>
+<div class="line">    print(clf2.predict(X[<span class="number">0</span>:<span class="number">1</span>]))</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># [0]</span></div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>joblib</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.externals <span class="keyword">import</span> joblib <span class="comment">#jbolib模块</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment">#保存Model(注:save文件夹要预先建立，否则会报错)</span></div>
+<div class="line">joblib.dump(clf, <span class="string">'save/clf.pkl'</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#读取Model</span></div>
+<div class="line">clf3 = joblib.load(<span class="string">'save/clf.pkl'</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#测试读取后的Model</span></div>
+<div class="line">print(clf3.predict(X[<span class="number">0</span>:<span class="number">1</span>]))</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># [0]</span></div>
+</pre></td></tr></table></figure>
+</li>
+</ol>
+
       
     </div>
     
@@ -929,7 +1133,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn常用属性和功能"><span class="nav-number">3.</span> <span class="nav-text">Sklearn常用属性和功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化"><span class="nav-number">4.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交叉验证cross-validation"><span class="nav-number">5.</span> <span class="nav-text">交叉验证cross-validation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Overfitting"><span class="nav-number">6.</span> <span class="nav-text">Overfitting</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通用学习模式"><span class="nav-number">1.</span> <span class="nav-text">通用学习模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn中数据集"><span class="nav-number">2.</span> <span class="nav-text">Sklearn中数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sklearn常用属性和功能"><span class="nav-number">3.</span> <span class="nav-text">Sklearn常用属性和功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正则化"><span class="nav-number">4.</span> <span class="nav-text">正则化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交叉验证cross-validation"><span class="nav-number">5.</span> <span class="nav-text">交叉验证cross-validation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Overfitting"><span class="nav-number">6.</span> <span class="nav-text">Overfitting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型保存"><span class="nav-number">7.</span> <span class="nav-text">模型保存</span></a></li></ol></div>
             
 
           </div>

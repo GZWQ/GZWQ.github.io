@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="从零开始学贪心算法 简单Jump Game 题目 点击显/隐内容 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at">
+<meta name="description" content="从零开始学贪心算法">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Greedy Algorithm">
 <meta property="og:url" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="从零开始学贪心算法 简单Jump Game 题目 点击显/隐内容 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at">
+<meta property="og:description" content="从零开始学贪心算法">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-29%20at%204.13.36%20PM%20(2">
-<meta property="og:updated_time" content="2018-06-29T21:17:16.764Z">
+<meta property="og:updated_time" content="2018-07-01T20:45:18.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
-<meta name="twitter:description" content="从零开始学贪心算法 简单Jump Game 题目 点击显/隐内容 Given an array of non-negative integers, you are initially positioned at the first index of the array. Each element in the array represents your maximum jump length at">
+<meta name="twitter:description" content="从零开始学贪心算法">
 <meta name="twitter:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
 
 
@@ -382,7 +382,89 @@
 
       
         <p><a href="https://blog.csdn.net/qq_32400847/article/details/51336300" target="_blank" rel="noopener">从零开始学贪心算法</a></p>
-<h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Jump-Game"><a href="#Jump-Game" class="headerlink" title="Jump Game"></a><a href="https://leetcode.com/problems/jump-game/description/" target="_blank" rel="noopener">Jump Game</a></h3><ol>
+<a id="more"></a>
+<h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Couples-Holding-Hands"><a href="#Couples-Holding-Hands" class="headerlink" title="Couples Holding Hands"></a><a href="https://leetcode.com/problems/couples-holding-hands/description/" target="_blank" rel="noopener">Couples Holding Hands</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>N couples sit in 2N seats arranged in a row and want to hold hands. We want to know the minimum number of swaps so that every couple is sitting side by side. A <em>swap</em> consists of choosing <strong>any</strong> two people, then they stand up and switch seats.</p>
+<p>The people and seats are represented by an integer from <code>0</code> to <code>2N-1</code>, the couples are numbered in order, the first couple being <code>(0, 1)</code>, the second couple being <code>(2, 3)</code>, and so on with the last couple being <code>(2N-2, 2N-1)</code>.</p>
+<p>The couples’ initial seating is given by <code>row[i]</code> being the value of the person who is initially sitting in the i-th seat.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: row = [<span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>]</div>
+<div class="line">Output: <span class="number">1</span></div>
+<div class="line">Explanation: We only need to swap the second (row[<span class="number">1</span>]) <span class="keyword">and</span> third (row[<span class="number">2</span>]) person.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: row = [<span class="number">3</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>]</div>
+<div class="line">Output: <span class="number">0</span></div>
+<div class="line">Explanation: All couples are already seated side by side.</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://blog.csdn.net/u014688145/article/details/79057475" target="_blank" rel="noopener">思路</a></p>
+<p>贪心，不过不好证明。从位置0开始，看位置1是否是它的partner，如果是，直接忽略这组couple，如果不是，从后面的数组中，找到partner直接交换，并且记录交换次数一次。遍历完整个数组即为最优解。</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minSwapsCouples</span><span class="params">(self, row)</span>:</span></div>
+<div class="line">        pos = <span class="number">0</span></div>
+<div class="line">        step = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">while</span> pos&lt;len(row):</div>
+<div class="line">            wife = row[pos]</div>
+<div class="line">            husband = row[pos+<span class="number">1</span>]</div>
+<div class="line">            <span class="keyword">if</span> wife%<span class="number">2</span>==<span class="number">0</span>:</div>
+<div class="line">                <span class="keyword">if</span> wife+<span class="number">1</span>==husband:</div>
+<div class="line">                    <span class="keyword">pass</span></div>
+<div class="line">                <span class="keyword">else</span>:</div>
+<div class="line">                    husband_pos = row.index(wife + <span class="number">1</span>)</div>
+<div class="line">                    row[pos + <span class="number">1</span>], row[husband_pos] = row[husband_pos], row[pos + <span class="number">1</span>]  <span class="comment"># 找到husband的位置，交换</span></div>
+<div class="line">                    step += <span class="number">1</span></div>
+<div class="line">            <span class="keyword">else</span>:</div>
+<div class="line">                <span class="keyword">if</span> wife<span class="number">-1</span>==husband:</div>
+<div class="line">                    <span class="keyword">pass</span></div>
+<div class="line">                <span class="keyword">else</span>:</div>
+<div class="line">                    husband_pos = row.index(wife - <span class="number">1</span>)</div>
+<div class="line">                    row[pos + <span class="number">1</span>], row[husband_pos] = row[husband_pos], row[pos + <span class="number">1</span>]  <span class="comment"># 找到husband的位置，交换</span></div>
+<div class="line">                    step += <span class="number">1</span></div>
+<div class="line">            pos += <span class="number">2</span></div>
+<div class="line">        <span class="keyword">return</span> step</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="Jump-Game"><a href="#Jump-Game" class="headerlink" title="Jump Game"></a><a href="https://leetcode.com/problems/jump-game/description/" target="_blank" rel="noopener">Jump Game</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
@@ -1638,6 +1720,38 @@
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 
 </div></div>
+
+### [Set Intersection Size At Least Two](https://leetcode.com/problems/set-intersection-size-at-least-two/description/)
+
+1. 题目
+
+   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+</li>
+<li><p><a href="https://blog.csdn.net/magicbean2/article/details/79568849" target="_blank" rel="noopener">思路</a></p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+
+
+
+### [Course Schedule III](https://leetcode.com/problems/course-schedule-iii/description/)
+
+1. 题目
+
+   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+</li>
+<li><p><a href="https://blog.csdn.net/jitianyu123/article/details/74611466" target="_blank" rel="noopener">思路</a></p>
+</li>
+<li><p><a href="http://fisherlei.blogspot.com/2017/07/leetcode-course-schedule-iii-solution.html" target="_blank" rel="noopener">代码</a></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
 </li>
 </ol>
 
@@ -1814,7 +1928,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.1.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.2.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.3.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.5.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.6.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.7.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.8.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.9.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">1.1.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.2.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.3.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.5.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.6.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.7.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.8.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.9.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.10.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li></ol></li></ol></div>
             
 
           </div>
