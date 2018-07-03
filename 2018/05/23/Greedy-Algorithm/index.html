@@ -79,23 +79,26 @@
 
 
 
-<meta name="description" content="从零开始学贪心算法">
+<meta name="description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Greedy Algorithm">
 <meta property="og:url" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="从零开始学贪心算法">
+<meta property="og:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160509195427891.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160507100634641%20(1">
+<meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160507101904360.jpeg">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-29%20at%204.13.36%20PM%20(2">
-<meta property="og:updated_time" content="2018-07-01T20:45:18.640Z">
+<meta property="og:updated_time" content="2018-07-02T20:56:24.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
-<meta name="twitter:description" content="从零开始学贪心算法">
-<meta name="twitter:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
+<meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160509195427891.jpeg">
 
 
 
@@ -382,10 +385,44 @@
 
       
         <p><a href="https://blog.csdn.net/qq_32400847/article/details/51336300" target="_blank" rel="noopener">从零开始学贪心算法</a></p>
+<p>贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。</p>
 <a id="more"></a>
-<h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Couples-Holding-Hands"><a href="#Couples-Holding-Hands" class="headerlink" title="Couples Holding Hands"></a><a href="https://leetcode.com/problems/couples-holding-hands/description/" target="_blank" rel="noopener">Couples Holding Hands</a></h3><ol>
+<h2 id="经典问题"><a href="#经典问题" class="headerlink" title="经典问题"></a>经典问题</h2><h3 id="活动选择"><a href="#活动选择" class="headerlink" title="活动选择"></a>活动选择</h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>有n个需要在同一天使用同一个教室的活动a1,a2,…,an，教室同一时刻只能由一个活动使用。每个活动ai都有一个开始时间si和结束时间fi 。一旦被选择后，活动ai就占据半开时间区间[si,fi)。如果[si,fi]和[sj,fj]互不重叠，ai和aj两个活动就可以被安排在这一天。该问题就是要安排这些活动使得尽量多的活动能不冲突的举行。例如下图所示的活动集合S，其中各项活动按照结束时间单调递增排序。</p>
+<p><img src="/2018/05/23/Greedy-Algorithm/20160509195427891.jpeg" alt="20160509195427891"></p>
+<p>为了方便，我们用不同颜色的线条代表每个活动，线条的长度就是活动所占据的时间段，蓝色的线条表示我们已经选择的活动；红色的线条表示我们没有选择的活动。</p>
+<p>如果我们每次都选择开始时间最早的活动，不能得到最优解：</p>
+<p><img src="/2018/05/23/Greedy-Algorithm/20160507100634641 (1" alt="20160507100634641 (1)">.jpeg)</p>
+<p>如果我们每次都选择持续时间最短的活动，不能得到最优解:</p>
+<p><img src="/2018/05/23/Greedy-Algorithm/20160507101904360.jpeg" alt="20160507101904360"></p>
+<p>我们的贪心策略应该是每次选取结束时间最早的活动, 按这种方法选择相容活动为未安排活动留下尽可能多的时间。</p>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+
+### 钱币找零
+
+假设1元、2元、5元、10元、20元、50元、100元的纸币分别有c0, c1, c2, c3, c4, c5, c6张。现在要用这些钱来支付K元，至少要用多少张纸币？用贪心算法的思想，很显然，每一步尽可能用面值大的纸币即可。
+
+### 背包问题
+
+我们考虑这样一种背包问题：在选择物品i装入背包时，可以选择物品的一部分，而不一定要全部装入背包。这时便可以使用贪心算法求解了。计算每种物品的单位重量价值作为贪心选择的依据指标，选择单位重量价值最高的物品，将尽可能多的该物品装入背包，依此策略一直地进行下去，直到背包装满为止。在零一背包问题中贪心选择之所以不能得到最优解原因是贪心选择无法保证最终能将背包装满，部分闲置的背包空间使每公斤背包空间的价值降低了。
+
+### 多机调度
+
+个作业组成的作业集，可由m台相同机器加工处理。要求给出一种作业调度方案，使所给的n个作业在尽可能短的时间内由m台机器加工处理完成。作业不能拆分成更小的子作业；每个作业均可在任何一台机器上加工处理。这个问题是NP完全问题，还没有有效的解法(求最优解)，但是可以用贪心选择策略设计出较好的近似算法(求次优解)。当n<=m时，只要将作业时间区间分配给作业即可；当n>m时，首先将n个作业从大到小排序，然后依此顺序将作业分配给空闲的处理机。也就是说从剩下的作业中，选择需要处理时间最长的，然后依次选择处理时间次长的，直到所有的作业全部处理完毕，或者机器不能再处理其他作业为止。如果我们每次是将需要处理时间最短的作业分配给空闲的机器，那么可能就会出现其它所有作业都处理完了只剩所需时间最长的作业在处理的情况，这样势必效率较低。
+
+## 简单
+
+### [Couples Holding Hands](https://leetcode.com/problems/couples-holding-hands/description/)
+
+1. 题目
+
+   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>N couples sit in 2N seats arranged in a row and want to hold hands. We want to know the minimum number of swaps so that every couple is sitting side by side. A <em>swap</em> consists of choosing <strong>any</strong> two people, then they stand up and switch seats.</p>
 <p>The people and seats are represented by an integer from <code>0</code> to <code>2N-1</code>, the couples are numbered in order, the first couple being <code>(0, 1)</code>, the second couple being <code>(2, 3)</code>, and so on with the last couple being <code>(2N-2, 2N-1)</code>.</p>
 <p>The couples’ initial seating is given by <code>row[i]</code> being the value of the person who is initially sitting in the i-th seat.</p>
@@ -407,7 +444,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-</li>
+</=m时，只要将作业时间区间分配给作业即可；当n></li>
 <li><p><a href="https://blog.csdn.net/u014688145/article/details/79057475" target="_blank" rel="noopener">思路</a></p>
 <p>贪心，不过不好证明。从位置0开始，看位置1是否是它的partner，如果是，直接忽略这组couple，如果不是，从后面的数组中，找到partner直接交换，并且记录交换次数一次。遍历完整个数组即为最优解。</p>
 </li>
@@ -1743,11 +1780,36 @@
 1. 题目
 
    <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>There are <code>n</code> different online courses numbered from <code>1</code> to <code>n</code>. Each course has some duration(course length) <code>t</code> and closed on <code>dth</code>day. A course should be taken <strong>continuously</strong> for <code>t</code> days and must be finished before or on the <code>dth</code> day. You will start at the <code>1st</code> day.</p>
+<p>Given <code>n</code> online courses represented by pairs <code>(t,d)</code>, your task is to find the maximal number of courses that can be taken.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">Input: [[<span class="number">100</span>, <span class="number">200</span>], [<span class="number">200</span>, <span class="number">1300</span>], [<span class="number">1000</span>, <span class="number">1250</span>], [<span class="number">2000</span>, <span class="number">3200</span>]]</div>
+<div class="line">Output: <span class="number">3</span></div>
+<div class="line">Explanation: </div>
+<div class="line">There<span class="string">'re totally 4 courses, but you can take 3 courses at most:</span></div>
+<div class="line"><span class="string">First, take the 1st course, it costs 100 days so you will finish it on the 100th day, and ready to take the next course on the 101st day.</span></div>
+<div class="line"><span class="string">Second, take the 3rd course, it costs 1000 days so you will finish it on the 1100th day, and ready to take the next course on the 1101st day. </span></div>
+<div class="line"><span class="string">Third, take the 2nd course, it costs 200 days so you will finish it on the 1300th day. </span></div>
+<div class="line"><span class="string">The 4th course cannot be taken now, since you will finish it on the 3300th day, which exceeds the closed date.</span></div>
+</pre></td></tr></table></figure>
 
 </div></div>
 </li>
 <li><p><a href="https://blog.csdn.net/jitianyu123/article/details/74611466" target="_blank" rel="noopener">思路</a></p>
+<p>题目大意：$n$个课程，每一个课程使用$(t,d)$表示，其中$t$是课程所需时间，$d$表示课程必须在$d$之前完成。如何选课才能选到最多的课程？</p>
+<p>我们的贪心选择是 - 选择截止日期越早的课程。比如（300，1000）和（500，600），我们可以先选择（500，600），这样课程结束时间是500&lt;600。然后选择（300，1000）,这样课程结束时间是500+300 &lt; 1000。选择2门课。</p>
+<p>而非优先选择所需时间最短的课程。优选选择课时短的（300，1000），结束时间是300. 如果再选择（500，600），上完课的时间就是 300+500 &gt; 600，就不能选了。</p>
 </li>
+</ol>
+<ol>
 <li><p><a href="http://fisherlei.blogspot.com/2017/07/leetcode-course-schedule-iii-solution.html" target="_blank" rel="noopener">代码</a></p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 
@@ -1873,7 +1935,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1928,7 +1990,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">1.1.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.2.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.3.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.5.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.6.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.7.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.8.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.9.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.10.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.2.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.3.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.5.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.6.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.7.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.8.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.9.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.10.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li></ol></li></ol></div>
             
 
           </div>
