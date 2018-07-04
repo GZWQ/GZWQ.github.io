@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-11%20at%209.58.34%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-06-05%20at%2010.10.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/30/DP-Mechanism/Screen%20Shot%202018-05-31%20at%203.10.30%20PM.png">
-<meta property="og:updated_time" content="2018-06-26T02:49:18.957Z">
+<meta property="og:updated_time" content="2018-07-03T16:00:21.509Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mechanism of Differential Privacy">
 <meta name="twitter:description" content="Laplace DistributionThe following details are from Wikipedia. And the python version is here PDF    概率密度函数反映了概率在$ x$点处的密集程度。 x轴表示每一种取值，而y轴表示概率。 the variance of this distribution is $\sigma^2=2b^2$, wh">
@@ -460,6 +460,17 @@
 </ol>
 </blockquote>
 <h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h3 id="Divisibility-of-Laplace-Distribution"><a href="#Divisibility-of-Laplace-Distribution" class="headerlink" title="Divisibility of Laplace Distribution"></a><a href="https://link.springer.com/content/pdf/10.1007%2Fs00450-016-0310-y.pdf" target="_blank" rel="noopener">Divisibility of Laplace Distribution</a></h3><p><img src="/2018/05/30/DP-Mechanism/Screen Shot 2018-06-25 at 9.46.44 PM.png" alt="Screen Shot 2018-06-25 at 9.46.44 PM"></p>
+<h2 id="Python-Implement"><a href="#Python-Implement" class="headerlink" title="Python Implement"></a>Python Implement</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">noise</span><span class="params">()</span>:</span></div>
+<div class="line">    loc = <span class="number">0</span></div>
+<div class="line">    scale = <span class="number">1</span></div>
+<div class="line">    noise = np.random.laplace(loc,scale,<span class="number">1</span>) <span class="comment">#返回一个list</span></div>
+<div class="line">    <span class="keyword">return</span> noise[<span class="number">0</span>]</div>
+</pre></td></tr></table></figure>
 <h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><blockquote>
 <p>We sometimes refer to the problem of responding to large numbers of (possibly arbitrary) queries as the query release problem.</p>
 <ol>
@@ -743,7 +754,7 @@ D(p||q)\ge0</script></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -754,7 +765,7 @@ D(p||q)\ge0</script></li>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -765,7 +776,7 @@ D(p||q)\ge0</script></li>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -798,7 +809,7 @@ D(p||q)\ge0</script></li>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Distribution"><span class="nav-number">1.</span> <span class="nav-text">Laplace Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.1.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDF"><span class="nav-number">1.2.</span> <span class="nav-text">CDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sensitivity"><span class="nav-number">2.</span> <span class="nav-text">Sensitivity</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#L1-sensitivity"><span class="nav-number">2.1.</span> <span class="nav-text">L1-sensitivity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Mechanism"><span class="nav-number">3.</span> <span class="nav-text">Laplace Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">3.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">3.2.</span> <span class="nav-text">Properties</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Divisibility-of-Laplace-Distribution"><span class="nav-number">3.2.1.</span> <span class="nav-text">Divisibility of Laplace Distribution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">3.3.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utility"><span class="nav-number">3.4.</span> <span class="nav-text">Utility</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exponential-mechanism"><span class="nav-number">4.</span> <span class="nav-text">Exponential mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-1"><span class="nav-number">4.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utility-1"><span class="nav-number">4.2.</span> <span class="nav-text">Utility</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Laplace-vs-Exponential"><span class="nav-number">4.3.</span> <span class="nav-text">Laplace vs Exponential</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples-1"><span class="nav-number">4.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Composition-Theorems"><span class="nav-number">5.</span> <span class="nav-text">Composition Theorems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequential-composition"><span class="nav-number">5.1.</span> <span class="nav-text">Sequential composition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parallel-composition"><span class="nav-number">5.2.</span> <span class="nav-text">Parallel composition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-Divergence"><span class="nav-number">5.3.</span> <span class="nav-text">KL-Divergence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">5.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">5.3.2.</span> <span class="nav-text">性质</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Distribution"><span class="nav-number">1.</span> <span class="nav-text">Laplace Distribution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDF"><span class="nav-number">1.1.</span> <span class="nav-text">PDF</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDF"><span class="nav-number">1.2.</span> <span class="nav-text">CDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sensitivity"><span class="nav-number">2.</span> <span class="nav-text">Sensitivity</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#L1-sensitivity"><span class="nav-number">2.1.</span> <span class="nav-text">L1-sensitivity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Laplace-Mechanism"><span class="nav-number">3.</span> <span class="nav-text">Laplace Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">3.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">3.2.</span> <span class="nav-text">Properties</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Divisibility-of-Laplace-Distribution"><span class="nav-number">3.2.1.</span> <span class="nav-text">Divisibility of Laplace Distribution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-Implement"><span class="nav-number">3.3.</span> <span class="nav-text">Python Implement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">3.4.</span> <span class="nav-text">Examples</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utility"><span class="nav-number">3.5.</span> <span class="nav-text">Utility</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exponential-mechanism"><span class="nav-number">4.</span> <span class="nav-text">Exponential mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition-1"><span class="nav-number">4.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utility-1"><span class="nav-number">4.2.</span> <span class="nav-text">Utility</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Laplace-vs-Exponential"><span class="nav-number">4.3.</span> <span class="nav-text">Laplace vs Exponential</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples-1"><span class="nav-number">4.4.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Composition-Theorems"><span class="nav-number">5.</span> <span class="nav-text">Composition Theorems</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequential-composition"><span class="nav-number">5.1.</span> <span class="nav-text">Sequential composition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parallel-composition"><span class="nav-number">5.2.</span> <span class="nav-text">Parallel composition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-Divergence"><span class="nav-number">5.3.</span> <span class="nav-text">KL-Divergence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">5.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">5.3.2.</span> <span class="nav-text">性质</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
