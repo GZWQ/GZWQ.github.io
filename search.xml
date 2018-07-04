@@ -3,10 +3,31 @@
   
     
     <entry>
+      <title>DP-Crowd Counting</title>
+      <link href="/2018/07/04/DP-Crowd-Counting/"/>
+      <url>/2018/07/04/DP-Crowd-Counting/</url>
+      <content type="html"><![CDATA[<p><a href="https://baike.baidu.com/item/%E7%8B%84%E6%8B%89%E5%85%8B%CE%B4%E5%87%BD%E6%95%B0" target="_blank" rel="noopener">delta function</a></p><p>$\delta$-函数常用于表示质点、点电荷等理想模型的密度函数，该函数在除了零以外的点取值都等于零，而其在整个定义域上的积分等于1。</p>]]></content>
+      
+      <categories>
+          
+          <category> Deep Learning </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Deep Learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Software Installation</title>
       <link href="/2018/07/04/Software-Installation/"/>
       <url>/2018/07/04/Software-Installation/</url>
-      <content type="html"><![CDATA[<h1 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pip install tensorflow</div></pre></td></tr></table></figure><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> python</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; import tensorflow as tf</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; hello = tf.constant('Hello, TensorFlow!')</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; sess = tf.Session()</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; print(sess.run(hello))</div></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello, TensorFlow!</div></pre></td></tr></table></figure>]]></content>
+      <content type="html"><![CDATA[<h1 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pip install tensorflow</div></pre></td></tr></table></figure><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> python</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; import tensorflow as tf</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; hello = tf.constant('Hello, TensorFlow!')</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; sess = tf.Session()</div></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; print(sess.run(hello))</div></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hello, TensorFlow!</div></pre></td></tr></table></figure><h1 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h1><h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>基于Anaconda</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> conda install pytorch torchvision -c soumith</div></pre></td></tr></table></figure><h1 id="Octave"><a href="#Octave" class="headerlink" title="Octave"></a>Octave</h1><p><a href="https://sourceforge.net/projects/octave/files/Octave%20MacOSX%20Binary/2013-12-30%20binary%20installer%20of%20Octave%203.8.0%20for%20OSX%2010.9.1%20%28beta%29/GNU_Octave_3.8.0-6.dmg/download" target="_blank" rel="noopener">download</a></p>]]></content>
       
       <categories>
           
@@ -685,14 +706,14 @@
       
       <categories>
           
-          <category> -Hexo </category>
+          <category> Hexo </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> -Hexo </tag>
+            <tag> Hexo </tag>
             
         </tags>
       
