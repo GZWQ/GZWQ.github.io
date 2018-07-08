@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867 如何通俗易懂地介绍 Gaussian Process？ - 知乎 https://www.zhihu.com/question/46631426 Gaussian Filtering (高斯滤波)  高斯滤波在图像处理概念下，将图像频域处理和时域处理相联系，作为低通滤波">
+<meta name="description" content="Q About perspective normalization, the closer the people is to the camera, the bigger he is. So the weight should be small, which is consistent to the paper. While in paper, the closer people is, the">
 <meta name="keywords" content="Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP-Crowd Counting">
 <meta property="og:url" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867 如何通俗易懂地介绍 Gaussian Process？ - 知乎 https://www.zhihu.com/question/46631426 Gaussian Filtering (高斯滤波)  高斯滤波在图像处理概念下，将图像频域处理和时域处理相联系，作为低通滤波">
+<meta property="og:description" content="Q About perspective normalization, the closer the people is to the camera, the bigger he is. So the weight should be small, which is consistent to the paper. While in paper, the closer people is, the">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-07%20at%204.15.43%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-07%20at%2011.08.24%20PM.png">
@@ -93,10 +93,12 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-07%20at%2011.08.38%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-05%20at%2010.47.30%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-08%20at%2012.17.26%20AM.png">
-<meta property="og:updated_time" content="2018-07-08T06:13:03.918Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-08%20at%2010.01.38%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-08%20at%209.38.43%20AM.png">
+<meta property="og:updated_time" content="2018-07-08T16:35:03.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-Crowd Counting">
-<meta name="twitter:description" content="机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867 如何通俗易懂地介绍 Gaussian Process？ - 知乎 https://www.zhihu.com/question/46631426 Gaussian Filtering (高斯滤波)  高斯滤波在图像处理概念下，将图像频域处理和时域处理相联系，作为低通滤波">
+<meta name="twitter:description" content="Q About perspective normalization, the closer the people is to the camera, the bigger he is. So the weight should be small, which is consistent to the paper. While in paper, the closer people is, the">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/04/DP-Crowd-Counting/Screen%20Shot%202018-07-07%20at%204.15.43%20PM.png">
 
 
@@ -383,8 +385,14 @@
       
 
       
-        <p>机器学习里的 kernel 是指什么？ - 知乎 <a href="https://www.zhihu.com/question/30371867" target="_blank" rel="noopener">https://www.zhihu.com/question/30371867</a></p>
+        <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ol>
+<li>About perspective normalization, the closer the people is to the camera, the bigger he is. So the weight should be small, which is consistent to the <a href="http://www.svcl.ucsd.edu/publications/journal/2008/pami/pami08-dytexmix.pdf" target="_blank" rel="noopener">paper</a>. While in <a href="http://www.ee.cuhk.edu.hk/~xgwang/papers/zhangLWYcvpr15.pdf" target="_blank" rel="noopener">paper</a>, the closer people is, the hotter the color, meaning bigger weight of people close to camera.</li>
+<li></li>
+<li></li>
+</ol>
+<p>机器学习里的 kernel 是指什么？ - 知乎 <a href="https://www.zhihu.com/question/30371867" target="_blank" rel="noopener">https://www.zhihu.com/question/30371867</a></p>
 <p>如何通俗易懂地介绍 Gaussian Process？ - 知乎 <a href="https://www.zhihu.com/question/46631426" target="_blank" rel="noopener">https://www.zhihu.com/question/46631426</a></p>
+<a id="more"></a>
 <p><a href="https://blog.csdn.net/sunmc1204953974/article/details/50634652" target="_blank" rel="noopener">Gaussian Filtering (高斯滤波)</a></p>
 <blockquote>
 <p>高斯滤波在图像处理概念下，将图像频域处理和时域处理相联系，作为低通滤波器使用，可以将低频能量（比如噪声）滤去，起到图像平滑作用。</p>
@@ -439,14 +447,28 @@
 <p>FPS是图像领域中的定义，是指画面每秒传输帧数，通俗来讲就是指动画或视频的画面数, 电影以每秒24张画面的速度播放，也就是一秒钟内在屏幕上连续投射出24张静止画面,那么我们就说电影是24fps.</p>
 </li>
 <li><p><a href="http://www.svcl.ucsd.edu/publications/journal/2008/pami/pami08-dytexmix.pdf" target="_blank" rel="noopener">A dynamic texture</a></p>
-<p>A dynamic texture (DT) is the temporal extension of 2D texture. </p>
+<p>A dynamic texture (DT) is the temporal extension of 2D texture, which is considered as a spatio-temporal generative model for video, which represents video sequences as observations from a linear dynamical system.</p>
+</li>
+</ol>
+<p>   <strong>Definition</strong> : For a frame at time $t$, we have two variables $y_t$ and $x_t$, which encode the frame appearance component and the evolution of the video over time respectively.</p>
+<p>   <img src="/2018/07/04/DP-Crowd-Counting/Screen Shot 2018-07-08 at 10.01.38 AM.png" alt="Screen Shot 2018-07-08 at 10.01.38 AM"></p>
+<ol>
+<li><p>Pixel</p>
+<p>图像是由的小方格即所谓的像素(pixel)组成的，这些小方块都有一个明确的位置和被分配的色彩数值，像素是整个图像中不可分割的单位或者是元素。e.g. 图片分辨率为72，即每英寸像素为72，1英寸等于2.54厘米，那么通过换算可以得出每厘米等于28像素(72 / 2.54)；又如15x15厘米长度的图片，等于420*420像素的长度。</p>
+</li>
+<li><p><a href="https://baike.baidu.com/item/%E7%81%B0%E5%BA%A6%E5%80%BC/10259111" target="_blank" rel="noopener">Grey-Scale Value</a></p>
+<p>把白色与黑色之间按对数关系分成若干级，称为“灰度等级”。范围一般从0到255，白色为255，黑色为0，故黑白图片也称灰度图像。</p>
+<p><img src="/2018/07/04/DP-Crowd-Counting/Screen Shot 2018-07-08 at 9.38.43 AM.png" alt="Screen Shot 2018-07-08 at 9.38.43 AM"></p>
+</li>
+<li><p>[Foreground vs Background]</p>
 </li>
 </ol>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.robots.ox.ac.uk/~vgg/publications/2010/Lempitsky10b/lempitsky10b.pdf" target="_blank" rel="noopener">[2010-Victor Lempitsky]</a> Learning To Count Objects in Images </p>
 <p><a href="http://www.di.ens.fr/willow/pdfscurrent/rodriguez11b.pdf" target="_blank" rel="noopener">[2011-Mikel Rodriguez]</a> Density-aware person detection and tracking in crowds</p>
 <p><a href="https://www.robots.ox.ac.uk/~vgg/publications/2014/Arteta14/arteta14.pdf" target="_blank" rel="noopener">[2014-Carlos Arteta]</a> Interactive Object Counting</p>
 <p><a href="https://arxiv.org/pdf/1705.10118.pdf" target="_blank" rel="noopener">[2018-Di Kang]</a> Beyond Counting: Comparisons of Density Maps for Crowd Analysis Tasks - Counting, Detection, and Tracking</p>
-<p>[2008-AB Chan] Privacy Preserving Crowd Monitoring: Counting People without People Models or Tracking</p>
+<p><a href="http://www.svcl.ucsd.edu/publications/journal/2008/pami/pami08-dytexmix.pdf" target="_blank" rel="noopener">[2008-AB Chan]</a> Privacy Preserving Crowd Monitoring: Counting People without People Models or Tracking</p>
+<p><a href="http://www.ee.cuhk.edu.hk/~xgwang/papers/zhangLWYcvpr15.pdf" target="_blank" rel="noopener">[2015- Cong Zhang]</a> Cross-scene Crowd Counting via Deep Convolutional Neural Networks</p>
 
       
     </div>
@@ -617,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2008-AB-Chan"><span class="nav-number">1.</span> <span class="nav-text">[2008-AB Chan]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Extraction"><span class="nav-number">1.1.</span> <span class="nav-text">Feature Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Segment-Features"><span class="nav-number">1.1.1.</span> <span class="nav-text">Segment Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Perimeter"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Perimeter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Perimeter-Edge-Orientation"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Perimeter Edge Orientation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Edge-Features"><span class="nav-number">1.1.2.</span> <span class="nav-text">Edge Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Minkowski-Dimension"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Minkowski Dimension</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Texture-Features"><span class="nav-number">1.1.3.</span> <span class="nav-text">Texture Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GLCM-For-Texture-Abstracting"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">GLCM For Texture Abstracting</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Knowledge"><span class="nav-number">2.</span> <span class="nav-text">Knowledge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2008-AB-Chan"><span class="nav-number">2.</span> <span class="nav-text">[2008-AB Chan]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-Extraction"><span class="nav-number">2.1.</span> <span class="nav-text">Feature Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Segment-Features"><span class="nav-number">2.1.1.</span> <span class="nav-text">Segment Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Perimeter"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">Perimeter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Perimeter-Edge-Orientation"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">Perimeter Edge Orientation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Edge-Features"><span class="nav-number">2.1.2.</span> <span class="nav-text">Edge Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Minkowski-Dimension"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Minkowski Dimension</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Texture-Features"><span class="nav-number">2.1.3.</span> <span class="nav-text">Texture Features</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GLCM-For-Texture-Abstracting"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">GLCM For Texture Abstracting</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Knowledge"><span class="nav-number">3.</span> <span class="nav-text">Knowledge</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
