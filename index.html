@@ -380,8 +380,6 @@
 <li></li>
 <li></li>
 </ol>
-<p>机器学习里的 kernel 是指什么？ - 知乎 <a href="https://www.zhihu.com/question/30371867" target="_blank" rel="noopener">https://www.zhihu.com/question/30371867</a></p>
-<p>如何通俗易懂地介绍 Gaussian Process？ - 知乎 <a href="https://www.zhihu.com/question/46631426" target="_blank" rel="noopener">https://www.zhihu.com/question/46631426</a></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/04/DP-Crowd-Counting/#more" rel="contents">
@@ -528,7 +526,8 @@
       
         
           
-            <h1 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+            <a id="more"></a>
+<h1 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pip install tensorflow</div>
 </pre></td></tr></table></figure>
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -841,54 +840,15 @@
 
       
         
-          
-            <p>kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。</p>
-<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><h2 id="Gaussian-Process-Regression"><a href="#Gaussian-Process-Regression" class="headerlink" title="Gaussian Process Regression"></a>Gaussian Process Regression</h2><p><strong>问题理解</strong>：你不知道函数长什么样。但是你有一些样本，还有这些样本的函数值（带噪声）。高斯过程可以通过kernel距离，给你把这个函数补出来：给一个新的样本，高斯过程可以告诉你函数值是多少。</p>
-<p>高斯分布是针对向量，而高斯过程是针对函数的；给定均值向量和协方差矩阵，我们可以确定一个高斯分布，同样给定<strong>一个均值函数和协方差函数，我们也可以惟一确定一个高斯过程</strong>。</p>
-<p>分析：<a href="https://www.zhihu.com/question/46631426/answer/122929183" target="_blank" rel="noopener">知乎1</a></p>
-<p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-07 at 4.47.21 PM.png" alt="Screen Shot 2018-07-07 at 4.47.21 PM"></p>
-<h2 id="Density-Estimation"><a href="#Density-Estimation" class="headerlink" title="Density Estimation"></a>Density Estimation</h2><p><a href="http://qr.ae/TUp6rs" target="_blank" rel="noopener">[ref1]</a> <a href="http://www.mvstat.net/tduong/research/seminars/seminar-2001-05/" target="_blank" rel="noopener">[ref2]</a> <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation" target="_blank" rel="noopener">[wiki]</a> <a href="https://www.zhihu.com/question/27301358/answer/105267357" target="_blank" rel="noopener">[ZhiHu]</a> <a href="http://sklearn.lzjqsdd.com/modules/density.html" target="_blank" rel="noopener">[sklearn-implement]</a> å</p>
-<p>核密度估计方法，属于非参数检验方法之一，不利用有关数据分布的先验知识，对数据分布不附加任何假定，是一种从数据样本本身出发研究数据分布特征的方法。</p>
-<h3 id="Python-Implement"><a href="#Python-Implement" class="headerlink" title="Python Implement"></a>Python Implement</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KernelDensity</div>
-<div class="line">np.random.seed(<span class="number">1</span>)</div>
-<div class="line">X = np.concatenate((np.random.normal(<span class="number">0</span>, <span class="number">1</span>, <span class="number">6</span>),</div>
-<div class="line">np.random.normal(<span class="number">5</span>, <span class="number">1</span>, <span class="number">14</span>)))[:, np.newaxis]</div>
-<div class="line">X_plot = np.linspace(<span class="number">-5</span>, <span class="number">10</span>, <span class="number">1000</span>)[:, np.newaxis]</div>
-<div class="line">bins = np.linspace(<span class="number">-5</span>, <span class="number">10</span>, <span class="number">10</span>)</div>
-<div class="line">fig, ax = plt.subplots(<span class="number">2</span>,<span class="number">2</span>)</div>
-<div class="line">fig.subplots_adjust(hspace=<span class="number">0.05</span>, wspace=<span class="number">0.05</span>)</div>
-<div class="line"><span class="comment"># 直方图 1 'Histogram'</span></div>
-<div class="line">ax[<span class="number">0</span>, <span class="number">0</span>].hist(X[:, <span class="number">0</span>], bins=bins,  normed=<span class="keyword">True</span>)</div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 核密度估计 2 'Gaussian KDE'</span></div>
-<div class="line">kde = KernelDensity(kernel=<span class="string">'gaussian'</span>, bandwidth=<span class="number">0.75</span>).fit(X)</div>
-<div class="line">log_dens = kde.score_samples(X_plot)</div>
-<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].fill(X_plot[:, <span class="number">0</span>], np.exp(log_dens))</div>
-<div class="line">plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-04 at 10.45.45 AM.png" alt="Screen Shot 2018-07-04 at 10.45.45 AM"></p>
-
-          
+          <p>kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。</p>
+<p>机器学习里的 kernel 是指什么？ - 知乎 <a href="https://www.zhihu.com/question/30371867" target="_blank" rel="noopener">https://www.zhihu.com/question/30371867</a></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/04/ML-Kernel-Function/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

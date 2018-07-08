@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 ApplicationsGaussian Process Regression问题理解：你不知道函数长什么样。但是你有一些样本，还有这些样本的函数值（带噪声）。高斯过程可以通过kernel距离，给你把这个函数补出来：给一个新的样本，高斯过程可以告诉">
+<meta name="description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
 <meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ML-Kernel Function">
 <meta property="og:url" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 ApplicationsGaussian Process Regression问题理解：你不知道函数长什么样。但是你有一些样本，还有这些样本的函数值（带噪声）。高斯过程可以通过kernel距离，给你把这个函数补出来：给一个新的样本，高斯过程可以告诉">
+<meta property="og:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-07%20at%204.47.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-04%20at%2010.45.45%20AM.png">
-<meta property="og:updated_time" content="2018-07-07T21:47:42.841Z">
+<meta property="og:updated_time" content="2018-07-08T22:17:06.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
-<meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 ApplicationsGaussian Process Regression问题理解：你不知道函数长什么样。但是你有一些样本，还有这些样本的函数值（带噪声）。高斯过程可以通过kernel距离，给你把这个函数补出来：给一个新的样本，高斯过程可以告诉">
+<meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-07%20at%204.47.21%20PM.png">
 
 
@@ -380,7 +380,10 @@
 
       
         <p>kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。</p>
-<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><h2 id="Gaussian-Process-Regression"><a href="#Gaussian-Process-Regression" class="headerlink" title="Gaussian Process Regression"></a>Gaussian Process Regression</h2><p><strong>问题理解</strong>：你不知道函数长什么样。但是你有一些样本，还有这些样本的函数值（带噪声）。高斯过程可以通过kernel距离，给你把这个函数补出来：给一个新的样本，高斯过程可以告诉你函数值是多少。</p>
+<p>机器学习里的 kernel 是指什么？ - 知乎 <a href="https://www.zhihu.com/question/30371867" target="_blank" rel="noopener">https://www.zhihu.com/question/30371867</a></p>
+<a id="more"></a>
+<h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><h2 id="Gaussian-Process-Regression"><a href="#Gaussian-Process-Regression" class="headerlink" title="Gaussian Process Regression"></a>Gaussian Process Regression</h2><p><a href="https://www.youtube.com/watch?v=4vGiHC35j9s" target="_blank" rel="noopener">YouTube</a> <a href="https://www.zhihu.com/question/46631426" target="_blank" rel="noopener">ZhiHu1</a> <a href="https://blog.csdn.net/lj6052317/article/details/78772494" target="_blank" rel="noopener">Blog1</a> <a href="https://zhuanlan.zhihu.com/p/27555501" target="_blank" rel="noopener">ZhiHu2</a> </p>
+<p><strong>问题理解</strong>：你不知道函数长什么样。但是你有一些样本，还有这些样本的函数值（带噪声）。高斯过程可以通过kernel距离，给你把这个函数补出来：给一个新的样本，高斯过程可以告诉你函数值是多少。</p>
 <p>高斯分布是针对向量，而高斯过程是针对函数的；给定均值向量和协方差矩阵，我们可以确定一个高斯分布，同样给定<strong>一个均值函数和协方差函数，我们也可以惟一确定一个高斯过程</strong>。</p>
 <p>分析：<a href="https://www.zhihu.com/question/46631426/answer/122929183" target="_blank" rel="noopener">知乎1</a></p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-07 at 4.47.21 PM.png" alt="Screen Shot 2018-07-07 at 4.47.21 PM"></p>
