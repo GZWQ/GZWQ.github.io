@@ -376,8 +376,11 @@
       
         
           <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ol>
-<li>About perspective normalization, the closer the people is to the camera, the bigger he is. So the weight should be small, which is consistent to the <a href="http://www.svcl.ucsd.edu/publications/journal/2008/pami/pami08-dytexmix.pdf" target="_blank" rel="noopener">paper</a>. While in <a href="http://www.ee.cuhk.edu.hk/~xgwang/papers/zhangLWYcvpr15.pdf" target="_blank" rel="noopener">paper</a>, the closer people is, the hotter the color, meaning bigger weight of people close to camera.</li>
-<li></li>
+<li><p>About perspective normalization, the closer the people is to the camera, the bigger he is. So the weight should be small, which is consistent to the <a href="http://www.svcl.ucsd.edu/publications/journal/2008/pami/pami08-dytexmix.pdf" target="_blank" rel="noopener">paper</a>. While in <a href="http://www.ee.cuhk.edu.hk/~xgwang/papers/zhangLWYcvpr15.pdf" target="_blank" rel="noopener">paper</a>, the closer people is, the hotter the color, meaning bigger weight of people close to camera.</p>
+</li>
+<li><p>down-sample the training pics by $\frac{1}{4}$ before training, it wouldn’t change the density? </p>
+<p>delta function to model the image with $N$ heads?</p>
+</li>
 <li></li>
 </ol>
           <!--noindex-->
@@ -525,36 +528,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> pip install tensorflow</div>
-</pre></td></tr></table></figure>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> python</div>
-</pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; import tensorflow as tf</div>
-</pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; hello = tf.constant('Hello, TensorFlow!')</div>
-</pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; sess = tf.Session()</div>
-</pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span>&gt;&gt; print(sess.run(hello))</div>
-</pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">Hello, TensorFlow!</div>
-</pre></td></tr></table></figure>
-<h1 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h1><h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><p>基于Anaconda</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="meta">$</span> conda install pytorch torchvision -c soumith</div>
-</pre></td></tr></table></figure>
-<h1 id="Octave"><a href="#Octave" class="headerlink" title="Octave"></a>Octave</h1><p><a href="https://sourceforge.net/projects/octave/files/Octave%20MacOSX%20Binary/2013-12-30%20binary%20installer%20of%20Octave%203.8.0%20for%20OSX%2010.9.1%20%28beta%29/GNU_Octave_3.8.0-6.dmg/download" target="_blank" rel="noopener">download</a></p>
-
-          
+          <p>Instructions of various sofware installation.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/04/Software-Installation/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -693,7 +674,15 @@
 
       
         
-          <p><strong><a href="http://www.jeyzhang.com/cnn-learning-notes-1.html" target="_blank" rel="noopener">卷积神经网络(Convolutional Neural Network, CNN)</a></strong>是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
+          <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ul>
+<li><p>每个卷积核代表了一种图像模式，往往有多个卷积核？？？</p>
+</li>
+<li><p>比如S2 -&gt; C3，是不是C3的每一个感受野要感受S2的6张map？</p>
+<p><img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.29.19 PM.png" alt="Screen Shot 2018-07-08 at 9.29.19 PM"></p>
+</li>
+</ul>
+<p>  <img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.38.28 PM.png" alt="Screen Shot 2018-07-08 at 9.38.28 PM"></p>
+<p><strong><a href="http://www.jeyzhang.com/cnn-learning-notes-1.html" target="_blank" rel="noopener">卷积神经网络(Convolutional Neural Network, CNN)</a></strong>是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
 <p>图像处理中，往往会将图像看成是一个或多个的二维向量，比如MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是RGB表示的彩色图片则有三个颜色通道，可表示为三张二维向量）。传统的神经网络都是采用全连接的方式，即输入层到隐藏层的神经元都是全部连接的，这样做将导致参数量巨大，使得网络训练耗时甚至难以训练，而CNN则通过<strong>局部连接</strong>、<strong>权值共享</strong>等方法避免这一困难。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1341,6 +1330,16 @@
         
           
             <p><a href="https://www.yiibai.com/python3/python_date_time.html#article-start" target="_blank" rel="noopener">last</a></p>
+<h1 id="琐碎"><a href="#琐碎" class="headerlink" title="琐碎"></a>琐碎</h1><ol>
+<li><p><strong>warning ignore</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> warnings</div>
+<div class="line">warnings.filterwarnings(<span class="string">"ignore"</span>)</div>
+</pre></td></tr></table></figure>
+</li>
+<li></li>
+</ol>
 <h1 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Python支持不同的数字类型 -</p>
 <ul>
 <li><p>int (有符号整数): 它们通常被称为只是整数或整数，是正的或负的整数，没有小数点。 Python3整数是无限的大小。Python 2中有两个整数类型 - int 和 long。</p>

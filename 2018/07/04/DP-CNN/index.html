@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像处理中，往往会将图像看成是一个或多个的二维向量，比如MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是R">
+<meta name="description" content="Q 每个卷积核代表了一种图像模式，往往有多个卷积核？？？  比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？       卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像">
 <meta name="keywords" content="Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP-CNN">
 <meta property="og:url" content="http://yoursite.com/2018/07/04/DP-CNN/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像处理中，往往会将图像看成是一个或多个的二维向量，比如MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是R">
+<meta property="og:description" content="Q 每个卷积核代表了一种图像模式，往往有多个卷积核？？？  比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？       卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-07T04:35:34.163Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-08%20at%209.29.19%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-08%20at%209.38.28%20PM.png">
+<meta property="og:updated_time" content="2018-07-10T03:23:17.177Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-CNN">
-<meta name="twitter:description" content="卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像处理中，往往会将图像看成是一个或多个的二维向量，比如MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是R">
+<meta name="twitter:description" content="Q 每个卷积核代表了一种图像模式，往往有多个卷积核？？？  比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？       卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-08%20at%209.29.19%20PM.png">
 
 
 
@@ -376,15 +379,24 @@
       
 
       
-        <p><strong><a href="http://www.jeyzhang.com/cnn-learning-notes-1.html" target="_blank" rel="noopener">卷积神经网络(Convolutional Neural Network, CNN)</a></strong>是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
+        <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ul>
+<li><p>每个卷积核代表了一种图像模式，往往有多个卷积核？？？</p>
+</li>
+<li><p>比如S2 -&gt; C3，是不是C3的每一个感受野要感受S2的6张map？</p>
+<p><img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.29.19 PM.png" alt="Screen Shot 2018-07-08 at 9.29.19 PM"></p>
+</li>
+</ul>
+<p>  <img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.38.28 PM.png" alt="Screen Shot 2018-07-08 at 9.38.28 PM"></p>
+<p><strong><a href="http://www.jeyzhang.com/cnn-learning-notes-1.html" target="_blank" rel="noopener">卷积神经网络(Convolutional Neural Network, CNN)</a></strong>是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
 <p>图像处理中，往往会将图像看成是一个或多个的二维向量，比如MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是RGB表示的彩色图片则有三个颜色通道，可表示为三张二维向量）。传统的神经网络都是采用全连接的方式，即输入层到隐藏层的神经元都是全部连接的，这样做将导致参数量巨大，使得网络训练耗时甚至难以训练，而CNN则通过<strong>局部连接</strong>、<strong>权值共享</strong>等方法避免这一困难。</p>
 <a id="more"></a>
-<p>每个层有多个彼此独立的Feature Map，每个Feature Map通过一种卷积滤波器（即权重）提取输入的一种特征，然后每个Feature Map有多个神经元（共用该map的权重）。</p>
-<p> 过滤器-卷积核-</p>
+<p>每个层有多个彼此独立的Feature Map，每个Feature Map通过一种卷积滤波器（即权重）提取输入的一种特征，然后每个Feature Map有多个神经元,神经元个数就是feature map的大小（共用该map的权重）。</p>
+<p> 过滤器-卷积核-Filters-(神经元局部感受的模板)</p>
 <p>在具体应用中，往往有多个卷积核，可以认为，每个卷积核代表了一种图像模式，如果某个图像块与此卷积核卷积出的值大，则认为此图像块十分接近于此卷积核。如果我们设计了6个卷积核，可以理解：我们认为这个图像上有6种底层纹理模式，也就是我们用6中基础模式就能描绘出一副图像。</p>
 <p>池化-下采样</p>
 <p>池化的原因是即使做完了卷积，图像仍然很大（因为卷积核比较小），所以为了降低数据维度，就进行下采样。而之所以能这么做，是因为即使减少了许多数据，特征的统计属性仍能够描述图像，而且由于降低了数据维度，有效地避免了过拟合。在实际应用中，池化根据下采样的方法，分为最大值下采样（Max-Pooling）与平均值下采样（Mean-Pooling）。</p>
 <p><a href="https://www.cnblogs.com/denny402/p/5071126.html" target="_blank" rel="noopener">parameters setting</a></p>
+<p><a href="https://blog.csdn.net/u011276025/article/details/76050377" target="_blank" rel="noopener">图像归一化</a></p>
 
       
     </div>
@@ -479,8 +491,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -540,6 +561,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
