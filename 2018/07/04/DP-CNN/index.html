@@ -79,16 +79,15 @@
 
 
 
-<meta name="description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？       卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像处理中，往往会将图像看成是一个或多个的二维向量，比如MN">
+<meta name="description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？  事实是：每一个卷积核要感受前一层的所有feature_maps   卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图">
 <meta name="keywords" content="Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP-CNN">
 <meta property="og:url" content="http://yoursite.com/2018/07/04/DP-CNN/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？       卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像处理中，往往会将图像看成是一个或多个的二维向量，比如MN">
+<meta property="og:description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？  事实是：每一个卷积核要感受前一层的所有feature_maps   卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-08%20at%209.29.19%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-08%20at%209.38.28%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20170430134321810.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%2011.02.43%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20170430143339630.png">
@@ -111,10 +110,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.38.52%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.41.42%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20170501131714709.png">
-<meta property="og:updated_time" content="2018-07-10T21:57:41.235Z">
+<meta property="og:updated_time" content="2018-07-10T22:04:31.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-CNN">
-<meta name="twitter:description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？       卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图像处理中，往往会将图像看成是一个或多个的二维向量，比如MN">
+<meta name="twitter:description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？  事实是：每一个卷积核要感受前一层的所有feature_maps   卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-08%20at%209.29.19%20PM.png">
 
 
@@ -404,9 +403,9 @@
         <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ul>
 <li><p>比如S2 -&gt; C3，是不是C3的每一个感受野要感受S2的6张map？</p>
 <p><img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.29.19 PM.png" alt="Screen Shot 2018-07-08 at 9.29.19 PM"></p>
+<p>事实是：每一个卷积核要感受前一层的所有feature_maps</p>
 </li>
 </ul>
-<p>  <img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.38.28 PM.png" alt="Screen Shot 2018-07-08 at 9.38.28 PM"></p>
 <p><strong><a href="http://www.jeyzhang.com/cnn-learning-notes-1.html" target="_blank" rel="noopener">卷积神经网络(Convolutional Neural Network, CNN)</a></strong>是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
 <p>图像处理中，往往会将图像看成是一个或多个的二维向量，比如MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是RGB表示的彩色图片则有三个颜色通道，可表示为三张二维向量）。传统的神经网络都是采用全连接的方式，即输入层到隐藏层的神经元都是全部连接的，这样做将导致参数量巨大，使得网络训练耗时甚至难以训练，而CNN则通过<strong>局部连接</strong>、<strong>权值共享</strong>等方法避免这一困难。</p>
 <a id="more"></a>

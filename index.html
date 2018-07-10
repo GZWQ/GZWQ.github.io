@@ -796,9 +796,9 @@
           <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ul>
 <li><p>比如S2 -&gt; C3，是不是C3的每一个感受野要感受S2的6张map？</p>
 <p><img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.29.19 PM.png" alt="Screen Shot 2018-07-08 at 9.29.19 PM"></p>
+<p>事实是：每一个卷积核要感受前一层的所有feature_maps</p>
 </li>
 </ul>
-<p>  <img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-08 at 9.38.28 PM.png" alt="Screen Shot 2018-07-08 at 9.38.28 PM"></p>
 <p><strong><a href="http://www.jeyzhang.com/cnn-learning-notes-1.html" target="_blank" rel="noopener">卷积神经网络(Convolutional Neural Network, CNN)</a></strong>是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。</p>
 <p>图像处理中，往往会将图像看成是一个或多个的二维向量，比如MNIST手写体图片就可以看做是一个28 × 28的二维向量（黑白图片，只有一个颜色通道；如果是RGB表示的彩色图片则有三个颜色通道，可表示为三张二维向量）。传统的神经网络都是采用全连接的方式，即输入层到隐藏层的神经元都是全部连接的，这样做将导致参数量巨大，使得网络训练耗时甚至难以训练，而CNN则通过<strong>局部连接</strong>、<strong>权值共享</strong>等方法避免这一困难。</p>
           <!--noindex-->
@@ -1094,7 +1094,7 @@
       
         
           
-            <h1 id="Lecture2"><a href="#Lecture2" class="headerlink" title="Lecture2"></a><a href="https://www.youtube.com/watch?v=1LTi6MmJf48" target="_blank" rel="noopener">Lecture2</a></h1><p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-02 at 6.14.21 PM.png" alt="Screen Shot 2018-07-02 at 6.14.21 PM"></p>
+            <h1 id="Lecture1"><a href="#Lecture1" class="headerlink" title="Lecture1"></a><a href="https://www.youtube.com/watch?v=OfWj89oRD7g" target="_blank" rel="noopener">Lecture1</a></h1><h1 id="Lecture2"><a href="#Lecture2" class="headerlink" title="Lecture2"></a><a href="https://www.youtube.com/watch?v=1LTi6MmJf48" target="_blank" rel="noopener">Lecture2</a></h1><p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-02 at 6.14.21 PM.png" alt="Screen Shot 2018-07-02 at 6.14.21 PM"></p>
 <blockquote>
 <ol>
 <li>$P(|x|\ge tb)=e^{-t}$ </li>
@@ -1158,6 +1158,29 @@
 <p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-03 at 9.56.54 AM.png" alt="Screen Shot 2018-07-03 at 9.56.54 AM"></p>
 <p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-03 at 9.58.36 AM.png" alt="Screen Shot 2018-07-03 at 9.58.36 AM"></p>
 <p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-03 at 10.00.51 AM.png" alt="Screen Shot 2018-07-03 at 10.00.51 AM"></p>
+<h1 id="Lecture3"><a href="#Lecture3" class="headerlink" title="Lecture3"></a><a href="https://www.youtube.com/watch?v=585hLnKDdUM" target="_blank" rel="noopener">Lecture3</a></h1><p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 5.38.25 PM.png" alt="Screen Shot 2018-07-10 at 5.38.25 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 5.40.29 PM.png" alt="Screen Shot 2018-07-10 at 5.40.29 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 5.43.16 PM.png" alt="Screen Shot 2018-07-10 at 5.43.16 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 5.44.13 PM.png" alt="Screen Shot 2018-07-10 at 5.44.13 PM"></p>
+<blockquote>
+<ol>
+<li>$D(q)$ is the probability so is bounded by 1.</li>
+</ol>
+</blockquote>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 5.48.18 PM.png" alt="Screen Shot 2018-07-10 at 5.48.18 PM"></p>
+<p> <img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 6.06.02 PM.png" alt="Screen Shot 2018-07-10 at 6.06.02 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 6.07.31 PM.png" alt="Screen Shot 2018-07-10 at 6.07.31 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 6.10.34 PM.png" alt="Screen Shot 2018-07-10 at 6.10.34 PM"></p>
+<blockquote>
+<ol>
+<li>There are two databases $x$ and $x’$, where $x$ has property $p2,p3,p6$ and $p8$ and $x’$ has property 1 through 4 but not 5 to 8. And we have a set of queries results $Y_i$ and say we release the result with some noise, where for $Y_1,Y_2,Y_3,Y_4$ we add positive noise while negative noise for $Y_5,Y_6,Y_7,Y_8$.</li>
+<li></li>
+</ol>
+</blockquote>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 6.17.02 PM.png" alt="Screen Shot 2018-07-10 at 6.17.02 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 6.18.22 PM.png" alt="Screen Shot 2018-07-10 at 6.18.22 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 6.23.33 PM.png" alt="Screen Shot 2018-07-10 at 6.23.33 PM"></p>
+<p><img src="/2018/07/02/DP-Lectures-by-Dwork/Screen Shot 2018-07-10 at 6.27.49 PM.png" alt="Screen Shot 2018-07-10 at 6.27.49 PM"></p>
 
           
         
