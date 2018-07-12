@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-10%20at%2010.38.46%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180710103835140.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-04%20at%2010.45.45%20AM.png">
-<meta property="og:updated_time" content="2018-07-10T15:39:14.849Z">
+<meta property="og:updated_time" content="2018-07-12T04:23:07.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -399,9 +399,9 @@
 <p>分析：<a href="https://www.zhihu.com/question/46631426/answer/122929183" target="_blank" rel="noopener">知乎1</a></p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-07 at 4.47.21 PM.png" alt="Screen Shot 2018-07-07 at 4.47.21 PM"></p>
 <h2 id="Density-Estimation"><a href="#Density-Estimation" class="headerlink" title="Density Estimation"></a>Density Estimation</h2><p><a href="http://qr.ae/TUp6rs" target="_blank" rel="noopener">[ref1]</a> <a href="http://www.mvstat.net/tduong/research/seminars/seminar-2001-05/" target="_blank" rel="noopener">[ref2]</a> <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation" target="_blank" rel="noopener">[wiki]</a> <a href="http://sklearn.lzjqsdd.com/modules/density.html" target="_blank" rel="noopener">[sklearn-implement]</a> </p>
-<p><a href="https://www.zhihu.com/question/27301358/answer/105267357" target="_blank" rel="noopener">[Begin]</a> <a href="https://wenku.baidu.com/view/364bc23931126edb6f1a104b.html" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/liangzuojiayi/article/details/78152180" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/unixtch/article/details/78556499" target="_blank" rel="noopener">[close to totally]</a> <a href="https://blog.csdn.net/pipisorry/article/details/53635895" target="_blank" rel="noopener">[closer]</a> </p>
-<p>核密度估计方法，属于非参数检验方法之一，不利用有关数据分布的先验知识，对数据分布不附加任何假定，是一种从数据样本本身出发研究数据分布特征的方法。</p>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>$(x_1,x_2,…,x_n)$是一组独立同分布的样本点，我们想要估计该组样本点的密度函数$f$。</p>
+<p><a href="https://www.zhihu.com/question/27301358/answer/105267357" target="_blank" rel="noopener">[Begin]</a> <a href="https://wenku.baidu.com/view/364bc23931126edb6f1a104b.html" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/liangzuojiayi/article/details/78152180" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/unixtch/article/details/78556499" target="_blank" rel="noopener">[close to totally]</a> <a href="https://blog.csdn.net/pipisorry/article/details/53635895" target="_blank" rel="noopener">[closer]</a> <a href="http://math.sjtu.edu.cn/faculty/chengwang/files/2015fall/ch4.pdf" target="_blank" rel="noopener">[sjtu]</a> <a href="https://github.com/endymecy/spark-ml-source-analysis/blob/master/%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1/kernel-density-estimation.md" target="_blank" rel="noopener">[intuition]</a> </p>
+<p>核密度估计方法，是概率论中用来估计未知的(概率)密度函数，属于非参数检验方法之一，不利用有关数据分布的先验知识，对数据分布不附加任何假定，是一种从数据样本本身出发研究数据分布特征的方法。</p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>$(x_1,x_2,…,x_n)$是一组独立同分布的样本点，我们想要估计该组样本点的概率密度函数$f$。</p>
 <p>一般的，我们会假设样本点服从某一分布，比如高斯分布$x\sim N(\mu,\sigma ^2)$。 那么我们可以通过样本点取求解两个未知参数：</p>
 <script type="math/tex; mode=display">
 \mu = \frac{1}{n}\sum_{i=1}^{n}x_i \\

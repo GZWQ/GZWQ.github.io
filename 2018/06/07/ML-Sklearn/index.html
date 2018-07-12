@@ -94,11 +94,12 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-06-28%20at%204.05.38%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628212803165.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180628213057808.png">
+<meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/Screen%20Shot%202018-07-12%20at%2010.12.09%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180629095455584.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180629095709851.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180701102341647.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/07/ML-Sklearn/image-20180701104019906.png">
-<meta property="og:updated_time" content="2018-07-01T15:42:56.057Z">
+<meta property="og:updated_time" content="2018-07-12T15:13:03.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python - Sklearn">
 <meta name="twitter:description" content="本文参考了1">
@@ -644,7 +645,37 @@
 <div class="line">print(clf.score(x_test,y_test))</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/06/07/ML-Sklearn/image-20180628213057808.png" alt="image-20180628213057808"></p>
-<h1 id="交叉验证cross-validation"><a href="#交叉验证cross-validation" class="headerlink" title="交叉验证cross-validation"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/3-2-cross-validation1/" target="_blank" rel="noopener">交叉验证cross-validation</a></h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h1 id="交叉验证cross-validation"><a href="#交叉验证cross-validation" class="headerlink" title="交叉验证cross-validation"></a><a href="https://morvanzhou.github.io/tutorials/machine-learning/sklearn/3-2-cross-validation1/" target="_blank" rel="noopener">交叉验证cross-validation</a></h1><p><a href="https://blog.csdn.net/evillist/article/details/61912827" target="_blank" rel="noopener">[Ref1]</a> <a href="https://www.cnblogs.com/pinard/p/5992719.html" target="_blank" rel="noopener">[Ref2]</a> </p>
+<p><img src="/2018/06/07/ML-Sklearn/Screen Shot 2018-07-12 at 10.12.09 AM.png" alt="Screen Shot 2018-07-12 at 10.12.09 AM"></p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line">[M,N]=<span class="built_in">size</span>(data);<span class="comment">%数据集为一个M*N的矩阵，其中每一行代表一个样本</span></div>
+<div class="line">    indices=crossvalind(<span class="string">'Kfold'</span>,data(<span class="number">1</span>:M,N),<span class="number">10</span>);<span class="comment">%进行随机分包</span></div>
+<div class="line">    <span class="keyword">for</span> k=<span class="number">1</span>:<span class="number">10</span><span class="comment">%交叉验证k=10，10个包轮流作为测试集</span></div>
+<div class="line">        test = (indices == k); <span class="comment">%获得test集元素在数据集中对应的单元编号</span></div>
+<div class="line">        train = ~test;<span class="comment">%train集元素的编号为非test元素的编号</span></div>
+<div class="line">        train_data=data(train,:);<span class="comment">%从数据集中划分出train样本的数据</span></div>
+<div class="line">        train_target=target(:,train);<span class="comment">%获得样本集的测试目标，在本例中是train样本的实际分类情况</span></div>
+<div class="line">        test_data=data(test,:);<span class="comment">%test样本集</span></div>
+<div class="line">        test_target=target(:,test);<span class="comment">%test的实际分类情况</span></div>
+<div class="line"></div>
+<div class="line">        ...........</div>
+<div class="line">    <span class="keyword">end</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>有一个<a href="https://blog.csdn.net/sq_sh1987/article/details/52671824" target="_blank" rel="noopener">问题</a>，k次训练会得到k个模型，也就是说每个模型的系数可能都不相同，那最终的模型是如何得到的呢？这个问题困扰了我很久。今天，通过阅读网上资料和matlab源码，解决这个问题，其实原理很简单。交叉验证只是一种模型验证方法，而不是一个模型优化方法，即用于评估一种模型在实际情况下的预测能力。比如，现在有若干个分类模型（决策树、SVM、KNN等），通过k-fold cross validation，可得到不同模型的误差值，进而选择最合适的模型，但是无法确定每个模型中的最优参数。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
