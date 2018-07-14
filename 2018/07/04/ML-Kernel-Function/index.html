@@ -95,13 +95,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/ML-Kernel-Function/Screen%20Shot%202018-07-10%20at%209.33.04%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/equation-1171263.svg">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/ML-Kernel-Function/equation-1171731.svg">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/e572f3e4048625a6ead4aa51b6132b34_hd.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-13%20at%205.10.25%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180710103709146.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-10%20at%2010.38.46%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180710103835140.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-04%20at%2010.45.45%20AM.png">
-<meta property="og:updated_time" content="2018-07-13T22:39:19.872Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713221657920.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713220740270.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713223436731.png">
+<meta property="og:updated_time" content="2018-07-14T04:16:33.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -407,7 +405,7 @@
 <p>对于<strong>参数估计</strong>，假设$(x_1,x_2,…,x_n)$是一组独立同分布的样本点，我们想要估计该组样本点的概率密度函数$f$。我们会假设样本点服从某一分布，比如高斯分布$x\sim N(\mu,\sigma ^2)$。 那么我们可以通过样本点取求解两个未知参数：</p>
 <script type="math/tex; mode=display">
 \mu = \frac{1}{n}\sum_{i=1}^{n}x_i \\
-\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i-\mu)^2</script><p>而非参数估计，核密度估计为：</p>
+\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i-\mu)^2</script><p>而<strong>非参数估计</strong>，核密度估计为：</p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-13 at 4.51.58 PM.png" alt="Screen Shot 2018-07-13 at 4.51.58 PM"></p>
 <p>核密度函数的好坏依赖于核函数和宽带$h$的选择，但是$h$对密度的估计影响比核函数选取大。通常我们考虑核函数为关于原点对称的且其积分为1.常见的核函数。</p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-10 at 10.02.58 AM.png" alt="Screen Shot 2018-07-10 at 10.02.58 AM"></p>
@@ -417,7 +415,7 @@
 <ul>
 <li><p>这些核函数存在共同点：在数据点处为波峰；曲线下方面积为1 ；故理解为在每一个样本点$x_i$都放置了一个高斯核，该核以$x_i$为轴对称。</p>
 </li>
-<li><p>直觉上，上式就是一个加权平均，离$x$越近的$x_i$其权重越高。</p>
+<li><p>在“非参数估计”的语境下，“核”是一个函数，用来提供权重。上式就是一个加权平均，离$x$越近的$x_i$其权重越高。在每一个样本点处都放了一个核函数；</p>
 </li>
 <li><p>核密度函数的原理比较简单，在我们知道某一事物的概率分布的情况下，如果某一个数在观察中出现了，我们可以认为这个数的概率密度很大，和这个数比较近的数的概率密度也会比较大，而那些离这个数远的数的概率密度会比较小。</p>
 <p>基于这种想法，针对观察中的第一个数，我们可以用K去拟合我们想象中的那个远小近大概率密度。对每一个观察数拟合出的多个概率密度分布函数，取平均。如果某些数是比较重要的，则可以取加权平均。需要说明的一点是，核密度的估计并不是找到真正的分布函数。</p>
@@ -428,6 +426,7 @@
 <p><strong>概率分布函数</strong>是描述随机变量取值分布规律的数学表示。对于任何实数x，事件[X&lt;x]的概率是一个x的函数：$F(x)=P(X\le x)$。</p>
 <p><strong>概率密度函数(Probability Density Function)</strong>是概率分布函数的一阶导数，</p>
 <p>暂时不谈概率密度，我们从概率分布说起，因为概率分布导数就是密度函数。对于一个点，它的概率是$P(X=x_i)=\frac{# x_i}{N}$, 即它出现的次数与点总数的商。</p>
+<p><strong><a href="http://blog.shaochuancs.com/statistics-histogram/" target="_blank" rel="noopener">直方图</a>。</strong> 将数据值所在范围分成若干个区间，然后在图上描画每个区间中数据点的个数。</p>
 <p><strong>分布函数的一阶导数。</strong></p>
 <p>密度函数，从其定义出发，是分布函数的一阶导数。那么自然的，对于给定的样本集，我们通过估计其分布函数，然后对其求导得到密度函数。一个最简单而有效的估计分布函数的方法是所谓的「经验分布函数（empirical distribution function」：</p>
 <script type="math/tex; mode=display">
@@ -444,27 +443,52 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
 <p>由高斯积分$\int_{-\infin}^{+\infin}e^{-x^2}dx=\sqrt{\pi}$,上述积分$\int_{-\infin}^{+\infin}\hat{f_h}(x)dx=\frac{1}{\sqrt{2\pi}}\int_{-\infin}^{+\infin}e^{-x^2/2}dx=1$</p>
 
 </div></div>
-<p><strong><a href="http://blog.shaochuancs.com/statistics-histogram/" target="_blank" rel="noopener">直方图</a>。</strong> 将数据值所在范围分成若干个区间，然后在图上描画每个区间中数据点的个数。</p>
-<p>频度直方图从某种程度上来说也能描绘数据的密度分布情况。如下图所示，假如我们想要预测$X=x$处的密度函数值，设置区间$h$, 那么样本点落在区间$[x,x+h]$的数量，除以总样本数，就得到了一个密度估计。</p>
-<p><img src="/2018/07/04/ML-Kernel-Function/e572f3e4048625a6ead4aa51b6132b34_hd.jpg" alt="e572f3e4048625a6ead4aa51b6132b34_hd"></p>
-<blockquote>
-<p>Distadvantage ：</p>
-<ol>
-<li>不够光滑；</li>
-<li>受区间$h$值选择的影响；</li>
-</ol>
-</blockquote>
 <p><strong><a href="http://blog.shaochuancs.com/statistics-kde/" target="_blank" rel="noopener">h的选择</a>。</strong></p>
 <p>如何选定核函数的“方差”呢？这其实是由带宽h来决定，不同的带宽下的核函数估计结果差异很大。</p>
+<p>如果是高斯核，令$\sigma$为样本方差，那么$h=(\frac{4}{3n})^{\frac{1}{5}}\sigma$. </p>
 <p>带宽反映了KDE曲线整体的平坦程度，也即观察到的数据点在KDE曲线形成过程中所占的比重。带宽越大，观察到的数据点在最终形成的曲线形状中所占比重越小，KDE整体曲线就越平坦；带宽越小，观察到的数据点在最终形成的曲线形状中所占比重越大，KDE整体曲线就越陡峭。</p>
 <p>假设有3个数据，生成的KDE曲线如下：</p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-13 at 5.10.25 PM.png" alt="Screen Shot 2018-07-13 at 5.10.25 PM"></p>
 <p>K函数内部的h分母用于调整KDE曲线的宽幅，而K函数外部的h分母则用于保证曲线下方的面积符合KDE的规则(KDE曲线下方面积和为1)。</p>
 <p>带宽的选择很大程度上取决于主观判断：如果认为真实的概率分布曲线是比较平坦的，那么就选择较大的带宽；相反，如果认为真实的概率分布曲线是比较陡峭的，那么就选择较小的带宽。</p>
 <p>如果带宽不是固定的，其变化取决于估计的位置（balloon  estimator）或样本点（逐点估计pointwise estimator），由此可以产产生一个非常强大的方法称为自适应或可变带宽核密度估计。</p>
-<h3 id="Python-Implement"><a href="#Python-Implement" class="headerlink" title="Python Implement"></a>Python Implement</h3><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<p>we have six samples:{-2.1, -1.3, -0.4, 1.9, 5.1, 6.2}</p>
-<p>For the histogram, first the horizontal axis is divided into sub-intervals or bins which cover the range of the data. In this case, we have 6 bins each of width 2. Whenever a data point falls inside this interval, we place a box of height 1/12. If more than one data point falls inside the same bin, we stack the boxes on top of each other.</p>
+<h3 id="Python-Implement"><a href="#Python-Implement" class="headerlink" title="Python Implement"></a><a href="http://scikit-learn.org/stable/modules/density.html#density-estimation" target="_blank" rel="noopener">Python Implement</a></h3><p><code>sklearn.neighbors.KernelDensity</code>实现了核密度估计，类声明如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">kde = KernelDensity(bandwidth=1.0,kernel=&apos;gaussian&apos;)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li>bandwidth：核带宽</li>
+<li>kernel：’gaussian’ , ‘tophat’ , ‘epanechnikov’ , ‘exponential’ , ‘linear’ , ‘cosine’. 默认’gaussian’</li>
+</ul>
+<p><strong>方法</strong></p>
+<p><code>fit(X)</code>: 观测样本, X是二维的, shape = ( m , n ) </p>
+<p><code>score_samples(X)</code>:对观测样本的概率取以e为底的对数</p>
+<p><strong>Simple 1D Kernel Density Estimation</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> norm</div>
+<div class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KernelDensity</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">N = <span class="number">100</span></div>
+<div class="line">np.random.seed(<span class="number">1</span>)</div>
+<div class="line">X = np.concatenate((np.random.normal(<span class="number">0</span>, <span class="number">1</span>, int(<span class="number">0.3</span> * N)),</div>
+<div class="line">                    np.random.normal(<span class="number">5</span>, <span class="number">1</span>, int(<span class="number">0.7</span> * N))))</div>
+<div class="line">print(X)<span class="comment">#是(100,)</span></div>
+<div class="line">X = X[:, np.newaxis]<span class="comment">#增加一个轴</span></div>
+<div class="line">print(X)<span class="comment">#(100,1)</span></div>
+</pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -474,21 +498,57 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
 <div class="line">7</div>
 <div class="line">8</div>
 <div class="line">9</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line">X_plot = np.linspace(<span class="number">-5</span>, <span class="number">10</span>, <span class="number">1000</span>)[:, np.newaxis]</div>
 <div class="line"></div>
-<div class="line">sampels = np.array([<span class="number">-2.1</span>,<span class="number">-1.3</span>,<span class="number">-0.4</span>,<span class="number">1.9</span>,<span class="number">5.1</span>,<span class="number">6.2</span>])</div>
-<div class="line">plt.hist(sampels,</div>
-<div class="line">         bins=<span class="number">6</span>, <span class="comment">#指定bin(箱子)的个数,也就是总共有几条条状图</span></div>
-<div class="line">         normed=<span class="keyword">True</span>, <span class="comment"># normed指定密度,也就是每个条状图的占比例比,默认为1</span></div>
-<div class="line">         range=[<span class="number">-4.1</span>,<span class="number">8.2</span>])</div>
+<div class="line">true_dens = (<span class="number">0.3</span> * norm(<span class="number">0</span>, <span class="number">1</span>).pdf(X_plot[:, <span class="number">0</span>]) <span class="comment">#X_plot[:, 0] shape = (1000,)</span></div>
+<div class="line">             + <span class="number">0.7</span> * norm(<span class="number">5</span>, <span class="number">1</span>).pdf(X_plot[:, <span class="number">0</span>]))</div>
+<div class="line"></div>
+<div class="line">fig, ax = plt.subplots()</div>
+<div class="line">ax.fill(X_plot[:, <span class="number">0</span>], true_dens, fc=<span class="string">'black'</span>, alpha=<span class="number">0.2</span>,</div>
+<div class="line">        label=<span class="string">'input distribution'</span>)</div>
+<div class="line">ax.plot(X[:, <span class="number">0</span>], <span class="number">-0.005</span> - <span class="number">0.01</span> * np.random.random(X.shape[<span class="number">0</span>]), <span class="string">'+k'</span>)</div>
+<div class="line">ax.text(<span class="number">6</span>, <span class="number">0.38</span>, <span class="string">"N=&#123;0&#125; points"</span>.format(N))</div>
+<div class="line">ax.legend(loc=<span class="string">'upper left'</span>)</div>
 <div class="line">plt.show()</div>
 </pre></td></tr></table></figure>
-<p><img src="/2018/07/04/ML-Kernel-Function/image-20180710103709146.png" alt="image-20180710103709146"></p>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180713221657920.png" alt="image-20180713221657920"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> kernel <span class="keyword">in</span> [<span class="string">'gaussian'</span>, <span class="string">'tophat'</span>, <span class="string">'epanechnikov'</span>]:</div>
+<div class="line">    kde = KernelDensity(kernel=kernel, bandwidth=<span class="number">0.5</span>).fit(X)<span class="comment">#输入X必须是2维</span></div>
+<div class="line">    log_dens = kde.score_samples(X_plot)</div>
+<div class="line">    ax.plot(X_plot[:, <span class="number">0</span>], np.exp(log_dens), <span class="string">'-'</span>,</div>
+<div class="line">            label=<span class="string">"kernel = '&#123;0&#125;'"</span>.format(kernel))</div>
+<div class="line"></div>
+<div class="line">ax.legend(loc=<span class="string">'upper left'</span>)</div>
+<div class="line">ax.set_xlim(<span class="number">-4</span>, <span class="number">9</span>)</div>
+<div class="line">ax.set_ylim(<span class="number">-0.02</span>, <span class="number">0.4</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180713220740270.png" alt="image-20180713220740270"></p>
 
 </div></div>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-10 at 10.38.46 AM.png" alt="Screen Shot 2018-07-10 at 10.38.46 AM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"></div>
+<div class="line"></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p><strong>物种分布密度拟合</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -508,30 +568,48 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
 <div class="line">17</div>
 <div class="line">18</div>
 <div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
 <div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line">sigma = <span class="number">2.25</span></div>
-<div class="line"><span class="keyword">for</span> sampel <span class="keyword">in</span> sampels:</div>
-<div class="line">    x = np.linspace(sampel<span class="number">-3</span>*sigma,sampel+<span class="number">3</span>*sigma,<span class="number">500</span>)</div>
-<div class="line">    y = np.exp(-(x-sampel)**<span class="number">2</span>/(<span class="number">2</span>*sigma**<span class="number">2</span>))/(np.sqrt(np.pi*<span class="number">2</span>)*sigma)</div>
-<div class="line">    plt.plot(x,y,<span class="string">'--'</span>)</div>
+<div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_species_distributions</div>
+<div class="line"><span class="keyword">from</span> sklearn.datasets.species_distributions <span class="keyword">import</span> construct_grids</div>
+<div class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KernelDensity</div>
 <div class="line"></div>
-<div class="line"><span class="comment"># plt.show()</span></div>
-<div class="line">sample_num = len(sampels)</div>
-<div class="line">xx = np.linspace(sampel<span class="number">-10</span>*sigma,sampel+<span class="number">5</span>*sigma,<span class="number">5000</span>)</div>
-<div class="line">yy = <span class="number">0</span></div>
-<div class="line">h=<span class="number">2.25</span></div>
-<div class="line"><span class="keyword">for</span> sampel <span class="keyword">in</span> sampels:</div>
-<div class="line">    yy += np.exp(-((xx-sampel)/h)**<span class="number">2</span>/<span class="number">2</span>)</div>
-<div class="line">yy = yy/(np.sqrt(np.pi*<span class="number">2</span>)*sample_num)</div>
-<div class="line">plt.plot(xx,yy,color=<span class="string">'k'</span>)</div>
+<div class="line"><span class="keyword">try</span>:</div>
+<div class="line">    <span class="keyword">from</span> mpl_toolkits.basemap <span class="keyword">import</span> Basemap</div>
+<div class="line">    basemap = <span class="keyword">True</span></div>
+<div class="line"><span class="keyword">except</span> ImportError:</div>
+<div class="line">    basemap = <span class="keyword">False</span></div>
 <div class="line"></div>
-<div class="line">plt.show()</div>
+<div class="line"><span class="comment"># data是一个字典（dictionary）,</span></div>
+<div class="line"><span class="comment"># 里面储存着Bradypus variegatus和Microryzomys minutus两个物种的地理分布数据</span></div>
+<div class="line"><span class="comment"># 对于每一个物种，储存着8个key-values对</span></div>
+<div class="line">data = fetch_species_distributions()</div>
+<div class="line">species_names = [<span class="string">'Bradypus Variegatus'</span>, <span class="string">'Microryzomys Minutus'</span>]</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># train是一个record array,它的shape 是 (1624,)。</span></div>
+<div class="line"><span class="comment"># 每一个数据点有三个fields: 物种名字：train['species']</span></div>
+<div class="line"><span class="comment"># 经度（单位：度）： train['dd long']</span></div>
+<div class="line"><span class="comment"># 维度（单位：度）： train['dd lat']</span></div>
+<div class="line">Xtrain = np.vstack([data[<span class="string">'train'</span>][<span class="string">'dd lat'</span>],</div>
+<div class="line">                    data[<span class="string">'train'</span>][<span class="string">'dd long'</span>]]).T <span class="comment">#Xtrain的shape=(1624, 2),不转置是（2，1624）</span></div>
+<div class="line">ytrain = np.array([d.decode(<span class="string">'ascii'</span>).startswith(<span class="string">'micro'</span>)</div>
+<div class="line">                  <span class="keyword">for</span> d <span class="keyword">in</span> data[<span class="string">'train'</span>][<span class="string">'species'</span>]], dtype=<span class="string">'int'</span>)</div>
+<div class="line">print(data[<span class="string">'train'</span>][<span class="string">'species'</span>])</div>
+<div class="line"><span class="comment"># [b'microryzomys_minutus' b'microryzomys_minutus'... b'microryzomys_minutus']</span></div>
+<div class="line"></div>
+<div class="line">Xtrain *= np.pi / <span class="number">180</span> <span class="comment">## Convert lat/long to 弧度</span></div>
 </pre></td></tr></table></figure>
-<p><img src="/2018/07/04/ML-Kernel-Function/image-20180710103835140.png" alt="image-20180710103835140"></p>
-
-</div></div>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -550,26 +628,90 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
 <div class="line">16</div>
 <div class="line">17</div>
 <div class="line">18</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KernelDensity</div>
-<div class="line">np.random.seed(<span class="number">1</span>)</div>
-<div class="line">X = np.concatenate((np.random.normal(<span class="number">0</span>, <span class="number">1</span>, <span class="number">6</span>),</div>
-<div class="line">np.random.normal(<span class="number">5</span>, <span class="number">1</span>, <span class="number">14</span>)))[:, np.newaxis]</div>
-<div class="line">X_plot = np.linspace(<span class="number">-5</span>, <span class="number">10</span>, <span class="number">1000</span>)[:, np.newaxis]</div>
-<div class="line">bins = np.linspace(<span class="number">-5</span>, <span class="number">10</span>, <span class="number">10</span>)</div>
-<div class="line">fig, ax = plt.subplots(<span class="number">2</span>,<span class="number">2</span>)</div>
-<div class="line">fig.subplots_adjust(hspace=<span class="number">0.05</span>, wspace=<span class="number">0.05</span>)</div>
-<div class="line"><span class="comment"># 直方图 1 'Histogram'</span></div>
-<div class="line">ax[<span class="number">0</span>, <span class="number">0</span>].hist(X[:, <span class="number">0</span>], bins=bins,  normed=<span class="keyword">True</span>)</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Set up the data grid for the contour plot</span></div>
+<div class="line">xgrid, ygrid = construct_grids(data)</div>
+<div class="line">X, Y = np.meshgrid(xgrid[::<span class="number">5</span>], ygrid[::<span class="number">5</span>][::<span class="number">-1</span>])</div>
+<div class="line">land_reference = data.coverages[<span class="number">6</span>][::<span class="number">5</span>, ::<span class="number">5</span>]</div>
+<div class="line">land_mask = (land_reference &gt; <span class="number">-9999</span>).ravel()</div>
 <div class="line"></div>
-<div class="line"><span class="comment"># 核密度估计 2 'Gaussian KDE'</span></div>
-<div class="line">kde = KernelDensity(kernel=<span class="string">'gaussian'</span>, bandwidth=<span class="number">0.75</span>).fit(X)</div>
-<div class="line">log_dens = kde.score_samples(X_plot)</div>
-<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].fill(X_plot[:, <span class="number">0</span>], np.exp(log_dens))</div>
+<div class="line">xy = np.vstack([Y.ravel(), X.ravel()]).T</div>
+<div class="line">xy = xy[land_mask]</div>
+<div class="line">xy *= np.pi / <span class="number">180.</span></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Plot map of South America with distributions of each species</span></div>
+<div class="line">fig = plt.figure()</div>
+<div class="line">fig.subplots_adjust(left=<span class="number">0.05</span>, right=<span class="number">0.95</span>, wspace=<span class="number">0.05</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>):</div>
+<div class="line">    plt.subplot(<span class="number">1</span>, <span class="number">2</span>, i + <span class="number">1</span>)</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># construct a kernel density estimate of the distribution</span></div>
+<div class="line">    print(<span class="string">" - computing KDE in spherical coordinates"</span>)</div>
+<div class="line">    kde = KernelDensity(bandwidth=<span class="number">0.04</span>, metric=<span class="string">'haversine'</span>,</div>
+<div class="line">                        kernel=<span class="string">'gaussian'</span>, algorithm=<span class="string">'ball_tree'</span>)</div>
+<div class="line">    kde.fit(Xtrain[ytrain == i])</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># evaluate only on the land: -9999 indicates ocean</span></div>
+<div class="line">    Z = <span class="number">-9999</span> + np.zeros(land_mask.shape[<span class="number">0</span>])</div>
+<div class="line">    Z[land_mask] = np.exp(kde.score_samples(xy))</div>
+<div class="line">    Z = Z.reshape(X.shape)</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># plot contours of the density</span></div>
+<div class="line">    levels = np.linspace(<span class="number">0</span>, Z.max(), <span class="number">25</span>)</div>
+<div class="line">    plt.contourf(X, Y, Z, levels=levels, cmap=plt.cm.Reds)</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">if</span> basemap:</div>
+<div class="line">        print(<span class="string">" - plot coastlines using basemap"</span>)</div>
+<div class="line">        m = Basemap(projection=<span class="string">'cyl'</span>, llcrnrlat=Y.min(),</div>
+<div class="line">                    urcrnrlat=Y.max(), llcrnrlon=X.min(),</div>
+<div class="line">                    urcrnrlon=X.max(), resolution=<span class="string">'c'</span>)</div>
+<div class="line">        m.drawcoastlines()</div>
+<div class="line">        m.drawcountries()</div>
+<div class="line">    <span class="keyword">else</span>:</div>
+<div class="line">        print(<span class="string">" - plot coastlines from coverage"</span>)</div>
+<div class="line">        plt.contour(X, Y, land_reference,</div>
+<div class="line">                    levels=[<span class="number">-9999</span>], colors=<span class="string">"k"</span>,</div>
+<div class="line">                    linestyles=<span class="string">"solid"</span>)</div>
+<div class="line">        plt.xticks([])</div>
+<div class="line">        plt.yticks([])</div>
+<div class="line"></div>
+<div class="line">    plt.title(species_names[i])</div>
+<div class="line"></div>
 <div class="line">plt.show()</div>
 </pre></td></tr></table></figure>
-<p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-04 at 10.45.45 AM.png" alt="Screen Shot 2018-07-04 at 10.45.45 AM"></p>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180713223436731.png" alt="image-20180713223436731"></p>
 
 </div></div>
 
