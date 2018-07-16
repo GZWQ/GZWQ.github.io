@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713221657920.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713220740270.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713223436731.png">
-<meta property="og:updated_time" content="2018-07-16T17:05:03.329Z">
+<meta property="og:updated_time" content="2018-07-16T17:07:47.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -440,7 +440,8 @@ K_{ij}=e^{-\frac{|x_i-x_j|^2}{2\sigma^2}}</script><p>现在我们有了一个新
 <p>我们使用回归方法去预测其对应的函数值$f^*$.</p>
 <p>我们假设 $f^*$和 训练集里的$f_1,f_2,f_3$同属于一个 （4维的）联合正态分布！</p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-14 at 11.36.53 PM.png" alt="Screen Shot 2018-07-14 at 11.36.53 PM"></p>
-<p>首先，黄色部分是训练集的3维联合分布计算得来的，绿色部分是由预测点$x^<em>$与训练集求解出来，这样整个联合分布就可以知道了。又正态分布的条件概率也是正态分布，即$P(f</em>|f)$为：</p>
+<p>首先，黄色部分是训练集的3维联合分布计算得来的，绿色部分是由预测点$x^*$与训练集求解出来，</p>
+<p>这样整个联合分布就可以知道了。又正态分布的条件概率也是正态分布，即$P(f*|f)$为：</p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-14 at 11.49.32 PM.png" alt="Screen Shot 2018-07-14 at 11.49.32 PM"></p>
 <p>这样我们就可以得到一个线性回归函数：</p>
 <blockquote>
