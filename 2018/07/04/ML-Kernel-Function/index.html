@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713221657920.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713220740270.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713223436731.png">
-<meta property="og:updated_time" content="2018-07-16T17:07:47.165Z">
+<meta property="og:updated_time" content="2018-07-16T18:03:21.501Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -427,7 +427,7 @@
 <p>对于二维正态随机变量$(X,Y)$, $X$和$Y$相互独立的充要条件是参数$\rho=0$.也即二维正态随机变量独立和不相关可以互推。</p>
 </li>
 </ul>
-<h3 id="多元高斯分布"><a href="#多元高斯分布" class="headerlink" title="多元高斯分布"></a>多元高斯分布</h3><p><a href="https://www.zhihu.com/question/36339816/answer/67043318" target="_blank" rel="noopener">Ref1</a> <a href="https://www.zhihu.com/question/36339816/answer/385944057" target="_blank" rel="noopener">Ref2</a></p>
+<h3 id="多元高斯分布"><a href="#多元高斯分布" class="headerlink" title="多元高斯分布"></a>多元高斯分布</h3><p><a href="https://www.zhihu.com/question/36339816/answer/67043318" target="_blank" rel="noopener">Ref1</a> <a href="https://www.zhihu.com/question/36339816/answer/385944057" target="_blank" rel="noopener">Ref2</a> <a href="https://www.datalearner.com/blog/1051485590815771" target="_blank" rel="noopener">Ref3</a></p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-14 at 11.08.08 PM.png" alt="Screen Shot 2018-07-14 at 11.08.08 PM"></p>
 <h1 id="Applications"><a href="#Applications" class="headerlink" title="Applications"></a>Applications</h1><h2 id="Gaussian-Process-Regression"><a href="#Gaussian-Process-Regression" class="headerlink" title="Gaussian Process Regression"></a>Gaussian Process Regression</h2><p><a href="http://dataunion.org/17089.html" target="_blank" rel="noopener">intuition1</a> <a href="https://www.zhihu.com/question/46631426" target="_blank" rel="noopener">intuition2</a></p>
 <p><a href="https://www.youtube.com/watch?v=4vGiHC35j9s" target="_blank" rel="noopener">YouTube</a>  <a href="https://blog.csdn.net/lj6052317/article/details/78772494" target="_blank" rel="noopener">Blog1</a> <a href="https://zhuanlan.zhihu.com/p/27555501" target="_blank" rel="noopener">ZhiHu2</a> </p>
@@ -441,9 +441,9 @@ K_{ij}=e^{-\frac{|x_i-x_j|^2}{2\sigma^2}}</script><p>现在我们有了一个新
 <p>我们假设 $f^*$和 训练集里的$f_1,f_2,f_3$同属于一个 （4维的）联合正态分布！</p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-14 at 11.36.53 PM.png" alt="Screen Shot 2018-07-14 at 11.36.53 PM"></p>
 <p>首先，黄色部分是训练集的3维联合分布计算得来的，绿色部分是由预测点$x^*$与训练集求解出来，</p>
-<p>这样整个联合分布就可以知道了。又正态分布的条件概率也是正态分布，即$P(f*|f)$为：</p>
+<p>这样整个联合分布就可以知道了。又正态分布的条件概率也是正态分布<a href="https://www.zhihu.com/question/46631426/answer/122929183" target="_blank" rel="noopener">Ref</a>，即$P(f*|f)$为：</p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-14 at 11.49.32 PM.png" alt="Screen Shot 2018-07-14 at 11.49.32 PM"></p>
-<p>这样我们就可以得到一个线性回归函数：</p>
+<p>所以这是一种贝叶斯方法，和OLS回归不同，这个方法给出了预测值所隶属的整个（后验）概率分布的。再强调一下，我们得到的是$f^*$的整个分布！</p>
 <blockquote>
 <ul>
 <li>高斯分布是针对向量，而高斯过程是针对函数的；给定均值向量和协方差矩阵，我们可以确定一个高斯分布，同样给定<strong>一个均值函数和协方差函数，我们也可以惟一确定一个高斯过程</strong>。</li>
@@ -887,7 +887,7 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
