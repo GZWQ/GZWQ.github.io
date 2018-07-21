@@ -104,10 +104,13 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/equation-1171263.svg">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/ML-Kernel-Function/equation-1171731.svg">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-13%20at%205.10.25%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180720093134022.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180720104627333.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180720104014770.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713221657920.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713220740270.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713223436731.png">
-<meta property="og:updated_time" content="2018-07-16T18:03:21.501Z">
+<meta property="og:updated_time" content="2018-07-20T16:01:00.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -506,7 +509,282 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
 <p>K函数内部的h分母用于调整KDE曲线的宽幅，而K函数外部的h分母则用于保证曲线下方的面积符合KDE的规则(KDE曲线下方面积和为1)。</p>
 <p>带宽的选择很大程度上取决于主观判断：如果认为真实的概率分布曲线是比较平坦的，那么就选择较大的带宽；相反，如果认为真实的概率分布曲线是比较陡峭的，那么就选择较小的带宽。</p>
 <p>如果带宽不是固定的，其变化取决于估计的位置（balloon  estimator）或样本点（逐点估计pointwise estimator），由此可以产产生一个非常强大的方法称为自适应或可变带宽核密度估计。</p>
-<h3 id="Python-Implement"><a href="#Python-Implement" class="headerlink" title="Python Implement"></a><a href="http://scikit-learn.org/stable/modules/density.html#density-estimation" target="_blank" rel="noopener">Python Implement</a></h3><p><code>sklearn.neighbors.KernelDensity</code>实现了核密度估计，类声明如下：</p>
+<h3 id="Python-Implement"><a href="#Python-Implement" class="headerlink" title="Python Implement"></a><a href="http://scikit-learn.org/stable/modules/density.html#density-estimation" target="_blank" rel="noopener">Python Implement</a></h3><p>1、<a href="https://www.homeworkhelponline.net/blog/math/tutorial-kde" target="_blank" rel="noopener">Several Examples</a></p>
+<p><strong>One data point example</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian</span><span class="params">(samples,sigma=<span class="number">1</span>)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> np.exp(-samples**<span class="number">2</span>/(<span class="number">2</span>*sigma**<span class="number">2</span>))/(sigma*np.sqrt(<span class="number">2</span>*np.pi))</div>
+<div class="line">observed = np.array([<span class="number">2.2</span>]) <span class="comment">#shape = (1,)</span></div>
+<div class="line">samples = np.linspace(<span class="number">-1</span>,<span class="number">6</span>,<span class="number">100</span>) <span class="comment"># shape = (100,)</span></div>
+<div class="line">fig,ax = plt.subplots(<span class="number">2</span>,<span class="number">3</span>,sharex=<span class="keyword">True</span>,sharey=<span class="keyword">True</span>,figsize=(<span class="number">14</span>,<span class="number">8</span>))</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="comment"># bins 如果是整数，指定bin(箱子)的个数,也就是总共有几条条状图</span></div>
+<div class="line"><span class="comment"># 如果是数组，则指明箱子的边界,[1,2,3,4,5]，则共4个箱子，区间是[1,2],[2,3],[3,4],[4,5]</span></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>,<span class="number">5</span>,<span class="number">16</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">0</span>].hist(observed,bins=bins,normed=<span class="keyword">False</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">0</span>].text(<span class="number">0</span>,<span class="number">1.25</span>,<span class="string">'Histogram, Not normed, bin=0.4'</span>)</div>
+<div class="line"></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>, <span class="number">5</span>, <span class="number">9</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">1</span>].hist(observed,bins=bins,normed=<span class="keyword">True</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">1</span>].text(<span class="number">0</span>,<span class="number">1.25</span>,<span class="string">'Histogram, normed, bin=0.75'</span>)</div>
+<div class="line"></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>, <span class="number">5</span>, <span class="number">5</span>)</div>
+<div class="line">ax[<span class="number">0</span>, <span class="number">2</span>].hist(observed, bins=bins, normed=<span class="keyword">True</span>)</div>
+<div class="line">ax[<span class="number">0</span>, <span class="number">2</span>].text(<span class="number">0</span>, <span class="number">1.25</span>, <span class="string">"Histogram, normed, bin=1.5"</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].fill(samples, gaussian(samples-observed[<span class="number">0</span>]))</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].text(<span class="number">0</span>, <span class="number">1.25</span>, <span class="string">"Gaussian, middle on X=2.2, b=1"</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].fill(samples, gaussian(samples-observed[<span class="number">0</span>],<span class="number">0.6</span>))</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].text(<span class="number">0</span>, <span class="number">1.25</span>, <span class="string">"Gaussian, middle on X=2.2, b=0.6"</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].fill(samples, gaussian(samples-observed[<span class="number">0</span>],<span class="number">0.35</span>))</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].text(<span class="number">0</span>, <span class="number">1.25</span>, <span class="string">"Gaussian, middle on X=2.2, b=0.35"</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180720093134022.png" alt="image-20180720093134022"></p>
+
+</div></div>
+<p><strong>Two data point example</strong>.</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian</span><span class="params">(samples,sigma=<span class="number">1</span>)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> np.exp(-samples**<span class="number">2</span>/(<span class="number">2</span>*sigma**<span class="number">2</span>))/(sigma*np.sqrt(<span class="number">2</span>*np.pi))</div>
+<div class="line">observed = np.array([<span class="number">2.2</span>,<span class="number">3.9</span>])</div>
+<div class="line">samples = np.linspace(<span class="number">-1</span>,<span class="number">7</span>,<span class="number">100</span>)</div>
+<div class="line">fig,ax = plt.subplots(<span class="number">2</span>,<span class="number">3</span>,sharex=<span class="keyword">True</span>,sharey=<span class="keyword">True</span>,figsize=(<span class="number">14</span>,<span class="number">8</span>))</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># bins 如果是整数，指定bin(箱子)的个数,也就是总共有几条条状图</span></div>
+<div class="line"><span class="comment"># 如果是数组，则指明箱子的边界,[1,2,3,4,5]，则共4个箱子，区间是[1,2],[2,3],[3,4],[4,5]</span></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>,<span class="number">7</span>,<span class="number">26</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">0</span>].hist(observed,bins=bins,normed=<span class="keyword">False</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">0</span>].text(<span class="number">-1</span>,<span class="number">1</span>,<span class="string">'Histogram, Not normed, bin=0.32'</span>) <span class="comment"># (7-(-1))/(26-1)</span></div>
+<div class="line"></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>, <span class="number">5</span>, <span class="number">9</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">1</span>].hist(observed,bins=bins,normed=<span class="keyword">True</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">1</span>].text(<span class="number">-1</span>,<span class="number">1</span>,<span class="string">'Histogram, normed, bin=0.75'</span>)</div>
+<div class="line"></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>, <span class="number">5</span>, <span class="number">5</span>)</div>
+<div class="line">ax[<span class="number">0</span>, <span class="number">2</span>].hist(observed, bins=bins, normed=<span class="keyword">True</span>)</div>
+<div class="line">ax[<span class="number">0</span>, <span class="number">2</span>].text(<span class="number">-1</span>,<span class="number">1</span>, <span class="string">"Histogram, normed, bin=1.5"</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].fill(samples, (gaussian(samples-observed[<span class="number">0</span>])+gaussian(samples-observed[<span class="number">1</span>]))/<span class="number">2</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].text(<span class="number">-1</span>,<span class="number">1</span>, <span class="string">"Gaussian, middle on X=2.2, b=1"</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].plot(samples, (gaussian(samples-observed[<span class="number">0</span>])/<span class="number">2</span>), <span class="string">'-k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].plot(samples, (gaussian(samples-observed[<span class="number">1</span>])/<span class="number">2</span>), <span class="string">'-k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].fill(samples, (gaussian(samples-observed[<span class="number">0</span>],<span class="number">0.6</span>)+gaussian(samples-observed[<span class="number">1</span>],<span class="number">0.6</span>))/<span class="number">2</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].text(<span class="number">-1</span>,<span class="number">1</span>, <span class="string">"Gaussian, middle on X=2.2, b=0.6"</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].plot(samples, (gaussian(samples-observed[<span class="number">0</span>],<span class="number">0.6</span>)/<span class="number">2</span>),<span class="string">'-k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].plot(samples, (gaussian(samples-observed[<span class="number">1</span>],<span class="number">0.6</span>)/<span class="number">2</span>),<span class="string">'-k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].fill(samples, (gaussian(samples-observed[<span class="number">0</span>],<span class="number">0.35</span>)+gaussian(samples-observed[<span class="number">1</span>],<span class="number">0.35</span>))/<span class="number">2</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].text(<span class="number">-1</span>,<span class="number">1</span>, <span class="string">"Gaussian, middle on X=2.2, b=0.35"</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].plot(samples, (gaussian(samples-observed[<span class="number">0</span>],<span class="number">0.35</span>))/<span class="number">2</span>,<span class="string">'-k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].plot(samples, (gaussian(samples-observed[<span class="number">1</span>],<span class="number">0.35</span>))/<span class="number">2</span>,<span class="string">'-k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line"></div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180720104627333.png" alt="image-20180720104627333"></p>
+
+</div></div>
+<p><strong>Multiple data points example</strong></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian</span><span class="params">(samples,sigma=<span class="number">1</span>)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> np.exp(-samples**<span class="number">2</span>/(<span class="number">2</span>*sigma**<span class="number">2</span>))/(sigma*np.sqrt(<span class="number">2</span>*np.pi))</div>
+<div class="line">np.random.seed(<span class="number">2</span>)</div>
+<div class="line">observed = np.random.normal(<span class="number">2.5</span>,<span class="number">0.9</span>,<span class="number">14</span>) <span class="comment"># 14 samples</span></div>
+<div class="line">n = len(observed)</div>
+<div class="line">samples = np.linspace(<span class="number">-1</span>,<span class="number">7</span>,<span class="number">100</span>)</div>
+<div class="line">fig,ax = plt.subplots(<span class="number">2</span>,<span class="number">3</span>,sharex=<span class="keyword">True</span>,figsize=(<span class="number">14</span>,<span class="number">8</span>))</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">0</span>].set_ylim([<span class="number">0</span>,<span class="number">3.1</span>])</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">1</span>].set_ylim([<span class="number">0</span>,<span class="number">1</span>])</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">2</span>].set_ylim([<span class="number">0</span>,<span class="number">1</span>])</div>
+<div class="line">ax[<span class="number">1</span>,<span class="number">0</span>].set_ylim([<span class="number">0</span>,<span class="number">1</span>])</div>
+<div class="line">ax[<span class="number">1</span>,<span class="number">1</span>].set_ylim([<span class="number">0</span>,<span class="number">1</span>])</div>
+<div class="line">ax[<span class="number">1</span>,<span class="number">2</span>].set_ylim([<span class="number">0</span>,<span class="number">1</span>])</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># bins 如果是整数，指定bin(箱子)的个数,也就是总共有几条条状图</span></div>
+<div class="line"><span class="comment"># 如果是数组，则指明箱子的边界,[1,2,3,4,5]，则共4个箱子，区间是[1,2],[2,3],[3,4],[4,5]</span></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>,<span class="number">5</span>,<span class="number">20</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">0</span>].hist(observed,bins=bins+<span class="number">0.75</span>,normed=<span class="keyword">False</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">0</span>].text(<span class="number">-1</span>,<span class="number">3</span>,<span class="string">'Histogram, Not normed, bin=0.32'</span>) <span class="comment"># (7-(-1))/(26-1)</span></div>
+<div class="line"></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>, <span class="number">5</span>, <span class="number">9</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">1</span>].hist(observed,bins=bins+<span class="number">0.75</span>,normed=<span class="keyword">True</span>)</div>
+<div class="line">ax[<span class="number">0</span>,<span class="number">1</span>].text(<span class="number">-1</span>,<span class="number">1</span>,<span class="string">'Histogram, normed, bin=0.75'</span>)</div>
+<div class="line"></div>
+<div class="line">bins = np.linspace(<span class="number">-1</span>, <span class="number">5</span>, <span class="number">5</span>)</div>
+<div class="line">ax[<span class="number">0</span>, <span class="number">2</span>].hist(observed, bins=bins+<span class="number">0.75</span>, normed=<span class="keyword">True</span>)</div>
+<div class="line">ax[<span class="number">0</span>, <span class="number">2</span>].text(<span class="number">-1</span>,<span class="number">1</span>, <span class="string">"Histogram, normed, bin=1.5"</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># 3 figures</span></div>
+<div class="line">sum1 = np.zeros(len(samples))</div>
+<div class="line">sum2 = np.zeros(len(samples))</div>
+<div class="line">sum3 = np.zeros(len(samples))</div>
+<div class="line"><span class="keyword">for</span> obs <span class="keyword">in</span> observed:</div>
+<div class="line">    ax[<span class="number">1</span>,<span class="number">0</span>].plot(samples,gaussian(samples-obs)/n,<span class="string">'-k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line">    sum1 += gaussian(samples-obs)</div>
+<div class="line">    ax[<span class="number">1</span>, <span class="number">1</span>].plot(samples, gaussian(samples - obs,<span class="number">0.6</span>) / n, <span class="string">'-k'</span>, linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line">    sum2 += gaussian(samples-obs,<span class="number">0.6</span>)</div>
+<div class="line">    ax[<span class="number">1</span>, <span class="number">2</span>].plot(samples, gaussian(samples - obs,<span class="number">0.35</span>) / n, <span class="string">'-k'</span>, linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line">    sum3 += gaussian(samples-obs,<span class="number">0.35</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].fill(samples, sum1/n)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].text(<span class="number">1</span>,<span class="number">0.7</span>, <span class="string">"Gaussian, b=1"</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].fill(samples, sum2/n)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">1</span>].text(<span class="number">1</span>,<span class="number">0.7</span>, <span class="string">"Gaussian, b=0.6"</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].fill(samples, sum3/n)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">2</span>].text(<span class="number">1</span>,<span class="number">0.7</span>, <span class="string">"Gaussian, b=0.35"</span>)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180720104014770.png" alt="image-20180720104014770"></p>
+
+</div></div>
+<p>2、<a href="https://www.homeworkhelponline.net/blog/programming/predict-pdf-generate-data" target="_blank" rel="noopener">Practical task using KDE</a></p>
+<p>给定样本数据集，预测其密度函数，并使用预测的密度函数生成样本</p>
+<p><a href="https://github.com/HomeworkHelpOnline/KDE-Task/blob/master/dataset1.txt" target="_blank" rel="noopener">dataset</a></p>
+<p>3、<strong>Python.sklaern工具包</strong></p>
+<p><code>sklearn.neighbors.KernelDensity</code>实现了核密度估计，类声明如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">kde = KernelDensity(bandwidth=1.0,kernel=&apos;gaussian&apos;)</div>
 </pre></td></tr></table></figure>
@@ -887,7 +1165,7 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -898,7 +1176,7 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -909,7 +1187,7 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
