@@ -6,7 +6,7 @@
       <title>Generative Adversarial Networks</title>
       <link href="/2018/07/20/Generative-Adversarial-Networks/"/>
       <url>/2018/07/20/Generative-Adversarial-Networks/</url>
-      <content type="html"><![CDATA[<p>GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。<strong>生成模型 G 捕捉样本数据的分布</strong>，<strong>用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本</strong>，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来自于训练数据（而非生成数据）的概率，如果样本来自于真实的训练数据，D 输出大概率，否则，D 输出小概率。</p><a id="more"></a><p><a href="https://blog.csdn.net/on2way/article/details/72773771" target="_blank" rel="noopener">intuition1</a> </p><p><a href="https://zhuanlan.zhihu.com/p/27440393" target="_blank" rel="noopener">code1</a> </p>]]></content>
+      <content type="html"><![CDATA[<p>GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。<strong>生成模型 G 捕捉样本数据的分布</strong>，<strong>用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本</strong>，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来自于训练数据（而非生成数据）的概率，如果样本来自于真实的训练数据，D 输出大概率，否则，D 输出小概率。</p><a id="more"></a><p><a href="https://blog.csdn.net/on2way/article/details/72773771" target="_blank" rel="noopener">intuition1</a> </p><p><a href="https://zhuanlan.zhihu.com/p/27440393" target="_blank" rel="noopener">code1</a> </p><p><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS17.html" target="_blank" rel="noopener">video</a> </p><p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-07-21 at 11.26.58 AM.png" alt="Screen Shot 2018-07-21 at 11.26.58 AM"></p>]]></content>
       
       <categories>
           
@@ -29,7 +29,7 @@
       <title>Variational AutoEncoder</title>
       <link href="/2018/07/20/Variational-AutoEncoder/"/>
       <url>/2018/07/20/Variational-AutoEncoder/</url>
-      <content type="html"><![CDATA[<p> AutoEncoder（自编码器）本质上是数据特定的数据压缩</p><p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。</p><a id="more"></a><p><a href="https://www.cnblogs.com/huangshiyu13/p/6209016.html" target="_blank" rel="noopener">intuition1</a> <a href="https://www.cnblogs.com/wangxiaocvpr/p/6231019.html" target="_blank" rel="noopener">intuition2</a> <a href="http://chengjunwen.github.io/2017/01/02/VAE/" target="_blank" rel="noopener">intuition3</a> </p><p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">ref5</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">ref6</a> </p>]]></content>
+      <content type="html"><![CDATA[<p> AutoEncoder（自编码器）本质上是数据特定的数据压缩</p><p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。</p><a id="more"></a><p><a href="https://www.cnblogs.com/huangshiyu13/p/6209016.html" target="_blank" rel="noopener">intuition1</a> <a href="https://www.cnblogs.com/wangxiaocvpr/p/6231019.html" target="_blank" rel="noopener">intuition2</a> <a href="http://chengjunwen.github.io/2017/01/02/VAE/" target="_blank" rel="noopener">intuition3</a> </p><p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">ref5</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">ref6</a> </p><p><a href="https://www.youtube.com/watch?v=8zomhgKrsmQ" target="_blank" rel="noopener">video1</a> </p>]]></content>
       
       <categories>
           
@@ -176,8 +176,22 @@
       <title>ML-Gradient-Descent</title>
       <link href="/2018/07/10/ML-Gradient-Descent/"/>
       <url>/2018/07/10/ML-Gradient-Descent/</url>
-      <content type="html"><![CDATA[]]></content>
+      <content type="html"><![CDATA[<p>adaptive moment estimation </p><a id="more"></a>]]></content>
       
+      <categories>
+          
+          <category> Machine Learning </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Gradient Descent </tag>
+            
+        </tags>
       
     </entry>
     
