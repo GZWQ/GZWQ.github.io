@@ -107,10 +107,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180720093134022.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180720104627333.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180720104014770.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180721000547637.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713221657920.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713220740270.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713223436731.png">
-<meta property="og:updated_time" content="2018-07-20T16:01:00.912Z">
+<meta property="og:updated_time" content="2018-07-21T05:06:13.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -783,6 +784,85 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
 <p>2、<a href="https://www.homeworkhelponline.net/blog/programming/predict-pdf-generate-data" target="_blank" rel="noopener">Practical task using KDE</a></p>
 <p>给定样本数据集，预测其密度函数，并使用预测的密度函数生成样本</p>
 <p><a href="https://github.com/HomeworkHelpOnline/KDE-Task/blob/master/dataset1.txt" target="_blank" rel="noopener">dataset</a></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian</span><span class="params">(x,sigma=<span class="number">1</span>)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> np.exp(-x**<span class="number">2</span>/(<span class="number">2</span>*sigma**<span class="number">2</span>))/(sigma*np.sqrt(<span class="number">2</span>*np.pi))</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># load data</span></div>
+<div class="line">data = np.loadtxt(<span class="string">'data1.txt'</span>) <span class="comment">#shape = (1000,)</span></div>
+<div class="line">data_len = len(data)</div>
+<div class="line"></div>
+<div class="line">hist,bins = np.histogram(data,bins=<span class="number">100</span>,range=(np.min(data),np.max(data)),density=<span class="keyword">True</span>)</div>
+<div class="line">dx = bins[<span class="number">1</span>]-bins[<span class="number">0</span>]</div>
+<div class="line">width = <span class="number">0.7</span>*dx</div>
+<div class="line">center = (bins[:<span class="number">-1</span>]+bins[<span class="number">1</span>:])/<span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">sumPdf = np.zeros(len(center))</div>
+<div class="line">h = <span class="number">1.06</span>*np.std(data)*data_len**(<span class="number">-1</span>/<span class="number">5.0</span>) <span class="comment">#Silverman's Rule to find optimal bandwidth</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">for</span> ele <span class="keyword">in</span> data:</div>
+<div class="line">    sumPdf += gaussian(center-ele,h)</div>
+<div class="line">sumPdf /= data_len</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#使用估计的KDE进行数据采样1000个点</span></div>
+<div class="line">samples = np.zeros(<span class="number">1000</span>)</div>
+<div class="line">i = <span class="number">0</span></div>
+<div class="line"><span class="keyword">while</span> i &lt; <span class="number">1000</span>:</div>
+<div class="line">    sample = np.random.rand(<span class="number">1</span>)*(np.max(data)-np.min(data))-np.abs(np.min(data)) <span class="comment">#np.random.rand()采样范围是[0,1)</span></div>
+<div class="line">    <span class="keyword">if</span> np.random.rand(<span class="number">1</span>) &lt;= np.sum(gaussian(sample-data,h)/data_len):</div>
+<div class="line">        samples[i] = sample</div>
+<div class="line">        i += <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">plt.plot(center, sumPdf, color=<span class="string">'k'</span>,linestyle=<span class="string">'dashed'</span>)</div>
+<div class="line">hist2,bins2 = np.histogram(samples,bins=<span class="number">100</span>,range=(np.min(data),np.max(data)),density=<span class="keyword">True</span>)</div>
+<div class="line">plt.bar(center,hist2,align=<span class="string">'center'</span>,width=width)</div>
+<div class="line">plt.title(<span class="string">'KDE in dashed vs Generated data bar, bandwidth h=%.2f'</span> %h)</div>
+<div class="line"></div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180721000547637.png" alt="image-20180721000547637"></p>
+
+</div></div>
 <p>3、<strong>Python.sklaern工具包</strong></p>
 <p><code>sklearn.neighbors.KernelDensity</code>实现了核密度估计，类声明如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
