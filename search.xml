@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>AutoEncoder</title>
+      <link href="/2018/07/22/AutoEncoder/"/>
+      <url>/2018/07/22/AutoEncoder/</url>
+      <content type="html"><![CDATA[<p><a href="https://www.youtube.com/watch?v=Tk5B4seA-AU&amp;t=0s&amp;list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&amp;index=26" target="_blank" rel="noopener">video1</a> </p><a id="more"></a><p><img src="/2018/07/22/AutoEncoder/Screen Shot 2018-07-22 at 12.42.04 AM.png" alt="Screen Shot 2018-07-22 at 12.42.04 AM"></p><p><img src="/2018/07/22/AutoEncoder/Screen Shot 2018-07-22 at 12.33.57 AM.png" alt="Screen Shot 2018-07-22 at 12.33.57 AM"></p><p><img src="/2018/07/22/AutoEncoder/Screen Shot 2018-07-22 at 12.36.22 AM.png" alt="Screen Shot 2018-07-22 at 12.36.22 AM"></p>]]></content>
+      
+      <categories>
+          
+          <category> Deep Learning </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Deep Learning </tag>
+            
+            <tag> AutoEncoder </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Generative Adversarial Networks</title>
       <link href="/2018/07/20/Generative-Adversarial-Networks/"/>
       <url>/2018/07/20/Generative-Adversarial-Networks/</url>
@@ -29,7 +52,7 @@
       <title>Variational AutoEncoder</title>
       <link href="/2018/07/20/Variational-AutoEncoder/"/>
       <url>/2018/07/20/Variational-AutoEncoder/</url>
-      <content type="html"><![CDATA[<p> AutoEncoder（自编码器）本质上是数据特定的数据压缩</p><p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。</p><a id="more"></a><p><a href="https://www.cnblogs.com/huangshiyu13/p/6209016.html" target="_blank" rel="noopener">intuition1</a> <a href="https://www.cnblogs.com/wangxiaocvpr/p/6231019.html" target="_blank" rel="noopener">intuition2</a> <a href="http://chengjunwen.github.io/2017/01/02/VAE/" target="_blank" rel="noopener">intuition3</a> </p><p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">ref5</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">ref6</a> </p><p><a href="https://www.youtube.com/watch?v=8zomhgKrsmQ" target="_blank" rel="noopener">video1</a> </p>]]></content>
+      <content type="html"><![CDATA[<p> AutoEncoder（自编码器）本质上是数据特定的数据压缩</p><p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。</p><a id="more"></a><p><a href="https://www.cnblogs.com/huangshiyu13/p/6209016.html" target="_blank" rel="noopener">intuition1</a> <a href="https://www.cnblogs.com/wangxiaocvpr/p/6231019.html" target="_blank" rel="noopener">intuition2</a> <a href="http://chengjunwen.github.io/2017/01/02/VAE/" target="_blank" rel="noopener">intuition3</a> </p><p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">ref5</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">ref6</a> </p><p><a href="https://www.youtube.com/watch?v=8zomhgKrsmQ" target="_blank" rel="noopener">video1</a> </p><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.44.09 AM-2238285.png" alt="Screen Shot 2018-07-22 at 12.44.09 AM-2238285"></p><blockquote><p>$\sigma$可正可负，exp确保一定是正，即$variance=e^{\sigma}$. </p></blockquote><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.55.37 AM.png" alt="Screen Shot 2018-07-22 at 12.55.37 AM"></p><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.58.12 AM.png" alt="Screen Shot 2018-07-22 at 12.58.12 AM"></p><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 1.01.32 AM.png" alt="Screen Shot 2018-07-22 at 1.01.32 AM"></p><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 1.05.19 AM.png" alt="Screen Shot 2018-07-22 at 1.05.19 AM"></p><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 1.06.46 AM.png" alt="Screen Shot 2018-07-22 at 1.06.46 AM"></p><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 1.09.36 AM.png" alt="Screen Shot 2018-07-22 at 1.09.36 AM"></p><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 1.12.06 AM.png" alt="Screen Shot 2018-07-22 at 1.12.06 AM"></p><blockquote><p>The generated image is linear combination of existing images.</p></blockquote>]]></content>
       
       <categories>
           
