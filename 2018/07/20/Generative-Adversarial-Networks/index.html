@@ -88,7 +88,8 @@
 <meta property="og:description" content="GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。生成模型 G 捕捉样本数据的分布，用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-21%20at%2011.26.58%20AM.png">
-<meta property="og:updated_time" content="2018-07-22T02:38:28.966Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/beb95bnndbwkgz4x!1200.jpeg">
+<meta property="og:updated_time" content="2018-07-23T22:29:17.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Generative Adversarial Networks">
 <meta name="twitter:description" content="GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。生成模型 G 捕捉样本数据的分布，用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来">
@@ -380,12 +381,13 @@
       
         <p>GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。<strong>生成模型 G 捕捉样本数据的分布</strong>，<strong>用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本</strong>，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来自于训练数据（而非生成数据）的概率，如果样本来自于真实的训练数据，D 输出大概率，否则，D 输出小概率。</p>
 <a id="more"></a>
-<p><a href="https://blog.csdn.net/on2way/article/details/72773771" target="_blank" rel="noopener">intuition1</a> </p>
-<p><a href="https://zhuanlan.zhihu.com/p/27440393" target="_blank" rel="noopener">code1</a> </p>
+<p><a href="https://blog.csdn.net/on2way/article/details/72773771" target="_blank" rel="noopener">intuition1</a> <a href="https://ctmakro.github.io/site/on_learning/gan.html" target="_blank" rel="noopener">intuition2</a> </p>
+<p><a href="https://zhuanlan.zhihu.com/p/27440393" target="_blank" rel="noopener">code1</a> <a href="http://baijiahao.baidu.com/s?id=1596173515001448323&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">tensorflow-gan</a> </p>
 <p><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS17.html" target="_blank" rel="noopener">video</a> </p>
+<p>通常，我们会用下面这个例子来说明 GAN 的原理：将警察视为判别器，制造假币的犯罪分子视为生成器。一开始，犯罪分子会首先向警察展示一张假币。警察识别出该假币，并向犯罪分子反馈哪些地方是假的。接着，根据警察的反馈，犯罪分子改进工艺，制作一张更逼真的假币给警方检查。这时警方再反馈，犯罪分子再改进工艺。不断重复这一过程，直到警察识别不出真假，那么模型就训练成功了。</p>
 <p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-07-21 at 11.26.58 AM.png" alt="Screen Shot 2018-07-21 at 11.26.58 AM"></p>
-<p><a href="# https://github.com/jiqizhixin/ML-Tutorial-Experiment/blob/master/Experiments/tf_GAN.ipynb">Tensorflow实现手写体</a></p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h1 id="GAN实现"><a href="#GAN实现" class="headerlink" title="GAN实现"></a>GAN实现</h1><h2 id="GAN训练伪代码"><a href="#GAN训练伪代码" class="headerlink" title="GAN训练伪代码"></a><a href="http://36kr.com/p/5086889.html" target="_blank" rel="noopener">GAN训练伪代码</a></h2><p><img src="/2018/07/20/Generative-Adversarial-Networks/beb95bnndbwkgz4x!1200.jpeg" alt="beb95bnndbwkgz4x!1200"></p>
+<h2 id="Tensorflow实现手写体"><a href="#Tensorflow实现手写体" class="headerlink" title="Tensorflow实现手写体"></a><a href="# https://github.com/jiqizhixin/ML-Tutorial-Experiment/blob/master/Experiments/tf_GAN.ipynb">Tensorflow实现手写体</a></h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -705,6 +707,434 @@
 </pre></td></tr></table></figure>
 
 </div></div>
+<h2 id="keras实现手写体"><a href="#keras实现手写体" class="headerlink" title="keras实现手写体"></a><a href="https://github.com/roatienza/Deep-Learning-Experiments/blob/master/Experiments/Tensorflow/GAN/dcgan_mnist.py" target="_blank" rel="noopener">keras实现手写体</a></h2><p><a href="https://www.leiphone.com/news/201703/Y5vnDSV9uIJIQzQm.html" target="_blank" rel="noopener">文字版</a> </p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+<div class="line">102</div>
+<div class="line">103</div>
+<div class="line">104</div>
+<div class="line">105</div>
+<div class="line">106</div>
+<div class="line">107</div>
+<div class="line">108</div>
+<div class="line">109</div>
+<div class="line">110</div>
+<div class="line">111</div>
+<div class="line">112</div>
+<div class="line">113</div>
+<div class="line">114</div>
+<div class="line">115</div>
+<div class="line">116</div>
+<div class="line">117</div>
+<div class="line">118</div>
+<div class="line">119</div>
+<div class="line">120</div>
+<div class="line">121</div>
+<div class="line">122</div>
+<div class="line">123</div>
+<div class="line">124</div>
+<div class="line">125</div>
+<div class="line">126</div>
+<div class="line">127</div>
+<div class="line">128</div>
+<div class="line">129</div>
+<div class="line">130</div>
+<div class="line">131</div>
+<div class="line">132</div>
+<div class="line">133</div>
+<div class="line">134</div>
+<div class="line">135</div>
+<div class="line">136</div>
+<div class="line">137</div>
+<div class="line">138</div>
+<div class="line">139</div>
+<div class="line">140</div>
+<div class="line">141</div>
+<div class="line">142</div>
+<div class="line">143</div>
+<div class="line">144</div>
+<div class="line">145</div>
+<div class="line">146</div>
+<div class="line">147</div>
+<div class="line">148</div>
+<div class="line">149</div>
+<div class="line">150</div>
+<div class="line">151</div>
+<div class="line">152</div>
+<div class="line">153</div>
+<div class="line">154</div>
+<div class="line">155</div>
+<div class="line">156</div>
+<div class="line">157</div>
+<div class="line">158</div>
+<div class="line">159</div>
+<div class="line">160</div>
+<div class="line">161</div>
+<div class="line">162</div>
+<div class="line">163</div>
+<div class="line">164</div>
+<div class="line">165</div>
+<div class="line">166</div>
+<div class="line">167</div>
+<div class="line">168</div>
+<div class="line">169</div>
+<div class="line">170</div>
+<div class="line">171</div>
+<div class="line">172</div>
+<div class="line">173</div>
+<div class="line">174</div>
+<div class="line">175</div>
+<div class="line">176</div>
+<div class="line">177</div>
+<div class="line">178</div>
+<div class="line">179</div>
+<div class="line">180</div>
+<div class="line">181</div>
+<div class="line">182</div>
+<div class="line">183</div>
+<div class="line">184</div>
+<div class="line">185</div>
+<div class="line">186</div>
+<div class="line">187</div>
+<div class="line">188</div>
+<div class="line">189</div>
+<div class="line">190</div>
+<div class="line">191</div>
+<div class="line">192</div>
+<div class="line">193</div>
+<div class="line">194</div>
+<div class="line">195</div>
+<div class="line">196</div>
+<div class="line">197</div>
+<div class="line">198</div>
+<div class="line">199</div>
+<div class="line">200</div>
+<div class="line">201</div>
+<div class="line">202</div>
+<div class="line">203</div>
+<div class="line">204</div>
+<div class="line">205</div>
+<div class="line">206</div>
+<div class="line">207</div>
+<div class="line">208</div>
+<div class="line">209</div>
+<div class="line">210</div>
+<div class="line">211</div>
+</pre></td><td class="code"><pre><div class="line"><span class="string">'''</span></div>
+<div class="line"><span class="string">DCGAN on MNIST using Keras</span></div>
+<div class="line"><span class="string">Author: Rowel Atienza</span></div>
+<div class="line"><span class="string">Project: https://github.com/roatienza/Deep-Learning-Experiments</span></div>
+<div class="line"><span class="string">Dependencies: tensorflow 1.0 and keras 2.0</span></div>
+<div class="line"><span class="string">Usage: python3 dcgan_mnist.py</span></div>
+<div class="line"><span class="string">'''</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> time</div>
+<div class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense, Activation, Flatten, Reshape</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Conv2D, Conv2DTranspose, UpSampling2D</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> LeakyReLU, Dropout</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> BatchNormalization</div>
+<div class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> Adam, RMSprop</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ElapsedTimer</span><span class="params">(object)</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        self.start_time = time.time()</div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">elapsed</span><span class="params">(self,sec)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> sec &lt; <span class="number">60</span>:</div>
+<div class="line">            <span class="keyword">return</span> str(sec) + <span class="string">" sec"</span></div>
+<div class="line">        <span class="keyword">elif</span> sec &lt; (<span class="number">60</span> * <span class="number">60</span>):</div>
+<div class="line">            <span class="keyword">return</span> str(sec / <span class="number">60</span>) + <span class="string">" min"</span></div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            <span class="keyword">return</span> str(sec / (<span class="number">60</span> * <span class="number">60</span>)) + <span class="string">" hr"</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">elapsed_time</span><span class="params">(self)</span>:</span></div>
+<div class="line">        print(<span class="string">"Elapsed: %s "</span> % self.elapsed(time.time() - self.start_time) )</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DCGAN</span><span class="params">(object)</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, img_rows=<span class="number">28</span>, img_cols=<span class="number">28</span>, channel=<span class="number">1</span>)</span>:</span></div>
+<div class="line"></div>
+<div class="line">        self.img_rows = img_rows</div>
+<div class="line">        self.img_cols = img_cols</div>
+<div class="line">        self.channel = channel</div>
+<div class="line">        self.D = <span class="keyword">None</span>   <span class="comment"># discriminator</span></div>
+<div class="line">        self.G = <span class="keyword">None</span>   <span class="comment"># generator</span></div>
+<div class="line">        self.AM = <span class="keyword">None</span>  <span class="comment"># adversarial model</span></div>
+<div class="line">        self.DM = <span class="keyword">None</span>  <span class="comment"># discriminator model</span></div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># (W−F+2P)/S+1</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">discriminator</span><span class="params">(self)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> self.D:</div>
+<div class="line">            <span class="keyword">return</span> self.D</div>
+<div class="line">        self.D = Sequential()</div>
+<div class="line">        depth = <span class="number">64</span></div>
+<div class="line">        dropout = <span class="number">0.4</span></div>
+<div class="line">        <span class="comment"># In: 28 x 28 x 1, depth = 1</span></div>
+<div class="line">        <span class="comment"># Out: 14 x 14 x 1, depth=64</span></div>
+<div class="line">        input_shape = (self.img_rows, self.img_cols, self.channel)</div>
+<div class="line">        self.D.add(Conv2D(depth*<span class="number">1</span>, <span class="number">5</span>, strides=<span class="number">2</span>, input_shape=input_shape,\</div>
+<div class="line">            padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.D.add(LeakyReLU(alpha=<span class="number">0.2</span>))</div>
+<div class="line">        self.D.add(Dropout(dropout))</div>
+<div class="line"></div>
+<div class="line">        self.D.add(Conv2D(depth*<span class="number">2</span>, <span class="number">5</span>, strides=<span class="number">2</span>, padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.D.add(LeakyReLU(alpha=<span class="number">0.2</span>))</div>
+<div class="line">        self.D.add(Dropout(dropout))</div>
+<div class="line"></div>
+<div class="line">        self.D.add(Conv2D(depth*<span class="number">4</span>, <span class="number">5</span>, strides=<span class="number">2</span>, padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.D.add(LeakyReLU(alpha=<span class="number">0.2</span>))</div>
+<div class="line">        self.D.add(Dropout(dropout))</div>
+<div class="line"></div>
+<div class="line">        self.D.add(Conv2D(depth*<span class="number">8</span>, <span class="number">5</span>, strides=<span class="number">1</span>, padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.D.add(LeakyReLU(alpha=<span class="number">0.2</span>))</div>
+<div class="line">        self.D.add(Dropout(dropout))</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Out: 1-dim probability</span></div>
+<div class="line">        self.D.add(Flatten())</div>
+<div class="line">        self.D.add(Dense(<span class="number">1</span>))</div>
+<div class="line">        self.D.add(Activation(<span class="string">'sigmoid'</span>))</div>
+<div class="line">        self.D.summary()</div>
+<div class="line">        <span class="keyword">return</span> self.D</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">generator</span><span class="params">(self)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> self.G:</div>
+<div class="line">            <span class="keyword">return</span> self.G</div>
+<div class="line">        self.G = Sequential()</div>
+<div class="line">        dropout = <span class="number">0.4</span></div>
+<div class="line">        depth = <span class="number">64</span>+<span class="number">64</span>+<span class="number">64</span>+<span class="number">64</span></div>
+<div class="line">        dim = <span class="number">7</span></div>
+<div class="line">        <span class="comment"># In: 100</span></div>
+<div class="line">        <span class="comment"># Out: dim x dim x depth</span></div>
+<div class="line">        self.G.add(Dense(dim*dim*depth, input_dim=<span class="number">100</span>))</div>
+<div class="line">        self.G.add(BatchNormalization(momentum=<span class="number">0.9</span>))</div>
+<div class="line">        self.G.add(Activation(<span class="string">'relu'</span>))</div>
+<div class="line">        self.G.add(Reshape((dim, dim, depth)))</div>
+<div class="line">        self.G.add(Dropout(dropout))</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># In: dim x dim x depth</span></div>
+<div class="line">        <span class="comment"># Out: 2*dim x 2*dim x depth/2</span></div>
+<div class="line">        self.G.add(UpSampling2D())</div>
+<div class="line">        self.G.add(Conv2DTranspose(int(depth/<span class="number">2</span>), <span class="number">5</span>, padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.G.add(BatchNormalization(momentum=<span class="number">0.9</span>))</div>
+<div class="line">        self.G.add(Activation(<span class="string">'relu'</span>))</div>
+<div class="line"></div>
+<div class="line">        self.G.add(UpSampling2D())</div>
+<div class="line">        self.G.add(Conv2DTranspose(int(depth/<span class="number">4</span>), <span class="number">5</span>, padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.G.add(BatchNormalization(momentum=<span class="number">0.9</span>))</div>
+<div class="line">        self.G.add(Activation(<span class="string">'relu'</span>))</div>
+<div class="line"></div>
+<div class="line">        self.G.add(Conv2DTranspose(int(depth/<span class="number">8</span>), <span class="number">5</span>, padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.G.add(BatchNormalization(momentum=<span class="number">0.9</span>))</div>
+<div class="line">        self.G.add(Activation(<span class="string">'relu'</span>))</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Out: 28 x 28 x 1 grayscale image [0.0,1.0] per pix</span></div>
+<div class="line">        self.G.add(Conv2DTranspose(<span class="number">1</span>, <span class="number">5</span>, padding=<span class="string">'same'</span>))</div>
+<div class="line">        self.G.add(Activation(<span class="string">'sigmoid'</span>))</div>
+<div class="line">        self.G.summary()</div>
+<div class="line">        <span class="keyword">return</span> self.G</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">discriminator_model</span><span class="params">(self)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> self.DM:</div>
+<div class="line">            <span class="keyword">return</span> self.DM</div>
+<div class="line">        optimizer = RMSprop(lr=<span class="number">0.0002</span>, decay=<span class="number">6e-8</span>)</div>
+<div class="line">        self.DM = Sequential()</div>
+<div class="line">        self.DM.add(self.discriminator())</div>
+<div class="line">        self.DM.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=optimizer,\</div>
+<div class="line">            metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line">        <span class="keyword">return</span> self.DM</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">adversarial_model</span><span class="params">(self)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> self.AM:</div>
+<div class="line">            <span class="keyword">return</span> self.AM</div>
+<div class="line">        optimizer = RMSprop(lr=<span class="number">0.0001</span>, decay=<span class="number">3e-8</span>)</div>
+<div class="line">        self.AM = Sequential()</div>
+<div class="line">        self.AM.add(self.generator())</div>
+<div class="line">        self.AM.add(self.discriminator())</div>
+<div class="line">        self.AM.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=optimizer,\</div>
+<div class="line">            metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line">        <span class="keyword">return</span> self.AM</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MNIST_DCGAN</span><span class="params">(object)</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        self.img_rows = <span class="number">28</span></div>
+<div class="line">        self.img_cols = <span class="number">28</span></div>
+<div class="line">        self.channel = <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">        self.x_train = input_data.read_data_sets(<span class="string">"mnist"</span>,\</div>
+<div class="line">        	one_hot=<span class="keyword">True</span>).train.images</div>
+<div class="line">        self.x_train = self.x_train.reshape(<span class="number">-1</span>, self.img_rows,\</div>
+<div class="line">        	self.img_cols, <span class="number">1</span>).astype(np.float32)</div>
+<div class="line"></div>
+<div class="line">        self.DCGAN = DCGAN()</div>
+<div class="line">        self.discriminator =  self.DCGAN.discriminator_model()</div>
+<div class="line">        self.adversarial = self.DCGAN.adversarial_model()</div>
+<div class="line">        self.generator = self.DCGAN.generator()</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_steps=<span class="number">2000</span>, batch_size=<span class="number">256</span>, save_interval=<span class="number">0</span>)</span>:</span></div>
+<div class="line">        noise_input = <span class="keyword">None</span></div>
+<div class="line">        <span class="keyword">if</span> save_interval&gt;<span class="number">0</span>:</div>
+<div class="line">            noise_input = np.random.uniform(<span class="number">-1.0</span>, <span class="number">1.0</span>, size=[<span class="number">16</span>, <span class="number">100</span>])</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(train_steps):</div>
+<div class="line">            images_train = self.x_train[np.random.randint(<span class="number">0</span>,</div>
+<div class="line">                self.x_train.shape[<span class="number">0</span>], size=batch_size), :, :, :]</div>
+<div class="line">            noise = np.random.uniform(<span class="number">-1.0</span>, <span class="number">1.0</span>, size=[batch_size, <span class="number">100</span>])</div>
+<div class="line">            images_fake = self.generator.predict(noise)</div>
+<div class="line">            x = np.concatenate((images_train, images_fake))</div>
+<div class="line">            y = np.ones([<span class="number">2</span>*batch_size, <span class="number">1</span>])</div>
+<div class="line">            y[batch_size:, :] = <span class="number">0</span></div>
+<div class="line">            d_loss = self.discriminator.train_on_batch(x, y)</div>
+<div class="line"></div>
+<div class="line">            y = np.ones([batch_size, <span class="number">1</span>])</div>
+<div class="line">            noise = np.random.uniform(<span class="number">-1.0</span>, <span class="number">1.0</span>, size=[batch_size, <span class="number">100</span>])</div>
+<div class="line">            a_loss = self.adversarial.train_on_batch(noise, y)</div>
+<div class="line">            log_mesg = <span class="string">"%d: [D loss: %f, acc: %f]"</span> % (i, d_loss[<span class="number">0</span>], d_loss[<span class="number">1</span>])</div>
+<div class="line">            log_mesg = <span class="string">"%s  [A loss: %f, acc: %f]"</span> % (log_mesg, a_loss[<span class="number">0</span>], a_loss[<span class="number">1</span>])</div>
+<div class="line">            print(log_mesg)</div>
+<div class="line">            <span class="keyword">if</span> save_interval&gt;<span class="number">0</span>:</div>
+<div class="line">                <span class="keyword">if</span> (i+<span class="number">1</span>)%save_interval==<span class="number">0</span>:</div>
+<div class="line">                    self.plot_images(save2file=<span class="keyword">True</span>, samples=noise_input.shape[<span class="number">0</span>],\</div>
+<div class="line">                        noise=noise_input, step=(i+<span class="number">1</span>))</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">plot_images</span><span class="params">(self, save2file=False, fake=True, samples=<span class="number">16</span>, noise=None, step=<span class="number">0</span>)</span>:</span></div>
+<div class="line">        filename = <span class="string">'mnist.png'</span></div>
+<div class="line">        <span class="keyword">if</span> fake:</div>
+<div class="line">            <span class="keyword">if</span> noise <span class="keyword">is</span> <span class="keyword">None</span>:</div>
+<div class="line">                noise = np.random.uniform(<span class="number">-1.0</span>, <span class="number">1.0</span>, size=[samples, <span class="number">100</span>])</div>
+<div class="line">            <span class="keyword">else</span>:</div>
+<div class="line">                filename = <span class="string">"mnist_%d.png"</span> % step</div>
+<div class="line">            images = self.generator.predict(noise)</div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            i = np.random.randint(<span class="number">0</span>, self.x_train.shape[<span class="number">0</span>], samples)</div>
+<div class="line">            images = self.x_train[i, :, :, :]</div>
+<div class="line"></div>
+<div class="line">        plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(images.shape[<span class="number">0</span>]):</div>
+<div class="line">            plt.subplot(<span class="number">4</span>, <span class="number">4</span>, i+<span class="number">1</span>)</div>
+<div class="line">            image = images[i, :, :, :]</div>
+<div class="line">            image = np.reshape(image, [self.img_rows, self.img_cols])</div>
+<div class="line">            plt.imshow(image, cmap=<span class="string">'gray'</span>)</div>
+<div class="line">            plt.axis(<span class="string">'off'</span>)</div>
+<div class="line">        plt.tight_layout()</div>
+<div class="line">        <span class="keyword">if</span> save2file:</div>
+<div class="line">            plt.savefig(filename)</div>
+<div class="line">            plt.close(<span class="string">'all'</span>)</div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            plt.show()</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    mnist_dcgan = MNIST_DCGAN()</div>
+<div class="line">    timer = ElapsedTimer()</div>
+<div class="line">    mnist_dcgan.train(train_steps=<span class="number">10000</span>, batch_size=<span class="number">256</span>, save_interval=<span class="number">500</span>)</div>
+<div class="line">    timer.elapsed_time()</div>
+<div class="line">    mnist_dcgan.plot_images(fake=<span class="keyword">True</span>)</div>
+<div class="line">    mnist_dcgan.plot_images(fake=<span class="keyword">False</span>, save2file=<span class="keyword">True</span>)</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+
       
     </div>
     
@@ -800,8 +1230,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -816,7 +1255,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -838,7 +1277,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -861,6 +1300,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN实现"><span class="nav-number">1.</span> <span class="nav-text">GAN实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN训练伪代码"><span class="nav-number">1.1.</span> <span class="nav-text">GAN训练伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorflow实现手写体"><span class="nav-number">1.2.</span> <span class="nav-text">Tensorflow实现手写体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keras实现手写体"><span class="nav-number">1.3.</span> <span class="nav-text">keras实现手写体</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -87,6 +87,9 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-23%20at%2011.15.34%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/8da0009b298c462b9dba190f21f594f5.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-23%20at%2011.16.40%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.44.09%20AM-2238285.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.55.37%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.58.12%20AM.png">
@@ -95,11 +98,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-22%20at%201.06.46%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-22%20at%201.09.36%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-22%20at%201.12.06%20AM.png">
-<meta property="og:updated_time" content="2018-07-22T06:12:49.148Z">
+<meta property="og:updated_time" content="2018-07-24T04:40:35.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational AutoEncoder">
 <meta name="twitter:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.44.09%20AM-2238285.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/Screen%20Shot%202018-07-23%20at%2011.15.34%20PM.png">
 
 
 
@@ -388,9 +391,19 @@
         <p> AutoEncoder（自编码器）本质上是数据特定的数据压缩</p>
 <p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。</p>
 <a id="more"></a>
-<p><a href="https://www.cnblogs.com/huangshiyu13/p/6209016.html" target="_blank" rel="noopener">intuition1</a> <a href="https://www.cnblogs.com/wangxiaocvpr/p/6231019.html" target="_blank" rel="noopener">intuition2</a> <a href="http://chengjunwen.github.io/2017/01/02/VAE/" target="_blank" rel="noopener">intuition3</a> </p>
-<p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">ref5</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">ref6</a> </p>
+<h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ul>
+<li><p>什么是生成式模型和判别式模型？</p>
+</li>
+<li><p>采样操作是不可导，采样之后的加减操作是可导，所以利用了重参技巧？</p>
+<p>可以参考这篇<a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">文章</a>. 如下图，左边是直接sample隐变量，显然，无法对这个“动作”进行任何数学计算；但是，使用了重参，即右边部分将隐变量的sample变成了一个数学计算，$z = \epsilon*\sigma+\mu$，显然可导。</p>
+</li>
+</ul>
+<p><a href="https://www.cnblogs.com/huangshiyu13/p/6209016.html" target="_blank" rel="noopener">AE to VAE</a> <a href="https://www.cnblogs.com/wangxiaocvpr/p/6231019.html" target="_blank" rel="noopener">AE vs VAE</a> <a href="http://chengjunwen.github.io/2017/01/02/VAE/" target="_blank" rel="noopener">intuition3</a> <a href="https://www.sohu.com/a/226209674_500659" target="_blank" rel="noopener">intuition4</a> </p>
+<p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">ref5</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">[intuition about learn latent gaussian distribution]</a> <a href="https://jaan.io/what-is-variational-autoencoder-vae-tutorial/" target="_blank" rel="noopener">ref7</a> </p>
 <p><a href="https://www.youtube.com/watch?v=8zomhgKrsmQ" target="_blank" rel="noopener">video1</a> </p>
+<h3 id="Reparemerization-重参"><a href="#Reparemerization-重参" class="headerlink" title="Reparemerization(重参)"></a>Reparemerization(重参)</h3><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-23 at 11.15.34 PM.png" alt="Screen Shot 2018-07-23 at 11.15.34 PM"></p>
+<p><img src="/2018/07/20/Variational-AutoEncoder/8da0009b298c462b9dba190f21f594f5.jpeg" alt="8da0009b298c462b9dba190f21f594f5"></p>
+<p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-23 at 11.16.40 PM.png" alt="Screen Shot 2018-07-23 at 11.16.40 PM"></p>
 <p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.44.09 AM-2238285.png" alt="Screen Shot 2018-07-22 at 12.44.09 AM-2238285"></p>
 <blockquote>
 <p>$\sigma$可正可负，exp确保一定是正，即$variance=e^{\sigma}$. </p>
@@ -405,6 +418,7 @@
 <blockquote>
 <p>The generated image is linear combination of existing images.</p>
 </blockquote>
+<h1 id="VAE实现"><a href="#VAE实现" class="headerlink" title="VAE实现"></a>VAE实现</h1><p><a href="https://blog.csdn.net/u014749291/article/details/56675805" target="_blank" rel="noopener">VAE-Keras</a> </p>
 
       
     </div>
@@ -501,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -517,7 +540,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -539,7 +562,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -562,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reparemerization-重参"><span class="nav-number">1.0.1.</span> <span class="nav-text">Reparemerization(重参)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE实现"><span class="nav-number">2.</span> <span class="nav-text">VAE实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
