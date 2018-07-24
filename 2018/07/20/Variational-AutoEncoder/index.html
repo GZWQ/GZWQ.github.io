@@ -104,7 +104,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/20161214175120686.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/20161214175146348.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/20161214175029514.png">
-<meta property="og:updated_time" content="2018-07-24T18:07:04.783Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/image-20180724163307750.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/image-20180724163319485.png">
+<meta property="og:updated_time" content="2018-07-24T21:50:29.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational AutoEncoder">
 <meta name="twitter:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。">
@@ -406,14 +408,12 @@
 <p>生成式模型：对$x$和$y$的联合分布$p(x,y)$进行建模，然后通过贝叶斯公式来求得$p(y|x)$，最后选择使$p(y|x)$最大的$y_i$。</p>
 </blockquote>
 </li>
-<li><p>采样操作是不可导，采样之后的加减操作是可导，所以利用了重参技巧？</p>
-<p>可以参考这篇<a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">文章</a>. 如下图，左边是直接sample隐变量，显然，无法对这个“动作”进行任何数学计算；但是，使用了重参，即右边部分将隐变量的sample变成了一个数学计算，$z = \epsilon*\sigma+\mu$，显然可导。</p>
-</li>
+<li></li>
 <li><p>一张图片生成一个对应的高斯分布，那么对于该分布的估计，是否需要该图片不断循环训练n次呢？因为如果使用别的图片，这样就会干扰该图片潜在的高斯分布。</p>
 </li>
 </ul>
 <p><a href="https://www.cnblogs.com/huangshiyu13/p/6209016.html" target="_blank" rel="noopener">AE to VAE</a> <a href="https://www.cnblogs.com/wangxiaocvpr/p/6231019.html" target="_blank" rel="noopener">AE vs VAE</a> <a href="http://chengjunwen.github.io/2017/01/02/VAE/" target="_blank" rel="noopener">intuition3</a> <a href="https://zhuanlan.zhihu.com/p/25269592" target="_blank" rel="noopener">gotcha</a> </p>
-<p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">VAE introduction in a new way</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">[intuition about learn latent gaussian distribution]</a> <a href="https://jaan.io/what-is-variational-autoencoder-vae-tutorial/" target="_blank" rel="noopener">ref7</a> </p>
+<p><a href="https://blog.csdn.net/jackytintin/article/details/53641885" target="_blank" rel="noopener">ref1</a> <a href="https://blog.csdn.net/u011534057/article/details/78911902" target="_blank" rel="noopener">ref2</a> <a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">ref3</a> <a href="http://www.dengfanxin.cn/?p=334" target="_blank" rel="noopener">ref4</a> <a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">VAE introduction in a new way</a> <a href="https://yq.aliyun.com/articles/68410" target="_blank" rel="noopener">[intuition about learn latent gaussian distribution]</a> <a href="https://jaan.io/what-is-variational-autoencoder-vae-tutorial/" target="_blank" rel="noopener">ref7</a> <a href="https://blog.csdn.net/heyc861221/article/details/80130968" target="_blank" rel="noopener">VAE vs GAN</a> </p>
 <p><a href="https://www.youtube.com/watch?v=8zomhgKrsmQ" target="_blank" rel="noopener">video1</a> </p>
 <h1 id="Intuition-behind-VAE"><a href="#Intuition-behind-VAE" class="headerlink" title="Intuition behind VAE"></a>Intuition behind VAE</h1><p>该部分参考了<a href="https://zhuanlan.zhihu.com/p/25269592" target="_blank" rel="noopener">ZhiHu-VAE</a>.</p>
 <p>考虑MNIST数据集，数据集里有10种数字，每种数字下有几千个不同的样本，我们能不能照猫画虎，模仿已有的数字生成一个同样可辨识，但却与现有的样本都不同的的数字呢？</p>
@@ -441,18 +441,21 @@
 <h3 id="Reparemerization-重参"><a href="#Reparemerization-重参" class="headerlink" title="Reparemerization(重参)"></a>Reparemerization(重参)</h3><p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-23 at 11.15.34 PM.png" alt="Screen Shot 2018-07-23 at 11.15.34 PM"></p>
 <blockquote>
 <p><a href="https://spaces.ac.cn/archives/5253" target="_blank" rel="noopener">intuition</a> </p>
+<ul>
+<li><p>采样操作是不可导，采样之后的加减操作是可导，所以利用了重参技巧？</p>
+<p>可以参考这篇<a href="http://lib.csdn.net/article/deeplearning/68143?knId=1748" target="_blank" rel="noopener">文章</a>. 如下图，左边是直接sample隐变量，显然，无法对这个“动作”进行任何数学计算；但是，使用了重参，即右边部分将隐变量的sample变成了一个数学计算，$z = \epsilon*\sigma+\mu$，显然可导。</p>
+</li>
+<li></li>
+</ul>
 </blockquote>
 <p><img src="/2018/07/20/Variational-AutoEncoder/8da0009b298c462b9dba190f21f594f5.jpeg" alt="8da0009b298c462b9dba190f21f594f5"></p>
 <p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-23 at 11.16.40 PM.png" alt="Screen Shot 2018-07-23 at 11.16.40 PM"></p>
 <blockquote>
 <ol>
-<li>由于训练过程只用到 xx（同时作为输入和目标输出），而与 xx 的标签无关，因此，这是无监督学习。</li>
+<li>由于训练过程只用到 X（同时作为输入和目标输出），而与 X的标签无关，因此，这是无监督学习。</li>
 </ol>
 </blockquote>
-<p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.44.09 AM-2238285.png" alt="Screen Shot 2018-07-22 at 12.44.09 AM-2238285"></p>
-<blockquote>
-<p>$\sigma$可正可负，exp确保一定是正，即$variance=e^{\sigma}$. </p>
-</blockquote>
+<p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.44.09 AM-2238285.png" alt="Screen Shot 2018-07-22 at 12.44.09 AM-2238285"> </p>
 <p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.55.37 AM.png" alt="Screen Shot 2018-07-22 at 12.55.37 AM"></p>
 <p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 12.58.12 AM.png" alt="Screen Shot 2018-07-22 at 12.58.12 AM"></p>
 <p><img src="/2018/07/20/Variational-AutoEncoder/Screen Shot 2018-07-22 at 1.01.32 AM.png" alt="Screen Shot 2018-07-22 at 1.01.32 AM"></p>
@@ -463,7 +466,7 @@
 <blockquote>
 <p>The generated image is linear combination of existing images.</p>
 </blockquote>
-<h1 id="VAE实现"><a href="#VAE实现" class="headerlink" title="VAE实现"></a>VAE实现</h1><p><a href="https://zhuanlan.zhihu.com/p/25269592" target="_blank" rel="noopener">VAE-Keras</a> </p>
+<h1 id="VAE的Keras实现"><a href="#VAE的Keras实现" class="headerlink" title="VAE的Keras实现"></a>VAE的Keras实现</h1><p><a href="https://blog.csdn.net/A_a_ron/article/details/79004163" target="_blank" rel="noopener">detailed explanation</a> </p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -490,8 +493,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<p>encoder</p>
-<p>输入是$n$维，输出$x\times m$维</p>
+<h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><p>输入是$n$维，输出$x\times m$维</p>
 <p><img src="/2018/07/20/Variational-AutoEncoder/20161214175120686.png" alt="20161214175120686"></p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -507,10 +509,10 @@
 <div class="line">11</div>
 </pre></td><td class="code"><pre><div class="line">batch_size = <span class="number">100</span></div>
 <div class="line">original_dim = <span class="number">784</span>  <span class="comment"># 28*28</span></div>
-<div class="line">latent_dim = <span class="number">2</span></div>
-<div class="line">intermediate_dim = <span class="number">256</span></div>
+<div class="line">latent_dim = <span class="number">2</span> <span class="comment"># encoder output size</span></div>
+<div class="line">intermediate_dim = <span class="number">256</span> <span class="comment"># neural number of hidden layer</span></div>
 <div class="line">nb_epoch = <span class="number">50</span></div>
-<div class="line">epsilon_std = <span class="number">1.0</span></div>
+<div class="line">epsilon_std = <span class="number">1.0</span> </div>
 <div class="line"></div>
 <div class="line">x = Input(batch_shape=(batch_size, original_dim))</div>
 <div class="line">h = Dense(intermediate_dim, activation=<span class="string">'relu'</span>)(x)</div>
@@ -519,8 +521,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<p>采样sampling</p>
-<p>将encoder的大小为$(2\times m)$的输出视作$m$个高斯多元分布的均值$z_mean$和方差的对数$z_log_var$</p>
+<h2 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h2><p>将encoder的大小为$(2\times m)$的输出视作$m$个高斯多元分布的均值$z_mean$和方差的对数$z_log_var$</p>
 <p><img src="/2018/07/20/Variational-AutoEncoder/20161214175146348.png" alt="20161214175146348"></p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -538,8 +539,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<p>decoder</p>
-<p><img src="/2018/07/20/Variational-AutoEncoder/20161214175029514.png" alt="20161214175029514"></p>
+<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><p><img src="/2018/07/20/Variational-AutoEncoder/20161214175029514.png" alt="20161214175029514"></p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -552,8 +552,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<p>loss function</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h2 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -569,8 +568,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<p>训练</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -588,35 +586,113 @@
 <div class="line">15</div>
 <div class="line">16</div>
 <div class="line">17</div>
+<div class="line">18</div>
 </pre></td><td class="code"><pre><div class="line">vae = Model(x, x_decoded_mean)</div>
 <div class="line">vae.compile(optimizer=<span class="string">'rmsprop'</span>, loss=vae_loss)</div>
 <div class="line"></div>
 <div class="line"><span class="comment"># train the VAE on MNIST digits</span></div>
 <div class="line">(x_train, y_train), (x_test, y_test) = mnist.load_data(path=<span class="string">'mnist.pkl.gz'</span>)</div>
 <div class="line"></div>
-<div class="line">x_train = x_train.astype(<span class="string">'float32'</span>) / <span class="number">255.</span></div>
+<div class="line">x_train = x_train.astype(<span class="string">'float32'</span>) / <span class="number">255.</span> <span class="comment"># input normalization</span></div>
 <div class="line">x_test = x_test.astype(<span class="string">'float32'</span>) / <span class="number">255.</span></div>
 <div class="line">x_train = x_train.reshape((len(x_train), np.prod(x_train.shape[<span class="number">1</span>:])))</div>
 <div class="line">x_test = x_test.reshape((len(x_test), np.prod(x_test.shape[<span class="number">1</span>:])))</div>
 <div class="line"></div>
-<div class="line">vae.fit(x_train, x_train,</div>
+<div class="line">vae.fit(x_train, <span class="comment"># regarded as "x", which is "training data"</span></div>
+<div class="line">        x_train, <span class="comment"># regarded as "y", which is "target/label data"</span></div>
 <div class="line">        shuffle=<span class="keyword">True</span>,</div>
 <div class="line">        nb_epoch=nb_epoch,</div>
-<div class="line">        verbose=<span class="number">2</span>,</div>
+<div class="line">        verbose=<span class="number">2</span>,<span class="comment"># Verbosity mode. 0 = silent, 1 = progress bar, 2 = one line per epoch.</span></div>
 <div class="line">        batch_size=batch_size,</div>
 <div class="line">        validation_data=(x_test, x_test))</div>
 </pre></td></tr></table></figure>
 
 </div></div>
+<h2 id="Latent-space-display"><a href="#Latent-space-display" class="headerlink" title="Latent space display"></a>Latent space display</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
-</pre></td><td class="code"><pre><div class="line">decoder_input = Input(shape=(latent_dim,))</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># build a model to project inputs on the latent space</span></div>
+<div class="line">encoder = Model(x, z_mean)</div>
+<div class="line"><span class="comment"># display a 2D plot of the digit classes in the latent space</span></div>
+<div class="line">x_test_encoded = encoder.predict(x_test, batch_size=batch_size)</div>
+<div class="line">plt.figure(figsize=(<span class="number">6</span>, <span class="number">6</span>))</div>
+<div class="line">plt.scatter(x_test_encoded[:, <span class="number">0</span>], x_test_encoded[:, <span class="number">1</span>], c=y_test)</div>
+<div class="line">plt.colorbar()</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p><img src="/2018/07/20/Variational-AutoEncoder/image-20180724163307750.png" alt="image-20180724163307750"></p>
+<h2 id="Generated-pics-display"><a href="#Generated-pics-display" class="headerlink" title="Generated pics display"></a>Generated pics display</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># build a digit generator that can sample from the learned distribution</span></div>
+<div class="line">decoder_input = Input(shape=(latent_dim,))</div>
 <div class="line">_h_decoded = decoder_h(decoder_input)</div>
 <div class="line">_x_decoded_mean = decoder_mean(_h_decoded)</div>
 <div class="line">generator = Model(decoder_input, _x_decoded_mean)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># display a 2D manifold of the digits</span></div>
+<div class="line">n = <span class="number">15</span>  <span class="comment"># figure with 15x15 digit pics</span></div>
+<div class="line">digit_size = <span class="number">28</span> <span class="comment"># size of the pic is 28*28</span></div>
+<div class="line">figure = np.zeros((digit_size * n, digit_size * n))</div>
+<div class="line"><span class="comment"># linearly spaced coordinates on the unit square were transformed through the inverse CDF (ppf) of the Gaussian</span></div>
+<div class="line"><span class="comment"># to produce values of the latent variables z, since the prior of the latent space is Gaussian</span></div>
+<div class="line"><span class="comment"># 生成因变量空间（二维）中的数据，数据满足高斯分布。这些数据构成隐变量，用于图像的生成。</span></div>
+<div class="line"><span class="comment">#ppf为累积分布函数（cdf）的反函数，累积分布函数是概率密度函数（pdf）的积分。np.linspace(0.05, 0.95, n)为累计分布函数的输出值（y值），现在我们需要其对应的x值，所以使用cdf的反函数，这些x值构成隐变量。</span></div>
+<div class="line">grid_x = norm.ppf(np.linspace(<span class="number">0.05</span>, <span class="number">0.95</span>, n))</div>
+<div class="line">grid_y = norm.ppf(np.linspace(<span class="number">0.05</span>, <span class="number">0.95</span>, n))</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#plotting</span></div>
+<div class="line"><span class="keyword">for</span> i, yi <span class="keyword">in</span> enumerate(grid_x):</div>
+<div class="line">    <span class="keyword">for</span> j, xi <span class="keyword">in</span> enumerate(grid_y):</div>
+<div class="line">        z_sample = np.array([[xi, yi]])<span class="comment">#1*2</span></div>
+<div class="line">        x_decoded = generator.predict(z_sample)</div>
+<div class="line">        digit = x_decoded[<span class="number">0</span>].reshape(digit_size, digit_size)<span class="comment">#the generated image</span></div>
+<div class="line">        figure[i * digit_size: (i + <span class="number">1</span>) * digit_size,</div>
+<div class="line">               j * digit_size: (j + <span class="number">1</span>) * digit_size] = digit</div>
+<div class="line"></div>
+<div class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">10</span>))</div>
+<div class="line">plt.imshow(figure, cmap=<span class="string">'Greys_r'</span>)</div>
+<div class="line">plt.show()</div>
 </pre></td></tr></table></figure>
+
+</div></div>
+<p><img src="/2018/07/20/Variational-AutoEncoder/image-20180724163319485.png" alt="image-20180724163319485"></p>
+
       
     </div>
     
@@ -792,7 +868,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intuition-behind-VAE"><span class="nav-number">2.</span> <span class="nav-text">Intuition behind VAE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network-Structure"><span class="nav-number">3.</span> <span class="nav-text">Network Structure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Entropy"><span class="nav-number">4.1.</span> <span class="nav-text">Cross Entropy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-Divergence"><span class="nav-number">4.2.</span> <span class="nav-text">KL-Divergence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reparemerization-重参"><span class="nav-number">4.2.1.</span> <span class="nav-text">Reparemerization(重参)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE实现"><span class="nav-number">5.</span> <span class="nav-text">VAE实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intuition-behind-VAE"><span class="nav-number">2.</span> <span class="nav-text">Intuition behind VAE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Network-Structure"><span class="nav-number">3.</span> <span class="nav-text">Network Structure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Entropy"><span class="nav-number">4.1.</span> <span class="nav-text">Cross Entropy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KL-Divergence"><span class="nav-number">4.2.</span> <span class="nav-text">KL-Divergence</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reparemerization-重参"><span class="nav-number">4.2.1.</span> <span class="nav-text">Reparemerization(重参)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VAE的Keras实现"><span class="nav-number">5.</span> <span class="nav-text">VAE的Keras实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Encoder"><span class="nav-number">5.1.</span> <span class="nav-text">Encoder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sampling"><span class="nav-number">5.2.</span> <span class="nav-text">Sampling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decoder"><span class="nav-number">5.3.</span> <span class="nav-text">Decoder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-Function"><span class="nav-number">5.4.</span> <span class="nav-text">Loss Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training"><span class="nav-number">5.5.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Latent-space-display"><span class="nav-number">5.6.</span> <span class="nav-text">Latent space display</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generated-pics-display"><span class="nav-number">5.7.</span> <span class="nav-text">Generated pics display</span></a></li></ol></li></ol></div>
             
 
           </div>
