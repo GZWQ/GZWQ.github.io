@@ -87,13 +87,16 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。生成模型 G 捕捉样本数据的分布，用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/20170526212621356.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-24%20at%205.13.45%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-24%20at%205.14.26%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-21%20at%2011.26.58%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/beb95bnndbwkgz4x!1200.jpeg">
-<meta property="og:updated_time" content="2018-07-23T22:29:17.335Z">
+<meta property="og:updated_time" content="2018-07-24T22:17:14.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Generative Adversarial Networks">
 <meta name="twitter:description" content="GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。生成模型 G 捕捉样本数据的分布，用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-21%20at%2011.26.58%20AM.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/20170526212621356.png">
 
 
 
@@ -384,7 +387,17 @@
 <p><a href="https://blog.csdn.net/on2way/article/details/72773771" target="_blank" rel="noopener">intuition1</a> <a href="https://ctmakro.github.io/site/on_learning/gan.html" target="_blank" rel="noopener">intuition2</a> </p>
 <p><a href="https://zhuanlan.zhihu.com/p/27440393" target="_blank" rel="noopener">code1</a> <a href="http://baijiahao.baidu.com/s?id=1596173515001448323&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">tensorflow-gan</a> </p>
 <p><a href="http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS17.html" target="_blank" rel="noopener">video</a> </p>
-<p>通常，我们会用下面这个例子来说明 GAN 的原理：将警察视为判别器，制造假币的犯罪分子视为生成器。一开始，犯罪分子会首先向警察展示一张假币。警察识别出该假币，并向犯罪分子反馈哪些地方是假的。接着，根据警察的反馈，犯罪分子改进工艺，制作一张更逼真的假币给警方检查。这时警方再反馈，犯罪分子再改进工艺。不断重复这一过程，直到警察识别不出真假，那么模型就训练成功了。</p>
+<h1 id="Intuition"><a href="#Intuition" class="headerlink" title="Intuition"></a>Intuition</h1><p>通常，我们会用下面这个例子来说明 GAN 的原理：将警察视为判别器，制造假币的犯罪分子视为生成器。一开始，犯罪分子会首先向警察展示一张假币。警察识别出该假币，并向犯罪分子反馈哪些地方是假的。接着，根据警察的反馈，犯罪分子改进工艺，制作一张更逼真的假币给警方检查。这时警方再反馈，犯罪分子再改进工艺。不断重复这一过程，直到警察识别不出真假，那么模型就训练成功了。</p>
+<p><strong>GAN强大之处在于可以自动的学习原始真实样本集的数据分布</strong>，GAN的生成模型最后可以通过噪声生成一个完整的真实数据（比如人脸），说明生成模型已经掌握了从随机噪声到人脸数据的分布规律了，有了这个规律，想生成人脸还不容易。然而这个规律我们开始知道吗？显然不知道，如果让你说从随机噪声到人脸应该服从什么分布，你不可能知道。这是一层层映射之后组合起来的非常复杂的分布映射规律。然而GAN的机制可以学习到，也就是说GAN学习到了真实样本集的数据分布。</p>
+<p><img src="/2018/07/20/Generative-Adversarial-Networks/20170526212621356.png" alt="20170526212621356"></p>
+<p>这张图表明的是GAN的生成网络如何一步步<strong>从均匀分布学习到正太分布</strong>的。原始数据x服从正太分布，这个过程你也没告诉生成网络说你得用正太分布来学习，但是生成网络学习到了。假设你改一下x的分布，不管什么分布，生成网络可能也能学到。</p>
+<h1 id="判别模型"><a href="#判别模型" class="headerlink" title="判别模型"></a>判别模型</h1><p>假设现在生成网络模型已经有了（当然可能不是最好的生成网络），那么给一堆随机数组，就会得到一堆假的样本集（因为不是最终的生成模型，那么现在生成网络可能就处于劣势，导致生成的样本就不咋地，可能很容易就被判别网络判别出来了说这货是假冒的），但是先不管这个，假设我们现在有了这样的假样本集，真样本集一直都有，现在我们人为的定义真假样本集的标签，因为我们希望真样本集的输出尽可能为1，假样本集为0，很明显这里我们就已经默认真样本集所有的类标签都为1，而假样本集的所有类标签都为0. 有人会说，在真样本集里面的人脸中，可能张三人脸和李四人脸不一样呀，对于这个问题我们需要理解的是，我们现在的任务是什么，我们是想分样本真假，而不是分真样本中那个是张三label、那个是李四label。况且我们也知道，原始真样本的label我们是不知道的。回过头来，我们现在有了真样本集以及它们的label（都是1）、假样本集以及它们的label（都是0），这样单就判别网络来说，此时问题就变成了一个再简单不过的<strong>有监督的二分类问题</strong>了，直接送到神经网络模型中训练就完事了。假设训练完了，下面我们来看生成网络。</p>
+<h1 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h1><p>对于生成网络，想想我们的目的，是生成尽可能逼真的样本。那么原始的生成网络生成的样本你怎么知道它真不真呢？就是送到判别网络中，所以在训练生成网络的时候，我们需要联合判别网络一起才能达到训练的目的。什么意思？就是如果我们单单只用生成网络，那么想想我们怎么去训练？误差来源在哪里？细想一下没有，但是如果我们把刚才的判别网络串接在生成网络的后面，这样我们就知道真假了，也就有了误差了。所以对于生成网络的训练其实是对生成-判别网络串接的训练。好了那么现在来分析一下样本，原始的噪声数组Z我们有，也就是生成了假样本我们有，此时很关键的一点来了，我们要<strong>把这些假样本的标签都设置为1</strong>，也就是认为这些假样本在生成网络训练的时候是真样本。那么为什么要这样呢？我们想想，是不是这样才能起到迷惑判别器的目的，也才能使得生成的假样本逐渐逼近为正样本。好了，重新顺一下思路，现在对于生成网络的训练，我们有了样本集（只有假样本集，没有真样本集），有了对应的label（全为1），是不是就可以训练了？有人会问，这样只有一类样本，训练啥呀？谁说一类样本就不能训练了？只要有误差就行。还有人说，你这样一训练，<strong>判别网络的网络参数不是也跟着变吗</strong>？没错，这很关键，所以在训练这个串接的网络的时候，一个很重要的操作就是<strong>不要判别网络的参数发生变化</strong>，也就是不让它参数发生更新，只是把误差一直传，传到生成网络那块后更新生成网络的参数。这样就完成了生成网络的训练了。</p>
+<p>在完成生成网络训练好，那么我们是不是可以根据目前新的生成网络再对先前的那些噪声Z生成新的假样本了，没错，并且训练后的假样本应该是更真了才对。然后又有了新的真假样本集（其实是新的假样本集），这样又可以重复上述过程了。我们把这个过程称作为单独交替训练。我们可以实现定义一个迭代次数，交替迭代到一定次数后停止即可。这个时候我们再去看一看噪声Z生成的假样本会发现，原来它已经很真了。</p>
+<h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>对于判别器$D$，其优化函数：</p>
+<p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-07-24 at 5.13.45 PM.png" alt="Screen Shot 2018-07-24 at 5.13.45 PM"></p>
+<p>对于生成器$G$，其优化函数：</p>
+<p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-07-24 at 5.14.26 PM.png" alt="Screen Shot 2018-07-24 at 5.14.26 PM"></p>
 <p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-07-21 at 11.26.58 AM.png" alt="Screen Shot 2018-07-21 at 11.26.58 AM"></p>
 <h1 id="GAN实现"><a href="#GAN实现" class="headerlink" title="GAN实现"></a>GAN实现</h1><h2 id="GAN训练伪代码"><a href="#GAN训练伪代码" class="headerlink" title="GAN训练伪代码"></a><a href="http://36kr.com/p/5086889.html" target="_blank" rel="noopener">GAN训练伪代码</a></h2><p><img src="/2018/07/20/Generative-Adversarial-Networks/beb95bnndbwkgz4x!1200.jpeg" alt="beb95bnndbwkgz4x!1200"></p>
 <h2 id="Tensorflow实现手写体"><a href="#Tensorflow实现手写体" class="headerlink" title="Tensorflow实现手写体"></a><a href="# https://github.com/jiqizhixin/ML-Tutorial-Experiment/blob/master/Experiments/tf_GAN.ipynb">Tensorflow实现手写体</a></h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
@@ -1310,7 +1323,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN实现"><span class="nav-number">1.</span> <span class="nav-text">GAN实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN训练伪代码"><span class="nav-number">1.1.</span> <span class="nav-text">GAN训练伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorflow实现手写体"><span class="nav-number">1.2.</span> <span class="nav-text">Tensorflow实现手写体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keras实现手写体"><span class="nav-number">1.3.</span> <span class="nav-text">keras实现手写体</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intuition"><span class="nav-number">1.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判别模型"><span class="nav-number">2.</span> <span class="nav-text">判别模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成模型"><span class="nav-number">3.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN实现"><span class="nav-number">5.</span> <span class="nav-text">GAN实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN训练伪代码"><span class="nav-number">5.1.</span> <span class="nav-text">GAN训练伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorflow实现手写体"><span class="nav-number">5.2.</span> <span class="nav-text">Tensorflow实现手写体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keras实现手写体"><span class="nav-number">5.3.</span> <span class="nav-text">keras实现手写体</span></a></li></ol></li></ol></div>
             
 
           </div>
