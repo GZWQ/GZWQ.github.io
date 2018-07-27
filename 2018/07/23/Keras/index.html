@@ -88,10 +88,11 @@
 <meta property="og:description" content="本文参考了Keras入门">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170707133635659-888158147.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Screen%20Shot%202018-07-26%20at%2011.18.59%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170707133932722-715494711.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Keras/CNNArchitecture.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170809132648824-260187979.png">
-<meta property="og:updated_time" content="2018-07-26T04:41:23.087Z">
+<meta property="og:updated_time" content="2018-07-26T17:53:37.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras">
 <meta name="twitter:description" content="本文参考了Keras入门">
@@ -412,7 +413,375 @@
 <p>也可以是独热向量，labels = keras.utils.to_categorical(labels, num_classes=10)</p>
 </li>
 </ul>
-<h3 id="函数式（Functional）模型"><a href="#函数式（Functional）模型" class="headerlink" title="函数式（Functional）模型"></a>函数式（Functional）模型</h3><h2 id="模型保存"><a href="#模型保存" class="headerlink" title="模型保存"></a>模型保存</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><h4 id="模型保存-1"><a href="#模型保存-1" class="headerlink" title="模型保存"></a>模型保存</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h3 id="函数式（Functional）模型"><a href="#函数式（Functional）模型" class="headerlink" title="函数式（Functional）模型"></a><a href="https://keras-cn.readthedocs.io/en/latest/getting_started/functional_API/" target="_blank" rel="noopener">函数式（Functional）模型</a></h3><p>Keras函数式模型接口是用户定义多输出模型、非循环有向模型或具有共享层的模型等复杂模型的途径。一句话，只要你的模型不是类似VGG一样一条路走到黑的模型，或者你的模型需要多于一个的输出，那么你总应该选择函数式模型。函数式模型是最广泛的一类模型，序贯模型（Sequential）只是它的一种特殊情况。</p>
+<h4 id="应用场景1：全连接网络"><a href="#应用场景1：全连接网络" class="headerlink" title="应用场景1：全连接网络"></a>应用场景1：全连接网络</h4><p><code>Sequential</code>当然是实现全连接网络的最好方式，但我们从简单的全连接网络开始学习函数式模型。</p>
+<p>之前，需要清楚的是：</p>
+<ul>
+<li>层对象接受张量为参数，返回一个张量。</li>
+<li>输入是张量，输出也是张量的一个框架就是一个模型，通过<code>Model</code>定义。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input, Dense</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Model</div>
+<div class="line"><span class="comment"># This returns a tensor</span></div>
+<div class="line">inputs = Input(shape=(<span class="number">784</span>,))</div>
+<div class="line"><span class="comment"># a layer instance is callable on a tensor, and returns a tensor</span></div>
+<div class="line">x = Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>)(inputs)</div>
+<div class="line">x = Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>)(x)</div>
+<div class="line">predictions = Dense(<span class="number">10</span>, activation=<span class="string">'softmax'</span>)(x)</div>
+<div class="line"><span class="comment"># This creates a model that includes</span></div>
+<div class="line"><span class="comment"># the Input layer and three Dense layers</span></div>
+<div class="line">model = Model(inputs=inputs, outputs=predictions)</div>
+<div class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</div>
+<div class="line">              loss=<span class="string">'categorical_crossentropy'</span>,</div>
+<div class="line">              metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line">model.fit(data, labels)  <span class="comment"># starts training</span></div>
+</pre></td></tr></table></figure>
+<p>利用函数式模型的接口，我们可以很容易的重用已经训练好的模型：你可以把模型当作一个层一样，通过提供一个tensor来调用它。注意当你调用一个模型时，你不仅仅重用了它的结构，也重用了它的权重。</p>
+<p>这种方式可以允许你快速的创建能处理序列信号的模型，你可以很快将一个图像分类的模型变为一个对视频分类的模型，只需要一行代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> TimeDistributed</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Input tensor for sequences of 20 timesteps,</span></div>
+<div class="line"><span class="comment"># each containing a 784-dimensional vector</span></div>
+<div class="line">input_sequences = Input(shape=(<span class="number">20</span>, <span class="number">784</span>))</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># This applies our previous model to every timestep in the input sequences.</span></div>
+<div class="line"><span class="comment"># the output of the previous model was a 10-way softmax,</span></div>
+<div class="line"><span class="comment"># so the output of the layer below will be a sequence of 20 vectors of size 10.</span></div>
+<div class="line">processed_sequences = TimeDistributed(model)(input_sequences)</div>
+</pre></td></tr></table></figure>
+<h4 id="应用场景2：多输入多输出模型"><a href="#应用场景2：多输入多输出模型" class="headerlink" title="应用场景2：多输入多输出模型"></a>应用场景2：多输入多输出模型</h4><p>使用函数式模型的一个典型场景是搭建多输入、多输出的模型。</p>
+<p><img src="/2018/07/23/Keras/Screen Shot 2018-07-26 at 11.18.59 AM.png" alt="Screen Shot 2018-07-26 at 11.18.59 AM"></p>
+<p>首先构造<code>main_input</code>，<code>embedding_1</code>和<code>lstm_1</code>层。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input, Embedding, LSTM, Dense</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Model</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Headline input: meant to receive sequences of 100 integers, between 1 and 10000.</span></div>
+<div class="line"><span class="comment"># Note that we can name any layer by passing it a "name" argument.</span></div>
+<div class="line">main_input = Input(shape=(<span class="number">100</span>,), dtype=<span class="string">'int32'</span>, name=<span class="string">'main_input'</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># This embedding layer will encode the input sequence</span></div>
+<div class="line"><span class="comment"># into a sequence of dense 512-dimensional vectors.</span></div>
+<div class="line">x = Embedding(output_dim=<span class="number">512</span>, input_dim=<span class="number">10000</span>, input_length=<span class="number">100</span>)(main_input)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># A LSTM will transform the vector sequence into a single vector,</span></div>
+<div class="line"><span class="comment"># containing information about the entire sequence</span></div>
+<div class="line">lstm_out = LSTM(<span class="number">32</span>)(x)</div>
+</pre></td></tr></table></figure>
+<p>然后定义额外的输出<code>aux_output</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">auxiliary_output = Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>, name=<span class="string">'aux_output'</span>)(lstm_out)</div>
+</pre></td></tr></table></figure>
+<p>接着定义另一个输入<code>aux_input</code>，联合<code>lstm_1</code>作为共同输入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">auxiliary_input = Input(shape=(<span class="number">5</span>,), name=<span class="string">'aux_input'</span>)</div>
+<div class="line">x = keras.layers.concatenate([lstm_out, auxiliary_input])</div>
+</pre></td></tr></table></figure>
+<p>将输入连接之后，定义三个全连接层<code>dense_1</code>，<code>dense_2</code>，<code>dense_3</code>和输出层<code>main_output</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># We stack a deep densely-connected network on top</span></div>
+<div class="line">x = Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>)(x)</div>
+<div class="line">x = Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>)(x)</div>
+<div class="line">x = Dense(<span class="number">64</span>, activation=<span class="string">'relu'</span>)(x)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># And finally we add the main logistic regression layer</span></div>
+<div class="line">main_output = Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>, name=<span class="string">'main_output'</span>)(x)</div>
+</pre></td></tr></table></figure>
+<p>最后通过函数式模型组装</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">model = Model(inputs=[main_input, auxiliary_input], outputs=[main_output, auxiliary_output])</div>
+</pre></td></tr></table></figure>
+<p>模型定义完毕，下一步编译模型。我们给额外的损失赋0.2的权重。我们可以通过关键字参数<code>loss_weights</code>或<code>loss</code>来为不同的输出设置不同的损失函数或权值。这两个参数均可为Python的列表或字典。这里我们给<code>loss</code>传递单个损失函数，这个损失函数会被应用于所有输出上。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>, loss=<span class="string">'binary_crossentropy'</span>,</div>
+<div class="line">              loss_weights=[<span class="number">1.</span>, <span class="number">0.2</span>])</div>
+</pre></td></tr></table></figure>
+<p>编译完成后，我们通过传递训练数据和目标值训练该模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">model.fit([headline_data, additional_data], [labels, labels],</div>
+<div class="line">          epochs=<span class="number">50</span>, batch_size=<span class="number">32</span>)</div>
+</pre></td></tr></table></figure>
+<p> 因为我们输入和输出是被命名过的（在定义时传递了“name”参数），我们也可以用下面的方式编译和训练模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</div>
+<div class="line">              loss=&#123;<span class="string">'main_output'</span>: <span class="string">'binary_crossentropy'</span>, <span class="string">'aux_output'</span>: <span class="string">'binary_crossentropy'</span>&#125;,</div>
+<div class="line">              loss_weights=&#123;<span class="string">'main_output'</span>: <span class="number">1.</span>, <span class="string">'aux_output'</span>: <span class="number">0.2</span>&#125;)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># And trained it via:</span></div>
+<div class="line">model.fit(&#123;<span class="string">'main_input'</span>: headline_data, <span class="string">'aux_input'</span>: additional_data&#125;,</div>
+<div class="line">          &#123;<span class="string">'main_output'</span>: labels, <span class="string">'aux_output'</span>: labels&#125;,</div>
+<div class="line">          epochs=<span class="number">50</span>, batch_size=<span class="number">32</span>)</div>
+</pre></td></tr></table></figure>
+<h4 id="应用场景3：共享层"><a href="#应用场景3：共享层" class="headerlink" title="应用场景3：共享层"></a>应用场景3：共享层</h4><p>另一个使用函数式模型的场合是使用共享层的时候。</p>
+<p>考虑微博数据，我们希望建立模型来判别两条微博是否是来自同一个用户，这个需求同样可以用来判断一个用户的两条微博的相似性。一种实现方式是，我们建立一个模型，它分别将两条微博的数据映射到两个特征向量上，然后将特征向量串联并加一个logistic回归层，输出它们来自同一个用户的概率。这种模型的训练数据是一对对的微博。因为这个问题是对称的，所以处理第一条微博的模型当然也能重用于处理第二条微博。所以这里我们使用一个共享的LSTM层来进行映射。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> keras</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input, LSTM, Dense</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Model</div>
+<div class="line"></div>
+<div class="line">tweet_a = Input(shape=(<span class="number">140</span>, <span class="number">256</span>))</div>
+<div class="line">tweet_b = Input(shape=(<span class="number">140</span>, <span class="number">256</span>))</div>
+</pre></td></tr></table></figure>
+<p>若要对不同的输入共享同一层，就初始化该层一次，然后多次调用它</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># This layer can take as input a matrix</span></div>
+<div class="line"><span class="comment"># and will return a vector of size 64</span></div>
+<div class="line">shared_lstm = LSTM(<span class="number">64</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># When we reuse the same layer instance</span></div>
+<div class="line"><span class="comment"># multiple times, the weights of the layer</span></div>
+<div class="line"><span class="comment"># are also being reused</span></div>
+<div class="line"><span class="comment"># (it is effectively *the same* layer)</span></div>
+<div class="line">encoded_a = shared_lstm(tweet_a)</div>
+<div class="line">encoded_b = shared_lstm(tweet_b)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># We can then concatenate the two vectors:</span></div>
+<div class="line">merged_vector = keras.layers.concatenate([encoded_a, encoded_b], axis=<span class="number">-1</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># And add a logistic regression on top</span></div>
+<div class="line">predictions = Dense(<span class="number">1</span>, activation=<span class="string">'sigmoid'</span>)(merged_vector)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># We define a trainable model linking the</span></div>
+<div class="line"><span class="comment"># tweet inputs to the predictions</span></div>
+<div class="line">model = Model(inputs=[tweet_a, tweet_b], outputs=predictions)</div>
+<div class="line"></div>
+<div class="line">model.compile(optimizer=<span class="string">'rmsprop'</span>,</div>
+<div class="line">              loss=<span class="string">'binary_crossentropy'</span>,</div>
+<div class="line">              metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line">model.fit([data_a, data_b], labels, epochs=<span class="number">10</span>)</div>
+</pre></td></tr></table></figure>
+<h5 id="层“节点”的概念"><a href="#层“节点”的概念" class="headerlink" title="层“节点”的概念"></a>层“节点”的概念</h5><p>无论何时，当你在某个输入上调用层时，你就创建了一个新的张量（即该层的输出），同时你也在为这个层增加一个“（计算）节点”。这个节点将输入张量映射为输出张量。当你多次调用该层时，这个层就有了多个节点，其下标分别为0，1，2…在上一版本的Keras中，你可以通过<code>layer.get_output()</code>方法来获得层的输出张量，或者通过<code>layer.output_shape</code>获得其输出张量的shape。这个版本的Keras你仍然可以这么做（除了<code>layer.get_output()</code>被<code>output</code>替换）。但如果一个层与多个输入相连，会出现什么情况呢？如果层只与一个输入相连，那没有任何困惑的地方。<code>.output</code>将会返回该层唯一的输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">a = Input(shape=(<span class="number">140</span>, <span class="number">256</span>))  lstm = LSTM(<span class="number">32</span>) encoded_a = lstm(a)  <span class="keyword">assert</span> lstm.output == encoded_a</div>
+</pre></td></tr></table></figure>
+<p>当层与多个输入相连时,</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">assert</span> lstm.get_output_at(<span class="number">0</span>) == encoded_a </div>
+<div class="line"><span class="keyword">assert</span> lstm.get_output_at(<span class="number">1</span>) == encoded_b</div>
+</pre></td></tr></table></figure>
+<p>对于<code>input_shape</code>和<code>output_shape</code>也是一样，如果一个层只有一个节点，或所有的节点都有相同的输入或输出shape，那么<code>input_shape</code>和<code>output_shape</code>都是没有歧义的，并也只返回一个值。但是，例如你把一个相同的<code>Conv2D</code>应用于一个大小为(32,32,3)的数据，然后又将其应用于一个(64,64,3)的数据，那么此时该层就具有了多个输入和输出的shape，你就需要显式的指定节点的下标，来表明你想取的是哪个了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line">a = Input(shape=(<span class="number">32</span>, <span class="number">32</span>, <span class="number">3</span>))</div>
+<div class="line">b = Input(shape=(<span class="number">64</span>, <span class="number">64</span>, <span class="number">3</span>))</div>
+<div class="line"></div>
+<div class="line">conv = Conv2D(<span class="number">16</span>, (<span class="number">3</span>, <span class="number">3</span>), padding=<span class="string">'same'</span>)</div>
+<div class="line">conved_a = conv(a)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Only one input so far, the following will work:</span></div>
+<div class="line"><span class="keyword">assert</span> conv.input_shape == (<span class="keyword">None</span>, <span class="number">32</span>, <span class="number">32</span>, <span class="number">3</span>)</div>
+<div class="line"></div>
+<div class="line">conved_b = conv(b)</div>
+<div class="line"><span class="comment"># now the `.input_shape` property wouldn't work, but this does:</span></div>
+<div class="line"><span class="keyword">assert</span> conv.get_input_shape_at(<span class="number">0</span>) == (<span class="keyword">None</span>, <span class="number">32</span>, <span class="number">32</span>, <span class="number">3</span>)</div>
+<div class="line"><span class="keyword">assert</span> conv.get_input_shape_at(<span class="number">1</span>) == (<span class="keyword">None</span>, <span class="number">64</span>, <span class="number">64</span>, <span class="number">3</span>)</div>
+</pre></td></tr></table></figure>
+<h2 id="Keras网络层"><a href="#Keras网络层" class="headerlink" title="Keras网络层"></a>Keras网络层</h2><p>所有的Keras层对象都有如下方法:</p>
+<ul>
+<li><code>layer.get_weights()</code>：返回层的权重（numpy array）</li>
+<li><code>layer.set_weights(weights)</code>：从numpy array中将权重加载到该层中，要求numpy array的形状与<code>layer.get_weights()</code>的形状相同</li>
+<li><code>layer.get_config()</code>：返回当前层配置信息的字典，层也可以借由配置信息重构</li>
+</ul>
+<p>如果层仅有一个计算节点（即该层不是共享层），则可以通过下列方法获得输入张量、输出张量、输入数据的形状和输出数据的形状：</p>
+<ul>
+<li><code>layer.input</code></li>
+<li><code>layer.output</code></li>
+<li><code>layer.input_shape</code></li>
+<li><code>layer.output_shape</code></li>
+</ul>
+<p>如果该层有多个计算节点。可以使用下面的方法</p>
+<ul>
+<li><code>layer.get_input_at(node_index)</code></li>
+<li><code>layer.get_output_at(node_index)</code></li>
+<li><code>layer.get_input_shape_at(node_index)</code></li>
+<li><code>layer.get_output_shape_at(node_index)</code> </li>
+</ul>
+<h3 id="常用层"><a href="#常用层" class="headerlink" title="常用层"></a><a href="https://keras-cn.readthedocs.io/en/latest/layers/core_layer/" target="_blank" rel="noopener">常用层</a></h3><h4 id="Dense层"><a href="#Dense层" class="headerlink" title="Dense层"></a>Dense层</h4><p>Dense就是常用的全连接层，所实现的运算是<code>output = activation(dot(input, kernel)+bias)</code>。其中<code>activation</code>是逐元素计算的激活函数，<code>kernel</code>是本层的权值矩阵，<code>bias</code>为偏置向量，只有当<code>use_bias=True</code>才会添加。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.core.Dense(units, activation=<span class="keyword">None</span>, use_bias=<span class="keyword">True</span>, kernel_initializer=<span class="string">'glorot_uniform'</span>, bias_initializer=<span class="string">'zeros'</span>, kernel_regularizer=<span class="keyword">None</span>, bias_regularizer=<span class="keyword">None</span>, activity_regularizer=<span class="keyword">None</span>, kernel_constraint=<span class="keyword">None</span>, bias_constraint=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<ul>
+<li>units：大于0的整数，代表该层的输出维度</li>
+<li>activation：激活函数，默认不使用任何激活函数(即使用线性激活函数：a(x)=x)</li>
+<li>use_bias: 布尔值，是否使用偏置项</li>
+<li>kernel_initializer：权值初始化方法</li>
+<li>bias_initializer：偏置向量初始化方法</li>
+<li>kernel_regularizer | bias_regularizer | activity_regularizer：施加在 权重 | 偏置向量 | 输出 上的正则项</li>
+<li>kernel_constraints | bias_constraints：施加在 权重 | 偏置上的约束项</li>
+</ul>
+<p><strong>输入</strong></p>
+<ul>
+<li>形如(batch_size, …, input_dim)的nD张量，最常见的情况为(batch_size, input_dim)的2D张量</li>
+</ul>
+<p><strong>输出</strong></p>
+<ul>
+<li>形如(batch_size, …, units)的nD张量，最常见的情况为(batch_size, units)的2D张量</li>
+</ul>
+<h4 id="Dropout层"><a href="#Dropout层" class="headerlink" title="Dropout层"></a>Dropout层</h4><p>为输入数据施加Dropout。Dropout将在训练过程中每次更新参数时按一定概率（rate）随机断开输入神经元，Dropout层用于防止过拟合。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.core.Dropout(rate, noise_shape=<span class="keyword">None</span>, seed=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<ul>
+<li>rate：0~1的浮点数，控制需要断开的神经元的比例</li>
+</ul>
+<h4 id="Flatten层"><a href="#Flatten层" class="headerlink" title="Flatten层"></a>Flatten层</h4><p>Flatten层用来将输入“压平”，即把多维的输入一维化，常用在从卷积层到全连接层的过渡。Flatten不影响batch的大小。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">model = Sequential()</div>
+<div class="line">model.add(Convolution2D(<span class="number">64</span>, <span class="number">3</span>, <span class="number">3</span>,</div>
+<div class="line">            border_mode=<span class="string">'same'</span>,</div>
+<div class="line">            input_shape=(<span class="number">3</span>, <span class="number">32</span>, <span class="number">32</span>)))</div>
+<div class="line"><span class="comment"># now: model.output_shape == (None, 64, 32, 32)</span></div>
+<div class="line"></div>
+<div class="line">model.add(Flatten())</div>
+<div class="line"><span class="comment"># now: model.output_shape == (None, 65536) # 65536 = 64*32*32</span></div>
+</pre></td></tr></table></figure>
+<h4 id="Lambda层"><a href="#Lambda层" class="headerlink" title="Lambda层"></a>Lambda层</h4><p>本函数用以对上一层的输出施以任何Theano/TensorFlow表达式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.core.Lambda(function, output_shape=<span class="keyword">None</span>, mask=<span class="keyword">None</span>, arguments=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<ul>
+<li>function：要实现的函数，该函数仅接受一个变量，即上一层的输出</li>
+<li>output_shape：函数应该返回的值的shape，可以是一个tuple，也可以是一个根据输入shape计算输出shape的函数</li>
+<li>arguments：可选，字典，用来记录向函数中传递的其他关键字参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># add a x -&gt; x^2 layer</span></div>
+<div class="line">model.add(Lambda(<span class="keyword">lambda</span> x: x ** <span class="number">2</span>))</div>
+</pre></td></tr></table></figure>
+<h3 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a><a href="https://keras-cn.readthedocs.io/en/latest/layers/convolutional_layer/" target="_blank" rel="noopener">卷积层</a></h3><h4 id="Conv2D层"><a href="#Conv2D层" class="headerlink" title="Conv2D层"></a>Conv2D层</h4><p>二维卷积层，即对图像的空域卷积。该层对二维输入进行滑动窗卷积，当使用该层作为第一层时，应提供<code>input_shape</code>参数。例如<code>input_shape = (128,128,3)</code>代表128*128的彩色RGB图像（<code>data_format=&#39;channels_last&#39;</code>）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.convolutional.Conv2D(filters, kernel_size, strides=(<span class="number">1</span>, <span class="number">1</span>), padding=<span class="string">'valid'</span>, data_format=<span class="keyword">None</span>, dilation_rate=(<span class="number">1</span>, <span class="number">1</span>), activation=<span class="keyword">None</span>, use_bias=<span class="keyword">True</span>, kernel_initializer=<span class="string">'glorot_uniform'</span>, bias_initializer=<span class="string">'zeros'</span>, kernel_regularizer=<span class="keyword">None</span>, bias_regularizer=<span class="keyword">None</span>, activity_regularizer=<span class="keyword">None</span>, kernel_constraint=<span class="keyword">None</span>, bias_constraint=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<ul>
+<li>filters：卷积核的数目（即输出的维度）</li>
+<li>kernel_size：单个整数或由两个整数构成的list/tuple，卷积核的宽度和长度。如为单个整数，则表示在各个空间维度的相同长度。</li>
+<li>strides：单个整数或由两个整数构成的list/tuple，为卷积的步长。如为单个整数，则表示在各个空间维度的相同步长。</li>
+<li>padding：补0策略，为“valid”, “same” 。“valid”代表只进行有效的卷积，即对边界数据不处理。“same”代表保留边界处的卷积结果，通常会导致输出shape与输入shape相同。</li>
+<li>activation：激活函数，默认不使用激活函数</li>
+<li>dilation_rate：单个整数或由两个个整数构成的list/tuple，指定dilated convolution中的膨胀比例。任何不为1的dilation_rate均与任何不为1的strides均不兼容。</li>
+<li>data_format：字符串，“channels_first”或“channels_last”之一，代表图像的通道维的位置。该参数是Keras 1.x中的image_dim_ordering，“channels_last”对应原本的“tf”，“channels_first”对应原本的“th”。以128x128的RGB图像为例，“channels_first”应将数据组织为（3,128,128），而“channels_last”应将数据组织为（128,128,3）。该参数的默认值是<code>~/.keras/keras.json</code>中设置的值，若从未设置过，为“channels_last”。</li>
+</ul>
+<p><strong>输入</strong></p>
+<p>‘channels_first’模式下，输入形如（samples,channels，rows，cols）的4D张量</p>
+<p>‘channels_last’模式下，输入形如（samples，rows，cols，channels）的4D张量</p>
+<p>注意这里的输入shape指的是函数内部实现的输入shape，而非函数接口应指定的<code>input_shape</code></p>
+<p><strong>输出</strong></p>
+<p>‘channels_first’模式下，为形如（samples，nb_filter, new_rows, new_cols）的4D张量</p>
+<p>‘channels_last’模式下，为形如（samples，new_rows, new_cols，nb_filter）的4D张量</p>
+<p>输出的行列数可能会因为填充方法而改变</p>
+<h4 id="Conv2DTranspose层"><a href="#Conv2DTranspose层" class="headerlink" title="Conv2DTranspose层"></a>Conv2DTranspose层</h4><p>该层是转置的卷积操作（反卷积）。需要反卷积的情况通常发生在用户想要对一个普通卷积的结果做反方向的变换。例如，将具有该卷积层输出shape的tensor转换为具有该卷积层输入shape的tensor。同时保留与卷积层兼容的连接模式。</p>
+<p>当使用该层作为第一层时，应提供<code>input_shape</code>参数。例如<code>input_shape = (3,128,128)</code>代表128*128的彩色RGB图像</p>
+ <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.convolutional.Conv2DTranspose(filters, kernel_size, strides=(<span class="number">1</span>, <span class="number">1</span>), padding=<span class="string">'valid'</span>, data_format=<span class="keyword">None</span>, activation=<span class="keyword">None</span>, use_bias=<span class="keyword">True</span>, kernel_initializer=<span class="string">'glorot_uniform'</span>, bias_initializer=<span class="string">'zeros'</span>, kernel_regularizer=<span class="keyword">None</span>, bias_regularizer=<span class="keyword">None</span>, activity_regularizer=<span class="keyword">None</span>, kernel_constraint=<span class="keyword">None</span>, bias_constraint=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a><a href="https://keras-cn.readthedocs.io/en/latest/layers/pooling_layer/" target="_blank" rel="noopener">池化层</a></h3><h4 id="MaxPooling2D层"><a href="#MaxPooling2D层" class="headerlink" title="MaxPooling2D层"></a>MaxPooling2D层</h4><h2 id="模型保存"><a href="#模型保存" class="headerlink" title="模型保存"></a>模型保存</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><h4 id="模型保存-1"><a href="#模型保存-1" class="headerlink" title="模型保存"></a>模型保存</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 </pre></td><td class="code"><pre><div class="line">json_string = model.to_json()</div>
@@ -841,7 +1210,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序贯（Sequential）模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">序贯（Sequential）模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络构造"><span class="nav-number">1.1.2.</span> <span class="nav-text">网络构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.4.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式（Functional）模型"><span class="nav-number">1.1.5.</span> <span class="nav-text">函数式（Functional）模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型保存"><span class="nav-number">1.2.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">1.2.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型保存-1"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型载入"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">1.2.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#符号计算-数据流图"><span class="nav-number">3.1.</span> <span class="nav-text">符号计算(数据流图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量"><span class="nav-number">3.2.</span> <span class="nav-text">张量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">3.3.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">3.4.</span> <span class="nav-text">模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：手写数字识别"><span class="nav-number">4.</span> <span class="nav-text">Example：手写数字识别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：CNN"><span class="nav-number">5.</span> <span class="nav-text">Example：CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text"> </span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序贯（Sequential）模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">序贯（Sequential）模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络构造"><span class="nav-number">1.1.2.</span> <span class="nav-text">网络构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.4.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式（Functional）模型"><span class="nav-number">1.1.5.</span> <span class="nav-text">函数式（Functional）模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景1：全连接网络"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">应用场景1：全连接网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景2：多输入多输出模型"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">应用场景2：多输入多输出模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景3：共享层"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">应用场景3：共享层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#层“节点”的概念"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">层“节点”的概念</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras网络层"><span class="nav-number">1.2.</span> <span class="nav-text">Keras网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用层"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense层"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Dense层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dropout层"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Dropout层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flatten层"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Flatten层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lambda层"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Lambda层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积层"><span class="nav-number">1.2.2.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2D层"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Conv2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2DTranspose层"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Conv2DTranspose层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化层"><span class="nav-number">1.2.3.</span> <span class="nav-text">池化层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MaxPooling2D层"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">MaxPooling2D层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型保存"><span class="nav-number">1.3.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">1.3.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型保存-1"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型载入"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">1.3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#符号计算-数据流图"><span class="nav-number">3.1.</span> <span class="nav-text">符号计算(数据流图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量"><span class="nav-number">3.2.</span> <span class="nav-text">张量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">3.3.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">3.4.</span> <span class="nav-text">模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：手写数字识别"><span class="nav-number">4.</span> <span class="nav-text">Example：手写数字识别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：CNN"><span class="nav-number">5.</span> <span class="nav-text">Example：CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text"> </span></a></li></ol></div>
             
 
           </div>
