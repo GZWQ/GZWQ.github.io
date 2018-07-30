@@ -99,8 +99,6 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-27%20at%209.50.36%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-27%20at%209.52.00%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-07%20at%204.47.21%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180728123533533.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-28%20at%204.32.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-13%20at%204.51.58%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-10%20at%2010.02.58%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-10%20at%2010.03.29%20AM.png">
@@ -116,7 +114,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713221657920.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713220740270.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713223436731.png">
-<meta property="og:updated_time" content="2018-07-28T21:32:53.895Z">
+<meta property="og:updated_time" content="2018-07-30T03:06:47.556Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -470,54 +468,15 @@ K_{ij}=e^{-\frac{\lambda|x_i-x_j|^2}{2\sigma^2}}</script><blockquote>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-27 at 9.52.00 PM.png" alt="Screen Shot 2018-07-27 at 9.52.00 PM"></p>
 <p>分析：<a href="https://www.zhihu.com/question/46631426/answer/122929183" target="_blank" rel="noopener">知乎1</a></p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-07 at 4.47.21 PM.png" alt="Screen Shot 2018-07-07 at 4.47.21 PM"></p>
-<h3 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h3><p><a href="https://blog.dominodatalab.com/fitting-gaussian-process-models-python/" target="_blank" rel="noopener">code1</a> </p>
-<h4 id="GP-prior"><a href="#GP-prior" class="headerlink" title="GP prior"></a>GP prior</h4><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"></div>
-<div class="line">seed = np.random.seed(<span class="number">1</span>)</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kernel</span><span class="params">(a,b)</span>:</span> <span class="comment"># using kernel function to calculate covariance matrix</span></div>
-<div class="line">    sqdist = np.sum(a**<span class="number">2</span>,<span class="number">1</span>).reshape(<span class="number">-1</span>,<span class="number">1</span>) + np.sum(b**<span class="number">2</span>,<span class="number">1</span>) - <span class="number">2</span>*np.dot(a,b.T)</div>
-<div class="line">    <span class="keyword">return</span> np.exp(<span class="number">-0.5</span>*sqdist)</div>
-<div class="line"></div>
-<div class="line">points_num = <span class="number">50</span></div>
-<div class="line">points = np.linspace(<span class="number">-5</span>,<span class="number">5</span>,points_num).reshape(<span class="number">-1</span>,<span class="number">1</span>) <span class="comment">#shape = (points_num,1)</span></div>
-<div class="line">K_ = kernel(points,points) <span class="comment"># shape = (points_num,points_num)</span></div>
-<div class="line"></div>
-<div class="line">L = np.linalg.cholesky(K_ + <span class="number">1e-6</span>*np.eye(points_num)) <span class="comment"># K = LL.T L.shape = (points_num,points_num)</span></div>
-<div class="line">f_prior = np.dot(L,np.random.normal(size=(points_num,<span class="number">10</span>))) <span class="comment"># f_prior.shape = (points_num,10)</span></div>
-<div class="line"></div>
-<div class="line">plt.plot(points,f_prior)</div>
-<div class="line">plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/07/04/ML-Kernel-Function/image-20180728123533533.png" alt="image-20180728123533533"></p>
-<blockquote>
-<p>Multivariate Gaussian Samples Generation</p>
-<p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-28 at 4.32.21 PM.png" alt="Screen Shot 2018-07-28 at 4.32.21 PM"></p>
-</blockquote>
+<h3 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h3><p><a href="https://blog.dominodatalab.com/fitting-gaussian-process-models-python/" target="_blank" rel="noopener">code1</a> <a href="https://github.com/fonnesbeck/gp_tutorial_pydata/blob/master/1-Introduction.ipynb" target="_blank" rel="noopener">code2</a> </p>
+<p>首先定义一个kernel函数，我们使用squared exponential，$\theta_1$和$\theta_2$是两个超参数。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+k(x,x^{\prime}) &= \theta_1\exp\left(-\frac{\theta_2}{2}(x-x^{\prime})^2\right)
+\end{aligned}</script><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 
 </div></div>
+<p>定义好了kernel函数之后，我们便可以利用kernel由样本点求出未知点的函数值的分布，</p>
 <h2 id="Density-Estimation"><a href="#Density-Estimation" class="headerlink" title="Density Estimation"></a>Density Estimation</h2><p><a href="http://qr.ae/TUp6rs" target="_blank" rel="noopener">[ref1]</a> <a href="http://www.mvstat.net/tduong/research/seminars/seminar-2001-05/" target="_blank" rel="noopener">[ref2]</a> <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation" target="_blank" rel="noopener">[wiki]</a> <a href="http://sklearn.lzjqsdd.com/modules/density.html" target="_blank" rel="noopener">[sklearn-implement]</a> </p>
 <p><a href="https://www.zhihu.com/question/27301358/answer/105267357" target="_blank" rel="noopener">[Begin]</a> <a href="https://wenku.baidu.com/view/364bc23931126edb6f1a104b.html" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/liangzuojiayi/article/details/78152180" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/unixtch/article/details/78556499" target="_blank" rel="noopener">[close to totally]</a> <a href="https://blog.csdn.net/pipisorry/article/details/53635895" target="_blank" rel="noopener">[closer]</a> <a href="http://math.sjtu.edu.cn/faculty/chengwang/files/2015fall/ch4.pdf" target="_blank" rel="noopener">[sjtu]</a> <a href="https://github.com/endymecy/spark-ml-source-analysis/blob/master/%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1/kernel-density-estimation.md" target="_blank" rel="noopener">[intuition]</a> <a href="http://lotabout.me/2018/kernel-density-estimation/" target="_blank" rel="noopener">[形象生动]</a></p>
 <p>核密度估计方法，是概率论中用来估计未知的(概率)密度函数，属于非参数检验方法之一，不利用有关数据分布的先验知识，对数据分布不附加任何假定，是一种从数据样本本身出发研究数据分布特征的方法。</p>
@@ -1363,7 +1322,7 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preliminary"><span class="nav-number">1.</span> <span class="nav-text">Preliminary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯分布"><span class="nav-number">1.1.</span> <span class="nav-text">高斯分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一元高斯分布"><span class="nav-number">1.1.1.</span> <span class="nav-text">一元高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二元高斯分布"><span class="nav-number">1.1.2.</span> <span class="nav-text">二元高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多元高斯分布"><span class="nav-number">1.1.3.</span> <span class="nav-text">多元高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多元高斯下的条件分布"><span class="nav-number">1.1.4.</span> <span class="nav-text">多元高斯下的条件分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Applications"><span class="nav-number">2.</span> <span class="nav-text">Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gaussian-Process-Regression"><span class="nav-number">2.1.</span> <span class="nav-text">Gaussian Process Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intuition"><span class="nav-number">2.1.1.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">2.1.2.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python实现"><span class="nav-number">2.1.3.</span> <span class="nav-text">Python实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GP-prior"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">GP prior</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Density-Estimation"><span class="nav-number">2.2.</span> <span class="nav-text">Density Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">2.2.1.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推导"><span class="nav-number">2.2.2.</span> <span class="nav-text">推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h的选择"><span class="nav-number">2.2.3.</span> <span class="nav-text">h的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-Implement"><span class="nav-number">2.2.4.</span> <span class="nav-text">Python Implement</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preliminary"><span class="nav-number">1.</span> <span class="nav-text">Preliminary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯分布"><span class="nav-number">1.1.</span> <span class="nav-text">高斯分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一元高斯分布"><span class="nav-number">1.1.1.</span> <span class="nav-text">一元高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二元高斯分布"><span class="nav-number">1.1.2.</span> <span class="nav-text">二元高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多元高斯分布"><span class="nav-number">1.1.3.</span> <span class="nav-text">多元高斯分布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多元高斯下的条件分布"><span class="nav-number">1.1.4.</span> <span class="nav-text">多元高斯下的条件分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Applications"><span class="nav-number">2.</span> <span class="nav-text">Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gaussian-Process-Regression"><span class="nav-number">2.1.</span> <span class="nav-text">Gaussian Process Regression</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intuition"><span class="nav-number">2.1.1.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition"><span class="nav-number">2.1.2.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python实现"><span class="nav-number">2.1.3.</span> <span class="nav-text">Python实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Density-Estimation"><span class="nav-number">2.2.</span> <span class="nav-text">Density Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">2.2.1.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推导"><span class="nav-number">2.2.2.</span> <span class="nav-text">推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h的选择"><span class="nav-number">2.2.3.</span> <span class="nav-text">h的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-Implement"><span class="nav-number">2.2.4.</span> <span class="nav-text">Python Implement</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
