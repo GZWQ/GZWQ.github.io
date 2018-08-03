@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170707133932722-715494711.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Keras/CNNArchitecture.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170809132648824-260187979.png">
-<meta property="og:updated_time" content="2018-07-26T17:53:37.348Z">
+<meta property="og:updated_time" content="2018-08-03T03:52:17.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras">
 <meta name="twitter:description" content="本文参考了Keras入门">
@@ -781,7 +781,164 @@
  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">keras.layers.convolutional.Conv2DTranspose(filters, kernel_size, strides=(<span class="number">1</span>, <span class="number">1</span>), padding=<span class="string">'valid'</span>, data_format=<span class="keyword">None</span>, activation=<span class="keyword">None</span>, use_bias=<span class="keyword">True</span>, kernel_initializer=<span class="string">'glorot_uniform'</span>, bias_initializer=<span class="string">'zeros'</span>, kernel_regularizer=<span class="keyword">None</span>, bias_regularizer=<span class="keyword">None</span>, activity_regularizer=<span class="keyword">None</span>, kernel_constraint=<span class="keyword">None</span>, bias_constraint=<span class="keyword">None</span>)</div>
 </pre></td></tr></table></figure>
-<h3 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a><a href="https://keras-cn.readthedocs.io/en/latest/layers/pooling_layer/" target="_blank" rel="noopener">池化层</a></h3><h4 id="MaxPooling2D层"><a href="#MaxPooling2D层" class="headerlink" title="MaxPooling2D层"></a>MaxPooling2D层</h4><h2 id="模型保存"><a href="#模型保存" class="headerlink" title="模型保存"></a>模型保存</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><h4 id="模型保存-1"><a href="#模型保存-1" class="headerlink" title="模型保存"></a>模型保存</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h3 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a><a href="https://keras-cn.readthedocs.io/en/latest/layers/pooling_layer/" target="_blank" rel="noopener">池化层</a></h3><h4 id="MaxPooling2D层"><a href="#MaxPooling2D层" class="headerlink" title="MaxPooling2D层"></a>MaxPooling2D层</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.pooling.MaxPooling2D(pool_size=(<span class="number">2</span>, <span class="number">2</span>), strides=<span class="keyword">None</span>, padding=<span class="string">'valid'</span>, data_format=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li>pool_size：整数或长为2的整数tuple，代表在两个方向（竖直，水平）上的下采样因子，如取（2，2）将使图片在两个维度上均变为原长的一半。为整数意为各个维度值相同且为该数字。</li>
+<li>strides：整数或长为2的整数tuple，或者None，步长值。</li>
+<li>border_mode：‘valid’或者‘same’</li>
+<li>data_format：字符串，“channels_first”或“channels_last”之一，代表图像的通道维的位置。默认“channels_last”</li>
+</ul>
+<h4 id="AveragePooling2D层"><a href="#AveragePooling2D层" class="headerlink" title="AveragePooling2D层"></a>AveragePooling2D层</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.pooling.AveragePooling2D(pool_size=(<span class="number">2</span>, <span class="number">2</span>), strides=<span class="keyword">None</span>, padding=<span class="string">'valid'</span>, data_format=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="批正则化"><a href="#批正则化" class="headerlink" title="批正则化"></a><a href="https://keras-cn.readthedocs.io/en/latest/layers/normalization_layer/" target="_blank" rel="noopener">批正则化</a></h3><h4 id="BatchNormalization层"><a href="#BatchNormalization层" class="headerlink" title="BatchNormalization层"></a>BatchNormalization层</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.layers.normalization.BatchNormalization(axis=<span class="number">-1</span>, momentum=<span class="number">0.99</span>, epsilon=<span class="number">0.001</span>, center=<span class="keyword">True</span>, scale=<span class="keyword">True</span>, beta_initializer=<span class="string">'zeros'</span>, gamma_initializer=<span class="string">'ones'</span>, moving_mean_initializer=<span class="string">'zeros'</span>, moving_variance_initializer=<span class="string">'ones'</span>, beta_regularizer=<span class="keyword">None</span>, gamma_regularizer=<span class="keyword">None</span>, beta_constraint=<span class="keyword">None</span>, gamma_constraint=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li>momentum: 动态均值的动量</li>
+<li>epsilon：大于0的小浮点数，用于防止除0错误</li>
+<li>center: 若设为True，将会将beta作为偏置加上去，否则忽略参数beta</li>
+</ul>
+<blockquote>
+<p>BN层的作用</p>
+<p>（1）加速收敛 （2）控制过拟合，可以少用或不用Dropout和正则 （3）降低网络对初始化权重不敏感 （4）允许使用较大的学习率</p>
+</blockquote>
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="损失函数loss"><a href="#损失函数loss" class="headerlink" title="损失函数loss"></a>损失函数loss</h3><p>目标函数，或称损失函数，是编译一个模型必须的两个参数之一：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>, optimizer=<span class="string">'sgd'</span>)</div>
+</pre></td></tr></table></figure>
+<p>自定义的损失函数：只接受两个参数</p>
+<ul>
+<li>y_true：真实的数据标签，Theano/TensorFlow张量</li>
+<li>y_pred：预测值，与y_true相同shape的Theano/TensorFlow张量</li>
+</ul>
+<p>返回在各个数据点得到的损失函数值之和的均值</p>
+<p><strong>部分可用的目标函数</strong></p>
+<ul>
+<li><p>mean_squared_error或mse</p>
+</li>
+<li><p>mean_absolute_error或mae</p>
+</li>
+<li><p>binary_crossentropy（亦称作对数损失，logloss）</p>
+</li>
+<li><p>categorical_crossentropy：亦称作多类的对数损失，注意使用该目标函数时，需要将标签转化为形如<code>(nb_samples, nb_classes)</code>的二值序列</p>
+<blockquote>
+<p><strong>注意</strong>: 当使用”categorical_crossentropy”作为目标函数时,标签应该为多类模式,即one-hot编码的向量,而不是单个数值. 可以使用工具中的<code>to_categorical</code>函数完成该转换.示例如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">&gt; <span class="keyword">from</span> keras.utils.np_utils <span class="keyword">import</span> to_categorical</div>
+<div class="line">&gt; </div>
+<div class="line">&gt; categorical_labels = to_categorical(int_labels, num_classes=<span class="keyword">None</span>)</div>
+<div class="line">&gt;</div>
+</pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<h3 id="优化器optimizers"><a href="#优化器optimizers" class="headerlink" title="优化器optimizers"></a>优化器optimizers</h3><p>优化器是编译Keras模型必要的另一个参数</p>
+<p>可以在调用<code>model.compile()</code>之前初始化一个优化器对象，然后传入该函数，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">sgd = optimizers.SGD(lr=<span class="number">0.01</span>, decay=<span class="number">1e-6</span>, momentum=<span class="number">0.9</span>, nesterov=<span class="keyword">True</span>)</div>
+<div class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>, optimizer=sgd)</div>
+</pre></td></tr></table></figure>
+<p>也可以在调用<code>model.compile()</code>时传递一个预定义优化器名</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># pass optimizer by name: default parameters will be used</span></div>
+<div class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>, optimizer=<span class="string">'sgd'</span>)</div>
+</pre></td></tr></table></figure>
+<p>参数<code>clipnorm</code>和<code>clipvalue</code>是所有优化器都可以使用的参数,用于对梯度进行裁剪</p>
+<h4 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.optimizers.SGD(lr=<span class="number">0.01</span>, momentum=<span class="number">0.0</span>, decay=<span class="number">0.0</span>, nesterov=<span class="keyword">False</span>, clipnorm=<span class="number">1.</span>)</div>
+</pre></td></tr></table></figure>
+<p>随机梯度下降法，支持动量参数，支持学习衰减率，支持Nesterov动量</p>
+<h4 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.optimizers.Adam(lr=<span class="number">0.001</span>, beta_1=<span class="number">0.9</span>, beta_2=<span class="number">0.999</span>, epsilon=<span class="number">1e-08</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="激活函数Activations"><a href="#激活函数Activations" class="headerlink" title="激活函数Activations"></a>激活函数Activations</h3><p>激活函数可以通过设置单独的<a href="https://keras-cn.readthedocs.io/en/latest/layers/core_layer/#activation" target="_blank" rel="noopener">激活层</a>实现，也可以在构造层对象时通过传递<code>activation</code>参数实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Activation, Dense</div>
+<div class="line">model.add(Dense(<span class="number">64</span>))</div>
+<div class="line">model.add(Activation(<span class="string">'tanh'</span>))</div>
+</pre></td></tr></table></figure>
+<p>等价于</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">model.add(Dense(<span class="number">64</span>, activation=<span class="string">'tanh'</span>))</div>
+</pre></td></tr></table></figure>
+<p><strong>预定义激活函数</strong></p>
+<ul>
+<li>softmax：对输入数据的最后一维进行softmax，输入数据应形如<code>(nb_samples, nb_timesteps, nb_dims)</code>或<code>(nb_samples,nb_dims)</code></li>
+<li>elu</li>
+<li>selu: 可伸缩的指数线性单元（Scaled Exponential Linear Unit），参考<a href="https://arxiv.org/abs/1706.02515" target="_blank" rel="noopener">Self-Normalizing Neural Networks</a></li>
+<li>softplus</li>
+<li>softsign</li>
+<li>relu</li>
+<li>tanh</li>
+<li>sigmoid</li>
+<li>hard_sigmoid</li>
+<li>linear</li>
+</ul>
+<h3 id="性能评估"><a href="#性能评估" class="headerlink" title="性能评估"></a>性能评估</h3><p>性能评估模块提供了一系列用于模型性能评估的函数,这些函数在模型编译时由<code>metrics</code>关键字设置</p>
+<p>可以通过字符串来使用域定义的性能评估函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>,</div>
+<div class="line">              optimizer=<span class="string">'sgd'</span>,</div>
+<div class="line">              metrics=[<span class="string">'mae'</span>, <span class="string">'acc'</span>])</div>
+</pre></td></tr></table></figure>
+<p>也可以自定义一个Theano/TensorFlow函数并使用之</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> metrics</div>
+<div class="line"></div>
+<div class="line">model.compile(loss=<span class="string">'mean_squared_error'</span>,</div>
+<div class="line">              optimizer=<span class="string">'sgd'</span>,</div>
+<div class="line">              metrics=[metrics.mae, metrics.categorical_accuracy])</div>
+</pre></td></tr></table></figure>
+<h3 id="初始化方法"><a href="#初始化方法" class="headerlink" title="初始化方法"></a>初始化方法</h3><p>初始化方法定义了对Keras层设置初始化权重的方法</p>
+<p>不同的层可能使用不同的关键字来传递初始化方法，一般来说指定初始化方法的关键字是<code>kernel_initializer</code> 和 <code>bias_initializer</code>，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">model.add(Dense(<span class="number">64</span>,</div>
+<div class="line">                kernel_initializer=<span class="string">'random_uniform'</span>,</div>
+<div class="line">                bias_initializer=<span class="string">'zeros'</span>))</div>
+</pre></td></tr></table></figure>
+<p><strong>预定义初始化方法</strong></p>
+<ul>
+<li>Zeros</li>
+<li>Ones</li>
+<li>Constant</li>
+<li>RandomNormal</li>
+<li>RandomUniform</li>
+</ul>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a><a href="https://keras-cn.readthedocs.io/en/latest/other/callbacks/" target="_blank" rel="noopener">回调函数</a></h3><p>回调函数是一组在训练的特定阶段被调用的函数集，你可以使用回调函数来观察训练过程中网络内部的状态和统计信息。通过传递回调函数列表到模型的<code>.fit()</code>中，即可在给定的训练阶段调用该函数集中的函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">keras.callbacks.Callback()</div>
+</pre></td></tr></table></figure>
+<p>这是回调函数的抽象类，定义新的回调函数必须继承自该类</p>
+<h3 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h3><ul>
+<li>params：字典，训练参数集（如信息显示方法verbosity，batch大小，epoch数）</li>
+<li>model：<code>keras.models.Model</code>对象，为正在训练的模型的引用</li>
+</ul>
+<p>回调函数以字典<code>logs</code>为参数，该字典包含了一系列与当前batch或epoch相关的信息。</p>
+<p>目前，模型的<code>.fit()</code>中有下列参数会被记录到<code>logs</code>中：</p>
+<ul>
+<li>在每个epoch的结尾处（on_epoch_end），<code>logs</code>将包含训练的正确率和误差，<code>acc</code>和<code>loss</code>，如果指定了验证集，还会包含验证集正确率和误差<code>val_acc)</code>和<code>val_loss</code>，<code>val_acc</code>还额外需要在<code>.compile</code>中启用<code>metrics=[&#39;accuracy&#39;]</code>。</li>
+<li>在每个batch的开始处（on_batch_begin）：<code>logs</code>包含<code>size</code>，即当前batch的样本数</li>
+<li>在每个batch的结尾处（on_batch_end）：<code>logs</code>包含<code>loss</code>，若启用<code>accuracy</code>则还包含<code>acc</code></li>
+</ul>
+<h2 id="Keras后端"><a href="#Keras后端" class="headerlink" title="Keras后端"></a><a href="https://keras-cn.readthedocs.io/en/latest/backend/" target="_blank" rel="noopener">Keras后端</a></h2><h2 id="模型保存"><a href="#模型保存" class="headerlink" title="模型保存"></a>模型保存</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><h4 id="模型保存-1"><a href="#模型保存-1" class="headerlink" title="模型保存"></a>模型保存</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 </pre></td><td class="code"><pre><div class="line">json_string = model.to_json()</div>
@@ -1210,7 +1367,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序贯（Sequential）模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">序贯（Sequential）模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络构造"><span class="nav-number">1.1.2.</span> <span class="nav-text">网络构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.4.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式（Functional）模型"><span class="nav-number">1.1.5.</span> <span class="nav-text">函数式（Functional）模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景1：全连接网络"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">应用场景1：全连接网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景2：多输入多输出模型"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">应用场景2：多输入多输出模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景3：共享层"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">应用场景3：共享层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#层“节点”的概念"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">层“节点”的概念</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras网络层"><span class="nav-number">1.2.</span> <span class="nav-text">Keras网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用层"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense层"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Dense层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dropout层"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Dropout层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flatten层"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Flatten层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lambda层"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Lambda层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积层"><span class="nav-number">1.2.2.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2D层"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Conv2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2DTranspose层"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Conv2DTranspose层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化层"><span class="nav-number">1.2.3.</span> <span class="nav-text">池化层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MaxPooling2D层"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">MaxPooling2D层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型保存"><span class="nav-number">1.3.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">1.3.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型保存-1"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型载入"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">1.3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#符号计算-数据流图"><span class="nav-number">3.1.</span> <span class="nav-text">符号计算(数据流图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量"><span class="nav-number">3.2.</span> <span class="nav-text">张量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">3.3.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">3.4.</span> <span class="nav-text">模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：手写数字识别"><span class="nav-number">4.</span> <span class="nav-text">Example：手写数字识别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：CNN"><span class="nav-number">5.</span> <span class="nav-text">Example：CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text"> </span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序贯（Sequential）模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">序贯（Sequential）模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络构造"><span class="nav-number">1.1.2.</span> <span class="nav-text">网络构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.4.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式（Functional）模型"><span class="nav-number">1.1.5.</span> <span class="nav-text">函数式（Functional）模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景1：全连接网络"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">应用场景1：全连接网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景2：多输入多输出模型"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">应用场景2：多输入多输出模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景3：共享层"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">应用场景3：共享层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#层“节点”的概念"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">层“节点”的概念</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras网络层"><span class="nav-number">1.2.</span> <span class="nav-text">Keras网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用层"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense层"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Dense层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dropout层"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Dropout层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flatten层"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Flatten层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lambda层"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Lambda层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积层"><span class="nav-number">1.2.2.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2D层"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Conv2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2DTranspose层"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Conv2DTranspose层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化层"><span class="nav-number">1.2.3.</span> <span class="nav-text">池化层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MaxPooling2D层"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">MaxPooling2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AveragePooling2D层"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">AveragePooling2D层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批正则化"><span class="nav-number">1.2.4.</span> <span class="nav-text">批正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNormalization层"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">BatchNormalization层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">1.3.</span> <span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数loss"><span class="nav-number">1.3.1.</span> <span class="nav-text">损失函数loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化器optimizers"><span class="nav-number">1.3.2.</span> <span class="nav-text">优化器optimizers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adam"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活函数Activations"><span class="nav-number">1.3.3.</span> <span class="nav-text">激活函数Activations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能评估"><span class="nav-number">1.3.4.</span> <span class="nav-text">性能评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化方法"><span class="nav-number">1.3.5.</span> <span class="nav-text">初始化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">1.3.6.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类属性"><span class="nav-number">1.3.7.</span> <span class="nav-text">类属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras后端"><span class="nav-number">1.4.</span> <span class="nav-text">Keras后端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型保存"><span class="nav-number">1.5.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">1.5.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型保存-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型载入"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">1.5.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#符号计算-数据流图"><span class="nav-number">3.1.</span> <span class="nav-text">符号计算(数据流图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量"><span class="nav-number">3.2.</span> <span class="nav-text">张量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">3.3.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">3.4.</span> <span class="nav-text">模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：手写数字识别"><span class="nav-number">4.</span> <span class="nav-text">Example：手写数字识别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：CNN"><span class="nav-number">5.</span> <span class="nav-text">Example：CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text"> </span></a></li></ol></div>
             
 
           </div>

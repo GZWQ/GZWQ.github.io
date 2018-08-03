@@ -99,7 +99,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.48%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%203.34.27%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png">
-<meta property="og:updated_time" content="2018-07-31T22:03:28.202Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/20/Generative-Adversarial-Networks/Screen%20Shot%202018-08-02%20at%207.59.25%20PM.png">
+<meta property="og:updated_time" content="2018-08-03T01:00:11.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Generative Adversarial Networks">
 <meta name="twitter:description" content="GAN 启发自博弈论中的二人零和博弈（two-player game），GAN 模型中的两位博弈方分别由生成式模型（generative model）和判别式模型（discriminative model）充当。生成模型 G 捕捉样本数据的分布，用服从某一分布（均匀分布，高斯分布等）的噪声 z 生成一个类似真实训练数据的样本，追求效果是越像真实样本越好；判别模型 D 是一个二分类器，估计一个样本来">
@@ -409,327 +411,7 @@
 <h1 id="局限"><a href="#局限" class="headerlink" title="局限"></a>局限</h1><p>在手写体数字生成过程中，我们无法得知什么样的噪声z可以用来生成数字1，什么样的噪声z可以用来生成数字3，我们对这些一无所知，这从一点程度上限制了我们对GAN的使用。</p>
 <h1 id="GAN实现"><a href="#GAN实现" class="headerlink" title="GAN实现"></a>GAN实现</h1><h2 id="GAN训练伪代码"><a href="#GAN训练伪代码" class="headerlink" title="GAN训练伪代码"></a><a href="http://36kr.com/p/5086889.html" target="_blank" rel="noopener">GAN训练伪代码</a></h2><p><img src="/2018/07/20/Generative-Adversarial-Networks/beb95bnndbwkgz4x!1200.jpeg" alt="beb95bnndbwkgz4x!1200"></p>
 <p><strong>这里红框圈出的部分是我们要额外注意的</strong>。第一步我们训练D，D是希望V(G, D)越大越好，所以是加上梯度(ascending)。第二步训练G时，V(G, D)越小越好，所以是减去梯度(descending)。整个训练过程交替进行。</p>
-<h2 id="Tensorflow实现手写体"><a href="#Tensorflow实现手写体" class="headerlink" title="Tensorflow实现手写体"></a><a href="# https://github.com/jiqizhixin/ML-Tutorial-Experiment/blob/master/Experiments/tf_GAN.ipynb">Tensorflow实现手写体</a></h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-<div class="line">36</div>
-<div class="line">37</div>
-<div class="line">38</div>
-<div class="line">39</div>
-<div class="line">40</div>
-<div class="line">41</div>
-<div class="line">42</div>
-<div class="line">43</div>
-<div class="line">44</div>
-<div class="line">45</div>
-<div class="line">46</div>
-<div class="line">47</div>
-<div class="line">48</div>
-<div class="line">49</div>
-<div class="line">50</div>
-<div class="line">51</div>
-<div class="line">52</div>
-<div class="line">53</div>
-<div class="line">54</div>
-<div class="line">55</div>
-<div class="line">56</div>
-<div class="line">57</div>
-<div class="line">58</div>
-<div class="line">59</div>
-<div class="line">60</div>
-<div class="line">61</div>
-<div class="line">62</div>
-<div class="line">63</div>
-<div class="line">64</div>
-<div class="line">65</div>
-<div class="line">66</div>
-<div class="line">67</div>
-<div class="line">68</div>
-<div class="line">69</div>
-<div class="line">70</div>
-<div class="line">71</div>
-<div class="line">72</div>
-<div class="line">73</div>
-<div class="line">74</div>
-<div class="line">75</div>
-<div class="line">76</div>
-<div class="line">77</div>
-<div class="line">78</div>
-<div class="line">79</div>
-<div class="line">80</div>
-<div class="line">81</div>
-<div class="line">82</div>
-<div class="line">83</div>
-<div class="line">84</div>
-<div class="line">85</div>
-<div class="line">86</div>
-<div class="line">87</div>
-<div class="line">88</div>
-<div class="line">89</div>
-<div class="line">90</div>
-<div class="line">91</div>
-<div class="line">92</div>
-<div class="line">93</div>
-<div class="line">94</div>
-<div class="line">95</div>
-<div class="line">96</div>
-<div class="line">97</div>
-<div class="line">98</div>
-<div class="line">99</div>
-<div class="line">100</div>
-<div class="line">101</div>
-<div class="line">102</div>
-<div class="line">103</div>
-<div class="line">104</div>
-<div class="line">105</div>
-<div class="line">106</div>
-<div class="line">107</div>
-<div class="line">108</div>
-<div class="line">109</div>
-<div class="line">110</div>
-<div class="line">111</div>
-<div class="line">112</div>
-<div class="line">113</div>
-<div class="line">114</div>
-<div class="line">115</div>
-<div class="line">116</div>
-<div class="line">117</div>
-<div class="line">118</div>
-<div class="line">119</div>
-<div class="line">120</div>
-<div class="line">121</div>
-<div class="line">122</div>
-<div class="line">123</div>
-<div class="line">124</div>
-<div class="line">125</div>
-<div class="line">126</div>
-<div class="line">127</div>
-<div class="line">128</div>
-<div class="line">129</div>
-<div class="line">130</div>
-<div class="line">131</div>
-<div class="line">132</div>
-<div class="line">133</div>
-<div class="line">134</div>
-<div class="line">135</div>
-<div class="line">136</div>
-<div class="line">137</div>
-<div class="line">138</div>
-<div class="line">139</div>
-<div class="line">140</div>
-<div class="line">141</div>
-<div class="line">142</div>
-<div class="line">143</div>
-<div class="line">144</div>
-<div class="line">145</div>
-<div class="line">146</div>
-<div class="line">147</div>
-<div class="line">148</div>
-<div class="line">149</div>
-<div class="line">150</div>
-<div class="line">151</div>
-<div class="line">152</div>
-<div class="line">153</div>
-<div class="line">154</div>
-<div class="line">155</div>
-<div class="line">156</div>
-<div class="line">157</div>
-<div class="line">158</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment"># https://github.com/jiqizhixin/ML-Tutorial-Experiment/blob/master/Experiments/tf_GAN.ipynb</span></div>
-<div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div>
-<div class="line"><span class="keyword">from</span> tensorflow.examples.tutorials.mnist <span class="keyword">import</span> input_data</div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"><span class="keyword">import</span> matplotlib.gridspec <span class="keyword">as</span> gridspec</div>
-<div class="line"><span class="keyword">import</span> os</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#该函数将给出权重初始化的方法</span></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">variable_init</span><span class="params">(size)</span>:</span></div>
-<div class="line">    in_dim = size[<span class="number">0</span>]</div>
-<div class="line"></div>
-<div class="line">    <span class="comment">#计算随机生成变量所服从的正态分布标准差</span></div>
-<div class="line">    w_stddev = <span class="number">1.</span> / tf.sqrt(in_dim / <span class="number">2.</span>)</div>
-<div class="line">    <span class="keyword">return</span> tf.random_normal(shape=size, stddev=w_stddev)</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#定义输入矩阵的占位符，输入层单元为784，None代表批量大小的占位，X代表输入的真实图片。占位符的数值类型为32位浮点型</span></div>
-<div class="line">X = tf.placeholder(tf.float32, shape=[<span class="keyword">None</span>, <span class="number">784</span>])</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#定义判别器的权重矩阵和偏置项向量，由此可知判别网络为三层全连接网络</span></div>
-<div class="line">D_W1 = tf.Variable(variable_init([<span class="number">784</span>, <span class="number">128</span>]))</div>
-<div class="line">D_b1 = tf.Variable(tf.zeros(shape=[<span class="number">128</span>]))</div>
-<div class="line"></div>
-<div class="line">D_W2 = tf.Variable(variable_init([<span class="number">128</span>, <span class="number">1</span>]))</div>
-<div class="line">D_b2 = tf.Variable(tf.zeros(shape=[<span class="number">1</span>]))</div>
-<div class="line"></div>
-<div class="line">theta_D = [D_W1, D_W2, D_b1, D_b2]</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#定义生成器的输入噪声为100维度的向量组，None根据批量大小确定</span></div>
-<div class="line">Z = tf.placeholder(tf.float32, shape=[<span class="keyword">None</span>, <span class="number">100</span>])</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#定义生成器的权重与偏置项。输入层为100个神经元且接受随机噪声，</span></div>
-<div class="line"><span class="comment">#输出层为784个神经元，并输出手写字体图片。生成网络根据原论文为三层全连接网络</span></div>
-<div class="line">G_W1 = tf.Variable(variable_init([<span class="number">100</span>, <span class="number">128</span>]))</div>
-<div class="line">G_b1 = tf.Variable(tf.zeros(shape=[<span class="number">128</span>]))</div>
-<div class="line"></div>
-<div class="line">G_W2 = tf.Variable(variable_init([<span class="number">128</span>, <span class="number">784</span>]))</div>
-<div class="line">G_b2 = tf.Variable(tf.zeros(shape=[<span class="number">784</span>]))</div>
-<div class="line"></div>
-<div class="line">theta_G = [G_W1, G_W2, G_b1, G_b2]</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#定义一个可以生成m*n阶随机矩阵的函数，该矩阵的元素服从均匀分布，随机生成的z就为生成器的输入</span></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sample_Z</span><span class="params">(m, n)</span>:</span></div>
-<div class="line">    <span class="keyword">return</span> np.random.uniform(<span class="number">-1.</span>, <span class="number">1.</span>, size=[m, n])</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 定义生成器</span></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generator</span><span class="params">(z)</span>:</span></div>
-<div class="line">    <span class="comment"># 第一层先计算 y=z*G_W1+G-b1,然后投入激活函数计算G_h1=ReLU（y）,G_h1 为第二次层神经网络的输出激活值</span></div>
-<div class="line">    G_h1 = tf.nn.relu(tf.matmul(z, G_W1) + G_b1)</div>
-<div class="line"></div>
-<div class="line">    <span class="comment"># 以下两个语句计算第二层传播到第三层的激活结果，第三层的激活结果是含有784个元素的向量，该向量转化28×28就可以表示图像</span></div>
-<div class="line">    G_log_prob = tf.matmul(G_h1, G_W2) + G_b2 <span class="comment">#shape = [784]</span></div>
-<div class="line">    G_prob = tf.nn.sigmoid(G_log_prob)</div>
-<div class="line">    <span class="keyword">return</span> G_prob</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 定义判别器</span></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">discriminator</span><span class="params">(x)</span>:</span></div>
-<div class="line">    <span class="comment"># 计算D_h1=ReLU（x*D_W1+D_b1）,该层的输入为含784个元素的向量</span></div>
-<div class="line">    D_h1 = tf.nn.relu(tf.matmul(x, D_W1) + D_b1)</div>
-<div class="line"></div>
-<div class="line">    <span class="comment"># 计算第三层的输出结果。因为使用的是Sigmoid函数，则该输出结果是一个取值为[0,1]间的标量（见上述权重定义）</span></div>
-<div class="line">    <span class="comment"># 即判别输入的图像到底是真（=1）还是假（=0）</span></div>
-<div class="line">    D_logit = tf.matmul(D_h1, D_W2) + D_b2</div>
-<div class="line">    D_prob = tf.nn.sigmoid(D_logit)</div>
-<div class="line"></div>
-<div class="line">    <span class="comment"># 返回判别为真的概率和第三层的输入值，输出D_logit是为了将其输入tf.nn.sigmoid_cross_entropy_with_logits()以构建损失函数</span></div>
-<div class="line">    <span class="keyword">return</span> D_prob, D_logit</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="comment">#该函数用于输出生成图片</span></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot</span><span class="params">(samples)</span>:</span></div>
-<div class="line">    fig = plt.figure(figsize=(<span class="number">4</span>, <span class="number">4</span>))</div>
-<div class="line">    gs = gridspec.GridSpec(<span class="number">4</span>, <span class="number">4</span>)</div>
-<div class="line">    gs.update(wspace=<span class="number">0.05</span>, hspace=<span class="number">0.05</span>)</div>
-<div class="line"></div>
-<div class="line">    <span class="keyword">for</span> i, sample <span class="keyword">in</span> enumerate(samples):</div>
-<div class="line">        ax = plt.subplot(gs[i])</div>
-<div class="line">        plt.axis(<span class="string">'off'</span>)</div>
-<div class="line">        ax.set_xticklabels([])</div>
-<div class="line">        ax.set_yticklabels([])</div>
-<div class="line">        ax.set_aspect(<span class="string">'equal'</span>)</div>
-<div class="line">        plt.imshow(sample.reshape(<span class="number">28</span>, <span class="number">28</span>), cmap=<span class="string">'Greys_r'</span>)</div>
-<div class="line"></div>
-<div class="line">    <span class="keyword">return</span> fig</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#输入随机噪声z而输出生成样本</span></div>
-<div class="line">G_sample = generator(Z)</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#分别输入真实图片和生成的图片，并投入判别器以判断真伪</span></div>
-<div class="line">D_real, D_logit_real = discriminator(X)</div>
-<div class="line">D_fake, D_logit_fake = discriminator(G_sample)</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#以下为原论文的判别器损失和生成器损失，但本实现并没有使用该损失函数</span></div>
-<div class="line"><span class="comment"># D_loss = -tf.reduce_mean(tf.log(D_real) + tf.log(1. - D_fake))</span></div>
-<div class="line"><span class="comment"># G_loss = -tf.reduce_mean(tf.log(D_fake))</span></div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 我们使用交叉熵作为判别器和生成器的损失函数，因为sigmoid_cross_entropy_with_logits内部会对预测输入执行Sigmoid函数，</span></div>
-<div class="line"><span class="comment">#所以我们取判别器最后一层未投入激活函数的值，即D_h1*D_W2+D_b2。</span></div>
-<div class="line"><span class="comment">#tf.ones_like(D_logit_real)创建维度和D_logit_real相等的全是1的标注，真实图片。</span></div>
-<div class="line">D_loss_real = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_real, labels=tf.ones_like(D_logit_real)))</div>
-<div class="line">D_loss_fake = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_fake, labels=tf.zeros_like(D_logit_fake)))</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#损失函数为两部分，即E[log(D(x))]+E[log(1-D(G(z)))]，将真的判别为假和将假的判别为真</span></div>
-<div class="line">D_loss = D_loss_real + D_loss_fake</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#同样使用交叉熵构建生成器损失函数</span></div>
-<div class="line">G_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_fake, labels=tf.ones_like(D_logit_fake)))</div>
-<div class="line"></div>
-<div class="line"><span class="comment">#定义判别器和生成器的优化方法为Adam算法，关键字var_list表明最小化损失函数所更新的权重矩阵</span></div>
-<div class="line">D_solver = tf.train.AdamOptimizer().minimize(D_loss, var_list=theta_D)</div>
-<div class="line">G_solver = tf.train.AdamOptimizer().minimize(G_loss, var_list=theta_G)</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="comment">#选择训练的批量大小和随机生成噪声的维度#选择训练的批</span></div>
-<div class="line">mb_size = <span class="number">128</span></div>
-<div class="line">Z_dim = <span class="number">100</span></div>
-<div class="line"></div>
-<div class="line"><span class="comment">#读取数据集MNIST，并放在当前目录data文件夹下MNIST文件夹中，如果该地址没有数据，则下载数据至该文件夹</span></div>
-<div class="line">mnist = input_data.read_data_sets(<span class="string">"./data/MNIST/"</span>, one_hot=<span class="keyword">True</span>)</div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 打开一个会话运行计算图</span></div>
-<div class="line">sess = tf.Session()</div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 初始化所有定义的变量</span></div>
-<div class="line">sess.run(tf.global_variables_initializer())</div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 如果当前目录下不存在out文件夹，则创建该文件夹</span></div>
-<div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'out/'</span>):</div>
-<div class="line">    os.makedirs(<span class="string">'out/'</span>)</div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 初始化，并开始迭代训练，100W次</span></div>
-<div class="line">i = <span class="number">0</span></div>
-<div class="line"><span class="keyword">for</span> it <span class="keyword">in</span> range(<span class="number">20000</span>):</div>
-<div class="line"></div>
-<div class="line">    <span class="comment"># 每2000次输出一张生成器生成的图片</span></div>
-<div class="line">    <span class="keyword">if</span> it % <span class="number">2000</span> == <span class="number">0</span>:</div>
-<div class="line">        samples = sess.run(G_sample, feed_dict=&#123;Z: sample_Z(<span class="number">16</span>, Z_dim)&#125;)</div>
-<div class="line"></div>
-<div class="line">        fig = plot(samples)</div>
-<div class="line">        plt.savefig(<span class="string">'out/&#123;&#125;.png'</span>.format(str(i).zfill(<span class="number">3</span>)), bbox_inches=<span class="string">'tight'</span>)</div>
-<div class="line">        i += <span class="number">1</span></div>
-<div class="line">        plt.close(fig)</div>
-<div class="line"></div>
-<div class="line">    <span class="comment"># next_batch抽取下一个批量的图片，该方法返回一个矩阵，即shape=[mb_size，784]，每一行是一张图片，共批量大小行</span></div>
-<div class="line">    X_mb, _ = mnist.train.next_batch(mb_size)</div>
-<div class="line"></div>
-<div class="line">    <span class="comment"># 投入数据并根据优化方法迭代一次，计算损失后返回损失值</span></div>
-<div class="line">    _, D_loss_curr = sess.run([D_solver, D_loss], feed_dict=&#123;X: X_mb, Z: sample_Z(mb_size, Z_dim)&#125;)</div>
-<div class="line">    _, G_loss_curr = sess.run([G_solver, G_loss], feed_dict=&#123;Z: sample_Z(mb_size, Z_dim)&#125;)</div>
-<div class="line"></div>
-<div class="line">    <span class="comment"># 每迭代2000次输出迭代数、生成器损失和判别器损失</span></div>
-<div class="line">    <span class="keyword">if</span> it % <span class="number">2000</span> == <span class="number">0</span>:</div>
-<div class="line">        print(<span class="string">'Iter: &#123;&#125;'</span>.format(it))</div>
-<div class="line">        print(<span class="string">'D loss: &#123;:.4&#125;'</span>.format(D_loss_curr))</div>
-<div class="line">        print(<span class="string">'G_loss: &#123;:.4&#125;'</span>.format(G_loss_curr))</div>
-<div class="line">        print()</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h2 id="keras实现手写体"><a href="#keras实现手写体" class="headerlink" title="keras实现手写体"></a><a href="https://github.com/roatienza/Deep-Learning-Experiments/blob/master/Experiments/Tensorflow/GAN/dcgan_mnist.py" target="_blank" rel="noopener">keras实现手写体</a></h2><p><a href="https://www.leiphone.com/news/201703/Y5vnDSV9uIJIQzQm.html" target="_blank" rel="noopener">文字版</a> </p>
+<h2 id="keras实现手写体"><a href="#keras实现手写体" class="headerlink" title="keras实现手写体"></a><a href="https://github.com/roatienza/Deep-Learning-Experiments/blob/master/Experiments/Tensorflow/GAN/dcgan_mnist.py" target="_blank" rel="noopener">keras实现手写体</a></h2><p><a href="https://www.leiphone.com/news/201703/Y5vnDSV9uIJIQzQm.html" target="_blank" rel="noopener">文字版</a> <a href="# https://github.com/jiqizhixin/ML-Tutorial-Experiment/blob/master/Experiments/tf_GAN.ipynb">Tensorflow实现手写体</a></p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -1197,6 +879,69 @@
 <p>（1）D网络的输入只有x，不加c。</p>
 <p>（2）Q网络和D网络共享同一个网络，只是到最后一层独立输出。</p>
 <p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-07-31 at 4.44.58 PM.png" alt="Screen Shot 2018-07-31 at 4.44.58 PM"></p>
+<h1 id="GAN-IN-KERAS"><a href="#GAN-IN-KERAS" class="headerlink" title="GAN_IN_KERAS"></a>GAN_IN_KERAS</h1><p>构造网络</p>
+<p>虽然训练的时候是基于batch大小，但是在设计网络的时候，考虑的是只训练一个样本的网络，Keras有两种形式设置一个神经网络，Model和Sequential。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">input_shape = (img_rows, img_cols, channel)</div>
+<div class="line">x_input = Input(input_shape) <span class="comment">#如果有多个输入，则写多个Input函数</span></div>
+<div class="line">h = Conv2D(<span class="number">256</span>, (k, k), strides=(<span class="number">2</span>, <span class="number">2</span>), border_mode=<span class="string">'same'</span>)(x)</div>
+<div class="line">h = BatchNormalization(momentum=<span class="number">0.8</span>)(h)</div>
+<div class="line">h = LeakyReLU(<span class="number">0.2</span>)(h)</div>
+<div class="line">....</div>
+<div class="line">y_output = Dense(<span class="number">10</span>)(h)</div>
+<div class="line">model = Model([x_input], [y_output]) <span class="comment">#指明网络的输入，输出，需要与train_on_batch相对应</span></div>
+</pre></td></tr></table></figure>
+<p>损失函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">loss = </div>
+<div class="line">model.add_loss(loss)</div>
+<div class="line">discriminator.compile(optimizer=opt, loss = <span class="keyword">None</span>)</div>
+<div class="line">discriminator.summary()</div>
+</pre></td></tr></table></figure>
+<p>训练</p>
+<p>一般我们先训练discriminator，它的输入正常情况下是真假图片，真图片来自于训练集，假图片来自于generator输出，我们利用generator模型的prediction函数生成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">imgs_batch = x_train[idx,:,:,:]</div>
+<div class="line">generated_imgs = generator.predict(imgs_batch)</div>
+</pre></td></tr></table></figure>
+<p>这样我们就有了真假图片，就可以训练了，函数是model_name.train_on_batch(x,y)，其中$x$就是神经网络的训练集输入，$y$是训练集的ground-truth，看discriminator的输出。</p>
+<p>训练discriminator时，它的输入就是一张图片，输出就是真假概率，所以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">discriminator.train_on_batch( x = imgs_batch, y = np.ones(shape=(batch_size,<span class="number">1</span>)) ) </div>
+<div class="line"></div>
+<div class="line">discriminator.train_on_batch( x = generated_imgs, y = np.zeros(shape=(batch_size,<span class="number">1</span>)) )</div>
+</pre></td></tr></table></figure>
+<p>训练generate模型，则输入是noise，x = np.random.uniform(0,1,size=(batch_size,100))，它的ground_truth是y=np.ones(shape=(batch_size,1))。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">generator.train_on_batch(x = np.random.uniform(<span class="number">0</span>,<span class="number">1</span>,size=(batch_size,<span class="number">100</span>)),</div>
+<div class="line">                         y=np.ones(shape=(batch_size,<span class="number">1</span>)) )</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>如果是cgan或者info-gan，那么会有额外的输入和输出，如下图：</p>
+<p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-07-31 at 4.44.58 PM.png" alt="Screen Shot 2018-07-31 at 4.44.58 PM"></p>
+<p>这是info-gan，可以看到，在gan基础上有了一个额外输入$c(latent)$，有了一个额外的输出$c$。所以generator的input是x = np.concatenate( z , c )，输出是y = ( f_r_label , c ) ，每一个输出都需要一个ground-truth，所以generator的训练代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">&gt; generator.train_on_batch(x = np.concatenate( z , c ),y = [np.ones(batch_size,<span class="number">1</span>),c])</div>
+<div class="line">&gt;</div>
+</pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<h2 id="AC-GAN"><a href="#AC-GAN" class="headerlink" title="AC-GAN"></a>AC-GAN</h2><p><img src="/2018/07/20/Generative-Adversarial-Networks/Screen Shot 2018-08-02 at 7.59.25 PM.png" alt="Screen Shot 2018-08-02 at 7.59.25 PM"></p>
 
       
     </div>
@@ -1373,7 +1118,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intuition"><span class="nav-number">1.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判别模型"><span class="nav-number">2.</span> <span class="nav-text">判别模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成模型"><span class="nav-number">3.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#局限"><span class="nav-number">5.</span> <span class="nav-text">局限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN实现"><span class="nav-number">6.</span> <span class="nav-text">GAN实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN训练伪代码"><span class="nav-number">6.1.</span> <span class="nav-text">GAN训练伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorflow实现手写体"><span class="nav-number">6.2.</span> <span class="nav-text">Tensorflow实现手写体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keras实现手写体"><span class="nav-number">6.3.</span> <span class="nav-text">keras实现手写体</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN的衍生模型"><span class="nav-number">7.</span> <span class="nav-text">GAN的衍生模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DCGAN"><span class="nav-number">7.1.</span> <span class="nav-text">DCGAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional-GAN"><span class="nav-number">7.2.</span> <span class="nav-text">Conditional GAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Info-GAN"><span class="nav-number">7.3.</span> <span class="nav-text">Info-GAN</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intuition"><span class="nav-number">1.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#判别模型"><span class="nav-number">2.</span> <span class="nav-text">判别模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成模型"><span class="nav-number">3.</span> <span class="nav-text">生成模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#局限"><span class="nav-number">5.</span> <span class="nav-text">局限</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN实现"><span class="nav-number">6.</span> <span class="nav-text">GAN实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAN训练伪代码"><span class="nav-number">6.1.</span> <span class="nav-text">GAN训练伪代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#keras实现手写体"><span class="nav-number">6.2.</span> <span class="nav-text">keras实现手写体</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN的衍生模型"><span class="nav-number">7.</span> <span class="nav-text">GAN的衍生模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DCGAN"><span class="nav-number">7.1.</span> <span class="nav-text">DCGAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional-GAN"><span class="nav-number">7.2.</span> <span class="nav-text">Conditional GAN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Info-GAN"><span class="nav-number">7.3.</span> <span class="nav-text">Info-GAN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN-IN-KERAS"><span class="nav-number">8.</span> <span class="nav-text">GAN_IN_KERAS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AC-GAN"><span class="nav-number">8.1.</span> <span class="nav-text">AC-GAN</span></a></li></ol></li></ol></div>
             
 
           </div>
