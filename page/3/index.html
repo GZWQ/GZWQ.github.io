@@ -283,6 +283,534 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/ML-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/26/ML-Python/" itemprop="url">Python</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T15:59:02-05:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://www.yiibai.com/python3/python_date_time.html#article-start" target="_blank" rel="noopener">last</a></p>
+<h1 id="琐碎"><a href="#琐碎" class="headerlink" title="琐碎"></a>琐碎</h1><ol>
+<li><p><strong>warning ignore</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> warnings</div>
+<div class="line">warnings.filterwarnings(<span class="string">"ignore"</span>)</div>
+</pre></td></tr></table></figure>
+</li>
+<li><p><strong>中文注释乱码</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf8 -*-</span></div>
+</pre></td></tr></table></figure>
+<p>放在python脚本的第一行。</p>
+</li>
+<li></li>
+</ol>
+<h1 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Python支持不同的数字类型 -</p>
+<ul>
+<li><p>int (有符号整数): 它们通常被称为只是整数或整数，是正的或负的整数，没有小数点。 Python3整数是无限的大小。Python 2中有两个整数类型 - int 和 long。</p>
+<p> 在Python3中不再有 “长整型”了。</p>
+</li>
+<li><p>float (点实数值) : 也叫浮点数，它们代表实数，并用小数点分割整数和小数部分。浮点数也可以用科学记数法，使用 e 或 E 表示10的幂 (2.5e2 = 2.5 x 102 = 250).</p>
+</li>
+<li><p>complex (复数) : 格式是 a + bJ，其中a和b是浮点数，而J(或j)代表-1的平方根(这是一个虚数)。 实数是a的一部分，而虚部为b。复数不经常使用在 Python 编程了。</p>
+</li>
+</ul>
+<h2 id="数值类型转换"><a href="#数值类型转换" class="headerlink" title="数值类型转换"></a>数值类型转换</h2><ul>
+<li>类型 int(X)是将x转换为纯整数</li>
+<li>类型 long(x) 将 x 转换为一个长整型</li>
+<li>类型 float(x) 将 x 转换为浮点数</li>
+<li>类型 complex(x) 将 x 转换成具有实数部分x和虚部为零的复数</li>
+<li>类型 complex(x, y) x和y转换成一个带x实部和y为虚部的复数。x和y是数值表达式</li>
+</ul>
+<h2 id="数值函数"><a href="#数值函数" class="headerlink" title="数值函数"></a>数值函数</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 11.09.15 AM.png" alt="Screen Shot 2018-06-27 at 11.09.15 AM"></p>
+<h2 id="随机函数"><a href="#随机函数" class="headerlink" title="随机函数"></a>随机函数</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 11.10.03 AM.png" alt="Screen Shot 2018-06-27 at 11.10.03 AM"></p>
+<h3 id="random-choice"><a href="#random-choice" class="headerlink" title="random.choice()"></a>random.choice()</h3><p>以下是 choice() 方法的语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">random.choice( seq ) <span class="comment">##seq是一个列表、元组或者字符串，返回一个随机选择的值</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> random</div>
+<div class="line">print(random.choice(range(<span class="number">100</span>)))</div>
+<div class="line"><span class="comment"># 31</span></div>
+<div class="line">print(random.choice(<span class="string">'HelleWorld'</span>))</div>
+<div class="line"><span class="comment"># r</span></div>
+<div class="line">print(random.choice([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">9</span>]))</div>
+<div class="line"><span class="comment"># 3</span></div>
+</pre></td></tr></table></figure>
+<h3 id="random-randrange"><a href="#random-randrange" class="headerlink" title="random.randrange()"></a>random.randrange()</h3><p>randrange()方法的语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">randrange ([start,] stop [,step]) <span class="comment">##该方法从给定范围内返回一个随机项</span></div>
+</pre></td></tr></table></figure>
+<ul>
+<li>start — 范围的开始点。这个起点包括在该范围内。默认值为0</li>
+<li>stop — 停止的范围点。这个点不包含在这个范围内</li>
+<li>step — 递增值。默认值为1</li>
+</ul>
+<h3 id="random-random"><a href="#random-random" class="headerlink" title="random.random()"></a>random.random()</h3><p>返回范围[0,1]内的随机值</p>
+<h3 id="random-shuffle"><a href="#random-shuffle" class="headerlink" title="random.shuffle()"></a>random.shuffle()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">random.shuffle (lst) <span class="comment">##返回重新洗牌列表。</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> random</div>
+<div class="line"></div>
+<div class="line">list = [<span class="number">20</span>, <span class="number">16</span>, <span class="number">10</span>, <span class="number">5</span>];</div>
+<div class="line">random.shuffle(list)</div>
+<div class="line">print(list)</div>
+<div class="line"><span class="comment"># [16, 20, 10, 5]</span></div>
+<div class="line">random.shuffle(list)</div>
+<div class="line">print(list)</div>
+<div class="line"><span class="comment"># [10, 16, 20, 5]</span></div>
+</pre></td></tr></table></figure>
+<h3 id="random-unform"><a href="#random-unform" class="headerlink" title="random.unform()"></a>random.unform()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">random.uniform(x, y) <span class="comment">##介于[x,y)的均分布随机值,返回一个浮点数 r，使得 x &lt;= r &lt; y</span></div>
+</pre></td></tr></table></figure>
+<h2 id="三角函数"><a href="#三角函数" class="headerlink" title="三角函数"></a>三角函数</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.14.54 PM.png" alt="Screen Shot 2018-06-27 at 12.14.54 PM"></p>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.16.18 PM.png" alt="Screen Shot 2018-06-27 at 12.16.18 PM"></p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="字符串访问"><a href="#字符串访问" class="headerlink" title="字符串访问"></a>字符串访问</h2><p>要访问子字符串，用方括号以及索引或索引来获得子切片</p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.18.32 PM.png" alt="Screen Shot 2018-06-27 at 12.18.32 PM"></p>
+<h2 id="字符串更新"><a href="#字符串更新" class="headerlink" title="字符串更新"></a>字符串更新</h2><p>字符串是常量，不能直接修改，但是可以通过字符串拼接，修改。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">s = <span class="string">'hello x world'</span></div>
+<div class="line">s = s[:<span class="number">6</span>]+<span class="string">"wq "</span>+s[<span class="number">8</span>:]</div>
+<div class="line">print(s)</div>
+<div class="line"><span class="comment"># hello wq world</span></div>
+</pre></td></tr></table></figure>
+<h2 id="字符串特殊操作符"><a href="#字符串特殊操作符" class="headerlink" title="字符串特殊操作符"></a>字符串特殊操作符</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.22.40 PM.png" alt="Screen Shot 2018-06-27 at 12.22.40 PM"></p>
+<h3 id="字符串格式化"><a href="#字符串格式化" class="headerlink" title="字符串格式化%"></a>字符串格式化%</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> (<span class="string">"My name is %s and weight is %d kg!"</span> % (<span class="string">'Zara'</span>, <span class="number">21</span>)) </div>
+<div class="line"><span class="comment"># My name is Zara and weight is 21 kg!</span></div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.24.44 PM.png" alt="Screen Shot 2018-06-27 at 12.24.44 PM"></p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.25.15 PM.png" alt="Screen Shot 2018-06-27 at 12.25.15 PM"></p>
+<h2 id="字符串内置函数"><a href="#字符串内置函数" class="headerlink" title="字符串内置函数"></a>字符串内置函数</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.26.32 PM.png" alt="Screen Shot 2018-06-27 at 12.26.32 PM"></p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.26.45 PM.png" alt="Screen Shot 2018-06-27 at 12.26.45 PM"></p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.27.04 PM.png" alt="Screen Shot 2018-06-27 at 12.27.04 PM"></p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-27 at 12.27.16 PM.png" alt="Screen Shot 2018-06-27 at 12.27.16 PM"></p>
+<h1 id="List-列表"><a href="#List-列表" class="headerlink" title="List(列表)"></a>List(列表)</h1><p>逗号分隔列表中元素，列表重要的一点是，在列表中的项目不必是同一类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>];</div>
+<div class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> ];</div>
+<div class="line">list3 = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>];</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>与字符串索引类似，列表的索引从0开始，并列出可切片，联接，等等。</p>
+</blockquote>
+<h2 id="访问列表值"><a href="#访问列表值" class="headerlink" title="访问列表值"></a>访问列表值</h2><p>要访问列表值，请使用方括号连同索引或索引切片获得索引对应可用的值。例如 -</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>]</div>
+<div class="line">list2 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span> ]</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"list1[0]: "</span>, list1[<span class="number">0</span>])</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"list2[1:5]: "</span>, list2[<span class="number">1</span>:<span class="number">5</span>])</div>
+</pre></td></tr></table></figure>
+<p>当执行上面的代码，它产生以下结果 -</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">list1[<span class="number">0</span>]:  physics</div>
+<div class="line">list2[<span class="number">1</span>:<span class="number">5</span>]:  [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div>
+</pre></td></tr></table></figure>
+<h2 id="列表值更新"><a href="#列表值更新" class="headerlink" title="列表值更新"></a>列表值更新</h2><p>可以通过给赋值运算符到左侧切片更新列表中的单个或多个元素， 并且可以使用 append()方法中加入一元素。例如 -</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">list = [<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>]</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"Value available at index 2 : "</span>, list[<span class="number">2</span>])</div>
+<div class="line">list[<span class="number">2</span>] = <span class="number">2001</span></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"New value available at index 2 : "</span>, list[<span class="number">2</span>])</div>
+</pre></td></tr></table></figure>
+<p>当执行上面的代码，它产生以下结果 -</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">Value available at index <span class="number">2</span> :</div>
+<div class="line"><span class="number">1997</span></div>
+<div class="line">New value available at index <span class="number">2</span> :</div>
+<div class="line"><span class="number">2001</span></div>
+</pre></td></tr></table></figure>
+<h2 id="删除列表值"><a href="#删除列表值" class="headerlink" title="删除列表值"></a>删除列表值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">del list[index] #删除index处的值</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">list = [<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>]</div>
+<div class="line"><span class="keyword">print</span> (list)</div>
+<div class="line"><span class="keyword">del</span> list[<span class="number">2</span>]</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"After deleting value at index 2 : "</span>, list)</div>
+<div class="line"><span class="comment"># ['physics', 'chemistry', 1997, 2000]</span></div>
+<div class="line"><span class="comment"># After deleting value at index 2 :  ['physics', 'chemistry', 2000]</span></div>
+</pre></td></tr></table></figure>
+<h2 id="列表基本操作"><a href="#列表基本操作" class="headerlink" title="列表基本操作"></a>列表基本操作</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-06-28 at 12.16.11 PM.png" alt="Screen Shot 2018-06-28 at 12.16.11 PM"></p>
+<h2 id="列表内置函数"><a href="#列表内置函数" class="headerlink" title="列表内置函数"></a>列表内置函数</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数名</th>
+<th style="text-align:center">功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">cmp(list1, list2)</td>
+<td style="text-align:center">列表元素比较，返回0,1,-1,</td>
+</tr>
+<tr>
+<td style="text-align:center">len(list)</td>
+<td style="text-align:center">列表长度</td>
+</tr>
+<tr>
+<td style="text-align:center">max(list)</td>
+<td style="text-align:center">返回列表中最大值</td>
+</tr>
+<tr>
+<td style="text-align:center">min(list)</td>
+<td style="text-align:center">列表中最小值</td>
+</tr>
+<tr>
+<td style="text-align:center">list(seq)</td>
+<td style="text-align:center">转化为list</td>
+</tr>
+<tr>
+<td style="text-align:center">append(ele)</td>
+<td style="text-align:center">元素添加到列表</td>
+</tr>
+<tr>
+<td style="text-align:center">count(ele)</td>
+<td style="text-align:center">统计元素在列表中出现次数</td>
+</tr>
+<tr>
+<td style="text-align:center">extend(list)</td>
+<td style="text-align:center">合并list</td>
+</tr>
+<tr>
+<td style="text-align:center">index(ele)</td>
+<td style="text-align:center">返回列表中 ele 对象对应最低索引值</td>
+</tr>
+<tr>
+<td style="text-align:center">insert(index, ele)</td>
+<td style="text-align:center">插入 ele 对象到列表的 index 索引位置,index必须给出</td>
+</tr>
+<tr>
+<td style="text-align:center">pop([index=-1])</td>
+<td style="text-align:center">根据index删除元素，默认删除最后一个</td>
+</tr>
+<tr>
+<td style="text-align:center">remove(ele)</td>
+<td style="text-align:center">删除ele元素</td>
+</tr>
+<tr>
+<td style="text-align:center">reverse()</td>
+<td style="text-align:center">列表翻转</td>
+</tr>
+<tr>
+<td style="text-align:center">sort()</td>
+<td style="text-align:center">列表元素排序</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="append"><a href="#append" class="headerlink" title="append()"></a>append()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">'C++'</span>, <span class="string">'Java'</span>, <span class="string">'Python'</span>]</div>
+<div class="line">list1.append(<span class="string">'C#'</span>)</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"updated list : "</span>, list1)</div>
+<div class="line"><span class="comment"># updated list :  ['C++', 'Java', 'Python', 'C#']</span></div>
+</pre></td></tr></table></figure>
+<h3 id="extend"><a href="#extend" class="headerlink" title="extend()"></a>extend()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="string">'maths'</span>]</div>
+<div class="line">list2=list(range(<span class="number">5</span>)) </div>
+<div class="line">list1.extend( list2)</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">'Extended List :'</span>,list1)</div>
+<div class="line"><span class="comment"># Extended List : ['physics', 'chemistry', 'maths', 0, 1, 2, 3, 4]</span></div>
+</pre></td></tr></table></figure>
+<h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">aList = [<span class="number">123</span>, <span class="string">'xyz'</span>, <span class="string">'zara'</span>, <span class="string">'abc'</span>, <span class="number">123</span>];</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"Count for 123 : "</span>, aList.count(<span class="number">123</span>))</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"Count for zara : "</span>, aList.count(<span class="string">'zara'</span>))</div>
+<div class="line"><span class="comment"># Count for 123 :  2</span></div>
+<div class="line"><span class="comment"># Count for zara :  1</span></div>
+</pre></td></tr></table></figure>
+<h1 id="Tuple元组"><a href="#Tuple元组" class="headerlink" title="Tuple元组"></a>Tuple元组</h1><p>元组是<strong>不可变</strong>的Python对象的序列，元组序列就像列表，元组和列表之间的区别是，元组不像列表那样不能被改变以及元组使用<strong>圆括号</strong>，而列表使用方括号，创建一个元组是将不同的逗号分隔值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">tup1 = (<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>)</div>
+<div class="line">tup2 = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> )</div>
+<div class="line">tup3 = <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span></div>
+<div class="line">print(tup1,tup2,tup3)</div>
+<div class="line"><span class="comment"># ('physics', 'chemistry', 1997, 2000) (1, 2, 3, 4, 5) ('a', 'b', 'c', 'd')</span></div>
+</pre></td></tr></table></figure>
+<p>为了编写含有一个单一的值，必须包含逗号，即使只有一个值的元组 −</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">tup1 = (<span class="number">50</span>,)</div>
+</pre></td></tr></table></figure>
+<h2 id="元素访问"><a href="#元素访问" class="headerlink" title="元素访问"></a>元素访问</h2><p>要访问值元组，用方括号带索引或索引切片来获得可用的索引值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">tup1 = (<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>)</div>
+<div class="line">tup2 = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> )</div>
+<div class="line">tup3 = <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span></div>
+<div class="line">print(tup1[<span class="number">1</span>]) <span class="comment"># chemistry</span></div>
+<div class="line">print(tup2[:<span class="number">2</span>]) <span class="comment"># (1, 2)</span></div>
+<div class="line">print(tup3[<span class="number">2</span>:]) <span class="comment"># ('c', 'd')</span></div>
+</pre></td></tr></table></figure>
+<h2 id="元素更新"><a href="#元素更新" class="headerlink" title="元素更新"></a>元素更新</h2><p>元组是不可变的，这意味着我们不可以更新或更改元组元素的值。如下面的例子说明了可以把现有的元组创建新的元组的部分 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">tup1 = (<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment">#TypeError: 'tuple' object does not support item assignment</span></div>
+<div class="line"><span class="comment">#tup1[0] = 100</span></div>
+<div class="line">t_add = (<span class="number">100</span>,)</div>
+<div class="line">tup1 = t_add + tup1[<span class="number">1</span>:]</div>
+<div class="line">print(tup1)</div>
+</pre></td></tr></table></figure>
+<h2 id="元素删除"><a href="#元素删除" class="headerlink" title="元素删除"></a>元素删除</h2><p>移除个元组的别元素是不可能的。如要明确删除整个元组，只需要用 del 语句。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">tup = (<span class="string">'physics'</span>, <span class="string">'chemistry'</span>, <span class="number">1997</span>, <span class="number">2000</span>);</div>
+<div class="line"><span class="keyword">del</span> tup;</div>
+</pre></td></tr></table></figure>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.07.25 PM.png" alt="Screen Shot 2018-07-01 at 4.07.25 PM"></p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.08.13 PM.png" alt="Screen Shot 2018-07-01 at 4.08.13 PM"></p>
+<h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.09.04 PM.png" alt="Screen Shot 2018-07-01 at 4.09.04 PM"></p>
+<h1 id="Python字典"><a href="#Python字典" class="headerlink" title="Python字典"></a>Python字典</h1><p>每个键是从它的值由冒号(:)，即在项目之间用逗号隔开，整个东西是包含在大括号中。没有任何项目一个空字典只写两个大括号，就像这样：{}.</p>
+<p>键在一个字典中是唯一的，而值则可以重复。字典的值可以是任何类型，但键必须是不可变的数据的类型，例如：字符串，数字或元组这样的类型。</p>
+<h2 id="访问字典中的值"><a href="#访问字典中的值" class="headerlink" title="访问字典中的值"></a>访问字典中的值</h2><p>要访问字典元素，你可以使用方括号和对应键，以获得其对应的值。</p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.11.11 PM.png" alt="Screen Shot 2018-07-01 at 4.11.11 PM"></p>
+<h2 id="更新字典"><a href="#更新字典" class="headerlink" title="更新字典"></a>更新字典</h2><p>可以通过添加新条目或键值对，修改现有条目，或删除现有条目</p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.12.07 PM.png" alt="Screen Shot 2018-07-01 at 4.12.07 PM"></p>
+<h2 id="删除字典"><a href="#删除字典" class="headerlink" title="删除字典"></a>删除字典</h2><p>可以删除单个字典元素或清除字典的全部内容。也可以在一个单一的操作删除整个词典。</p>
+<p>要明确删除整个词典，只要用 del 语句就可以做到。</p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.13.11 PM.png" alt="Screen Shot 2018-07-01 at 4.13.11 PM"></p>
+<h2 id="字典键"><a href="#字典键" class="headerlink" title="字典键"></a>字典键</h2><ol>
+<li><p>每个键对应多个条目是不允许的。这意味着重复键是不允许的。当键分配过程中遇到重复，以最后分配的为准。例如 -</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">dict = &#123;<span class="string">'Name'</span>: <span class="string">'Zara'</span>, <span class="string">'Age'</span>: <span class="number">7</span>, <span class="string">'Name'</span>: <span class="string">'Manni'</span>&#125;</div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"dict['Name']: "</span>, dict[<span class="string">'Name'</span>])</div>
+<div class="line"><span class="comment">## dict['Name']:  Manni</span></div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>键必须是不可变的。这意味着可以使用字符串，数字或元组作为字典的键，但是像[‘key’]是不允许的。</p>
+</li>
+</ol>
+<h2 id="内置函数-1"><a href="#内置函数-1" class="headerlink" title="内置函数"></a>内置函数</h2><p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.18.40 PM.png" alt="Screen Shot 2018-07-01 at 4.18.40 PM"></p>
+<ol>
+<li><p>fromkeys()</p>
+<p>使用seq的值作为键，来设置创建新的字典。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">dict.fromkeys(seq[, value]))</div>
+</pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<ul>
+<li>seq — 这是将用于字典键准备值的列表。</li>
+<li>value — 这是可选的，如果提供的话则这个值将被设置为字典的值</li>
+</ul>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.19.56 PM.png" alt="Screen Shot 2018-07-01 at 4.19.56 PM"></p>
+</li>
+<li><p>get()</p>
+<p>返回给定键的值。如果键不可用，那么返回默认值 - None。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">dict.get(key, default=None)</div>
+</pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<ul>
+<li>key — 这是在字典中被搜索的键。</li>
+<li>default — 这是以防键不存在对应值时，则使用这个值返回。</li>
+</ul>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.21.11 PM.png" alt="Screen Shot 2018-07-01 at 4.21.11 PM"></p>
+</li>
+<li><p>update()</p>
+<p>添加字典dict2键值对到字典dict</p>
+<p><img src="/2018/06/26/ML-Python/Screen Shot 2018-07-01 at 4.22.45 PM.png" alt="Screen Shot 2018-07-01 at 4.22.45 PM"></p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/DP-Smart-Metering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1681,155 +2209,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/08/TWICE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/08/TWICE/" itemprop="url">TWICE</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-08T15:30:57-05:00">
-                2018-06-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="综艺"><a href="#综艺" class="headerlink" title="综艺"></a>综艺</h1><h2 id="What-is-Love"><a href="#What-is-Love" class="headerlink" title="What is Love?"></a>What is Love?</h2><ul>
-<li><a href="https://www.bilibili.com/video/av22015572?p=2" target="_blank" rel="noopener">[Ask in a box]</a></li>
-<li></li>
-</ul>
-<h2 id="Heart-Shake"><a href="#Heart-Shake" class="headerlink" title="Heart Shake"></a>Heart Shake</h2><ul>
-<li></li>
-</ul>
-<h2 id="Likey"><a href="#Likey" class="headerlink" title="Likey"></a>Likey</h2><ul>
-<li></li>
-</ul>
-<h2 id="Signal"><a href="#Signal" class="headerlink" title="Signal"></a>Signal</h2><ul>
-<li><a href="https://www.bilibili.com/video/av13991100?from=search&amp;seid=755459151186256462" target="_blank" rel="noopener">[ 认识的哥哥]</a></li>
-</ul>
-<h2 id="Knock-Knock"><a href="#Knock-Knock" class="headerlink" title="Knock Knock"></a>Knock Knock</h2><ul>
-<li></li>
-</ul>
-<h2 id="TT"><a href="#TT" class="headerlink" title="TT"></a>TT</h2><ul>
-<li><a href="https://www.bilibili.com/video/av12257422?p=2" target="_blank" rel="noopener">[Amigo Tv]</a></li>
-<li><a href="">[一周的偶像]</a></li>
-</ul>
-<h2 id="Cheer-Up"><a href="#Cheer-Up" class="headerlink" title="Cheer Up"></a>Cheer Up</h2><ul>
-<li><a href="https://www.bilibili.com/video/av13973897?from=search&amp;seid=10925089392099596062" target="_blank" rel="noopener">[同床异梦]</a></li>
-<li></li>
-</ul>
-<h2 id="Like-Ooh-Ahh"><a href="#Like-Ooh-Ahh" class="headerlink" title="Like Ooh-Ahh"></a>Like Ooh-Ahh</h2><ul>
-<li><a href="https://www.bilibili.com/video/av13358708?from=search&amp;seid=10925089392099596062" target="_blank" rel="noopener">[社长在看]</a></li>
-<li><a href="https://www.bilibili.com/video/av9774482/?p=2" target="_blank" rel="noopener">[Twice Tv Begins]</a></li>
-<li><a href="https://www.bilibili.com/video/av9770455?from=search&amp;seid=13802790461139478911" target="_blank" rel="noopener">[Twice TV 1]</a></li>
-<li><a href="https://www.bilibili.com/video/av21233693?from=search&amp;seid=13802790461139478911" target="_blank" rel="noopener">[Twice Tv 2]</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1880,7 +2259,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1891,7 +2270,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1902,7 +2281,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
