@@ -99,6 +99,14 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-27%20at%209.50.36%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-27%20at%209.52.00%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-07%20at%204.47.21%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180804212108124.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-08-04%20at%209.44.00%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180804221943887.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180804233007785.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180804233150258.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180804233352771.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180804233917970.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180804234353362.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-13%20at%204.51.58%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-10%20at%2010.02.58%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/Screen%20Shot%202018-07-10%20at%2010.03.29%20AM.png">
@@ -114,7 +122,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713221657920.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713220740270.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/ML-Kernel-Function/image-20180713223436731.png">
-<meta property="og:updated_time" content="2018-07-30T03:06:47.556Z">
+<meta property="og:updated_time" content="2018-08-05T04:44:41.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Kernel Function">
 <meta name="twitter:description" content="kernel function的核心是，只要我们对整个空间给定一个对距离相关性的度量标准，那么我们因为这个度量标准可以推测出别处的数据(可能的)分布。 机器学习里的 kernel 是指什么？ - 知乎 https://www.zhihu.com/question/30371867">
@@ -469,14 +477,265 @@ K_{ij}=e^{-\frac{\lambda|x_i-x_j|^2}{2\sigma^2}}</script><blockquote>
 <p>分析：<a href="https://www.zhihu.com/question/46631426/answer/122929183" target="_blank" rel="noopener">知乎1</a></p>
 <p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-07-07 at 4.47.21 PM.png" alt="Screen Shot 2018-07-07 at 4.47.21 PM"></p>
 <h3 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h3><p><a href="https://blog.dominodatalab.com/fitting-gaussian-process-models-python/" target="_blank" rel="noopener">code1</a> <a href="https://github.com/fonnesbeck/gp_tutorial_pydata/blob/master/1-Introduction.ipynb" target="_blank" rel="noopener">code2</a> </p>
-<p>首先定义一个kernel函数，我们使用squared exponential，$\theta_1$和$\theta_2$是两个超参数。</p>
+<p>首先定义一个kernel函数来计算数据点之间的协方差矩阵，我们使用squared exponential，$\theta_1$和$\theta_2$是两个超参数，这样越靠近的两个点，它们的kernel函数值也会越接近于1。</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 k(x,x^{\prime}) &= \theta_1\exp\left(-\frac{\theta_2}{2}(x-x^{\prime})^2\right)
 \end{aligned}</script><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kernel</span><span class="params">(data1,data2,params)</span>:</span></div>
+<div class="line">    theta_1 = params[<span class="number">0</span>]</div>
+<div class="line">    theta_2 = params[<span class="number">1</span>]</div>
+<div class="line">    kernel_func = theta_1*np.exp(<span class="number">-0.5</span>*theta_2*np.subtract.outer(data1,data2)**<span class="number">2</span>)</div>
+<div class="line">    <span class="keyword">return</span> kernel_func</div>
+</pre></td></tr></table></figure>
+<p>可视化协方差矩阵</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_cov_matrix</span><span class="params">()</span>:</span></div>
+<div class="line">    fig, (ax1, ax2) = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">12</span>, <span class="number">5</span>))</div>
+<div class="line">    xrange = np.linspace(<span class="number">0</span>, <span class="number">5</span>)  <span class="comment"># generate 50 points</span></div>
+<div class="line">    ax1.plot(xrange, kernel(<span class="number">0</span>, xrange, [<span class="number">1</span>, <span class="number">1</span>]))</div>
+<div class="line">    ax1.set_xlabel(<span class="string">'x'</span>)</div>
+<div class="line">    ax1.set_ylabel(<span class="string">'cov(0, x)'</span>)</div>
+<div class="line"></div>
+<div class="line">    cov_matrix = kernel(xrange, xrange, [<span class="number">1</span>, <span class="number">1</span>])</div>
+<div class="line">    z = np.array(cov_matrix)  <span class="comment"># shape is (50,50)</span></div>
+<div class="line">    ims = ax2.imshow(z, cmap=<span class="string">"inferno"</span>,</div>
+<div class="line">                     interpolation=<span class="string">'none'</span>,</div>
+<div class="line">                     extent=(<span class="number">0</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">0</span>))</div>
+<div class="line">    ax2.set_xlabel(<span class="string">'x'</span>)</div>
+<div class="line">    ax2.set_ylabel(<span class="string">'x'</span>)</div>
+<div class="line">    plt.colorbar(ims, ax=ax2)</div>
+<div class="line"></div>
+<div class="line">    plt.tight_layout()</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180804212108124.png" alt="image-20180804212108124"></p>
 
 </div></div>
-<p>定义好了kernel函数之后，我们便可以利用kernel由样本点求出未知点的函数值的分布，</p>
+<p>定义好了kernel函数之后，我们便可以利用kernel由样本点求出未知点的函数值的分布，我们假定未知点和已知点共同构成多变量的正态分布，而且多变量的正态分布的条件概率也是多变量正态分布，</p>
+<p><img src="/2018/07/04/ML-Kernel-Function/Screen Shot 2018-08-04 at 9.44.00 PM.png" alt="Screen Shot 2018-08-04 at 9.44.00 PM"></p>
+<p>所以只要根据上述公式计算出新分布的均值和协方差矩阵，那么我们就知道了未知点的多变量正态分布。所以，我们现在计算均值和协方差矩阵，可以看到它们两个都是由$K$, $KK_$, $K_K$和$K_$组合而来，所以根据kernel_function来计算：</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal_mean_var</span><span class="params">(new_data,old_data,y,params)</span>:</span></div>
+<div class="line"></div>
+<div class="line">    K = kernel(old_data,old_data,params)</div>
+<div class="line">    K_xing = kernel(new_data,old_data,params)</div>
+<div class="line">    K_xingxing = kernel(new_data, new_data, params)</div>
+<div class="line"></div>
+<div class="line">    K_inv = np.linalg.inv(K)</div>
+<div class="line"></div>
+<div class="line">    mu = K_xing.dot(K_inv).dot(y)</div>
+<div class="line">    var = K_xingxing - K_xing.dot(K_inv).dot(K_xing)</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> mu,var</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>现在假设我们有一个观测点$(0,0)$，那么我们根据该点画出高斯过程先验</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_gaussian_prior</span><span class="params">()</span>:</span></div>
+<div class="line">    thetas = [<span class="number">1</span>,<span class="number">10</span>]</div>
+<div class="line">    sigma_0 = kernel(<span class="number">0</span>,<span class="number">0</span>,thetas)</div>
+<div class="line">    x = np.arange(<span class="number">-3</span>,<span class="number">3</span>,step=<span class="number">0.01</span>)</div>
+<div class="line">    plt.errorbar(x,np.zeros(len(x)),yerr=sigma_0)</div>
+<div class="line">    plt.ylim(<span class="number">-3</span>,<span class="number">3</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180804221943887.png" alt="image-20180804221943887"></p>
+
+</div></div>
+<p>现在，假设我们有一个已知点$(x=1.0,y=0.4967141530112327)$，那么我们就根据这个点取预测新样本的值，即计算出正态分布的均值和方差，然后采样即可。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line">seed = np.random.seed(<span class="number">42</span>)</div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    thetas = [<span class="number">1</span>, <span class="number">10</span>]</div>
+<div class="line">    sigma_0 = kernel(<span class="number">0</span>, <span class="number">0</span>, thetas)</div>
+<div class="line">    x = [<span class="number">1.0</span>]</div>
+<div class="line">    y = [np.random.normal(scale=sigma_0)]</div>
+<div class="line">    print(y)</div>
+<div class="line">    <span class="comment"># [0.4967141530112327]</span></div>
+<div class="line">    x_pred = np.linspace(<span class="number">-3</span>,<span class="number">3</span>,<span class="number">1000</span>)</div>
+<div class="line">    predictions = [cal_mean_var(i,x,y,thetas) <span class="keyword">for</span> i <span class="keyword">in</span> x_pred]</div>
+<div class="line">    y_pred, sigmas = np.transpose(predictions)</div>
+<div class="line">    plt.errorbar(x_pred, y_pred, yerr=sigmas)</div>
+<div class="line">    plt.plot(x, y, <span class="string">"ro"</span>)</div>
+<div class="line">    plt.xlim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">    plt.ylim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180804233007785.png" alt="image-20180804233007785"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line">m, s = cal_mean_var([<span class="number">-0.7</span>], x, y, thetas)</div>
+<div class="line">y2 = np.random.normal(m, s)</div>
+<div class="line">x.append(<span class="number">-0.7</span>)</div>
+<div class="line">y.append(y2)</div>
+<div class="line">predictions = [cal_mean_var(i, x, y, thetas) <span class="keyword">for</span> i <span class="keyword">in</span> x_pred]</div>
+<div class="line">y_pred, sigmas = np.transpose(predictions)</div>
+<div class="line">plt.errorbar(x_pred, y_pred, yerr=sigmas)</div>
+<div class="line">plt.plot(x, y, <span class="string">"ro"</span>)</div>
+<div class="line">plt.xlim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">plt.ylim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180804233150258.png" alt="image-20180804233150258"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line">x_more = [<span class="number">-2.1</span>, <span class="number">-1.5</span>, <span class="number">0.3</span>, <span class="number">1.8</span>, <span class="number">2.5</span>]</div>
+<div class="line">    m, s = cal_mean_var(x_more, x, y, thetas)</div>
+<div class="line">    y_more = np.random.multivariate_normal(m, s)</div>
+<div class="line">    print(y_more)</div>
+<div class="line">    <span class="comment"># [-1.5128756   0.52371713 -0.13952425 -0.93665367 -1.29343995]</span></div>
+<div class="line">    x += x_more</div>
+<div class="line">    y += y_more.tolist()</div>
+<div class="line">    predictions = [cal_mean_var(i, x, y, thetas) <span class="keyword">for</span> i <span class="keyword">in</span> x_pred]</div>
+<div class="line">    y_pred, sigmas = np.transpose(predictions)</div>
+<div class="line">    plt.errorbar(x_pred, y_pred, yerr=sigmas)</div>
+<div class="line">    plt.plot(x, y, <span class="string">"ro"</span>)</div>
+<div class="line">    plt.xlim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">    plt.ylim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180804233352771.png" alt="image-20180804233352771"> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line">x = np.linspace(<span class="number">-3</span>,<span class="number">3</span>,<span class="number">10</span>)</div>
+<div class="line">m,s = cal_mean_var(x,[],[],thetas)</div>
+<div class="line">y = np.random.multivariate_normal(m,s)</div>
+<div class="line">print(y)</div>
+<div class="line"><span class="comment"># [-0.10972138 -0.68964403 -1.35001851  0.12093873  0.66659681 -1.58789444</span></div>
+<div class="line">  <span class="number">1.01459254</span> <span class="number">-0.69464233</span> <span class="number">-0.8580216</span>   <span class="number">1.1130274</span> ]</div>
+<div class="line">plt.plot(x, y, <span class="string">"ro"</span>)</div>
+<div class="line">predictions = [cal_mean_var(i, x, y, thetas) <span class="keyword">for</span> i <span class="keyword">in</span> x_pred]</div>
+<div class="line">y_pred, sigmas = np.transpose(predictions)</div>
+<div class="line">plt.errorbar(x_pred, y_pred, yerr=sigmas)</div>
+<div class="line">plt.ylim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180804233917970.png" alt="image-20180804233917970"></p>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    x_pred = np.linspace(<span class="number">-3</span>, <span class="number">3</span>, <span class="number">1000</span>)</div>
+<div class="line">    thetas = [<span class="number">1</span>,<span class="number">10</span>]</div>
+<div class="line">    x = np.linspace(<span class="number">-3</span>,<span class="number">3</span>)</div>
+<div class="line">    m,s = cal_mean_var(x,[],[],thetas)</div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div>
+<div class="line">        y = np.random.multivariate_normal(m,s)</div>
+<div class="line">        predictions = [cal_mean_var(i,x,y,thetas) <span class="keyword">for</span> i <span class="keyword">in</span> x_pred]</div>
+<div class="line">        y_pred,sigmas = np.transpose(predictions)</div>
+<div class="line">        plt.plot(x_pred, y_pred, <span class="string">'LightSeaGreen'</span>, alpha=<span class="number">0.3</span>)</div>
+<div class="line">        plt.ylim(<span class="number">-3</span>, <span class="number">3</span>)</div>
+<div class="line">    plt.xlabel(<span class="string">'X'</span>)</div>
+<div class="line">    plt.ylabel(<span class="string">'y'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/04/ML-Kernel-Function/image-20180804234353362.png" alt="image-20180804234353362"></p>
+
+</div></div>
 <h2 id="Density-Estimation"><a href="#Density-Estimation" class="headerlink" title="Density Estimation"></a>Density Estimation</h2><p><a href="http://qr.ae/TUp6rs" target="_blank" rel="noopener">[ref1]</a> <a href="http://www.mvstat.net/tduong/research/seminars/seminar-2001-05/" target="_blank" rel="noopener">[ref2]</a> <a href="https://en.wikipedia.org/wiki/Kernel_density_estimation" target="_blank" rel="noopener">[wiki]</a> <a href="http://sklearn.lzjqsdd.com/modules/density.html" target="_blank" rel="noopener">[sklearn-implement]</a> </p>
 <p><a href="https://www.zhihu.com/question/27301358/answer/105267357" target="_blank" rel="noopener">[Begin]</a> <a href="https://wenku.baidu.com/view/364bc23931126edb6f1a104b.html" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/liangzuojiayi/article/details/78152180" target="_blank" rel="noopener">[deepen]</a> <a href="https://blog.csdn.net/unixtch/article/details/78556499" target="_blank" rel="noopener">[close to totally]</a> <a href="https://blog.csdn.net/pipisorry/article/details/53635895" target="_blank" rel="noopener">[closer]</a> <a href="http://math.sjtu.edu.cn/faculty/chengwang/files/2015fall/ch4.pdf" target="_blank" rel="noopener">[sjtu]</a> <a href="https://github.com/endymecy/spark-ml-source-analysis/blob/master/%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1/kernel-density-estimation.md" target="_blank" rel="noopener">[intuition]</a> <a href="http://lotabout.me/2018/kernel-density-estimation/" target="_blank" rel="noopener">[形象生动]</a></p>
 <p>核密度估计方法，是概率论中用来估计未知的(概率)密度函数，属于非参数检验方法之一，不利用有关数据分布的先验知识，对数据分布不附加任何假定，是一种从数据样本本身出发研究数据分布特征的方法。</p>
@@ -1267,7 +1526,7 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1278,7 +1537,7 @@ f(x) = lim_{h\to0}\frac{F(x+h)-F(x-h)}{2h}</script><p>我们把分布函数用�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
