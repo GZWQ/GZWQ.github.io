@@ -283,6 +283,378 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/GAN Params Comparison /">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/06/GAN Params Comparison /" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T15:16:22-05:00">
+                2018-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Original"><a href="#Original" class="headerlink" title="Original"></a>Original</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">opt  = RMSprop(lr=<span class="number">0.0003</span>, decay=<span class="number">1e-6</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Encoder-Decoder</div>
+<div class="line">BatchNormalization(momentum=<span class="number">0.8</span>)</div>
+<div class="line">LeakyReLU(<span class="number">0.2</span>)</div>
+<div class="line"></div>
+<div class="line">Discriminator</div>
+<div class="line">BatchNormalization(momentum=<span class="number">0.9</span>)</div>
+<div class="line">LeakyReLU(<span class="number">0.2</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="DCGAN-CGAN"><a href="#DCGAN-CGAN" class="headerlink" title="DCGAN || CGAN"></a><a href="https://github.com/carpedm20/DCGAN-tensorflow" target="_blank" rel="noopener">DCGAN</a> || <a href="https://github.com/zhangqianhui/Conditional-Gans" target="_blank" rel="noopener">CGAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">optim = tf.train.AdamOptimizer(lr=<span class="number">0.0002</span>, beta1=<span class="number">0.5</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>beta1 is Momentum term of adam [0.5]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">lrelu(0.2) </div>
+<div class="line">batch_norm(epsilon=1e-5, momentum = 0.9)</div>
+</pre></td></tr></table></figure>
+<h3 id="INFO-GAN"><a href="#INFO-GAN" class="headerlink" title="INFO-GAN"></a><a href="https://github.com/openai/InfoGAN" target="_blank" rel="noopener">INFO-GAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">d_opt = tf.train.AdamOptimizer(lr = <span class="number">0.0002</span>, beta1=<span class="number">0.5</span>)</div>
+<div class="line">g_opt = tf.train.AdamOptimizer(lr = <span class="number">0.001</span>, beta1=<span class="number">0.5</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">batch_norm(epsilon=<span class="number">1e-5</span>,momentum=<span class="number">0.1</span>)</div>
+<div class="line">Lrelu(<span class="number">0.1</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="AC-GAN"><a href="#AC-GAN" class="headerlink" title="AC-GAN"></a><a href="https://arxiv.org/pdf/1610.09585.pdf" target="_blank" rel="noopener">AC-GAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">optim = Adam(lr=[<span class="number">0.0001</span>,<span class="number">0.0002</span>,<span class="number">0.00003</span>],beta1=<span class="number">0.5</span>,beta2=<span class="number">0.999</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">LRELU(<span class="number">0.2</span>)</div>
+<div class="line">dropout(<span class="number">0.5</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">optim = tf.train.AdamOptimizer(learning_rate=<span class="number">0.001</span>,beta1=<span class="number">0.9</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">dropout(0.2)</div>
+</pre></td></tr></table></figure>
+<h3 id="BI-GAN"><a href="#BI-GAN" class="headerlink" title="BI-GAN"></a>BI-GAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">optim = Adam(lr=<span class="number">0.0002</span>,beta1=<span class="number">0.5</span>,beta2=<span class="number">0.999</span>)</div>
+<div class="line">lr decays exponentially to <span class="number">0.000002</span> starting halfway through training.</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">lrelu(<span class="number">0.2</span>)</div>
+<div class="line">(params free) batch_normalization()</div>
+</pre></td></tr></table></figure>
+<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Adam(lr=0.0001,beta1=0,beta2=0.9) -&gt; WGAN with Gradient penalty</div>
+<div class="line">RMSProp(lr=0.00005) -&gt; WGAN with weight clipping</div>
+</pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"></div>
+<div class="line"></div>
+</pre></td></tr></table></figure>
+<h3 id="LSGAN"><a href="#LSGAN" class="headerlink" title="LSGAN"></a>LSGAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">RMSProp(lr=<span class="number">0.0001</span>)[chosen by search over lr=<span class="number">.001</span>,<span class="number">.0002</span>,<span class="number">.0001</span>]</div>
+</pre></td></tr></table></figure>
+<h3 id="SR-GAN"><a href="#SR-GAN" class="headerlink" title="SR-GAN"></a>SR-GAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">Adam(lr=<span class="number">0.0001</span>,beta1=<span class="number">0.9</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">lrelu(0.2)</div>
+<div class="line">batch_normalization()</div>
+</pre></td></tr></table></figure>
+<p><a href="https://arxiv.org/pdf/1612.05424.pdf" target="_blank" rel="noopener">loss weights</a> </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/Linear-Regression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/06/Linear-Regression/" itemprop="url">Linear Regression</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T10:47:44-05:00">
+                2018-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Multiple Features Variable</p>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-06 at 10.57.13 AM.png" alt="Screen Shot 2018-08-06 at 10.57.13 AM"></p>
+<h1 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h1><p>For a variable with $n$ features, we have hypothesis like:</p>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-06 at 11.01.05 AM.png" alt="Screen Shot 2018-08-06 at 11.01.05 AM"></p>
+<p>If we write $\theta = []$</p>
+<h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><p>Feature Scaling</p>
+<p>It involves <strong>dividing the input values by the range</strong> (i.e. the maximum value minus the minimum value) of the input variable, resulting in <strong>a new range of just 1</strong>.</p>
+<p>Mean normalization </p>
+<p>This involves <strong>subtracting the average value</strong> for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero. </p>
+<p>By combining the two techniques and adjust the input values as shown in the following formula:</p>
+<script type="math/tex; mode=display">
+x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the values for feature $(i)$ and $s_i$ is the range of values (max - min), or $s_i$ is the standard deviation.</p>
+<h1 id="Convergence-Figure"><a href="#Convergence-Figure" class="headerlink" title="Convergence Figure"></a>Convergence Figure</h1><p>In order to make sure that our algorithm runs correctly, we need to debug gradient descent. Make a plot with <em>number of iterations</em> on the x-axis. Now plot the cost function, $J(\theta)$ over the number of iterations of gradient descent. If $J(\theta)$ ever increases, then you probably need to decrease learning rate $\alpha$.</p>
+<p><strong>Summary</strong></p>
+<ul>
+<li><p>If $\alpha$ is too small, it could result in slow convergence.</p>
+</li>
+<li><p>If $\alpha$ is too large, it may not decrease on every iteration and thus may not converge, like the following pic:</p>
+</li>
+</ul>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-06 at 12.58.12 PM.png" alt="Screen Shot 2018-08-06 at 12.58.12 PM"></p>
+<p><strong>Example</strong></p>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-06 at 12.54.04 PM.png" alt="Screen Shot 2018-08-06 at 12.54.04 PM"></p>
+<blockquote>
+<p>A is $\alpha=0.1$, B is $\alpha=0.01$, A is $\alpha=1$.</p>
+<p>In graph C, the cost function is increasing, so the learning rate is set too high. Both graphs A and B converge to an optimum of the cost function, but graph B does so very slowly, so its learning rate is set too low. Graph A lies between the two.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/Linux命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1418,311 +1790,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/Delta-Function/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/16/Delta-Function/" itemprop="url">Delta Function</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T23:33:44-05:00">
-                2018-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Probability-and-Statistics/" itemprop="url" rel="index">
-                    <span itemprop="name">Probability and Statistics</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Technically speaking, the Dirac delta function is not actually a function. It is what we may call a generalized function. Nevertheless, its definition is intuitive and it simplifies dealing with probability distributions.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/16/Delta-Function/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/Books/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/16/Books/" itemprop="url">Books</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T01:08:10-05:00">
-                2018-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Books/" itemprop="url" rel="index">
-                    <span itemprop="name">Books</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Habits"><a href="#Habits" class="headerlink" title="Habits"></a>Habits</h1><ol>
-<li>The single most important change you can make in your working habits is to switch to creative work first, reactive work second. This means blocking off a large chunk of time every day for creative work on your own priorities, with the phone and e-mail off.</li>
-<li>Notice when you seem to have the most energy during the day, and dedicate those valuable periods to your most important creative work. Never book a meeting during this time if you can help it. And don’t waste any of it on administrative work!</li>
-</ol>
-<h1 id="Logic"><a href="#Logic" class="headerlink" title="Logic"></a>Logic</h1><p><a href="https://www.zhihu.com/question/19599216" target="_blank" rel="noopener">ref</a> </p>
-<p>A4纸横放，每张纸写一个主题，1页写4至6行，每行8字到12字，一张纸控制在2分钟之内，每天写10页，即每天用10-20分钟的时间写笔记。</p>
-<ul>
-<li>写标题和正文时，别思考太多，想到的事，不论是什么，先写下来。</li>
-<li>严格坚持每页1分钟，一想到就立刻写下来，这会让你不拖延。</li>
-<li>随身准备好A4纸和纸板，在任何地方都可以写，或者把A4纸折成三折</li>
-<li>可以把写好的笔记，4-6行的内容做为正文，继续深入下去</li>
-<li>对于，同一个标题可以用不同的角度来写很多页，处理问题和视野都能扩展开来</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1768,7 +1840,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1790,7 +1862,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
