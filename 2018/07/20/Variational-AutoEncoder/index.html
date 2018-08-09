@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。">
+<meta name="description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩。虽然自编码器中的重构损失函数确保了编码过程原始数据不会丢失过多，但是没有对约束特征$z$做出约束。 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，其在ae的基础上约束潜变量$z$服从于某个已知的先验分布$p(z|x)$，比如希望$z$的每个特征相互独立并且符合高斯分">
 <meta name="keywords" content="Deep Learning,Variational AutoEncoder">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Variational AutoEncoder">
 <meta property="og:url" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。">
+<meta property="og:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩。虽然自编码器中的重构损失函数确保了编码过程原始数据不会丢失过多，但是没有对约束特征$z$做出约束。 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，其在ae的基础上约束潜变量$z$服从于某个已知的先验分布$p(z|x)$，比如希望$z$的每个特征相互独立并且符合高斯分">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/v2-0533fd3dc73184f807038b4f08e8681a_hd.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/v2-89c7d409bcb7a8218c80b3134b015818_hd.jpg">
@@ -100,10 +100,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/20161214175029514.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/image-20180724163307750.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/image-20180724163319485.png">
-<meta property="og:updated_time" content="2018-07-31T16:45:40.714Z">
+<meta property="og:updated_time" content="2018-08-09T02:18:46.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational AutoEncoder">
-<meta name="twitter:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。">
+<meta name="twitter:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩。虽然自编码器中的重构损失函数确保了编码过程原始数据不会丢失过多，但是没有对约束特征$z$做出约束。 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，其在ae的基础上约束潜变量$z$服从于某个已知的先验分布$p(z|x)$，比如希望$z$的每个特征相互独立并且符合高斯分">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/v2-0533fd3dc73184f807038b4f08e8681a_hd.jpg">
 
 
@@ -390,8 +390,8 @@
       
 
       
-        <p> AutoEncoder（自编码器）本质上是数据特定的数据压缩</p>
-<p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，意味着我们可以产生看起来像我们的训练数据的 samples。</p>
+        <p> AutoEncoder（自编码器）本质上是数据特定的数据压缩。虽然自编码器中的重构损失函数确保了编码过程原始数据不会丢失过多，但是没有对约束特征$z$做出约束。</p>
+<p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，其在ae的基础上约束潜变量$z$服从于某个已知的先验分布$p(z|x)$，比如希望$z$的每个特征相互独立并且符合高斯分布等。</p>
 <a id="more"></a>
 <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ul>
 <li><p>什么是判别式模型和生成式模型？ </p>
@@ -798,7 +798,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -820,7 +820,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

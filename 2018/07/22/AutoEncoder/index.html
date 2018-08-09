@@ -87,14 +87,15 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="AutoEncoder通过设计encode和decode过程使输入和输出越来越接近，是一种自监督学习过程，输入图片通过encode进行处理，得到code，再经过decode处理得到输出，我们可以控制encode的输出维数，就相当于强迫encode过程以低维参数学习高维特征。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/1_eLieLQIprDp4BgC63288kQ.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.42.04%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.33.57%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.36.22%20AM.png">
-<meta property="og:updated_time" content="2018-07-22T22:19:57.603Z">
+<meta property="og:updated_time" content="2018-08-09T03:09:46.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AutoEncoder">
 <meta name="twitter:description" content="AutoEncoder通过设计encode和decode过程使输入和输出越来越接近，是一种自监督学习过程，输入图片通过encode进行处理，得到code，再经过decode处理得到输出，我们可以控制encode的输出维数，就相当于强迫encode过程以低维参数学习高维特征。">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/22/AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.42.04%20AM.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/22/AutoEncoder/1_eLieLQIprDp4BgC63288kQ.png">
 
 
 
@@ -382,6 +383,12 @@
       
         <p>AutoEncoder通过设计encode和decode过程使输入和输出越来越接近，是一种自监督学习过程，输入图片通过encode进行处理，得到code，再经过decode处理得到输出，我们可以控制encode的输出维数，就相当于强迫encode过程以低维参数学习高维特征。</p>
 <a id="more"></a>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-1-autoencoder-d9a5f8795af4" target="_blank" rel="noopener">ref1</a> </p>
+<p><img src="/2018/07/22/AutoEncoder/1_eLieLQIprDp4BgC63288kQ.png" alt="1_eLieLQIprDp4BgC63288kQ"></p>
+<p>自编码器包含两个部分：encoder和decoder。</p>
+<p><strong>encoder</strong>的输入是$x$，输出是$h$，通常$h$的维度比$x$少。比如：我们输入encoder一张大小为$100\times 100$大小的图片，输出潜在编码$h$，大小是$100\times 1$。这种情况下，encoder将输入图片映射到了一个低维空间，这样我们只需要很少的空间就可以存储$h$，当然这样的压缩也会丢失一些原始数据的信息。</p>
+<p><strong>decoder</strong>的输入是潜在编码$h$，并且尝试重构出一张图片。假如$h$的大小是$100\times 1$，decoder试图利用$h$重构一张大小为$100\times100$的图片，我们训练decoder使之输出的图片尽量接近原图。</p>
+<p>只有当输入是彼此关联的（比如图片是来自同一个领域），降维才能有效。如果输入是完全随机的图片，降维的效果是很差的。同时这个过程中我们没有使用任何label数据，所以自编码器属于无监督模型。</p>
 <p><a href="https://blog.csdn.net/marsjhao/article/details/73480859" target="_blank" rel="noopener">intuition1</a> </p>
 <p><a href="https://www.youtube.com/watch?v=Tk5B4seA-AU&amp;t=0s&amp;list=PLJV_el3uVTsPy9oCRY30oBPNLCo89yu49&amp;index=26" target="_blank" rel="noopener">video1</a> </p>
 <p><img src="/2018/07/22/AutoEncoder/Screen Shot 2018-07-22 at 12.42.04 AM.png" alt="Screen Shot 2018-07-22 at 12.42.04 AM"></p>
@@ -484,8 +491,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -500,7 +516,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -522,7 +538,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -545,6 +561,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.</span> <span class="nav-text">模型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
