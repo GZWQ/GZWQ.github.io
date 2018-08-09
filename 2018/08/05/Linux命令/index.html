@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="文件退出保存 1 :wq  利用scp远程上传下载文件/文件夹ref1  设置屏幕分辨率 1 xrandr -s 1366x768">
+<meta name="description" content="文件退出保存 1 :wq  利用scp远程上传下载文件/文件夹ref1  设置屏幕分辨率 1 xrandr -s 1366x768  删除 删除目录下所有文件 用通配符*英文星号可以表示“所有文件”这个概念，所以删除文件夹下所有文件的方法就是，先用cd命令切换到这个文件夹下，然后执行rm ./*命令表示删除当前目录下所有的文件，但是注意，如果文件夹下有子目录，这条命令就无法生效了，因为它无法删除子">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux命令">
 <meta property="og:url" content="http://yoursite.com/2018/08/05/Linux命令/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="文件退出保存 1 :wq  利用scp远程上传下载文件/文件夹ref1  设置屏幕分辨率 1 xrandr -s 1366x768">
+<meta property="og:description" content="文件退出保存 1 :wq  利用scp远程上传下载文件/文件夹ref1  设置屏幕分辨率 1 xrandr -s 1366x768  删除 删除目录下所有文件 用通配符*英文星号可以表示“所有文件”这个概念，所以删除文件夹下所有文件的方法就是，先用cd命令切换到这个文件夹下，然后执行rm ./*命令表示删除当前目录下所有的文件，但是注意，如果文件夹下有子目录，这条命令就无法生效了，因为它无法删除子">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-05T23:23:04.966Z">
+<meta property="og:updated_time" content="2018-08-09T16:33:49.487Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令">
-<meta name="twitter:description" content="文件退出保存 1 :wq  利用scp远程上传下载文件/文件夹ref1  设置屏幕分辨率 1 xrandr -s 1366x768">
+<meta name="twitter:description" content="文件退出保存 1 :wq  利用scp远程上传下载文件/文件夹ref1  设置屏幕分辨率 1 xrandr -s 1366x768  删除 删除目录下所有文件 用通配符*英文星号可以表示“所有文件”这个概念，所以删除文件夹下所有文件的方法就是，先用cd命令切换到这个文件夹下，然后执行rm ./*命令表示删除当前目录下所有的文件，但是注意，如果文件夹下有子目录，这条命令就无法生效了，因为它无法删除子">
 
 
 
@@ -376,7 +376,7 @@
       
 
       
-        <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>退出保存</p>
+        <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>退出保存</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">:wq</div>
 </pre></td></tr></table></figure>
@@ -385,6 +385,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">xrandr -s 1366x768</div>
 </pre></td></tr></table></figure>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除目录下所有文件</p>
+<p>用通配符*英文星号可以表示“所有文件”这个概念，所以删除文件夹下所有文件的方法就是，先用cd命令切换到这个文件夹下，然后执行rm ./*命令表示删除当前目录下所有的文件，但是注意，如果文件夹下有子目录，这条命令就无法生效了，因为它无法删除子目录（删除子目录要加上-r选项）。</p>
+</li>
+</ul>
 
       
     </div>
@@ -504,7 +509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -559,7 +564,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件"><span class="nav-number">1.</span> <span class="nav-text">文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件"><span class="nav-number">1.</span> <span class="nav-text">文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除"><span class="nav-number">1.1.</span> <span class="nav-text">删除</span></a></li></ol></li></ol></div>
             
 
           </div>

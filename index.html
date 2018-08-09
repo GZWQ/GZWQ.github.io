@@ -283,6 +283,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/09/Python-Sth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/09/Python-Sth/" itemprop="url">Python Sth</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-09T10:52:36-05:00">
+                2018-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>目录</p>
+<p>检查目录，并生成一级目录</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">path = <span class="string">'./xx/'</span></div>
+<div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(path):</div>
+<div class="line">    os.mkdir(path)</div>
+</pre></td></tr></table></figure>
+<p>多级目录生成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"> </div>
+</pre></td></tr></table></figure>
+</li>
+</ol>
+<p>2. </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -376,10 +534,27 @@
       
         
           
-            <h1 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h1><p><a href="https://duvenaud.github.io/learn-discrete/slides/AdversarialAutoencoders.pdf" target="_blank" rel="noopener">ref1</a> <a href="http://closure11.com/%E5%AF%B9%E6%8A%97%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%9Aadversarial-autoencoders/" target="_blank" rel="noopener">gocha</a> <a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-2-exploring-latent-space-with-adversarial-2d53a6f8a4f9" target="_blank" rel="noopener">continue</a>  </p>
+            <h1 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h1><p><a href="https://duvenaud.github.io/learn-discrete/slides/AdversarialAutoencoders.pdf" target="_blank" rel="noopener">ref1</a> <a href="http://closure11.com/%E5%AF%B9%E6%8A%97%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%9Aadversarial-autoencoders/" target="_blank" rel="noopener">gocha</a> <a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-2-exploring-latent-space-with-adversarial-2d53a6f8a4f9" target="_blank" rel="noopener">good one</a>  </p>
 <h2 id="无监督AAE"><a href="#无监督AAE" class="headerlink" title="无监督AAE"></a>无监督AAE</h2><h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png" alt="Screen-Shot-2016-10-13-at-11.17.21-AM-690x332"></p>
 <p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen Shot 2018-08-08 at 9.33.36 PM.png" alt="Screen Shot 2018-08-08 at 9.33.36 PM"></p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><h2 id="监督AAE"><a href="#监督AAE" class="headerlink" title="监督AAE"></a>监督AAE</h2>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_nnf4UUq9Uuf2l19iCYaNfg.png" alt="1_nnf4UUq9Uuf2l19iCYaNfg"></p>
+<ul>
+<li>$x$是输入</li>
+<li>$q(z|x)$是encoder基于输入$x$的输出</li>
+<li>$z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到</li>
+<li>$z’$是采样自想要的分布，作为真实输入</li>
+<li>$p(x|z)$是基于$z$的decoder输入</li>
+<li>$x_$是重构图像</li>
+</ul>
+<p>我们的主要目的是迫使encoder的输出逼近一个先验分布（比如正态分布，gamma分布等）。我们将使用encoder$(q(z|x))$作为生成器，而判别器辨别它的输入是来自于一个先验分布$p(z)$，亦或是来自于encoder的输出$z$，decoder仍然进行图片重构的工作。</p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>AAE的训练分成两个部分：重构阶段和正则化阶段。</p>
+<h4 id="重构阶段"><a href="#重构阶段" class="headerlink" title="重构阶段"></a>重构阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_DKPl7YOnX-8FJQuHAZop-g.png" alt="1_DKPl7YOnX-8FJQuHAZop-g"></p>
+<p>在该阶段，我们需要训练encoder和decoder来最小化重构误差（输入图片与重构图片间的均方误差）。我们将输入传递给encoder，encoder输出一个潜在码；随后，我们将该潜在码送入decoder从而得到一张重构图像。</p>
+<h4 id="正则化阶段"><a href="#正则化阶段" class="headerlink" title="正则化阶段"></a>正则化阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1__pIXKcCCqJRNmIWTRymJzA.png" alt="1__pIXKcCCqJRNmIWTRymJzA"></p>
+<p>在该阶段，我们训练生成器和辨别器，我们将encod的输出$z$和随机采样$z’$（来自于想要的分布）作为输入来训练辨别器，这样辨别器就会返回1如果输入是$z’$，而返回0如果输入是$z$。接下来，为了迫使encoder的输出$z$逼近我们想要的分布，我们将encoder的输出作为辨别器的输入，连接encoder和辨别器。</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_DoJESN2LvxpxNVYADRJXWw.png" alt="1_DoJESN2LvxpxNVYADRJXWw"></p>
+<p>我们固定辨别器的权重参数，固定输入的目标标签为1，然后我们输入一些图像到encoder，并计算辨别器的输出与目标标签间的差异（使用交叉熵损失函数），这个阶段我们只更新encoder的权重参数，这样促使encoder去学习我们想要的分布，使输出服从这个分布。</p>
+<h2 id="监督AAE"><a href="#监督AAE" class="headerlink" title="监督AAE"></a>监督AAE</h2>
           
         
       
@@ -929,7 +1104,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
       
         
           
-            <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><p>退出保存</p>
+            <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>退出保存</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">:wq</div>
 </pre></td></tr></table></figure>
@@ -938,6 +1113,11 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">xrandr -s 1366x768</div>
 </pre></td></tr></table></figure>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除目录下所有文件</p>
+<p>用通配符*英文星号可以表示“所有文件”这个概念，所以删除文件夹下所有文件的方法就是，先用cd命令切换到这个文件夹下，然后执行rm ./*命令表示删除当前目录下所有的文件，但是注意，如果文件夹下有子目录，这条命令就无法生效了，因为它无法删除子目录（删除子目录要加上-r选项）。</p>
+</li>
+</ul>
 
           
         
@@ -1980,130 +2160,6 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Density-Map/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/17/Density-Map/" itemprop="url">Density Map</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T22:43:28-05:00">
-                2018-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>This is some implementations of create ground truth density maps for crowd counting.  </p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/17/Density-Map/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2154,7 +2210,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

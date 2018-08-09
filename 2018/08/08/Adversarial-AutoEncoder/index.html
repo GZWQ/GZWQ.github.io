@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Deep Learning,GAN," />
+  <meta name="keywords" content="GAN,Deep Learning," />
 
 
 
@@ -79,20 +79,24 @@
 
 
 
-<meta name="description" content="Adversarial Autoencoderref1 gocha continue   无监督AAE模型  训练监督AAE">
-<meta name="keywords" content="Deep Learning,GAN">
+<meta name="description" content="Adversarial Autoencoderref1 gocha good one   无监督AAE模型    $x$是输入 $q(z|x)$是encoder基于输入$x$的输出 $z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到 $z’$是采样自想要的分布，作为真实输入 $p(x|z)$是基于$z$的decoder输入 $x_$是重构图像  我们的主要目的是迫使encoder的输">
+<meta name="keywords" content="GAN,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adversarial AutoEncoder">
 <meta property="og:url" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Adversarial Autoencoderref1 gocha continue   无监督AAE模型  训练监督AAE">
+<meta property="og:description" content="Adversarial Autoencoderref1 gocha good one   无监督AAE模型    $x$是输入 $q(z|x)$是encoder基于输入$x$的输出 $z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到 $z’$是采样自想要的分布，作为真实输入 $p(x|z)$是基于$z$的decoder输入 $x_$是重构图像  我们的主要目的是迫使encoder的输">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/Screen%20Shot%202018-08-08%20at%209.33.36%20PM.png">
-<meta property="og:updated_time" content="2018-08-09T04:22:19.164Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_nnf4UUq9Uuf2l19iCYaNfg.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_DKPl7YOnX-8FJQuHAZop-g.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1__pIXKcCCqJRNmIWTRymJzA.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_DoJESN2LvxpxNVYADRJXWw.png">
+<meta property="og:updated_time" content="2018-08-09T17:30:07.246Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adversarial AutoEncoder">
-<meta name="twitter:description" content="Adversarial Autoencoderref1 gocha continue   无监督AAE模型  训练监督AAE">
+<meta name="twitter:description" content="Adversarial Autoencoderref1 gocha good one   无监督AAE模型    $x$是输入 $q(z|x)$是encoder基于输入$x$的输出 $z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到 $z’$是采样自想要的分布，作为真实输入 $p(x|z)$是基于$z$的decoder输入 $x_$是重构图像  我们的主要目的是迫使encoder的输">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png">
 
 
@@ -379,10 +383,27 @@
       
 
       
-        <h1 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h1><p><a href="https://duvenaud.github.io/learn-discrete/slides/AdversarialAutoencoders.pdf" target="_blank" rel="noopener">ref1</a> <a href="http://closure11.com/%E5%AF%B9%E6%8A%97%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%9Aadversarial-autoencoders/" target="_blank" rel="noopener">gocha</a> <a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-2-exploring-latent-space-with-adversarial-2d53a6f8a4f9" target="_blank" rel="noopener">continue</a>  </p>
+        <h1 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h1><p><a href="https://duvenaud.github.io/learn-discrete/slides/AdversarialAutoencoders.pdf" target="_blank" rel="noopener">ref1</a> <a href="http://closure11.com/%E5%AF%B9%E6%8A%97%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%9Aadversarial-autoencoders/" target="_blank" rel="noopener">gocha</a> <a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-2-exploring-latent-space-with-adversarial-2d53a6f8a4f9" target="_blank" rel="noopener">good one</a>  </p>
 <h2 id="无监督AAE"><a href="#无监督AAE" class="headerlink" title="无监督AAE"></a>无监督AAE</h2><h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png" alt="Screen-Shot-2016-10-13-at-11.17.21-AM-690x332"></p>
 <p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen Shot 2018-08-08 at 9.33.36 PM.png" alt="Screen Shot 2018-08-08 at 9.33.36 PM"></p>
-<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><h2 id="监督AAE"><a href="#监督AAE" class="headerlink" title="监督AAE"></a>监督AAE</h2>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_nnf4UUq9Uuf2l19iCYaNfg.png" alt="1_nnf4UUq9Uuf2l19iCYaNfg"></p>
+<ul>
+<li>$x$是输入</li>
+<li>$q(z|x)$是encoder基于输入$x$的输出</li>
+<li>$z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到</li>
+<li>$z’$是采样自想要的分布，作为真实输入</li>
+<li>$p(x|z)$是基于$z$的decoder输入</li>
+<li>$x_$是重构图像</li>
+</ul>
+<p>我们的主要目的是迫使encoder的输出逼近一个先验分布（比如正态分布，gamma分布等）。我们将使用encoder$(q(z|x))$作为生成器，而判别器辨别它的输入是来自于一个先验分布$p(z)$，亦或是来自于encoder的输出$z$，decoder仍然进行图片重构的工作。</p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>AAE的训练分成两个部分：重构阶段和正则化阶段。</p>
+<h4 id="重构阶段"><a href="#重构阶段" class="headerlink" title="重构阶段"></a>重构阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_DKPl7YOnX-8FJQuHAZop-g.png" alt="1_DKPl7YOnX-8FJQuHAZop-g"></p>
+<p>在该阶段，我们需要训练encoder和decoder来最小化重构误差（输入图片与重构图片间的均方误差）。我们将输入传递给encoder，encoder输出一个潜在码；随后，我们将该潜在码送入decoder从而得到一张重构图像。</p>
+<h4 id="正则化阶段"><a href="#正则化阶段" class="headerlink" title="正则化阶段"></a>正则化阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1__pIXKcCCqJRNmIWTRymJzA.png" alt="1__pIXKcCCqJRNmIWTRymJzA"></p>
+<p>在该阶段，我们训练生成器和辨别器，我们将encod的输出$z$和随机采样$z’$（来自于想要的分布）作为输入来训练辨别器，这样辨别器就会返回1如果输入是$z’$，而返回0如果输入是$z$。接下来，为了迫使encoder的输出$z$逼近我们想要的分布，我们将encoder的输出作为辨别器的输入，连接encoder和辨别器。</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_DoJESN2LvxpxNVYADRJXWw.png" alt="1_DoJESN2LvxpxNVYADRJXWw"></p>
+<p>我们固定辨别器的权重参数，固定输入的目标标签为1，然后我们输入一些图像到encoder，并计算辨别器的输出与目标标签间的差异（使用交叉熵损失函数），这个阶段我们只更新encoder的权重参数，这样促使encoder去学习我们想要的分布，使输出服从这个分布。</p>
+<h2 id="监督AAE"><a href="#监督AAE" class="headerlink" title="监督AAE"></a>监督AAE</h2>
       
     </div>
     
@@ -399,9 +420,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
-          
             <a href="/tags/GAN/" rel="tag"># GAN</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
           
         </div>
       
@@ -423,6 +444,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/09/Python-Sth/" rel="prev" title="Python Sth">
+                Python Sth <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -499,7 +524,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -554,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">1.</span> <span class="nav-text">Adversarial Autoencoder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无监督AAE"><span class="nav-number">1.1.</span> <span class="nav-text">无监督AAE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.2.</span> <span class="nav-text">训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监督AAE"><span class="nav-number">1.2.</span> <span class="nav-text">监督AAE</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">1.</span> <span class="nav-text">Adversarial Autoencoder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无监督AAE"><span class="nav-number">1.1.</span> <span class="nav-text">无监督AAE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.2.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重构阶段"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">重构阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化阶段"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">正则化阶段</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监督AAE"><span class="nav-number">1.2.</span> <span class="nav-text">监督AAE</span></a></li></ol></li></ol></div>
             
 
           </div>

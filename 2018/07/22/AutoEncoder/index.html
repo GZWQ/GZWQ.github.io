@@ -91,7 +91,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.42.04%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.33.57%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/Screen%20Shot%202018-07-22%20at%2012.36.22%20AM.png">
-<meta property="og:updated_time" content="2018-08-09T03:09:46.102Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/22/AutoEncoder/image-20180809104701466.png">
+<meta property="og:updated_time" content="2018-08-09T15:48:37.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AutoEncoder">
 <meta name="twitter:description" content="AutoEncoder通过设计encode和decode过程使输入和输出越来越接近，是一种自监督学习过程，输入图片通过encode进行处理，得到code，再经过decode处理得到输出，我们可以控制encode的输出维数，就相当于强迫encode过程以低维参数学习高维特征。">
@@ -394,8 +395,170 @@
 <p><img src="/2018/07/22/AutoEncoder/Screen Shot 2018-07-22 at 12.42.04 AM.png" alt="Screen Shot 2018-07-22 at 12.42.04 AM"></p>
 <p><img src="/2018/07/22/AutoEncoder/Screen Shot 2018-07-22 at 12.33.57 AM.png" alt="Screen Shot 2018-07-22 at 12.33.57 AM"></p>
 <p><img src="/2018/07/22/AutoEncoder/Screen Shot 2018-07-22 at 12.36.22 AM.png" alt="Screen Shot 2018-07-22 at 12.36.22 AM"></p>
-<p><a href="https://blog.csdn.net/u013719780/article/details/53908852" target="_blank" rel="noopener">Tensorflow - Denoising AE</a> </p>
+<h2 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h2><p><a href="https://blog.csdn.net/u013719780/article/details/53908852" target="_blank" rel="noopener">Tensorflow - Denoising AE</a> </p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input, Flatten, Dense, Reshape</div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> Model</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> Adam</div>
+<div class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist</div>
+<div class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AE</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        self.rows = <span class="number">28</span></div>
+<div class="line">        self.cols = <span class="number">28</span></div>
+<div class="line">        self.chanels = <span class="number">1</span></div>
+<div class="line">        self.input_shape = (self.rows,self.cols,self.chanels)</div>
+<div class="line">        self.latent_dim = <span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">        opt = Adam(lr=<span class="number">0.002</span>,beta_1=<span class="number">0.9</span>)</div>
+<div class="line">        self.encoder = self.make_encoder()</div>
+<div class="line">        en_input = Input(self.input_shape)</div>
+<div class="line">        en_out = self.encoder(en_input)</div>
+<div class="line">        self.decoder = self.make_decoder()</div>
+<div class="line">        out_img = self.decoder(en_out)</div>
+<div class="line">        self.ae = Model(en_input,out_img)</div>
+<div class="line">        self.ae.compile(optimizer=opt,loss=<span class="string">'mse'</span>,metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_encoder</span><span class="params">(self)</span>:</span></div>
+<div class="line">        input = Input(self.input_shape)</div>
+<div class="line">        h = Flatten()(input)</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">        output = Dense(self.latent_dim)(h)</div>
+<div class="line">        encoder = Model(input,output)</div>
+<div class="line">        encoder.summary()</div>
+<div class="line">        <span class="keyword">return</span> encoder</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_decoder</span><span class="params">(self)</span>:</span></div>
+<div class="line">        input = Input((self.latent_dim,))</div>
+<div class="line">        h = Dense(<span class="number">1000</span>, activation=<span class="string">'relu'</span>)(input)</div>
+<div class="line">        h = Dense(<span class="number">1000</span>, activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">        h = Dense(np.prod(self.input_shape),activation=<span class="string">'tanh'</span>)(h)</div>
+<div class="line">        output = Reshape(self.input_shape)(h)</div>
+<div class="line">        decoder = Model(input,output)</div>
+<div class="line">        decoder.summary()</div>
+<div class="line">        <span class="keyword">return</span> decoder</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self,batch_size=<span class="number">128</span>,epoches=<span class="number">100</span>)</span>:</span></div>
+<div class="line">        (x_train,y_train),(x_test,y_test) = mnist.load_data()</div>
+<div class="line">        x_train = (x_train<span class="number">-127.5</span>)/<span class="number">127.5</span></div>
+<div class="line">        x_test = (x_test<span class="number">-127.5</span>)/<span class="number">127.5</span></div>
+<div class="line">        x_train = np.expand_dims(x_train,axis=<span class="number">3</span>)</div>
+<div class="line">        x_test = np.expand_dims(x_test,axis=<span class="number">3</span>)</div>
+<div class="line">        losses = []</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> tqdm(range(epoches)):</div>
+<div class="line">            idx = np.random.randint(<span class="number">0</span>,len(x_train),batch_size)</div>
+<div class="line">            input_imgs = x_train[idx,:,:,:]</div>
+<div class="line">            loss = self.ae.train_on_batch(input_imgs,input_imgs)</div>
+<div class="line">            losses.append(loss[<span class="number">0</span>])</div>
+<div class="line">        losses = np.array(losses)</div>
+<div class="line">        plt.plot(range(<span class="number">1</span>,len(losses)+<span class="number">1</span>),losses)</div>
+<div class="line">        plt.show()</div>
+<div class="line">        self.pred(x_test)</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pred</span><span class="params">(self,x_test)</span>:</span></div>
+<div class="line">        idx = np.random.randint(<span class="number">0</span>,len(x_test),<span class="number">3</span>)</div>
+<div class="line">        image = x_test[idx, :, :, :]</div>
+<div class="line">        generated_img = self.ae.predict(image)</div>
+<div class="line">        generated_img = np.reshape(generated_img,(<span class="number">-1</span>,<span class="number">28</span>,<span class="number">28</span>))</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(generated_img)):</div>
+<div class="line">            pic = generated_img[i]</div>
+<div class="line">            pic = pic*<span class="number">127.5</span>+<span class="number">127.5</span></div>
+<div class="line">            img = Image.fromarray(pic)</div>
+<div class="line">            plt.imshow(img)</div>
+<div class="line">            plt.show()</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    ae = AE()</div>
+<div class="line">    ae.train()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/07/22/AutoEncoder/image-20180809104701466.png" alt="image-20180809104701466"></p>
 
+</div></div>
       
     </div>
     
@@ -516,7 +679,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -571,7 +734,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.</span> <span class="nav-text">模型</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python实现"><span class="nav-number">2.</span> <span class="nav-text">Python实现</span></a></li></ol></div>
             
 
           </div>
