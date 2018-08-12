@@ -383,16 +383,20 @@
 <div class="line">2</div>
 <div class="line">3</div>
 </pre></td><td class="code"><pre><div class="line">path = <span class="string">'./xx/'</span></div>
-<div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(path):</div>
+<div class="line"><span class="keyword">if</span> os.path.isdir(path) == <span class="keyword">False</span>:</div>
 <div class="line">    os.mkdir(path)</div>
 </pre></td></tr></table></figure>
 <p>多级目录生成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"> </div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">path = <span class="string">'./xx/yy/zz/'</span></div>
+<div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(path):</div>
+<div class="line">    os.makedirs(path)</div>
 </pre></td></tr></table></figure>
 </li>
+<li></li>
 </ol>
-<p>2. </p>
 
           
         
@@ -2232,7 +2236,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

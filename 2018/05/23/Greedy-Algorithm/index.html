@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Algorithm," />
+  <meta name="keywords" content="Algorithm,LeetCode,Greedy Algorithm," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
-<meta name="keywords" content="Algorithm">
+<meta name="keywords" content="Algorithm,LeetCode,Greedy Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Greedy Algorithm">
 <meta property="og:url" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/index.html">
@@ -93,8 +93,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-29%20at%204.13.36%20PM%20(2">
-<meta property="og:updated_time" content="2018-07-19T00:29:18.461Z">
+<meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/123.png">
+<meta property="og:updated_time" content="2018-08-12T21:28:49.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
@@ -1787,7 +1787,7 @@
 <p>我们先考虑一个数组的情况，即如何从一个数组中选出k个元素，在不改变元素顺序的情况下，组合得到的值最大。贪心方法，使用一个栈，扫描一次数组，如果栈空或者当前的元素值比栈顶大，则持续出栈直到栈顶元素比较大。有个要求就是为了保证最后有k个数字，我们最多只能出栈len(num)-k个元素，具体过程在下图的左上角, 时间复杂度是$O(n)$.</p>
 <p>接下来，我们考虑另一个问题，给定两个数组，在不考虑k的限制，即如何用两个数组排列出最大的值。那么显然是贪心了，同时扫描两个数组，分别比较数组的第一个值，选择大值作为新值的一部分，然后弹出该值，继续扫描。</p>
 <p>那么将上述两个步骤合并就能解决我们的问题了。因为要选择k个，那么在第一个数组中选择i个，第一个数组中选择(k-i)个，得到的两个子数组构成的值都是相对最优的；那么再将这两个子数组合并，就得到了k长度的解。</p>
-<p><img src="/2018/05/23/Greedy-Algorithm/Screen Shot 2018-06-29 at 4.13.36 PM (2" alt="Screen Shot 2018-06-29 at 4.13.36 PM (2)">.png)</p>
+<p><img src="/2018/05/23/Greedy-Algorithm/123.png" alt="123"></p>
 </li>
 <li><p>代码</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
@@ -1879,23 +1879,52 @@
 <h3 id="Set-Intersection-Size-At-Least-Two"><a href="#Set-Intersection-Size-At-Least-Two" class="headerlink" title="Set Intersection Size At Least Two"></a><a href="https://leetcode.com/problems/set-intersection-size-at-least-two/description/" target="_blank" rel="noopener">Set Intersection Size At Least Two</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-
-</div></div>
-
-2. [思路](https://blog.csdn.net/magicbean2/article/details/79568849)
-
-   
-
-3. 代码
-
-   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>An integer interval <code>[a, b]</code> (for integers <code>a &lt; b</code>) is a set of all consecutive integers from <code>a</code> to <code>b</code>, including <code>a</code> and <code>b</code>.</p>
+<p>Find the minimum size of a set S such that for every integer interval A in <code>intervals</code>, the intersection of S with A has size at least 2.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">Input: intervals = [[1, 3], [1, 4], [2, 5], [3, 5]]</div>
+<div class="line">Output: 3</div>
+<div class="line">Explanation:</div>
+<div class="line">Consider the set S = &#123;2, 3, 4&#125;.  For each interval, there are at least 2 elements from S in the interval.</div>
+<div class="line">Also, there isn&apos;t a smaller size set that fulfills the above condition.</div>
+<div class="line">Thus, we output the size of this set, which is 3.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">Input: intervals = [[1, 2], [2, 3], [2, 4], [4, 5]]</div>
+<div class="line">Output: 5</div>
+<div class="line">Explanation:</div>
+<div class="line">An example of a minimum sized set is &#123;1, 2, 3, 4, 5&#125;.</div>
+</pre></td></tr></table></figure>
 
 </div></div>
 </li>
+<li><p><a href="https://blog.csdn.net/magicbean2/article/details/79568849" target="_blank" rel="noopener">思路</a></p>
+<p> 题意大概是：每个连续整数间隔数组都由两个数表示：<code>a</code>表示连续整数的开始，<code>b</code>表示连续整数的结束。现在给出一堆这样的连续整数间隔，需要找到一个最小的数组，使该数组与每个连续数组都至少有两个数是相同的，不要求该数组是由连续整数构成。</p>
+</li>
 </ol>
-<h3 id="Course-Schedule-III"><a href="#Course-Schedule-III" class="headerlink" title="Course Schedule III"></a><a href="https://leetcode.com/problems/course-schedule-iii/description/" target="_blank" rel="noopener">Course Schedule III</a></h3><ol>
-<li><p>题目</p>
+<ol>
+<li><p>代码</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+
+
+
+### [Course Schedule III](https://leetcode.com/problems/course-schedule-iii/description/)
+
+1. 题目
+
+   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>There are <code>n</code> different online courses numbered from <code>1</code> to <code>n</code>. Each course has some duration(course length) <code>t</code> and closed on <code>dth</code>day. A course should be taken <strong>continuously</strong> for <code>t</code> days and must be finished before or on the <code>dth</code> day. You will start at the <code>1st</code> day.</p>
 <p>Given <code>n</code> online courses represented by pairs <code>(t,d)</code>, your task is to find the maximal number of courses that can be taken.</p>
 <p><strong>Example:</strong></p>
@@ -1923,11 +1952,43 @@
 <p>题目大意：$n$个课程，每一个课程使用$(t,d)$表示，其中$t$是课程所需时间，$d$表示课程必须在$d$之前完成。如何选课才能选到最多的课程？</p>
 <p>我们的贪心选择是 - 选择截止日期越早的课程。比如（300，1000）和（500，600），我们可以先选择（500，600），这样课程结束时间是500&lt;600。然后选择（300，1000）,这样课程结束时间是500+300 &lt; 1000。选择2门课。</p>
 <p>而非优先选择所需时间最短的课程。优选选择课时短的（300，1000），结束时间是300. 如果再选择（500，600），上完课的时间就是 300+500 &gt; 600，就不能选了。</p>
+<p>但是，为了防止这种情况：<code>[[5,5],[4,6],[2,6]]</code>，如果单纯用上述方法，则返回1。实际上，我们需要一个优先队列，将选择的课程按照持续时间排列，扫描课程，先吸收入优先队列，更新start时间；然后判断该课程是否合理，如果不合理，则从队列中选择持续时间最长的课程，抛弃之。</p>
 </li>
-</ol>
-<ol>
 <li><p><a href="http://fisherlei.blogspot.com/2017/07/leetcode-course-schedule-iii-solution.html" target="_blank" rel="noopener">代码</a></p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> heapq</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">scheduleCourse</span><span class="params">(self, courses)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> courses: <span class="keyword">return</span> <span class="number">0</span></div>
+<div class="line">        sel_c = []</div>
+<div class="line">        sorted_c = sorted(courses,key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</div>
+<div class="line">        start = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> sorted_c:</div>
+<div class="line">            duration = c[<span class="number">0</span>]</div>
+<div class="line">            end = c[<span class="number">1</span>]</div>
+<div class="line">            heapq.heappush(sel_c,-duration)</div>
+<div class="line">            start = duration + start</div>
+<div class="line">            <span class="keyword">if</span> start &gt; end:</div>
+<div class="line">                d = heapq.heappop(sel_c)</div>
+<div class="line">                start += d</div>
+<div class="line">        <span class="keyword">return</span> len(sel_c)</div>
+</pre></td></tr></table></figure>
 
 </div></div>
 </li>
@@ -1950,6 +2011,10 @@
         <div class="post-tags">
           
             <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+            <a href="/tags/Greedy-Algorithm/" rel="tag"># Greedy Algorithm</a>
           
         </div>
       
@@ -2073,7 +2138,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2106,7 +2171,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.2.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.3.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.5.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.6.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.7.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.8.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.9.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.10.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">3.4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">3.5.</span> <span class="nav-text">Course Schedule III</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.2.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.3.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.5.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.6.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.7.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.8.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.9.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.10.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">3.4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li></ol></li></ol></div>
             
 
           </div>
