@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="目录 检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)">
+<meta name="description" content="目录 检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)   txt读写 ref  np.loadtxt()">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Sth">
 <meta property="og:url" content="http://yoursite.com/2018/08/09/Python-Sth/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="目录 检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)">
+<meta property="og:description" content="目录 检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)   txt读写 ref  np.loadtxt()">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-09T21:00:29.296Z">
+<meta property="og:updated_time" content="2018-08-13T15:42:42.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Sth">
-<meta name="twitter:description" content="目录 检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)">
+<meta name="twitter:description" content="目录 检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)   txt读写 ref  np.loadtxt()">
 
 
 
@@ -395,7 +395,37 @@
 <div class="line">    os.makedirs(path)</div>
 </pre></td></tr></table></figure>
 </li>
-<li></li>
+<li><p>txt读写 <a href="https://blog.csdn.net/heyijia0327/article/details/42506063" target="_blank" rel="noopener">ref</a> </p>
+<p><code>np.loadtxt()</code>用于从文本加载数据。 文本文件中的每一行必须含有相同的数据。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">loadtxt(fname, dtype=&lt;class 'float'&gt;, comments='#', delimiter=None, converters=None, skiprows=0, usecols=None, unpack=False, ndmin=0)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li>fname：文件名</li>
+<li>dtype：数据类型，默认float</li>
+<li>comments：注释</li>
+<li>delimiter：分隔符，默认是空格</li>
+<li>skiprows：跳过前几行，0是第一行，必须int</li>
+<li><code>usecols</code>：要读取哪些列，0是第一列。例如，usecols = （1,4,5）将提取第2，第5和第6列。默认读取所有列。</li>
+<li><code>unpack</code>如果为<code>True</code>，将分列读取。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">with</span> open(<span class="string">'odom.txt'</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</div>
+<div class="line">    data = f.readlines()  <span class="comment">#txt中所有字符串读入data</span></div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> data:</div>
+<div class="line">        odom = line.split()        <span class="comment">#将单个数据分隔开存好</span></div>
+<div class="line">        numbers_float = map(float, odom) <span class="comment">#转化为浮点数</span></div>
+</pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li>xx</li>
 </ol>
 
       

@@ -97,7 +97,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180808113730536.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180808114529415.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180808123047797.png">
-<meta property="og:updated_time" content="2018-08-08T17:31:06.662Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180813110624641.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180813111620624.png">
+<meta property="og:updated_time" content="2018-08-13T17:39:28.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression">
 <meta name="twitter:description" content="线性回归模型线性回归模型，顾名思义就是线性模型求解回归问题。 线性模型【定义】给定具有$d$个属性的数据样本$x=\{x_1,x_2,…,x_d\}$，$x_i$是$x$在第$i$个属性上的取值，线性模型通过对属性的线性组合来进行预测的函数：  f(x)=w_1x_1+w_2x_2+...+w_dx_d+b向量形式表示为：  f(x)=w^Tx+b其中$w=(w_1;w_2;…;w_d)$，只要">
@@ -551,7 +553,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 <h1 id="Polynomial-Regression"><a href="#Polynomial-Regression" class="headerlink" title="Polynomial Regression"></a>Polynomial Regression</h1><p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
 <p> We can <strong>change the behavior or curve</strong> of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).</p>
 <p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-07 at 12.18.01 AM.png" alt="Screen Shot 2018-08-07 at 12.18.01 AM"></p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p><img src="/2018/08/06/Linear-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen Shot 2018-08-08 at 11.32.08 AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/06/Linear-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen Shot 2018-08-08 at 11.32.08 AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
 <ol>
 <li><p>数据载入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -655,6 +657,128 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 <p><img src="/2018/08/06/Linear-Regression/image-20180808123047797.png" alt="image-20180808123047797"></p>
 </li>
 </ol>
+<h2 id="交叉验证法-vs-留一法"><a href="#交叉验证法-vs-留一法" class="headerlink" title="交叉验证法 vs 留一法"></a>交叉验证法 vs 留一法</h2><p>基于UCI数据集，比较10折交叉验证和留一法所估计出的对率回归的准确率。</p>
+<p>我们选择<a href="http://archive.ics.uci.edu/ml/datasets/Iris" target="_blank" rel="noopener">Iris</a>数据和<a href="http://archive.ics.uci.edu/ml/datasets/Blood+Transfusion+Service+Center" target="_blank" rel="noopener">blood transfusion</a>数据</p>
+<p><strong>Iris数据</strong>共有4个特征个一个类别label。</p>
+<p>第一个是sepal length，第二个是sepal width，第三个是petal length，第四个特征是petal width。类别有三类：— Iris Setosa  — Iris Versicolour  — Iris Virginica</p>
+<p><strong>blood transfusion</strong>数据总共有4个特征和一个label。</p>
+<p>R(Recency):距离上次献血时间(month)<br>F(Frequency):总献血次数<br>M(Monetary):总献血量<br>T(Time):距离第一次献血(month)<br>Y:2007的三月是否献血;1-献血，0-没有献血</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">(data,y)</span>:</span></div>
+<div class="line">    sns.set(style=<span class="string">'white'</span>,color_codes=<span class="keyword">True</span>)</div>
+<div class="line">    sns.pairplot(data,hue=y)</div>
+<div class="line">    plt.show()</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line"></div>
+<div class="line">    iris = sns.load_dataset(<span class="string">'iris'</span>)</div>
+<div class="line">    plot_data(iris,<span class="string">'species'</span>)</div>
+<div class="line"></div>
+<div class="line">    data = pd.read_csv(<span class="string">'blood_dataset.txt'</span>,sep=<span class="string">','</span>,header=<span class="keyword">None</span>)</div>
+<div class="line">    data.columns = [<span class="string">'R'</span>,<span class="string">'F'</span>,<span class="string">'M'</span>,<span class="string">'T'</span>,<span class="string">'Y'</span>]</div>
+<div class="line">    plot_data(data,<span class="string">'Y'</span>)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/08/06/Linear-Regression/image-20180813110624641.png" alt="image-20180813110624641"></p>
+<p><img src="/2018/08/06/Linear-Regression/image-20180813111620624.png" alt="image-20180813111620624"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</div>
+<div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_predict, LeaveOneOut</div>
+<div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</div>
+<div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cv</span><span class="params">(x,y)</span>:</span></div>
+<div class="line">    log_regression = LogisticRegression()</div>
+<div class="line">    pre = cross_val_predict(log_regression,x,y,cv=<span class="number">5</span>)</div>
+<div class="line">    print(metrics.accuracy_score(y,pre))</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loo</span><span class="params">(x,y)</span>:</span></div>
+<div class="line">    loo = LeaveOneOut()</div>
+<div class="line">    accuracy = <span class="number">0</span></div>
+<div class="line">    log_regression = LogisticRegression()</div>
+<div class="line">    <span class="keyword">for</span> train,test <span class="keyword">in</span> loo.split(x):</div>
+<div class="line">        log_regression.fit(x[train],y[train])</div>
+<div class="line">        y_p = log_regression.predict(x[test])</div>
+<div class="line">        <span class="keyword">if</span> y_p == y[test] : accuracy += <span class="number">1</span></div>
+<div class="line">    print(accuracy/np.shape(x)[<span class="number">0</span>]) <span class="comment"># 0.9533333333333334</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_blood</span><span class="params">()</span>:</span></div>
+<div class="line">    data = np.loadtxt(<span class="string">'blood_dataset.txt'</span>,delimiter=<span class="string">','</span>) <span class="comment">#shape = (748,5)</span></div>
+<div class="line">    x = data[:,:<span class="number">-1</span>] <span class="comment"># shape = (748, 4)</span></div>
+<div class="line">    y = data[:,<span class="number">-1</span>] <span class="comment"># shape = (748,)</span></div>
+<div class="line">    <span class="keyword">return</span> x,y</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line"></div>
+<div class="line">    iris = load_iris()</div>
+<div class="line">    x = iris.data  <span class="comment"># x.shape = (150,4)</span></div>
+<div class="line">    y = iris.target  <span class="comment"># x.shape = (150,)</span></div>
+<div class="line">    cv(x,y) <span class="comment"># 0.96</span></div>
+<div class="line">    loo(x,y) <span class="comment"># 0.9533333333333334</span></div>
+<div class="line"></div>
+<div class="line">    x,y=load_blood()</div>
+<div class="line">    cv(x,y) <span class="comment"># 0.7807486631016043</span></div>
+<div class="line">    loo(x,y) <span class="comment"># 0.7700534759358288</span></div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>也可以看到，两种交叉验证的结果相近，但是由于此数据集的类分性不如iris明显，所得结果也要差一些。同时由程序运行可以看出，<strong>LOOCV的运行时间相对较长</strong>，这一点随着数据量的增大而愈发明显。</p>
+<p>所以，一般情况下选择K-折交叉验证即可满足精度要求，同时运算量相对小。</p>
+</blockquote>
 
       
     </div>
@@ -833,7 +957,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">回归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性回归-1"><span class="nav-number">1.1.3.</span> <span class="nav-text">线性回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解"><span class="nav-number">1.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小二乘法"><span class="nav-number">1.2.1.</span> <span class="nav-text">最小二乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数估计"><span class="nav-number">1.2.2.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Loss函数求导取极值"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Loss函数求导取极值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化的损失函数"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">正则化的损失函数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑斯蒂回归"><span class="nav-number">2.</span> <span class="nav-text">逻辑斯蒂回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解-1"><span class="nav-number">2.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">2.2.1.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标函数"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法-1"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">梯度下降法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分类学习"><span class="nav-number">2.3.</span> <span class="nav-text">多分类学习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">3.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Convergence-Figure"><span class="nav-number">4.</span> <span class="nav-text">Convergence Figure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polynomial-Regression"><span class="nav-number">5.</span> <span class="nav-text">Polynomial Regression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">回归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性回归-1"><span class="nav-number">1.1.3.</span> <span class="nav-text">线性回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解"><span class="nav-number">1.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小二乘法"><span class="nav-number">1.2.1.</span> <span class="nav-text">最小二乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数估计"><span class="nav-number">1.2.2.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Loss函数求导取极值"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Loss函数求导取极值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化的损失函数"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">正则化的损失函数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑斯蒂回归"><span class="nav-number">2.</span> <span class="nav-text">逻辑斯蒂回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解-1"><span class="nav-number">2.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">2.2.1.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标函数"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法-1"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">梯度下降法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分类学习"><span class="nav-number">2.3.</span> <span class="nav-text">多分类学习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">3.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Convergence-Figure"><span class="nav-number">4.</span> <span class="nav-text">Convergence Figure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polynomial-Regression"><span class="nav-number">5.</span> <span class="nav-text">Polynomial Regression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归预测西瓜"><span class="nav-number">6.1.</span> <span class="nav-text">逻辑斯蒂回归预测西瓜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉验证法-vs-留一法"><span class="nav-number">6.2.</span> <span class="nav-text">交叉验证法 vs 留一法</span></a></li></ol></li></ol></div>
             
 
           </div>
