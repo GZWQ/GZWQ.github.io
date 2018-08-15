@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/123.png">
-<meta property="og:updated_time" content="2018-08-13T21:10:50.689Z">
+<meta property="og:updated_time" content="2018-08-14T21:51:21.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
@@ -418,11 +418,61 @@
 
 ## 简单
 
-### [Couples Holding Hands](https://leetcode.com/problems/couples-holding-hands/description/)
+### [Is Subsequence](https://leetcode.com/problems/is-subsequence/description/)
 
 1. 题目
 
    <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given a string <strong>s</strong> and a string <strong>t</strong>, check if <strong>s</strong> is subsequence of <strong>t</strong>.</p>
+<p>You may assume that there is only lower case English letters in both <strong>s</strong> and <strong>t</strong>. <strong>t</strong> is potentially a very long (length ~= 500,000) string, and <strong>s</strong> is a short string (&lt;=100).</p>
+<p>A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, <code>&quot;ace&quot;</code> is a subsequence of <code>&quot;abcde&quot;</code> while <code>&quot;aec&quot;</code> is not).</p>
+<p><strong>Example 1:</strong><br><strong>s</strong> = <code>&quot;abc&quot;</code>, <strong>t</strong> = <code>&quot;ahbgdc&quot;</code></p>
+<p>Return <code>true</code>.</p>
+<p><strong>Example 2:</strong><br><strong>s</strong> = <code>&quot;axc&quot;</code>, <strong>t</strong> = <code>&quot;ahbgdc&quot;</code></p>
+<p>Return <code>false</code>.</p>
+
+</div></div>
+</=m时，只要将作业时间区间分配给作业即可；当n></li>
+<li><p>思路</p>
+<p>题意大概是判断一个字符串<code>s</code>是否为另一个<code>t</code>的子串，一个串的子串：通过删去一些字符得到的字符串。</p>
+<p>很显然，就从头比较两个字符串，设置两个指针<code>p1</code>和<code>p2</code>，初始分别指向字符串<code>s</code>和<code>t</code>的首字符。如果相同，则同时移动两个指针指向下一个字符；否则只移动<code>p2</code>指向<code>t</code>的下一个字符，直到找到与<code>p1</code>指向的字符。遍历一遍即可，如果<code>p1</code>不能超过<code>s</code>的最后一个字符，则不能是子串。</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isSubsequence</span><span class="params">(self, s, t)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> s: <span class="keyword">return</span> <span class="keyword">True</span></div>
+<div class="line">        cur_s = <span class="number">0</span></div>
+<div class="line">        cur_t = <span class="number">0</span></div>
+<div class="line">        ls = len(s)</div>
+<div class="line">        lt = len(t)</div>
+<div class="line">        <span class="keyword">while</span> cur_s&lt;ls <span class="keyword">and</span> cur_t&lt;lt:</div>
+<div class="line">            <span class="keyword">if</span> s[cur_s]==t[cur_t]:</div>
+<div class="line">                cur_s += <span class="number">1</span></div>
+<div class="line">            cur_t += <span class="number">1</span></div>
+<div class="line">        <span class="keyword">if</span> cur_s==ls:<span class="keyword">return</span> <span class="keyword">True</span></div>
+<div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="Couples-Holding-Hands"><a href="#Couples-Holding-Hands" class="headerlink" title="Couples Holding Hands"></a><a href="https://leetcode.com/problems/couples-holding-hands/description/" target="_blank" rel="noopener">Couples Holding Hands</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>N couples sit in 2N seats arranged in a row and want to hold hands. We want to know the minimum number of swaps so that every couple is sitting side by side. A <em>swap</em> consists of choosing <strong>any</strong> two people, then they stand up and switch seats.</p>
 <p>The people and seats are represented by an integer from <code>0</code> to <code>2N-1</code>, the couples are numbered in order, the first couple being <code>(0, 1)</code>, the second couple being <code>(2, 3)</code>, and so on with the last couple being <code>(2N-2, 2N-1)</code>.</p>
 <p>The couples’ initial seating is given by <code>row[i]</code> being the value of the person who is initially sitting in the i-th seat.</p>
@@ -444,7 +494,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-</=m时，只要将作业时间区间分配给作业即可；当n></li>
+</li>
 <li><p><a href="https://blog.csdn.net/u014688145/article/details/79057475" target="_blank" rel="noopener">思路</a></p>
 <p>贪心，不过不好证明。从位置0开始，看位置1是否是它的partner，如果是，直接忽略这组couple，如果不是，从后面的数组中，找到partner直接交换，并且记录交换次数一次。遍历完整个数组即为最优解。</p>
 </li>
@@ -556,8 +606,7 @@
 </div></div>
 </li>
 </ol>
-<p><a href="https://leetcode.com/problems/jump-game-ii/description/" target="_blank" rel="noopener">Jump Game II</a></p>
-<ol>
+<h3 id="Jump-Game-II"><a href="#Jump-Game-II" class="headerlink" title="Jump Game II"></a><a href="https://leetcode.com/problems/jump-game-ii/description/" target="_blank" rel="noopener">Jump Game II</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
@@ -2028,6 +2077,119 @@
 </div></div>
 </li>
 </ol>
+<h3 id="Patching-Array"><a href="#Patching-Array" class="headerlink" title="Patching Array"></a><a href="https://leetcode.com/problems/patching-array/description/" target="_blank" rel="noopener">Patching Array</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given a sorted positive integer array <em>nums</em> and an integer <em>n</em>, add/patch elements to the array such that any number in range <code>[1, n]</code> inclusive can be formed by the sum of some elements in the array. Return the minimum number of patches required.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input: nums = [<span class="number">1</span>,<span class="number">3</span>], n = <span class="number">6</span></div>
+<div class="line">Output: <span class="number">1</span> </div>
+<div class="line">Explanation:</div>
+<div class="line">Combinations of nums are [<span class="number">1</span>], [<span class="number">3</span>], [<span class="number">1</span>,<span class="number">3</span>], which form possible sums of: <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>.</div>
+<div class="line">Now <span class="keyword">if</span> we add/patch <span class="number">2</span> to nums, the combinations are: [<span class="number">1</span>], [<span class="number">2</span>], [<span class="number">3</span>], [<span class="number">1</span>,<span class="number">3</span>], [<span class="number">2</span>,<span class="number">3</span>], [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>].</div>
+<div class="line">Possible sums are <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, which now covers the range [<span class="number">1</span>, <span class="number">6</span>].</div>
+<div class="line">So we only need <span class="number">1</span> patch.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: nums = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">10</span>], n = <span class="number">20</span></div>
+<div class="line">Output: <span class="number">2</span></div>
+<div class="line">Explanation: The two patches can be [<span class="number">2</span>, <span class="number">4</span>].</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: nums = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>], n = <span class="number">5</span></div>
+<div class="line">Output: <span class="number">0</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://www.hrwhisper.me/leetcode-patching-array/" target="_blank" rel="noopener">思路</a> </p>
+<p>题意大概是：给定一个数组和一个目标值<code>n</code>，要求往数组中增加最少的元素，使数组中几个元素的和可以表示<code>[1,n]</code>范围内的数字.</p>
+<p>我们设置一个变量<code>known_num</code>表示当前数字可以表示的最大<code>[1,known_num)</code>。扫描一遍数组，如果当前的元素不比<code>known_num</code>大，则我们可以更新我们的表示范围<code>[1,known_num + ele_</code>；如果当前的元素比<code>known_num</code>大，那么我们需要添加元素<code>known_num</code>，更新表示范围<code>[1,known_num*2)</code>。</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">minPatches</span><span class="params">(self, nums, n)</span>:</span></div>
+<div class="line">        known_num = <span class="number">1</span></div>
+<div class="line">        add_num = <span class="number">0</span></div>
+<div class="line">        pos = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">while</span> known_num<span class="number">-1</span> &lt; n:</div>
+<div class="line">            <span class="keyword">if</span> pos &lt; len(nums) <span class="keyword">and</span> nums[pos] &lt;= known_num:</div>
+<div class="line">                known_num += nums[pos]</div>
+<div class="line">                pos += <span class="number">1</span></div>
+<div class="line">            <span class="keyword">else</span>:</div>
+<div class="line">                known_num *= <span class="number">2</span></div>
+<div class="line">                add_num += <span class="number">1</span></div>
+<div class="line">        <span class="keyword">return</span> add_num</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="IPO"><a href="#IPO" class="headerlink" title="IPO"></a><a href="https://leetcode.com/problems/ipo/description/" target="_blank" rel="noopener">IPO</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Suppose LeetCode will start its IPO soon. In order to sell a good price of its shares to Venture Capital, LeetCode would like to work on some projects to increase its capital before the IPO. Since it has limited resources, it can only finish at most <strong>k</strong> distinct projects before the IPO. Help LeetCode design the best way to maximize its total capital after finishing at most <strong>k</strong> distinct projects.</p>
+<p>You are given several projects. For each project <strong>i</strong>, it has a pure profit <strong>Pi</strong> and a minimum capital of <strong>Ci</strong> is needed to start the corresponding project. Initially, you have <strong>W</strong> capital. When you finish a project, you will obtain its pure profit and the profit will be added to your total capital.</p>
+<p>To sum up, pick a list of at most <strong>k</strong> distinct projects from given projects to maximize your final capital, and output your final maximized capital.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line">Input: k=<span class="number">2</span>, W=<span class="number">0</span>, Profits=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], Capital=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>].</div>
+<div class="line"></div>
+<div class="line">Output: <span class="number">4</span></div>
+<div class="line"></div>
+<div class="line">Explanation: Since your initial capital is <span class="number">0</span>, you can only start the project indexed <span class="number">0</span>.</div>
+<div class="line">             After finishing it you will obtain profit <span class="number">1</span> and your capital becomes <span class="number">1</span>.</div>
+<div class="line">             With capital <span class="number">1</span>, you can either start the project indexed <span class="number">1</span> or the project indexed <span class="number">2</span>.</div>
+<div class="line">             Since you can choose at most <span class="number">2</span> projects, you need to finish the project indexed <span class="number">2</span> to get the maximum capital.</div>
+<div class="line">             Therefore, output the <span class="keyword">final</span> maximized capital, which is <span class="number">0</span> + <span class="number">1</span> + <span class="number">3</span> = <span class="number">4</span>.</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p>思路</p>
+</li>
+</ol>
+<ol>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+</li>
+</ol>
 
       
     </div>
@@ -2206,7 +2368,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.2.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.3.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.4.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.5.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.6.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.7.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.8.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.9.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.10.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">3.4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">3.5.</span> <span class="nav-text">Course Schedule III</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">1.2.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.3.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">1.4.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.5.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.6.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.7.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.8.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.9.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.10.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.11.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.12.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">3.4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">3.5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">3.6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">3.7.</span> <span class="nav-text">IPO</span></a></li></ol></li></ol></div>
             
 
           </div>

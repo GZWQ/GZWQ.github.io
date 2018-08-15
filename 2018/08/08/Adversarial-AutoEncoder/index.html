@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Adversarial Autoencoderref1 gocha good one   无监督AAE模型    $x$是输入 $q(z|x)$是encoder基于输入$x$的输出 $z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到 $z’$是采样自想要的分布，作为真实输入 $p(x|z)$是基于$z$的decoder输入 $x_$是重构图像  我们的主要目的是迫使encoder的输">
+<meta name="description" content="Adversarial Autoencoderref1 gocha good one   无监督AAEautoencoder中的encoder的输出(潜在码)并不能在某一特定空间均匀分布，而且AE 的 G 只能保证将由 x 生成的 z 还原为 x。如果我们随机生成 1 个 z，经过 AE 的 G 后往往不会得到有效的图像。 所以我们希望encoder的输出可以服从某一分布，这个分布可以是正态分布，">
 <meta name="keywords" content="GAN,Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adversarial AutoEncoder">
 <meta property="og:url" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Adversarial Autoencoderref1 gocha good one   无监督AAE模型    $x$是输入 $q(z|x)$是encoder基于输入$x$的输出 $z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到 $z’$是采样自想要的分布，作为真实输入 $p(x|z)$是基于$z$的decoder输入 $x_$是重构图像  我们的主要目的是迫使encoder的输">
+<meta property="og:description" content="Adversarial Autoencoderref1 gocha good one   无监督AAEautoencoder中的encoder的输出(潜在码)并不能在某一特定空间均匀分布，而且AE 的 G 只能保证将由 x 生成的 z 还原为 x。如果我们随机生成 1 个 z，经过 AE 的 G 后往往不会得到有效的图像。 所以我们希望encoder的输出可以服从某一分布，这个分布可以是正态分布，">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/Screen%20Shot%202018-08-08%20at%209.33.36%20PM.png">
@@ -93,10 +93,13 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_DKPl7YOnX-8FJQuHAZop-g.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1__pIXKcCCqJRNmIWTRymJzA.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_DoJESN2LvxpxNVYADRJXWw.png">
-<meta property="og:updated_time" content="2018-08-09T17:30:07.246Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_Hud7t2vLY2JIP3SXn4WTDA.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_0t7JrvUqyzg7AdQGDjZkRw.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/1_Df3_l66beZqsqRe5i6lZRw.png">
+<meta property="og:updated_time" content="2018-08-14T15:55:37.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adversarial AutoEncoder">
-<meta name="twitter:description" content="Adversarial Autoencoderref1 gocha good one   无监督AAE模型    $x$是输入 $q(z|x)$是encoder基于输入$x$的输出 $z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到 $z’$是采样自想要的分布，作为真实输入 $p(x|z)$是基于$z$的decoder输入 $x_$是重构图像  我们的主要目的是迫使encoder的输">
+<meta name="twitter:description" content="Adversarial Autoencoderref1 gocha good one   无监督AAEautoencoder中的encoder的输出(潜在码)并不能在某一特定空间均匀分布，而且AE 的 G 只能保证将由 x 生成的 z 还原为 x。如果我们随机生成 1 个 z，经过 AE 的 G 后往往不会得到有效的图像。 所以我们希望encoder的输出可以服从某一分布，这个分布可以是正态分布，">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png">
 
 
@@ -384,7 +387,11 @@
 
       
         <h1 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h1><p><a href="https://duvenaud.github.io/learn-discrete/slides/AdversarialAutoencoders.pdf" target="_blank" rel="noopener">ref1</a> <a href="http://closure11.com/%E5%AF%B9%E6%8A%97%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%9Aadversarial-autoencoders/" target="_blank" rel="noopener">gocha</a> <a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-2-exploring-latent-space-with-adversarial-2d53a6f8a4f9" target="_blank" rel="noopener">good one</a>  </p>
-<h2 id="无监督AAE"><a href="#无监督AAE" class="headerlink" title="无监督AAE"></a>无监督AAE</h2><h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png" alt="Screen-Shot-2016-10-13-at-11.17.21-AM-690x332"></p>
+<h2 id="无监督AAE"><a href="#无监督AAE" class="headerlink" title="无监督AAE"></a>无监督AAE</h2><p>autoencoder中的encoder的输出(潜在码)并不能在某一特定空间均匀分布，而且AE 的 G 只能保证将由 x 生成的 z 还原为 x。如果我们随机生成 1 个 z，经过 AE 的 G 后往往不会得到有效的图像。</p>
+<p>所以我们希望encoder的输出可以服从某一分布，这个分布可以是正态分布，均匀分布等，这样就会使encoder的输出均匀分布在给定的先验分布，使decoder学习到一个先验分布到输入数据的映射(本例中就是学习到MNIST手写体数据的分布)，那么此时只需从这个先验分布采样出 z，就能通过 G 得到有效的图像。</p>
+<p>假设你正在学习一门课程，如果你的老师并没有提供任何资料，你又会如何学习这门课呢？但是考试怎么办呢，难道要自己瞎答吗？这种情况就是类似我们的encoder的输出并不服从某种特定分布，这样decoder就无法学习到一个从任意数字到图片的映射。</p>
+<p>但是如果你有了一个课程指导书，你就可以在考试之前复习这本书，这样就知道了可能的考试内容。类似的，如果我们的encoder输出服从一个已知分布，那么encoder就会将潜在码覆盖整个先验分布。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png" alt="Screen-Shot-2016-10-13-at-11.17.21-AM-690x332"></p>
 <p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen Shot 2018-08-08 at 9.33.36 PM.png" alt="Screen Shot 2018-08-08 at 9.33.36 PM"></p>
 <p><img src="/2018/08/08/Adversarial-AutoEncoder/1_nnf4UUq9Uuf2l19iCYaNfg.png" alt="1_nnf4UUq9Uuf2l19iCYaNfg"></p>
 <ul>
@@ -403,7 +410,12 @@
 <p>在该阶段，我们训练生成器和辨别器，我们将encod的输出$z$和随机采样$z’$（来自于想要的分布）作为输入来训练辨别器，这样辨别器就会返回1如果输入是$z’$，而返回0如果输入是$z$。接下来，为了迫使encoder的输出$z$逼近我们想要的分布，我们将encoder的输出作为辨别器的输入，连接encoder和辨别器。</p>
 <p><img src="/2018/08/08/Adversarial-AutoEncoder/1_DoJESN2LvxpxNVYADRJXWw.png" alt="1_DoJESN2LvxpxNVYADRJXWw"></p>
 <p>我们固定辨别器的权重参数，固定输入的目标标签为1，然后我们输入一些图像到encoder，并计算辨别器的输出与目标标签间的差异（使用交叉熵损失函数），这个阶段我们只更新encoder的权重参数，这样促使encoder去学习我们想要的分布，使输出服从这个分布。</p>
-<h2 id="监督AAE"><a href="#监督AAE" class="headerlink" title="监督AAE"></a>监督AAE</h2>
+<h3 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h3><h4 id="Encoder构造"><a href="#Encoder构造" class="headerlink" title="Encoder构造"></a>Encoder构造</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_Hud7t2vLY2JIP3SXn4WTDA.png" alt="1_Hud7t2vLY2JIP3SXn4WTDA"></p>
+<h4 id="Decoder构造"><a href="#Decoder构造" class="headerlink" title="Decoder构造"></a>Decoder构造</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_0t7JrvUqyzg7AdQGDjZkRw.png" alt="1_0t7JrvUqyzg7AdQGDjZkRw"></p>
+<h4 id="Discriminator构造"><a href="#Discriminator构造" class="headerlink" title="Discriminator构造"></a>Discriminator构造</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_Df3_l66beZqsqRe5i6lZRw.png" alt="1_Df3_l66beZqsqRe5i6lZRw"></p>
+<h2 id="监督AAE"><a href="#监督AAE" class="headerlink" title="监督AAE"></a>监督AAE</h2><h2 id="CVAE-GAN"><a href="#CVAE-GAN" class="headerlink" title="CVAE-GAN"></a>CVAE-GAN</h2><p><a href="https://www.jiqizhixin.com/articles/2018-06-12-5" target="_blank" rel="noopener">REF1</a> </p>
+<p>《 CVAE-GAN: Fine-Grained Image Generation through Asymmetric Training》</p>
+
       
     </div>
     
@@ -579,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">1.</span> <span class="nav-text">Adversarial Autoencoder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无监督AAE"><span class="nav-number">1.1.</span> <span class="nav-text">无监督AAE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.2.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重构阶段"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">重构阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化阶段"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">正则化阶段</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监督AAE"><span class="nav-number">1.2.</span> <span class="nav-text">监督AAE</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">1.</span> <span class="nav-text">Adversarial Autoencoder</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无监督AAE"><span class="nav-number">1.1.</span> <span class="nav-text">无监督AAE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.2.</span> <span class="nav-text">训练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重构阶段"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">重构阶段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化阶段"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">正则化阶段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python实现"><span class="nav-number">1.1.3.</span> <span class="nav-text">Python实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoder构造"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">Encoder构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Decoder构造"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Decoder构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Discriminator构造"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">Discriminator构造</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监督AAE"><span class="nav-number">1.2.</span> <span class="nav-text">监督AAE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CVAE-GAN"><span class="nav-number">1.3.</span> <span class="nav-text">CVAE-GAN</span></a></li></ol></li></ol></div>
             
 
           </div>
