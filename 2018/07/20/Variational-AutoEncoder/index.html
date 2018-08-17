@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/20161214175029514.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/image-20180724163307750.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/20/Variational-AutoEncoder/image-20180724163319485.png">
-<meta property="og:updated_time" content="2018-08-09T02:18:46.622Z">
+<meta property="og:updated_time" content="2018-08-15T21:03:21.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variational AutoEncoder">
 <meta name="twitter:description" content="AutoEncoder（自编码器）本质上是数据特定的数据压缩。虽然自编码器中的重构损失函数确保了编码过程原始数据不会丢失过多，但是没有对约束特征$z$做出约束。 作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，其在ae的基础上约束潜变量$z$服从于某个已知的先验分布$p(z|x)$，比如希望$z$的每个特征相互独立并且符合高斯分">
@@ -392,6 +392,7 @@
       
         <p> AutoEncoder（自编码器）本质上是数据特定的数据压缩。虽然自编码器中的重构损失函数确保了编码过程原始数据不会丢失过多，但是没有对约束特征$z$做出约束。</p>
 <p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，其在ae的基础上约束潜变量$z$服从于某个已知的先验分布$p(z|x)$，比如希望$z$的每个特征相互独立并且符合高斯分布等。</p>
+<p>VAE is an autoencoder where the encoder is regularized by a prior over the latent distribution $p(z)$. </p>
 <a id="more"></a>
 <h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><ul>
 <li><p>什么是判别式模型和生成式模型？ </p>

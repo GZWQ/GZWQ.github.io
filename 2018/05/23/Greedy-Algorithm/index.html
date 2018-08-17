@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/123.png">
-<meta property="og:updated_time" content="2018-08-14T21:51:21.952Z">
+<meta property="og:updated_time" content="2018-08-16T21:04:08.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
@@ -2151,6 +2151,86 @@
 </div></div>
 </li>
 </ol>
+<h3 id="Reorganize-String"><a href="#Reorganize-String" class="headerlink" title="Reorganize String"></a><a href="https://leetcode.com/problems/reorganize-string/description/" target="_blank" rel="noopener">Reorganize String</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given a string <code>S</code>, check if the letters can be rearranged so that two characters that are adjacent to each other are not the same.</p>
+<p>If possible, output any possible result.  If not possible, return the empty string.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: S = <span class="string">"aab"</span></div>
+<div class="line">Output: <span class="string">"aba"</span></div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: S = <span class="string">"aaab"</span></div>
+<div class="line">Output: <span class="string">""</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://blog.csdn.net/magicbean2/article/details/79629519" target="_blank" rel="noopener">思路</a> </p>
+<p>题目大致说给出一个字符串，要求重排字符顺序，使得相邻的字符总是不同。</p>
+<p>首先，我们先找出不能重构字符串的条件：出现最多次的字符的出现次数大于字符串长度的一半，直接返回空字符串。</p>
+<p>其次，如果可以重构，我们借助一个优先队列，每次都从中选择出现次数最多的字符构成字符串，如此循环直至优先队列空。</p>
+<p>但是，如果<code>aaaabbcc</code>，优先队列先弹出<code>a</code>，加入重组字符串；然后会继续弹出<code>a</code>，但是如果直接加入重组字符串，则出现相邻的<code>a</code>。所以，这时，我们继续弹出出现次数第二多的字符<code>b</code>，加入重组字符串。</p>
+</li>
+<li><p><a href="https://leetcode.com/problems/reorganize-string/discuss/130825/Python-solution-with-detailed-explanation" target="_blank" rel="noopener">代码</a> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> collections</div>
+<div class="line"><span class="keyword">import</span> heapq</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reorganizeString</span><span class="params">(self, S)</span>:</span></div>
+<div class="line">        s_counter = collections.Counter(S)</div>
+<div class="line">        most_freq = s_counter.most_common(<span class="number">1</span>)</div>
+<div class="line">        <span class="keyword">if</span> len(S) &lt; most_freq[<span class="number">0</span>][<span class="number">1</span>]*<span class="number">2</span><span class="number">-1</span>:</div>
+<div class="line">            <span class="keyword">return</span> <span class="string">""</span></div>
+<div class="line">        re_string = <span class="string">""</span></div>
+<div class="line">        h = []</div>
+<div class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> s_counter.items():</div>
+<div class="line">            heapq.heappush(h,(-v,k))</div>
+<div class="line">        <span class="keyword">while</span> h:</div>
+<div class="line">            v,k = heapq.heappop(h)</div>
+<div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> re_string <span class="keyword">or</span> k != re_string[<span class="number">-1</span>]: <span class="comment"># 初始时 或者 重构字符串的最后一个字符串不同于弹出的字符串</span></div>
+<div class="line">                re_string += k</div>
+<div class="line">                <span class="keyword">if</span> v != <span class="number">-1</span> :</div>
+<div class="line">                    heapq.heappush(h,(v+<span class="number">1</span>,k))</div>
+<div class="line">            <span class="keyword">else</span>:</div>
+<div class="line">                v1,k1 = heapq.heappop(h) <span class="comment">#弹出出现次数第二多的字符</span></div>
+<div class="line">                re_string += k1</div>
+<div class="line">                heapq.heappush(h,(v,k))</div>
+<div class="line">                <span class="keyword">if</span> v1 != <span class="number">-1</span>:</div>
+<div class="line">                    heapq.heappush(h,(v1+<span class="number">1</span>,k))</div>
+<div class="line">        <span class="keyword">return</span> re_string</div>
+</pre></td></tr></table></figure>
+</li>
+</ol>
 <h3 id="IPO"><a href="#IPO" class="headerlink" title="IPO"></a><a href="https://leetcode.com/problems/ipo/description/" target="_blank" rel="noopener">IPO</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
@@ -2181,11 +2261,41 @@
 </div></div>
 </li>
 <li><p>思路</p>
+<p>大概题意是：你有启动资金$W$，并且你只能完成$k$个任务。现有一堆任务，每个任务需要一定的资金启动，一旦任务完成，你就会获得一定的利润，而且该利润可以添加到你的启动资金里。问最终能达到的最大启动资金？</p>
+<p>比较直观，先选择任务的启动资金小于等于你当前的启动资金$W$，然后在可以做的任务里选择获利最大的任务去完成，使最大化你的启动资金$W$。</p>
+<p>实现的时候，利用一个优先队列，里面存储的是可以做的任务的获利，扫描任务list，一旦发现任务的启动资金小于等于你的$W$，将该任务的获利送入优先队列。</p>
 </li>
-</ol>
-<ol>
 <li><p>代码</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> heapq</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMaximizedCapital</span><span class="params">(self, k, W, Profits, Capital)</span>:</span></div>
+<div class="line">        sorted_capital = sorted(zip(Profits,Capital),key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])</div>
+<div class="line">        available_task = []</div>
+<div class="line">        pos = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">while</span> k&gt;<span class="number">0</span>:</div>
+<div class="line">            k -= <span class="number">1</span></div>
+<div class="line">            <span class="keyword">while</span> pos&lt;len(sorted_capital) <span class="keyword">and</span> sorted_capital[pos][<span class="number">1</span>] &lt;= W:</div>
+<div class="line">                heapq.heappush(available_task,-sorted_capital[pos][<span class="number">0</span>])</div>
+<div class="line">                pos += <span class="number">1</span></div>
+<div class="line">            <span class="keyword">if</span> available_task:</div>
+<div class="line">                W -= heapq.heappop(available_task)</div>
+<div class="line">        <span class="keyword">return</span> W</div>
+</pre></td></tr></table></figure>
 
 </div></div>
 </li>
@@ -2368,7 +2478,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">1.2.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.3.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">1.4.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.5.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.6.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.7.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.8.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.9.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.10.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.11.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.12.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">3.4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">3.5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">3.6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">3.7.</span> <span class="nav-text">IPO</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">1.2.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.3.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">1.4.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.5.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.6.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.7.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.8.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.9.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.10.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.11.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.12.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">3.4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">3.5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">3.6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorganize-String"><span class="nav-number">3.7.</span> <span class="nav-text">Reorganize String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">3.8.</span> <span class="nav-text">IPO</span></a></li></ol></li></ol></div>
             
 
           </div>

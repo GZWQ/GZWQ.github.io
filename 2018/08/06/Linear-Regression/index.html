@@ -95,13 +95,17 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/Screen%20Shot%202018-08-06%20at%2012.58.12%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/Screen%20Shot%202018-08-06%20at%2012.54.04%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/Screen%20Shot%202018-08-07%20at%2012.18.01%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180815174124083.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/Screen%20Shot%202018-08-15%20at%206.19.39%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/Screen%20Shot%202018-08-15%20at%206.26.20%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180816163328931.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen%20Shot%202018-08-08%20at%2011.32.08%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180808113730536.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180808114529415.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180808123047797.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180813110624641.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/Linear-Regression/image-20180813111620624.png">
-<meta property="og:updated_time" content="2018-08-15T02:18:32.786Z">
+<meta property="og:updated_time" content="2018-08-16T22:06:19.393Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linear Regression">
 <meta name="twitter:description" content="线性回归模型线性回归模型，顾名思义就是线性模型求解回归问题。 线性模型【定义】给定具有$d$个属性的数据样本$x=\{x_1,x_2,…,x_d\}$，$x_i$是$x$在第$i$个属性上的取值，线性模型通过对属性的线性组合来进行预测的函数：  f(x)=w_1x_1+w_2x_2+...+w_dx_d+b向量形式表示为：  f(x)=w^Tx+b其中$w=(w_1;w_2;…;w_d)$，只要">
@@ -603,7 +607,125 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 <h1 id="Polynomial-Regression"><a href="#Polynomial-Regression" class="headerlink" title="Polynomial Regression"></a>Polynomial Regression</h1><p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
 <p> We can <strong>change the behavior or curve</strong> of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).</p>
 <p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-07 at 12.18.01 AM.png" alt="Screen Shot 2018-08-07 at 12.18.01 AM"></p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/06/Linear-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen Shot 2018-08-08 at 11.32.08 AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="线性回归预测一维数据"><a href="#线性回归预测一维数据" class="headerlink" title="线性回归预测一维数据"></a>线性回归预测一维数据</h2><p>来自Andrew Ng第二周的课程练习，给出城市人口及该市的商店利润，预测如何进行店铺扩展，即选择哪座城市开分店？给定的数据只有一个人口特征及利润目标值。</p>
+<p>第一步就是进行<strong>数据的可视化</strong>。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">()</span>:</span></div>
+<div class="line">    data = np.loadtxt(<span class="string">'./dataset/ex1data1.txt'</span>, delimiter=<span class="string">','</span>)</div>
+<div class="line">    x = data[:, <span class="number">0</span>]</div>
+<div class="line">    y = data[:, <span class="number">1</span>]</div>
+<div class="line">    plt.scatter(x, y, marker=<span class="string">'x'</span>)</div>
+<div class="line">    plt.xlabel(<span class="string">"Population of City in 10,000s"</span>)</div>
+<div class="line">    plt.ylabel(<span class="string">"Profit in $10,000s"</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/08/06/Linear-Regression/image-20180815174124083.png" alt="image-20180815174124083"></p>
+
+</div></div>
+<p>第二步：数据处理及参数初始化</p>
+<p>我们为数据增加一列全一</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">length = x.shape[<span class="number">0</span>]</div>
+<div class="line">z = np.ones(length)</div>
+<div class="line">x = np.array(list(zip(z,x)))  <span class="comment"># add a column of ones to x</span></div>
+<div class="line">theta = np.zeros([x.shape[<span class="number">1</span>],<span class="number">1</span>]) <span class="comment"># initialize fitting parameters</span></div>
+<div class="line">alpha = <span class="number">0.01</span></div>
+<div class="line">iters = <span class="number">1500</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>第三步：损失函数</p>
+<p>我们使用公式</p>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-15 at 6.19.39 PM.png" alt="Screen Shot 2018-08-15 at 6.19.39 PM"></p>
+<p>初次调用，返回值是32.07。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cost_function</span><span class="params">(x,y,theta)</span>:</span></div>
+<div class="line">    y_ = x.dot(theta)</div>
+<div class="line">    loss = (y-y_)**<span class="number">2</span></div>
+<div class="line">    cost = sum(loss) / (<span class="number">2</span>*length)</div>
+<div class="line">    <span class="keyword">return</span> cost</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>第四步：梯度下降法</p>
+<p>检查梯度下降法是否正确的一个手段：查看损失函数是否在逐步减小。我们使用梯度更新公式：</p>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-15 at 6.26.20 PM.png" alt="Screen Shot 2018-08-15 at 6.26.20 PM"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_descent</span><span class="params">(x,y,theta,alpha,iters)</span>:</span></div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(iters):</div>
+<div class="line">        <span class="comment"># cost_function(x,y,theta)</span></div>
+<div class="line">        print(theta)</div>
+<div class="line">        y_ = x.dot(theta)</div>
+<div class="line">        loss = (y_ - y)</div>
+<div class="line">        gd = loss.T.dot(x) <span class="comment"># shape = (1,2)</span></div>
+<div class="line">        gd = alpha * gd.T / length</div>
+<div class="line">        theta = theta - gd</div>
+<div class="line">    <span class="keyword">return</span> theta</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的一个点是：loss = ( y_pred - y )。反过来的话，会出现loss趋于无穷大。这个是对loss函数求导得到的，无论$(h_\theta(x)-y )^2$还是$(y-h_\theta(x) )^2$，都是一样的。</p>
+</blockquote>
+
+</div></div>
+<p>第五步：可视化拟合曲线</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">(x,y,theta)</span>:</span></div>
+<div class="line">    plt.scatter(x, y, marker=<span class="string">'x'</span>,label=<span class="string">'Training data'</span>)</div>
+<div class="line">    plt.xlabel(<span class="string">"Population of City in 10,000s"</span>)</div>
+<div class="line">    plt.ylabel(<span class="string">"Profit in $10,000s"</span>)</div>
+<div class="line">    x_ = np.linspace(min(x),max(x),<span class="number">1000</span>)</div>
+<div class="line">    y_ = x_*theta[<span class="number">1</span>] + theta[<span class="number">0</span>]</div>
+<div class="line">    plt.plot(x_,y_,label=<span class="string">'Linear regression'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/08/06/Linear-Regression/image-20180816163328931.png" alt="image-20180816163328931"></p>
+
+</div></div>
+<p>第六步：可视化目标损失</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/06/Linear-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen Shot 2018-08-08 at 11.32.08 AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
 <ol>
 <li><p>数据载入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -1007,7 +1129,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">回归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性回归-1"><span class="nav-number">1.1.3.</span> <span class="nav-text">线性回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解"><span class="nav-number">1.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小二乘法"><span class="nav-number">1.2.1.</span> <span class="nav-text">最小二乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数估计"><span class="nav-number">1.2.2.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Loss函数求导取极值"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Loss函数求导取极值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化的损失函数"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">正则化的损失函数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑斯蒂回归"><span class="nav-number">2.</span> <span class="nav-text">逻辑斯蒂回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解-1"><span class="nav-number">2.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">2.2.1.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标函数"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法-1"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">梯度下降法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分类学习"><span class="nav-number">2.3.</span> <span class="nav-text">多分类学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一对一（OvO）"><span class="nav-number">2.3.1.</span> <span class="nav-text">一对一（OvO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对余-OvR"><span class="nav-number">2.3.2.</span> <span class="nav-text">一对余(OvR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类别不平衡"><span class="nav-number">2.3.3.</span> <span class="nav-text">类别不平衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">3.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Convergence-Figure"><span class="nav-number">4.</span> <span class="nav-text">Convergence Figure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polynomial-Regression"><span class="nav-number">5.</span> <span class="nav-text">Polynomial Regression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归预测西瓜"><span class="nav-number">6.1.</span> <span class="nav-text">逻辑斯蒂回归预测西瓜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉验证法-vs-留一法"><span class="nav-number">6.2.</span> <span class="nav-text">交叉验证法 vs 留一法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#线性回归"><span class="nav-number">1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线性模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回归问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">回归问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性回归-1"><span class="nav-number">1.1.3.</span> <span class="nav-text">线性回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解"><span class="nav-number">1.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小二乘法"><span class="nav-number">1.2.1.</span> <span class="nav-text">最小二乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数估计"><span class="nav-number">1.2.2.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Loss函数求导取极值"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Loss函数求导取极值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则化的损失函数"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">正则化的损失函数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑斯蒂回归"><span class="nav-number">2.</span> <span class="nav-text">逻辑斯蒂回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解-1"><span class="nav-number">2.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">2.2.1.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标函数"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法-1"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">梯度下降法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分类学习"><span class="nav-number">2.3.</span> <span class="nav-text">多分类学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一对一（OvO）"><span class="nav-number">2.3.1.</span> <span class="nav-text">一对一（OvO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对余-OvR"><span class="nav-number">2.3.2.</span> <span class="nav-text">一对余(OvR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类别不平衡"><span class="nav-number">2.3.3.</span> <span class="nav-text">类别不平衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">2.3.3.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">3.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Convergence-Figure"><span class="nav-number">4.</span> <span class="nav-text">Convergence Figure</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polynomial-Regression"><span class="nav-number">5.</span> <span class="nav-text">Polynomial Regression</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">6.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性回归预测一维数据"><span class="nav-number">6.1.</span> <span class="nav-text">线性回归预测一维数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归预测西瓜"><span class="nav-number">6.2.</span> <span class="nav-text">逻辑斯蒂回归预测西瓜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉验证法-vs-留一法"><span class="nav-number">6.3.</span> <span class="nav-text">交叉验证法 vs 留一法</span></a></li></ol></li></ol></div>
             
 
           </div>

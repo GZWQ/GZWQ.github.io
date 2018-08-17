@@ -950,7 +950,125 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 <h1 id="Polynomial-Regression"><a href="#Polynomial-Regression" class="headerlink" title="Polynomial Regression"></a>Polynomial Regression</h1><p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
 <p> We can <strong>change the behavior or curve</strong> of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).</p>
 <p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-07 at 12.18.01 AM.png" alt="Screen Shot 2018-08-07 at 12.18.01 AM"></p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/06/Linear-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen Shot 2018-08-08 at 11.32.08 AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="线性回归预测一维数据"><a href="#线性回归预测一维数据" class="headerlink" title="线性回归预测一维数据"></a>线性回归预测一维数据</h2><p>来自Andrew Ng第二周的课程练习，给出城市人口及该市的商店利润，预测如何进行店铺扩展，即选择哪座城市开分店？给定的数据只有一个人口特征及利润目标值。</p>
+<p>第一步就是进行<strong>数据的可视化</strong>。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">()</span>:</span></div>
+<div class="line">    data = np.loadtxt(<span class="string">'./dataset/ex1data1.txt'</span>, delimiter=<span class="string">','</span>)</div>
+<div class="line">    x = data[:, <span class="number">0</span>]</div>
+<div class="line">    y = data[:, <span class="number">1</span>]</div>
+<div class="line">    plt.scatter(x, y, marker=<span class="string">'x'</span>)</div>
+<div class="line">    plt.xlabel(<span class="string">"Population of City in 10,000s"</span>)</div>
+<div class="line">    plt.ylabel(<span class="string">"Profit in $10,000s"</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/08/06/Linear-Regression/image-20180815174124083.png" alt="image-20180815174124083"></p>
+
+</div></div>
+<p>第二步：数据处理及参数初始化</p>
+<p>我们为数据增加一列全一</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">length = x.shape[<span class="number">0</span>]</div>
+<div class="line">z = np.ones(length)</div>
+<div class="line">x = np.array(list(zip(z,x)))  <span class="comment"># add a column of ones to x</span></div>
+<div class="line">theta = np.zeros([x.shape[<span class="number">1</span>],<span class="number">1</span>]) <span class="comment"># initialize fitting parameters</span></div>
+<div class="line">alpha = <span class="number">0.01</span></div>
+<div class="line">iters = <span class="number">1500</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>第三步：损失函数</p>
+<p>我们使用公式</p>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-15 at 6.19.39 PM.png" alt="Screen Shot 2018-08-15 at 6.19.39 PM"></p>
+<p>初次调用，返回值是32.07。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cost_function</span><span class="params">(x,y,theta)</span>:</span></div>
+<div class="line">    y_ = x.dot(theta)</div>
+<div class="line">    loss = (y-y_)**<span class="number">2</span></div>
+<div class="line">    cost = sum(loss) / (<span class="number">2</span>*length)</div>
+<div class="line">    <span class="keyword">return</span> cost</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>第四步：梯度下降法</p>
+<p>检查梯度下降法是否正确的一个手段：查看损失函数是否在逐步减小。我们使用梯度更新公式：</p>
+<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-15 at 6.26.20 PM.png" alt="Screen Shot 2018-08-15 at 6.26.20 PM"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_descent</span><span class="params">(x,y,theta,alpha,iters)</span>:</span></div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(iters):</div>
+<div class="line">        <span class="comment"># cost_function(x,y,theta)</span></div>
+<div class="line">        print(theta)</div>
+<div class="line">        y_ = x.dot(theta)</div>
+<div class="line">        loss = (y_ - y)</div>
+<div class="line">        gd = loss.T.dot(x) <span class="comment"># shape = (1,2)</span></div>
+<div class="line">        gd = alpha * gd.T / length</div>
+<div class="line">        theta = theta - gd</div>
+<div class="line">    <span class="keyword">return</span> theta</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的一个点是：loss = ( y_pred - y )。反过来的话，会出现loss趋于无穷大。这个是对loss函数求导得到的，无论$(h_\theta(x)-y )^2$还是$(y-h_\theta(x) )^2$，都是一样的。</p>
+</blockquote>
+
+</div></div>
+<p>第五步：可视化拟合曲线</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">(x,y,theta)</span>:</span></div>
+<div class="line">    plt.scatter(x, y, marker=<span class="string">'x'</span>,label=<span class="string">'Training data'</span>)</div>
+<div class="line">    plt.xlabel(<span class="string">"Population of City in 10,000s"</span>)</div>
+<div class="line">    plt.ylabel(<span class="string">"Profit in $10,000s"</span>)</div>
+<div class="line">    x_ = np.linspace(min(x),max(x),<span class="number">1000</span>)</div>
+<div class="line">    y_ = x_*theta[<span class="number">1</span>] + theta[<span class="number">0</span>]</div>
+<div class="line">    plt.plot(x_,y_,label=<span class="string">'Linear regression'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/08/06/Linear-Regression/image-20180816163328931.png" alt="image-20180816163328931"></p>
+
+</div></div>
+<p>第六步：可视化目标损失</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/06/Linear-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen Shot 2018-08-08 at 11.32.08 AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
 <ol>
 <li><p>数据载入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -2333,6 +2451,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
         
           <p> AutoEncoder（自编码器）本质上是数据特定的数据压缩。虽然自编码器中的重构损失函数确保了编码过程原始数据不会丢失过多，但是没有对约束特征$z$做出约束。</p>
 <p>作为一种无监督的学习方法，VAE（Variational Auto-Encoder，变分自编码器）是一个产生式模型，其在ae的基础上约束潜变量$z$服从于某个已知的先验分布$p(z|x)$，比如希望$z$的每个特征相互独立并且符合高斯分布等。</p>
+<p>VAE is an autoencoder where the encoder is regularized by a prior over the latent distribution $p(z)$. </p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/20/Variational-AutoEncoder/#more" rel="contents">
