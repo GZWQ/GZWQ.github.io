@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
+<meta name="description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 点击显/隐内容">
 <meta name="keywords" content="Algorithm,LeetCode,Greedy Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Greedy Algorithm">
 <meta property="og:url" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
+<meta property="og:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 点击显/隐内容">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160509195427891.jpeg">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160507100634641%20(1">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/123.png">
-<meta property="og:updated_time" content="2018-08-16T21:04:08.020Z">
+<meta property="og:updated_time" content="2018-08-17T21:20:34.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
-<meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。">
+<meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 点击显/隐内容">
 <meta name="twitter:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160509195427891.jpeg">
 
 
@@ -386,10 +386,19 @@
       
         <p><a href="https://blog.csdn.net/qq_32400847/article/details/51336300" target="_blank" rel="noopener">从零开始学贪心算法</a></p>
 <p>贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。</p>
-<a id="more"></a>
-<h2 id="经典问题"><a href="#经典问题" class="headerlink" title="经典问题"></a>经典问题</h2><h3 id="活动选择"><a href="#活动选择" class="headerlink" title="活动选择"></a>活动选择</h3><ol>
-<li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+
+<a id="more"></a>
+
+## 经典问题
+
+### 活动选择
+
+1. 题目
+
+   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>有n个需要在同一天使用同一个教室的活动a1,a2,…,an，教室同一时刻只能由一个活动使用。每个活动ai都有一个开始时间si和结束时间fi 。一旦被选择后，活动ai就占据半开时间区间[si,fi)。如果[si,fi]和[sj,fj]互不重叠，ai和aj两个活动就可以被安排在这一天。该问题就是要安排这些活动使得尽量多的活动能不冲突的举行。例如下图所示的活动集合S，其中各项活动按照结束时间单调递增排序。</p>
 <p><img src="/2018/05/23/Greedy-Algorithm/20160509195427891.jpeg" alt="20160509195427891"></p>
 <p>为了方便，我们用不同颜色的线条代表每个活动，线条的长度就是活动所占据的时间段，蓝色的线条表示我们已经选择的活动；红色的线条表示我们没有选择的活动。</p>
@@ -400,29 +409,70 @@
 <p>我们的贪心策略应该是每次选取结束时间最早的活动, 按这种方法选择相容活动为未安排活动留下尽可能多的时间。</p>
 
 </div></div>
+<h3 id="钱币找零"><a href="#钱币找零" class="headerlink" title="钱币找零"></a>钱币找零</h3><p>假设1元、2元、5元、10元、20元、50元、100元的纸币分别有c0, c1, c2, c3, c4, c5, c6张。现在要用这些钱来支付K元，至少要用多少张纸币？用贪心算法的思想，很显然，每一步尽可能用面值大的纸币即可。</p>
+<h4 id="Lemonade-Change"><a href="#Lemonade-Change" class="headerlink" title="Lemonade Change"></a><a href="https://leetcode.com/problems/lemonade-change/description/" target="_blank" rel="noopener">Lemonade Change</a></h4><ol>
+<li><p><a href="https://leetcode.com/problems/lemonade-change/description/" target="_blank" rel="noopener">题目</a> </p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>At a lemonade stand, each lemonade costs <code>$5</code>. </p>
+<p>Customers are standing in a queue to buy from you, and order one at a time (in the order specified by <code>bills</code>).</p>
+<p>Each customer will only buy one lemonade and pay with either a <code>$5</code>, <code>$10</code>, or <code>$20</code> bill.  You must provide the correct change to each customer, so that the net transaction is that the customer pays $5.</p>
+<p>Note that you don’t have any change in hand at first.</p>
+<p>Return <code>true</code> if and only if you can provide every customer with correct change.</p>
 
 </div></div>
-
-### 钱币找零
-
-假设1元、2元、5元、10元、20元、50元、100元的纸币分别有c0, c1, c2, c3, c4, c5, c6张。现在要用这些钱来支付K元，至少要用多少张纸币？用贪心算法的思想，很显然，每一步尽可能用面值大的纸币即可。
-
-### 背包问题
-
-我们考虑这样一种背包问题：在选择物品i装入背包时，可以选择物品的一部分，而不一定要全部装入背包。这时便可以使用贪心算法求解了。计算每种物品的单位重量价值作为贪心选择的依据指标，选择单位重量价值最高的物品，将尽可能多的该物品装入背包，依此策略一直地进行下去，直到背包装满为止。在零一背包问题中贪心选择之所以不能得到最优解原因是贪心选择无法保证最终能将背包装满，部分闲置的背包空间使每公斤背包空间的价值降低了。
-
-### 多机调度
-
-个作业组成的作业集，可由m台相同机器加工处理。要求给出一种作业调度方案，使所给的n个作业在尽可能短的时间内由m台机器加工处理完成。作业不能拆分成更小的子作业；每个作业均可在任何一台机器上加工处理。这个问题是NP完全问题，还没有有效的解法(求最优解)，但是可以用贪心选择策略设计出较好的近似算法(求次优解)。当n<=m时，只要将作业时间区间分配给作业即可；当n>m时，首先将n个作业从大到小排序，然后依此顺序将作业分配给空闲的处理机。也就是说从剩下的作业中，选择需要处理时间最长的，然后依次选择处理时间次长的，直到所有的作业全部处理完毕，或者机器不能再处理其他作业为止。如果我们每次是将需要处理时间最短的作业分配给空闲的机器，那么可能就会出现其它所有作业都处理完了只剩所需时间最长的作业在处理的情况，这样势必效率较低。
-
-## 简单
-
-### [Is Subsequence](https://leetcode.com/problems/is-subsequence/description/)
-
-1. 题目
-
-   <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input: [5,5,5,10,20]</div>
+<div class="line">Output: true</div>
+<div class="line">Explanation: </div>
+<div class="line">From the first 3 customers, we collect three $5 bills in order.</div>
+<div class="line">From the fourth customer, we collect a $10 bill and give back a $5.</div>
+<div class="line">From the fifth customer, we give a $10 bill and a $5 bill.</div>
+<div class="line">Since all customers got correct change, we output true.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: [5,5,10]</div>
+<div class="line">Output: true</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: [10,10]</div>
+<div class="line">Output: false</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input: [5,5,10,10,20]</div>
+<div class="line">Output: false</div>
+<div class="line">Explanation: </div>
+<div class="line">From the first two customers in order, we collect two $5 bills.</div>
+<div class="line">For the next two customers in order, we collect a $10 bill and give back a $5 bill.</div>
+<div class="line">For the last customer, we can&apos;t give change of $15 back because we only have two $10 bills.</div>
+<div class="line">Since not every customer received correct change, the answer is false.</div>
+</pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://leetcode.com/problems/lemonade-change/discuss/160917/Python-code-with-explanations" target="_blank" rel="noopener">思路 &amp; 代码</a></p>
+</li>
+</ol>
+<h3 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h3><p>我们考虑这样一种背包问题：在选择物品i装入背包时，可以选择物品的一部分，而不一定要全部装入背包。这时便可以使用贪心算法求解了。计算每种物品的单位重量价值作为贪心选择的依据指标，选择单位重量价值最高的物品，将尽可能多的该物品装入背包，依此策略一直地进行下去，直到背包装满为止。在零一背包问题中贪心选择之所以不能得到最优解原因是贪心选择无法保证最终能将背包装满，部分闲置的背包空间使每公斤背包空间的价值降低了。</p>
+<h3 id="多机调度"><a href="#多机调度" class="headerlink" title="多机调度"></a>多机调度</h3><p>个作业组成的作业集，可由m台相同机器加工处理。要求给出一种作业调度方案，使所给的n个作业在尽可能短的时间内由m台机器加工处理完成。作业不能拆分成更小的子作业；每个作业均可在任何一台机器上加工处理。这个问题是NP完全问题，还没有有效的解法(求最优解)，但是可以用贪心选择策略设计出较好的近似算法(求次优解)。当n&lt;=m时，只要将作业时间区间分配给作业即可；当n&gt;m时，首先将n个作业从大到小排序，然后依此顺序将作业分配给空闲的处理机。也就是说从剩下的作业中，选择需要处理时间最长的，然后依次选择处理时间次长的，直到所有的作业全部处理完毕，或者机器不能再处理其他作业为止。如果我们每次是将需要处理时间最短的作业分配给空闲的机器，那么可能就会出现其它所有作业都处理完了只剩所需时间最长的作业在处理的情况，这样势必效率较低。</p>
+<h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Is-Subsequence"><a href="#Is-Subsequence" class="headerlink" title="Is Subsequence"></a><a href="https://leetcode.com/problems/is-subsequence/description/" target="_blank" rel="noopener">Is Subsequence</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a string <strong>s</strong> and a string <strong>t</strong>, check if <strong>s</strong> is subsequence of <strong>t</strong>.</p>
 <p>You may assume that there is only lower case English letters in both <strong>s</strong> and <strong>t</strong>. <strong>t</strong> is potentially a very long (length ~= 500,000) string, and <strong>s</strong> is a short string (&lt;=100).</p>
 <p>A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, <code>&quot;ace&quot;</code> is a subsequence of <code>&quot;abcde&quot;</code> while <code>&quot;aec&quot;</code> is not).</p>
@@ -432,7 +482,7 @@
 <p>Return <code>false</code>.</p>
 
 </div></div>
-</=m时，只要将作业时间区间分配给作业即可；当n></li>
+</li>
 <li><p>思路</p>
 <p>题意大概是判断一个字符串<code>s</code>是否为另一个<code>t</code>的子串，一个串的子串：通过删去一些字符得到的字符串。</p>
 <p>很显然，就从头比较两个字符串，设置两个指针<code>p1</code>和<code>p2</code>，初始分别指向字符串<code>s</code>和<code>t</code>的首字符。如果相同，则同时移动两个指针指向下一个字符；否则只移动<code>p2</code>指向<code>t</code>的下一个字符，直到找到与<code>p1</code>指向的字符。遍历一遍即可，如果<code>p1</code>不能超过<code>s</code>的最后一个字符，则不能是子串。</p>
@@ -2434,7 +2484,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2478,7 +2528,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经典问题"><span class="nav-number">1.</span> <span class="nav-text">经典问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#活动选择"><span class="nav-number">1.1.</span> <span class="nav-text">活动选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">1.2.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">1.3.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">1.4.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">1.5.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">1.6.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">1.7.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">1.8.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">1.9.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">1.10.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">1.11.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">1.12.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">2.3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">2.4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number">3.</span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">3.1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">3.2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">3.4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">3.5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">3.6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorganize-String"><span class="nav-number">3.7.</span> <span class="nav-text">Reorganize String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">3.8.</span> <span class="nav-text">IPO</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#钱币找零"><span class="nav-number">1.</span> <span class="nav-text">钱币找零</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lemonade-Change"><span class="nav-number">1.1.</span> <span class="nav-text">Lemonade Change</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背包问题"><span class="nav-number">2.</span> <span class="nav-text">背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多机调度"><span class="nav-number">3.</span> <span class="nav-text">多机调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Is-Subsequence"><span class="nav-number">1.</span> <span class="nav-text">Is Subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">2.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">3.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">4.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">5.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">6.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">7.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">8.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">9.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">10.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">11.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">12.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number"></span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorganize-String"><span class="nav-number">7.</span> <span class="nav-text">Reorganize String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">8.</span> <span class="nav-text">IPO</span></a></li></ol></div>
             
 
           </div>
