@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/123.png">
-<meta property="og:updated_time" content="2018-08-17T21:20:34.082Z">
+<meta property="og:updated_time" content="2018-08-19T21:31:52.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 点击显/隐内容">
@@ -418,59 +418,182 @@
 <p>Each customer will only buy one lemonade and pay with either a <code>$5</code>, <code>$10</code>, or <code>$20</code> bill.  You must provide the correct change to each customer, so that the net transaction is that the customer pays $5.</p>
 <p>Note that you don’t have any change in hand at first.</p>
 <p>Return <code>true</code> if and only if you can provide every customer with correct change.</p>
-
-</div></div>
 <p><strong>Example 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
 <div class="line">5</div>
 <div class="line">6</div>
 <div class="line">7</div>
-</pre></td><td class="code"><pre><div class="line">Input: [5,5,5,10,20]</div>
-<div class="line">Output: true</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">20</span>]</div>
+<div class="line">Output: <span class="keyword">true</span></div>
 <div class="line">Explanation: </div>
-<div class="line">From the first 3 customers, we collect three $5 bills in order.</div>
-<div class="line">From the fourth customer, we collect a $10 bill and give back a $5.</div>
-<div class="line">From the fifth customer, we give a $10 bill and a $5 bill.</div>
-<div class="line">Since all customers got correct change, we output true.</div>
+<div class="line">From the first <span class="number">3</span> customers, we collect three $<span class="number">5</span> bills in order.</div>
+<div class="line">From the fourth customer, we collect a $<span class="number">10</span> bill and give back a $<span class="number">5</span>.</div>
+<div class="line">From the fifth customer, we give a $<span class="number">10</span> bill and a $<span class="number">5</span> bill.</div>
+<div class="line">Since all customers got correct change, we output <span class="keyword">true</span>.</div>
 </pre></td></tr></table></figure>
 <p><strong>Example 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">Input: [5,5,10]</div>
-<div class="line">Output: true</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">5</span>,<span class="number">5</span>,<span class="number">10</span>]</div>
+<div class="line">Output: <span class="keyword">true</span></div>
 </pre></td></tr></table></figure>
 <p><strong>Example 3:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">Input: [10,10]</div>
-<div class="line">Output: false</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">10</span>,<span class="number">10</span>]</div>
+<div class="line">Output: <span class="keyword">false</span></div>
 </pre></td></tr></table></figure>
 <p><strong>Example 4:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
 <div class="line">5</div>
 <div class="line">6</div>
 <div class="line">7</div>
-</pre></td><td class="code"><pre><div class="line">Input: [5,5,10,10,20]</div>
-<div class="line">Output: false</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">5</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">10</span>,<span class="number">20</span>]</div>
+<div class="line">Output: <span class="keyword">false</span></div>
 <div class="line">Explanation: </div>
-<div class="line">From the first two customers in order, we collect two $5 bills.</div>
-<div class="line">For the next two customers in order, we collect a $10 bill and give back a $5 bill.</div>
-<div class="line">For the last customer, we can&apos;t give change of $15 back because we only have two $10 bills.</div>
-<div class="line">Since not every customer received correct change, the answer is false.</div>
+<div class="line">From the first two customers in order, we collect two $<span class="number">5</span> bills.</div>
+<div class="line">For the next two customers in order, we collect a $<span class="number">10</span> bill and give back a $<span class="number">5</span> bill.</div>
+<div class="line">For the last customer, we can<span class="string">'t give change of $15 back because we only have two $10 bills.</span></div>
+<div class="line"><span class="string">Since not every customer received correct change, the answer is false.</span></div>
 </pre></td></tr></table></figure>
+
+</div></div>
 </li>
 <li><p><a href="https://leetcode.com/problems/lemonade-change/discuss/160917/Python-code-with-explanations" target="_blank" rel="noopener">思路 &amp; 代码</a></p>
 </li>
 </ol>
 <h3 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h3><p>我们考虑这样一种背包问题：在选择物品i装入背包时，可以选择物品的一部分，而不一定要全部装入背包。这时便可以使用贪心算法求解了。计算每种物品的单位重量价值作为贪心选择的依据指标，选择单位重量价值最高的物品，将尽可能多的该物品装入背包，依此策略一直地进行下去，直到背包装满为止。在零一背包问题中贪心选择之所以不能得到最优解原因是贪心选择无法保证最终能将背包装满，部分闲置的背包空间使每公斤背包空间的价值降低了。</p>
 <h3 id="多机调度"><a href="#多机调度" class="headerlink" title="多机调度"></a>多机调度</h3><p>个作业组成的作业集，可由m台相同机器加工处理。要求给出一种作业调度方案，使所给的n个作业在尽可能短的时间内由m台机器加工处理完成。作业不能拆分成更小的子作业；每个作业均可在任何一台机器上加工处理。这个问题是NP完全问题，还没有有效的解法(求最优解)，但是可以用贪心选择策略设计出较好的近似算法(求次优解)。当n&lt;=m时，只要将作业时间区间分配给作业即可；当n&gt;m时，首先将n个作业从大到小排序，然后依此顺序将作业分配给空闲的处理机。也就是说从剩下的作业中，选择需要处理时间最长的，然后依次选择处理时间次长的，直到所有的作业全部处理完毕，或者机器不能再处理其他作业为止。如果我们每次是将需要处理时间最短的作业分配给空闲的机器，那么可能就会出现其它所有作业都处理完了只剩所需时间最长的作业在处理的情况，这样势必效率较低。</p>
-<h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Is-Subsequence"><a href="#Is-Subsequence" class="headerlink" title="Is Subsequence"></a><a href="https://leetcode.com/problems/is-subsequence/description/" target="_blank" rel="noopener">Is Subsequence</a></h3><ol>
+<h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Advantage-Shuffle"><a href="#Advantage-Shuffle" class="headerlink" title="Advantage Shuffle"></a><a href="https://leetcode.com/problems/advantage-shuffle/description/" target="_blank" rel="noopener">Advantage Shuffle</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given two arrays <code>A</code> and <code>B</code> of equal size, the <em>advantage of A with respect to B</em> is the number of indices <code>i</code> for which <code>A[i] &gt; B[i]</code>.</p>
+<p>Return <strong>any</strong> permutation of <code>A</code> that maximizes its advantage with respect to <code>B</code>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: A = [<span class="number">2</span>,<span class="number">7</span>,<span class="number">11</span>,<span class="number">15</span>], B = [<span class="number">1</span>,<span class="number">10</span>,<span class="number">4</span>,<span class="number">11</span>]</div>
+<div class="line">Output: [<span class="number">2</span>,<span class="number">11</span>,<span class="number">7</span>,<span class="number">15</span>]</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: A = [<span class="number">12</span>,<span class="number">24</span>,<span class="number">8</span>,<span class="number">32</span>], B = [<span class="number">13</span>,<span class="number">25</span>,<span class="number">32</span>,<span class="number">11</span>]</div>
+<div class="line">Output: [<span class="number">24</span>,<span class="number">32</span>,<span class="number">8</span>,<span class="number">12</span>]</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p><a href="https://leetcode.com/problems/advantage-shuffle/discuss/153153/Python-simple-binary-search-greedy-solution" target="_blank" rel="noopener">思路</a> </p>
+<p>题目大意是对于给定两个长度相同的数组$A$和$B$，要求重排$A$，尽量使$A$中每一个元素值都大于$B$中对应元素。</p>
+<p>这就是田忌赛马，尽量用小的数去对应对方的最大的数，然后用差距不大的数对应对方数。实现的时候，先对$A$排序，然后对每一个$B$中元素使用<code>bisect.bisect_right</code>    找出离他最近的$A$中的元素，与之对应；如果没有，则使用$A$中最小的与之对应。</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"></div>
+<div class="line"><span class="keyword">import</span> bisect</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advantageCount</span><span class="params">(self, A, B)</span>:</span></div>
+<div class="line">        sorted_a = sorted(A)</div>
+<div class="line">        result = []</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> B:</div>
+<div class="line">            idx = bisect.bisect_right(sorted_a,i)</div>
+<div class="line">            <span class="keyword">if</span> idx == len(sorted_a):result.append(sorted_a.pop(<span class="number">0</span>))</div>
+<div class="line">            <span class="keyword">else</span>: result.append(sorted_a.pop(idx))</div>
+<div class="line">        <span class="keyword">return</span> result</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="Boats-to-Save-People"><a href="#Boats-to-Save-People" class="headerlink" title="Boats to Save People"></a><a href="https://leetcode.com/problems/boats-to-save-people/description/" target="_blank" rel="noopener">Boats to Save People</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>The <code>i</code>-th person has weight <code>people[i]</code>, and each boat can carry a maximum weight of <code>limit</code>.</p>
+<p>Each boat carries at most 2 people at the same time, provided the sum of the weight of those people is at most <code>limit</code>.</p>
+<p>Return the minimum number of boats to carry every given person.  (It is guaranteed each person can be carried by a boat.)</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: people = [<span class="number">1</span>,<span class="number">2</span>], limit = <span class="number">3</span></div>
+<div class="line">Output: <span class="number">1</span></div>
+<div class="line">Explanation: <span class="number">1</span> boat (<span class="number">1</span>, <span class="number">2</span>)</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: people = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>], limit = <span class="number">3</span></div>
+<div class="line">Output: <span class="number">3</span></div>
+<div class="line">Explanation: <span class="number">3</span> boats (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">2</span>) and (<span class="number">3</span>)</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: people = [<span class="number">3</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">4</span>], limit = <span class="number">5</span></div>
+<div class="line">Output: <span class="number">4</span></div>
+<div class="line">Explanation: <span class="number">4</span> boats (<span class="number">3</span>), (<span class="number">3</span>), (<span class="number">4</span>), (<span class="number">5</span>)</div>
+</pre></td></tr></table></figure>
+
+</div></div> 
+</li>
+<li><p><a href="https://leetcode.com/problems/boats-to-save-people/discuss/156740/C++JavaPython-Two-Pointers" target="_blank" rel="noopener">思路</a></p>
+<p>题目大概是要让一群人过河，每一艘船只能载两个人且承重最多是$limit$。问把所有人送过河所需的最少船只。</p>
+<p>贪心策略：把体重排序之后，每次选择最重的人和最轻的人，如果体重之和在船只承重范围内，则一次送走两个人；否则，只能送走最重的那个人。</p>
+</li>
+<li><p>代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numRescueBoats</span><span class="params">(self, people, limit)</span>:</span></div>
+<div class="line">        people = sorted(people)</div>
+<div class="line">        front,back = <span class="number">0</span>,len(people)<span class="number">-1</span></div>
+<div class="line">        count = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">while</span> front&lt;=back:</div>
+<div class="line">            <span class="keyword">if</span> people[front] + people[back] &lt;= limit:</div>
+<div class="line">                front += <span class="number">1</span></div>
+<div class="line">                back -= <span class="number">1</span></div>
+<div class="line">            <span class="keyword">else</span>:</div>
+<div class="line">                back -= <span class="number">1</span></div>
+<div class="line">            count += <span class="number">1</span></div>
+<div class="line">        <span class="keyword">return</span> count</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="Is-Subsequence"><a href="#Is-Subsequence" class="headerlink" title="Is Subsequence"></a><a href="https://leetcode.com/problems/is-subsequence/description/" target="_blank" rel="noopener">Is Subsequence</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a string <strong>s</strong> and a string <strong>t</strong>, check if <strong>s</strong> is subsequence of <strong>t</strong>.</p>
@@ -2473,7 +2596,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2495,7 +2618,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2528,7 +2651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#钱币找零"><span class="nav-number">1.</span> <span class="nav-text">钱币找零</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lemonade-Change"><span class="nav-number">1.1.</span> <span class="nav-text">Lemonade Change</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背包问题"><span class="nav-number">2.</span> <span class="nav-text">背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多机调度"><span class="nav-number">3.</span> <span class="nav-text">多机调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Is-Subsequence"><span class="nav-number">1.</span> <span class="nav-text">Is Subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">2.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">3.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">4.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">5.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">6.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">7.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">8.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">9.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">10.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">11.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">12.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number"></span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorganize-String"><span class="nav-number">7.</span> <span class="nav-text">Reorganize String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">8.</span> <span class="nav-text">IPO</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#钱币找零"><span class="nav-number">1.</span> <span class="nav-text">钱币找零</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lemonade-Change"><span class="nav-number">1.1.</span> <span class="nav-text">Lemonade Change</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背包问题"><span class="nav-number">2.</span> <span class="nav-text">背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多机调度"><span class="nav-number">3.</span> <span class="nav-text">多机调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Advantage-Shuffle"><span class="nav-number">1.</span> <span class="nav-text">Advantage Shuffle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boats-to-Save-People"><span class="nav-number">2.</span> <span class="nav-text">Boats to Save People</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Is-Subsequence"><span class="nav-number">3.</span> <span class="nav-text">Is Subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">4.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">5.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">6.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">7.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">8.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">9.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">10.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">11.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">12.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">13.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">14.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number"></span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorganize-String"><span class="nav-number">7.</span> <span class="nav-text">Reorganize String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">8.</span> <span class="nav-text">IPO</span></a></li></ol></div>
             
 
           </div>
