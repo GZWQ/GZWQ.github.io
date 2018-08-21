@@ -87,10 +87,19 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="我们之前介绍了GAN模型，在本章中，将介绍一些GAN的变体模型。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T04:15:31.155Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/9dd87e799b054c538ead26df0d7394fb_th.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/ac5b965024b647a8954ade2c6bdf22d3_th.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/84bbfddafa9c4d9cb3c2b5aa2ec2e3f2_th.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/u_net.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/86c9fccb701d4bc8b4011fa4bc259f6a_th.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/4.png">
+<meta property="og:updated_time" content="2018-08-21T16:00:41.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variant GAN">
 <meta name="twitter:description" content="我们之前介绍了GAN模型，在本章中，将介绍一些GAN的变体模型。">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/20/Variant-GAN/9dd87e799b054c538ead26df0d7394fb_th.png">
 
 
 
@@ -378,9 +387,28 @@
       
         <p>我们之前介绍了GAN模型，在本章中，将介绍一些GAN的变体模型。</p>
 <a id="more"></a>
-<h2 id="DRAW-A-Recurrent-Neural-Network-For-Image-Generation-paper-tensorflow"><a href="#DRAW-A-Recurrent-Neural-Network-For-Image-Generation-paper-tensorflow" class="headerlink" title="DRAW: A Recurrent Neural Network For Image Generation paper  tensorflow"></a>DRAW: A Recurrent Neural Network For Image Generation <a href="https://arxiv.org/pdf/1502.04623.pdf" target="_blank" rel="noopener">paper</a>  <a href="https://github.com/ericjang/draw" target="_blank" rel="noopener">tensorflow</a></h2><p><strong>2015 with 800 citations</strong></p>
+<h2 id="DRAW-A-Recurrent-Neural-Network-For-Image-Generation"><a href="#DRAW-A-Recurrent-Neural-Network-For-Image-Generation" class="headerlink" title="DRAW: A Recurrent Neural Network For Image Generation"></a>DRAW: A Recurrent Neural Network For Image Generation</h2><p> <a href="https://arxiv.org/pdf/1502.04623.pdf" target="_blank" rel="noopener">paper</a>  <a href="https://github.com/ericjang/draw" target="_blank" rel="noopener">tensorflow</a>  <a href="">2015 - 800citation</a> </p>
 <p>the DRAW network is a generative model of<br>images in the variational auto-encoder framework that decomposes image formation into multiple<br>stages of additions to a canvas matrix. The DRAW paper assumes an LSTM based generative model<br>of these sequential drawing actions which is more general than our model. In practice, these drawing<br>actions seem to progressively refine an initially blurry region of an image to be sharper. </p>
-<h2 id="Pix2pix-paper"><a href="#Pix2pix-paper" class="headerlink" title="Pix2pix paper"></a>Pix2pix <a href="https://arxiv.org/pdf/1611.07004.pdf" target="_blank" rel="noopener">paper</a></h2><p><a href="http://www.sohu.com/a/134110704_741733" target="_blank" rel="noopener">ref1</a> </p>
+<h2 id="Pix2pix"><a href="#Pix2pix" class="headerlink" title="Pix2pix"></a>Pix2pix</h2><p><a href="https://arxiv.org/pdf/1611.07004.pdf" target="_blank" rel="noopener">paper</a>  <a href="http://www.sohu.com/a/134110704_741733" target="_blank" rel="noopener">ref1</a> <a href="https://github.com/affinelayer/pix2pix-tensorflow" target="_blank" rel="noopener">tensorflow</a> </p>
+<p>pix2pix是基于条件对抗生成网络来学习从输入图像到输出图像的映射。</p>
+<h3 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h3><p>生成器的目标就是将输入的图像转换为目标图像，利用编码-解码器的架构来实现。</p>
+<p><img src="/2018/08/20/Variant-GAN/9dd87e799b054c538ead26df0d7394fb_th.png" alt="9dd87e799b054c538ead26df0d7394fb_th"></p>
+<p>输入图像是256*256大小3种颜色通道的图像（红、绿、蓝通道，对于黑白图，这三个通道的数值相等）。生成器接收输入，并将它用一系列编码器（卷积＋激活函数）简化成更小的表示（representation）。这样做的基本想法是我们用最终的编码层可以得到一种对数据更高层次（抽象）的表达。解码器层呢主要做了相反的操作（反卷积deconvolution＋激活函数），并将编码层的动作反过来。</p>
+<p><img src="/2018/08/20/Variant-GAN/ac5b965024b647a8954ade2c6bdf22d3_th.png" alt="ac5b965024b647a8954ade2c6bdf22d3_th"></p>
+<p>为了提高这种图像到图像转换的效率，作者用了一种称为U－Net的方法而不是编码－解码器方法。它们本来是一回事，但是U－Net引入了所谓的“跳跃链接”，以便将编码器层和解码器层直接相连，这种跳跃链接可以为网络提供一种省略编码／解码部分的选择，从而当网络真的用不到它们的时候，处理效率就会很快了。</p>
+<p><img src="/2018/08/20/Variant-GAN/84bbfddafa9c4d9cb3c2b5aa2ec2e3f2_th.png" alt="84bbfddafa9c4d9cb3c2b5aa2ec2e3f2_th"></p>
+<blockquote>
+<p>U-Net网络结构</p>
+<p><img src="/2018/08/20/Variant-GAN/u_net.png" alt="u_net"></p>
+</blockquote>
+<h3 id="辨别器"><a href="#辨别器" class="headerlink" title="辨别器"></a>辨别器</h3><p>对比发现，生成器和辨别器的输入是不同的：前者只有一张图片作为输入，后者有两张图片作为输入，辨别器的输出是一个30*30的图像，每一个像素都是0～1的数值，代表了这一部分与目标图像比起来有多像。在pix2pix的执行中，这30*30图像中的每一个像素都对应了输入图像的70*70个块（patch，这些patch会有很多重叠，因为输入图像大小是256*256）。这种架构称为“PatchGAN”。</p>
+<p><img src="/2018/08/20/Variant-GAN/86c9fccb701d4bc8b4011fa4bc259f6a_th.png" alt="86c9fccb701d4bc8b4011fa4bc259f6a_th"></p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><h4 id="生成器-1"><a href="#生成器-1" class="headerlink" title="生成器"></a>生成器</h4><p>除了辨别器判断生成图片的真假损失</p>
+<p><img src="/2018/08/20/Variant-GAN/4.png" alt="4"></p>
+<p>还有$L_1$损失来衡量生成图片的优劣。</p>
+<p><img src="/2018/08/20/Variant-GAN/6.png" alt="6"></p>
+<h4 id="判别器"><a href="#判别器" class="headerlink" title="判别器"></a>判别器</h4><p>在损失函数中，L1被添加进来来保证输入和输出的共性。这就启发出了一个观点，那就是图像的变形分为两种，局部的和全局的。既然L1可以防止全局的变形。那么只要让D去保证局部能够精准即可。于是，Pix2Pix中的D被实现为Patch-D，D区分图像中的每个$N*N$大小的补丁是真是假。</p>
+<p><img src="/2018/08/20/Variant-GAN/4.png" alt="4"></p>
 
       
     </div>
@@ -424,6 +452,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/21/Algorithm/" rel="prev" title="Algorithm">
+                Algorithm <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -500,7 +532,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -555,7 +587,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DRAW-A-Recurrent-Neural-Network-For-Image-Generation-paper-tensorflow"><span class="nav-number">1.</span> <span class="nav-text">DRAW: A Recurrent Neural Network For Image Generation paper  tensorflow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pix2pix-paper"><span class="nav-number">2.</span> <span class="nav-text">Pix2pix paper</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DRAW-A-Recurrent-Neural-Network-For-Image-Generation"><span class="nav-number">1.</span> <span class="nav-text">DRAW: A Recurrent Neural Network For Image Generation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pix2pix"><span class="nav-number">2.</span> <span class="nav-text">Pix2pix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器"><span class="nav-number">2.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辨别器"><span class="nav-number">2.2.</span> <span class="nav-text">辨别器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数"><span class="nav-number">2.3.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成器-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判别器"><span class="nav-number">2.3.2.</span> <span class="nav-text">判别器</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
