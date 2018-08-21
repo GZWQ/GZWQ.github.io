@@ -94,13 +94,15 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen%20Shot%202018-08-14%20at%205.55.35%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/image-20180818165938933.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Screen%20Shot%202018-08-18%20at%205.02.58%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Screen%20Shot%202018-08-19%20at%208.23.02%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Screen%20Shot%202018-08-19%20at%208.23.25%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen%20Shot%202018-08-08%20at%2011.32.08%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808113730536.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808114529415.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808123047797.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813110624641.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813111620624.png">
-<meta property="og:updated_time" content="2018-08-18T22:26:49.523Z">
+<meta property="og:updated_time" content="2018-08-20T22:34:06.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression">
 <meta name="twitter:description" content="逻辑斯蒂回归模型线性回归试图用一个线性函数的预测值取逼近真实值，那么是否能用一个线性函数的预测值去逼近真实值的衍生值呢？假设我们使用预测值去逼近一个对数函数$g(y)=In(y)$，那么$g(y)=f(y)$，  In(y)=w^Tx+b这样我们就得到了对数线性回归，它实际上是试图让$e^{(w^Tx+b)}$去逼近$y$，本质上仍然是线性回归，但已是在求输入空间到输出空间的非线性函数的映射。如">
@@ -485,7 +487,35 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <li>对数据集进行重采样</li>
 <li></li>
 </ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="预测是否录取学生"><a href="#预测是否录取学生" class="headerlink" title="预测是否录取学生"></a>预测是否录取学生</h2><p>数据集包含学生的两次考试成绩以及其是否被录取的信息。</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="预测是否录取学生-ref"><a href="#预测是否录取学生-ref" class="headerlink" title="预测是否录取学生 ref"></a>预测是否录取学生 <a href="https://www.johnwittenauer.net/machine-learning-exercises-in-python-part-3/" target="_blank" rel="noopener">ref</a></h2><p>数据集包含学生的两次考试成绩以及其是否被录取的信息。</p>
+<h3 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h3><p>数据载入的方式千千万万种方式，但是一旦载入之后，需要做的操作包括：</p>
+<ol>
+<li>提取训练集$x$和对应的标签$y$</li>
+<li>为$x$多加一行全1列</li>
+<li>数据正则化</li>
+</ol>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line">data = np.loadtxt(<span class="string">'./dataset/ex2data1.txt'</span>,delimiter=<span class="string">','</span>)</div>
+<div class="line">x = np.array(data[:,:<span class="number">-1</span>])</div>
+<div class="line">y = np.array(data[:,<span class="number">-1</span>])</div>
+<div class="line"></div>
+<div class="line">row,_ = np.shape(x)</div>
+<div class="line">zero = np.zeros((row,<span class="number">1</span>))</div>
+<div class="line">x_new = np.concatenate((zero,x),axis=<span class="number">1</span>)</div>
+<div class="line">_,col = np.shape(x_new)</div>
+<div class="line">thetas = np.zeros((col,<span class="number">1</span>))</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h3 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h3><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -518,7 +548,101 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 </pre></td></tr></table></figure>
 
 </div></div>
-<h3 id="代价函数和梯度下降法"><a href="#代价函数和梯度下降法" class="headerlink" title="代价函数和梯度下降法"></a>代价函数和梯度下降法</h3><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h3 id="代价函数和梯度下降法"><a href="#代价函数和梯度下降法" class="headerlink" title="代价函数和梯度下降法"></a>代价函数和梯度下降法</h3><p><img src="/2018/08/18/Logistic-Regression/Screen Shot 2018-08-19 at 8.23.02 PM.png" alt="Screen Shot 2018-08-19 at 8.23.02 PM"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cost_func</span><span class="params">(thetas,x,y)</span>:</span></div>
+<div class="line">    z = x.dot(thetas)</div>
+<div class="line">    y_pred = sigmoid(z)</div>
+<div class="line">    loss = y.T.dot(np.log(y_pred)) + (<span class="number">1</span>-y).T.dot(np.log(<span class="number">1</span>-y_pred))</div>
+<div class="line">    <span class="keyword">return</span> -loss/row</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>初次调用时，loss=0.693</p>
+</blockquote>
+<p><img src="/2018/08/18/Logistic-Regression/Screen Shot 2018-08-19 at 8.23.25 PM.png" alt="Screen Shot 2018-08-19 at 8.23.25 PM"></p>
+<p>这次我们的梯度下降法返回梯度量，不直接返回参数更新</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_descent</span><span class="params">(thetas,x,y)</span>:</span></div>
+<div class="line">    z = x.dot(thetas)</div>
+<div class="line">    y_pred = sigmoid(z)</div>
+<div class="line">    gd = (y_pred-y).T.dot(x) / row</div>
+<div class="line">    <span class="keyword">return</span> gd</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h3 id="损失函数优化"><a href="#损失函数优化" class="headerlink" title="损失函数优化"></a>损失函数优化</h3><p>这次，我们使用<code>scipy.optimize</code>寻找目标函数的最优值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">scipy.optimize.fmin_tnc(func, x0, fprime=<span class="keyword">None</span>, args=())</div>
+</pre></td></tr></table></figure>
+<ul>
+<li><p>func：目标函数，它必须满足以下条件之一：</p>
+<p>— 返回函数值<code>f</code>和梯度值<code>g</code></p>
+<p>— 返回函数值<code>f</code>，但是必须提供梯度函数作为<code>fprime</code>的参数</p>
+<p>—返回函数值<code>f</code>，设置 <code>approx_grad=True</code></p>
+</li>
+<li><p>x0：待优化参数的初始值</p>
+</li>
+<li><p>fprime：梯度函数</p>
+</li>
+<li><p>args：<code>func</code>函数的参数</p>
+</li>
+<li><p>该函数的返回值：x—solution；nfeval—函数优化次数；</p>
+</li>
+</ul>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scipy.optimize <span class="keyword">as</span> opt</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">scipy_gd</span><span class="params">(thetas,x,y)</span>:</span></div>
+<div class="line">    result = opt.fmin_tnc(</div>
+<div class="line">        func=cost_func,x0=thetas,fprime=gradient_descent,args=(x,y))</div>
+<div class="line">    <span class="keyword">return</span> result[<span class="number">0</span>]</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h3 id="预测及评价"><a href="#预测及评价" class="headerlink" title="预测及评价"></a>预测及评价</h3><p>我们定义一个预测函数，输入未知值，预测其分类</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(thetas,x)</span>:</span></div>
+<div class="line">    z = x.dot(thetas)</div>
+<div class="line">    prob = sigmoid(z)</div>
+<div class="line">    <span class="keyword">return</span> [<span class="number">1</span> <span class="keyword">if</span> x &gt;= <span class="number">0.5</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> x <span class="keyword">in</span> prob]</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>使用准确率来评估预测结果</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    thetas = scipy_gd(thetas,x_new,y)</div>
+<div class="line">    predictions = predict(thetas,x_new)</div>
+<div class="line">    correct = [<span class="number">1</span> <span class="keyword">if</span> ((a == <span class="number">1</span> <span class="keyword">and</span> b == <span class="number">1</span>) <span class="keyword">or</span> (a == <span class="number">0</span> <span class="keyword">and</span> b == <span class="number">0</span>)) <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> (a, b) <span class="keyword">in</span> zip(predictions, y)]</div>
+<div class="line">    accuracy = (sum(map(int, correct)) % len(correct))</div>
+<div class="line">    print(accuracy)</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 
 </div></div>
 <h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen%20Shot%202018-08-08%20at%2011.32.08%20AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
@@ -791,6 +915,10 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/08/20/Variant-GAN/" rel="prev" title="Variant GAN">
+                Variant GAN <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -866,7 +994,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -888,7 +1016,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -921,7 +1049,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑斯蒂回归"><span class="nav-number">1.</span> <span class="nav-text">逻辑斯蒂回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解"><span class="nav-number">1.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">1.2.1.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标函数"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">梯度下降法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分类学习"><span class="nav-number">1.3.</span> <span class="nav-text">多分类学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一对一（OvO）"><span class="nav-number">1.3.1.</span> <span class="nav-text">一对一（OvO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对余-OvR"><span class="nav-number">1.3.2.</span> <span class="nav-text">一对余(OvR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类别不平衡"><span class="nav-number">1.3.3.</span> <span class="nav-text">类别不平衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预测是否录取学生"><span class="nav-number">2.1.</span> <span class="nav-text">预测是否录取学生</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据可视化"><span class="nav-number">2.1.1.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sigmoid激活函数"><span class="nav-number">2.1.2.</span> <span class="nav-text">Sigmoid激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代价函数和梯度下降法"><span class="nav-number">2.1.3.</span> <span class="nav-text">代价函数和梯度下降法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归预测西瓜"><span class="nav-number">2.2.</span> <span class="nav-text">逻辑斯蒂回归预测西瓜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉验证法-vs-留一法"><span class="nav-number">2.3.</span> <span class="nav-text">交叉验证法 vs 留一法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑斯蒂回归"><span class="nav-number">1.</span> <span class="nav-text">逻辑斯蒂回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法求解"><span class="nav-number">1.2.</span> <span class="nav-text">算法求解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则化"><span class="nav-number">1.2.1.</span> <span class="nav-text">正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目标函数"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">梯度下降法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多分类学习"><span class="nav-number">1.3.</span> <span class="nav-text">多分类学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一对一（OvO）"><span class="nav-number">1.3.1.</span> <span class="nav-text">一对一（OvO）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一对余-OvR"><span class="nav-number">1.3.2.</span> <span class="nav-text">一对余(OvR)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类别不平衡"><span class="nav-number">1.3.3.</span> <span class="nav-text">类别不平衡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">解决方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">2.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预测是否录取学生-ref"><span class="nav-number">2.1.</span> <span class="nav-text">预测是否录取学生 ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据加载"><span class="nav-number">2.1.1.</span> <span class="nav-text">数据加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据可视化"><span class="nav-number">2.1.2.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sigmoid激活函数"><span class="nav-number">2.1.3.</span> <span class="nav-text">Sigmoid激活函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代价函数和梯度下降法"><span class="nav-number">2.1.4.</span> <span class="nav-text">代价函数和梯度下降法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数优化"><span class="nav-number">2.1.5.</span> <span class="nav-text">损失函数优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测及评价"><span class="nav-number">2.1.6.</span> <span class="nav-text">预测及评价</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑斯蒂回归预测西瓜"><span class="nav-number">2.2.</span> <span class="nav-text">逻辑斯蒂回归预测西瓜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉验证法-vs-留一法"><span class="nav-number">2.3.</span> <span class="nav-text">交叉验证法 vs 留一法</span></a></li></ol></li></ol></div>
             
 
           </div>
