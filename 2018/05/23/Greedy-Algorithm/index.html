@@ -92,9 +92,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20160507101904360.jpeg">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-24%20at%209.04.01%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/79f0f736afc379317be931cfedc4b74542a91156.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/123.png">
-<meta property="og:updated_time" content="2018-08-22T23:21:11.835Z">
+<meta property="og:updated_time" content="2018-08-23T21:54:31.443Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 点击显/隐内容">
@@ -1679,6 +1680,18 @@
 </div></div>
 </li>
 <li><p>思路</p>
+<p>问题大意：有一个机器人在无限大的平面上，初始时面对正北方向位于$(0,0)$。机器人接受一系列指令：-2则要左转；-1则要右转；1-9之间的数字则要前进相应的步数。但是该平面上有一些障碍$(i,j)$，如果机器人在行进过程中遇到了障碍，则停留在当前位置不动。求机器人能到达的最大欧氏距离。</p>
+<p>该问题有两个难点：一个是方向如何表示，二是如何表示方向的改变。</p>
+<p>假如现在在$(0,0)$，如果前进$a$个长度：</p>
+<p>假设向$N$前进，则前进后的位置是$N(0,a)=N(0,0)+(0,a)$</p>
+<p>假设现在在E，前进后的位置是E(a,0)=E(0,0)+(a,0)$</p>
+<p>假设现在在$S$，则前进后的位置是$S(a,0)=S(0,0)+(0,-a)$</p>
+<p>假设现在在W，则前进后的位置是$W(a,0)=E(0,0)+(-a,0)$</p>
+<p>基于此，我们可以N,E,S,W四个方向转化为$[(0,1),(1,0),(0,-1),(-1,0)]$ </p>
+<p>那么该如何改变方向呢？即如何选择上述四个方向呢？</p>
+<p><img src="/2018/05/23/Greedy-Algorithm/79f0f736afc379317be931cfedc4b74542a91156.jpg" alt="79f0f736afc379317be931cfedc4b74542a91156"></p>
+<p>可以发现无论当前处于东南西北的哪一个方向，接受到指令$-2$，你选择左边的方向，$-1$则选择右边的方向。如果用$direction$表示当前方向，则-2时，你更新你的方向为</p>
+<p>$ direction = (direction-1)%4$；-1时，更新$direction = (direction + 1) % 4$ 。</p>
 </li>
 <li><p><a href="https://leetcode.com/problems/walking-robot-simulation/discuss/157505/Simple-Python-solution-Accepted" target="_blank" rel="noopener">代码</a> </p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
@@ -2799,7 +2812,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

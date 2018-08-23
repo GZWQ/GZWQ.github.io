@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-21T21:12:01.306Z">
+<meta property="og:updated_time" content="2018-08-23T21:24:15.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm">
 <meta name="twitter:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
@@ -383,26 +383,33 @@
 <li>does not have any redundancy(several steps together caused redundacy, not caused by a single step)</li>
 </ul>
 <a id="more"></a>
-<h1 id="Move-all-zeros-to-the-leftmost"><a href="#Move-all-zeros-to-the-leftmost" class="headerlink" title="Move all zeros to the leftmost"></a>Move all zeros to the leftmost</h1><ol>
-<li><p><strong>problem</strong></p>
-<p>Now we want to find an efficient algorithm to move all 0’s in a 0/1-array to the leftmost places which minimizes (say) the number of changes in the array-items.</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h2 id="Move-all-zeros-to-the-leftmost"><a href="#Move-all-zeros-to-the-leftmost" class="headerlink" title="Move all zeros to the leftmost"></a>Move all zeros to the leftmost</h2><p>Now we want to find an efficient algorithm to move all 0’s in a 0/1-array to the leftmost places which minimizes (say) the number of changes in the array-items.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 </pre></td><td class="code"><pre><div class="line">input : [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>]</div>
 <div class="line">output : [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]</div>
 </pre></td></tr></table></figure>
-</li>
-<li><p><strong>analysis</strong></p>
+<blockquote>
 <p>use two pointers. One points to the rightmost zero and the other one points to the leftmost one and then swap them.</p>
-<p> ???</p>
-<p>total amount of work in finding 0-1 pairs in the following step so that it is minimal:</p>
-<p>find the leftmost 1 and swap it with the rightmost 0 if that 0 is to the right of that 1 else stop, one perpon involved.</p>
-<p>?????</p>
-<p>can 3/4 people do better than 2 people?</p>
-</li>
-<li><p><strong>applications</strong></p>
-</li>
-</ol>
+</blockquote>
+<h2 id="Path-count"><a href="#Path-count" class="headerlink" title="Path count"></a>Path count</h2><p>How to count #(acyclic-paths between two nodes in a complete digraph of N nodes) - contd. </p>
+<blockquote>
+<ul>
+<li>(1$\to$ n with 1 step) : 1</li>
+<li>(1$\to$ n with 2 steps) : n-2</li>
+<li>(1$\to$ n with 3 steps) : (n-2)(n-3)</li>
+<li>….</li>
+<li>(1$\to$ n with k steps) : (n-2)(n-3)…(n-k) </li>
+<li>(1$\to$ n with (n-1) step) : (n-2)(n-3)…2*1</li>
+</ul>
+<p>$ #(1,n-paths) =1+(n-2)+(n-2)(n-3)+…+(n-2)(n-3)2\cdot1 \approx e\cdot (n-2)!$</p>
+<p>证明？？？？？？？？？</p>
+</blockquote>
+<h1 id="Shortest-Paths"><a href="#Shortest-Paths" class="headerlink" title="Shortest Paths"></a>Shortest Paths</h1><p>complete acyclic digraph</p>
+<p>$# links=(n-1)+(n-2)+…+1= $</p>
+<p>$# (1\to n\  paths)=$</p>
+<p>subpath optimality</p>
+<p>if $<x_1,x_2,...x_m>$ is an optimal $x_1 \to x_m$ path, then $<x_i,x_{i+1},...,x_{j-1},x_j>$ is optimal. </x_i,x_{i+1},...,x_{j-1},x_j></x_1,x_2,...x_m></p>
 
       
     </div>
@@ -442,6 +449,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/23/Tree/" rel="prev" title="Tree">
+                Tree <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -518,7 +529,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -573,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Move-all-zeros-to-the-leftmost"><span class="nav-number">1.</span> <span class="nav-text">Move all zeros to the leftmost</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-all-zeros-to-the-leftmost"><span class="nav-number">1.1.</span> <span class="nav-text">Move all zeros to the leftmost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-count"><span class="nav-number">1.2.</span> <span class="nav-text">Path count</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shortest-Paths"><span class="nav-number">2.</span> <span class="nav-text">Shortest Paths</span></a></li></ol></div>
             
 
           </div>
