@@ -768,13 +768,22 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <li>对数据集进行重采样</li>
 <li></li>
 </ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="预测是否录取学生-ref"><a href="#预测是否录取学生-ref" class="headerlink" title="预测是否录取学生 ref"></a>预测是否录取学生 <a href="https://www.johnwittenauer.net/machine-learning-exercises-in-python-part-3/" target="_blank" rel="noopener">ref</a></h2><p>数据集包含学生的两次考试成绩以及其是否被录取的信息。</p>
-<h3 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h3><p>数据载入的方式千千万万种方式，但是一旦载入之后，需要做的操作包括：</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>需要一个标准对数据进行约束：</p>
 <ol>
-<li>提取训练集$x$和对应的标签$y$</li>
-<li>为$x$多加一行全1列</li>
-<li>数据正则化</li>
+<li><p>x增加全1行</p>
+</li>
+<li><p>shape</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">x.shape = (m,n) <span class="comment"># m:样本数；n：特征数</span></div>
+<div class="line">y.shape = (m,) <span class="comment"># 一维行向量</span></div>
+<div class="line">thetas = (n,<span class="number">1</span>) <span class="comment"># 一维列向量</span></div>
+</pre></td></tr></table></figure>
+</li>
 </ol>
+<h2 id="预测是否录取学生-ref"><a href="#预测是否录取学生-ref" class="headerlink" title="预测是否录取学生 ref"></a>预测是否录取学生 <a href="https://www.johnwittenauer.net/machine-learning-exercises-in-python-part-3/" target="_blank" rel="noopener">ref</a></h2><p>数据集包含学生的两次考试成绩以及其是否被录取的信息。</p>
+<h3 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h3><p>数据载入的方式千千万万种方式，但是一旦载入之后，需要做的操作包括：</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -790,10 +799,10 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <div class="line">y = np.array(data[:,<span class="number">-1</span>])</div>
 <div class="line"></div>
 <div class="line">row,_ = np.shape(x)</div>
-<div class="line">zero = np.zeros((row,<span class="number">1</span>))</div>
-<div class="line">x_new = np.concatenate((zero,x),axis=<span class="number">1</span>)</div>
+<div class="line">ones = np.ones((row,<span class="number">1</span>))</div>
+<div class="line">x_new = np.concatenate((ones,x),axis=<span class="number">1</span>)</div>
 <div class="line">_,col = np.shape(x_new)</div>
-<div class="line">thetas = np.zeros((col,<span class="number">1</span>))</div>
+<div class="line">thetas = np.zeros([col,<span class="number">1</span>])</div>
 </pre></td></tr></table></figure>
 
 </div></div>
@@ -804,14 +813,12 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <div class="line">4</div>
 <div class="line">5</div>
 <div class="line">6</div>
-<div class="line">7</div>
 </pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">(x,y)</span>:</span></div>
 <div class="line">    plt.scatter(x[y==<span class="number">0</span>,<span class="number">0</span>],x[y==<span class="number">0</span>,<span class="number">1</span>],marker=<span class="string">'o'</span>,label=<span class="string">'Not admitted'</span>,c = <span class="string">'y'</span>)</div>
 <div class="line">    plt.scatter(x[y == <span class="number">1</span>, <span class="number">0</span>], x[y == <span class="number">1</span>, <span class="number">1</span>], marker=<span class="string">'+'</span>, label=<span class="string">'Admitted'</span>,c=<span class="string">'black'</span>)</div>
 <div class="line">    plt.xlabel(<span class="string">'Exam1 score'</span>)</div>
 <div class="line">    plt.ylabel(<span class="string">'Exam2 score'</span>)</div>
 <div class="line">    plt.legend()</div>
-<div class="line">    plt.show()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/08/18/Logistic-Regression/image-20180818165938933.png" alt="image-20180818165938933"></p>
 
@@ -856,7 +863,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <div class="line">    z = x.dot(thetas)</div>
 <div class="line">    y_pred = sigmoid(z)</div>
 <div class="line">    gd = (y_pred-y).T.dot(x) / row</div>
-<div class="line">    <span class="keyword">return</span> gd</div>
+<div class="line">    <span class="keyword">return</span> gd.T</div>
 </pre></td></tr></table></figure>
 
 </div></div>
@@ -879,6 +886,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <li><p>该函数的返回值：x—solution；nfeval—函数优化次数；</p>
 </li>
 </ul>
+<p>最优化之后的损失函数值是0.203左右。</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -919,7 +927,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <div class="line">    predictions = predict(thetas,x_new)</div>
 <div class="line">    correct = [<span class="number">1</span> <span class="keyword">if</span> ((a == <span class="number">1</span> <span class="keyword">and</span> b == <span class="number">1</span>) <span class="keyword">or</span> (a == <span class="number">0</span> <span class="keyword">and</span> b == <span class="number">0</span>)) <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> (a, b) <span class="keyword">in</span> zip(predictions, y)]</div>
 <div class="line">    accuracy = (sum(map(int, correct)) % len(correct))</div>
-<div class="line">    print(accuracy)</div>
+<div class="line">    plot_boundary(x,y,thetas)</div>
 </pre></td></tr></table></figure>
 
 </div></div>
@@ -952,9 +960,22 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <div class="line">    plt.contour(x0, x1, z, cmap=pl.cm.Paired)</div>
 <div class="line">    plt.show()</div>
 </pre></td></tr></table></figure>
+<p><img src="/2018/08/18/Logistic-Regression/image-20180822205326946.png" alt="image-20180822205326946"></p>
 
 </div></div>
-<h2 id="正则化的回归"><a href="#正则化的回归" class="headerlink" title="正则化的回归"></a>正则化的回归</h2><h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen%20Shot%202018-08-08%20at%2011.32.08%20AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
+<h2 id="正则化的回归"><a href="#正则化的回归" class="headerlink" title="正则化的回归"></a>正则化的回归</h2><p><a href="https://www.johnwittenauer.net/machine-learning-exercises-in-python-part-3/" target="_blank" rel="noopener">ref</a> </p>
+<p>本题我们使用正则化的逻辑斯蒂回归来分类。给定的数据集是关于微芯片的两次测试数据，label是合格与不合格。</p>
+<ol>
+<li><p>数据可视化</p>
+<p>直接利用上面的画图函数，可以看到我们需要使用一个非线性曲线去分类，类似椭圆。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p><img src="/2018/08/18/Logistic-Regression/image-20180822210526246.png" alt="image-20180822210526246"></p>
+
+</div></div>
+</li>
+<li></li>
+</ol>
+<h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen%20Shot%202018-08-08%20at%2011.32.08%20AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
 <ol>
 <li><p>数据载入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>

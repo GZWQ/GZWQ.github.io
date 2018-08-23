@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/20170311103822129.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/Screen%20Shot%202018-06-27%20at%2010.29.49%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/23/Greedy-Algorithm/123.png">
-<meta property="og:updated_time" content="2018-08-20T21:18:18.425Z">
+<meta property="og:updated_time" content="2018-08-22T23:21:11.835Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Greedy Algorithm">
 <meta name="twitter:description" content="从零开始学贪心算法 贪心算法是指在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，只做出在某种意义上的局部最优解。贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。 点击显/隐内容">
@@ -1646,7 +1646,96 @@
 </div></div>
 </li>
 </ol>
-<h2 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h2><h3 id="Queue-Reconstruction-by-Height"><a href="#Queue-Reconstruction-by-Height" class="headerlink" title="Queue Reconstruction by Height"></a><a href="https://leetcode.com/problems/queue-reconstruction-by-height/description/" target="_blank" rel="noopener">Queue Reconstruction by Height</a></h3><ol>
+<h2 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h2><h3 id="Walking-Robot-Simulation"><a href="#Walking-Robot-Simulation" class="headerlink" title="Walking Robot Simulation"></a><a href="https://leetcode.com/problems/walking-robot-simulation/description/" target="_blank" rel="noopener">Walking Robot Simulation</a></h3><ol>
+<li><p>题目</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>A robot on an infinite grid starts at point (0, 0) and faces north.  The robot can receive one of three possible types of commands:</p>
+<ul>
+<li><code>-2</code>: turn left 90 degrees</li>
+<li><code>-1</code>: turn right 90 degrees</li>
+<li><code>1 &lt;= x &lt;= 9</code>: move forward <code>x</code> units</li>
+</ul>
+<p>Some of the grid squares are obstacles. </p>
+<p>The <code>i</code>-th obstacle is at grid point <code>(obstacles[i][0], obstacles[i][1])</code></p>
+<p>If the robot would try to move onto them, the robot stays on the previous grid square instead (but still continues following the rest of the route.)</p>
+<p>Return the <strong>square</strong> of the maximum Euclidean distance that the robot will be from the origin. </p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: commands = [<span class="number">4</span>,-<span class="number">1</span>,<span class="number">3</span>], obstacles = []</div>
+<div class="line">Output: <span class="number">25</span></div>
+<div class="line">Explanation: <span class="function">robot will go <span class="title">to</span> <span class="params">(<span class="number">3</span>, <span class="number">4</span>)</span></span></div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: commands = [<span class="number">4</span>,-<span class="number">1</span>,<span class="number">4</span>,-<span class="number">2</span>,<span class="number">4</span>], obstacles = [[<span class="number">2</span>,<span class="number">4</span>]]</div>
+<div class="line">Output: <span class="number">65</span></div>
+<div class="line">Explanation: <span class="function">robot will be stuck <span class="title">at</span> <span class="params">(<span class="number">1</span>, <span class="number">4</span>)</span> before turning left and going <span class="title">to</span> <span class="params">(<span class="number">1</span>, <span class="number">8</span>)</span></span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+<li><p>思路</p>
+</li>
+<li><p><a href="https://leetcode.com/problems/walking-robot-simulation/discuss/157505/Simple-Python-solution-Accepted" target="_blank" rel="noopener">代码</a> </p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">robotSim</span><span class="params">(self, commands, obstacles)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type commands: List[int]</span></div>
+<div class="line"><span class="string">        :type obstacles: List[List[int]]</span></div>
+<div class="line"><span class="string">        :rtype: int</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        directions = [(<span class="number">0</span>,<span class="number">1</span>),(<span class="number">1</span>,<span class="number">0</span>),(<span class="number">0</span>,<span class="number">-1</span>),(<span class="number">-1</span>,<span class="number">0</span>)] <span class="comment"># N,E,S,W</span></div>
+<div class="line">        obstacles = set(map(tuple,obstacles))</div>
+<div class="line">        max_dis,x,y,direction = <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span></div>
+<div class="line">        <span class="keyword">for</span> command <span class="keyword">in</span> commands:</div>
+<div class="line">            <span class="keyword">if</span> command == <span class="number">-2</span>:</div>
+<div class="line">                direction = (direction<span class="number">-1</span>)%<span class="number">4</span></div>
+<div class="line">            <span class="keyword">elif</span> command == <span class="number">-1</span> :</div>
+<div class="line">                direction = (direction + <span class="number">1</span>) % <span class="number">4</span></div>
+<div class="line">            <span class="keyword">else</span>:</div>
+<div class="line">                x_offset,y_offset = directions[direction][<span class="number">0</span>],directions[direction][<span class="number">1</span>]</div>
+<div class="line">                <span class="keyword">while</span> command&gt;<span class="number">0</span>:</div>
+<div class="line">                    <span class="keyword">if</span> (x+x_offset,y+y_offset) <span class="keyword">not</span> <span class="keyword">in</span> obstacles:</div>
+<div class="line">                        x += x_offset</div>
+<div class="line">                        y += y_offset</div>
+<div class="line">                    command -= <span class="number">1</span></div>
+<div class="line">                max_dis = max(max_dis,x**<span class="number">2</span>+y**<span class="number">2</span>)</div>
+<div class="line">        <span class="keyword">return</span> max_dis</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+</li>
+</ol>
+<h3 id="Queue-Reconstruction-by-Height"><a href="#Queue-Reconstruction-by-Height" class="headerlink" title="Queue Reconstruction by Height"></a><a href="https://leetcode.com/problems/queue-reconstruction-by-height/description/" target="_blank" rel="noopener">Queue Reconstruction by Height</a></h3><ol>
 <li><p>题目</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -2765,7 +2854,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#钱币找零"><span class="nav-number">1.</span> <span class="nav-text">钱币找零</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lemonade-Change"><span class="nav-number">1.1.</span> <span class="nav-text">Lemonade Change</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背包问题"><span class="nav-number">2.</span> <span class="nav-text">背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多机调度"><span class="nav-number">3.</span> <span class="nav-text">多机调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Score-After-Flipping-Matrix"><span class="nav-number">1.</span> <span class="nav-text">Score After Flipping Matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advantage-Shuffle"><span class="nav-number">2.</span> <span class="nav-text">Advantage Shuffle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boats-to-Save-People"><span class="nav-number">3.</span> <span class="nav-text">Boats to Save People</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Is-Subsequence"><span class="nav-number">4.</span> <span class="nav-text">Is Subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">5.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">6.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">7.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">8.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">9.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">10.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">11.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">12.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">13.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">14.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">15.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">1.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">2.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">3.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">4.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number"></span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorganize-String"><span class="nav-number">7.</span> <span class="nav-text">Reorganize String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">8.</span> <span class="nav-text">IPO</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#钱币找零"><span class="nav-number">1.</span> <span class="nav-text">钱币找零</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lemonade-Change"><span class="nav-number">1.1.</span> <span class="nav-text">Lemonade Change</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背包问题"><span class="nav-number">2.</span> <span class="nav-text">背包问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多机调度"><span class="nav-number">3.</span> <span class="nav-text">多机调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Score-After-Flipping-Matrix"><span class="nav-number">1.</span> <span class="nav-text">Score After Flipping Matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advantage-Shuffle"><span class="nav-number">2.</span> <span class="nav-text">Advantage Shuffle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boats-to-Save-People"><span class="nav-number">3.</span> <span class="nav-text">Boats to Save People</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Is-Subsequence"><span class="nav-number">4.</span> <span class="nav-text">Is Subsequence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Couples-Holding-Hands"><span class="nav-number">5.</span> <span class="nav-text">Couples Holding Hands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game"><span class="nav-number">6.</span> <span class="nav-text">Jump Game</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Jump-Game-II"><span class="nav-number">7.</span> <span class="nav-text">Jump Game II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gas-Station"><span class="nav-number">8.</span> <span class="nav-text">Gas Station</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-II"><span class="nav-number">9.</span> <span class="nav-text">Best Time to Buy and Sell Stock II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Time-to-Buy-and-Sell-Stock-with-Transaction-Fee"><span class="nav-number">10.</span> <span class="nav-text">Best Time to Buy and Sell Stock with Transaction Fee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-overlapping-Intervals"><span class="nav-number">11.</span> <span class="nav-text">Non-overlapping Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-Labels"><span class="nav-number">12.</span> <span class="nav-text">Partition Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Split-Array-into-Consecutive-Subsequences"><span class="nav-number">13.</span> <span class="nav-text">Split Array into Consecutive Subsequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dota2-Senate"><span class="nav-number">14.</span> <span class="nav-text">Dota2 Senate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimum-Number-of-Arrows-to-Burst-Balloons"><span class="nav-number">15.</span> <span class="nav-text">Minimum Number of Arrows to Burst Balloons</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Walking-Robot-Simulation"><span class="nav-number">1.</span> <span class="nav-text">Walking Robot Simulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue-Reconstruction-by-Height"><span class="nav-number">2.</span> <span class="nav-text">Queue Reconstruction by Height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-K-Digits"><span class="nav-number">3.</span> <span class="nav-text">Remove K Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monotone-Increasing-Digits"><span class="nav-number">4.</span> <span class="nav-text">Monotone Increasing Digits</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Scheduler"><span class="nav-number">5.</span> <span class="nav-text">Task Scheduler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级"><span class="nav-number"></span> <span class="nav-text">高级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Candy"><span class="nav-number">1.</span> <span class="nav-text">Candy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-Duplicate-Letters"><span class="nav-number">2.</span> <span class="nav-text">Remove Duplicate Letters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Maximum-Number"><span class="nav-number">3.</span> <span class="nav-text">Create Maximum Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Intersection-Size-At-Least-Two"><span class="nav-number">4.</span> <span class="nav-text">Set Intersection Size At Least Two</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Course-Schedule-III"><span class="nav-number">5.</span> <span class="nav-text">Course Schedule III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Patching-Array"><span class="nav-number">6.</span> <span class="nav-text">Patching Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reorganize-String"><span class="nav-number">7.</span> <span class="nav-text">Reorganize String</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPO"><span class="nav-number">8.</span> <span class="nav-text">IPO</span></a></li></ol></div>
             
 
           </div>
