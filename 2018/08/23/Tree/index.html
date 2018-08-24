@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Algorithm,Tree," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="树的定义  点击显/隐内容">
+<meta name="keywords" content="Algorithm,Tree">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tree">
 <meta property="og:url" content="http://yoursite.com/2018/08/23/Tree/index.html">
 <meta property="og:site_name" content="Blog of Qing">
+<meta property="og:description" content="树的定义  点击显/隐内容">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-23T21:55:10.032Z">
+<meta property="og:updated_time" content="2018-08-24T01:36:08.122Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tree">
+<meta name="twitter:description" content="树的定义  点击显/隐内容">
 
 
 
@@ -323,6 +327,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -350,7 +376,101 @@
       
 
       
-        
+        <p>树的定义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">Definition <span class="keyword">for</span> a binary tree node.</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></div>
+<div class="line">        self.val = x</div>
+<div class="line">        self.left = <span class="keyword">None</span></div>
+<div class="line">        self.right = <span class="keyword">None</span></div>
+</pre></td></tr></table></figure>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<a id="more"></a>
+<h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Same-Tree"><a href="#Same-Tree" class="headerlink" title="Same Tree"></a><a href="https://leetcode.com/problems/same-tree/description/" target="_blank" rel="noopener">Same Tree</a></h3><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h5><p>Given two binary trees, write a function to check if they are the same or not.</p>
+<p>Two binary trees are considered the same if they are structurally identical and the nodes have the same value.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input:     <span class="number">1</span>         <span class="number">1</span></div>
+<div class="line">          / \       / \</div>
+<div class="line">         <span class="number">2</span>   <span class="number">3</span>     <span class="number">2</span>   <span class="number">3</span></div>
+<div class="line"></div>
+<div class="line">        [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],   [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</div>
+<div class="line"></div>
+<div class="line">Output: <span class="keyword">true</span></div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input:     <span class="number">1</span>         <span class="number">1</span></div>
+<div class="line">          /           \</div>
+<div class="line">         <span class="number">2</span>             <span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">        [<span class="number">1</span>,<span class="number">2</span>],     [<span class="number">1</span>,<span class="keyword">null</span>,<span class="number">2</span>]</div>
+<div class="line"></div>
+<div class="line">Output: <span class="keyword">false</span></div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input:     <span class="number">1</span>         <span class="number">1</span></div>
+<div class="line">          / \       / \</div>
+<div class="line">         <span class="number">2</span>   <span class="number">1</span>     <span class="number">1</span>   <span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">        [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>],   [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>]</div>
+<div class="line"></div>
+<div class="line">Output: <span class="keyword">false</span></div>
+</pre></td></tr></table></figure>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>题目大意是要判断是否两棵树相同，相同的要求是具有相同的结构且节点值一致。比较简单，使用递归的方法，两棵树的相对节点，判断其值是否相同，如果相同，则递归判断其左子树和右子树。</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isSameTree</span><span class="params">(self, p, q)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type p: TreeNode</span></div>
+<div class="line"><span class="string">        :type q: TreeNode</span></div>
+<div class="line"><span class="string">        :rtype: bool</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> p <span class="keyword">or</span> <span class="keyword">not</span> q:</div>
+<div class="line">            <span class="keyword">return</span> p==q</div>
+<div class="line">        <span class="keyword">elif</span> p.val == q.val:</div>
+<div class="line">            <span class="keyword">return</span> self.isSameTree(p.left,q.left) <span class="keyword">and</span> self.isSameTree(p.right,q.right)</div>
+<div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div>
+</pre></td></tr></table></figure>
+<h2 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h2><h2 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h2>
       
     </div>
     
@@ -364,6 +484,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/Tree/" rel="tag"># Tree</a>
+          
+        </div>
       
 
       
@@ -434,8 +562,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -472,7 +609,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -495,6 +632,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Same-Tree"><span class="nav-number">1.1.</span> <span class="nav-text">Same Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#困难"><span class="nav-number">3.</span> <span class="nav-text">困难</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1006,6 +1159,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
