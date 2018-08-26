@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235024692.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235337038.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/CFC5A1C95A84A6D8CF3FFC1DD30597782AEEAE57_size20_w740_h231.jpeg">
-<meta property="og:updated_time" content="2018-08-26T02:27:16.200Z">
+<meta property="og:updated_time" content="2018-08-26T02:32:08.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network">
 <meta name="twitter:description" content="本节介绍最基本的神经网络。">
@@ -403,7 +403,26 @@
 \begin{eqnarray} \mbox{output} = \left\{ \begin{array}{ll} 0 & \mbox{if } w\cdot x + b \leq 0 \\ 1 & \mbox{if } w\cdot x + b > 0 \end{array} \right. \tag{2}\end{eqnarray}</script><p>如下图所示。</p>
 <p><img src="/2018/07/24/Neural-Network/perceptron.png" alt="perceptron"></p>
 <p>可以将偏置理解为感知机为了得到输出为1的容易度的度量，如果一个感知机的偏置非常大，那么这个感知机的输出很容易为1，相反如果偏置非常小，那么输出1就很困难。</p>
-<p>&gt;</p>
+<h4 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h4><blockquote>
+<p>为确定感知机模型参数$w$和$b$,需要定义一个损失函数并将损失函数最小化。样本点到超平面的距离:</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\frac{1}{||w||}{|w\times{x}+b|}</script><p>$||w||$是$w$的$L_2$范数，为保计算结果为正，对$w\times x+b$进行绝对值运算。</p>
+<blockquote>
+<p>对于误分类的数据$(x_i,y_i)$来说，$-y_i(w\times{x_i}+b)&gt;0$，假设超平面$S$的误分类点集合为$M$，那么损失函数为所有误分类点到平面距离:</p>
+</blockquote>
+ 
+$$
+L(w,b)=-\frac{1}{||w||}\sum_{x_i\in{M}}{{y_i|w\times{x_i}+b|}}
+$$
+$\frac{1}{||w||}$是常量，不影响，$L(w,b)=-\sum_{x_i\in{M}}{{y_i|w\times{x_i}+b|}}$
+
+
+<blockquote>
+<p>采用梯度下降法，对于一个误分类样本点$(x_i,y_i)$，$\frac{\partial L}{\partial w}=-\eta{y_ix_i}$，$\frac{\partial{L}}{\partial{b}}=-\eta{y_i}$。</p>
+<p>则参数更新公式为：</p>
+<p>$w=w+\eta y_ix_i, b = b+\eta y_i$ </p>
+</blockquote>
 <h4 id="逻辑计算"><a href="#逻辑计算" class="headerlink" title="逻辑计算"></a>逻辑计算</h4><p>感知机可以用于计算初等逻辑函数：与、或、非。</p>
 <div class="table-container">
 <table>
@@ -671,7 +690,7 @@ C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id=
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播算法"><span class="nav-number">1.3.1.</span> <span class="nav-text">反向传播算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">2.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">2.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">2.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">2.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">2.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">2.5.</span> <span class="nav-text">Softmax函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">3.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">3.1.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">3.2.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">4.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">5.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">6.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播算法"><span class="nav-number">1.3.1.</span> <span class="nav-text">反向传播算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">2.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">2.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">2.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">2.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">2.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">2.5.</span> <span class="nav-text">Softmax函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">3.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">3.1.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">3.2.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">4.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">5.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">6.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
             
 
           </div>
