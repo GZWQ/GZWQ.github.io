@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="树的定义  点击显/隐内容">
+<meta name="description" content="树的定义 队列">
 <meta name="keywords" content="Algorithm,Tree">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tree">
 <meta property="og:url" content="http://yoursite.com/2018/08/23/Tree/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="树的定义  点击显/隐内容">
+<meta property="og:description" content="树的定义 队列">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-24T01:36:08.122Z">
+<meta property="og:updated_time" content="2018-08-26T02:19:12.227Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tree">
-<meta name="twitter:description" content="树的定义  点击显/隐内容">
+<meta name="twitter:description" content="树的定义 队列">
 
 
 
@@ -376,23 +376,42 @@
       
 
       
-        <p>树的定义</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+        <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
 <div class="line">5</div>
 <div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line">Definition <span class="keyword">for</span> a binary tree node.</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#Definition for a binary tree node.</span></div>
 <div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></div>
 <div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></div>
 <div class="line">        self.val = x</div>
 <div class="line">        self.left = <span class="keyword">None</span></div>
 <div class="line">        self.right = <span class="keyword">None</span></div>
 </pre></td></tr></table></figure>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-
-</div></div>
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">#定义一个队列</span></div>
+<div class="line"><span class="keyword">import</span> queue</div>
+<div class="line">qu = queue.Queue()</div>
+<div class="line"><span class="comment">#入队列</span></div>
+<div class="line">qu.put(xx)</div>
+<div class="line"><span class="comment">#出队列</span></div>
+<div class="line">qu.get()</div>
+<div class="line"><span class="comment">#队列大小</span></div>
+<div class="line">qu.qsize()</div>
+<div class="line"><span class="comment">#队列空</span></div>
+<div class="line">qu.empty()</div>
+</pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h2><h3 id="Same-Tree"><a href="#Same-Tree" class="headerlink" title="Same Tree"></a><a href="https://leetcode.com/problems/same-tree/description/" target="_blank" rel="noopener">Same Tree</a></h3><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h5><p>Given two binary trees, write a function to check if they are the same or not.</p>
 <p>Two binary trees are considered the same if they are structurally identical and the nodes have the same value.</p>
@@ -469,6 +488,73 @@
 <div class="line">        <span class="keyword">elif</span> p.val == q.val:</div>
 <div class="line">            <span class="keyword">return</span> self.isSameTree(p.left,q.left) <span class="keyword">and</span> self.isSameTree(p.right,q.right)</div>
 <div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div>
+</pre></td></tr></table></figure>
+<h3 id="Binary-Tree-Level-Order-Traversal-II"><a href="#Binary-Tree-Level-Order-Traversal-II" class="headerlink" title="Binary Tree Level Order Traversal II"></a><a href="https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/" target="_blank" rel="noopener">Binary Tree Level Order Traversal II</a></h3><h4 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a>题目</h4><p>Given a binary tree, return the <em>bottom-up level order</em> traversal of its nodes’ values. (ie, from left to right, level by level from leaf to root).</p>
+<p>For example:<br>Given binary tree <code>[3,9,20,null,null,15,7]</code>,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">  <span class="number">3</span></div>
+<div class="line"> / \</div>
+<div class="line"><span class="number">9</span>  <span class="number">20</span></div>
+<div class="line">  /  \</div>
+<div class="line"> <span class="number">15</span>   <span class="number">7</span></div>
+</pre></td></tr></table></figure>
+<p>return its bottom-up level order traversal as:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">[</div>
+<div class="line">  [<span class="number">15</span>,<span class="number">7</span>],</div>
+<div class="line">  [<span class="number">9</span>,<span class="number">20</span>],</div>
+<div class="line">  [<span class="number">3</span>]</div>
+<div class="line">]</div>
+</pre></td></tr></table></figure>
+<h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p>这道题就是对树进行广度遍历，借助队列。需要注意的是：在判断队列是否为空，需要检查其队列大小。</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> queue</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">levelOrderBottom</span><span class="params">(self, root)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</div>
+<div class="line">            <span class="keyword">return</span> []</div>
+<div class="line">        nodes = []</div>
+<div class="line">        qu = queue.Queue()</div>
+<div class="line">        qu.put(root)</div>
+<div class="line">        <span class="keyword">while</span> qu.qsize()&gt;<span class="number">0</span>: </div>
+<div class="line">            l = qu.qsize()</div>
+<div class="line">            node = []</div>
+<div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(l):</div>
+<div class="line">                front = qu.get()</div>
+<div class="line">                node.append(front.val)</div>
+<div class="line">                <span class="keyword">if</span> front.left:</div>
+<div class="line">                    qu.put(front.left)</div>
+<div class="line">                <span class="keyword">if</span> front.right:</div>
+<div class="line">                    qu.put(front.right)</div>
+<div class="line">            nodes.insert(<span class="number">0</span>,node)</div>
+<div class="line">        <span class="keyword">return</span> nodes</div>
 </pre></td></tr></table></figure>
 <h2 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h2><h2 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h2>
       
@@ -642,7 +728,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number">1.</span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Same-Tree"><span class="nav-number">1.1.</span> <span class="nav-text">Same Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number">2.</span> <span class="nav-text">中等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#困难"><span class="nav-number">3.</span> <span class="nav-text">困难</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#树的定义"><span class="nav-number">1.</span> <span class="nav-text">树的定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#队列"><span class="nav-number">2.</span> <span class="nav-text">队列</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Same-Tree"><span class="nav-number"></span> <span class="nav-text">Same Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number"></span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题目-1"><span class="nav-number"></span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路-1"><span class="nav-number"></span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-1"><span class="nav-number"></span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#困难"><span class="nav-number"></span> <span class="nav-text">困难</span></a></div>
             
 
           </div>
