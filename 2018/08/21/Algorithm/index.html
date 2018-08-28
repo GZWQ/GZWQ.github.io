@@ -87,10 +87,13 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-27T00:10:25.425Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308144724663.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308150247263.png">
+<meta property="og:updated_time" content="2018-08-28T21:27:12.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm">
 <meta name="twitter:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308144724663.png">
 
 
 
@@ -403,13 +406,23 @@
 <li>(1$\to$ n with (n-1) step) : (n-2)(n-3)…2*1</li>
 </ul>
 <p>$#$$  (1,n-paths) =1+(n-2)+(n-2)(n-3)+…+(n-2)(n-3)2\cdot1 \approx e\cdot (n-2)!$</p>
-<p>证明？？？？？？？？？</p>
 </blockquote>
 <h1 id="Shortest-Paths"><a href="#Shortest-Paths" class="headerlink" title="Shortest Paths"></a>Shortest Paths</h1><p>complete acyclic digraph</p>
 <p>$#$links $=(n-1)+(n-2)+…+1= $</p>
 <p>$#$$ (1\to n\  paths)=$</p>
 <p>subpath optimality</p>
-<p>if $  x_1\to x_2\to …\to x_m$ is an optimal $x_1 \to x_m$ path, then $x_i \to x_{i+1}\to …\to x_{j-1}\to x_j​$ is optimal. </p>
+<p>if $  x_1\to x_2\to …\to x_m$ is an optimal $x_1 \to x_m$ path, then $x_i \to x_{i+1}\to …\to x_{j-1}\to x_j$ is optimal. </p>
+<h3 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a><a href="https://blog.csdn.net/qq_35644234/article/details/60870719" target="_blank" rel="noopener">Dijkstra算法</a></h3><p>求从顶点$v_1$到其他各个顶点的最短路径</p>
+<p><img src="/2018/08/21/Algorithm/20170308144724663.png" alt="20170308144724663"></p>
+<ol>
+<li><p>设置dis数组</p>
+<p>数组中的元素值表征$v_1$到其他顶点的距离</p>
+<p><img src="/2018/08/21/Algorithm/20170308150247263.png" alt="20170308150247263"></p>
+<p>即$dis(v_1,v_1)=0$，$dis(v_1,v_2)=\infin$，$dis(v_1,v_3)=10$，$dis(v_1,v_4)=\infin$，$dis(v_1,v_5)=30$，$dis(v_1,v_6)=100$。</p>
+</li>
+<li><p>选择一个最短路径</p>
+</li>
+</ol>
 
       
     </div>
@@ -584,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-all-zeros-to-the-leftmost"><span class="nav-number">1.1.</span> <span class="nav-text">Move all zeros to the leftmost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-count"><span class="nav-number">1.2.</span> <span class="nav-text">Path count</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shortest-Paths"><span class="nav-number">2.</span> <span class="nav-text">Shortest Paths</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-all-zeros-to-the-leftmost"><span class="nav-number">1.1.</span> <span class="nav-text">Move all zeros to the leftmost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-count"><span class="nav-number">1.2.</span> <span class="nav-text">Path count</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shortest-Paths"><span class="nav-number">2.</span> <span class="nav-text">Shortest Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra算法"><span class="nav-number">2.0.1.</span> <span class="nav-text">Dijkstra算法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
