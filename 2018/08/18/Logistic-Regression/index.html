@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808123047797.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813110624641.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813111620624.png">
-<meta property="og:updated_time" content="2018-08-23T02:09:46.992Z">
+<meta property="og:updated_time" content="2018-08-27T15:22:59.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression">
 <meta name="twitter:description" content="逻辑斯蒂回归模型线性回归试图用一个线性函数的预测值取逼近真实值，那么是否能用一个线性函数的预测值去逼近真实值的衍生值呢？假设我们使用预测值去逼近一个对数函数$g(y)=In(y)$，那么$g(y)=f(y)$，  In(y)=w^Tx+b这样我们就得到了对数线性回归，它实际上是试图让$e^{(w^Tx+b)}$去逼近$y$，本质上仍然是线性回归，但已是在求输入空间到输出空间的非线性函数的映射。如">
@@ -688,7 +688,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <p>本题我们使用正则化的逻辑斯蒂回归来分类。给定的数据集是关于微芯片的两次测试数据，label是合格与不合格。</p>
 <ol>
 <li><p>数据可视化</p>
-<p>直接利用上面的画图函数，可以看到我们需要使用一个非线性曲线去分类，类似椭圆。</p>
+<p>直接利用上面的画图函数，可以看到我们需要使用一个非线性曲线去分类，类似椭圆。显然这不能是线性分类，对于非线性分类问题，逻辑回归会使用多项式扩展特征。这带来的弊端就是引入巨大特征。</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p><img src="/2018/08/18/Logistic-Regression/image-20180822210526246.png" alt="image-20180822210526246"></p>
 

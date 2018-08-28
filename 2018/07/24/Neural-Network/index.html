@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235024692.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235337038.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/CFC5A1C95A84A6D8CF3FFC1DD30597782AEEAE57_size20_w740_h231.jpeg">
-<meta property="og:updated_time" content="2018-08-26T23:13:25.674Z">
+<meta property="og:updated_time" content="2018-08-28T01:44:32.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network">
 <meta name="twitter:description" content="本节介绍最基本的神经网络。">
@@ -481,7 +481,7 @@ $\frac{1}{||w||}$是常量，不影响，$L(w,b)=-\sum_{x_i\in{M}}{{y_i|w\times{
 <p>故我们称上述神经元为sigmoid神经元。</p>
 <h2 id="神经网络结构"><a href="#神经网络结构" class="headerlink" title="神经网络结构"></a>神经网络结构</h2><p>多个sigmoid神经元构成复杂的神经网络。网络的最左边的一层被称为输入层，其中的神经元被称为输入神经元(input neurons)；最右边的一层是输出层(output layer)，包含的神经元被称为输出神经元(output neurons)。下图中我们的输出层只有一个神经元，网络的中间一层被称为隐层(hidden layer)，因为它既不是输入层，也不是输出层。</p>
 <p><img src="/2018/07/24/Neural-Network/tikz11.png" alt="tikz11"></p>
-<h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><p><a href="https://ilewseu.github.io/2017/12/17/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E6%8E%A8%E5%AF%BC/" target="_blank" rel="noopener">ref1</a> <a href="https://zhuanlan.zhihu.com/p/34378516" target="_blank" rel="noopener">ref2</a> </p>
+<h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><p><a href="https://ilewseu.github.io/2017/12/17/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E6%8E%A8%E5%AF%BC/" target="_blank" rel="noopener">ref1</a> <a href="https://zhuanlan.zhihu.com/p/34378516" target="_blank" rel="noopener">ref2</a> <a href="https://www.zybuluo.com/hanbingtao/note/476663" target="_blank" rel="noopener">gotta</a> </p>
 <h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><h4 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h4><h3 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h3><h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> </p>
 <p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
 <p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
