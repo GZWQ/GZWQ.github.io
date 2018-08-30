@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235024692.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235337038.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/CFC5A1C95A84A6D8CF3FFC1DD30597782AEEAE57_size20_w740_h231.jpeg">
-<meta property="og:updated_time" content="2018-08-29T04:16:52.848Z">
+<meta property="og:updated_time" content="2018-08-30T02:01:01.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network">
 <meta name="twitter:description" content="本节介绍最基本的神经网络。">
@@ -628,7 +628,28 @@ w_{ji}\gets w_{ji}+\eta\delta_jx_{ji}\qquad</script><p>其中，$w_ji$是节点$
 <p>偏置项的输入值永远为1。例如，节点4的偏置项$w_{4b}$应该按照下面的方法计算： $w_{4b}\gets w_{4b}+\eta\delta_4$ </p>
 <p>显然，计算一个节点的误差项，需要先计算每个与其相连的下一层节点的误差项。这就要求误差项的计算顺序必须是从输出层开始，然后反向依次计算每个隐藏层的误差项，直到与输入层相连的那个隐藏层。这就是反向传播算法的名字的含义。</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-
+<p>同样地，我们需要计算$\frac{\partial E_d } {\partial w_{ji} }$,由链式法则：</p>
+<script type="math/tex; mode=display">
+\frac{\partial{E_d}}{\partial{w_{ji}}}={\frac{\partial{E_d}}{\partial{a_j}}}{\frac{\partial{a_j}}{\partial{net_j}}}{\frac{\partial{net_j}}{\partial{w_{ji}}}}</script><p>考虑第一项：</p>
+<p>首先，我们需要定义节点$j$的所有直接下游节点的集合$Downstream(j)$。例如，对于节点4来说，它的直接下游节点是节点8、节点9。可以看到$a_j$只能通过影响$Downstream(j)$再影响$E_d$。设$net_j$是节点$j$的下游节点的输入，则</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+{\frac{\partial{E_d}}{\partial{a_j}}}
+&=\sum_{k\in Downstream(j)}{\frac{\partial{E_d}}{\partial{net_k}}}{\frac{\partial{net_k}}{\partial{a_j}}}\\
+&=\sum_{k\in Downstream(j)}\sigma_k{\frac{\partial{net_k}}{\partial{a_j}}}\\
+&=\sum_{k\in Downstream(j)}\sigma_k w_{kj}\\
+\end{aligned}
+\end{equation}</script><p>考虑第二项：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial{a_j}}{\partial{net_j}}&=\frac{\partial sigmoid(net_j)}{\partial{net_j}}\\
+&=a_j(1-a_j)\\
+\end{align}</script><p>综合第一项和第二项：</p>
+<script type="math/tex; mode=display">
+{\frac{\partial{E_d}}{\partial{net_j}}}=a_j(1-a_j)\sum_{k\in Downstream(j)}\sigma_k w_{kj}</script><p>令$\delta_j=\frac{\partial E_d}{ \partial net_j }$，则</p>
+<script type="math/tex; mode=display">
+\delta_j=a_j(1-a_j)\sum_{k\in Downstream(j)}\delta_kw_{kj}</script>
 </div></div> 
 <h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> </p>
 <p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
