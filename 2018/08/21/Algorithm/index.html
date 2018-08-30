@@ -89,7 +89,11 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308144724663.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308150247263.png">
-<meta property="og:updated_time" content="2018-08-28T21:27:12.265Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308150707766.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20171205193212203.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308151732132.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308152038851.png">
+<meta property="og:updated_time" content="2018-08-30T17:16:37.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm">
 <meta name="twitter:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
@@ -417,10 +421,38 @@
 <ol>
 <li><p>设置dis数组</p>
 <p>数组中的元素值表征$v_1$到其他顶点的距离</p>
+<p>初始化顶点集为：$T=\{ v_1\}$, 路径是：$v_1$</p>
 <p><img src="/2018/08/21/Algorithm/20170308150247263.png" alt="20170308150247263"></p>
 <p>即$dis(v_1,v_1)=0$，$dis(v_1,v_2)=\infin$，$dis(v_1,v_3)=10$，$dis(v_1,v_4)=\infin$，$dis(v_1,v_5)=30$，$dis(v_1,v_6)=100$。</p>
 </li>
-<li><p>选择一个最短路径</p>
+<li><p>选择一个最短距离</p>
+<p>因为$dis(v_1,v_3)=10$是最短的，所以将$v_3$加入到顶点集中：$T=\{ v_1, v_3\}$</p>
+<p>路径是：$v_1 \to v_3$</p>
+<p>一旦有新的点加入，则我们更新dis数组，$v_3$可以到达的点有：$v_4$。</p>
+<p>$dis(v_1 \to v_3 \to v_4)=10+50=60&lt; \infin $，所以更新$dis[3]=60$</p>
+<p><img src="/2018/08/21/Algorithm/20170308150707766.png" alt="20170308150707766"></p>
+</li>
+<li><p>继续选择一个最短距离</p>
+<p>除去顶点集$\{v_1,v_3\}$中的点，在dis中选择一个距离最小的点：$v_5$，加入顶点集$\{v_1,v_3, v_5\}$。</p>
+<p>路径是：$(v_1 \to t_3\to t_5)$</p>
+<p>更新dis数组，$v_5$可以到达的点是：$v_4$和$v_6$。</p>
+<p>$dis(v_1 \to t_3\to t_5\to t_4 )=30+20=50 &lt; 60$，更新$dis(v_4)=50$</p>
+<p>$dis(v_1 \to t_3\to t_5\to t_6 )=30+60=90 &lt; 100$，更新$dis(v_5)=90$</p>
+<p><img src="/2018/08/21/Algorithm/20171205193212203.png" alt="20171205193212203"></p>
+</li>
+<li><p>继续选择一个最短距离</p>
+<p>将$v_4$加入顶点集$\{v_1, v_3, v_5,v_4\}$，路径是：$(v_1 \to t_3\to t_5\to t_4)$</p>
+<p>$t_4$可以到达的点：$v_6$</p>
+<p>$dis(v_4 \to v_6)=50+10=60 &lt; 90$，更新</p>
+<p><img src="/2018/08/21/Algorithm/20170308151732132.png" alt="20170308151732132"></p>
+</li>
+<li><p>选择一个最短距离</p>
+<p>将$v_6$加入顶点集$\{v_1, v_3, v_5,v_4, v_6\}$，路径是：$(v_1 \to t_3\to t_5\to t_4 \to v_6)$。</p>
+<p>$v_6$不能到达任何点。</p>
+<p><img src="/2018/08/21/Algorithm/20170308152038851.png" alt="20170308152038851"></p>
+</li>
+<li><p>结束</p>
+<p>因为$dis(v_2)=\infin $，则没有任何点可以到达它，所以，算法结束。</p>
 </li>
 </ol>
 
