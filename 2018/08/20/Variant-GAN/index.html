@@ -95,7 +95,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/4.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/6.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/4.png">
-<meta property="og:updated_time" content="2018-08-21T16:00:41.294Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/schematic.png">
+<meta property="og:updated_time" content="2018-08-31T04:00:37.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variant GAN">
 <meta name="twitter:description" content="我们之前介绍了GAN模型，在本章中，将介绍一些GAN的变体模型。">
@@ -409,6 +410,12 @@
 <p><img src="/2018/08/20/Variant-GAN/6.png" alt="6"></p>
 <h4 id="判别器"><a href="#判别器" class="headerlink" title="判别器"></a>判别器</h4><p>在损失函数中，L1被添加进来来保证输入和输出的共性。这就启发出了一个观点，那就是图像的变形分为两种，局部的和全局的。既然L1可以防止全局的变形。那么只要让D去保证局部能够精准即可。于是，Pix2Pix中的D被实现为Patch-D，D区分图像中的每个$N*N$大小的补丁是真是假。</p>
 <p><img src="/2018/08/20/Variant-GAN/4.png" alt="4"></p>
+<h2 id="Coupled-GAN"><a href="#Coupled-GAN" class="headerlink" title="Coupled-GAN"></a>Coupled-GAN</h2><p><a href="https://arxiv.org/pdf/1606.07536.pdf" target="_blank" rel="noopener">paper</a> <a href="https://wiseodd.github.io/techblog/2017/02/18/coupled_gan/" target="_blank" rel="noopener">ref</a> </p>
+<p>AAE是一种学习数据分布$P(X)$的方法，Conditional GAN则学习数据的条件分布$P(X|c)$，而Coupled-GAN意在学习数据的联合分布$P(X_1,X_2)$，其中$X_1, X_2$是来自不同域的，比如同一个场景的图片但是一个是彩色图片，一个是深度图片；又或者同一张脸的不同表情（笑和不笑）。</p>
+<p>Coupled-GAN是从数据的边缘分布$x_1 \sim P(X_1)$和$x_2 \sim P(X_2)$采样，来学习数据的联合分布，而实现这个的技巧是权值共享。我们认为数据的高层级表征是共享的，故我们强制网络共享部分层的权重，这样CoGAN会趋近学习到两种域数据的共同表征，也就是它们的联合分布。</p>
+<p>但是，网络共享哪些层的权重呢？我们知道，神经网络在进行分类任务时，是从下到上的方式学习数据的特征，也即是说从低层级特征到高层级特征。低层级特征过于细致，不够泛化，它们往往捕捉图片的厚度，色彩饱和度等特征；而高层级特征能够学习到数据更为抽象的特征，比如“鸟”，“狗”，忽略图片色彩厚度等细节，所以我们强制神经网络的处理高层级的层共享参数。</p>
+<p>对discriminator来说，它的共享层应为最后几层；而对generator来说，它的共享层应该是前面几层，因为生成器的工作方式是从抽象特征生成具体图像。</p>
+<p><img src="/2018/08/20/Variant-GAN/schematic.png" alt="schematic"></p>
 
       
     </div>
@@ -587,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DRAW-A-Recurrent-Neural-Network-For-Image-Generation"><span class="nav-number">1.</span> <span class="nav-text">DRAW: A Recurrent Neural Network For Image Generation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pix2pix"><span class="nav-number">2.</span> <span class="nav-text">Pix2pix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器"><span class="nav-number">2.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辨别器"><span class="nav-number">2.2.</span> <span class="nav-text">辨别器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数"><span class="nav-number">2.3.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成器-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判别器"><span class="nav-number">2.3.2.</span> <span class="nav-text">判别器</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DRAW-A-Recurrent-Neural-Network-For-Image-Generation"><span class="nav-number">1.</span> <span class="nav-text">DRAW: A Recurrent Neural Network For Image Generation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pix2pix"><span class="nav-number">2.</span> <span class="nav-text">Pix2pix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成器"><span class="nav-number">2.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辨别器"><span class="nav-number">2.2.</span> <span class="nav-text">辨别器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数"><span class="nav-number">2.3.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成器-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">生成器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判别器"><span class="nav-number">2.3.2.</span> <span class="nav-text">判别器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coupled-GAN"><span class="nav-number">3.</span> <span class="nav-text">Coupled-GAN</span></a></li></ol></div>
             
 
           </div>
