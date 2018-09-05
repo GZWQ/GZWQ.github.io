@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="逻辑斯蒂回归模型线性回归试图用一个线性函数的预测值取逼近真实值，那么是否能用一个线性函数的预测值去逼近真实值的衍生值呢？假设我们使用预测值去逼近一个对数函数$g(y)=In(y)$，那么$g(y)=f(y)$，  In(y)=w^Tx+b这样我们就得到了对数线性回归，它实际上是试图让$e^{(w^Tx+b)}$去逼近$y$，本质上仍然是线性回归，但已是在求输入空间到输出空间的非线性函数的映射。如">
+<meta name="description" content="用于分类任务的逻辑斯蒂回归。">
 <meta name="keywords" content="Machine Learning,Regression,Logistic Regression">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Logistic Regression">
 <meta property="og:url" content="http://yoursite.com/2018/08/18/Logistic-Regression/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="逻辑斯蒂回归模型线性回归试图用一个线性函数的预测值取逼近真实值，那么是否能用一个线性函数的预测值去逼近真实值的衍生值呢？假设我们使用预测值去逼近一个对数函数$g(y)=In(y)$，那么$g(y)=f(y)$，  In(y)=w^Tx+b这样我们就得到了对数线性回归，它实际上是试图让$e^{(w^Tx+b)}$去逼近$y$，本质上仍然是线性回归，但已是在求输入空间到输出空间的非线性函数的映射。如">
+<meta property="og:description" content="用于分类任务的逻辑斯蒂回归。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-07%20at%209.14.32%20PM-3694489.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-07%20at%209.23.13%20PM.png">
@@ -104,10 +104,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808123047797.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813110624641.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813111620624.png">
-<meta property="og:updated_time" content="2018-08-27T15:22:59.506Z">
+<meta property="og:updated_time" content="2018-08-31T15:57:45.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression">
-<meta name="twitter:description" content="逻辑斯蒂回归模型线性回归试图用一个线性函数的预测值取逼近真实值，那么是否能用一个线性函数的预测值去逼近真实值的衍生值呢？假设我们使用预测值去逼近一个对数函数$g(y)=In(y)$，那么$g(y)=f(y)$，  In(y)=w^Tx+b这样我们就得到了对数线性回归，它实际上是试图让$e^{(w^Tx+b)}$去逼近$y$，本质上仍然是线性回归，但已是在求输入空间到输出空间的非线性函数的映射。如">
+<meta name="twitter:description" content="用于分类任务的逻辑斯蒂回归。">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-07%20at%209.14.32%20PM-3694489.png">
 
 
@@ -394,7 +394,8 @@
       
 
       
-        <a id="more"></a>
+        <p>用于分类任务的逻辑斯蒂回归。</p>
+<a id="more"></a>
 <h1 id="逻辑斯蒂回归"><a href="#逻辑斯蒂回归" class="headerlink" title="逻辑斯蒂回归"></a>逻辑斯蒂回归</h1><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>线性回归试图用一个线性函数的预测值取逼近真实值，那么是否能用一个线性函数的预测值去逼近真实值的衍生值呢？假设我们使用预测值去逼近一个对数函数$g(y)=In(y)$，那么$g(y)=f(y)$，</p>
 <script type="math/tex; mode=display">
 In(y)=w^Tx+b</script><p>这样我们就得到了对数线性回归，它实际上是试图让$e^{(w^Tx+b)}$去逼近$y$，本质上仍然是线性回归，但已是在求输入空间到输出空间的<strong>非线性</strong>函数的映射。如下图所示，指数空间的真实值通过对数函数映射到一个线性空间：</p>
@@ -1045,7 +1046,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1067,7 +1068,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

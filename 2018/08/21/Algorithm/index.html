@@ -93,7 +93,8 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20171205193212203.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308151732132.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308152038851.png">
-<meta property="og:updated_time" content="2018-08-30T17:16:37.664Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/Screen%20Shot%202018-09-04%20at%203.39.07%20PM.png">
+<meta property="og:updated_time" content="2018-09-04T21:09:57.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Algorithm">
 <meta name="twitter:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
@@ -455,7 +456,56 @@
 <p>因为$dis(v_2)=\infin $，则没有任何点可以到达它，所以，算法结束。</p>
 </li>
 </ol>
-
+<p><img src="/2018/08/21/Algorithm/Screen Shot 2018-09-04 at 3.39.07 PM.png" alt="Screen Shot 2018-09-04 at 3.39.07 PM"></p>
+<ul>
+<li><p>the link (x,y) is processed at most once.</p>
+<blockquote>
+<p>because x is closed at most once, (x,y) is processed when x is closed.</p>
+<p>d(y)=d(x)+c(x,y) if y is not open or closed.</p>
+<p>if d(y)&gt;[d(x)+c(c,y)], d(y)=d(x)+c(x,y)</p>
+<p>everytime d(y) is changed, parent(y)=x</p>
+</blockquote>
+</li>
+<li><p>if G has N nodes, max number of links is N(N-1)=O(N^2), so processing all links takes at most O(N^2)</p>
+<blockquote>
+<p>When the graph is a complete digraph and because one link is processed at most once.</p>
+</blockquote>
+</li>
+<li><p>Time complexity for dijkstra’s algoritm is $O(N^2)$.</p>
+<blockquote>
+<p>max number of closed nodes is O(N)</p>
+<p>computation to choose $i_{th}$ node for closing:</p>
+<p>$OPEN_1=\{s\}$</p>
+<p>$|OPEN|_2\le N-1$</p>
+<p>$|OPEN|_3\le N-2$</p>
+<p>….</p>
+<p>$|OPEN|_{N-1}\le N-(N-2)=2$</p>
+<p>$|OPEN|_N\le 1$</p>
+<p>$OPEN_i=\{x_i,y_i,y_2,…,y_{N-i}\}$, because $|OPEN|_i$ is at most $N-(i-1)$, and in order to find a shortest path, we need to compare:</p>
+<p>$d(x_i)\le d(y_1)$</p>
+<p>$d(x_i)\le d(y_2)$</p>
+<p>$d(x_i)\le d(y_{N-i})$</p>
+<p>which requires at most $(N-i)$ comparisons </p>
+<p>so $OPEN_2$ requires at  most $N-2$ comparisons in selecting $x_2$</p>
+<p> $OPEN_3$ requires at  most $N-3$ comparisons in selecting $x_3$</p>
+<p>…</p>
+<p> $OPEN_{N-1}$ requires at  most $1$ comparisons in selecting $x_{N-1}$</p>
+<p>SO THE total computation is $1+2+3+…+(N-2)=\frac{N^2-3N+2}{2}$</p>
+<ul>
+<li><p>The initialization takes $O(N)$ time, where we make $d(x)=\infin$ for each node $x$.</p>
+</li>
+<li><p>The sum of all links weights computation is $O(N^2)$</p>
+</li>
+<li><p>The path of $s\to x_i$ is computed at most $i-1$, so computation of all paths is $(1+2+..+(N-1))=O(N^2)$. </p>
+</li>
+<li>Th total number of paths from starting node $s$ is $O(e\cdot (N-2)!)=O((N-2)!)$, ============================================================</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h3 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h3><p>We use following formula to measure how close the set of points to each other:</p>
+<script type="math/tex; mode=display">
+\sum_{i,j}||x_i-x_j||^2</script>
       
     </div>
     
@@ -574,7 +624,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -596,7 +646,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -629,7 +679,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-all-zeros-to-the-leftmost"><span class="nav-number">1.1.</span> <span class="nav-text">Move all zeros to the leftmost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-count"><span class="nav-number">1.2.</span> <span class="nav-text">Path count</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shortest-Paths"><span class="nav-number">2.</span> <span class="nav-text">Shortest Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra算法"><span class="nav-number">2.0.1.</span> <span class="nav-text">Dijkstra算法</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-all-zeros-to-the-leftmost"><span class="nav-number">1.1.</span> <span class="nav-text">Move all zeros to the leftmost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-count"><span class="nav-number">1.2.</span> <span class="nav-text">Path count</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shortest-Paths"><span class="nav-number">2.</span> <span class="nav-text">Shortest Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra算法"><span class="nav-number">2.0.1.</span> <span class="nav-text">Dijkstra算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clustering"><span class="nav-number">2.0.2.</span> <span class="nav-text">Clustering</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

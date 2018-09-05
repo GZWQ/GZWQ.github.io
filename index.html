@@ -283,6 +283,198 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Grid-Search/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/Grid-Search/" itemprop="url">Grid Search</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T11:47:49-05:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>模型参数(Model Parameters)</p>
+<p>模型参数是根据训练集数据而定义的，故它们是利用训练集数据训练得到的，它们往往不能手动设置，常见的模型参数包括：</p>
+<ul>
+<li>线性模型、非线性模型的系数</li>
+<li>神经网络的权重，隐藏层的层数，每一层的神经元个数等</li>
+<li>随机森林中决策树的个数</li>
+</ul>
+<p>模型超参数(Model Hyper-Parameters)</p>
+<p>模型超参数往往独立于训练集而被定义，所以它们不能从训练集中学习得到。常见的超参数包括：</p>
+<ul>
+<li>模型的学习速率</li>
+<li>k折交叉验证的k值</li>
+</ul>
+<p>Grid Search</p>
+<p>每一个模型几乎都有许多超参数，所以寻找超参数的一个直观的方法是尝试这些超参数的不能组合，然后比较结果。</p>
+<p>Python实现</p>
+<p>下面我们以寻找逻辑斯蒂回归模型最佳正则函数和学习速率为例，来感受一个Grid Search。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Create logistic regression object</span></div>
+<div class="line">logistic = linear_model.LogisticRegression()</div>
+<div class="line"><span class="comment"># Create a list of all of the different penalty values that you want to test and save them to a variable called 'penalty'</span></div>
+<div class="line">penalty = [<span class="string">'l1'</span>, <span class="string">'l2'</span>]</div>
+<div class="line"><span class="comment"># Create a list of all of the different C values that you want to test and save them to a variable called 'C'</span></div>
+<div class="line">C = [<span class="number">0.0001</span>, <span class="number">0.001</span>, <span class="number">0.01</span>, <span class="number">1</span>, <span class="number">100</span>]</div>
+<div class="line"><span class="comment"># Now that you have two lists each holding the different values that you want test, use the dict() function to combine them into a dictionary.</span></div>
+<div class="line"><span class="comment"># Save your new dictionary to the variable 'hyperparameters'</span></div>
+<div class="line">hyperparameters = dict(C=C, penalty=penalty)</div>
+<div class="line"><span class="comment"># Fit your model using gridsearch</span></div>
+<div class="line">clf = GridSearchCV(logistic, hyperparameters, cv=<span class="number">5</span>, verbose=<span class="number">0</span>)</div>
+<div class="line">best_model = clf.fit(X, Y)</div>
+<div class="line"><span class="comment">#Print all the Parameters that gave the best results:</span></div>
+<div class="line">print(<span class="string">'Best Parameters'</span>,clf.best_params_)</div>
+<div class="line"><span class="comment"># You can also print the best penalty and C value individually from best_model.best_estimator_.get_params()</span></div>
+<div class="line">print(<span class="string">'Best Penalty:'</span>, best_model.best_estimator_.get_params()[<span class="string">'penalty'</span>])</div>
+<div class="line">print(<span class="string">'Best C:'</span>, best_model.best_estimator_.get_params()[<span class="string">'C'</span>])</div>
+</pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/23/Tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,8 +567,8 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�395-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�396-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�417-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�418-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -819,537 +1011,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h1 id="逻辑斯蒂回归"><a href="#逻辑斯蒂回归" class="headerlink" title="逻辑斯蒂回归"></a>逻辑斯蒂回归</h1><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>线性回归试图用一个线性函数的预测值取逼近真实值，那么是否能用一个线性函数的预测值去逼近真实值的衍生值呢？假设我们使用预测值去逼近一个对数函数$g(y)=In(y)$，那么$g(y)=f(y)$，</p>
-<script type="math/tex; mode=display">
-In(y)=w^Tx+b</script><p>这样我们就得到了对数线性回归，它实际上是试图让$e^{(w^Tx+b)}$去逼近$y$，本质上仍然是线性回归，但已是在求输入空间到输出空间的<strong>非线性</strong>函数的映射。如下图所示，指数空间的真实值通过对数函数映射到一个线性空间：</p>
-<p><img src="/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-07%20at%209.14.32%20PM-3694489.png" alt="Screen Shot 2018-08-07 at 9.14.32 PM-3694489"></p>
-<p>线性模型可以用于回归学习，但是如果要做的是分类任务该如何？启发自对数线性回归，我们可以找到一个类似对数函数的一个单调可微函数将分类任务的真实标记$y$映射到线性回归模型的预测值。</p>
-<p>考虑二分类问题，其输出标记是$y\in\{0,1\}$，而线性回归模型的预测值$z=w^Tx+b$是实值，故使用一个阶跃函数，进行实值与离散值的映射：</p>
-<p><img src="/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-07%20at%209.23.13%20PM.png" alt="Screen Shot 2018-08-07 at 9.23.13 PM"></p>
-<p>若预测值$z$大于零就判为正例，小于零就判为负例，预测值为临界值零则任意判断，</p>
-<p><img src="/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-07%20at%209.23.19%20PM.png" alt="Screen Shot 2018-08-07 at 9.23.19 PM"></p>
-<p>因为阶跃函数是不连续的，所以我们使用了一个连续可微的函数替代函数：</p>
-<script type="math/tex; mode=display">
-y=\frac{1}{1+e^{-z}}=\frac{1}{1+e^{-(w^Tx+b)}}</script><p>上式可变化为：</p>
-<script type="math/tex; mode=display">
-In\frac{y}{1-y}=w^Tx+b</script><p>如果将$y$看作样本$x$作为正例的概率，则$1-y$表示反例的概率，两者的比值反映了$x$作为正例的相对可能性，称为几率，对几率取对数称为对数几率。可以看出上式用线性回归模型的预测值去逼近真实标记的对数几率，因为对应模型称为逻辑斯蒂回归。需要注意的是虽然名字是”回归”，但是它是分类方法。</p>
-<h2 id="算法求解"><a href="#算法求解" class="headerlink" title="算法求解"></a>算法求解</h2><p>如果将预测值$y$看作类后验概率估计$p(y=1|x)$，则上式：</p>
-<script type="math/tex; mode=display">
-In(\frac{p(y=1|x)}{p(y=0|x)})=w^Tx+b</script><p>又因为$p(y=1|x)+p(y=0|x)=1$，所以联合求解得到：</p>
-<script type="math/tex; mode=display">
-p(y=1|x)=\frac{e^{w^Tx+b}}{1+e^{w^Tx+b}}\\
-p(y=1|x)=\frac{1}{1+e^{w^Tx+b}}</script><p>可以通过极大似然法求解：</p>
-<script type="math/tex; mode=display">
-max \ P=\prod_{i=1}^{m}[p(y=1|x_i)^{y_i}p(y=0|x_i)^{(1-y_i)}]</script><p>即令每个样本属于其真实标记的概率越大越好，两边取对数：</p>
-<script type="math/tex; mode=display">
-max\ In(P)=\sum_{i=1}^{m}y_iIn[p(y=1|x_i)]+(1-y_i)In[p(y=0|x_i)]</script><p>如果真实标记$y_i=1$，则$y_iIn[p(y=1|x_i)]+(1-y_i)In[p(y=0|x_i)]=p(y=1|x_i)$；</p>
-<p>如果真实标记$y_i=0$，则$y_iIn[p(y=1|x_i)]+(1-y_i)In[p(y=0|x_i)]=p(y=0|x_i)$；</p>
-<p>即：</p>
-<script type="math/tex; mode=display">
-max \ In(Loss)=\sum_{i=1}^{m}y_i(w^Tx+b)+In(\frac{1}{e^{w^Tx+b}+1})</script><p>max上式等价于：</p>
-<script type="math/tex; mode=display">
-min \ In(Loss)=\sum_{i=1}^{m}-y_i(w^Tx+b)+In({1+e^{w^Tx+b}})</script><p>可以使用梯度下降法求解最佳的$w$和$b$：</p>
-<script type="math/tex; mode=display">
-w_j=w_j-\alpha\sum_{i=1}^{n}(h_w(x^{(i)})-y^{(i)})x_{j}^{(i)}</script><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<p>样本集$D\{(x_i,y_i)\}^{n}_{i=1}$, 利用最大似然法, 即令每个样本属于其真实标签的概率越大越好，故似然函数为</p>
-<script type="math/tex; mode=display">
-\prod_{i=1}^{n}p^{y_i}(1-p)^{(1-y_i)}</script><p>对数似然函数:</p>
-<script type="math/tex; mode=display">
-L(p)=\sum_{i=1}^{n}y_iInP+\sum_{i=1}^{n}(1-y_i)In(1-p)</script><p>对$P$求$w$导数:</p>
-<script type="math/tex; mode=display">
-P=\frac{1}{1+e^{-(wx+b)}}\\
-\frac{\partial{P}}{\partial{w}}=\frac{-1}{(1+e^{-(wx+b)})^2}*e^{-(wx+b)}*-x=P(1-P)</script><p>$L(P)$对$w$求导数:</p>
-<script type="math/tex; mode=display">
-\frac{\partial{L(P)}}{\partial{w}}=\sum_{i=1}^{n}y_i\frac{1}{P}\frac{\partial{P}}{\partial{w}}+\sum_{i=1}^{n}(1-y_i)\frac{-1}{1-p}\frac{\partial{P}}{\partial{w}}=XY(1-P)+(-1+Y)XP=(Y-P)X</script>
-</div></div>
-<h3 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h3><h4 id="目标函数"><a href="#目标函数" class="headerlink" title="目标函数"></a>目标函数</h4><script type="math/tex; mode=display">
-E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^{(i)}))]+\lambda\sum_{i=1}^{n}w_{i}^{2}</script><h4 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h4><p>$w_0=w_0-\alpha\frac{1}{n}\sum_{i=1}^{n}(h_w(x^{(i)})-y^{(i)})x_0^{(i)}$</p>
-<p>$w_j=w_j-\alpha[\frac{1}{n}\sum_{i=1}^{n}(h_w(x^{(i)})-y^{(i)})x_j^{(i)}-\frac{\lambda}{n}w_j]$</p>
-<h2 id="多分类学习"><a href="#多分类学习" class="headerlink" title="多分类学习"></a>多分类学习</h2><p>目前我们接触的问题是二分类问题，即每一个样本的label只有两种可能性(0|1)。但是，有时候会碰到多分类问题，即每一个样本label有两种以上的选择，比如对水果图片进行分类的任务就是多分类任务，因为一张图片可能是苹果，香蕉，橘子或者草莓等。</p>
-<p>多分类的学习思路是将多分类任务拆分成若干个二分类任务求解，经典的拆分方法有三种：“一对一”(One vs One，简称OvO)，“一对余”(One vs Rest，简称OvR)和“多对多”(Many vs Many，简称MvM)。</p>
-<p><img src="/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-14%20at%205.48.16%20PM.png" alt="Screen Shot 2018-08-14 at 5.48.16 PM"></p>
-<h3 id="一对一（OvO）"><a href="#一对一（OvO）" class="headerlink" title="一对一（OvO）"></a>一对一（OvO）</h3><p><strong>思想</strong>：给定具有$N$个类别的数据集，分为$N$个类别的堆，两两一组，一正一反，训练出$\frac{N(N-1)}{2}$个分类器。测试的时候，将测试样本送给所有的分类器，故产生$\frac{N(N-1)}{2}$个结果，投票选出最终的类别。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div>
-<div class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsOneClassifier</div>
-<div class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</div>
-<div class="line"></div>
-<div class="line">iris = datasets.load_iris()</div>
-<div class="line">x,y = iris.data, iris.target</div>
-<div class="line">model = OneVsOneClassifier(LinearSVC(random_state=<span class="number">0</span>))</div>
-<div class="line">model.fit(x,y)</div>
-<div class="line">re = model.predict(x)</div>
-<div class="line">print(re)</div>
-</pre></td></tr></table></figure>
-<h3 id="一对余-OvR"><a href="#一对余-OvR" class="headerlink" title="一对余(OvR)"></a>一对余(OvR)</h3><p><strong>思想</strong>：每次将一个类的样例作为正类，剩下的其他类的样例作为反例来训练$N$个分类器。测试时，若仅有一个分类器预测为正类，则对应的类别作为最终的分类结果。若有多个分类器预测为正类，则通常考虑各分类器的预测置信度，选择置信度最大的类别标记为分类结果。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> datasets</div>
-<div class="line"><span class="keyword">from</span> sklearn.multiclass <span class="keyword">import</span> OneVsRestClassifier</div>
-<div class="line"><span class="keyword">from</span> sklearn.svm <span class="keyword">import</span> LinearSVC</div>
-<div class="line">iris = datasets.load_iris()</div>
-<div class="line">X, y = iris.data, iris.target</div>
-<div class="line">OneVsRestClassifier(LinearSVC(random_state=<span class="number">0</span>)).fit(X, y).predict(X)</div>
-</pre></td></tr></table></figure>
-<p><strong>比较</strong>：<img src="/2018/08/18/Logistic-Regression/Linear-Regression/Screen%20Shot%202018-08-14%20at%205.55.35%20PM.png" alt="Screen Shot 2018-08-14 at 5.55.35 PM"></p>
-<h3 id="类别不平衡"><a href="#类别不平衡" class="headerlink" title="类别不平衡"></a>类别不平衡</h3><p><a href="https://zhuanlan.zhihu.com/p/32940093" target="_blank" rel="noopener">ref1</a> </p>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>机器学习中常常会遇到数据的<strong>类别不平衡（class imbalance）</strong>，也叫数据偏斜（class skew）。以常见的二分类问题为例，我们希望预测病人是否得了某种罕见疾病。但在历史数据中，阳性的比例可能很低（如百分之0.1）。在这种情况下，学习出好的分类器是很难的，而且在这种情况下得到结论往往也是很具迷惑性的。</p>
-<p>以上面提到的场景来说，如果我们的分类器<strong>总是</strong>预测一个人未患病，即预测为反例，那么我们依然有高达99.9%的预测准确率。然而这种结果是没有意义的。</p>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
-<li>试用其他评价指标</li>
-<li>对数据集进行重采样</li>
-<li></li>
-</ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>需要一个标准对数据进行约束：</p>
-<ol>
-<li><p>x增加全1行</p>
-</li>
-<li><p>shape</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-</pre></td><td class="code"><pre><div class="line">x.shape = (m,n) <span class="comment"># m:样本数；n：特征数</span></div>
-<div class="line">y.shape = (m,) <span class="comment"># 一维行向量</span></div>
-<div class="line">thetas = (n,<span class="number">1</span>) <span class="comment"># 一维列向量</span></div>
-</pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="预测是否录取学生-ref"><a href="#预测是否录取学生-ref" class="headerlink" title="预测是否录取学生 ref"></a>预测是否录取学生 <a href="https://www.johnwittenauer.net/machine-learning-exercises-in-python-part-3/" target="_blank" rel="noopener">ref</a></h2><p>数据集包含学生的两次考试成绩以及其是否被录取的信息。</p>
-<h3 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h3><p>数据载入的方式千千万万种方式，但是一旦载入之后，需要做的操作包括：</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-</pre></td><td class="code"><pre><div class="line">data = np.loadtxt(<span class="string">'./dataset/ex2data1.txt'</span>,delimiter=<span class="string">','</span>)</div>
-<div class="line">x = np.array(data[:,:<span class="number">-1</span>])</div>
-<div class="line">y = np.array(data[:,<span class="number">-1</span>])</div>
-<div class="line"></div>
-<div class="line">row,_ = np.shape(x)</div>
-<div class="line">ones = np.ones((row,<span class="number">1</span>))</div>
-<div class="line">x_new = np.concatenate((ones,x),axis=<span class="number">1</span>)</div>
-<div class="line">_,col = np.shape(x_new)</div>
-<div class="line">thetas = np.zeros([col,<span class="number">1</span>])</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h3 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h3><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">(x,y)</span>:</span></div>
-<div class="line">    plt.scatter(x[y==<span class="number">0</span>,<span class="number">0</span>],x[y==<span class="number">0</span>,<span class="number">1</span>],marker=<span class="string">'o'</span>,label=<span class="string">'Not admitted'</span>,c = <span class="string">'y'</span>)</div>
-<div class="line">    plt.scatter(x[y == <span class="number">1</span>, <span class="number">0</span>], x[y == <span class="number">1</span>, <span class="number">1</span>], marker=<span class="string">'+'</span>, label=<span class="string">'Admitted'</span>,c=<span class="string">'black'</span>)</div>
-<div class="line">    plt.xlabel(<span class="string">'Exam1 score'</span>)</div>
-<div class="line">    plt.ylabel(<span class="string">'Exam2 score'</span>)</div>
-<div class="line">    plt.legend()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/08/18/Logistic-Regression/image-20180818165938933.png" alt="image-20180818165938933"></p>
-
-</div></div>
-<h3 id="Sigmoid激活函数"><a href="#Sigmoid激活函数" class="headerlink" title="Sigmoid激活函数"></a>Sigmoid激活函数</h3><p>我们的sigmoid函数为：</p>
-<p><img src="/2018/08/18/Logistic-Regression/Screen Shot 2018-08-18 at 5.02.58 PM.png" alt="Screen Shot 2018-08-18 at 5.02.58 PM"></p>
-<p>在实现激活函数之后，我们使用几个值取测试是否写对了：如果激活函数的输入是很大的值，那么我们的输出应该接近1；如果是很小的数，应该接近0；如果输入0，则输出0.5。而且，输入不应区分向量，矩阵的。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></div>
-<div class="line">    gz = <span class="number">1</span> / (<span class="number">1</span> + np.exp(-z))</div>
-<div class="line">    <span class="keyword">return</span> gz</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h3 id="代价函数和梯度下降法"><a href="#代价函数和梯度下降法" class="headerlink" title="代价函数和梯度下降法"></a>代价函数和梯度下降法</h3><p><img src="/2018/08/18/Logistic-Regression/Screen Shot 2018-08-19 at 8.23.02 PM.png" alt="Screen Shot 2018-08-19 at 8.23.02 PM"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cost_func</span><span class="params">(thetas,x,y)</span>:</span></div>
-<div class="line">    z = x.dot(thetas)</div>
-<div class="line">    y_pred = sigmoid(z)</div>
-<div class="line">    loss = y.T.dot(np.log(y_pred)) + (<span class="number">1</span>-y).T.dot(np.log(<span class="number">1</span>-y_pred))</div>
-<div class="line">    <span class="keyword">return</span> -loss/row</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<p>初次调用时，loss=0.693</p>
-</blockquote>
-<p><img src="/2018/08/18/Logistic-Regression/Screen Shot 2018-08-19 at 8.23.25 PM.png" alt="Screen Shot 2018-08-19 at 8.23.25 PM"></p>
-<p>这次我们的梯度下降法返回梯度量，不直接返回参数更新</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_descent</span><span class="params">(thetas,x,y)</span>:</span></div>
-<div class="line">    z = x.dot(thetas)</div>
-<div class="line">    y_pred = sigmoid(z)</div>
-<div class="line">    gd = (y_pred-y).T.dot(x) / row</div>
-<div class="line">    <span class="keyword">return</span> gd.T</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h3 id="损失函数优化"><a href="#损失函数优化" class="headerlink" title="损失函数优化"></a>损失函数优化</h3><p>这次，我们使用<code>scipy.optimize</code>寻找目标函数的最优值。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">scipy.optimize.fmin_tnc(func, x0, fprime=<span class="keyword">None</span>, args=())</div>
-</pre></td></tr></table></figure>
-<ul>
-<li><p>func：目标函数，它必须满足以下条件之一：</p>
-<p>— 返回函数值<code>f</code>和梯度值<code>g</code></p>
-<p>— 返回函数值<code>f</code>，但是必须提供梯度函数作为<code>fprime</code>的参数</p>
-<p>—返回函数值<code>f</code>，设置 <code>approx_grad=True</code></p>
-</li>
-<li><p>x0：待优化参数的初始值</p>
-</li>
-<li><p>fprime：梯度函数</p>
-</li>
-<li><p>args：<code>func</code>函数的参数</p>
-</li>
-<li><p>该函数的返回值：x—solution；nfeval—函数优化次数；</p>
-</li>
-</ul>
-<p>最优化之后的损失函数值是0.203左右。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scipy.optimize <span class="keyword">as</span> opt</div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">scipy_gd</span><span class="params">(thetas,x,y)</span>:</span></div>
-<div class="line">    result = opt.fmin_tnc(</div>
-<div class="line">        func=cost_func,x0=thetas,fprime=gradient_descent,args=(x,y))</div>
-<div class="line">    <span class="keyword">return</span> result[<span class="number">0</span>]</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h3 id="预测及评价"><a href="#预测及评价" class="headerlink" title="预测及评价"></a>预测及评价</h3><p>我们定义一个预测函数，输入未知值，预测其分类</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(thetas,x)</span>:</span></div>
-<div class="line">    z = x.dot(thetas)</div>
-<div class="line">    prob = sigmoid(z)</div>
-<div class="line">    <span class="keyword">return</span> [<span class="number">1</span> <span class="keyword">if</span> x &gt;= <span class="number">0.5</span> <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> x <span class="keyword">in</span> prob]</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<p>使用准确率来评估预测结果</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
-<div class="line">    thetas = scipy_gd(thetas,x_new,y)</div>
-<div class="line">    predictions = predict(thetas,x_new)</div>
-<div class="line">    correct = [<span class="number">1</span> <span class="keyword">if</span> ((a == <span class="number">1</span> <span class="keyword">and</span> b == <span class="number">1</span>) <span class="keyword">or</span> (a == <span class="number">0</span> <span class="keyword">and</span> b == <span class="number">0</span>)) <span class="keyword">else</span> <span class="number">0</span> <span class="keyword">for</span> (a, b) <span class="keyword">in</span> zip(predictions, y)]</div>
-<div class="line">    accuracy = (sum(map(int, correct)) % len(correct))</div>
-<div class="line">    plot_boundary(x,y,thetas)</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h3 id="画出分类边界"><a href="#画出分类边界" class="headerlink" title="画出分类边界"></a>画出分类边界</h3><p>需要注意的是，此时的x并不需要额外的全1行。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib.pylab <span class="keyword">as</span> pl</div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_boundary</span><span class="params">(x,y,thetas)</span>:</span></div>
-<div class="line">    plot_data(x,y)</div>
-<div class="line">    h = <span class="number">0.1</span></div>
-<div class="line">    x0_min, x0_max = x[:, <span class="number">0</span>].min() - <span class="number">0.1</span>, x[:, <span class="number">0</span>].max() + <span class="number">0.1</span></div>
-<div class="line">    x1_min, x1_max = x[:, <span class="number">1</span>].min() - <span class="number">0.1</span>, x[:, <span class="number">1</span>].max() + <span class="number">0.1</span></div>
-<div class="line">    x0, x1 = np.meshgrid(np.arange(x0_min, x0_max, h),</div>
-<div class="line">                         np.arange(x1_min, x1_max, h))</div>
-<div class="line">    z = np.c_[x0.ravel(), x1.ravel()].dot(thetas[<span class="number">1</span>:]) + thetas[<span class="number">0</span>]</div>
-<div class="line">    z = sigmoid(z)</div>
-<div class="line">    z = z.reshape(x0.shape)</div>
-<div class="line">    plt.contour(x0, x1, z, cmap=pl.cm.Paired)</div>
-<div class="line">    plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/08/18/Logistic-Regression/image-20180822205326946.png" alt="image-20180822205326946"></p>
-
-</div></div>
-<h2 id="正则化的回归"><a href="#正则化的回归" class="headerlink" title="正则化的回归"></a>正则化的回归</h2><p><a href="https://www.johnwittenauer.net/machine-learning-exercises-in-python-part-3/" target="_blank" rel="noopener">ref</a> </p>
-<p>本题我们使用正则化的逻辑斯蒂回归来分类。给定的数据集是关于微芯片的两次测试数据，label是合格与不合格。</p>
-<ol>
-<li><p>数据可视化</p>
-<p>直接利用上面的画图函数，可以看到我们需要使用一个非线性曲线去分类，类似椭圆。显然这不能是线性分类，对于非线性分类问题，逻辑回归会使用多项式扩展特征。这带来的弊端就是引入巨大特征。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<p><img src="/2018/08/18/Logistic-Regression/image-20180822210526246.png" alt="image-20180822210526246"></p>
-
-</div></div>
-</li>
-<li></li>
-</ol>
-<h2 id="逻辑斯蒂回归预测西瓜"><a href="#逻辑斯蒂回归预测西瓜" class="headerlink" title="逻辑斯蒂回归预测西瓜"></a>逻辑斯蒂回归预测西瓜</h2><p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/Screen%20Shot%202018-08-08%20at%2011.32.08%20AM.png" alt="Screen Shot 2018-08-08 at 11.32.08 AM"></p>
-<ol>
-<li><p>数据载入</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np  </div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line">dataset = np.loadtxt(<span class="string">'watermelon_3a.csv'</span>, delimiter=<span class="string">","</span>)</div>
-<div class="line">X = dataset[:, <span class="number">1</span>:<span class="number">3</span>]</div>
-<div class="line">y = dataset[:, <span class="number">3</span>]</div>
-<div class="line">m, n = np.shape(X)</div>
-</pre></td></tr></table></figure>
-</li>
-<li><p>数据可视化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment"># draw scatter diagram to show the raw data</span></div>
-<div class="line">f1 = plt.figure(<span class="number">1</span>)</div>
-<div class="line">plt.title(<span class="string">'watermelon_3a'</span>)</div>
-<div class="line">plt.xlabel(<span class="string">'density'</span>)</div>
-<div class="line">plt.ylabel(<span class="string">'ratio_sugar'</span>)</div>
-<div class="line">plt.scatter(X[y == <span class="number">0</span>, <span class="number">0</span>], X[y == <span class="number">0</span>, <span class="number">1</span>], marker=<span class="string">'o'</span>, color=<span class="string">'k'</span>, s=<span class="number">100</span>, label=<span class="string">'bad'</span>)</div>
-<div class="line">plt.scatter(X[y == <span class="number">1</span>, <span class="number">0</span>], X[y == <span class="number">1</span>, <span class="number">1</span>], marker=<span class="string">'o'</span>, color=<span class="string">'g'</span>, s=<span class="number">100</span>, label=<span class="string">'good'</span>)</div>
-<div class="line">plt.legend(loc=<span class="string">'upper right'</span>)</div>
-<div class="line">plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808113730536.png" alt="image-20180808113730536"></p>
-</li>
-<li><p>利用sklearn求解</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</div>
-<div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> model_selection</div>
-<div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pylab <span class="keyword">as</span> pl</div>
-<div class="line">X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=<span class="number">0.5</span>, random_state=<span class="number">0</span>)</div>
-<div class="line">log_model = LogisticRegression()  </div>
-<div class="line">log_model.fit(X_train, y_train) </div>
-<div class="line">weights , b = log_model.coef_, log_model.intercept_</div>
-<div class="line"><span class="comment"># weights = [[-0.0865987   0.39410864]] </span></div>
-<div class="line"><span class="comment"># b = [-0.02152586]</span></div>
-</pre></td></tr></table></figure>
-</li>
-<li><p>结果可视化</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment">###计算模型各种评价标准</span></div>
-<div class="line">print(metrics.confusion_matrix(y_test, y_pred))</div>
-<div class="line">print(metrics.classification_report(y_test, y_pred))</div>
-<div class="line">y_pred = log_model.predict(X_test)</div>
-<div class="line">precision, recall, thresholds = metrics.precision_recall_curve(y_test, y_pred)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-</pre></td><td class="code"><pre><div class="line">h = <span class="number">0.001</span></div>
-<div class="line">x0_min, x0_max = X[:, <span class="number">0</span>].min() - <span class="number">0.1</span>, X[:, <span class="number">0</span>].max() + <span class="number">0.1</span></div>
-<div class="line">x1_min, x1_max = X[:, <span class="number">1</span>].min() - <span class="number">0.1</span>, X[:, <span class="number">1</span>].max() + <span class="number">0.1</span></div>
-<div class="line">x0, x1 = np.meshgrid(np.arange(x0_min, x0_max, h),</div>
-<div class="line">                     np.arange(x1_min, x1_max, h))</div>
-<div class="line">z = log_model.predict(np.c_[x0.ravel(), x1.ravel()])</div>
-<div class="line">z = z.reshape(x0.shape)</div>
-<div class="line">plt.contourf(x0, x1, z, cmap=pl.cm.Paired)</div>
-<div class="line">plt.contour(x0, x1, z, cmap=pl.cm.Paired)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><a href="https://www.cnblogs.com/lemonbit/p/7593898.html" target="_blank" rel="noopener">meshgrid</a> 通俗说，输入是两个一维向量x和y，对于y中的每一个值$y_i$，都为之复制一个x，相当于从$y_i$出发画一条平行x轴的直线，有多少个y点，就有多少条直线；同理，对于x中的灭一个$x_i$，为之复制一个y，等价于从该$x_i$出发画一条平行于$y$轴的直线。这样很多条直线相交就会产生$len(y) \ \cdot \ len(x)$形状的矩阵。</li>
-<li><code>np.c_[a,b]</code>将两数组在column方向合并,等价于<code>np.concatenate((a,b),axis=1)</code></li>
-<li><code>np.ravel()</code>将数组展开，多维降为一维，类似<code>np.flatten()</code>，只不过<code>np.flatten()</code>返回拷贝，而<code>ravel()</code>返回视图，会对原始数组产生影响。</li>
-</ul>
-</blockquote>
-<p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808114529415.png" alt="image-20180808114529415"></p>
-<p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180808123047797.png" alt="image-20180808123047797"></p>
-</li>
-</ol>
-<h2 id="交叉验证法-vs-留一法"><a href="#交叉验证法-vs-留一法" class="headerlink" title="交叉验证法 vs 留一法"></a>交叉验证法 vs 留一法</h2><p>基于UCI数据集，比较10折交叉验证和留一法所估计出的对率回归的准确率。</p>
-<p>我们选择<a href="http://archive.ics.uci.edu/ml/datasets/Iris" target="_blank" rel="noopener">Iris</a>数据和<a href="http://archive.ics.uci.edu/ml/datasets/Blood+Transfusion+Service+Center" target="_blank" rel="noopener">blood transfusion</a>数据</p>
-<p><strong>Iris数据</strong>共有4个特征个一个类别label。</p>
-<p>第一个是sepal length，第二个是sepal width，第三个是petal length，第四个特征是petal width。类别有三类：— Iris Setosa  — Iris Versicolour  — Iris Virginica</p>
-<p><strong>blood transfusion</strong>数据总共有4个特征和一个label。</p>
-<p>R(Recency):距离上次献血时间(month)<br>F(Frequency):总献血次数<br>M(Monetary):总献血量<br>T(Time):距离第一次献血(month)<br>Y:2007的三月是否献血;1-献血，0-没有献血</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">(data,y)</span>:</span></div>
-<div class="line">    sns.set(style=<span class="string">'white'</span>,color_codes=<span class="keyword">True</span>)</div>
-<div class="line">    sns.pairplot(data,hue=y)</div>
-<div class="line">    plt.show()</div>
-<div class="line"></div>
-<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
-<div class="line"></div>
-<div class="line">    iris = sns.load_dataset(<span class="string">'iris'</span>)</div>
-<div class="line">    plot_data(iris,<span class="string">'species'</span>)</div>
-<div class="line"></div>
-<div class="line">    data = pd.read_csv(<span class="string">'blood_dataset.txt'</span>,sep=<span class="string">','</span>,header=<span class="keyword">None</span>)</div>
-<div class="line">    data.columns = [<span class="string">'R'</span>,<span class="string">'F'</span>,<span class="string">'M'</span>,<span class="string">'T'</span>,<span class="string">'Y'</span>]</div>
-<div class="line">    plot_data(data,<span class="string">'Y'</span>)</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813110624641.png" alt="image-20180813110624641"></p>
-<p><img src="/2018/08/18/Logistic-Regression/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Linear-Regression/image-20180813111620624.png" alt="image-20180813111620624"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-<div class="line">36</div>
-<div class="line">37</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</div>
-<div class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> cross_val_predict, LeaveOneOut</div>
-<div class="line"><span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression</div>
-<div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> metrics</div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cv</span><span class="params">(x,y)</span>:</span></div>
-<div class="line">    log_regression = LogisticRegression()</div>
-<div class="line">    pre = cross_val_predict(log_regression,x,y,cv=<span class="number">5</span>)</div>
-<div class="line">    print(metrics.accuracy_score(y,pre))</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loo</span><span class="params">(x,y)</span>:</span></div>
-<div class="line">    loo = LeaveOneOut()</div>
-<div class="line">    accuracy = <span class="number">0</span></div>
-<div class="line">    log_regression = LogisticRegression()</div>
-<div class="line">    <span class="keyword">for</span> train,test <span class="keyword">in</span> loo.split(x):</div>
-<div class="line">        log_regression.fit(x[train],y[train])</div>
-<div class="line">        y_p = log_regression.predict(x[test])</div>
-<div class="line">        <span class="keyword">if</span> y_p == y[test] : accuracy += <span class="number">1</span></div>
-<div class="line">    print(accuracy/np.shape(x)[<span class="number">0</span>]) <span class="comment"># 0.9533333333333334</span></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_blood</span><span class="params">()</span>:</span></div>
-<div class="line">    data = np.loadtxt(<span class="string">'blood_dataset.txt'</span>,delimiter=<span class="string">','</span>) <span class="comment">#shape = (748,5)</span></div>
-<div class="line">    x = data[:,:<span class="number">-1</span>] <span class="comment"># shape = (748, 4)</span></div>
-<div class="line">    y = data[:,<span class="number">-1</span>] <span class="comment"># shape = (748,)</span></div>
-<div class="line">    <span class="keyword">return</span> x,y</div>
-<div class="line"></div>
-<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
-<div class="line"></div>
-<div class="line">    iris = load_iris()</div>
-<div class="line">    x = iris.data  <span class="comment"># x.shape = (150,4)</span></div>
-<div class="line">    y = iris.target  <span class="comment"># x.shape = (150,)</span></div>
-<div class="line">    cv(x,y) <span class="comment"># 0.96</span></div>
-<div class="line">    loo(x,y) <span class="comment"># 0.9533333333333334</span></div>
-<div class="line"></div>
-<div class="line">    x,y=load_blood()</div>
-<div class="line">    cv(x,y) <span class="comment"># 0.7807486631016043</span></div>
-<div class="line">    loo(x,y) <span class="comment"># 0.7700534759358288</span></div>
-</pre></td></tr></table></figure>
-<blockquote>
-<p>也可以看到，两种交叉验证的结果相近，但是由于此数据集的类分性不如iris明显，所得结果也要差一些。同时由程序运行可以看出，<strong>LOOCV的运行时间相对较长</strong>，这一点随着数据量的增大而愈发明显。</p>
-<p>所以，一般情况下选择K-折交叉验证即可满足精度要求，同时运算量相对小。</p>
-</blockquote>
-
-          
+          <p>用于分类任务的逻辑斯蒂回归。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/18/Logistic-Regression/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1489,9 +1158,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
       
         
           
-            <ol>
-<li><p>目录</p>
-<p>检查目录，并生成一级目录</p>
+            <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>检查目录，并生成一级目录</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1507,8 +1174,7 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <div class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(path):</div>
 <div class="line">    os.makedirs(path)</div>
 </pre></td></tr></table></figure>
-</li>
-<li><p>txt读写 <a href="https://blog.csdn.net/heyijia0327/article/details/42506063" target="_blank" rel="noopener">ref</a> </p>
+<h2 id="R-amp-W-in-TXT"><a href="#R-amp-W-in-TXT" class="headerlink" title="R &amp; W in TXT"></a>R &amp; W in TXT</h2><p> <a href="https://blog.csdn.net/heyijia0327/article/details/42506063" target="_blank" rel="noopener">ref</a> </p>
 <p><code>np.loadtxt()</code>用于从文本加载数据。 文本文件中的每一行必须含有相同的数据。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">loadtxt(fname, dtype=&lt;class 'float'&gt;, comments='#', delimiter=None, converters=None, skiprows=0, usecols=None, unpack=False, ndmin=0)</div>
@@ -1535,11 +1201,21 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <div class="line">        odom = line.split()        <span class="comment">#将单个数据分隔开存好</span></div>
 <div class="line">        numbers_float = map(float, odom) <span class="comment">#转化为浮点数</span></div>
 </pre></td></tr></table></figure>
+<h2 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h2><h3 id="np-random-rand"><a href="#np-random-rand" class="headerlink" title="np.random.rand()"></a>np.random.rand()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">numpy.random.rand(d0,d1,…,dn)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li>rand函数根据给定维度生成[0,1)之间的数据，包含0，不包含1</li>
+<li>dn为每个维度</li>
+<li>返回值为指定维度的数组</li>
+</ul>
+<h3 id="np-random-randn"><a href="#np-random-randn" class="headerlink" title="np.random.randn()"></a>np.random.randn()</h3><ul>
+<li><p>randn函数返回具有标准正态分布的数据。</p>
 </li>
-</ol>
-<ol>
-<li>xx</li>
-</ol>
+<li><p>dn为每个维度</p>
+</li>
+<li>返回值为指定维度的数组</li>
+</ul>
 
           
         
@@ -2178,7 +1854,15 @@ E(w,b)=-\frac{1}{n}[\sum_{i=1}^{n}y^{(i)}logh_w(x^{(i)})+(1-y^{(i)})log(1-h_w(x^
 <p>同样的，为了生成具有高斯分布的latent code（z），我们还需要训练分辨器$D_{gauss}$。</p>
 <h4 id="半监督分类器阶段"><a href="#半监督分类器阶段" class="headerlink" title="半监督分类器阶段"></a>半监督分类器阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_ZS7wa7H8tHUDWkuqGZJT2Q.png" alt="1_ZS7wa7H8tHUDWkuqGZJT2Q"></p>
 <p>最终我们训练encoder来对手写体数字进行分类，目的是最小化生成的分类标签与真实的标签的交叉熵。</p>
-<h3 id="Python实现-2"><a href="#Python实现-2" class="headerlink" title="Python实现"></a>Python实现</h3><h2 id="CVAE-GAN"><a href="#CVAE-GAN" class="headerlink" title="CVAE-GAN"></a>CVAE-GAN</h2><p><a href="https://www.jiqizhixin.com/articles/2018-06-12-5" target="_blank" rel="noopener">REF1</a> </p>
+<h3 id="Python实现-2"><a href="#Python实现-2" class="headerlink" title="Python实现"></a>Python实现</h3><h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_qufKKgKUPUGvYKWsmqiv5w.png" alt="1_qufKKgKUPUGvYKWsmqiv5w"></p>
+<p>在原始encoder的基础上，只需要需改encoder的输出维度，增加对分类标签的输出</p>
+<h4 id="Decoder-1"><a href="#Decoder-1" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_nRF013A75pCdlgOT48w0MA.png" alt="1_nRF013A75pCdlgOT48w0MA"></p>
+<h4 id="Discriminator"><a href="#Discriminator" class="headerlink" title="Discriminator"></a>Discriminator</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_jzDB_IJhVL74Zb0NU03Uew.png" alt="1_jzDB_IJhVL74Zb0NU03Uew"></p>
+<p>我们需要两个分辨器，它们除了输入维度不同，其他是一样的</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<h2 id="CVAE-GAN"><a href="#CVAE-GAN" class="headerlink" title="CVAE-GAN"></a>CVAE-GAN</h2><p><a href="https://www.jiqizhixin.com/articles/2018-06-12-5" target="_blank" rel="noopener">REF1</a> </p>
 <p>《 CVAE-GAN: Fine-Grained Image Generation through Asymmetric Training》</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 
@@ -2763,6 +2447,9 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 </pre></td><td class="code"><pre><div class="line">ls -l |grep "^-"|wc -l #统计当前目录下文件数量</div>
 <div class="line">ls -l |grep "^ｄ"|wc -l #统计当前目录下文件夹数量</div>
 </pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">cp -r dir1/. /dir2/</div>
+</pre></td></tr></table></figure>
 <p>设置屏幕分辨率</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">xrandr -s 1366x768</div>
@@ -3082,152 +2769,6 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/24/Neural-Network/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/24/Neural-Network/" itemprop="url">Neural Network</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-24T09:56:04-05:00">
-                2018-07-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本节介绍最基本的神经网络。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/24/Neural-Network/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3278,7 +2819,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3300,7 +2841,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
