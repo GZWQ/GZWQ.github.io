@@ -283,6 +283,276 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/C-Programing-Language/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/12/C-Programing-Language/" itemprop="url">C++ Programing Language</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-12T17:40:37-05:00">
+                2018-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><p>常量是固定值，在程序执行期间不会改变，常量就像是常规的变量，只不过常量的值在定义后<strong>不能进行修改</strong>。</p>
+<p>在 C++ 中，有两种简单的定义常量的方式：</p>
+<ul>
+<li><p>使用 <strong>#define</strong> 预处理器。</p>
+<p>下面是使用 #define 预处理器定义常量的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> identifier value</span></div>
+</pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div>
+<div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div>
+<div class="line"></div>
+<div class="line"><span class="meta">#<span class="meta-keyword">define</span> LENGTH 10   </span></div>
+<div class="line"><span class="meta">#<span class="meta-keyword">define</span> WIDTH  5</span></div>
+<div class="line"><span class="meta">#<span class="meta-keyword">define</span> NEWLINE <span class="meta-string">'\n'</span></span></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div>
+<div class="line"><span class="function"></span>&#123;</div>
+<div class="line"></div>
+<div class="line">   <span class="keyword">int</span> area;  </div>
+<div class="line">   </div>
+<div class="line">   area = LENGTH * WIDTH;</div>
+<div class="line">   <span class="built_in">cout</span> &lt;&lt; area;</div>
+<div class="line">   <span class="built_in">cout</span> &lt;&lt; NEWLINE;</div>
+<div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div>
+<div class="line">&#125;</div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>使用 <strong>const</strong> 关键字。</p>
+<p>您可以使用 <strong>const</strong> 前缀声明指定类型的常量，如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> type variable = value;</div>
+</pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div>
+<div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div>
+<div class="line"><span class="function"></span>&#123;</div>
+<div class="line">   <span class="keyword">const</span> <span class="keyword">int</span>  LENGTH = <span class="number">10</span>;</div>
+<div class="line">   <span class="keyword">const</span> <span class="keyword">int</span>  WIDTH  = <span class="number">5</span>;</div>
+<div class="line">   <span class="keyword">const</span> <span class="keyword">char</span> NEWLINE = <span class="string">'\n'</span>;</div>
+<div class="line">   <span class="keyword">int</span> area;  </div>
+<div class="line">   </div>
+<div class="line">   area = LENGTH * WIDTH;</div>
+<div class="line">   <span class="built_in">cout</span> &lt;&lt; area;</div>
+<div class="line">   <span class="built_in">cout</span> &lt;&lt; NEWLINE;</div>
+<div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div>
+<div class="line">&#125;</div>
+</pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="字符常量"><a href="#字符常量" class="headerlink" title="字符常量"></a>字符常量</h2><p>字符常量是括在单引号中，字符常量可以是一个普通的字符（例如 ‘x’）、一个转义序列（例如 ‘\t’）。</p>
+<p>在 C++ 中，有一些特定的字符，当它们前面有反斜杠时，它们就具有特殊的含义，被用来表示如换行符（\n）或制表符（\t）等。</p>
+<p><img src="/2018/09/12/C-Programing-Language/Screen Shot 2018-09-12 at 5.44.19 PM.png" alt="Screen Shot 2018-09-12 at 5.44.19 PM"></p>
+<h2 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h2><p>字符串常量是括在双引号 “” 中的。</p>
+<h1 id="存储类"><a href="#存储类" class="headerlink" title="存储类"></a>存储类</h1><h2 id="static-存储类"><a href="#static-存储类" class="headerlink" title="static 存储类"></a>static 存储类</h2><h2 id="extern-存储类"><a href="#extern-存储类" class="headerlink" title="extern 存储类"></a>extern 存储类</h2><h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="杂项运算符"><a href="#杂项运算符" class="headerlink" title="杂项运算符"></a>杂项运算符</h2><p><img src="/2018/09/12/C-Programing-Language/Screen Shot 2018-09-12 at 5.53.35 PM.png" alt="Screen Shot 2018-09-12 at 5.53.35 PM"></p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">C++ 中的函数定义的一般形式如下：</div>
+<div class="line"></div>
+<div class="line"><span class="function">return_type <span class="title">function_name</span><span class="params">( parameter <span class="built_in">list</span> )</span></span></div>
+<div class="line"><span class="function"></span>&#123;</div>
+<div class="line">   body of the function</div>
+<div class="line">&#125;</div>
+</pre></td></tr></table></figure>
+<p>在 C++ 中，函数由一个函数头和一个函数主体组成。下面列出一个函数的所有组成部分：</p>
+<ul>
+<li><p><strong>返回类型：</strong>一个函数可以返回一个值。<strong>return_type</strong> 是函数返回的值的数据类型。有些函数执行所需的操作而不返回值，在这种情况下，return_type 是关键字 <strong>void</strong>。</p>
+</li>
+<li><p><strong>函数名称：</strong>这是函数的实际名称。函数名和参数列表一起构成了函数签名。</p>
+</li>
+<li><p><strong>参数：</strong>参数就像是占位符。当函数被调用时，您向参数传递一个值，这个值被称为实际参数。参数列表包括函数参数的类型、顺序、数量。参数是可选的，也就是说，函数可能不包含参数。</p>
+<blockquote>
+<p>当您定义一个函数，您可以为参数列表中后边的每一个参数指定默认值。当调用函数时，如果实际参数的值留空，则使用这个默认值。</p>
+<p>这是通过在函数定义中使用赋值运算符来为参数赋值的。调用函数时，如果未传递参数的值，则会使用默认值，如果指定了值，则会忽略默认值，使用传递的值。</p>
+</blockquote>
+</li>
+<li><p><strong>函数主体：</strong>函数主体包含一组定义函数执行任务的语句。</p>
+</li>
+</ul>
+<h2 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h2><p>函数<strong>声明</strong>会告诉编译器函数名称及如何调用函数。函数声明包括以下几个部分：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function">return_type <span class="title">function_name</span><span class="params">( parameter <span class="built_in">list</span> )</span></span>;</div>
+</pre></td></tr></table></figure>
+<p>在函数声明中，参数的名称并不重要，只有参数的类型是必需的，因此下面也是有效的声明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span>, <span class="keyword">int</span>)</span></span>;</div>
+</pre></td></tr></table></figure>
+<p>当您在一个源文件中定义函数且在另一个文件中调用函数时，函数声明是必需的。在这种情况下，您应该在调用函数的文件顶部声明函数。</p>
+<h2 id="函数传参"><a href="#函数传参" class="headerlink" title="函数传参"></a>函数传参</h2><p>如果函数要使用参数，则必须声明接受参数值的变量。这些变量称为函数的<strong>形式参数</strong>。</p>
+<p>形式参数就像函数内的其他局部变量，在进入函数时被创建，退出函数时被销毁。</p>
+<p>当调用函数时，有两种向函数传递参数的方式：</p>
+<p><img src="/2018/09/12/C-Programing-Language/Screen Shot 2018-09-12 at 6.00.35 PM.png" alt="Screen Shot 2018-09-12 at 6.00.35 PM"></p>
+<p>默认情况下，C++ 使用<strong>传值调用</strong>来传递参数。一般来说，这意味着函数内的代码不能改变用于调用函数的参数。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/11/Support-Vector-Machine/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,7 +645,8 @@
 
       
         
-          <p>支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。</p>
+          <p>支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。</p>
+<p>支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。</p>
 <p>在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，即如果$y=wx+b$的计算结果大于1，我们分类至正例；如果$y=wx+b$的计算结果小于-1，我们分类至负例，这样我们就得到了一个区间$[-1,1]$，称之为间隔。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -714,8 +985,8 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�420-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�421-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�427-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�428-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -2477,170 +2748,6 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/Linux命令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/05/Linux命令/" itemprop="url">Linux命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-05T10:35:29-05:00">
-                2018-08-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>退出保存</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">:wq</div>
-</pre></td></tr></table></figure>
-<p>利用scp远程上传下载文件/文件夹<a href="https://www.cnblogs.com/zhaofeng555/p/8075279.html" target="_blank" rel="noopener">ref1</a> </p>
-<p>统计文件个数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">ls -l |grep "^-"|wc -l #统计当前目录下文件数量</div>
-<div class="line">ls -l |grep "^ｄ"|wc -l #统计当前目录下文件夹数量</div>
-</pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">cp -r dir1/. /dir2/</div>
-</pre></td></tr></table></figure>
-<p>设置屏幕分辨率</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">xrandr -s 1366x768</div>
-</pre></td></tr></table></figure>
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><ul>
-<li><p>删除目录下所有文件</p>
-<p>用通配符*英文星号可以表示“所有文件”这个概念，所以删除文件夹下所有文件的方法就是，先用cd命令切换到这个文件夹下，然后执行rm ./*命令表示删除当前目录下所有的文件，但是注意，如果文件夹下有子目录，这条命令就无法生效了，因为它无法删除子目录（删除子目录要加上-r选项）。</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2691,7 +2798,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2702,7 +2809,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -2713,7 +2820,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

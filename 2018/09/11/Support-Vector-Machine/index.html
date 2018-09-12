@@ -79,21 +79,23 @@
 
 
 
-<meta name="description" content="支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，即如果$y=wx+b$的计算结果大于1，我们分类至正例；如果$y=wx+b$的计算">
+<meta name="description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
 <meta name="keywords" content="Machine Learning,Support Vector Machine">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Support Vector Machine">
 <meta property="og:url" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，即如果$y=wx+b$的计算结果大于1，我们分类至正例；如果$y=wx+b$的计算">
+<meta property="og:description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1_VDATmWG1E1ZNg7hdasOh5g.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1_AMR3v-jCvUMXPUtQskzxmQ.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%2010.16.55%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%209.44.08%20AM.png">
-<meta property="og:updated_time" content="2018-09-11T20:05:17.687Z">
+<meta property="og:updated_time" content="2018-09-12T16:15:06.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Support Vector Machine">
-<meta name="twitter:description" content="支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，即如果$y=wx+b$的计算结果大于1，我们分类至正例；如果$y=wx+b$的计算">
-<meta name="twitter:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%2010.16.55%20AM.png">
+<meta name="twitter:description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1_VDATmWG1E1ZNg7hdasOh5g.png">
 
 
 
@@ -379,11 +381,51 @@
       
 
       
-        <p>支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。</p>
+        <p>支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。</p>
+<p>支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。</p>
 <p>在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，即如果$y=wx+b$的计算结果大于1，我们分类至正例；如果$y=wx+b$的计算结果小于-1，我们分类至负例，这样我们就得到了一个区间$[-1,1]$，称之为间隔。</p>
 <a id="more"></a>
 <p><a href="https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47" target="_blank" rel="noopener">ref1</a> <a href="https://towardsdatascience.com/https-medium-com-pupalerushikesh-svm-f4b42800e989" target="_blank" rel="noopener">ref2</a> </p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>给定数据集$D=\{(x_1,y_1), (x_2,y_2),…,(x_m,y_m)\}, y_i\in{\{-1,+1\}}$, 欲找到一个划分超平面, 将不同类别的样本分开. </p>
+<p><img src="/2018/09/11/Support-Vector-Machine/1_VDATmWG1E1ZNg7hdasOh5g.png" alt="1_VDATmWG1E1ZNg7hdasOh5g"></p>
+<p>但是能将训练样本分开的划分超平面有多个, 直观上, 去找位于两类样本”正中间”的划分超平面,  即下图中的黄线是比较好的分割线。可用线性方程描述:</p>
+<blockquote>
+<script type="math/tex; mode=display">
+w^Tx+b=0</script></blockquote>
+<p><img src="/2018/09/11/Support-Vector-Machine/1_AMR3v-jCvUMXPUtQskzxmQ.png" alt="1_AMR3v-jCvUMXPUtQskzxmQ"></p>
+<p>那么如何用数学方法描述黄色的那条直线是比较好的分割线呢？使用点到直线的距离，我们欲使直线两边的点离直线的距离越远越好，这样不同类的点也距离越远，说明我们的分割线比较明确地分类出正类和负类。</p>
+<p>我们介绍两种衡量距离的方法：函数间隔和几何间隔。</p>
+<p><strong>函数间隔</strong>      对于给定的数据集和超平面$(w,b)$, 定义超平面$(w,b)$关于样本点$(x_i,y_i)$的函数间隔为:</p>
+<script type="math/tex; mode=display">
+functional\_margin_i=y_i(w\dot{}x_i+b)</script><p>定义样本点关于超平面最小的函数间隔为:</p>
+<script type="math/tex; mode=display">
+functianal\_margin(min)=\min\limits_{i=1,2,...,m}functional\_margin_i</script><blockquote>
+<p><a href="https://www.zhihu.com/question/20466147/answer/28469993" target="_blank" rel="noopener">ref</a> </p>
+<p>在超平面确定的情况下，即$w\cdot x+b=0$，对于二分类问题，如果$w\cdot x_i+b&gt;0$，则$x_i$的类别被判别为1；否则判定为-1。所以，$y_i(w\cdot x_i+b)&gt;0$意味着$x_i$的分类结果是正确的，而且$y_i(w\cdot x_i+b)$的值越大，分类结果的确信度越大，反之亦然。</p>
+</blockquote>
+<p><strong>几何间隔（点到平面距离）</strong>    对于给定的数据集和超平面$(w,b)$, 定义超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔为:</p>
+<script type="math/tex; mode=display">
+geometric\_margin=y_i\frac{w\dot{}x_i+b}{||w||}</script><p>定义样本点关于超平面最小的几何间隔为:</p>
+<script type="math/tex; mode=display">
+geometric\_margin(min)=\min\limits_{i=1,2,...,m}geometric\_margin_i</script><blockquote>
+<p>但是如果成比例的改变$w$和$b$, 超平面并没有改变, 但是函数间隔随之改变, 故对超平面的法向量进行规范化，使得间隔是确定的，这时函数间隔成为了几何间隔。</p>
+</blockquote>
+<p><strong>间隔最大化</strong>      </p>
+<p>间隔最大化的直观解释: 对训练数据找到几何间隔最大的超平面意味着以充分大的确信度对训练数据进行分类.  即不仅将正负实例点分开, 而且对最难分的实例点（离超平面最近的点）也有足够大的确信度将它们分开. 这样, 对未知的新实例有很好的分类预测能力. 具体地, 这个问题可以表示为以下的约束最优化问题:</p>
+<script type="math/tex; mode=display">
+\begin{align*}&\max\limits_{w,b} geometric\_margin\\&s.t. y_i(\frac{w\dot{}x_i+b}{||w||})\ge{geometric\_margin, i=1,2,..,N} \end{align*}</script><p>即希望最大化超平面$(w,b)$关于数据集的几个间隔$geometric_margin$, 约束条件表示的是超平面$(w,b)$关于每个样本点的几个间隔至少是$geometric_margin$. 超平面两边分别是正例和负例, 故会存在正例对超平面的最小几何间隔$geometric_margin+$, 负例对超平面的最小几何间隔$geometric_margin-$, 选其中最小的, 如果$geometric_margin+$&lt;$geometric_margin-$, 则一定有正例样本点落在间隔面上; $geometric_margin+$&gt;$geometric_margin-$, 则一定有负例点落在间隔面上; $geometric_margin+$=$geometric_margin-$, 则间隔面上有正负实例样本点.</p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>SVM的目标就是寻找一个几何间隔最大化的分离超平面，该问题可以表示为下面的约束问题：</p>
+<script type="math/tex; mode=display">
+\begin{align*}&\max\limits_{w,b} geometric\_margin\\&s.t. y_i(\frac{w\dot{}x_i+b}{||w||})\ge{geometric\_margin, i=1,2,..,N} \end{align*}</script><p>即我们希望最大化超平面$(w,b)$关于训练集数据的几何间隔，约束条件表示每个样本点关于超平面的几何间隔至少是$geometric_margin$。</p>
+<p>考虑几何间隔和函数间隔的关系, 即$\frac{1}{||w||}$大小，则</p>
+<script type="math/tex; mode=display">
+\begin{align*}&\max\limits_{w,b} \frac{functional\_margin}{||w||}\\&s.t. y_i({w\dot{}x_i+b})\ge{functional\_margin, i=1,2,..,N} \end{align*}</script><p>仍然最大化最小几何间隔, 即间隔临界样本点到超平面的距离, 约束变成了所有的样本点的函数间隔都要大于最小的函数间隔.</p>
+<p>考虑到函数间隔$functional_margin$的取值并不影响最优化问题的解. 因为上面我们介绍过了，之所以采样几何间隔，就是因为成比例扩大/缩小$(w,b)$，函数间隔的值会改变，即使超平面不变。所以，对于同一个超平面，一个样本关于该平面的函数间隔有无穷多个，可以是1，可以是10等等，只需要成比例扩大/缩小$(w,b)$。故，为简化问题，我们领函数间隔为1，代入上式：</p>
+<script type="math/tex; mode=display">
+\max \limits_{w,b}\frac{1}{||w||}\\s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><p>又因为最大化$\frac{1}{||w||}$，等价于最小化$||w||$，等价于最小化$\frac{1}{2}||w||^2$，故上式等价于:</p>
+<script type="math/tex; mode=display">
+\min \limits_{w,b}\frac{1}{2}{||w||^2}=\frac{1}{2}\sum_{j=1}w_i^2\\
+s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -441,6 +483,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/12/C-Programing-Language/" rel="prev" title="C++ Programing Language">
+                C++ Programing Language <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -517,7 +563,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -528,7 +574,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -539,7 +585,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -572,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">2.</span> <span class="nav-text">Python</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对偶问题"><span class="nav-number">3.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">4.</span> <span class="nav-text">Python</span></a></li></ol></div>
             
 
           </div>
