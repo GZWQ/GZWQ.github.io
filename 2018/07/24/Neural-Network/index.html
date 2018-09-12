@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235024692.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235337038.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/CFC5A1C95A84A6D8CF3FFC1DD30597782AEEAE57_size20_w740_h231.jpeg">
-<meta property="og:updated_time" content="2018-09-05T21:45:22.255Z">
+<meta property="og:updated_time" content="2018-09-09T02:47:22.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network">
 <meta name="twitter:description" content="本节介绍最基本的神经网络。">
@@ -653,6 +653,32 @@ w_{ji}\gets w_{ji}+\eta\delta_jx_{ji}\qquad</script><p>其中，$w_ji$是节点$
 <script type="math/tex; mode=display">
 \delta_j=a_j(1-a_j)\sum_{k\in Downstream(j)}\delta_kw_{kj}</script>
 </div></div> 
+<h2 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h2><p>假设我们三层神经网络，即输入层、隐藏层和输出层，使用$L_2$损失函数。</p>
+<ul>
+<li><p>输入是<code>x</code>，令<code>a1=x</code>。</p>
+</li>
+<li><p>前向传播</p>
+<ul>
+<li><p>输入层-隐藏层的前向传播：<code>z2=a1*w1</code></p>
+</li>
+<li><p>输入层-隐藏层的激活函数：<code>a2=sigmoid(z2)</code></p>
+</li>
+<li><p>隐藏层-输出层的前向传播：<code>z3=a2*w2</code></p>
+</li>
+<li><p>隐藏层-输出层的激活函数：<code>h=sigmoid(z3)</code></p>
+</li>
+</ul>
+</li>
+<li><p>后向传播</p>
+<ul>
+<li>输出层-隐藏层的损失：<code>h_err=(h-y)*sigmoid_prime(h)</code></li>
+<li>输出层-隐藏层的梯度：<code>h_delta=h_err*a2</code></li>
+<li>隐藏层-输入层的损失：<code>z2_err=(h_err*w2)*sigmoid_prime(a2)</code></li>
+<li>隐藏层-输入层的梯度：<code>z2_delta=z2_err*a1</code></li>
+<li>更新梯度：<code>w1 -= z2_delta</code>,<code>w2 -= h_delta</code></li>
+</ul>
+</li>
+</ul>
 <h2 id="Python-实现"><a href="#Python-实现" class="headerlink" title="Python 实现"></a>Python 实现</h2><h3 id="Toy-Example"><a href="#Toy-Example" class="headerlink" title="Toy Example"></a><a href="https://dev.to/shamdasani/build-a-flexible-neural-network-with-backpropagation-in-python" target="_blank" rel="noopener">Toy Example</a></h3><p>在该例子中，我们将建模一个具有二输入、一输出和一隐藏层的神经网络，该网络用于预测考试成绩基于两个输入：学习时间和睡觉时间。以下为训练样本：</p>
 <div class="table-container">
 <table>
@@ -826,13 +852,86 @@ Loss=\frac{1}{2m}\sum_{i=1}^{m}(o_i-y_i)</script><p>其中，$o_i$是对$i_{th}$
 <div class="line">3</div>
 <div class="line">4</div>
 <div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line">theta = np.zeros(hidden_size*(input_size+<span class="number">1</span>)+output_size*(hidden_size+<span class="number">1</span>))</div>
+</pre></td><td class="code"><pre><div class="line">theta = np.random.randn(hidden_size*(input_size+<span class="number">1</span>)+output_size*(hidden_size+<span class="number">1</span>))</div>
 <div class="line">theta1 = theta[<span class="number">0</span>:hidden_size*(input_size+<span class="number">1</span>)]</div>
 <div class="line">theta1 = theta1.reshape(hidden_size,input_size+<span class="number">1</span>)</div>
 <div class="line">theta2 = theta[hidden_size*(input_size+<span class="number">1</span>):]</div>
 <div class="line">theta2 = theta2.reshape(output_size,hidden_size+<span class="number">1</span>)</div>
 </pre></td></tr></table></figure>
-<h4 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h4><h4 id="前向传播-2"><a href="#前向传播-2" class="headerlink" title="前向传播"></a>前向传播</h4><p>输入是$x$，其维度是（$batch_size, 400$），我们需要对其插入一列全1偏置向量，得到新输入$a_1$变成（$batch_size, 401$）维：</p>
+<blockquote>
+<p>不要将权重参数初始化为0</p>
+</blockquote>
+<h4 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h4><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">displayData</span><span class="params">(self,example_width=None, figsize=<span class="params">(<span class="number">10</span>, <span class="number">10</span>)</span>)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Displays 2D data stored in X in a nice grid.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    <span class="comment"># Compute rows, cols</span></div>
+<div class="line">    rand_indices = np.random.choice(len(self.y), <span class="number">100</span>, replace=<span class="keyword">False</span>)</div>
+<div class="line">    X = self.x[rand_indices, :]</div>
+<div class="line">    <span class="keyword">if</span> X.ndim == <span class="number">2</span>:</div>
+<div class="line">        m, n = X.shape</div>
+<div class="line">    <span class="keyword">elif</span> X.ndim == <span class="number">1</span>:</div>
+<div class="line">        n = X.size</div>
+<div class="line">        m = <span class="number">1</span></div>
+<div class="line">        X = X[<span class="keyword">None</span>]  <span class="comment"># Promote to a 2 dimensional array</span></div>
+<div class="line">    <span class="keyword">else</span>:</div>
+<div class="line">        <span class="keyword">raise</span> IndexError(<span class="string">'Input X should be 1 or 2 dimensional.'</span>)</div>
+<div class="line"></div>
+<div class="line">    example_width = example_width <span class="keyword">or</span> int(np.round(np.sqrt(n)))</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Compute number of items to display</span></div>
+<div class="line">    display_rows = int(np.floor(np.sqrt(m)))</div>
+<div class="line">    display_cols = int(np.ceil(m / display_rows))</div>
+<div class="line"></div>
+<div class="line">    fig, ax_array = pyplot.subplots(display_rows, display_cols, figsize=figsize)</div>
+<div class="line">    fig.subplots_adjust(wspace=<span class="number">0.025</span>, hspace=<span class="number">0.025</span>)</div>
+<div class="line"></div>
+<div class="line">    ax_array = [ax_array] <span class="keyword">if</span> m == <span class="number">1</span> <span class="keyword">else</span> ax_array.ravel()</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> i, ax <span class="keyword">in</span> enumerate(ax_array):</div>
+<div class="line">        <span class="comment"># Display Image</span></div>
+<div class="line">        h = ax.imshow(X[i].reshape(example_width, example_width, order=<span class="string">'F'</span>),</div>
+<div class="line">                      cmap=<span class="string">'Greys'</span>, extent=[<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>])</div>
+<div class="line">        ax.axis(<span class="string">'off'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="前向传播-2"><a href="#前向传播-2" class="headerlink" title="前向传播"></a>前向传播</h4><p>输入是$x$，其维度是（$batch_size, 400$），我们需要对其插入一列全1偏置向量，得到新输入$a_1$变成（$batch_size, 401$）维：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 </pre></td><td class="code"><pre><div class="line">row,col = np.shape</div>
@@ -894,6 +993,16 @@ Loss=\frac{1}{2m}\sum_{i=1}^{m}(o_i-y_i)</script><p>其中，$o_i$是对$i_{th}$
 <h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>我们利用神经网络进行分类任务，所以我们使用交叉熵来衡量损失：</p>
 <p><img src="/2018/07/24/Neural-Network/Screen Shot 2018-09-02 at 4.03.40 PM.png" alt="Screen Shot 2018-09-02 at 4.03.40 PM"></p>
 <p>上式是增加了正则化项的损失函数，其中$m$是样本数，即$batch_size$；$K$是输出神经元数，即$output_size$；$\lambda$是学习速率；需要注意的是，正则化项没有偏置参数。</p>
+<blockquote>
+<p><a href="https://blog.csdn.net/sinat_29819401/article/details/60885679" target="_blank" rel="noopener">why regularization</a> </p>
+<p>除了偏置神经元的权重之外，我们对网络的所有神经元的权重平方和作为正则化项。在求损失函数对权重的梯度时，在原来的梯度计算基础上，加上$\frac{\lambda}{m}\theta$。</p>
+<p>回忆起$L_2$的梯度更新公式：</p>
+<script type="math/tex; mode=display">
+\frac{\partial Cost}{\partial \theta}=\frac{\partial Cost}{\partial h}\frac{\partial h}{\partial z}\frac{\partial z}{\partial \theta}=(h-y)\sigma'(h)x</script><p>其中$L_2$的$\frac{\partial Cost}{\partial h}=(h-y)$，但是对于交叉熵而言$\frac{\partial Cost}{\partial h}=\frac{h-y}{h(1-h)}=\frac{h-y}{\sigma’(h)}$</p>
+<p>$\frac{\partial Cost}{\partial h}$代入上式：</p>
+<script type="math/tex; mode=display">
+\frac{\partial Cost}{\partial \theta}=\frac{\partial Cost}{\partial h}\frac{\partial h}{\partial z}\frac{\partial z}{\partial \theta}=\frac{h-y}{\sigma'(h)}\sigma'(h)x=(h-y)x</script><p>可以看出，偏导数是由$(h-y)$控制，模型的输出$h$与标签$y$之间的差异越大，偏导数就会越大，学习就会越快。</p>
+</blockquote>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -946,10 +1055,98 @@ sigmoid'(z)=z(1-z)</script><figure class="highlight python"><table><tr><td class
 <p>$err_2=sigmoid_{gradient}(a_2)<em>err_3.  </em>theta_2$,$shape=(batch_size,hidden_size+1)$</p>
 <p>输入层与隐藏层之间的梯度：</p>
 <p>$\delta_2=[err_2]^T.*a_1$，$shape=(hidden_size,input_size+1)$</p>
+<h3 id="KERAS版本实现"><a href="#KERAS版本实现" class="headerlink" title="KERAS版本实现"></a>KERAS版本实现</h3><p><code>100epoch</code>训练之后的正确率为<code>94.56%</code>。</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+</pre></td><td class="code"><pre><div class="line">from keras.layers import Input, Dense</div>
+<div class="line">from keras.optimizers import Adam</div>
+<div class="line">from keras.models import Model</div>
+<div class="line">from scipy.io import loadmat</div>
+<div class="line">from sklearn.preprocessing import OneHotEncoder</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">class Ann():</div>
+<div class="line">    def __init__(self):</div>
+<div class="line">        self.input_size = 400</div>
+<div class="line">        self.hidden_size = 25</div>
+<div class="line">        self.output_size = 10</div>
+<div class="line"></div>
+<div class="line">        opt = Adam(lr=0.0002,beta_1=0.5)</div>
+<div class="line"></div>
+<div class="line">        self.ann = self.make_model()</div>
+<div class="line">        self.ann.compile(loss=&apos;categorical_crossentropy&apos;,</div>
+<div class="line">                         optimizer=opt,</div>
+<div class="line">                         metrics=[&apos;accuracy&apos;])</div>
+<div class="line"></div>
+<div class="line">    def make_model(self):</div>
+<div class="line">        inputs = Input((self.input_size,))</div>
+<div class="line">        h = Dense(self.hidden_size,activation=&apos;sigmoid&apos;)(inputs)</div>
+<div class="line">        outputs = Dense(self.output_size,activation=&apos;sigmoid&apos;)(h)</div>
+<div class="line">        model = Model(inputs,outputs)</div>
+<div class="line">        model.summary()</div>
+<div class="line">        return model</div>
+<div class="line"></div>
+<div class="line">    def train(self):</div>
+<div class="line">        data = loadmat(&apos;dataset/ex3data1.mat&apos;)</div>
+<div class="line">        X = data[&apos;X&apos;]</div>
+<div class="line">        y = data[&apos;y&apos;]</div>
+<div class="line">        encoder = OneHotEncoder(sparse=False)</div>
+<div class="line">        y = encoder.fit_transform(y)</div>
+<div class="line"></div>
+<div class="line">        results = self.ann.fit(X,y,epochs=100)</div>
+<div class="line"></div>
+<div class="line">if __name__ == &apos;__main__&apos;:</div>
+<div class="line">    ann = Ann()</div>
+<div class="line">    ann.train()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h3 id="梯度检查"><a href="#梯度检查" class="headerlink" title="梯度检查"></a>梯度检查</h3><p>实现了神经网络的前向传播和后向传播之后，为保证我们的代码能正确运行，在进行神经网络训练数据之前，我们需要检查梯度是否正确。最简单的方法是将神经网络的梯度与我们手工计算得梯度进行比较。</p>
 <script type="math/tex; mode=display">
 \frac{\partial Cost}{\partial \theta}=\frac{Cost(\theta +\epsilon)-Cost(\theta -\epsilon)}{2\epsilon}</script><p>也就是说，反向传播计算出来的梯度应该近似上述式子计算出来的梯度，否则我们的代码有误。</p>
 <p>一般的，我们设置$\epsilon=10^{-7}$，而两个梯度之间的差异应该小于$10^{-7}$。</p>
+<ol>
+<li><a href="https://www.leiphone.com/news/201711/MWEDFvRMdOyN7Evm.html" target="_blank" rel="noopener">神经网络中容易被忽视的基础知识</a> </li>
+</ol>
 <h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
 <p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
 <p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
@@ -1105,7 +1302,7 @@ C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id=
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1127,7 +1324,7 @@ C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id=
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1160,7 +1357,7 @@ C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id=
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前向传播"><span class="nav-number">1.3.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络的矩阵表示"><span class="nav-number">1.3.2.</span> <span class="nav-text">神经网络的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">1.3.3.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出层"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏层"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">隐藏层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-实现"><span class="nav-number">1.4.</span> <span class="nav-text">Python 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Toy-Example"><span class="nav-number">1.4.1.</span> <span class="nav-text">Toy Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-1"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-1"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNIST手写体数字分类"><span class="nav-number">1.4.2.</span> <span class="nav-text">MNIST手写体数字分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据可视化"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-2"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-2"><span class="nav-number">1.4.2.4.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度检查"><span class="nav-number">1.4.3.</span> <span class="nav-text">梯度检查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">2.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">2.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">2.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">2.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">2.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">2.5.</span> <span class="nav-text">Softmax函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">3.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">3.1.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">3.2.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">4.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">5.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">6.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前向传播"><span class="nav-number">1.3.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络的矩阵表示"><span class="nav-number">1.3.2.</span> <span class="nav-text">神经网络的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">1.3.3.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出层"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏层"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">隐藏层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法步骤"><span class="nav-number">1.4.</span> <span class="nav-text">算法步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-实现"><span class="nav-number">1.5.</span> <span class="nav-text">Python 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Toy-Example"><span class="nav-number">1.5.1.</span> <span class="nav-text">Toy Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-1"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNIST手写体数字分类"><span class="nav-number">1.5.2.</span> <span class="nav-text">MNIST手写体数字分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据可视化"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-2"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-2"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KERAS版本实现"><span class="nav-number">1.5.3.</span> <span class="nav-text">KERAS版本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度检查"><span class="nav-number">1.5.4.</span> <span class="nav-text">梯度检查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">2.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">2.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">2.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">2.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">2.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">2.5.</span> <span class="nav-text">Softmax函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">3.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">3.1.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">3.2.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">4.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">5.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">6.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
             
 
           </div>

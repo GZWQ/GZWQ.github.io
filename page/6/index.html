@@ -283,6 +283,239 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/28/DP-Application-Random-Response/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/28/DP-Application-Random-Response/" itemprop="url">DP Application - Random Response</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-28T17:31:23-05:00">
+                2018-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
+                    <span itemprop="name">Differential Privacy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://link.springer.com/content/pdf/10.1007%2F978-3-319-45871-7_17.pdf" target="_blank" rel="noopener">[2016-Atsushi]</a> gives a comprehensive survey about random response. Randomized response tends to be used in data collection scenario.Randomized response is purely a client-based privacy solution. It does not rely upon a trusted third-party server and puts control over data back to clients. The basic idea is answer truthfully with probability $p$, and answer randomly by picking a answer from the rest choices with probability $1-p$. And the rest choices include the true answer.</p>
+<h3 id="Random-Response-and-its-Variant"><a href="#Random-Response-and-its-Variant" class="headerlink" title="Random Response and its  Variant"></a>Random Response and its  Variant</h3><h4 id="Definition-2016-Wang"><a href="#Definition-2016-Wang" class="headerlink" title="Definition[2016-Wang]"></a>Definition<a href="http://ceur-ws.org/Vol-1558/paper35.pdf" target="_blank" rel="noopener">[2016-Wang]</a></h4><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 10.18.29 PM.png" alt="Screen Shot 2018-05-29 at 10.18.29 PM"></p>
+<h4 id="Warner-Version"><a href="#Warner-Version" class="headerlink" title="Warner Version"></a>Warner Version</h4><p>Random response was first proposed by [1965-Warner]. The aim is to estimate the proportion $\pi(A)$ of people who have some attribute A.</p>
+<p>Each user has  reports her true answer $t\in \{1,-1\}​$ with probability p, and a random answer with probability 1 − p. The latter has the same probability to be −1 and +1;</p>
+<h5 id="Framework"><a href="#Framework" class="headerlink" title="Framework"></a>Framework</h5><ol>
+<li>There are red cards and non-red cards in a box, where the ratio of red cards among all the cards is $q$ with $0 &lt; q &lt; 1$ and $q \ne \frac{1}{2}$. And user draws a card.</li>
+<li>If red, answer truthfully to the question “I am a member of A”</li>
+<li>Otherwise, answer truthfully to the question “I am a member of A”</li>
+</ol>
+<h5 id="Utility"><a href="#Utility" class="headerlink" title="Utility"></a>Utility</h5><p>Let $\hat{T}$ be the proportion to which the respondents reply “True.” It is easy to see that the expectation of $\hat{T}$  is:</p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 12.40.16 AM.png" alt="Screen Shot 2018-05-29 at 12.40.16 AM"></p>
+<h5 id="Privacy-Analysis"><a href="#Privacy-Analysis" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p>According to the definition of Differential Privacy, the following ratio should be bounded,</p>
+<script type="math/tex; mode=display">
+P(A|A)\le{e^\epsilon{P(A|not \ A)}}\\
+P(A|not \ A)\le{e^\epsilon{P(A|A)}}</script><p>$P(A|A)=q​$</p>
+<p>$P(A| not \ A)=(1-q)$</p>
+<p>So combining the above two, we have:</p>
+<p>The randomized response satisfied $\epsilon$-Differential Privacy, where</p>
+<script type="math/tex; mode=display">
+\epsilon=max\{ln\frac{1-q}{q},ln\frac{q}{1-q}  \}</script><p><img src="/2018/05/28/DP-Application-Random-Response/myplot.jpeg" alt="myplot"></p>
+<h4 id="Kuk-Version"><a href="#Kuk-Version" class="headerlink" title="Kuk Version"></a>Kuk Version</h4><p>Kuk’s proposed another kind of randomized response mechanism to estimate the proportion $\pi_A$, the same as Warner’s mechanism. </p>
+<h5 id="Framework-1"><a href="#Framework-1" class="headerlink" title="Framework"></a>Framework</h5><ol>
+<li>There are two boxes, $BOX_1$ and $BOX_2$. There are red and non-red cards in each box and the ratio of red cards in each box is $q_1,q_2$ respectively, where $0&lt;q_1,q_2&lt;1, q_1\ne{q_2}$. User takes one card from each box.</li>
+<li>If this user is a member of A, then replies “red card” or “non-red card” in accordance<br>with the card taken from $BOX_1$</li>
+<li>Otherwise, he does the same as above except that he takes a card from $BOX_2$.</li>
+</ol>
+<h5 id="Privacy-Analysis-1"><a href="#Privacy-Analysis-1" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.08.31 AM.png" alt="Screen Shot 2018-05-29 at 1.08.31 AM"></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.08.51 AM.png" alt="Screen Shot 2018-05-29 at 1.08.51 AM"></p>
+<h4 id="Negative-Survey-Mechanism"><a href="#Negative-Survey-Mechanism" class="headerlink" title="Negative Survey Mechanism"></a>Negative Survey Mechanism</h4><h5 id="Framework-2"><a href="#Framework-2" class="headerlink" title="Framework"></a>Framework</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.10.11 AM.png" alt="Screen Shot 2018-05-29 at 1.10.11 AM"></p>
+<h5 id="Privacy-Analysis-2"><a href="#Privacy-Analysis-2" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.11.13 AM.png" alt="Screen Shot 2018-05-29 at 1.11.13 AM"></p>
+<h4 id="t-times-Negative-Survey"><a href="#t-times-Negative-Survey" class="headerlink" title="t-times Negative Survey"></a>t-times Negative Survey</h4><h5 id="Privacy-Analysis-3"><a href="#Privacy-Analysis-3" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.12.13 AM-7574379.png" alt="Screen Shot 2018-05-29 at 1.12.13 AM-7574379"></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-05-29 at 1.12.36 AM.png" alt="Screen Shot 2018-05-29 at 1.12.36 AM"></p>
+<h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><h4 id="2011-Quercia"><a href="#2011-Quercia" class="headerlink" title="[2011-Quercia] "></a><a href="https://pdfs.semanticscholar.org/7e74/15857ddcc798affff74d7e615b0d29f6bf74.pdf" target="_blank" rel="noopener">[2011-Quercia] </a></h4><blockquote>
+<h5 id="Framework-3"><a href="#Framework-3" class="headerlink" title="Framework"></a>Framework</h5><p>[2011-Quercia] uses random response to obfuscate locations.</p>
+<p>Let $k$ be the number of locations on a map. Then, the main part of SpotMe works as follows:</p>
+<ol>
+<li>the mobile phone chooses the location k uniformly at random with probability $p$</li>
+<li>it chooses the true location with probability $1-p$</li>
+</ol>
+<h5 id="Privacy-Analysis-4"><a href="#Privacy-Analysis-4" class="headerlink" title="Privacy Analysis"></a>Privacy Analysis</h5><p>According to the definition of Differential Privacy, the following ratio should be bounded,</p>
+<script type="math/tex; mode=display">
+P(L_{noise}|L_{true})\le{e^{\epsilon}P(L_{true}|L^{'}_{true})}</script><p>where $L_{true}$ is user’s actual location and $L^{‘}_{true}$ is the user’s location after making some changes while $L_{noise}$ is user’s obfuscated location.</p>
+<p>$P(L_{true}|L_{true})=(1-p)+p*\frac{1}{k}$</p>
+<p>$P(L_{true}|L^{‘}_{true})=p*\frac{1}{k}$</p>
+<p>so after combining above two formulations, we have privacy bugdet:</p>
+<script type="math/tex; mode=display">
+\epsilon=ln\frac{k-(k-1)p}{p}</script></blockquote>
+<h4 id="2016-Wang"><a href="#2016-Wang" class="headerlink" title="[2016-Wang]"></a><a href="http://ceur-ws.org/Vol-1558/paper35.pdf" target="_blank" rel="noopener">[2016-Wang]</a></h4><blockquote>
+<p>Randomized Response vs. Laplace Mechanism</p>
+<p><u><strong>Randomized Response</strong></u> </p>
+<p>Without loss of generality, we assume the randomized response still favors the true value, i.e., $p_{00}, p_{11} &gt; 0.5$. Intuitively, under the same privacy standard, the mechanism with larger diagonal elements in the corresponding design matrix tends to achieve better utility.</p>
+<ul>
+<li><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.09.06%20PM.png" alt="Screen Shot 2018-06-01 at 5.09.06 PM"></li>
+<li>What is the proportion of $X=1$? It aims to o learn the population distribution based on the collected randomized dataset. We use $\pi_1$to denote the true proportion of value 1 to be estimated in the original population. The observed proportion of value 1 in the collected dataset is denoted as $\lambda_1$. We denote the unbiased estimator for $\pi_1$ respectively as $\hat{\pi}_1$. </li>
+<li><p><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.13.14%20PM.png" alt="Screen Shot 2018-06-01 at 5.13.14 PM"></p>
+<p><strong><u>Laplace Mechanism</u></strong></p>
+</li>
+<li><p><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.22.11%20PM.png" alt="Screen Shot 2018-06-01 at 5.22.11 PM"></p>
+</li>
+<li><img src="/2018/05/28/DP-Application-Random-Response/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.23.19%20PM-7891843.png" alt="Screen Shot 2018-06-01 at 5.23.19 PM-7891843"></li>
+<li><img src="/2018/05/28/DP-Application-Random-Response/Screen%20Shot%202018-06-01%20at%205.24.26%20PM.png" alt="Screen Shot 2018-06-01 at 5.24.26 PM"></li>
+<li></li>
+</ul>
+</blockquote>
+<h4 id="2006-Huseyin"><a href="#2006-Huseyin" class="headerlink" title="[2006-Huseyin]"></a><a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.78.3576&amp;rep=rep1&amp;type=pdf" target="_blank" rel="noopener">[2006-Huseyin]</a></h4><p><strong>One-Group Scheme</strong>s  vs <strong>Multi-Group Schemes</strong>. </p>
+<blockquote>
+<p>in my understanding, one-group means there arw n users and m items. for a user, all the items rating are in a group. For example, user_i’s true rateing for all items is (0101),with probability theta to upload (0101) and (1-theta) probability to upload (1010).</p>
+<p>And in m-group, for example m=2, then user_i’s rating is (01)and(11). with probability theta1 to upload (01) and (1-theta1) to upload (10); theta2 to upload(11) and (1-theta2) to upload (00)</p>
+<p>Although we achieve decent accuracy in this scheme, the privacy level is very low. We improve privacy level by introducing multi-group schemes, while with increasing M, accuracy decreases because we add more randomness. The accuracy is from how much info is preserved after randomness. The more info, the more accurate. P(true=x|randon resp = x) means preserved info. m-group info preserved: $P^m$</p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-06-02 at 4.16.46 PM.png" alt="Screen Shot 2018-06-02 at 4.16.46 PM"></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-06-02 at 4.16.55 PM.png" alt="Screen Shot 2018-06-02 at 4.16.55 PM"></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-06-02 at 4.17.21 PM.png" alt="Screen Shot 2018-06-02 at 4.17.21 PM"></p>
+</blockquote>
+<p><strong>Private Mechanism With Full Privacy</strong></p>
+<blockquote>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-06-02 at 4.20.01 PM.png" alt="Screen Shot 2018-06-02 at 4.20.01 PM"></p>
+</blockquote>
+<h4 id="2014-Sun"><a href="#2014-Sun" class="headerlink" title="[2014-Sun]"></a><a href="https://pdfs.semanticscholar.org/ff20/5884c8e34f8a1d6616809ca532e6ed801393.pdf?_ga=2.49109027.44169730.1528666244-1946321552.1526143877" target="_blank" rel="noopener">[2014-Sun]</a></h4><blockquote>
+<p>The problem setting is how to find frequent itemset with privacy. Say we have the item set $I={I_1,I_2,..,I_n}$. Before each user sends out their transaction which is $n$-dimention vector and ithe entry being 1 means this user has this item or else, he does the the randomized selection for each item. That is, keep true answer with probability $p_i$ for item i and  perturb the answer with $1-p$. And p controls the privacy level.</p>
+<p>For k-itemset, we want to find out its support, which comes from the estimator based on the perturbed data. Say we want to calculate the support of $2$-itemset. And the item set is $\{A,B,C,D\}$. And the candidate domain is $\{AB,AC,AD,BC,BD,CD\}$. The aim is to get the true count of $AB, \ c(AB)$, which is $11$ and may comes from $\{00,01,10,11\}$, with the probability matrix $P=\matrix{p_{00},p_{01}\\p_{10},p_{11}}$. so based on the observed count of $[A=0,B=0],[A=0,B=1],[A=1,B=0],[A=1,B=1]$ we can get estimator count matrix by $C_{observed}=PC_{estimator}\to C_{estimator}=P^{-1}C_{observed}$. And the support for $AB$ is $C_{estimator}[-1]$.</p>
+</blockquote>
+<p>Basic RAPPOR</p>
+<blockquote>
+<p><a href="https://arxiv.org/pdf/1503.01214.pdf" target="_blank" rel="noopener">[Building a RAPPOR with the Unknown: Privacy-Preserving Learning of Associations and Data Dictionaries]</a></p>
+<p><img src="/2018/05/28/DP-Application-Random-Response/Screen Shot 2018-06-17 at 11.08.18 AM.png" alt="Screen Shot 2018-06-17 at 11.08.18 AM"></p>
+</blockquote>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[2011-Quercia] SpotME if you can: randomized responses for location obfuscation on mobile phones</p>
+<p>[1965-Warner] Randomized response: a survey technique for eliminating evasive answer bias</p>
+<p>[2016-Wang] Using Randomized Response for Differential Privacy Preserving Data Collection </p>
+<p>[2006-Huseyin] Achieving Private Recommendations Using Randomized Response Techniques</p>
+<p>[2014-Sun] Personalized Privacy-Preserving Frequent Itemset Mining Using Randomized Response</p>
+<p>[]</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/DP-Application-Location-Protection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1550,7 +1783,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1572,7 +1805,7 @@ m_2=\lceil{\sqrt{\frac{N'\times{\epsilon_2}}{k_2=5}}}\rceil</script></li>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
