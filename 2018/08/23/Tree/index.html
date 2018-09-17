@@ -89,7 +89,8 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/23/Tree/Screen%20Shot%202018-08-25%20at%204.47.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/23/Tree/Screen%20Shot%202018-08-25%20at%204.49.46%20PM.png">
-<meta property="og:updated_time" content="2018-09-10T21:16:23.435Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/23/Tree/Screen%20Shot%202018-09-17%20at%2012.28.26%20PM.png">
+<meta property="og:updated_time" content="2018-09-17T17:29:05.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tree">
 <meta name="twitter:description" content="树的定义 队列">
@@ -914,7 +915,215 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Binary-Tree-Paths-1"><a href="#Binary-Tree-Paths-1" class="headerlink" title="Binary Tree Paths"></a><a href="https://leetcode.com/problems/binary-tree-paths/description/" target="_blank" rel="noopener">Binary Tree Paths</a></h4><h5 id="题目-9"><a href="#题目-9" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Longest-Univalue-Path"><a href="#Longest-Univalue-Path" class="headerlink" title="Longest Univalue Path"></a><a href="https://leetcode.com/problems/longest-univalue-path/description/" target="_blank" rel="noopener">Longest Univalue Path</a></h4><h5 id="题目-9"><a href="#题目-9" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given a binary tree, find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.</p>
+<p><strong>Note:</strong> The length of path between two nodes is represented by the number of edges between them.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">    <span class="number">5</span></div>
+<div class="line">   / \</div>
+<div class="line">  <span class="number">4</span>   <span class="number">5</span></div>
+<div class="line"> / \   \</div>
+<div class="line"><span class="number">1</span>   <span class="number">1</span>   <span class="number">5</span></div>
+</pre></td></tr></table></figure>
+<p>Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">2</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<p>Input:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">    <span class="number">1</span></div>
+<div class="line">   / \</div>
+<div class="line">  <span class="number">4</span>   <span class="number">5</span></div>
+<div class="line"> / \   \</div>
+<div class="line"><span class="number">4</span>   <span class="number">4</span>   <span class="number">5</span></div>
+</pre></td></tr></table></figure>
+<p>Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">2</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h5 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找出树上最长路径，使该路径上每个节点值都相同。并不要求该路径一定要经过根，路径上边的数量表示路径长度。</p>
+<p>这道题的思路类似<a href="https://leetcode.com/problems/path-sum-iii/description/" target="_blank" rel="noopener">Path Sum III</a>，因为允许不经过root。首先来分析节点值相同的路径的集中情况，题目给出的两个例子包含了所有的两种情况：例子1是路径由父母节点和其某个子树构成；例子2路径存在某个子树中，不经过父亲节点。</p>
+<p>情况一：如果根节点的值与子节点值相同，那么递归求解左右子树下的路径，然后选择长度更长的路径+1。</p>
+<p>情况二：</p>
+<h5 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span><span class="params">(self,rootval,root)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> rootval!=root.val :<span class="keyword">return</span> <span class="number">0</span></div>
+<div class="line">        l = self.find(root.val,root.left)</div>
+<div class="line">        r = self.find(root.val,root.right)</div>
+<div class="line">        <span class="keyword">return</span> <span class="number">1</span>+max(l,r)</div>
+<div class="line">        </div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestUnivaluePath</span><span class="params">(self, root)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></div>
+<div class="line">        l = self.longestUnivaluePath(root.left)</div>
+<div class="line">        r = self.longestUnivaluePath(root.right)</div>
+<div class="line">        <span class="keyword">return</span> max( max(l,r), self.find(root.val,root.left)+self.find(root.val,root.right) )</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Second-Minimum-Node-In-a-Binary-Tree"><a href="#Second-Minimum-Node-In-a-Binary-Tree" class="headerlink" title="Second Minimum Node In a Binary Tree"></a><a href="https://leetcode.com/problems/second-minimum-node-in-a-binary-tree/description/" target="_blank" rel="noopener">Second Minimum Node In a Binary Tree</a></h4><h5 id="题目-10"><a href="#题目-10" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given a non-empty special binary tree consisting of nodes with the non-negative value, where each node in this tree has exactly <code>two</code>or <code>zero</code> sub-node. If the node has two sub-nodes, then this node’s value is the smaller value among its two sub-nodes.</p>
+<p>Given such a binary tree, you need to output the <strong>second minimum</strong> value in the set made of all the nodes’ value in the whole tree.</p>
+<p>If no such second minimum value exists, output -1 instead.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line">Input: </div>
+<div class="line">    <span class="number">2</span></div>
+<div class="line">   / \</div>
+<div class="line">  <span class="number">2</span>   <span class="number">5</span></div>
+<div class="line">     / \</div>
+<div class="line">    <span class="number">5</span>   <span class="number">7</span></div>
+<div class="line"></div>
+<div class="line">Output: <span class="number">5</span></div>
+<div class="line">Explanation: The smallest value is <span class="number">2</span>, the second smallest value is <span class="number">5</span>.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Input: </div>
+<div class="line">    <span class="number">2</span></div>
+<div class="line">   / \</div>
+<div class="line">  <span class="number">2</span>   <span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">Output: -<span class="number">1</span></div>
+<div class="line">Explanation: The smallest value is <span class="number">2</span>, but there isn<span class="string">'t any second smallest value.</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h5 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h5><p>题目大意：给定一棵树，这棵树上的节点要么没有子树，要么一定有左右子树而且左右子树的节点值一定不小于该节点值。现在求该树上的第二小的值。</p>
+<p>根据该树的描述，根节点一定是最小的，那么就遍历树找比根节点大，但又小于剩下的节点值。那么如何找出满足条件的值呢？我们初始化<code>secondNum=max_value</code>，每次遍历一个节点，只要满足<code>root.val&lt;current_node.val&lt;secondNum</code>，我们就更新：<code>secondNum=current_node.val</code>。使用<code>DFS</code>和<code>BFS</code>两种方法遍历，发现第一种方法更快。<code>dfs:36ms</code> 而<code>bfs:44ms</code></p>
+<h5 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dfs</span><span class="params">(self,root,first,second)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> first&lt;root.val&lt;second:</div>
+<div class="line">            second = root.val</div>
+<div class="line">        <span class="keyword">if</span> root.left:</div>
+<div class="line">            second = self.dfs(root.left,first,second)</div>
+<div class="line">            second = self.dfs(root.right,first,second)</div>
+<div class="line">        <span class="keyword">return</span> second</div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findSecondMinimumValue</span><span class="params">(self, root)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type root: TreeNode</span></div>
+<div class="line"><span class="string">        :rtype: int</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">-1</span></div>
+<div class="line">        second = sys.maxsize</div>
+<div class="line">        second = self.dfs(root,root.val,second)</div>
+<div class="line">        <span class="keyword">if</span> second == sys.maxsize:</div>
+<div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            <span class="keyword">return</span> second</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> queue</div>
+<div class="line"><span class="keyword">import</span> sys</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findSecondMinimumValue</span><span class="params">(self, root)</span>:</span></div>
+<div class="line">        <span class="string">"""</span></div>
+<div class="line"><span class="string">        :type root: TreeNode</span></div>
+<div class="line"><span class="string">        :rtype: int</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        secondNum = sys.maxsize</div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">-1</span></div>
+<div class="line">        qu = queue.Queue()</div>
+<div class="line">        qu.put(root)</div>
+<div class="line">        <span class="keyword">while</span> qu.qsize()&gt;<span class="number">0</span>:</div>
+<div class="line">            node = qu.get()</div>
+<div class="line">            <span class="keyword">if</span> node.val&gt;root.val <span class="keyword">and</span> node.val&lt;secondNum:</div>
+<div class="line">                secondNum = node.val</div>
+<div class="line">            <span class="keyword">if</span> node.left:</div>
+<div class="line">                qu.put(node.left)</div>
+<div class="line">                qu.put(node.right)</div>
+<div class="line">        <span class="keyword">if</span> secondNum==sys.maxsize:</div>
+<div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            <span class="keyword">return</span> secondNum</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Binary-Tree-Paths-1"><a href="#Binary-Tree-Paths-1" class="headerlink" title="Binary Tree Paths"></a><a href="https://leetcode.com/problems/binary-tree-paths/description/" target="_blank" rel="noopener">Binary Tree Paths</a></h4><h5 id="题目-11"><a href="#题目-11" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a binary tree, return all root-to-leaf paths.</p>
 <p><strong>Note:</strong> A leaf is a node with no children.</p>
 <p><strong>Example:</strong></p>
@@ -943,9 +1152,9 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找到一棵树的全部路径。</p>
+<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找到一棵树的全部路径。</p>
 <p>递归求解，如果碰到一个节点是叶子，即没有左右子树，则找到了一条路径，返回。否则，将该节点值加入路径，然后递归求解其左右子树。</p>
-<h5 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -985,7 +1194,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><a href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree" class="headerlink" title="Lowest Common Ancestor of a Binary Search Tree"></a><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/" target="_blank" rel="noopener">Lowest Common Ancestor of a Binary Search Tree</a></h4><h5 id="题目-10"><a href="#题目-10" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><a href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree" class="headerlink" title="Lowest Common Ancestor of a Binary Search Tree"></a><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/" target="_blank" rel="noopener">Lowest Common Ancestor of a Binary Search Tree</a></h4><h5 id="题目-12"><a href="#题目-12" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a binary search tree (BST), find the lowest common ancestor (LCA) of two given nodes in the BST.</p>
 <p>According to the <a href="https://en.wikipedia.org/wiki/Lowest_common_ancestor" target="_blank" rel="noopener">definition of LCA on Wikipedia</a>: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow <strong>a node to be a descendant of itself</strong>).”</p>
 <p>Given binary search tree:  root = [6,2,8,0,4,7,9,null,null,3,5]</p>
@@ -1029,9 +1238,9 @@
 </ul>
 
 </div></div>
-<h5 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在二分搜索树树上寻找两个节点的最近祖先，节点本身就是该节点的祖先。</p>
+<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在二分搜索树树上寻找两个节点的最近祖先，节点本身就是该节点的祖先。</p>
 <p>做这道题一定要利用这棵树是二分搜索树的相关性质：即左子树的节点值小于根节点值，而右子树的节点值大于根节点值。那么如果两个节点分落在一个节点的左右子树，那么共同祖先只有一个，便是该点；如果两个节点在一个节点的同一个子树，那么判断是否其中一个节点是另一个节点的祖先；最后递归上述步骤。</p>
-<h5 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1055,7 +1264,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Symmetric-Tree"><a href="#Symmetric-Tree" class="headerlink" title="Symmetric Tree"></a><a href="https://leetcode.com/problems/symmetric-tree/description/" target="_blank" rel="noopener">Symmetric Tree</a></h4><h5 id="题目-11"><a href="#题目-11" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Symmetric-Tree"><a href="#Symmetric-Tree" class="headerlink" title="Symmetric Tree"></a><a href="https://leetcode.com/problems/symmetric-tree/description/" target="_blank" rel="noopener">Symmetric Tree</a></h4><h5 id="题目-13"><a href="#题目-13" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).</p>
 <p>For example, this binary tree <code>[1,2,2,3,4,4,3]</code> is symmetric:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -1083,9 +1292,9 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一棵树是否对称。</p>
+<h5 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一棵树是否对称。</p>
 <p>判断对称，以中间为中心，判断左右是否相同，但是我们判断的是节点值是否相等。可以发现，待判断的节点都是成对的：左子树的左节点 vs 右子树的右节点；左子树的右节点 vs 右子树的左节点。递归求解。</p>
-<h5 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1123,7 +1332,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Balanced-Binary-Tree"><a href="#Balanced-Binary-Tree" class="headerlink" title="Balanced Binary Tree"></a><a href="https://leetcode.com/problems/balanced-binary-tree/description/" target="_blank" rel="noopener">Balanced Binary Tree</a></h4><h5 id="题目-12"><a href="#题目-12" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Balanced-Binary-Tree"><a href="#Balanced-Binary-Tree" class="headerlink" title="Balanced Binary Tree"></a><a href="https://leetcode.com/problems/balanced-binary-tree/description/" target="_blank" rel="noopener">Balanced Binary Tree</a></h4><h5 id="题目-14"><a href="#题目-14" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a binary tree, determine if it is height-balanced.</p>
 <p>For this problem, a height-balanced binary tree is defined as:</p>
 <blockquote>
@@ -1162,7 +1371,7 @@
 <p>Return false.</p>
 
 </div></div>
-<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/leetcode/leetcode-110-balanced-binary-tree/" target="_blank" rel="noopener">思路</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/leetcode/leetcode-110-balanced-binary-tree/" target="_blank" rel="noopener">思路</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>题目大意：判断一棵树是否为平衡树，所谓平衡树，任意顶点的左右子树的高度相差不超过1。</p>
 <p>那么根据平衡树的定义，首先判断根的左右子树是否满足定义；入室，则递归判断root的左子树和右子树。为了计算顶点的高度，我们需要引进高度计算函数。但是该方法的复杂度：</p>
 <p>为了计算root的高度，我们需要从root遍历到leaf顶点，$O(n)$</p>
@@ -1173,7 +1382,7 @@
 <p>仔细检查可以发现，我们有大量重复计算，左子树高度其实已经在计算root得高度时已经计算过了，实际上我们只需要遍历一次树就可以求出各顶点的高度。具体实现时，由于我们使用递归方法，在计算父亲节点之前，必然先求出孩子节点，所以，叶子节点的高度是最先求出来的，一旦求出后，我们马上比较它的左子树和右子树高度，如果大于1，则必然整棵树不是平衡树，返回-1。否则返回该节点的高度。所以，每次我们计算了节点高度后，先判断是否为-1，如果是，则返回，说明这棵树不是平衡树。</p>
 
 </div></div>
-<h5 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>方法一：</p>
 <p><img src="/2018/08/23/Tree/Screen Shot 2018-08-25 at 4.49.46 PM.png" alt="Screen Shot 2018-08-25 at 4.49.46 PM"></p>
 <p>方法二：</p>
@@ -1214,7 +1423,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Minimum-Depth-of-Binary-Tree"><a href="#Minimum-Depth-of-Binary-Tree" class="headerlink" title="Minimum Depth of Binary Tree"></a><a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/description/" target="_blank" rel="noopener">Minimum Depth of Binary Tree</a></h4><h5 id="题目-13"><a href="#题目-13" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Minimum-Depth-of-Binary-Tree"><a href="#Minimum-Depth-of-Binary-Tree" class="headerlink" title="Minimum Depth of Binary Tree"></a><a href="https://leetcode.com/problems/minimum-depth-of-binary-tree/description/" target="_blank" rel="noopener">Minimum Depth of Binary Tree</a></h4><h5 id="题目-15"><a href="#题目-15" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a binary tree, find its minimum depth.</p>
 <p>The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.</p>
 <p><strong>Note:</strong> A leaf is a node with no children.</p>
@@ -1234,7 +1443,7 @@
 <p>return its minimum depth = 2.</p>
 
 </div></div>
-<h5 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a>思路</h5><p>题目定义：求根到叶子的最短路径。</p>
+<h5 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h5><p>题目定义：求根到叶子的最短路径。</p>
 <p>这道题完全是上一道题目Balanced Binary Tree的一部分，实质就是计算高度。求出根的左子树高度和右子树高度，选择小的那个；至于子树的高度，可以使用递归求解。但是有一点需要注意的是，求得是root到leaf的路径，如果给的树是如下，发现左子树高度是1，右子树高度是0，那么是不是应该选择右子树呢，答案为1呢？不，这样就不是一条从根到叶子的路径的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -1243,7 +1452,7 @@
 <div class="line"> / </div>
 <div class="line"><span class="number">9</span></div>
 </pre></td></tr></table></figure>
-<h5 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1275,7 +1484,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h3 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h3><h4 id="Path-Sum-III"><a href="#Path-Sum-III" class="headerlink" title="Path Sum III"></a><a href="https://leetcode.com/problems/path-sum-iii/description/" target="_blank" rel="noopener">Path Sum III</a></h4><h5 id="题目-14"><a href="#题目-14" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h3 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h3><h4 id="Path-Sum-III"><a href="#Path-Sum-III" class="headerlink" title="Path Sum III"></a><a href="https://leetcode.com/problems/path-sum-iii/description/" target="_blank" rel="noopener">Path Sum III</a></h4><h5 id="题目-16"><a href="#题目-16" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>ou are given a binary tree in which each node contains an integer value.</p>
 <p>Find the number of paths that sum to a given value.</p>
 <p>The path does not need to start or end at the root or a leaf, but it must go downwards (traveling only from parent nodes to child nodes).</p>
@@ -1314,10 +1523,10 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在树上找到所有的路径，使每一条路径的和等于目标值，路径不要求从根开始，以叶子节点结束。</p>
+<h5 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在树上找到所有的路径，使每一条路径的和等于目标值，路径不要求从根开始，以叶子节点结束。</p>
 <p>首先，我们使用一个额外函数来找到一条符合要求的路径：如果当前节点值等于目标值，则count+1；递归求解该节点的左右子树；</p>
 <p>难点是如何求不以root开始的符合要求的路径？就是把每一个节点都当作root处理。</p>
-<h5 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1339,6 +1548,78 @@
 <div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="number">0</span></div>
 <div class="line">        <span class="keyword">return</span> self.find(root,sum) + self.pathSum(root.right,sum) + self.pathSum(root.left,sum)</div>
 </pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Trim-a-Binary-Search-Tree"><a href="#Trim-a-Binary-Search-Tree" class="headerlink" title="Trim a Binary Search Tree"></a><a href="https://leetcode.com/problems/trim-a-binary-search-tree/description/" target="_blank" rel="noopener">Trim a Binary Search Tree</a></h4><h5 id="题目-17"><a href="#题目-17" class="headerlink" title="题目"></a>题目</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given a binary search tree and the lowest and highest boundaries as <code>L</code> and <code>R</code>, trim the tree so that all its elements lies in <code>[L, R]</code> (R &gt;= L). You might need to change the root of the tree, so the result should return the new root of the trimmed binary search tree.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line">Input: </div>
+<div class="line">    <span class="number">1</span></div>
+<div class="line">   / \</div>
+<div class="line">  <span class="number">0</span>   <span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">  L = <span class="number">1</span></div>
+<div class="line">  R = <span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">Output: </div>
+<div class="line">    <span class="number">1</span></div>
+<div class="line">      \</div>
+<div class="line">       <span class="number">2</span></div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line">Input: </div>
+<div class="line">    <span class="number">3</span></div>
+<div class="line">   / \</div>
+<div class="line">  <span class="number">0</span>   <span class="number">4</span></div>
+<div class="line">   \</div>
+<div class="line">    <span class="number">2</span></div>
+<div class="line">   /</div>
+<div class="line">  <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">  L = <span class="number">1</span></div>
+<div class="line">  R = <span class="number">3</span></div>
+<div class="line"></div>
+<div class="line">Output: </div>
+<div class="line">      <span class="number">3</span></div>
+<div class="line">     / </div>
+<div class="line">   <span class="number">2</span>   </div>
+<div class="line">  /</div>
+<div class="line"> <span class="number">1</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/leetcode/leetcode-669-trim-a-binary-search-tree/" target="_blank" rel="noopener">思路</a></h5><p><img src="/2018/08/23/Tree/Screen Shot 2018-09-17 at 12.28.26 PM.png" alt="Screen Shot 2018-09-17 at 12.28.26 PM"></p>
+<h5 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 
 </div></div>
       
@@ -1516,7 +1797,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#树的定义"><span class="nav-number">1.</span> <span class="nav-text">树的定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#队列"><span class="nav-number">2.</span> <span class="nav-text">队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Find-Mode-in-Binary-Search-Tree"><span class="nav-number"></span> <span class="nav-text">Find Mode in Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sum-of-Left-Leaves"><span class="nav-number"></span> <span class="nav-text">Sum of Left Leaves</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Maximum Depth of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-2"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Convert-Sorted-Array-to-Binary-Search-Tree"><span class="nav-number"></span> <span class="nav-text">Convert Sorted Array to Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-3"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-3"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Tree-Paths"><span class="nav-number"></span> <span class="nav-text">Binary Tree Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-4"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-4"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-4"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Invert Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-5"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-5"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-5"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Same-Tree"><span class="nav-number"></span> <span class="nav-text">Same Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-6"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-6"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-6"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number"></span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-7"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-7"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-7"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Sum"><span class="nav-number"></span> <span class="nav-text">Path Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-8"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-8"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-8"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Tree-Paths-1"><span class="nav-number"></span> <span class="nav-text">Binary Tree Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-9"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-9"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-9"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number"></span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-10"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-10"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-10"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symmetric-Tree"><span class="nav-number"></span> <span class="nav-text">Symmetric Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-11"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-11"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-11"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Balanced-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Balanced Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-12"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-12"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-12"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Minimum-Depth-of-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Minimum Depth of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-13"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-13"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-13"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#困难"><span class="nav-number"></span> <span class="nav-text">困难</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Sum-III"><span class="nav-number"></span> <span class="nav-text">Path Sum III</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-14"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-14"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-14"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#树的定义"><span class="nav-number">1.</span> <span class="nav-text">树的定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#队列"><span class="nav-number">2.</span> <span class="nav-text">队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单"><span class="nav-number"></span> <span class="nav-text">简单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Find-Mode-in-Binary-Search-Tree"><span class="nav-number"></span> <span class="nav-text">Find Mode in Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sum-of-Left-Leaves"><span class="nav-number"></span> <span class="nav-text">Sum of Left Leaves</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximum-Depth-of-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Maximum Depth of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-2"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Convert-Sorted-Array-to-Binary-Search-Tree"><span class="nav-number"></span> <span class="nav-text">Convert Sorted Array to Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-3"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-3"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Tree-Paths"><span class="nav-number"></span> <span class="nav-text">Binary Tree Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-4"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-4"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-4"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Invert-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Invert Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-5"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-5"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-5"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Same-Tree"><span class="nav-number"></span> <span class="nav-text">Same Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-6"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-6"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-6"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Tree-Level-Order-Traversal-II"><span class="nav-number"></span> <span class="nav-text">Binary Tree Level Order Traversal II</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-7"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-7"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-7"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Sum"><span class="nav-number"></span> <span class="nav-text">Path Sum</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-8"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-8"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-8"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中等"><span class="nav-number"></span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Longest-Univalue-Path"><span class="nav-number"></span> <span class="nav-text">Longest Univalue Path</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-9"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-9"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-9"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Second-Minimum-Node-In-a-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Second Minimum Node In a Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-10"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-10"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-10"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binary-Tree-Paths-1"><span class="nav-number"></span> <span class="nav-text">Binary Tree Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-11"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-11"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-11"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lowest-Common-Ancestor-of-a-Binary-Search-Tree"><span class="nav-number"></span> <span class="nav-text">Lowest Common Ancestor of a Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-12"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-12"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-12"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symmetric-Tree"><span class="nav-number"></span> <span class="nav-text">Symmetric Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-13"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-13"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-13"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Balanced-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Balanced Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-14"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-14"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-14"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Minimum-Depth-of-Binary-Tree"><span class="nav-number"></span> <span class="nav-text">Minimum Depth of Binary Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-15"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-15"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-15"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#困难"><span class="nav-number"></span> <span class="nav-text">困难</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Sum-III"><span class="nav-number"></span> <span class="nav-text">Path Sum III</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-16"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-16"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-16"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Trim-a-Binary-Search-Tree"><span class="nav-number"></span> <span class="nav-text">Trim a Binary Search Tree</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-17"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-17"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-17"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>

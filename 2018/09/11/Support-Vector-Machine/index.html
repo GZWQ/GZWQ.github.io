@@ -89,9 +89,13 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1_VDATmWG1E1ZNg7hdasOh5g.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1_AMR3v-jCvUMXPUtQskzxmQ.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-13%20at%206.07.12%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-13%20at%206.07.01%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-15%20at%2010.42.27%20PM%20(2">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1260px-Kernel_trick_idea.svg.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%2010.16.55%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%209.44.08%20AM.png">
-<meta property="og:updated_time" content="2018-09-12T16:15:06.092Z">
+<meta property="og:updated_time" content="2018-09-16T16:26:47.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Support Vector Machine">
 <meta name="twitter:description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
@@ -425,7 +429,39 @@ geometric\_margin(min)=\min\limits_{i=1,2,...,m}geometric\_margin_i</script><blo
 \max \limits_{w,b}\frac{1}{||w||}\\s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><p>又因为最大化$\frac{1}{||w||}$，等价于最小化$||w||$，等价于最小化$\frac{1}{2}||w||^2$，故上式等价于:</p>
 <script type="math/tex; mode=display">
 \min \limits_{w,b}\frac{1}{2}{||w||^2}=\frac{1}{2}\sum_{j=1}w_i^2\\
-s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><h1 id="软间隔最大化"><a href="#软间隔最大化" class="headerlink" title="软间隔最大化"></a>软间隔最大化</h1><p>比较下面两张图：我们发现图二的决策边界更具有一般性，但是我们的模型得到的是图一中的结果，图一中蓝色的决策边界有点过拟合，因为它过于在意完全分类正确，对于左上角的一个异常样本，为了将它分类正确，导致最终的分割线严重偏斜。所以，我们希望允许SVM有错误分类，这样才能提高模型的泛化能力。</p>
+<p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2018-09-13 at 6.07.12 PM.png" alt="Screen Shot 2018-09-13 at 6.07.12 PM"></p>
+<p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2018-09-13 at 6.07.01 PM.png" alt="Screen Shot 2018-09-13 at 6.07.01 PM"></p>
+<p>在上述SVM的定义中，因为我们要求所有样本点的函数间隔都要大于等于1，即每个样本点都分类正确；那么允许分类错误意味着某些样本点不满足函数间隔大于等于1的约束条件, 故可以针对每个样本点引进一个松弛变量$\xi_{i}\ge0$, 使函数间隔加上松弛变量大于等于1. 这样, 约束条件变为:</p>
+<script type="math/tex; mode=display">
+y_i(w\dot{x_i}+b)\ge1-\xi_{i}</script><p>同时, 对每个松弛变量$\xi_{i}$, 支付一个代价$\xi_{i}$, 则目标函数由原来的$\frac{1}{2}||w||^2$变成</p>
+<script type="math/tex; mode=display">
+\frac{1}{2}||w||^2+C\sum_{i=1}^{N}\xi_i</script><p>$C\ge0$称为惩罚参数. 最小化目标函数包含两层含义: 使$\frac{1}{2}||w||^2$尽量小即间隔尽量打, 同时使误分类点的个数尽量小, C是调和二者的系数. C越大，则允许的分类错误越少；C越小，则允许多的分类误差。则线性支持向量机的学习问题变成了如下凸二次规划问题:</p>
+<script type="math/tex; mode=display">
+\min\limits_{w, b,\xi}\frac{1}{2}||w||^2+C\sum_{i=1}^{N}\xi_i\\
+\begin{align*}s.t. &y_i(w\dot{x_i}+b)\ge1-\xi_{i}, i=1,2,...,N\\&\xi_i\ge0, i=1,2,...,m\end{align*}</script><h1 id="核方法"><a href="#核方法" class="headerlink" title="核方法"></a>核方法</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>通俗说，只要涉及空间的变换和內积的运算，我们就可以使用Kernel trick来简化运算。</p>
+<p>一般的，在高维空间计算內积，我们需要分两步：</p>
+<ol>
+<li><p>将原始低维数据空间$X$映射到更高维的$Z$空间：</p>
+<script type="math/tex; mode=display">
+\phi(x):X\to Z</script></li>
+<li><p>在$Z$空间里计算內积：</p>
+<script type="math/tex; mode=display">
+z_i = \phi(x_i)\\
+z_j = \phi(x_j)\\
+k = z_i^Tz_j</script></li>
+</ol>
+<p>而核方法：</p>
+<script type="math/tex; mode=display">
+K(x_i,x_j)=z_i^Tz_j=\phi(x_i)^T\phi(x_j)</script><p>即，$K(x_i,x_j)$计算得到的结果就是原始数据空间中的两点先升维$\phi(x)$再內积$\phi(x_i)^T\phi(x_j)$的结果，不必进行显示的升维操作。</p>
+<h2 id="Kernel-Trick-in-SVM"><a href="#Kernel-Trick-in-SVM" class="headerlink" title="Kernel Trick in SVM"></a>Kernel Trick in SVM</h2><p><a href="https://www.youtube.com/watch?v=vMmG_7JcfIc" target="_blank" rel="noopener">kernel visualiztion</a> </p>
+<p>那么SVM中如何利用核方法呢？且看下面的这个例子。</p>
+<p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2018-09-15 at 10.42.27 PM (2" alt="Screen Shot 2018-09-15 at 10.42.27 PM (2)">.png)</p>
+<p>在一维空间（直线上）我们有一系列样本点，蓝色为正例，红色为负例，显然我们不能找到一个线性的分割来分类它们。那么，如果将一维的数据点映射到二维平面呢？即对每个样本点，我们先进行映射：$(x)\to (x,y)$，其中$y=x^2$，这样就将蓝色和红色的样本点分开了，于是，我们就可以使用一条直线取划分样本点了。</p>
+<p>再看一个二维空间的例子，如下图所示：</p>
+<p><img src="/2018/09/11/Support-Vector-Machine/1260px-Kernel_trick_idea.svg.png" alt="1260px-Kernel_trick_idea.svg"></p>
+<p>显然我们无法使用线性的分割去分类上述点，但是如果我们将二维平面上的点增加一个维度$z$，使平面上点映射到三维空间上，$(x,y)\to (x,y,z)$，如右边图所示，这样我们就可以使用一个平面进行划分了。</p>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -440,6 +476,7 @@ s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><h1 id="对偶问题"><a href="#对�
 <div class="line">clf = SVC.fit(X, y)</div>
 <div class="line">prediction = clf.predict([[<span class="number">0</span>,<span class="number">6</span>]])</div>
 </pre></td></tr></table></figure>
+<h2 id="Exercise1"><a href="#Exercise1" class="headerlink" title="Exercise1"></a>Exercise1</h2><p><a href="https://www.johnwittenauer.net/machine-learning-exercises-in-python-part-6/" target="_blank" rel="noopener">Machine Learning Exercises In Python, Part 6 - SVM</a> </p>
 <p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2018-09-11 at 10.16.55 AM.png" alt="Screen Shot 2018-09-11 at 10.16.55 AM"></p>
 <p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2018-09-11 at 9.44.08 AM.png" alt="Screen Shot 2018-09-11 at 9.44.08 AM"></p>
 
@@ -618,7 +655,7 @@ s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><h1 id="对偶问题"><a href="#对�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对偶问题"><span class="nav-number">3.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">4.</span> <span class="nav-text">Python</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软间隔最大化"><span class="nav-number">3.</span> <span class="nav-text">软间隔最大化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核方法"><span class="nav-number">4.</span> <span class="nav-text">核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">4.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-Trick-in-SVM"><span class="nav-number">4.2.</span> <span class="nav-text">Kernel Trick in SVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">5.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise1"><span class="nav-number">5.1.</span> <span class="nav-text">Exercise1</span></a></li></ol></li></ol></div>
             
 
           </div>
