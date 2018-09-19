@@ -91,11 +91,12 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1_AMR3v-jCvUMXPUtQskzxmQ.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-13%20at%206.07.12%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-13%20at%206.07.01%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/image-20180918214002918.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-15%20at%2010.42.27%20PM%20(2">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1260px-Kernel_trick_idea.svg.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%2010.16.55%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%209.44.08%20AM.png">
-<meta property="og:updated_time" content="2018-09-16T16:26:47.622Z">
+<meta property="og:updated_time" content="2018-09-19T02:53:45.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Support Vector Machine">
 <meta name="twitter:description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
@@ -434,9 +435,34 @@ s.t. y_i(w^Tx_i+b)\ge1, i=1,2,...,m</script><h1 id="软间隔最大化"><a href=
 <p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2018-09-13 at 6.07.01 PM.png" alt="Screen Shot 2018-09-13 at 6.07.01 PM"></p>
 <p>在上述SVM的定义中，因为我们要求所有样本点的函数间隔都要大于等于1，即每个样本点都分类正确；那么允许分类错误意味着某些样本点不满足函数间隔大于等于1的约束条件, 故可以针对每个样本点引进一个松弛变量$\xi_{i}\ge0$, 使函数间隔加上松弛变量大于等于1. 这样, 约束条件变为:</p>
 <script type="math/tex; mode=display">
-y_i(w\dot{x_i}+b)\ge1-\xi_{i}</script><p>同时, 对每个松弛变量$\xi_{i}$, 支付一个代价$\xi_{i}$, 则目标函数由原来的$\frac{1}{2}||w||^2$变成</p>
+y_i(w\dot{x_i}+b)+\xi_{i}\ge1</script><p>同时, 对每个松弛变量$\xi_{i}$, 支付一个代价$\xi_{i}$, 则目标函数由原来的$\frac{1}{2}||w||^2$变成</p>
 <script type="math/tex; mode=display">
-\frac{1}{2}||w||^2+C\sum_{i=1}^{N}\xi_i</script><p>$C\ge0$称为惩罚参数. 最小化目标函数包含两层含义: 使$\frac{1}{2}||w||^2$尽量小即间隔尽量打, 同时使误分类点的个数尽量小, C是调和二者的系数. C越大，则允许的分类错误越少；C越小，则允许多的分类误差。则线性支持向量机的学习问题变成了如下凸二次规划问题:</p>
+\frac{1}{2}||w||^2+C\sum_{i=1}^{N}\xi_i</script><p>$C\ge0$称为惩罚参数. 最小化目标函数包含两层含义: 使$\frac{1}{2}||w||^2$尽量小即间隔尽量打, 同时使误分类点的个数尽量小, C是调和二者的系数. C越大，则允许的分类错误越少；C越小，则允许多的分类误差。</p>
+<p>令$z_i=y_i(w\dot{x_i}+b)-1$时，</p>
+<script type="math/tex; mode=display">
+l_{0/1}(z)=
+
+\left\{
+
+\begin{align} 
+
+1, & \text{if z<0}\\
+
+0, &\text{otherwise}
+
+\end{align}
+
+\right.</script><p>代入得：</p>
+<script type="math/tex; mode=display">
+\frac{1}{2}||w||^2+C\sum_{i=1}^{N}l_{0/1}(y_i(w\dot{x_i}+b)-1)</script><p>但是$l_{0/1}$是阶跃函数，非凸，非连续，所以我们采用其他函数来代替，替代损失函数一般选取凸的连续函数且是$l_{0/1}$的上界，常用的：</p>
+<script type="math/tex; mode=display">
+hinge损失：l_{hinge}(z)=max(0,1-z)\\
+指数损失：l_{exp}(z)=e^{-z}\\
+对率损失：l_{log}=log(1+e^{-z})</script><p><img src="/2018/09/11/Support-Vector-Machine/image-20180918214002918.png" alt="image-20180918214002918"></p>
+<blockquote>
+<p>以上函数的x正半轴几乎为0，与我们的事实符合：$z_i=y_i(w\dot{x_i}+b)-1&gt;0$，则没有任何损失。</p>
+</blockquote>
+<p>则线性支持向量机的学习问题变成了如下凸二次规划问题:</p>
 <script type="math/tex; mode=display">
 \min\limits_{w, b,\xi}\frac{1}{2}||w||^2+C\sum_{i=1}^{N}\xi_i\\
 \begin{align*}s.t. &y_i(w\dot{x_i}+b)\ge1-\xi_{i}, i=1,2,...,N\\&\xi_i\ge0, i=1,2,...,m\end{align*}</script><h1 id="核方法"><a href="#核方法" class="headerlink" title="核方法"></a>核方法</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>通俗说，只要涉及空间的变换和內积的运算，我们就可以使用Kernel trick来简化运算。</p>
@@ -461,6 +487,29 @@ K(x_i,x_j)=z_i^Tz_j=\phi(x_i)^T\phi(x_j)</script><p>即，$K(x_i,x_j)$计算得�
 <p>再看一个二维空间的例子，如下图所示：</p>
 <p><img src="/2018/09/11/Support-Vector-Machine/1260px-Kernel_trick_idea.svg.png" alt="1260px-Kernel_trick_idea.svg"></p>
 <p>显然我们无法使用线性的分割去分类上述点，但是如果我们将二维平面上的点增加一个维度$z$，使平面上点映射到三维空间上，$(x,y)\to (x,y,z)$，如右边图所示，这样我们就可以使用一个平面进行划分了。</p>
+<h2 id="常用核函数"><a href="#常用核函数" class="headerlink" title="常用核函数"></a>常用核函数</h2><p>通过上面的讨论，我们希望样本在新的特征空间内线性可分，因此特征空间的好坏对支持向量机的性能至关重要。但是在不知道特征映射的形式时，我们并不知道什么样的核函数是合适的，而核函数也仅是隐式地定义了这个特征空间，故选择合适的核函数很重要。</p>
+<ul>
+<li><p>多项式核：$k(x_i,x_j)=(x_i^Tx_j)^d$</p>
+<blockquote>
+<p>当$d=1$退化为线性核</p>
+</blockquote>
+</li>
+<li><p>高斯核：$k(x_i,x_j)=e^{(-\frac{||x_i-x_j||^2}{2\sigma^2})}$</p>
+<blockquote>
+<p>亦称RBF核，$\sigma&gt;0$为高斯核的带宽</p>
+</blockquote>
+</li>
+<li><p>拉普拉斯核：$k(x_i,x_j)=e^{(-\frac{||x_i-x_j||^2}{\sigma^2})}$</p>
+<blockquote>
+<p>$\sigma&gt;0$</p>
+</blockquote>
+</li>
+<li><p>Sigmoid核：$k(x_i,x_j)=tanh(\beta x_i^Tx_j+\theta)$</p>
+<blockquote>
+<p>$\beta&gt;0$，$\theta&lt;0$</p>
+</blockquote>
+</li>
+</ul>
 <h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -655,7 +704,7 @@ K(x_i,x_j)=z_i^Tz_j=\phi(x_i)^T\phi(x_j)</script><p>即，$K(x_i,x_j)$计算得�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软间隔最大化"><span class="nav-number">3.</span> <span class="nav-text">软间隔最大化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核方法"><span class="nav-number">4.</span> <span class="nav-text">核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">4.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-Trick-in-SVM"><span class="nav-number">4.2.</span> <span class="nav-text">Kernel Trick in SVM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">5.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise1"><span class="nav-number">5.1.</span> <span class="nav-text">Exercise1</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软间隔最大化"><span class="nav-number">3.</span> <span class="nav-text">软间隔最大化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核方法"><span class="nav-number">4.</span> <span class="nav-text">核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">4.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-Trick-in-SVM"><span class="nav-number">4.2.</span> <span class="nav-text">Kernel Trick in SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用核函数"><span class="nav-number">4.3.</span> <span class="nav-text">常用核函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">5.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise1"><span class="nav-number">5.1.</span> <span class="nav-text">Exercise1</span></a></li></ol></li></ol></div>
             
 
           </div>

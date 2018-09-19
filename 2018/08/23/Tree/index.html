@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/23/Tree/Screen%20Shot%202018-08-25%20at%204.47.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/23/Tree/Screen%20Shot%202018-08-25%20at%204.49.46%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/23/Tree/Screen%20Shot%202018-09-17%20at%2012.28.26%20PM.png">
-<meta property="og:updated_time" content="2018-09-17T17:29:05.949Z">
+<meta property="og:updated_time" content="2018-09-18T22:02:01.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tree">
 <meta name="twitter:description" content="树的定义 队列">
@@ -957,7 +957,7 @@
 <h5 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找出树上最长路径，使该路径上每个节点值都相同。并不要求该路径一定要经过根，路径上边的数量表示路径长度。</p>
 <p>这道题的思路类似<a href="https://leetcode.com/problems/path-sum-iii/description/" target="_blank" rel="noopener">Path Sum III</a>，因为允许不经过root。首先来分析节点值相同的路径的集中情况，题目给出的两个例子包含了所有的两种情况：例子1是路径由父母节点和其某个子树构成；例子2路径存在某个子树中，不经过父亲节点。</p>
 <p>情况一：如果根节点的值与子节点值相同，那么递归求解左右子树下的路径，然后选择长度更长的路径+1。</p>
-<p>情况二：</p>
+<p>情况二：如果根节点的值与子节点值相同，那么递归求解左右子树下的路径，最长路径由左子树-根-右子树组成。</p>
 <h5 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -1618,8 +1618,31 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/leetcode/leetcode-669-trim-a-binary-search-tree/" target="_blank" rel="noopener">思路</a></h5><p><img src="/2018/08/23/Tree/Screen Shot 2018-09-17 at 12.28.26 PM.png" alt="Screen Shot 2018-09-17 at 12.28.26 PM"></p>
+<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/leetcode/leetcode-669-trim-a-binary-search-tree/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给出一个取值区间范围，削减二分搜索树使该树上的节点值均介于该取值范围内。</p>
+<p>首先一定要利用该树是二分搜索树的一些性质，左子树的节点值小于右子树的节点值。递归求解，对于每一个节点，如果该节点值小于<code>L</code>，那么该节点及其左子树便被削减，递归求解其右子树；如果该节点值大于<code>R</code>，则该节点及其右子树被削减，递归求解其左子树；如果该节点值在范围内，则递归求解左子树和右子树。</p>
+<p><img src="/2018/08/23/Tree/Screen Shot 2018-09-17 at 12.28.26 PM.png" alt="Screen Shot 2018-09-17 at 12.28.26 PM"></p>
 <h5 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">trimBST</span><span class="params">(self, root, L, R)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> <span class="keyword">None</span></div>
+<div class="line">        <span class="keyword">if</span> root.val&lt;L:</div>
+<div class="line">            <span class="keyword">return</span> self.trimBST(root.right,L,R)</div>
+<div class="line">        <span class="keyword">if</span> root.val&gt;R:</div>
+<div class="line">            <span class="keyword">return</span> self.trimBST(root.left,L,R)</div>
+<div class="line">        root.left = self.trimBST(root.left,L,R)</div>
+<div class="line">        root.right = self.trimBST(root.right,L,R)</div>
+<div class="line">        <span class="keyword">return</span> root</div>
+</pre></td></tr></table></figure>
 
 </div></div>
       
