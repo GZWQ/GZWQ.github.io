@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1260px-Kernel_trick_idea.svg.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%2010.16.55%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%209.44.08%20AM.png">
-<meta property="og:updated_time" content="2018-09-19T02:53:45.821Z">
+<meta property="og:updated_time" content="2018-09-20T17:46:37.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Support Vector Machine">
 <meta name="twitter:description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
@@ -390,7 +390,7 @@
 <p>支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。</p>
 <p>在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，即如果$y=wx+b$的计算结果大于1，我们分类至正例；如果$y=wx+b$的计算结果小于-1，我们分类至负例，这样我们就得到了一个区间$[-1,1]$，称之为间隔。</p>
 <a id="more"></a>
-<p><a href="https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47" target="_blank" rel="noopener">ref1</a> <a href="https://towardsdatascience.com/https-medium-com-pupalerushikesh-svm-f4b42800e989" target="_blank" rel="noopener">ref2</a> </p>
+<p><a href="https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47" target="_blank" rel="noopener">ref1</a> <a href="https://towardsdatascience.com/https-medium-com-pupalerushikesh-svm-f4b42800e989" target="_blank" rel="noopener">ref2</a> <a href="https://blog.csdn.net/v_july_v/article/details/7624837" target="_blank" rel="noopener">支持向量机通俗导论（理解SVM的三层境界</a> </p>
 <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>给定数据集$D=\{(x_1,y_1), (x_2,y_2),…,(x_m,y_m)\}, y_i\in{\{-1,+1\}}$, 欲找到一个划分超平面, 将不同类别的样本分开. </p>
 <p><img src="/2018/09/11/Support-Vector-Machine/1_VDATmWG1E1ZNg7hdasOh5g.png" alt="1_VDATmWG1E1ZNg7hdasOh5g"></p>
 <p>但是能将训练样本分开的划分超平面有多个, 直观上, 去找位于两类样本”正中间”的划分超平面,  即下图中的黄线是比较好的分割线。可用线性方程描述:</p>
@@ -489,14 +489,17 @@ K(x_i,x_j)=z_i^Tz_j=\phi(x_i)^T\phi(x_j)</script><p>即，$K(x_i,x_j)$计算得�
 <p>显然我们无法使用线性的分割去分类上述点，但是如果我们将二维平面上的点增加一个维度$z$，使平面上点映射到三维空间上，$(x,y)\to (x,y,z)$，如右边图所示，这样我们就可以使用一个平面进行划分了。</p>
 <h2 id="常用核函数"><a href="#常用核函数" class="headerlink" title="常用核函数"></a>常用核函数</h2><p>通过上面的讨论，我们希望样本在新的特征空间内线性可分，因此特征空间的好坏对支持向量机的性能至关重要。但是在不知道特征映射的形式时，我们并不知道什么样的核函数是合适的，而核函数也仅是隐式地定义了这个特征空间，故选择合适的核函数很重要。</p>
 <ul>
-<li><p>多项式核：$k(x_i,x_j)=(x_i^Tx_j)^d$</p>
+<li><p>线性核：$k(x_i,x_j)=x_i^Tx_j$</p>
+</li>
+<li><p>多项式核：$k(x_i,x_j)=(\gamma x_i^Tx_j+r)^d$</p>
 <blockquote>
-<p>当$d=1$退化为线性核</p>
+<p>当$d&gt;1$</p>
 </blockquote>
 </li>
 <li><p>高斯核：$k(x_i,x_j)=e^{(-\frac{||x_i-x_j||^2}{2\sigma^2})}$</p>
 <blockquote>
 <p>亦称RBF核，$\sigma&gt;0$为高斯核的带宽</p>
+<p>如果$\sigma$设的太小，方差会很小，方差很小的高斯分布长得又高又瘦， 会造成只会作用于支持向量样本附近，对于未知样本分类效果很差，存在训练准确率可以很高，(如果让方差无穷小，则理论上，高斯核的SVM可以拟合任何非线性数据，但容易过拟合)而测试准确率不高的可能，就是通常说的过训练；而如果设的过大，则会造成平滑效应太大，无法在训练集上得到特别高的准确率，也会影响测试集的准确率。<a href="https://xijunlee.github.io/2017/03/29/sklearn%E4%B8%ADSVM%E8%B0%83%E5%8F%82%E8%AF%B4%E6%98%8E%E5%8F%8A%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">ref</a> </p>
 </blockquote>
 </li>
 <li><p>拉普拉斯核：$k(x_i,x_j)=e^{(-\frac{||x_i-x_j||^2}{\sigma^2})}$</p>
