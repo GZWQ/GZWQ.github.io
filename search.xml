@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>Naive Bayes</title>
+      <link href="/2018/09/20/Naive-Bayes/"/>
+      <url>/2018/09/20/Naive-Bayes/</url>
+      <content type="html"><![CDATA[<p>朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。</p><p>本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。</p><a id="more"></a><h1 id="贝叶斯理论"><a href="#贝叶斯理论" class="headerlink" title="贝叶斯理论"></a>贝叶斯理论</h1><p><a href="http://www.statisticshowto.com/posterior-distribution-probability/" target="_blank" rel="noopener">ref1</a> <a href="https://stats.stackexchange.com/questions/58564/help-me-understand-bayesian-prior-and-posterior-distributions" target="_blank" rel="noopener">ref2</a> </p><p><strong>似然函数</strong>：</p><blockquote><p><a href="https://www.zhihu.com/question/54082000/answer/138115757" target="_blank" rel="noopener">似然函数 VS 概率</a> </p><p>统计学的观点始终认为样本的出现是基于一个分布的，我们假设这个分布为$f$，该分布由参数$\theta$决定，比如我们认为$f$为高斯分布，那么它由参数$u$(均值)和$\sigma^2$(方差)唯一决定，故而不同的参数决定了不同的分布。</p><p>概率$f(x|\theta)$表示的是给定参数$\theta$的情况下，事件$x$出现的可能性；而似然函数$L(\theta|x)$表示我观测到事件$x$已经发生了，选择何种参数$\theta$能最大化$x$出现的可能性。</p><p>即概率是已知参数$\theta$对于事件$x$的函数，而似然函数是已知事件$x$关于$\theta$的函数。</p></blockquote><p><strong>先验概率</strong>：事件发生前的根据以往的经验推测的与该事件相关的概率。可以是基于历史数据的统计，可以由背景常识得出，也可以是人的主观观点给出。一般都是单独事件概率，如$P(X)，P(Y)$。</p><p><strong>后验概率</strong>：在事件(试验)真正发生后，通过事件(试验)的结果可以修正先验概率</p><p>比如：你来到一个山洞,这个山洞里可能有熊也可能没有熊, 记你觉得山洞有熊的为事件 $Y$. 然后,你也许听到山洞里传来熊的吼声, 记听到熊吼声为事件 $X$. 你一开始认为山洞有熊的概率是 $P(Y)$; 听到熊的吼声之后,你认为有熊的概率是 $P(Y|X)$。在这里，$P(Y)$就是先验概率,$P(Y|X)$是后验概率.</p><script type="math/tex; mode=display">\mathrm{posterior} \propto \mathrm{prior} \times \mathrm{likelihood}</script><p>注意这里是正比于而不是等于，这个是理解似然函数的一个关键，右侧直接的乘积其实是不满足概率分布归一化的条件的（就是右侧的积分最后不会等于1）那么这个正比符号怎样才能变成等号呢？其实只要再除以一个系数进行归一化就可以了：</p>]]></content>
+      
+      <categories>
+          
+          <category> Machine Learning </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Naive Bayes </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>C++ Programing Language</title>
       <link href="/2018/09/12/C-Programing-Language/"/>
       <url>/2018/09/12/C-Programing-Language/</url>
