@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。 本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。">
+<meta name="description" content="朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入|输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。朴素贝叶斯法广泛应用于文本分类以及垃圾邮件检测。 本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。">
 <meta name="keywords" content="Machine Learning,Naive Bayes">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Naive Bayes">
 <meta property="og:url" content="http://yoursite.com/2018/09/20/Naive-Bayes/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。 本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。">
+<meta property="og:description" content="朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入|输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。朴素贝叶斯法广泛应用于文本分类以及垃圾邮件检测。 本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-21T21:56:35.371Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Naive-Bayes/Screen%20Shot%202018-10-01%20at%2011.23.00%20PM.png">
+<meta property="og:updated_time" content="2018-10-02T04:23:20.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Naive Bayes">
-<meta name="twitter:description" content="朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。 本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。">
+<meta name="twitter:description" content="朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入|输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。朴素贝叶斯法广泛应用于文本分类以及垃圾邮件检测。 本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/20/Naive-Bayes/Screen%20Shot%202018-10-01%20at%2011.23.00%20PM.png">
 
 
 
@@ -376,10 +378,10 @@
       
 
       
-        <p>朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。</p>
+        <p>朴素贝叶斯法是基于<strong>贝叶斯定理</strong>与<strong>特征条件独立</strong>假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入|输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。朴素贝叶斯法广泛应用于文本分类以及垃圾邮件检测。</p>
 <p>本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。</p>
 <a id="more"></a>
-<h1 id="贝叶斯理论"><a href="#贝叶斯理论" class="headerlink" title="贝叶斯理论"></a>贝叶斯理论</h1><p><a href="http://www.statisticshowto.com/posterior-distribution-probability/" target="_blank" rel="noopener">ref1</a> <a href="https://stats.stackexchange.com/questions/58564/help-me-understand-bayesian-prior-and-posterior-distributions" target="_blank" rel="noopener">ref2</a> </p>
+<h1 id="贝叶斯理论"><a href="#贝叶斯理论" class="headerlink" title="贝叶斯理论"></a>贝叶斯理论</h1><p><a href="http://www.statisticshowto.com/posterior-distribution-probability/" target="_blank" rel="noopener">ref1</a> <a href="https://stats.stackexchange.com/questions/58564/help-me-understand-bayesian-prior-and-posterior-distributions" target="_blank" rel="noopener">ref2</a> <a href="https://www.youtube.com/watch?v=XcwH9JGfZOU" target="_blank" rel="noopener">How Naive Bayes Classifier Works[1]</a> <a href="https://www.youtube.com/watch?v=k2diLn5Nqbs" target="_blank" rel="noopener">How Naive Bayes Classifier Works[2]</a> </p>
 <p><strong>似然函数</strong>：</p>
 <blockquote>
 <p><a href="https://www.zhihu.com/question/54082000/answer/138115757" target="_blank" rel="noopener">似然函数 VS 概率</a> </p>
@@ -392,6 +394,235 @@
 <p>比如：你来到一个山洞,这个山洞里可能有熊也可能没有熊, 记你觉得山洞有熊的为事件 $Y$. 然后,你也许听到山洞里传来熊的吼声, 记听到熊吼声为事件 $X$. 你一开始认为山洞有熊的概率是 $P(Y)$; 听到熊的吼声之后,你认为有熊的概率是 $P(Y|X)$。在这里，$P(Y)$就是先验概率,$P(Y|X)$是后验概率.</p>
 <script type="math/tex; mode=display">
 \mathrm{posterior} \propto \mathrm{prior} \times \mathrm{likelihood}</script><p>注意这里是正比于而不是等于，这个是理解似然函数的一个关键，右侧直接的乘积其实是不满足概率分布归一化的条件的（就是右侧的积分最后不会等于1）那么这个正比符号怎样才能变成等号呢？其实只要再除以一个系数进行归一化就可以了：</p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>已知训练数据$T=\{(X_1,Y_1),(X_2,Y_2),…,(X_N,Y_N)\}$，其中$X_i=(X_i^{(1)},X_i^{(2)},…,X_i^{(M)})$，$X_i^{(j)}$是第$i$个样本的第$j$个特征。给定一个实例$x$，预测该实例的分类。</p>
+<p>朴素贝叶斯法基于贝叶斯定理和特征条件独立假设，我们分开介绍。</p>
+<p><strong>贝叶斯定理</strong></p>
+<script type="math/tex; mode=display">
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><p>在分类问题背景下，我们已知某个实例$x$，预测$x$隶属的类，即：$P(Y=c_k|X=x)$。则贝叶斯定理可以为：</p>
+<script type="math/tex; mode=display">
+P(Y=c_k|X=x)=\frac{P(Y=c_k)P(X=x|Y=c_x))}{P(X=x)}</script><p>可以理解为：在未观测到$x$之前，我有一定把握猜测属于类$c_k$的概率是$P(Y=c_k)$，在观测到$x$之后，我根据观测信息修正我们的预测：$P(Y=c_k)P(X=x|Y=c_k)$。</p>
+<p><strong>特征条件独立</strong></p>
+<p>因为每个样本都有多个特征，特征条件独立假设每个特征发生都是彼此独立。比如上式中的$P(X=x)$和$P(X=x|Y=c_x)$，在特征独立假设下：</p>
+<script type="math/tex; mode=display">
+P(X=x)=P(x^{(1)})\cdot P(x^{(2)})\cdot ...\cdot P(x^{(M)})\\
+P(X=x|Y=c_x)=P(x^{(1)}|Y=c_x)\cdot P(x^{(2)}|Y=c_x)\cdot...\cdot P(x^{(M)}|Y=c_x)</script><p>即样本$x$发生的概率是其每个特征发生的概率乘积。</p>
+<p>朴素贝叶斯方法实际上学习到生成数据的机制，属于生成模型，分类时，通过学习到的模型计算后验概率分布$P(y_x|x)$，将后验概率最大的类作为$x$的类输出：</p>
+<script type="math/tex; mode=display">
+P(Y=c_k|X=x)=\frac{P(Y=c_x)\prod_iP(x^{(i)}|Y=c_k)}{\sum_kP(Y=c_k)\prod_iP(x^{(i)}|Y=c_k)}</script><p>这是朴素贝叶斯法分类的基本公式，于是贝叶斯分类器可表示为：</p>
+<script type="math/tex; mode=display">
+y=f(x)=argmax_{c_k}\frac{P(Y=c_x)\prod_iP(x^{(i)}|Y=c_k)}{\sum_kP(Y=c_k)\prod_iP(x^{(i)}|Y=c_k)}</script><p>由于对每个$c_k$，分母都是相同的，所以</p>
+<script type="math/tex; mode=display">
+y=f(x)=argmax_{c_k}{P(Y=c_x)\prod_iP(x^{(i)}|Y=c_k)}</script><h1 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h1><h2 id="极大似然法"><a href="#极大似然法" class="headerlink" title="极大似然法"></a>极大似然法</h2><p>在朴素贝叶斯法中，学习模型意味着估计$P(X=x)$和$P(X=x|Y=c_x)$，故可以利用极大似然法估计相应的概率，即在给定的训练样本中统计计数，计算概率。 </p>
+<p>对于$P(X=x|Y=c_x)$的计算，在条件独立假设下：</p>
+<script type="math/tex; mode=display">
+P(X=x|Y=c_x)=P(x^{(1)}|Y=c_x)\cdot P(x^{(2)}|Y=c_x)\cdot...\cdot P(x^{(M)}|Y=c_x)</script><p>分解为计算每个特征的概率$P(x^{(i)})$。对于每个特征，我们可以使用一个概率表：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">$x^{(i)}=v1$</th>
+<th style="text-align:center">$x^{(i)}=v2$</th>
+<th style="text-align:center">…</th>
+<th style="text-align:center">$x^{(i)}=vl$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$c_1$</td>
+<td style="text-align:center">$P(x^{(i)}=v1</td>
+<td style="text-align:center">c_1)$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">$c_2$</td>
+<td style="text-align:center">$P(x^{(i)}=v1</td>
+<td style="text-align:center">c_2$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">$c_n$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="/2018/09/20/Naive-Bayes/Screen Shot 2018-10-01 at 11.23.00 PM.png" alt="Screen Shot 2018-10-01 at 11.23.00 PM"></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>我们有以下15个观测样本记录着天气情况以及类标签：是否可以打高尔夫球。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Outlook</th>
+<th style="text-align:center">Temperature</th>
+<th style="text-align:center">Humidity</th>
+<th style="text-align:center">Windy</th>
+<th style="text-align:center">Play Golf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">rainy</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">rainy</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">rainy</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">rainy</td>
+<td style="text-align:center">cool</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">rainy</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">overcast</td>
+<td style="text-align:center">hot</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">yes</td>
+</tr>
+<tr>
+<td style="text-align:center">sunny</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">high</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>现在给出某一天的天气如下，请问这一天是否适合打高尔夫球？</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">outlook</th>
+<th style="text-align:center">temperature</th>
+<th style="text-align:center">humidity</th>
+<th style="text-align:center">windy</th>
+<th style="text-align:center">play golf</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">rainy</td>
+<td style="text-align:center">mild</td>
+<td style="text-align:center">normal</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">?</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li><p>先验概率</p>
+<p>我们基于最大似然法，利用观测样本算出先验概率。因为类标签只有两种：yes和no。</p>
+<p>$P(yes)=\frac{9}{14}$，  $P(no)=\frac{5}{14}$ </p>
+</li>
+<li><p>条件概率</p>
+<p>对于每一种特征，我们求出该特征的条件概率表。</p>
+<p>| Outlook | rainy | overcast | sunny |<br>| :——-: | :—-: | :———: | :—-: |<br>|   yes   |  2/9  |   4/9    |  3/9  |<br>|   no    |  3/5  |   2/5    |   0   |</p>
+<p>| Temperature | hot  | mild | cool |<br>| :————-: | :—: | :—: | :—: |<br>|     yes     | 2/9  | 4/9  | 3/9  |<br>|     no      | 2/5  | 2/5  | 1/5  |</p>
+<p>| Humidity | high | normal |<br>| :———: | :—: | :——: |<br>|   yes    | 3/9  |  6/9   |<br>|    no    | 4/5  |  1/5   |</p>
+<p>| windy | true | false |<br>| :—-: | :—: | :—-: |<br>|  yes  | 3/9  |  6/9  |<br>|  no   | 3/5  |  2/5  |</p>
+</li>
+<li><p>预测</p>
+<p>利用预测公式</p>
+<script type="math/tex; mode=display">
+P(Y=y_i|X)=P(Y=y_i)P(X^{(1)}|Y=yes)P(X^{(2)}|Y=yes)...P(X^{(m)}|Y=yes)</script><p>其中，$m$是特征数。</p>
+<p>所以，对于每个类标签$Yes$和$No$，我们可以计算出概率为：</p>
+<script type="math/tex; mode=display">
+P(Yes|X)=P(rainy|Yes)P(mild|Yes)P(normal|Yes)P(windy|Yes)P(Yes)\\=\frac{2}{9}\frac{4}{9}\frac{6}{9}\frac{3}{9}\frac{9}{14}=0.0141099347</script><script type="math/tex; mode=display">
+P(No|X)=P(rainy|No)P(mild|No)P(normal|No)P(windy|No)P(No)=0.010285714</script><p>将上式正则化：</p>
+<script type="math/tex; mode=display">
+P(Yes)=\frac{0.0141099347}{0.0141099347+0.010285714}=0.578368999\\
+P(No)=\frac{0.010285714}{0.0141099347+0.010285714}=0.421631001</script><p>所以，我们预测可以出行打高尔夫球。</p>
+</li>
+</ol>
 
       
     </div>
@@ -564,7 +795,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#贝叶斯理论"><span class="nav-number">1.</span> <span class="nav-text">贝叶斯理论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#贝叶斯理论"><span class="nav-number">1.</span> <span class="nav-text">贝叶斯理论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参数估计"><span class="nav-number">3.</span> <span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#极大似然法"><span class="nav-number">3.1.</span> <span class="nav-text">极大似然法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">3.1.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-number">3.2.</span> <span class="nav-text">思路</span></a></li></ol></li></ol></div>
             
 
           </div>

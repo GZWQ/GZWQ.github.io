@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 VIDEOS从视频中提取帧 ref   点击显/隐内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 4">
+<meta name="description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena.jpg&apos;,0)   //  cv2.IMREA">
 <meta name="keywords" content="Image Processing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Image_Processing">
 <meta property="og:url" content="http://yoursite.com/2018/07/15/Image-Processing/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 VIDEOS从视频中提取帧 ref   点击显/隐内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 4">
+<meta property="og:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena.jpg&apos;,0)   //  cv2.IMREA">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-28T04:07:30.912Z">
+<meta property="og:updated_time" content="2018-10-01T03:16:50.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Image_Processing">
-<meta name="twitter:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 VIDEOS从视频中提取帧 ref   点击显/隐内容 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 4">
+<meta name="twitter:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena.jpg&apos;,0)   //  cv2.IMREA">
 
 
 
@@ -379,6 +379,29 @@
         <p><a href="https://blog.csdn.net/dengtaocs/article/details/38022153" target="_blank" rel="noopener">opencv中感兴趣区域以及mask的使用</a></p>
 <p><a href="https://blog.csdn.net/matlab_matlab/article/details/54015331" target="_blank" rel="noopener">不规则区域提取</a></p>
 <p><a href="https://ask.helplib.com/matlab/post_5759524" target="_blank" rel="noopener">使用预先定义的ROI Matlab进行图像裁剪</a></p>
+<h1 id="CV2"><a href="#CV2" class="headerlink" title="CV2"></a>CV2</h1><p>图片读取<code>cv2.imread()</code>第一个参数是文件路径，第二个参数指定读取方式</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> cv2</div>
+<div class="line"><span class="comment"># 以灰度模式读取图片</span></div>
+<div class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>,<span class="number">0</span>)   //  cv2.IMREAD_GRAYSCALE</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>cv2.IMREAD_COLOR：加载彩色图片，这个是默认参数。</li>
+<li>cv2.IMREAD_GRAYSCALE：以灰度模式加载图片。</li>
+<li>cv2.IMREAD_UNCHANGED：包括alpha。</li>
+<li>上面三个flag分别对应的值为1，0，-1</li>
+</ul>
+</blockquote>
+
+</div></div>
+<p>使用<code>cv2.imshow()</code>显示一个图像窗口，窗口大小根据图像自动调整。第一个参数是窗口名称，第二个参数是图片。</p>
+<p>使用函数<code>cv2.imwrite()</code>保存图像到文件,第一个参数是文件名，第二个参数是你要保存的文件</p>
 <h1 id="VIDEOS"><a href="#VIDEOS" class="headerlink" title="VIDEOS"></a>VIDEOS</h1><p>从视频中提取帧 <a href="https://blog.csdn.net/JNingWei/article/details/77869078" target="_blank" rel="noopener">ref</a>  </p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -474,7 +497,8 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h1 id="Depth-Images"><a href="#Depth-Images" class="headerlink" title="Depth Images"></a>Depth Images</h1><p><a href="http://www.atifanwer.xyz/blog/loading-and-visualizing-kinect-depth-images-in-matlab/" target="_blank" rel="noopener">Loading and Visualizing Kinect Depth images in Matlab</a> </p>
+<h1 id="Depth-Images"><a href="#Depth-Images" class="headerlink" title="Depth Images"></a>Depth Images</h1><p><a href="https://rgbd-dataset.cs.washington.edu/software.html" target="_blank" rel="noopener">rgbd images processing</a> </p>
+<p><a href="http://www.atifanwer.xyz/blog/loading-and-visualizing-kinect-depth-images-in-matlab/" target="_blank" rel="noopener">Loading and Visualizing Kinect Depth images in Matlab</a> </p>
 <p>MSR3D-Daily Activities Dataset</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -799,7 +823,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#VIDEOS"><span class="nav-number">1.</span> <span class="nav-text">VIDEOS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Depth-Images"><span class="nav-number">2.</span> <span class="nav-text">Depth Images</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CV2"><span class="nav-number">1.</span> <span class="nav-text">CV2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VIDEOS"><span class="nav-number">2.</span> <span class="nav-text">VIDEOS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Depth-Images"><span class="nav-number">3.</span> <span class="nav-text">Depth Images</span></a></li></ol></div>
             
 
           </div>

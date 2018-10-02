@@ -375,7 +375,7 @@
 
       
         
-          <p>朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。</p>
+          <p>朴素贝叶斯法是基于<strong>贝叶斯定理</strong>与<strong>特征条件独立</strong>假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入|输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。朴素贝叶斯法广泛应用于文本分类以及垃圾邮件检测。</p>
 <p>本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。</p>
           <!--noindex-->
           <div class="post-button text-center">
@@ -1132,8 +1132,14 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�439-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�440-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�432-->
+<h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
+<!--�433-->
+<p>In-order： (left)，root，(right)</p>
+<!--�434-->
+<p>Post-order： (left)，(right)，root</p>
+<!--�435-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�436-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
