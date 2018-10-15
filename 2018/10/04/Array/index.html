@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="中等X of a Kind in a Deck of Cards题目点击显/隐内容 In a deck of cards, each card has an integer written on it. Return true if and only if you can choose X &amp;gt;= 2 such that it is possible to split the entire d">
+<meta name="description" content="中等Largest Number At Least Twice of Others题目  点击显/隐内容 In a given integer array nums, there is always exactly one largest element. Find whether the largest element in the array is at least twice as much">
 <meta name="keywords" content="Algorithm,LeetCode,Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Array">
 <meta property="og:url" content="http://yoursite.com/2018/10/04/Array/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="中等X of a Kind in a Deck of Cards题目点击显/隐内容 In a deck of cards, each card has an integer written on it. Return true if and only if you can choose X &amp;gt;= 2 such that it is possible to split the entire d">
+<meta property="og:description" content="中等Largest Number At Least Twice of Others题目  点击显/隐内容 In a given integer array nums, there is always exactly one largest element. Find whether the largest element in the array is at least twice as much">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-10T22:51:46.384Z">
+<meta property="og:updated_time" content="2018-10-13T16:10:01.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Array">
-<meta name="twitter:description" content="中等X of a Kind in a Deck of Cards题目点击显/隐内容 In a deck of cards, each card has an integer written on it. Return true if and only if you can choose X &amp;gt;= 2 such that it is possible to split the entire d">
+<meta name="twitter:description" content="中等Largest Number At Least Twice of Others题目  点击显/隐内容 In a given integer array nums, there is always exactly one largest element. Find whether the largest element in the array is at least twice as much">
 
 
 
@@ -376,7 +376,166 @@
       
 
       
-        <h4 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h4><h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+        <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Largest-Number-At-Least-Twice-of-Others"><a href="#Largest-Number-At-Least-Twice-of-Others" class="headerlink" title="Largest Number At Least Twice of Others"></a>Largest Number At Least Twice of Others</h4><p><a href="https://leetcode.com/problems/largest-number-at-least-twice-of-others/description/" target="_blank" rel="noopener">题目</a> </p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>In a given integer array <code>nums</code>, there is always exactly one largest element.</p>
+<p>Find whether the largest element in the array is at least twice as much as every other number in the array.</p>
+<p>If it is, return the <strong>index</strong> of the largest element, otherwise return -1.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">Input: nums = [<span class="number">3</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">0</span>]</div>
+<div class="line">Output: <span class="number">1</span></div>
+<div class="line">Explanation: <span class="number">6</span> is the largest integer, <span class="keyword">and</span> <span class="keyword">for</span> every other number in the <span class="built_in">array</span> x,</div>
+<div class="line"><span class="number">6</span> is more than twice as big as x.  The index of value <span class="number">6</span> is <span class="number">1</span>, so we <span class="keyword">return</span> <span class="number">1.</span></div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div>
+<div class="line">Output: <span class="number">-1</span></div>
+<div class="line">Explanation: <span class="number">4</span> isn't at least as big as twice the value of <span class="number">3</span>, so we <span class="keyword">return</span> <span class="number">-1.</span></div>
+</pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<ol>
+<li><code>nums</code> will have a length in the range <code>[1, 50]</code>.</li>
+<li>Every <code>nums[i]</code> will be an integer in the range <code>[0, 99]</code>.</li>
+</ol>
+
+</div></div>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
+<p>遍历一次，找出最大和次大的元素。重点是在次大元素的更新，每次最大元素更新，次大元素继承上一次最大元素值。</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dominantIndex</span><span class="params">(self, nums)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:<span class="keyword">return</span> <span class="number">-1</span></div>
+<div class="line">        res_index = <span class="number">0</span></div>
+<div class="line">        highest = <span class="number">0</span></div>
+<div class="line">        secondHighest = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">for</span> idx,v <span class="keyword">in</span> enumerate(nums):</div>
+<div class="line">            <span class="keyword">if</span> highest&lt;v:</div>
+<div class="line">                secondHighest = highest</div>
+<div class="line">                highest=v</div>
+<div class="line">                res_index = idx</div>
+<div class="line">            <span class="keyword">elif</span> secondHighest&lt;v:</div>
+<div class="line">                secondHighest = v</div>
+<div class="line">        <span class="keyword">if</span> highest&gt;=<span class="number">2</span>*secondHighest:</div>
+<div class="line">            <span class="keyword">return</span> res_index</div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            <span class="keyword">return</span> <span class="number">-1</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Toeplitz-Matrix"><a href="#Toeplitz-Matrix" class="headerlink" title="Toeplitz Matrix"></a>Toeplitz Matrix</h4><p><a href="https://leetcode.com/problems/toeplitz-matrix/description/" target="_blank" rel="noopener">题目</a> </p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>A matrix is <em>Toeplitz</em> if every diagonal from top-left to bottom-right has the same element.</p>
+<p>Now given an <code>M x N</code> matrix, return <code>True</code> if and only if the matrix is <em>Toeplitz</em>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line">Input:</div>
+<div class="line">matrix = [</div>
+<div class="line">  [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],</div>
+<div class="line">  [<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</div>
+<div class="line">  [<span class="number">9</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">2</span>]</div>
+<div class="line">]</div>
+<div class="line">Output: True</div>
+<div class="line">Explanation:</div>
+<div class="line">In the above grid, the diagonals are:</div>
+<div class="line"><span class="string">"[9]"</span>, <span class="string">"[5, 5]"</span>, <span class="string">"[1, 1, 1]"</span>, <span class="string">"[2, 2, 2]"</span>, <span class="string">"[3, 3]"</span>, <span class="string">"[4]"</span>.</div>
+<div class="line">In each diagonal all elements are the same, so the answer is True.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line">Input:</div>
+<div class="line">matrix = [</div>
+<div class="line">  [<span class="number">1</span>,<span class="number">2</span>],</div>
+<div class="line">  [<span class="number">2</span>,<span class="number">2</span>]</div>
+<div class="line">]</div>
+<div class="line">Output: False</div>
+<div class="line">Explanation:</div>
+<div class="line">The diagonal <span class="string">"[1, 2]"</span> has different elements.</div>
+<div class="line">**Note:**</div>
+</pre></td></tr></table></figure>
+<ol>
+<li><code>matrix</code> will be a 2D array of integers.</li>
+<li><code>matrix</code> will have a number of rows and columns in range <code>[1, 20]</code>.</li>
+<li><code>matrix[i][j]</code> will be integers in range <code>[0, 99]</code>.</li>
+</ol>
+
+</div></div>
+<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
+<p>感觉挺巧的想法，遍历一遍矩阵，每次判断当前元素与其紧邻的对角线元素是否相等。</p>
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isToeplitzMatrix</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</div>
+<div class="line">        <span class="keyword">int</span> row = matrix.size();</div>
+<div class="line">        <span class="keyword">int</span> col = matrix[<span class="number">0</span>].size();</div>
+<div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;row<span class="number">-1</span>;i++)&#123;</div>
+<div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;col<span class="number">-1</span>;j++)&#123;</div>
+<div class="line">                <span class="keyword">if</span> (matrix[i][j]!=matrix[i+<span class="number">1</span>][j+<span class="number">1</span>])</div>
+<div class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</div>
+<div class="line">            &#125;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div>
+<div class="line">    &#125;</div>
+<div class="line">&#125;;</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a deck of cards, each card has an integer written on it.</p>
 <p>Return <code>true</code> if and only if you can choose <code>X &gt;= 2</code> such that it is possible to split the entire deck into 1 or more groups of cards, where:</p>
 <ul>
@@ -425,9 +584,9 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
+<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
 <p>思路很直接，遍历数组，统计相同元素个数。只要最小组的长度大于2且是其他组的除数，就可以。但是，这个对例子<code>[1,1,1,1,2,2,2,2,2,2]</code>是不行的。实际上，只要各组长度之间存在大于1的最大公约数，该最大公倍数即最终划分的长度，则满足题意。</p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -513,10 +672,10 @@
 </ol>
 
 </div></div>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
+<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
 <p>即对于每一个空座位，需要考虑左边最近人的距离和右边最近人的距离，那么该座位与旁人的最大距离为左右两边距离的较小一个。这样每一个空座位的最大距离求出之后，选择最大距离的座位。</p>
 <p>为了求出每个座位与左右两边人的最近距离，我们使用遍历两次座位数组，第一次遍历求出空座位与周边人的距离；第二次遍历求出与右边人的距离。</p>
-<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -622,6 +781,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/10/12/Clustering/" rel="prev" title="Clustering">
+                Clustering <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -697,7 +860,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -719,7 +882,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -752,7 +915,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#中等"><span class="nav-number">1.</span> <span class="nav-text">中等</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X-of-a-Kind-in-a-Deck-of-Cards"><span class="nav-number">2.</span> <span class="nav-text">X of a Kind in a Deck of Cards</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">2.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximize-Distance-to-Closest-Person"><span class="nav-number">3.</span> <span class="nav-text">Maximize Distance to Closest Person</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">3.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">3.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中等"><span class="nav-number">1.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Largest-Number-At-Least-Twice-of-Others"><span class="nav-number">1.1.</span> <span class="nav-text">Largest Number At Least Twice of Others</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Toeplitz-Matrix"><span class="nav-number">1.2.</span> <span class="nav-text">Toeplitz Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X-of-a-Kind-in-a-Deck-of-Cards"><span class="nav-number">1.3.</span> <span class="nav-text">X of a Kind in a Deck of Cards</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximize-Distance-to-Closest-Person"><span class="nav-number">1.4.</span> <span class="nav-text">Maximize Distance to Closest Person</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
