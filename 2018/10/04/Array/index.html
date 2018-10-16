@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="中等Largest Number At Least Twice of Others题目  点击显/隐内容 In a given integer array nums, there is always exactly one largest element. Find whether the largest element in the array is at least twice as much">
+<meta name="description" content="中等Find Pivot Index题目  点击显/隐内容 Given an array of integers nums, write a method that returns the “pivot” index of this array. We define the pivot index as the index where the sum of the numbers to the l">
 <meta name="keywords" content="Algorithm,LeetCode,Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Array">
 <meta property="og:url" content="http://yoursite.com/2018/10/04/Array/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="中等Largest Number At Least Twice of Others题目  点击显/隐内容 In a given integer array nums, there is always exactly one largest element. Find whether the largest element in the array is at least twice as much">
+<meta property="og:description" content="中等Find Pivot Index题目  点击显/隐内容 Given an array of integers nums, write a method that returns the “pivot” index of this array. We define the pivot index as the index where the sum of the numbers to the l">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-13T16:10:01.066Z">
+<meta property="og:updated_time" content="2018-10-15T21:10:02.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Array">
-<meta name="twitter:description" content="中等Largest Number At Least Twice of Others题目  点击显/隐内容 In a given integer array nums, there is always exactly one largest element. Find whether the largest element in the array is at least twice as much">
+<meta name="twitter:description" content="中等Find Pivot Index题目  点击显/隐内容 Given an array of integers nums, write a method that returns the “pivot” index of this array. We define the pivot index as the index where the sum of the numbers to the l">
 
 
 
@@ -376,7 +376,47 @@
       
 
       
-        <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Largest-Number-At-Least-Twice-of-Others"><a href="#Largest-Number-At-Least-Twice-of-Others" class="headerlink" title="Largest Number At Least Twice of Others"></a>Largest Number At Least Twice of Others</h4><p><a href="https://leetcode.com/problems/largest-number-at-least-twice-of-others/description/" target="_blank" rel="noopener">题目</a> </p>
+        <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Find-Pivot-Index"><a href="#Find-Pivot-Index" class="headerlink" title="Find Pivot Index"></a>Find Pivot Index</h4><p><a href="https://leetcode.com/problems/find-pivot-index/description/" target="_blank" rel="noopener">题目</a> </p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given an array of integers <code>nums</code>, write a method that returns the “pivot” index of this array.</p>
+<p>We define the pivot index as the index where the sum of the numbers to the left of the index is equal to the sum of the numbers to the right of the index.</p>
+<p>If no such index exists, we should return -1. If there are multiple pivot indexes, you should return the left-most pivot index.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">Input: </div>
+<div class="line">nums = [1, 7, 3, 6, 5, 6]</div>
+<div class="line">Output: 3</div>
+<div class="line">Explanation: </div>
+<div class="line">The sum of the numbers to the left of index 3 (nums[3] = 6) is equal to the sum of numbers to the right of index 3.</div>
+<div class="line">Also, 3 is the first index where this occurs.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">Input: </div>
+<div class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</div>
+<div class="line">Output: -<span class="number">1</span></div>
+<div class="line">Explanation: </div>
+<div class="line">There is no index that satisfies the conditions in the problem statement.</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+
+#### Largest Number At Least Twice of Others
+
+[题目](https://leetcode.com/problems/largest-number-at-least-twice-of-others/description/) 
+
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a given integer array <code>nums</code>, there is always exactly one largest element.</p>
 <p>Find whether the largest element in the array is at least twice as much as every other number in the array.</p>
@@ -406,9 +446,9 @@
 </ol>
 
 </div></div>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
+<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
 <p>遍历一次，找出最大和次大的元素。重点是在次大元素的更新，每次最大元素更新，次大元素继承上一次最大元素值。</p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -501,9 +541,9 @@
 </ol>
 
 </div></div>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
+<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
 <p>感觉挺巧的想法，遍历一遍矩阵，每次判断当前元素与其紧邻的对角线元素是否相等。</p>
-<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -584,9 +624,9 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
+<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
 <p>思路很直接，遍历数组，统计相同元素个数。只要最小组的长度大于2且是其他组的除数，就可以。但是，这个对例子<code>[1,1,1,1,2,2,2,2,2,2]</code>是不行的。实际上，只要各组长度之间存在大于1的最大公约数，该最大公倍数即最终划分的长度，则满足题意。</p>
-<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -672,10 +712,10 @@
 </ol>
 
 </div></div>
-<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
+<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
 <p>即对于每一个空座位，需要考虑左边最近人的距离和右边最近人的距离，那么该座位与旁人的最大距离为左右两边距离的较小一个。这样每一个空座位的最大距离求出之后，选择最大距离的座位。</p>
 <p>为了求出每个座位与左右两边人的最近距离，我们使用遍历两次座位数组，第一次遍历求出空座位与周边人的距离；第二次遍历求出与右边人的距离。</p>
-<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -915,7 +955,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中等"><span class="nav-number">1.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Largest-Number-At-Least-Twice-of-Others"><span class="nav-number">1.1.</span> <span class="nav-text">Largest Number At Least Twice of Others</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Toeplitz-Matrix"><span class="nav-number">1.2.</span> <span class="nav-text">Toeplitz Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X-of-a-Kind-in-a-Deck-of-Cards"><span class="nav-number">1.3.</span> <span class="nav-text">X of a Kind in a Deck of Cards</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximize-Distance-to-Closest-Person"><span class="nav-number">1.4.</span> <span class="nav-text">Maximize Distance to Closest Person</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中等"><span class="nav-number">1.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Find-Pivot-Index"><span class="nav-number">1.1.</span> <span class="nav-text">Find Pivot Index</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.1.2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.1.3.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">1.1.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Toeplitz-Matrix"><span class="nav-number">1.2.</span> <span class="nav-text">Toeplitz Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.2.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">1.2.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X-of-a-Kind-in-a-Deck-of-Cards"><span class="nav-number">1.3.</span> <span class="nav-text">X of a Kind in a Deck of Cards</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.3.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-3"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximize-Distance-to-Closest-Person"><span class="nav-number">1.4.</span> <span class="nav-text">Maximize Distance to Closest Person</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-4"><span class="nav-number">1.4.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-4"><span class="nav-number">1.4.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
