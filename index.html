@@ -785,7 +785,142 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 <div class="line">    plt.show()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/10/12/Clustering/image-20181016121826220.png" alt="image-20181016121826220"></p>
-<h4 id="k-means-for-color-compression"><a href="#k-means-for-color-compression" class="headerlink" title="k-means for color compression"></a><em>k</em>-means for color compression</h4><h2 id="高斯混合聚类"><a href="#高斯混合聚类" class="headerlink" title="高斯混合聚类"></a>高斯混合聚类</h2><h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><p><a href="https://pythonmachinelearning.pro/clustering-with-gaussian-mixture-models/" target="_blank" rel="noopener">ref1</a> <a href="http://statweb.stanford.edu/~tibs/stat315a/LECTURES/em.pdf" target="_blank" rel="noopener">ref2</a> <a href="https://home.deib.polimi.it/matteucc/Clustering/tutorial_html/mixture.html" target="_blank" rel="noopener">ref3</a> <a href="http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf" target="_blank" rel="noopener">ref4</a> <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html" target="_blank" rel="noopener">ref5</a> </p>
+<h4 id="k-means-for-color-compression"><a href="#k-means-for-color-compression" class="headerlink" title="k-means for color compression"></a><em>k</em>-means for color compression</h4><h2 id="高斯混合聚类"><a href="#高斯混合聚类" class="headerlink" title="高斯混合聚类"></a>高斯混合聚类</h2><p><code>k-means</code>聚类属于hard assignments，即每一个点一定要被分配到一个类中；但是如果两个真实的簇相互重叠，在重叠区域的点可以同时属于两个类，但是<code>k-means</code>只会分配点到更近的簇中。而高斯混合模型聚类(Gaussian Mixture Models)解决这个问题。我们首先回顾高斯分布，然后介绍高斯混合模型，以及模型求解的方法EM算法。</p>
+<p><strong>一元高斯分布</strong>的密度函数为：</p>
+<script type="math/tex; mode=display">
+N(x;\mu, \sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-u)^2}{2\sigma^2}}</script><p><strong>多元高斯分布</strong>的密度函数：</p>
+<p>一元高斯分布函数中的$x$是标量，多元高斯分布函数中的$x$是一个向量。</p>
+<script type="math/tex; mode=display">
+N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u)^T}(\sum)^{-1}(x-u)</script><p>其中$\mu$是$n$维均值向量，$\sum$是$n\times n$的协方差矩阵。</p>
+<h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><p><a href="https://pythonmachinelearning.pro/clustering-with-gaussian-mixture-models/" target="_blank" rel="noopener">ref1</a> <a href="http://statweb.stanford.edu/~tibs/stat315a/LECTURES/em.pdf" target="_blank" rel="noopener">ref2</a> <a href="https://home.deib.polimi.it/matteucc/Clustering/tutorial_html/mixture.html" target="_blank" rel="noopener">ref3</a> <a href="http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf" target="_blank" rel="noopener">ref4</a> <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html" target="_blank" rel="noopener">ref5</a> </p>
+<p>假设数据点来自几个不同的高斯分布，这样所有样本点混合一起，构成了一个高斯混合分布：</p>
+<script type="math/tex; mode=display">
+P_M(x)=\sum_{i=1}^{k}\alpha_i\cdotp(x|\mu_i,(\sum)_{i})</script><p>该分布共由$k$个混合分布组成，每个混合分布对应一个高斯分布，其中$u_i$与$\sum_i$是第$i$个高斯混合成分的参数，而$\alpha_i&gt;0$为相应的混合系数，$\sum_{i=1}^{k}=1$。</p>
+<p>假设样本的生成过程由高斯混合分布给出：首先，根据$\alpha_1, \alpha_2,…,\alpha_k$定义的先验分布选择高斯分布混合成分，其中$\alpha_i$为选择第$i$个混合成分的概率；然后，根据被选中的混合成分的概率密度函数进行采样，从而生成相应的样本。</p>
+<p><img src="/2018/10/12/Clustering/Screen Shot 2018-10-17 at 12.45.09 PM.png" alt="creen Shot 2018-10-17 at 12.45.09 P"></p>
+<h3 id="Python例子-1"><a href="#Python例子-1" class="headerlink" title="Python例子"></a>Python例子</h3><h4 id="GMM-from-scratch"><a href="#GMM-from-scratch" class="headerlink" title="GMM from scratch"></a>GMM from scratch</h4><p>同样以上面的西瓜数据集为例，令高斯混合成分的个数$k=3$。算法开始时，假定高斯混合分布的模型参数初始化为：$\alpha_1=\alpha_2=\alpha_3=\frac{1}{3}$, $\sum_1=\sum_2=\sum_3=(\begin{matrix}0.1 &amp; 0.0   \\0.0 &amp; 0.1  \end{matrix})$ ， 随机选择$k$个样本点作为初始聚类中心。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">    self.data_path = <span class="string">'watermelon4_0.csv'</span></div>
+<div class="line">    self.cluster_center_change = <span class="keyword">True</span></div>
+<div class="line">    self.cluser_number = <span class="number">3</span></div>
+<div class="line">    self.max_iter = <span class="number">10000</span></div>
+<div class="line">    self.cluster = []</div>
+<div class="line">    self.load_data()</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># choose 3 random smaples as initial cluster centers</span></div>
+<div class="line">    idx = np.random.randint(self.sample_num, size=self.cluser_number)</div>
+<div class="line">    self.mean = self.data[idx]</div>
+<div class="line">    self.sigma = np.array([[[<span class="number">0.1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]],[[<span class="number">0.1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]],[[<span class="number">0.1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]]])</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(self)</span>:</span></div>
+<div class="line">    df = pd.read_csv(self.data_path, encoding=<span class="string">'unicode_escape'</span>, header=<span class="keyword">None</span>)</div>
+<div class="line">    self.data = df[[<span class="number">1</span>, <span class="number">2</span>]].values</div>
+<div class="line">    self.sample_num, self.attr_num = self.data.shape</div>
+</pre></td></tr></table></figure>
+<p>根据多元高斯分布密度函数公式，我们完成密度函数计算：</p>
+<script type="math/tex; mode=display">
+N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u)^T}(\sum)^{-1}(x-u)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian_pdf</span><span class="params">(self,x,u,sigma)</span>:</span></div>
+<div class="line">    x = np.array([x]) <span class="comment">#shape = (1,2)</span></div>
+<div class="line">    _,n = x.shape</div>
+<div class="line">    inv_sigma = np.matrix(sigma)</div>
+<div class="line">    inv_sigma = np.linalg.inv(inv_sigma).getA() <span class="comment"># shape = (2,2)</span></div>
+<div class="line">    cc = <span class="number">-0.5</span>*(x-u).dot(inv_sigma).dot((x-u).T) <span class="comment"># singular</span></div>
+<div class="line">    pdf = (<span class="number">1</span>/(np.pi**(n/<span class="number">2</span>)*np.linalg.det(sigma)**<span class="number">.5</span>))*np.e**(<span class="number">-0.5</span>*cc)</div>
+<div class="line">    <span class="keyword">return</span> pdf[<span class="number">0</span>][<span class="number">0</span>]</div>
+</pre></td></tr></table></figure>
+<p>E-step: 针对每个样本计算属于各个混合成分的概率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># E step, find most possible cluster for each data smaple</span></div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(self.sample_num):</div>
+<div class="line">    psum = <span class="number">0</span></div>
+<div class="line">    tprob = []</div>
+<div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(self.cluser_number):</div>
+<div class="line">        psum += self.alpha[j]*self.gaussian_pdf(self.data[i], self.mean[j], self.sigma[j])</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(self.cluser_number):</div>
+<div class="line">        tprob.append(self.alpha[j]*self.gaussian_pdf(self.data[i], self.mean[j], self.sigma[j])/psum)</div>
+<div class="line"></div>
+<div class="line">    tprob = np.array(tprob).T</div>
+<div class="line">    prob.append(tprob)</div>
+</pre></td></tr></table></figure>
+<p>M-step: 更新高斯分布参数$u$和$\sum_i$</p>
+<h4 id="GMM-in-Sklearn"><a href="#GMM-in-Sklearn" class="headerlink" title="GMM in Sklearn"></a>GMM in Sklearn</h4><p>sklearn内置GMM算法，为了熟悉该方法，我们生成一组400个样本数据，隶属于4个簇：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gmm</span><span class="params">(self)</span>:</span></div>
+<div class="line">    <span class="keyword">from</span> sklearn.datasets.samples_generator <span class="keyword">import</span> make_blobs</div>
+<div class="line">    x,y = make_blobs(n_samples=<span class="number">400</span>,centers=<span class="number">4</span>,cluster_std=<span class="number">0.4</span>,random_state=<span class="number">0</span>)</div>
+<div class="line">    <span class="keyword">from</span> sklearn.mixture <span class="keyword">import</span> GMM</div>
+<div class="line">    gmm = GMM(n_components=<span class="number">4</span>).fit(x)</div>
+<div class="line">    lables = gmm.predict(x)</div>
+<div class="line">    plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>],c=lables,s=<span class="number">40</span>,cmap=<span class="string">'jet'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/12/Clustering/image-201810171341383.png" alt="mage-20181017134138"></p>
+<p>GMM给出了分类的置信度，<code>predict_proba</code>返回一个大小为<code>[n_samples,n_clusters]</code>的矩阵，每个元素值反应了样本点属于某个簇的概率大小。这样我们就可以将分类的不确定度可视化，通过使每个点的大小与分类确定度成正比。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gmm</span><span class="params">(self)</span>:</span></div>
+<div class="line">    <span class="keyword">from</span> sklearn.datasets.samples_generator <span class="keyword">import</span> make_blobs</div>
+<div class="line">    x,y = make_blobs(n_samples=<span class="number">400</span>,centers=<span class="number">4</span>,cluster_std=<span class="number">0.4</span>,random_state=<span class="number">0</span>)</div>
+<div class="line">    <span class="keyword">from</span> sklearn.mixture <span class="keyword">import</span> GMM</div>
+<div class="line">    gmm = GMM(n_components=<span class="number">4</span>).fit(x)</div>
+<div class="line">    lables = gmm.predict(x)</div>
+<div class="line">    prob = gmm.predict_proba(x)</div>
+<div class="line">    size = <span class="number">50</span>*(prob.max(<span class="number">1</span>))**<span class="number">2</span></div>
+<div class="line">    plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>],c=lables,s=size,cmap=<span class="string">'jet'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/12/Clustering/image-201810171354542.png" alt="mage-20181017135454"></p>
+<p>接下来，我们利用每个簇的中心点来画出椭圆形：</p>
 
           
         
@@ -927,7 +1062,83 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
       
         
           
-            <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="1-bit-and-2-bit-Characters"><a href="#1-bit-and-2-bit-Characters" class="headerlink" title="1-bit and 2-bit Characters"></a>1-bit and 2-bit Characters</h4><p><a href="https://leetcode.com/problems/1-bit-and-2-bit-characters/description/" target="_blank" rel="noopener">题目</a> </p>
+            <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Non-decreasing-Array"><a href="#Non-decreasing-Array" class="headerlink" title="Non-decreasing Array"></a>Non-decreasing Array</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/non-decreasing-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given an array with <code>n</code> integers, your task is to check if it could become non-decreasing by modifying <strong>at most</strong> <code>1</code> element.</p>
+<p>We define an array is non-decreasing if <code>array[i] &lt;= array[i + 1]</code> holds for every <code>i</code> (1 &lt;= i &lt; n).</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>]</div>
+<div class="line">Output: True</div>
+<div class="line">Explanation: You could modify the first <span class="number">4</span> to <span class="number">1</span> to get a non-decreasing <span class="built_in">array</span>.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>]</div>
+<div class="line">Output: False</div>
+<div class="line">Explanation: You can't get a non-decreasing <span class="built_in">array</span> by modify at most one element.</div>
+</pre></td></tr></table></figure>
+<p><strong>Note:</strong> The <code>n</code> belongs to [1, 10,000].</p>
+
+</div></div>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">checkPossibility</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div>
+<div class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</div>
+<div class="line">        <span class="keyword">int</span> l = nums.size();</div>
+<div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l<span class="number">-1</span>;i++)&#123;</div>
+<div class="line">            <span class="keyword">if</span> (nums[i]&gt;nums[i+<span class="number">1</span>])&#123;</div>
+<div class="line">                count+=<span class="number">1</span>;</div>
+<div class="line">                <span class="keyword">if</span>(i==<span class="number">0</span>)&#123;</div>
+<div class="line">                    nums[i]=nums[i+<span class="number">1</span>]<span class="number">-1</span>;</div>
+<div class="line">                &#125;</div>
+<div class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(nums[i<span class="number">-1</span>]&lt;nums[i+<span class="number">1</span>])&#123; </div>
+<div class="line">                    nums[i]=nums[i+<span class="number">1</span>]<span class="number">-1</span>;</div>
+<div class="line">                &#125;</div>
+<div class="line">                <span class="keyword">else</span>&#123;</div>
+<div class="line">                    nums[i+<span class="number">1</span>]=nums[i]+<span class="number">1</span>;</div>
+<div class="line">                &#125;</div>
+<div class="line">            &#125;</div>
+<div class="line">                </div>
+<div class="line">            <span class="keyword">if</span> (count&gt;<span class="number">1</span>)</div>
+<div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div>
+<div class="line">    &#125;</div>
+<div class="line">&#125;;</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="1-bit-and-2-bit-Characters"><a href="#1-bit-and-2-bit-Characters" class="headerlink" title="1-bit and 2-bit Characters"></a>1-bit and 2-bit Characters</h4><p><a href="https://leetcode.com/problems/1-bit-and-2-bit-characters/description/" target="_blank" rel="noopener">题目</a> </p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>We have two special characters. The first character can be represented by one bit <code>0</code>. The second character can be represented by two bits (<code>10</code> or <code>11</code>).</p>
 <p>Now given a string represented by several bits. Return whether the last character must be a one-bit character or not. The given string will always end with a zero.</p>
@@ -957,9 +1168,9 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
+<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
 <p>仔细分析之后，会发现如果字符以<code>1</code>开头，那么它只能是<code>10</code>或者<code>11</code>，如果是<code>0</code>开头，那么只能是<code>0</code>。基于此，我们扫描一遍字符串，如果当前字符是<code>1</code>，那么跳过下一个字符，直接扫描<code>index = i+2</code>的字符；如果当前字符是<code>0</code>，那么扫描下一个字符，判断是否能到达最后一个字符且为<code>0</code>。</p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1030,10 +1241,10 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
+<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
 <p>第一种方法是遍历每个点，然后分别计算点左边和，点右边和。但是这样的复杂度是$O(n)$.</p>
 <p>第二中方法是同样遍历每个点，但是并不是每次都去计算左边和，右边和。实际上，每一次遍历的时候，左边和、右边和的差异就是当前点：即左边和=上一次的和+当前点，右边和=上一次的和-当前点。</p>
-<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1091,9 +1302,9 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </ol>
 
 </div></div>
-<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
+<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
 <p>遍历一次，找出最大和次大的元素。重点是在次大元素的更新，每次最大元素更新，次大元素继承上一次最大元素值。</p>
-<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1186,9 +1397,9 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </ol>
 
 </div></div>
-<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
+<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
 <p>感觉挺巧的想法，遍历一遍矩阵，每次判断当前元素与其紧邻的对角线元素是否相等。</p>
-<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1220,7 +1431,7 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a deck of cards, each card has an integer written on it.</p>
 <p>Return <code>true</code> if and only if you can choose <code>X &gt;= 2</code> such that it is possible to split the entire deck into 1 or more groups of cards, where:</p>
 <ul>
@@ -1269,9 +1480,9 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
+<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
 <p>思路很直接，遍历数组，统计相同元素个数。只要最小组的长度大于2且是其他组的除数，就可以。但是，这个对例子<code>[1,1,1,1,2,2,2,2,2,2]</code>是不行的。实际上，只要各组长度之间存在大于1的最大公约数，该最大公倍数即最终划分的长度，则满足题意。</p>
-<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1319,7 +1530,7 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a row of <code>seats</code>, <code>1</code> represents a person sitting in that seat, and <code>0</code> represents that the seat is empty. </p>
 <p>There is at least one empty seat, and at least one person sitting.</p>
 <p>Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized. </p>
@@ -1357,10 +1568,10 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 </ol>
 
 </div></div>
-<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
+<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
 <p>即对于每一个空座位，需要考虑左边最近人的距离和右边最近人的距离，那么该座位与旁人的最大距离为左右两边距离的较小一个。这样每一个空座位的最大距离求出之后，选择最大距离的座位。</p>
 <p>为了求出每个座位与左右两边人的最近距离，我们使用遍历两次座位数组，第一次遍历求出空座位与周边人的距离；第二次遍历求出与右边人的距离。</p>
-<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2250,14 +2461,14 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�418-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�466-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�419-->
+<!--�467-->
 <p>In-order： (left)，root，(right)</p>
-<!--�420-->
+<!--�468-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�421-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�422-->
+<!--�469-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�470-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">

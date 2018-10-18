@@ -93,7 +93,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-20181016113124346.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-20181016114128997.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-20181016121826220.png">
-<meta property="og:updated_time" content="2018-10-16T17:51:59.253Z">
+<meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/Screen%20Shot%202018-10-17%20at%2012.45.09%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-201810171341383.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-201810171354542.png">
+<meta property="og:updated_time" content="2018-10-17T18:58:38.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Clustering">
 <meta name="twitter:description" content="聚类在无监督学习中，训练样本的标记信息是未知的，目标是通过对无标记训练样本的学习来揭示数据内在性质及规律，此类学习中研究最多、应用最广的是“聚类(Clustering)”。 聚类试图将数据集中的样本划分为若干个不相交的子集，每个子集称为一个“簇(cluster)”。形式化地说，假定样本集$D=\{x_1,x_2,…,x_m\}$包含$m$个无标记的样本，每个样本$x_i=\{x_i^{1},x_">
@@ -792,7 +795,142 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
 <div class="line">    plt.show()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/10/12/Clustering/image-20181016121826220.png" alt="image-20181016121826220"></p>
-<h4 id="k-means-for-color-compression"><a href="#k-means-for-color-compression" class="headerlink" title="k-means for color compression"></a><em>k</em>-means for color compression</h4><h2 id="高斯混合聚类"><a href="#高斯混合聚类" class="headerlink" title="高斯混合聚类"></a>高斯混合聚类</h2><h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><p><a href="https://pythonmachinelearning.pro/clustering-with-gaussian-mixture-models/" target="_blank" rel="noopener">ref1</a> <a href="http://statweb.stanford.edu/~tibs/stat315a/LECTURES/em.pdf" target="_blank" rel="noopener">ref2</a> <a href="https://home.deib.polimi.it/matteucc/Clustering/tutorial_html/mixture.html" target="_blank" rel="noopener">ref3</a> <a href="http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf" target="_blank" rel="noopener">ref4</a> <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html" target="_blank" rel="noopener">ref5</a> </p>
+<h4 id="k-means-for-color-compression"><a href="#k-means-for-color-compression" class="headerlink" title="k-means for color compression"></a><em>k</em>-means for color compression</h4><h2 id="高斯混合聚类"><a href="#高斯混合聚类" class="headerlink" title="高斯混合聚类"></a>高斯混合聚类</h2><p><code>k-means</code>聚类属于hard assignments，即每一个点一定要被分配到一个类中；但是如果两个真实的簇相互重叠，在重叠区域的点可以同时属于两个类，但是<code>k-means</code>只会分配点到更近的簇中。而高斯混合模型聚类(Gaussian Mixture Models)解决这个问题。我们首先回顾高斯分布，然后介绍高斯混合模型，以及模型求解的方法EM算法。</p>
+<p><strong>一元高斯分布</strong>的密度函数为：</p>
+<script type="math/tex; mode=display">
+N(x;\mu, \sigma^2)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-u)^2}{2\sigma^2}}</script><p><strong>多元高斯分布</strong>的密度函数：</p>
+<p>一元高斯分布函数中的$x$是标量，多元高斯分布函数中的$x$是一个向量。</p>
+<script type="math/tex; mode=display">
+N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u)^T}(\sum)^{-1}(x-u)</script><p>其中$\mu$是$n$维均值向量，$\sum$是$n\times n$的协方差矩阵。</p>
+<h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><p><a href="https://pythonmachinelearning.pro/clustering-with-gaussian-mixture-models/" target="_blank" rel="noopener">ref1</a> <a href="http://statweb.stanford.edu/~tibs/stat315a/LECTURES/em.pdf" target="_blank" rel="noopener">ref2</a> <a href="https://home.deib.polimi.it/matteucc/Clustering/tutorial_html/mixture.html" target="_blank" rel="noopener">ref3</a> <a href="http://www.cs.cmu.edu/~guestrin/Class/10701-S07/Slides/clustering.pdf" target="_blank" rel="noopener">ref4</a> <a href="https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html" target="_blank" rel="noopener">ref5</a> </p>
+<p>假设数据点来自几个不同的高斯分布，这样所有样本点混合一起，构成了一个高斯混合分布：</p>
+<script type="math/tex; mode=display">
+P_M(x)=\sum_{i=1}^{k}\alpha_i\cdotp(x|\mu_i,(\sum)_{i})</script><p>该分布共由$k$个混合分布组成，每个混合分布对应一个高斯分布，其中$u_i$与$\sum_i$是第$i$个高斯混合成分的参数，而$\alpha_i&gt;0$为相应的混合系数，$\sum_{i=1}^{k}=1$。</p>
+<p>假设样本的生成过程由高斯混合分布给出：首先，根据$\alpha_1, \alpha_2,…,\alpha_k$定义的先验分布选择高斯分布混合成分，其中$\alpha_i$为选择第$i$个混合成分的概率；然后，根据被选中的混合成分的概率密度函数进行采样，从而生成相应的样本。</p>
+<p><img src="/2018/10/12/Clustering/Screen Shot 2018-10-17 at 12.45.09 PM.png" alt="creen Shot 2018-10-17 at 12.45.09 P"></p>
+<h3 id="Python例子-1"><a href="#Python例子-1" class="headerlink" title="Python例子"></a>Python例子</h3><h4 id="GMM-from-scratch"><a href="#GMM-from-scratch" class="headerlink" title="GMM from scratch"></a>GMM from scratch</h4><p>同样以上面的西瓜数据集为例，令高斯混合成分的个数$k=3$。算法开始时，假定高斯混合分布的模型参数初始化为：$\alpha_1=\alpha_2=\alpha_3=\frac{1}{3}$, $\sum_1=\sum_2=\sum_3=(\begin{matrix}0.1 &amp; 0.0   \\0.0 &amp; 0.1  \end{matrix})$ ， 随机选择$k$个样本点作为初始聚类中心。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">    self.data_path = <span class="string">'watermelon4_0.csv'</span></div>
+<div class="line">    self.cluster_center_change = <span class="keyword">True</span></div>
+<div class="line">    self.cluser_number = <span class="number">3</span></div>
+<div class="line">    self.max_iter = <span class="number">10000</span></div>
+<div class="line">    self.cluster = []</div>
+<div class="line">    self.load_data()</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># choose 3 random smaples as initial cluster centers</span></div>
+<div class="line">    idx = np.random.randint(self.sample_num, size=self.cluser_number)</div>
+<div class="line">    self.mean = self.data[idx]</div>
+<div class="line">    self.sigma = np.array([[[<span class="number">0.1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]],[[<span class="number">0.1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]],[[<span class="number">0.1</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">0.1</span>]]])</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(self)</span>:</span></div>
+<div class="line">    df = pd.read_csv(self.data_path, encoding=<span class="string">'unicode_escape'</span>, header=<span class="keyword">None</span>)</div>
+<div class="line">    self.data = df[[<span class="number">1</span>, <span class="number">2</span>]].values</div>
+<div class="line">    self.sample_num, self.attr_num = self.data.shape</div>
+</pre></td></tr></table></figure>
+<p>根据多元高斯分布密度函数公式，我们完成密度函数计算：</p>
+<script type="math/tex; mode=display">
+N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u)^T}(\sum)^{-1}(x-u)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussian_pdf</span><span class="params">(self,x,u,sigma)</span>:</span></div>
+<div class="line">    x = np.array([x]) <span class="comment">#shape = (1,2)</span></div>
+<div class="line">    _,n = x.shape</div>
+<div class="line">    inv_sigma = np.matrix(sigma)</div>
+<div class="line">    inv_sigma = np.linalg.inv(inv_sigma).getA() <span class="comment"># shape = (2,2)</span></div>
+<div class="line">    cc = <span class="number">-0.5</span>*(x-u).dot(inv_sigma).dot((x-u).T) <span class="comment"># singular</span></div>
+<div class="line">    pdf = (<span class="number">1</span>/(np.pi**(n/<span class="number">2</span>)*np.linalg.det(sigma)**<span class="number">.5</span>))*np.e**(<span class="number">-0.5</span>*cc)</div>
+<div class="line">    <span class="keyword">return</span> pdf[<span class="number">0</span>][<span class="number">0</span>]</div>
+</pre></td></tr></table></figure>
+<p>E-step: 针对每个样本计算属于各个混合成分的概率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># E step, find most possible cluster for each data smaple</span></div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(self.sample_num):</div>
+<div class="line">    psum = <span class="number">0</span></div>
+<div class="line">    tprob = []</div>
+<div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(self.cluser_number):</div>
+<div class="line">        psum += self.alpha[j]*self.gaussian_pdf(self.data[i], self.mean[j], self.sigma[j])</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(self.cluser_number):</div>
+<div class="line">        tprob.append(self.alpha[j]*self.gaussian_pdf(self.data[i], self.mean[j], self.sigma[j])/psum)</div>
+<div class="line"></div>
+<div class="line">    tprob = np.array(tprob).T</div>
+<div class="line">    prob.append(tprob)</div>
+</pre></td></tr></table></figure>
+<p>M-step: 更新高斯分布参数$u$和$\sum_i$</p>
+<h4 id="GMM-in-Sklearn"><a href="#GMM-in-Sklearn" class="headerlink" title="GMM in Sklearn"></a>GMM in Sklearn</h4><p>sklearn内置GMM算法，为了熟悉该方法，我们生成一组400个样本数据，隶属于4个簇：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gmm</span><span class="params">(self)</span>:</span></div>
+<div class="line">    <span class="keyword">from</span> sklearn.datasets.samples_generator <span class="keyword">import</span> make_blobs</div>
+<div class="line">    x,y = make_blobs(n_samples=<span class="number">400</span>,centers=<span class="number">4</span>,cluster_std=<span class="number">0.4</span>,random_state=<span class="number">0</span>)</div>
+<div class="line">    <span class="keyword">from</span> sklearn.mixture <span class="keyword">import</span> GMM</div>
+<div class="line">    gmm = GMM(n_components=<span class="number">4</span>).fit(x)</div>
+<div class="line">    lables = gmm.predict(x)</div>
+<div class="line">    plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>],c=lables,s=<span class="number">40</span>,cmap=<span class="string">'jet'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/12/Clustering/image-201810171341383.png" alt="mage-20181017134138"></p>
+<p>GMM给出了分类的置信度，<code>predict_proba</code>返回一个大小为<code>[n_samples,n_clusters]</code>的矩阵，每个元素值反应了样本点属于某个簇的概率大小。这样我们就可以将分类的不确定度可视化，通过使每个点的大小与分类确定度成正比。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gmm</span><span class="params">(self)</span>:</span></div>
+<div class="line">    <span class="keyword">from</span> sklearn.datasets.samples_generator <span class="keyword">import</span> make_blobs</div>
+<div class="line">    x,y = make_blobs(n_samples=<span class="number">400</span>,centers=<span class="number">4</span>,cluster_std=<span class="number">0.4</span>,random_state=<span class="number">0</span>)</div>
+<div class="line">    <span class="keyword">from</span> sklearn.mixture <span class="keyword">import</span> GMM</div>
+<div class="line">    gmm = GMM(n_components=<span class="number">4</span>).fit(x)</div>
+<div class="line">    lables = gmm.predict(x)</div>
+<div class="line">    prob = gmm.predict_proba(x)</div>
+<div class="line">    size = <span class="number">50</span>*(prob.max(<span class="number">1</span>))**<span class="number">2</span></div>
+<div class="line">    plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>],c=lables,s=size,cmap=<span class="string">'jet'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/12/Clustering/image-201810171354542.png" alt="mage-20181017135454"></p>
+<p>接下来，我们利用每个簇的中心点来画出椭圆形：</p>
 
       
     </div>
@@ -967,7 +1105,7 @@ E=\sum_{i=1}^{k}\sum_{x\in C_i}||x-\mu_i||_{2}^{2}</script><p>其中，$u_i=\fra
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类"><span class="nav-number">1.</span> <span class="nav-text">聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#K-means算法"><span class="nav-number">1.1.</span> <span class="nav-text">K-means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">1.1.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python例子"><span class="nav-number">1.1.3.</span> <span class="nav-text">Python例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means-From-Sratch"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">K-means From Sratch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means-in-SKlearn"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">K-means in SKlearn</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means-in-Digits-Clustering"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">K-means in Digits Clustering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k-means-for-color-compression"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">k-means for color compression</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯混合聚类"><span class="nav-number">1.2.</span> <span class="nav-text">高斯混合聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">模型</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#聚类"><span class="nav-number">1.</span> <span class="nav-text">聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#K-means算法"><span class="nav-number">1.1.</span> <span class="nav-text">K-means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">1.1.2.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python例子"><span class="nav-number">1.1.3.</span> <span class="nav-text">Python例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means-From-Sratch"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">K-means From Sratch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means-in-SKlearn"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">K-means in SKlearn</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-means-in-Digits-Clustering"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">K-means in Digits Clustering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k-means-for-color-compression"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">k-means for color compression</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯混合聚类"><span class="nav-number">1.2.</span> <span class="nav-text">高斯混合聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python例子-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Python例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GMM-from-scratch"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">GMM from scratch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GMM-in-Sklearn"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">GMM in Sklearn</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
