@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-201810182244258.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-201810182254181.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/12/Clustering/image-201810182300164.png">
-<meta property="og:updated_time" content="2018-10-20T02:17:40.724Z">
+<meta property="og:updated_time" content="2018-10-20T16:12:47.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Clustering">
 <meta name="twitter:description" content="聚类在无监督学习中，训练样本的标记信息是未知的，目标是通过对无标记训练样本的学习来揭示数据内在性质及规律，此类学习中研究最多、应用最广的是“聚类(Clustering)”。 聚类试图将数据集中的样本划分为若干个不相交的子集，每个子集称为一个“簇(cluster)”。形式化地说，假定样本集$D=\{x_1,x_2,…,x_m\}$包含$m$个无标记的样本，每个样本$x_i=\{x_i^{1},x_">
@@ -776,6 +776,219 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <div class="line">self.cluster = cluster</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/10/12/Clustering/image-201810192108345.png" alt="mage-20181019210834"></p>
+<p>完整代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+<div class="line">102</div>
+<div class="line">103</div>
+<div class="line">104</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># 预处理数据</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadData</span><span class="params">(filename)</span>:</span></div>
+<div class="line">    df = pd.read_csv(<span class="string">'watermelon4_0.csv'</span>, encoding=<span class="string">'unicode_escape'</span>, header=<span class="keyword">None</span>)</div>
+<div class="line">    data = df[[<span class="number">1</span>, <span class="number">2</span>]].values</div>
+<div class="line">    <span class="keyword">return</span> data</div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># 高斯分布的概率密度函数</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">prob</span><span class="params">(x, mu, sigma)</span>:</span></div>
+<div class="line">     n = np.shape(x)[<span class="number">1</span>]</div>
+<div class="line">     expOn = float(<span class="number">-0.5</span> * (x - mu) * (sigma.I) * ((x - mu).T))</div>
+<div class="line">     divBy = pow(<span class="number">2</span> * np.pi, n / <span class="number">2</span>) * pow(np.linalg.det(sigma), <span class="number">0.5</span>)  <span class="comment"># np.linalg.det 计算矩阵的行列式</span></div>
+<div class="line">     <span class="comment"># print(pow(np.e, expOn) / divBy)</span></div>
+<div class="line">     <span class="keyword">return</span> pow(np.e, expOn) / divBy</div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># EM算法</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">EM</span><span class="params">(dataMat, maxIter=<span class="number">50</span>)</span>:</span></div>
+<div class="line">     m, n = np.shape(dataMat)</div>
+<div class="line">     <span class="comment"># 1.初始化各高斯混合成分参数</span></div>
+<div class="line">     alpha = [<span class="number">1</span> / <span class="number">3</span>, <span class="number">1</span> / <span class="number">3</span>, <span class="number">1</span> / <span class="number">3</span>]   <span class="comment"># 1.1初始化 alpha1=alpha2=alpha3=1/3</span></div>
+<div class="line">     mu = [dataMat[<span class="number">5</span>, :], dataMat[<span class="number">21</span>, :], dataMat[<span class="number">26</span>, :]] <span class="comment"># 1.2初始化 mu1=x6,mu2=x22,mu3=x27</span></div>
+<div class="line">     sigma = [np.mat([[<span class="number">0.1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.1</span>]]) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">3</span>)]    <span class="comment"># 1.3初始化协方差矩阵</span></div>
+<div class="line">     gamma = np.mat(np.zeros((m, <span class="number">3</span>)))</div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(maxIter):</div>
+<div class="line">         <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">             sumAlphaMulP = <span class="number">0</span></div>
+<div class="line">             <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>):</div>
+<div class="line">                 gamma[j, k] = alpha[k] * prob(dataMat[j, :], mu[k], sigma[k]) <span class="comment"># 4.计算混合成分生成的后验概率，即gamma</span></div>
+<div class="line">                 sumAlphaMulP += gamma[j, k]</div>
+<div class="line">             <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>):</div>
+<div class="line">                 gamma[j, k] /= sumAlphaMulP</div>
+<div class="line">         sumGamma = np.sum(gamma, axis=<span class="number">0</span>)</div>
+<div class="line">         <span class="comment"># print(sumGamma)</span></div>
+<div class="line"></div>
+<div class="line">         <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>):</div>
+<div class="line">             mu[k] = np.mat(np.zeros((<span class="number">1</span>, n)))</div>
+<div class="line">             sigma[k] = np.mat(np.zeros((n, n)))</div>
+<div class="line">             <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">                 mu[k] += gamma[j, k] * dataMat[j, :]</div>
+<div class="line">             mu[k] /= sumGamma[<span class="number">0</span>, k] <span class="comment">#  7.计算新均值向量</span></div>
+<div class="line">             <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">                 sigma[k] += gamma[j, k] * (dataMat[j, :] - mu[k]).T *(dataMat[j, :] - mu[k])</div>
+<div class="line">             sigma[k] /= sumGamma[<span class="number">0</span>, k]  <span class="comment"># 8. 计算新的协方差矩阵</span></div>
+<div class="line">             alpha[k] = sumGamma[<span class="number">0</span>, k] / m   <span class="comment"># 9. 计算新混合系数</span></div>
+<div class="line">             <span class="comment"># print(mu)</span></div>
+<div class="line">     <span class="keyword">return</span> gamma</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># init centroids with random samples</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">initCentroids</span><span class="params">(dataMat, k)</span>:</span></div>
+<div class="line">     numSamples, dim = dataMat.shape</div>
+<div class="line">     centroids = np.zeros((k, dim))</div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div>
+<div class="line">         index = int(np.random.uniform(<span class="number">0</span>, numSamples))</div>
+<div class="line">         centroids[i, :] = dataMat[index, :]</div>
+<div class="line">     <span class="keyword">return</span> centroids</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussianCluster</span><span class="params">(dataMat)</span>:</span></div>
+<div class="line">     m, n = np.shape(dataMat)</div>
+<div class="line">     centroids = initCentroids(dataMat, m)  <span class="comment">## step 1: init centroids</span></div>
+<div class="line">     clusterAssign = np.mat(np.zeros((m, <span class="number">2</span>)))</div>
+<div class="line">     gamma = EM(dataMat)</div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</div>
+<div class="line">         <span class="comment"># amx返回矩阵最大值，argmax返回矩阵最大值所在下标</span></div>
+<div class="line">         clusterAssign[i, :] = np.argmax(gamma[i, :]), np.amax(gamma[i, :])  <span class="comment"># 15.确定x的簇标记lambda</span></div>
+<div class="line">         <span class="comment">## step 4: update centroids</span></div>
+<div class="line">     <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">         pointsInCluster = dataMat[np.nonzero(clusterAssign[:, <span class="number">0</span>].A == j)[<span class="number">0</span>]]</div>
+<div class="line">         centroids[j, :] = np.mean(pointsInCluster, axis=<span class="number">0</span>)  <span class="comment"># 计算出均值向量</span></div>
+<div class="line">     <span class="keyword">return</span> centroids, clusterAssign</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">showCluster</span><span class="params">(dataMat, k, centroids, clusterAssment)</span>:</span></div>
+<div class="line">     numSamples, dim = dataMat.shape</div>
+<div class="line">     <span class="keyword">if</span> dim != <span class="number">2</span>:</div>
+<div class="line">         print(<span class="string">"Sorry! I can not draw because the dimension of your data is not 2!"</span>)</div>
+<div class="line">         <span class="keyword">return</span> <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">     mark = [<span class="string">'or'</span>, <span class="string">'ob'</span>, <span class="string">'og'</span>, <span class="string">'ok'</span>, <span class="string">'^r'</span>, <span class="string">'+r'</span>, <span class="string">'sr'</span>, <span class="string">'dr'</span>, <span class="string">'&lt;r'</span>, <span class="string">'pr'</span>]</div>
+<div class="line">     <span class="keyword">if</span> k &gt; len(mark):</div>
+<div class="line">         print(<span class="string">"Sorry! Your k is too large!"</span>)</div>
+<div class="line">         <span class="keyword">return</span> <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">         <span class="comment"># draw all samples</span></div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(numSamples):</div>
+<div class="line">         markIndex = int(clusterAssment[i, <span class="number">0</span>])</div>
+<div class="line">         plt.plot(dataMat[i, <span class="number">0</span>], dataMat[i, <span class="number">1</span>], mark[markIndex])</div>
+<div class="line"></div>
+<div class="line">     mark = [<span class="string">'Dr'</span>, <span class="string">'Db'</span>, <span class="string">'Dg'</span>, <span class="string">'Dk'</span>, <span class="string">'^b'</span>, <span class="string">'+b'</span>, <span class="string">'sb'</span>, <span class="string">'db'</span>, <span class="string">'&lt;b'</span>, <span class="string">'pb'</span>]</div>
+<div class="line">     <span class="comment"># draw the centroids</span></div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div>
+<div class="line">         plt.plot(centroids[i, <span class="number">0</span>], centroids[i, <span class="number">1</span>], mark[i], markersize=<span class="number">12</span>)</div>
+<div class="line"></div>
+<div class="line">     plt.show()</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div>
+<div class="line">     dataMat = np.mat(loadData(<span class="string">'watermelon4.txt'</span>))</div>
+<div class="line">     centroids, clusterAssign = gaussianCluster(dataMat)</div>
+<div class="line">     print(clusterAssign)</div>
+<div class="line">     showCluster(dataMat, <span class="number">3</span>, centroids, clusterAssign)</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h4 id="GMM-in-Sklearn"><a href="#GMM-in-Sklearn" class="headerlink" title="GMM in Sklearn"></a>GMM in Sklearn</h4><p>sklearn内置GMM算法，为了熟悉该方法，我们生成一组400个样本数据，隶属于4个簇：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -979,6 +1192,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/10/20/Principal-Component-Analysis/" rel="prev" title="Principal Component Analysis">
+                Principal Component Analysis <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -1054,7 +1271,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1076,7 +1293,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

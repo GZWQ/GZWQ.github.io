@@ -283,6 +283,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/20/Principal-Component-Analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/20/Principal-Component-Analysis/" itemprop="url">Principal Component Analysis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T20:16:00-05:00">
+                2018-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我们利用<code>sklearn</code>中的方法来探索pca，首先生成样本数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PCA</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visualize</span><span class="params">(self)</span>:</span></div>
+<div class="line">        rng = np.random.RandomState(<span class="number">1</span>)</div>
+<div class="line">        <span class="comment"># rng.rand(2,2) - sample 2*2 from uniform distribution</span></div>
+<div class="line">        <span class="comment"># rng.randn(2,200) - sample 2*200 from normal distribution</span></div>
+<div class="line">        x = np.dot(rng.rand(<span class="number">2</span>,<span class="number">2</span>),rng.randn(<span class="number">2</span>,<span class="number">200</span>)).T <span class="comment"># get 2*200 mixture sample</span></div>
+<div class="line">        plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>])</div>
+<div class="line">        plt.axis(<span class="string">'equal'</span>)</div>
+<div class="line">        plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810202030142.png" alt="mage-20181020203014"></p>
+<p>明显的，<code>x</code>和<code>y</code>存在类似线性的关系，但是不像线性回归去建模得到一个从<code>x</code>到<code>y</code>的预测函数，<code>PCA</code>尝试学习<code>x</code>与<code>y</code>的关系，这种关系是由一组特征向量和特征值表示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sk_pca</span><span class="params">(self)</span>:</span></div>
+<div class="line">    <span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</div>
+<div class="line">    pca = PCA(n_components=<span class="number">2</span>)</div>
+<div class="line">    pca.fit(self.x)</div>
+<div class="line">    print(pca.components_)</div>
+<div class="line">    <span class="comment">### [[ 0.94446029  0.32862557]</span></div>
+<div class="line">    <span class="comment">### [ 0.32862557 -0.94446029]]</span></div>
+<div class="line">    print(pca.explained_variance_)</div>
+<div class="line">    <span class="comment">### [ 0.75871884  0.01838551]</span></div>
+</pre></td></tr></table></figure>
+<p>其中<code>pca.components_</code>是特征向量，<code>pca.explained_variance_</code>是特征值。为了了解它们的意义，我们将之可视化：</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/12/Clustering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -758,6 +947,219 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <div class="line">self.cluster = cluster</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/10/12/Clustering/image-201810192108345.png" alt="mage-20181019210834"></p>
+<p>完整代码</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+<div class="line">102</div>
+<div class="line">103</div>
+<div class="line">104</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># 预处理数据</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadData</span><span class="params">(filename)</span>:</span></div>
+<div class="line">    df = pd.read_csv(<span class="string">'watermelon4_0.csv'</span>, encoding=<span class="string">'unicode_escape'</span>, header=<span class="keyword">None</span>)</div>
+<div class="line">    data = df[[<span class="number">1</span>, <span class="number">2</span>]].values</div>
+<div class="line">    <span class="keyword">return</span> data</div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># 高斯分布的概率密度函数</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">prob</span><span class="params">(x, mu, sigma)</span>:</span></div>
+<div class="line">     n = np.shape(x)[<span class="number">1</span>]</div>
+<div class="line">     expOn = float(<span class="number">-0.5</span> * (x - mu) * (sigma.I) * ((x - mu).T))</div>
+<div class="line">     divBy = pow(<span class="number">2</span> * np.pi, n / <span class="number">2</span>) * pow(np.linalg.det(sigma), <span class="number">0.5</span>)  <span class="comment"># np.linalg.det 计算矩阵的行列式</span></div>
+<div class="line">     <span class="comment"># print(pow(np.e, expOn) / divBy)</span></div>
+<div class="line">     <span class="keyword">return</span> pow(np.e, expOn) / divBy</div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># EM算法</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">EM</span><span class="params">(dataMat, maxIter=<span class="number">50</span>)</span>:</span></div>
+<div class="line">     m, n = np.shape(dataMat)</div>
+<div class="line">     <span class="comment"># 1.初始化各高斯混合成分参数</span></div>
+<div class="line">     alpha = [<span class="number">1</span> / <span class="number">3</span>, <span class="number">1</span> / <span class="number">3</span>, <span class="number">1</span> / <span class="number">3</span>]   <span class="comment"># 1.1初始化 alpha1=alpha2=alpha3=1/3</span></div>
+<div class="line">     mu = [dataMat[<span class="number">5</span>, :], dataMat[<span class="number">21</span>, :], dataMat[<span class="number">26</span>, :]] <span class="comment"># 1.2初始化 mu1=x6,mu2=x22,mu3=x27</span></div>
+<div class="line">     sigma = [np.mat([[<span class="number">0.1</span>, <span class="number">0</span>], [<span class="number">0</span>, <span class="number">0.1</span>]]) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">3</span>)]    <span class="comment"># 1.3初始化协方差矩阵</span></div>
+<div class="line">     gamma = np.mat(np.zeros((m, <span class="number">3</span>)))</div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(maxIter):</div>
+<div class="line">         <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">             sumAlphaMulP = <span class="number">0</span></div>
+<div class="line">             <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>):</div>
+<div class="line">                 gamma[j, k] = alpha[k] * prob(dataMat[j, :], mu[k], sigma[k]) <span class="comment"># 4.计算混合成分生成的后验概率，即gamma</span></div>
+<div class="line">                 sumAlphaMulP += gamma[j, k]</div>
+<div class="line">             <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>):</div>
+<div class="line">                 gamma[j, k] /= sumAlphaMulP</div>
+<div class="line">         sumGamma = np.sum(gamma, axis=<span class="number">0</span>)</div>
+<div class="line">         <span class="comment"># print(sumGamma)</span></div>
+<div class="line"></div>
+<div class="line">         <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">3</span>):</div>
+<div class="line">             mu[k] = np.mat(np.zeros((<span class="number">1</span>, n)))</div>
+<div class="line">             sigma[k] = np.mat(np.zeros((n, n)))</div>
+<div class="line">             <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">                 mu[k] += gamma[j, k] * dataMat[j, :]</div>
+<div class="line">             mu[k] /= sumGamma[<span class="number">0</span>, k] <span class="comment">#  7.计算新均值向量</span></div>
+<div class="line">             <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">                 sigma[k] += gamma[j, k] * (dataMat[j, :] - mu[k]).T *(dataMat[j, :] - mu[k])</div>
+<div class="line">             sigma[k] /= sumGamma[<span class="number">0</span>, k]  <span class="comment"># 8. 计算新的协方差矩阵</span></div>
+<div class="line">             alpha[k] = sumGamma[<span class="number">0</span>, k] / m   <span class="comment"># 9. 计算新混合系数</span></div>
+<div class="line">             <span class="comment"># print(mu)</span></div>
+<div class="line">     <span class="keyword">return</span> gamma</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"> <span class="comment"># init centroids with random samples</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">initCentroids</span><span class="params">(dataMat, k)</span>:</span></div>
+<div class="line">     numSamples, dim = dataMat.shape</div>
+<div class="line">     centroids = np.zeros((k, dim))</div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div>
+<div class="line">         index = int(np.random.uniform(<span class="number">0</span>, numSamples))</div>
+<div class="line">         centroids[i, :] = dataMat[index, :]</div>
+<div class="line">     <span class="keyword">return</span> centroids</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gaussianCluster</span><span class="params">(dataMat)</span>:</span></div>
+<div class="line">     m, n = np.shape(dataMat)</div>
+<div class="line">     centroids = initCentroids(dataMat, m)  <span class="comment">## step 1: init centroids</span></div>
+<div class="line">     clusterAssign = np.mat(np.zeros((m, <span class="number">2</span>)))</div>
+<div class="line">     gamma = EM(dataMat)</div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</div>
+<div class="line">         <span class="comment"># amx返回矩阵最大值，argmax返回矩阵最大值所在下标</span></div>
+<div class="line">         clusterAssign[i, :] = np.argmax(gamma[i, :]), np.amax(gamma[i, :])  <span class="comment"># 15.确定x的簇标记lambda</span></div>
+<div class="line">         <span class="comment">## step 4: update centroids</span></div>
+<div class="line">     <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</div>
+<div class="line">         pointsInCluster = dataMat[np.nonzero(clusterAssign[:, <span class="number">0</span>].A == j)[<span class="number">0</span>]]</div>
+<div class="line">         centroids[j, :] = np.mean(pointsInCluster, axis=<span class="number">0</span>)  <span class="comment"># 计算出均值向量</span></div>
+<div class="line">     <span class="keyword">return</span> centroids, clusterAssign</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">showCluster</span><span class="params">(dataMat, k, centroids, clusterAssment)</span>:</span></div>
+<div class="line">     numSamples, dim = dataMat.shape</div>
+<div class="line">     <span class="keyword">if</span> dim != <span class="number">2</span>:</div>
+<div class="line">         print(<span class="string">"Sorry! I can not draw because the dimension of your data is not 2!"</span>)</div>
+<div class="line">         <span class="keyword">return</span> <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">     mark = [<span class="string">'or'</span>, <span class="string">'ob'</span>, <span class="string">'og'</span>, <span class="string">'ok'</span>, <span class="string">'^r'</span>, <span class="string">'+r'</span>, <span class="string">'sr'</span>, <span class="string">'dr'</span>, <span class="string">'&lt;r'</span>, <span class="string">'pr'</span>]</div>
+<div class="line">     <span class="keyword">if</span> k &gt; len(mark):</div>
+<div class="line">         print(<span class="string">"Sorry! Your k is too large!"</span>)</div>
+<div class="line">         <span class="keyword">return</span> <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">         <span class="comment"># draw all samples</span></div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(numSamples):</div>
+<div class="line">         markIndex = int(clusterAssment[i, <span class="number">0</span>])</div>
+<div class="line">         plt.plot(dataMat[i, <span class="number">0</span>], dataMat[i, <span class="number">1</span>], mark[markIndex])</div>
+<div class="line"></div>
+<div class="line">     mark = [<span class="string">'Dr'</span>, <span class="string">'Db'</span>, <span class="string">'Dg'</span>, <span class="string">'Dk'</span>, <span class="string">'^b'</span>, <span class="string">'+b'</span>, <span class="string">'sb'</span>, <span class="string">'db'</span>, <span class="string">'&lt;b'</span>, <span class="string">'pb'</span>]</div>
+<div class="line">     <span class="comment"># draw the centroids</span></div>
+<div class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div>
+<div class="line">         plt.plot(centroids[i, <span class="number">0</span>], centroids[i, <span class="number">1</span>], mark[i], markersize=<span class="number">12</span>)</div>
+<div class="line"></div>
+<div class="line">     plt.show()</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div>
+<div class="line">     dataMat = np.mat(loadData(<span class="string">'watermelon4.txt'</span>))</div>
+<div class="line">     centroids, clusterAssign = gaussianCluster(dataMat)</div>
+<div class="line">     print(clusterAssign)</div>
+<div class="line">     showCluster(dataMat, <span class="number">3</span>, centroids, clusterAssign)</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h4 id="GMM-in-Sklearn"><a href="#GMM-in-Sklearn" class="headerlink" title="GMM in Sklearn"></a>GMM in Sklearn</h4><p>sklearn内置GMM算法，为了熟悉该方法，我们生成一组400个样本数据，隶属于4个簇：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -1058,7 +1460,88 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
       
         
           
-            <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/can-place-flowers/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+            <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Array-Partition-I"><a href="#Array-Partition-I" class="headerlink" title="Array Partition I"></a>Array Partition I</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/array-partition-i/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given an array of <strong>2n</strong> integers, your task is to group these integers into <strong>n</strong> pairs of integer, say (a1, b1), (a2, b2), …, (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>]</div>
+<div class="line"></div>
+<div class="line">Output: <span class="number">4</span></div>
+<div class="line">Explanation: n <span class="keyword">is</span> <span class="number">2</span>, <span class="keyword">and</span> the maximum sum of pairs <span class="keyword">is</span> <span class="number">4</span> = min(<span class="number">1</span>, <span class="number">2</span>) + min(<span class="number">3</span>, <span class="number">4</span>).</div>
+</pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<ol>
+<li><strong>n</strong> is a positive integer, which is in the range of [1, 10000].</li>
+<li>All the integers in the array will be in the range of [-10000, 10000].</li>
+</ol>
+
+</div></div>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/hashtable/leetcode-561-array-partition-i/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将长度为<code>2n</code>的数组分成<code>n</code>个长度为2的元组，使<code>n</code>个元组小值的和最大。</p>
+<p>一个很直接的思路就是排序，然后遍历一遍，每次将偶数index上的值相加，这样的时间复杂度由排序控制是<code>O(nlogn)</code>。</p>
+<p>但是，我们可以丢弃排序，增加一个数组，以空间换时间，将时间复杂度降维<code>O(n)</code>，空间复杂度为<code>O(n)</code>。</p>
+<p>由题目看到，元素值范围是<code>[-10000,10000]</code>，这样我们设置一个长度为<code>2*10000</code>的数组，元素值为新数组的下标，新数组的值为下标在已知数组中出现的次数。第一次遍历<code>nums</code>，得到每个元素的频数，而且，隐含了排序。第二次遍历，如果新数组的值为0，则跳过；否则，判断是否为一对元素值得第一个；</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">arrayPairSum</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">int</span> max_val = <span class="number">10000</span>;</div>
+<div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; val_idx_map(<span class="number">2</span>*max_val);</div>
+<div class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> ele : nums)&#123;</div>
+<div class="line">            val_idx_map[ele+max_val]++;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">bool</span> first = <span class="literal">true</span>;</div>
+<div class="line">        <span class="keyword">int</span> n = -max_val;</div>
+<div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div>
+<div class="line">        <span class="keyword">while</span>(n&lt;max_val)&#123;</div>
+<div class="line">            <span class="keyword">if</span> (!val_idx_map[n+max_val])&#123;</div>
+<div class="line">                n++;</div>
+<div class="line">                <span class="keyword">continue</span>;</div>
+<div class="line">            &#125;</div>
+<div class="line">            <span class="keyword">if</span> (first)&#123;</div>
+<div class="line">                res += n;</div>
+<div class="line">                first = <span class="literal">false</span>;</div>
+<div class="line">            &#125;<span class="keyword">else</span>&#123;</div>
+<div class="line">                first = <span class="literal">true</span>;</div>
+<div class="line">            &#125;</div>
+<div class="line">            val_idx_map[n+max_val]--;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">return</span> res;</div>
+<div class="line">    &#125;</div>
+<div class="line">&#125;;</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/can-place-flowers/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Suppose you have a long flowerbed in which some of the plots are planted and some are not. However, flowers cannot be planted in adjacent plots - they would compete for water and both would die.</p>
 <p>Given a flowerbed (represented as an array containing 0 and 1, where 0 means empty and 1 means not empty), and a number <strong>n</strong>, return if <strong>n</strong> new flowers can be planted in it without violating the no-adjacent-flowers rule.</p>
 <p><strong>Example 1:</strong></p>
@@ -1081,9 +1564,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
+<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
 <p>从左向右遍历flowerbed，将满足要求的0设为1。计数与n比较即可。</p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1123,7 +1606,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Non-decreasing-Array"><a href="#Non-decreasing-Array" class="headerlink" title="Non-decreasing Array"></a>Non-decreasing Array</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/non-decreasing-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Non-decreasing-Array"><a href="#Non-decreasing-Array" class="headerlink" title="Non-decreasing Array"></a>Non-decreasing Array</h4><h5 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/non-decreasing-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array with <code>n</code> integers, your task is to check if it could become non-decreasing by modifying <strong>at most</strong> <code>1</code> element.</p>
 <p>We define an array is non-decreasing if <code>array[i] &lt;= array[i + 1]</code> holds for every <code>i</code> (1 &lt;= i &lt; n).</p>
 <p><strong>Example 1:</strong></p>
@@ -1145,7 +1628,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <p><strong>Note:</strong> The <code>n</code> belongs to [1, 10,000].</p>
 
 </div></div>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1229,9 +1712,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
+<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
 <p>仔细分析之后，会发现如果字符以<code>1</code>开头，那么它只能是<code>10</code>或者<code>11</code>，如果是<code>0</code>开头，那么只能是<code>0</code>。基于此，我们扫描一遍字符串，如果当前字符是<code>1</code>，那么跳过下一个字符，直接扫描<code>index = i+2</code>的字符；如果当前字符是<code>0</code>，那么扫描下一个字符，判断是否能到达最后一个字符且为<code>0</code>。</p>
-<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1302,10 +1785,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
+<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
 <p>第一种方法是遍历每个点，然后分别计算点左边和，点右边和。但是这样的复杂度是$O(n)$.</p>
 <p>第二中方法是同样遍历每个点，但是并不是每次都去计算左边和，右边和。实际上，每一次遍历的时候，左边和、右边和的差异就是当前点：即左边和=上一次的和+当前点，右边和=上一次的和-当前点。</p>
-<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1363,9 +1846,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
+<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
 <p>遍历一次，找出最大和次大的元素。重点是在次大元素的更新，每次最大元素更新，次大元素继承上一次最大元素值。</p>
-<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1458,9 +1941,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
+<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
 <p>感觉挺巧的想法，遍历一遍矩阵，每次判断当前元素与其紧邻的对角线元素是否相等。</p>
-<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1492,7 +1975,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a deck of cards, each card has an integer written on it.</p>
 <p>Return <code>true</code> if and only if you can choose <code>X &gt;= 2</code> such that it is possible to split the entire deck into 1 or more groups of cards, where:</p>
 <ul>
@@ -1541,9 +2024,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
+<h5 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
 <p>思路很直接，遍历数组，统计相同元素个数。只要最小组的长度大于2且是其他组的除数，就可以。但是，这个对例子<code>[1,1,1,1,2,2,2,2,2,2]</code>是不行的。实际上，只要各组长度之间存在大于1的最大公约数，该最大公倍数即最终划分的长度，则满足题意。</p>
-<h5 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1591,7 +2074,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-4"><a href="#题目-4" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a row of <code>seats</code>, <code>1</code> represents a person sitting in that seat, and <code>0</code> represents that the seat is empty. </p>
 <p>There is at least one empty seat, and at least one person sitting.</p>
 <p>Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized. </p>
@@ -1629,10 +2112,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
+<h5 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
 <p>即对于每一个空座位，需要考虑左边最近人的距离和右边最近人的距离，那么该座位与旁人的最大距离为左右两边距离的较小一个。这样每一个空座位的最大距离求出之后，选择最大距离的座位。</p>
 <p>为了求出每个座位与左右两边人的最近距离，我们使用遍历两次座位数组，第一次遍历求出空座位与周边人的距离；第二次遍历求出与右边人的距离。</p>
-<h5 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2522,14 +3005,14 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�436-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�368-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�437-->
+<!--�369-->
 <p>In-order： (left)，root，(right)</p>
-<!--�438-->
+<!--�370-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�439-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�440-->
+<!--�371-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�372-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -2867,152 +3350,6 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/Logistic-Regression/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/18/Logistic-Regression/" itemprop="url">Logistic Regression</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-18T16:44:27-05:00">
-                2018-08-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>用于分类任务的逻辑斯蒂回归。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/18/Logistic-Regression/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3063,7 +3400,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">63</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3085,7 +3422,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

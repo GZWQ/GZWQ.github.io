@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Delta Function,Probability," />
+  <meta name="keywords" content="Machine Learning,Principal Component Analysis," />
 
 
 
@@ -79,35 +79,20 @@
 
 
 
-<meta name="description" content="Technically speaking, the Dirac delta function is not actually a function. It is what we may call a generalized function. Nevertheless, its definition is intuitive and it simplifies dealing with proba">
-<meta name="keywords" content="Delta Function,Probability">
+<meta name="description" content="我们利用sklearn中的方法来探索pca，首先生成样本数据： 1 2 3 4 5 6 7 8 9 10 11 12 import numpy as np import matplotlib.pyplot as plt  class PCA():     def visualize(self):         rng = np.random.RandomState(1)         # rn">
+<meta name="keywords" content="Machine Learning,Principal Component Analysis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Delta Function">
-<meta property="og:url" content="http://yoursite.com/2018/07/16/Delta-Function/index.html">
+<meta property="og:title" content="Principal Component Analysis">
+<meta property="og:url" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Technically speaking, the Dirac delta function is not actually a function. It is what we may call a generalized function. Nevertheless, its definition is intuitive and it simplifies dealing with proba">
+<meta property="og:description" content="我们利用sklearn中的方法来探索pca，首先生成样本数据： 1 2 3 4 5 6 7 8 9 10 11 12 import numpy as np import matplotlib.pyplot as plt  class PCA():     def visualize(self):         rng = np.random.RandomState(1)         # rn">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%2011.05.35%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%2011.05.41%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%2011.31.14%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/1024px-Dirac_distribution_PDF.svg.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%2011.34.17%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/image-20180717155151850.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%203.55.43%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%203.56.49%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%203.57.52%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%204.12.12%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%204.28.56%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%204.30.18%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%204.35.03%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%204.37.40%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%204.38.41%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%204.39.32%20PM.png">
-<meta property="og:updated_time" content="2018-07-17T21:41:06.772Z">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810202030142.png">
+<meta property="og:updated_time" content="2018-10-21T01:43:01.166Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Delta Function">
-<meta name="twitter:description" content="Technically speaking, the Dirac delta function is not actually a function. It is what we may call a generalized function. Nevertheless, its definition is intuitive and it simplifies dealing with proba">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/16/Delta-Function/Screen%20Shot%202018-07-17%20at%2011.05.35%20AM.png">
+<meta name="twitter:title" content="Principal Component Analysis">
+<meta name="twitter:description" content="我们利用sklearn中的方法来探索pca，首先生成样本数据： 1 2 3 4 5 6 7 8 9 10 11 12 import numpy as np import matplotlib.pyplot as plt  class PCA():     def visualize(self):         rng = np.random.RandomState(1)         # rn">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810202030142.png">
 
 
 
@@ -137,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/16/Delta-Function/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/20/Principal-Component-Analysis/"/>
 
 
 
 
 
-  <title>Delta Function | Blog of Qing</title>
+  <title>Principal Component Analysis | Blog of Qing</title>
   
 
 
@@ -304,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/Delta-Function/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/20/Principal-Component-Analysis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -321,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Delta Function</h1>
+          <h1 class="post-title" itemprop="name headline">Principal Component Analysis</h1>
         
 
         <div class="post-meta">
@@ -333,8 +318,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T23:33:44-05:00">
-                2018-07-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T20:16:00-05:00">
+                2018-10-20
               </time>
             
 
@@ -356,8 +341,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Probability-and-Statistics/" itemprop="url" rel="index">
-                    <span itemprop="name">Probability and Statistics</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
                   </a>
                 </span>
 
@@ -393,65 +378,54 @@
       
 
       
-        <p>Technically speaking, the Dirac delta function is not actually a function. It is what we may call a generalized function. Nevertheless, its definition is intuitive and it simplifies dealing with probability distributions.</p>
-<a id="more"></a>
-<p><a href="https://www.youtube.com/watch?v=ECslmuGlu-U" target="_blank" rel="noopener">Intuition</a> <a href="https://www.probabilitycourse.com/chapter4/4_3_2_delta_function.php" target="_blank" rel="noopener">ref2</a> <a href="https://www.youtube.com/watch?v=oQx1myAYZoY" target="_blank" rel="noopener">begin to understand</a> </p>
-<p><a href="http://www.stat.cmu.edu/~cshalizi/350/lectures/28/lecture-28.pdf" target="_blank" rel="noopener">Ref1</a> <a href="https://www.google.com/search?q=empirical+distribution+delta+function&amp;oq=empirical+distribution+delta+function&amp;aqs=chrome..69i57.6208j0j7&amp;sourceid=chrome&amp;ie=UTF-8" target="_blank" rel="noopener">Google search</a> </p>
-<h2 id="Unit-Step-function"><a href="#Unit-Step-function" class="headerlink" title="Unit Step function"></a><strong>Unit Step function</strong></h2><p>在介绍delta函数之前，我们先了解一下阶跃函数(step function)，定义如下：</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 11.05.35 AM.png" alt="Screen Shot 2018-07-17 at 11.05.35 AM"></p>
-<p>即当$t&lt;0$时，函数值为0；否则，函数值是1。其图像如下：</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 11.05.41 AM.png" alt="Screen Shot 2018-07-17 at 11.05.41 AM"></p>
-<p>那么我们来求出阶跃函数的导数，显然当$t<0$和$t>0$时，导数是0，那么$t=0$呢？直觉上，在$t=0$处，函数的斜率是$\infin$，而实际上$t=0$处的导数就是$\infin$，证明可以参看<a href="https://blog.csdn.net/cinmyheart/article/details/21133039" target="_blank" rel="noopener">阶跃函数的导数为什么是冲击函数?</a></0$和$t></p>
-<h2 id="delta-Function"><a href="#delta-Function" class="headerlink" title="$\delta$ Function"></a><strong>$\delta$ Function</strong></h2><p>这样我们就得到了delta函数，$\delta$函数是在实数线上的一个函数，在原点上无限，在所有其他点上为零，</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 11.31.14 AM.png" alt="Screen Shot 2018-07-17 at 11.31.14 AM"></p>
-<p>其图像是：</p>
-<p><img src="/2018/07/16/Delta-Function/1024px-Dirac_distribution_PDF.svg.png" alt="1024px-Dirac_distribution_PDF.svg"></p>
-<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a><strong>Properties</strong></h2><p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 11.34.17 AM.png" alt="Screen Shot 2018-07-17 at 11.34.17 AM"></p>
-<blockquote>
-<p>对于第三条性质，由于delta function是阶跃函数的导数，那么对其积分就对阶跃函数求函数值：</p>
-<script type="math/tex; mode=display">
-\int_{-\epsilon}^{\epsilon}\delta(x)dx=u(x)|_{-\epsilon}^{\epsilon}=u(\epsilon)-u(-\epsilon)=1-0=1</script><p>对于第四条性质，令$F(x)=g(x)\delta(x-x_0)$，根据$\delta$函数的定义，如果$x-x_0\ne 0$,即$x\ne x_0$，$\delta()=0$，即$F(x)=0$，那么可以改写上述为$F(x)=g(x_0)\delta (x-x_0)$，则</p>
-<script type="math/tex; mode=display">
-\int_{-\infin}^{\infin}g(x_0)\delta(x)dx=g(x_0)\int_{-\infin}^{\infin}\delta(x)dx=g(x_0)</script></blockquote>
-<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Delta-Function-in-PDFs"><a href="#Delta-Function-in-PDFs" class="headerlink" title="Delta Function in PDFs"></a>Delta Function in PDFs</h3><p>无论是离散还是连续变量，它们都有连续累积函数(<strong>CDF</strong>)；而概率密度函数(<strong>PDF</strong>)，只存在于连续型变量；离散型变量有相应的概率质量函数(<strong>PMF</strong>)。使用$\delta$函数可以帮助我们对离散型变量和混合型变量定义一个<strong>PDF</strong>。</p>
-<p>假设我们有一随机变量$X$，其取值为$R_X=\{x_1,x_2,x_3,…\}$，对应的PMF是$P_X(x_k)$。那么离散随机变量的CDF是一个阶梯函数，如下入所示</p>
-<p><img src="/2018/07/16/Delta-Function/image-20180717155151850.png" alt="image-20180717155151850"></p>
-<p>图中每一个跳跃点对应到横轴上都是一个$X$的取值，那么对于每一个$x_k$，其PMF为：</p>
-<script type="math/tex; mode=display">
-P_X(x_k)u(x-x_k)</script><p>即只有当$x=x_k$时，其概率是$P_X(x_k)$.</p>
-<p>那么该随机变量$X$的CDF可以写作：</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 3.55.43 PM.png" alt="Screen Shot 2018-07-17 at 3.55.43 PM"></p>
-<p>那么我们可以通过对CDF求导得到PDF，</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 3.56.49 PM.png" alt="Screen Shot 2018-07-17 at 3.56.49 PM"></p>
-<p>我们称之为<strong>generalized PDF</strong></p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 3.57.52 PM.png" alt="Screen Shot 2018-07-17 at 3.57.52 PM"></p>
-<p><strong>期望</strong></p>
-<p>对一个具有上述PDF的离散型变量X，其期望为：</p>
-<script type="math/tex; mode=display">
-\begin{equation}
-\begin{aligned}
-E(X)&=\int_{-\infin}^{\infin}xf_X(x)dx\\
-&=\int_{-\infin}^{\infin}x\sum_{x_k\in R_X}P_X(x_k)\delta (x-x_k)dx\\
-&=\sum_{x_k\in R_X}P_X(x_k)\int_{-\infin}^{\infin}x\delta (x-x_k)dx\\
-&=\sum_{x_k\in R_X}P_X(x_k)x_k          ------\text{4th property}
-\end{aligned}
-
-\end{equation}</script><p>可以看到，其期望值与离散型随机变量的定义一样。</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 4.12.12 PM.png" alt="Screen Shot 2018-07-17 at 4.12.12 PM"></p>
-<p><strong>例子</strong></p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 4.28.56 PM.png" alt="Screen Shot 2018-07-17 at 4.28.56 PM"></p>
-<blockquote>
-<p>a. 画出CDF图像如下示：</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 4.30.18 PM.png" alt="Screen Shot 2018-07-17 at 4.30.18 PM"></p>
-<p>可以看到有两个跳跃点$x=0$和$x=1$，同时在区间$[0,1)$和$[1,\infin]$，CDF又是连续的，所以随机变量$X$是一个混合型变量。</p>
-<p>b. CDF有两个跳跃点，且每一个跳跃点的概率大小都是0.25，所以CDF有两个$\delta$函数：</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 4.35.03 PM.png" alt="Screen Shot 2018-07-17 at 4.35.03 PM"></p>
-<p>c. 利用CDF，我们有：</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 4.37.40 PM.png" alt="Screen Shot 2018-07-17 at 4.37.40 PM"></p>
-<p>利用PDF，我们有：</p>
-<p><img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 4.38.41 PM.png" alt="Screen Shot 2018-07-17 at 4.38.41 PM"></p>
-<p>d. <img src="/2018/07/16/Delta-Function/Screen Shot 2018-07-17 at 4.39.32 PM.png" alt="Screen Shot 2018-07-17 at 4.39.32 PM"></p>
-</blockquote>
+        <p>我们利用<code>sklearn</code>中的方法来探索pca，首先生成样本数据：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PCA</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">visualize</span><span class="params">(self)</span>:</span></div>
+<div class="line">        rng = np.random.RandomState(<span class="number">1</span>)</div>
+<div class="line">        <span class="comment"># rng.rand(2,2) - sample 2*2 from uniform distribution</span></div>
+<div class="line">        <span class="comment"># rng.randn(2,200) - sample 2*200 from normal distribution</span></div>
+<div class="line">        x = np.dot(rng.rand(<span class="number">2</span>,<span class="number">2</span>),rng.randn(<span class="number">2</span>,<span class="number">200</span>)).T <span class="comment"># get 2*200 mixture sample</span></div>
+<div class="line">        plt.scatter(x[:,<span class="number">0</span>],x[:,<span class="number">1</span>])</div>
+<div class="line">        plt.axis(<span class="string">'equal'</span>)</div>
+<div class="line">        plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810202030142.png" alt="mage-20181020203014"></p>
+<p>明显的，<code>x</code>和<code>y</code>存在类似线性的关系，但是不像线性回归去建模得到一个从<code>x</code>到<code>y</code>的预测函数，<code>PCA</code>尝试学习<code>x</code>与<code>y</code>的关系，这种关系是由一组特征向量和特征值表示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sk_pca</span><span class="params">(self)</span>:</span></div>
+<div class="line">    <span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</div>
+<div class="line">    pca = PCA(n_components=<span class="number">2</span>)</div>
+<div class="line">    pca.fit(self.x)</div>
+<div class="line">    print(pca.components_)</div>
+<div class="line">    <span class="comment">### [[ 0.94446029  0.32862557]</span></div>
+<div class="line">    <span class="comment">### [ 0.32862557 -0.94446029]]</span></div>
+<div class="line">    print(pca.explained_variance_)</div>
+<div class="line">    <span class="comment">### [ 0.75871884  0.01838551]</span></div>
+</pre></td></tr></table></figure>
+<p>其中<code>pca.components_</code>是特征向量，<code>pca.explained_variance_</code>是特征值。为了了解它们的意义，我们将之可视化：</p>
 
       
     </div>
@@ -469,9 +443,9 @@ E(X)&=\int_{-\infin}^{\infin}xf_X(x)dx\\
       
         <div class="post-tags">
           
-            <a href="/tags/Delta-Function/" rel="tag"># Delta Function</a>
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           
-            <a href="/tags/Probability/" rel="tag"># Probability</a>
+            <a href="/tags/Principal-Component-Analysis/" rel="tag"># Principal Component Analysis</a>
           
         </div>
       
@@ -484,8 +458,8 @@ E(X)&=\int_{-\infin}^{\infin}xf_X(x)dx\\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/16/Books/" rel="next" title="Books">
-                <i class="fa fa-chevron-left"></i> Books
+              <a href="/2018/10/12/Clustering/" rel="next" title="Clustering">
+                <i class="fa fa-chevron-left"></i> Clustering
               </a>
             
           </div>
@@ -493,10 +467,6 @@ E(X)&=\int_{-\infin}^{\infin}xf_X(x)dx\\
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/17/Density-Map/" rel="prev" title="Density Map">
-                Density Map <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,17 +518,8 @@ E(X)&=\int_{-\infin}^{\infin}xf_X(x)dx\\
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -618,22 +579,6 @@ E(X)&=\int_{-\infin}^{\infin}xf_X(x)dx\\
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-Step-function"><span class="nav-number">1.</span> <span class="nav-text">Unit Step function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delta-Function"><span class="nav-number">2.</span> <span class="nav-text">$\delta$ Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">3.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">4.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Delta-Function-in-PDFs"><span class="nav-number">4.1.</span> <span class="nav-text">Delta Function in PDFs</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
