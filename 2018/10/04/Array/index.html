@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="中等Array Partition I题目点击显/隐内容 Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), …, (an, bn) which makes sum of min(ai, bi) for all i f">
+<meta name="description" content="中等K-diff Pairs in an Array题目点击显/隐内容 Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j">
 <meta name="keywords" content="Algorithm,LeetCode,Array">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Array">
 <meta property="og:url" content="http://yoursite.com/2018/10/04/Array/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="中等Array Partition I题目点击显/隐内容 Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), …, (an, bn) which makes sum of min(ai, bi) for all i f">
+<meta property="og:description" content="中等K-diff Pairs in an Array题目点击显/隐内容 Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-21T01:10:15.746Z">
+<meta property="og:updated_time" content="2018-10-23T03:58:47.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Array">
-<meta name="twitter:description" content="中等Array Partition I题目点击显/隐内容 Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), …, (an, bn) which makes sum of min(ai, bi) for all i f">
+<meta name="twitter:description" content="中等K-diff Pairs in an Array题目点击显/隐内容 Given an array of integers and an integer k, you need to find the number of unique k-diff pairs in the array. Here a k-diff pair is defined as an integer pair (i, j">
 
 
 
@@ -376,7 +376,101 @@
       
 
       
-        <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Array-Partition-I"><a href="#Array-Partition-I" class="headerlink" title="Array Partition I"></a>Array Partition I</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/array-partition-i/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+        <h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="K-diff-Pairs-in-an-Array"><a href="#K-diff-Pairs-in-an-Array" class="headerlink" title="K-diff Pairs in an Array"></a>K-diff Pairs in an Array</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/k-diff-pairs-in-an-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given an array of integers and an integer <strong>k</strong>, you need to find the number of <strong>unique</strong> k-diff pairs in the array. Here a <strong>k-diff</strong> pair is defined as an integer pair (i, j), where <strong>i</strong> and <strong>j</strong> are both numbers in the array and their <a href="https://en.wikipedia.org/wiki/Absolute_difference" target="_blank" rel="noopener">absolute difference</a> is <strong>k</strong>.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">3</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">5</span>], k = <span class="number">2</span></div>
+<div class="line">Output: <span class="number">2</span></div>
+<div class="line">Explanation: There are two <span class="number">2</span>-diff pairs in the array, (<span class="number">1</span>, <span class="number">3</span>) and (<span class="number">3</span>, <span class="number">5</span>).</div>
+<div class="line">Although we have two <span class="number">1</span>s in the input, we should only <span class="keyword">return</span> the number of unique pairs.</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input:[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], k = <span class="number">1</span></div>
+<div class="line">Output: <span class="number">4</span></div>
+<div class="line">Explanation: There are four <span class="number">1</span>-diff pairs in the array, (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">2</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">4</span>) and (<span class="number">4</span>, <span class="number">5</span>).</div>
+</pre></td></tr></table></figure>
+<p><strong>Example 3:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">4</span>], k = <span class="number">0</span></div>
+<div class="line">Output: <span class="number">1</span></div>
+<div class="line">Explanation: There is one <span class="number">0</span>-diff pair in the array, (<span class="number">1</span>, <span class="number">1</span>).</div>
+</pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<ol>
+<li>The pairs (i, j) and (j, i) count as the same pair.</li>
+<li>The length of the array won’t exceed 10,000.</li>
+<li>All the integers in the given input belong to the range: [-1e7, 1e7].</li>
+</ol>
+
+</div></div>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/6545075.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：一个含有重复数字的无序数组，还有一个整数k，让我们找出有多少对不重复的数对(i, j)使得i和j的差刚好为k。</p>
+<p>由于k有可能为0，而只有含有至少两个相同的数字才能形成数对，那么就是说我们需要统计数组中每个数字的个数。我们可以建立每个数字和其出现次数之间的映射，然后遍历哈希表中的数字，如果k为0且该数字出现的次数大于1，则结果res自增1；如果k不为0，且用当前数字加上k后得到的新数字也在数组中存在，则结果res自增1。需要注意的k不可能为负值。</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPairs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div>
+<div class="line">        <span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt; mymap;</div>
+<div class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ele : nums)&#123;</div>
+<div class="line">            mymap[ele]++;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</div>
+<div class="line">        <span class="keyword">if</span> (k&lt;<span class="number">0</span>) <span class="keyword">return</span> res;</div>
+<div class="line">        <span class="keyword">if</span> (k==<span class="number">0</span>)&#123;</div>
+<div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> ele : mymap)&#123;</div>
+<div class="line">                <span class="keyword">if</span> (ele.second&gt;<span class="number">1</span>)</div>
+<div class="line">                    res++;</div>
+<div class="line">            &#125;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">else</span>&#123;</div>
+<div class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span> ele : mymap)&#123;</div>
+<div class="line">                <span class="keyword">if</span>(mymap.find(ele.first+k) != mymap.end())&#123;</div>
+<div class="line">                    res++;</div>
+<div class="line">                &#125;</div>
+<div class="line">                    </div>
+<div class="line">            &#125;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">return</span> res;</div>
+<div class="line">    &#125;</div>
+<div class="line">&#125;;</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Array-Partition-I"><a href="#Array-Partition-I" class="headerlink" title="Array Partition I"></a>Array Partition I</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/array-partition-i/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array of <strong>2n</strong> integers, your task is to group these integers into <strong>n</strong> pairs of integer, say (a1, b1), (a2, b2), …, (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.</p>
 <p><strong>Example 1:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -395,11 +489,11 @@
 </ol>
 
 </div></div>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/hashtable/leetcode-561-array-partition-i/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将长度为<code>2n</code>的数组分成<code>n</code>个长度为2的元组，使<code>n</code>个元组小值的和最大。</p>
+<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/hashtable/leetcode-561-array-partition-i/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将长度为<code>2n</code>的数组分成<code>n</code>个长度为2的元组，使<code>n</code>个元组小值的和最大。</p>
 <p>一个很直接的思路就是排序，然后遍历一遍，每次将偶数index上的值相加，这样的时间复杂度由排序控制是<code>O(nlogn)</code>。</p>
 <p>但是，我们可以丢弃排序，增加一个数组，以空间换时间，将时间复杂度降维<code>O(n)</code>，空间复杂度为<code>O(n)</code>。</p>
 <p>由题目看到，元素值范围是<code>[-10000,10000]</code>，这样我们设置一个长度为<code>2*10000</code>的数组，元素值为新数组的下标，新数组的值为下标在已知数组中出现的次数。第一次遍历<code>nums</code>，得到每个元素的频数，而且，隐含了排序。第二次遍历，如果新数组的值为0，则跳过；否则，判断是否为一对元素值得第一个；</p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -457,7 +551,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/can-place-flowers/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h4><h5 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/can-place-flowers/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Suppose you have a long flowerbed in which some of the plots are planted and some are not. However, flowers cannot be planted in adjacent plots - they would compete for water and both would die.</p>
 <p>Given a flowerbed (represented as an array containing 0 and 1, where 0 means empty and 1 means not empty), and a number <strong>n</strong>, return if <strong>n</strong> new flowers can be planted in it without violating the no-adjacent-flowers rule.</p>
 <p><strong>Example 1:</strong></p>
@@ -480,9 +574,9 @@
 </ol>
 
 </div></div>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
+<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
 <p>从左向右遍历flowerbed，将满足要求的0设为1。计数与n比较即可。</p>
-<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -522,7 +616,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Non-decreasing-Array"><a href="#Non-decreasing-Array" class="headerlink" title="Non-decreasing Array"></a>Non-decreasing Array</h4><h5 id="题目-2"><a href="#题目-2" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/non-decreasing-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Non-decreasing-Array"><a href="#Non-decreasing-Array" class="headerlink" title="Non-decreasing Array"></a>Non-decreasing Array</h4><h5 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/non-decreasing-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array with <code>n</code> integers, your task is to check if it could become non-decreasing by modifying <strong>at most</strong> <code>1</code> element.</p>
 <p>We define an array is non-decreasing if <code>array[i] &lt;= array[i + 1]</code> holds for every <code>i</code> (1 &lt;= i &lt; n).</p>
 <p><strong>Example 1:</strong></p>
@@ -544,7 +638,7 @@
 <p><strong>Note:</strong> The <code>n</code> belongs to [1, 10,000].</p>
 
 </div></div>
-<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -628,9 +722,9 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
+<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
 <p>仔细分析之后，会发现如果字符以<code>1</code>开头，那么它只能是<code>10</code>或者<code>11</code>，如果是<code>0</code>开头，那么只能是<code>0</code>。基于此，我们扫描一遍字符串，如果当前字符是<code>1</code>，那么跳过下一个字符，直接扫描<code>index = i+2</code>的字符；如果当前字符是<code>0</code>，那么扫描下一个字符，判断是否能到达最后一个字符且为<code>0</code>。</p>
-<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -701,10 +795,10 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
+<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
 <p>第一种方法是遍历每个点，然后分别计算点左边和，点右边和。但是这样的复杂度是$O(n)$.</p>
 <p>第二中方法是同样遍历每个点，但是并不是每次都去计算左边和，右边和。实际上，每一次遍历的时候，左边和、右边和的差异就是当前点：即左边和=上一次的和+当前点，右边和=上一次的和-当前点。</p>
-<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -762,9 +856,9 @@
 </ol>
 
 </div></div>
-<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
+<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
 <p>遍历一次，找出最大和次大的元素。重点是在次大元素的更新，每次最大元素更新，次大元素继承上一次最大元素值。</p>
-<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -857,9 +951,9 @@
 </ol>
 
 </div></div>
-<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
+<h5 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
 <p>感觉挺巧的想法，遍历一遍矩阵，每次判断当前元素与其紧邻的对角线元素是否相等。</p>
-<h5 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -891,7 +985,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目-3"><a href="#题目-3" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目-4"><a href="#题目-4" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a deck of cards, each card has an integer written on it.</p>
 <p>Return <code>true</code> if and only if you can choose <code>X &gt;= 2</code> such that it is possible to split the entire deck into 1 or more groups of cards, where:</p>
 <ul>
@@ -940,9 +1034,9 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
+<h5 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
 <p>思路很直接，遍历数组，统计相同元素个数。只要最小组的长度大于2且是其他组的除数，就可以。但是，这个对例子<code>[1,1,1,1,2,2,2,2,2,2]</code>是不行的。实际上，只要各组长度之间存在大于1的最大公约数，该最大公倍数即最终划分的长度，则满足题意。</p>
-<h5 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -990,7 +1084,7 @@
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-4"><a href="#题目-4" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-5"><a href="#题目-5" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a row of <code>seats</code>, <code>1</code> represents a person sitting in that seat, and <code>0</code> represents that the seat is empty. </p>
 <p>There is at least one empty seat, and at least one person sitting.</p>
 <p>Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized. </p>
@@ -1028,10 +1122,10 @@
 </ol>
 
 </div></div>
-<h5 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
+<h5 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
 <p>即对于每一个空座位，需要考虑左边最近人的距离和右边最近人的距离，那么该座位与旁人的最大距离为左右两边距离的较小一个。这样每一个空座位的最大距离求出之后，选择最大距离的座位。</p>
 <p>为了求出每个座位与左右两边人的最近距离，我们使用遍历两次座位数组，第一次遍历求出空座位与周边人的距离；第二次遍历求出与右边人的距离。</p>
-<h5 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1216,7 +1310,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1227,7 +1321,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1238,7 +1332,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1271,7 +1365,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中等"><span class="nav-number">1.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-Partition-I"><span class="nav-number">1.1.</span> <span class="nav-text">Array Partition I</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Can-Place-Flowers"><span class="nav-number">1.2.</span> <span class="nav-text">Can Place Flowers</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-decreasing-Array"><span class="nav-number">1.3.</span> <span class="nav-text">Non-decreasing Array</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-bit-and-2-bit-Characters"><span class="nav-number">1.4.</span> <span class="nav-text">1-bit and 2-bit Characters</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Find-Pivot-Index"><span class="nav-number">1.5.</span> <span class="nav-text">Find Pivot Index</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-4"><span class="nav-number">1.5.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Largest-Number-At-Least-Twice-of-Others"><span class="nav-number">1.6.</span> <span class="nav-text">Largest Number At Least Twice of Others</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-5"><span class="nav-number">1.6.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Toeplitz-Matrix"><span class="nav-number">1.7.</span> <span class="nav-text">Toeplitz Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-6"><span class="nav-number">1.7.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X-of-a-Kind-in-a-Deck-of-Cards"><span class="nav-number">1.8.</span> <span class="nav-text">X of a Kind in a Deck of Cards</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-3"><span class="nav-number">1.8.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-7"><span class="nav-number">1.8.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-7"><span class="nav-number">1.8.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximize-Distance-to-Closest-Person"><span class="nav-number">1.9.</span> <span class="nav-text">Maximize Distance to Closest Person</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-4"><span class="nav-number">1.9.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-8"><span class="nav-number">1.9.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-8"><span class="nav-number">1.9.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#中等"><span class="nav-number">1.</span> <span class="nav-text">中等</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#K-diff-Pairs-in-an-Array"><span class="nav-number">1.1.</span> <span class="nav-text">K-diff Pairs in an Array</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路"><span class="nav-number">1.1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">1.1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-Partition-I"><span class="nav-number">1.2.</span> <span class="nav-text">Array Partition I</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Can-Place-Flowers"><span class="nav-number">1.3.</span> <span class="nav-text">Can Place Flowers</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-decreasing-Array"><span class="nav-number">1.4.</span> <span class="nav-text">Non-decreasing Array</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-bit-and-2-bit-Characters"><span class="nav-number">1.5.</span> <span class="nav-text">1-bit and 2-bit Characters</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-4"><span class="nav-number">1.5.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Find-Pivot-Index"><span class="nav-number">1.6.</span> <span class="nav-text">Find Pivot Index</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-5"><span class="nav-number">1.6.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Largest-Number-At-Least-Twice-of-Others"><span class="nav-number">1.7.</span> <span class="nav-text">Largest Number At Least Twice of Others</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-6"><span class="nav-number">1.7.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Toeplitz-Matrix"><span class="nav-number">1.8.</span> <span class="nav-text">Toeplitz Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-7"><span class="nav-number">1.8.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-7"><span class="nav-number">1.8.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#X-of-a-Kind-in-a-Deck-of-Cards"><span class="nav-number">1.9.</span> <span class="nav-text">X of a Kind in a Deck of Cards</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-4"><span class="nav-number">1.9.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-8"><span class="nav-number">1.9.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-8"><span class="nav-number">1.9.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Maximize-Distance-to-Closest-Person"><span class="nav-number">1.10.</span> <span class="nav-text">Maximize Distance to Closest Person</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目-5"><span class="nav-number">1.10.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#思路-9"><span class="nav-number">1.10.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码-9"><span class="nav-number">1.10.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
