@@ -79,20 +79,22 @@
 
 
 
-<meta name="description" content="我们利用sklearn中的方法来探索pca，首先生成样本数据： 1 2 3 4 5 6 7 8 9 10 11 12 import numpy as np import matplotlib.pyplot as plt  class PCA():     def visualize(self):         rng = np.random.RandomState(1)         # rn">
+<meta name="description" content="机器学习中，在高维情形下出现的数据样本稀疏、距离计算困难等问题，被称为“维数灾难”（curse of dimensionality）。而缓解该问题的一个重要途径是降维（dimension reduction），即通过某种数学变换将原始高维空间转换为一个低维“子空间”（subspace），在这个子空间中样本密度大幅度提高，距离计算也变得更加容易。 之所以可以进行降维，是因为在许多时候，人们观测或者收">
 <meta name="keywords" content="Machine Learning,Principal Component Analysis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Principal Component Analysis">
 <meta property="og:url" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="我们利用sklearn中的方法来探索pca，首先生成样本数据： 1 2 3 4 5 6 7 8 9 10 11 12 import numpy as np import matplotlib.pyplot as plt  class PCA():     def visualize(self):         rng = np.random.RandomState(1)         # rn">
+<meta property="og:description" content="机器学习中，在高维情形下出现的数据样本稀疏、距离计算困难等问题，被称为“维数灾难”（curse of dimensionality）。而缓解该问题的一个重要途径是降维（dimension reduction），即通过某种数学变换将原始高维空间转换为一个低维“子空间”（subspace），在这个子空间中样本密度大幅度提高，距离计算也变得更加容易。 之所以可以进行降维，是因为在许多时候，人们观测或者收">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/Screen%20Shot%202018-10-24%20at%2012.56.10%20PM-0403807.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810241415598.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810202030142.png">
-<meta property="og:updated_time" content="2018-10-21T01:43:01.166Z">
+<meta property="og:updated_time" content="2018-10-24T19:16:55.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Principal Component Analysis">
-<meta name="twitter:description" content="我们利用sklearn中的方法来探索pca，首先生成样本数据： 1 2 3 4 5 6 7 8 9 10 11 12 import numpy as np import matplotlib.pyplot as plt  class PCA():     def visualize(self):         rng = np.random.RandomState(1)         # rn">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810202030142.png">
+<meta name="twitter:description" content="机器学习中，在高维情形下出现的数据样本稀疏、距离计算困难等问题，被称为“维数灾难”（curse of dimensionality）。而缓解该问题的一个重要途径是降维（dimension reduction），即通过某种数学变换将原始高维空间转换为一个低维“子空间”（subspace），在这个子空间中样本密度大幅度提高，距离计算也变得更加容易。 之所以可以进行降维，是因为在许多时候，人们观测或者收">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/Screen%20Shot%202018-10-24%20at%2012.56.10%20PM-0403807.png">
 
 
 
@@ -378,7 +380,96 @@
       
 
       
-        <p>我们利用<code>sklearn</code>中的方法来探索pca，首先生成样本数据：</p>
+        <p>机器学习中，在高维情形下出现的数据样本稀疏、距离计算困难等问题，被称为“维数灾难”（curse of dimensionality）。而缓解该问题的一个重要途径是降维（dimension reduction），即通过某种数学变换将原始高维空间转换为一个低维“子空间”（subspace），在这个子空间中样本密度大幅度提高，距离计算也变得更加容易。</p>
+<p>之所以可以进行降维，是因为在许多时候，人们观测或者收集到的数据样本虽然是高维的，但是与学习任务相关的也许仅仅是某个低维分布。</p>
+<a id="more"></a>
+<p><img src="/2018/10/20/Principal-Component-Analysis/Screen Shot 2018-10-24 at 12.56.10 PM-0403807.png" alt="creen Shot 2018-10-24 at 12.56.10 PM-040380"></p>
+<p>PCA from Scratch</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">(self)</span>:</span></div>
+<div class="line">    self.data = pd.read_csv(<span class="string">'testSet.txt'</span>,sep=<span class="string">'\t'</span>,header=<span class="keyword">None</span>,names=[<span class="string">'x1'</span>,<span class="string">'x2'</span>]).values</div>
+<div class="line">    self.data = np.array(self.data)</div>
+<div class="line">    self.ori_data = pd.read_csv(<span class="string">'testSet.txt'</span>,sep=<span class="string">'\t'</span>,header=<span class="keyword">None</span>,names=[<span class="string">'x1'</span>,<span class="string">'x2'</span>]).values</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">pca</span><span class="params">(self)</span>:</span></div>
+<div class="line">    self.d = <span class="number">1</span> <span class="comment"># dimension after reduction</span></div>
+<div class="line">    self.load_data()</div>
+<div class="line">    row,col = self.data.shape</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Step 1: data centralization</span></div>
+<div class="line">    col_sum = np.sum(self.data,axis=<span class="number">0</span>)</div>
+<div class="line">    col_mean = col_sum/row</div>
+<div class="line">    self.data -= col_mean</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Step 2: calculating covariance matrix</span></div>
+<div class="line">    cov = self.data.T.dot(self.data)</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Step 3: feature factorization</span></div>
+<div class="line">    feature_val, feature_vec = np.linalg.eig(cov)</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Step 4: top n feature value and vector</span></div>
+<div class="line">    sorted_eig = np.argsort(feature_val)</div>
+<div class="line">    sorted_eig = sorted_eig[:-(self.d+<span class="number">1</span>):<span class="number">-1</span>] <span class="comment"># pic d values from the end to the front</span></div>
+<div class="line">    w = feature_vec[:,sorted_eig]</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Step 5: calculate low-dimension data</span></div>
+<div class="line">    self.lowdim_data = self.data.dot(w)+col_mean</div>
+<div class="line">    self.vis()</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">vis</span><span class="params">(self)</span>:</span></div>
+<div class="line">    x = self.ori_data[:,<span class="number">0</span>]</div>
+<div class="line">    y = self.ori_data[:,<span class="number">1</span>]</div>
+<div class="line">    fig = plt.figure()</div>
+<div class="line">    ax = fig.add_subplot(<span class="number">111</span>)</div>
+<div class="line">    ax.scatter(x, y)</div>
+<div class="line">    x0 = self.lowdim_data[:, <span class="number">0</span>]</div>
+<div class="line">    y0 = self.lowdim_data[:, <span class="number">1</span>]</div>
+<div class="line">    ax.scatter(x0, y0, marker=<span class="string">'o'</span>, c=<span class="string">'r'</span>)</div>
+<div class="line">    plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810241415598.png" alt="mage-20181024141559"></p>
+<p>我们利用<code>sklearn</code>中的方法来探索pca，首先生成样本数据：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
