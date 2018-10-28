@@ -94,7 +94,13 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810252123309.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810252140521.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810261632428.png">
-<meta property="og:updated_time" content="2018-10-27T00:22:18.668Z">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810272228567.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810272231320.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810272239305.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810272307483.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810272310030.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/20/Principal-Component-Analysis/image-201810272311402.png">
+<meta property="og:updated_time" content="2018-10-28T04:11:45.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Principal Component Analysis">
 <meta name="twitter:description" content="机器学习中，在高维情形下出现的数据样本稀疏、距离计算困难等问题，被称为“维数灾难”（curse of dimensionality）。而缓解该问题的一个重要途径是降维（dimension reduction），即通过某种数学变换将原始高维空间转换为一个低维“子空间”（subspace），在这个子空间中样本密度大幅度提高，距离计算也变得更加容易。 之所以可以进行降维，是因为在许多时候，人们观测或者收">
@@ -688,6 +694,131 @@
 <div class="line">    plt.show()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/10/20/Principal-Component-Analysis/image-201810261632428.png" alt="mage-20181026163242"></p>
+<p>PCA as Noise Filtering</p>
+<blockquote>
+<p>PCA can also be used as a filtering approach for noisy data. The idea is this: any components with variance much larger than the effect of the noise should be relatively unaffected by the noise. So if you reconstruct the data using just the largest subset of principal components, you should be preferentially keeping the signal and throwing out the noise.</p>
+</blockquote>
+<p>下面我们以手写体数字为例，探索PCA作为噪声过滤器的效果，首先我们画出无噪声的手写体数字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_digits</div>
+<div class="line">digits = load_digits().data</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_digits</span><span class="params">(data)</span>:</span></div>
+<div class="line">    fig,axes = plt.subplots(<span class="number">4</span>,<span class="number">10</span>,figsize=(<span class="number">10</span>,<span class="number">4</span>),sharex=<span class="keyword">True</span>,sharey=<span class="keyword">True</span>)</div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</div>
+<div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">10</span>):</div>
+<div class="line">            axes[i][j].imshow(data[i*<span class="number">10</span>+j].reshape(<span class="number">8</span>,<span class="number">8</span>),cmap=<span class="string">'binary'</span>)</div>
+<div class="line">    plt.show()</div>
+<div class="line">plot_digits(digits)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810272228567.png" alt="mage-20181027222856"></p>
+<p>现在我们队手写体数字添加噪声：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">np.random.seed(<span class="number">42</span>)</div>
+<div class="line">noisy = np.random.normal(digits,<span class="number">4</span>)</div>
+<div class="line">plot_digits(noisy)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810272231320.png" alt="mage-20181027223132"></p>
+<p>显然，添加了噪声的数据很难辨别，现在我们就去训练一个PCA进行去噪：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</div>
+<div class="line">pca = PCA(<span class="number">0.5</span>)</div>
+<div class="line">pca.fit(noisy)</div>
+<div class="line">print(pca.n_components_) <span class="comment">#12</span></div>
+</pre></td></tr></table></figure>
+<p>我们想要模型解释至少50%的变化，根据模型显示，需要12个维度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">components = pca.transform(noisy)</div>
+<div class="line">filtered = pca.inverse_transform(components)</div>
+<div class="line">plot_digits(filtered)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810272239305.png" alt="mage-20181027223930"></p>
+<blockquote>
+<p>This signal preserving/noise filtering property makes PCA a very useful feature selection routine—for example, rather than training a classifier on very high-dimensional data, you might instead train the classifier on the lower-dimensional representation, which will automatically serve to filter out random noise in the inputs.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_lfw_people</div>
+<div class="line">faces = fetch_lfw_people(min_faces_per_person=<span class="number">60</span>)</div>
+<div class="line">print(faces.data.shape) <span class="comment">#(1348, 2914)</span></div>
+</pre></td></tr></table></figure>
+<p>可以看到每一张图片的维度是2941=62*47，由于数据维度比较大，这次我们使用<code>RandomizedPCA</code>而非标准<code>PCA</code></p>
+<blockquote>
+<p>In this case, it can be interesting to visualize the images associated with the first several principal components (these components are technically known as “eigenvectors,” so these types of images are often called “eigenfaces”). As you can see in this figure, they are as creepy as they sound:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> RandomizedPCA</div>
+<div class="line">pca = RandomizedPCA(<span class="number">150</span>)</div>
+<div class="line">pca.fit(faces.data)</div>
+<div class="line">fig,axes = plt.subplots(<span class="number">3</span>,<span class="number">8</span>,figsize=(<span class="number">9</span>,<span class="number">4</span>),sharex=<span class="keyword">True</span>,sharey=<span class="keyword">True</span>)</div>
+<div class="line"><span class="keyword">for</span> i,ax <span class="keyword">in</span> enumerate(axes.flat):</div>
+<div class="line">    ax.imshow(pca.components_[i].reshape(<span class="number">62</span>,<span class="number">47</span>),cmap=<span class="string">'bone'</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810272307483.png" alt="mage-20181027230748"></p>
+<blockquote>
+<p>The results are very interesting, and give us insight into how the images vary: for example, the first few eigenfaces (from the top left) seem to be associated with the angle of lighting on the face, and later principal vectors seem to be picking out certain features, such as eyes, noses, and lips. Let’s take a look at the cumulative variance of these components to see how much of the data information the projection is preserving:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">plt.plot(range(<span class="number">150</span>),np.cumsum(pca.explained_variance_ratio_))</div>
+<div class="line">plt.xlabel(<span class="string">'number of components'</span>)</div>
+<div class="line">plt.ylabel(<span class="string">'cumulative explained variance'</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810272310030.png" alt="mage-20181027231003"></p>
+<blockquote>
+<p>We see that these 150 components account for just over 90% of the variance. That would lead us to believe that using these 150 components, we would recover most of the essential characteristics of the data. To make this more concrete, we can compare the input images with the images reconstructed from these 150 components</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line">components = pca.transform(faces.data)</div>
+<div class="line">projected = pca.inverse_transform(components)</div>
+<div class="line">fig, ax = plt.subplots(<span class="number">2</span>, <span class="number">10</span>, figsize=(<span class="number">10</span>, <span class="number">2.5</span>),</div>
+<div class="line">                       subplot_kw=&#123;<span class="string">'xticks'</span>: [], <span class="string">'yticks'</span>: []&#125;,</div>
+<div class="line">                       gridspec_kw=dict(hspace=<span class="number">0.1</span>, wspace=<span class="number">0.1</span>))</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div>
+<div class="line">    ax[<span class="number">0</span>, i].imshow(faces.data[i].reshape(<span class="number">62</span>, <span class="number">47</span>), cmap=<span class="string">'binary_r'</span>)</div>
+<div class="line">    ax[<span class="number">1</span>, i].imshow(projected[i].reshape(<span class="number">62</span>, <span class="number">47</span>), cmap=<span class="string">'binary_r'</span>)</div>
+<div class="line"></div>
+<div class="line">ax[<span class="number">0</span>, <span class="number">0</span>].set_ylabel(<span class="string">'full-dim\ninput'</span>)</div>
+<div class="line">ax[<span class="number">1</span>, <span class="number">0</span>].set_ylabel(<span class="string">'150-dim\nreconstruction'</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/10/20/Principal-Component-Analysis/image-201810272311402.png" alt="mage-20181027231140"></p>
 
       
     </div>
