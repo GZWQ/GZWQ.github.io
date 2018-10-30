@@ -387,10 +387,14 @@
 <p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-10-29 at 10.54.11 PM.png" alt="creen Shot 2018-10-29 at 10.54.11 P"></p>
 <p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-10-29 at 10.57.45 PM.png" alt="creen Shot 2018-10-29 at 10.57.45 P"></p>
 <p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-10-29 at 11.08.43 PM.png" alt="creen Shot 2018-10-29 at 11.08.43 P"></p>
-<h5 id="Natural-and-Effective-Obfuscation-by-Head-Inpainting"><a href="#Natural-and-Effective-Obfuscation-by-Head-Inpainting" class="headerlink" title="Natural and Effective Obfuscation by Head Inpainting"></a><a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Sun_Natural_and_Effective_CVPR_2018_paper.pdf" target="_blank" rel="noopener">Natural and Effective Obfuscation by Head Inpainting</a></h5><p>We focus on the scenario where the user wants to obfuscate some identities in a social media photo by inpainting new heads for them. We use facial landmarks to provide strong guidance for the head inpainter. We factor the head inpainting task into two stages: (1) landmark detection or generation and (2) head<br>inpainting conditioned on body context and landmarks.</p>
+<p>In particular, we aim at sampling from a standard distribution, e.g. a Gaussian<br>distribution, to first generate new embedding features and from them generate new images</p>
+<h5 id="Natural-and-Effective-Obfuscation-by-Head-Inpainting"><a href="#Natural-and-Effective-Obfuscation-by-Head-Inpainting" class="headerlink" title="Natural and Effective Obfuscation by Head Inpainting"></a><a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Sun_Natural_and_Effective_CVPR_2018_paper.pdf" target="_blank" rel="noopener">Natural and Effective Obfuscation by Head Inpainting</a></h5><p>We focus on the scenario where the user wants to obfuscate some identities in a social media photo by inpainting new heads for them. We use facial landmarks to provide strong guidance for the head inpainter. We factor the head inpainting task into two stages: (1) landmark detection or generation and (2) head inpainting conditioned on body context and landmarks.</p>
 <p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-10-29 at 11.19.36 PM.png" alt="creen Shot 2018-10-29 at 11.19.36 P"></p>
+<p>It takes <strong>either the original or blackhead image as input</strong>, in order to give flexibility to deal with cases where the original images are not available.</p>
+<p>Given original or headobfuscated input, stage-I detects or generates landmarks,<br>respectively. Stage-II takes the blackhead image and landmarks as input, and outputs the generated image.</p>
 <p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-10-29 at 11.23.53 PM.png" alt="creen Shot 2018-10-29 at 11.23.53 P"></p>
 <h5 id="Deformable-GANs-for-Pose-based-Human-Image-Generation"><a href="#Deformable-GANs-for-Pose-based-Human-Image-Generation" class="headerlink" title="Deformable GANs for Pose-based Human Image Generation"></a><a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Siarohin_Deformable_GANs_for_CVPR_2018_paper.pdf" target="_blank" rel="noopener">Deformable GANs for Pose-based Human Image Generation</a></h5><p>Specifically, given an image of a person and a target pose, we synthesize a new image of that person in the novel pose. In order to deal with <strong>pixel-to-pixel misalignments caused by the pose differences</strong>, we introduce deformable skip connections in the generator of our Generative Adversarial Network. </p>
+<p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-10-30 at 10.00.26 AM.png" alt="creen Shot 2018-10-30 at 10.00.26 A"></p>
 <h4 id="2018-10-27"><a href="#2018-10-27" class="headerlink" title="2018-10-27"></a>2018-10-27</h4><h5 id="Cross-Modality-Person-Re-Identification-with-Generative-Adversarial-Training"><a href="#Cross-Modality-Person-Re-Identification-with-Generative-Adversarial-Training" class="headerlink" title="Cross-Modality Person Re-Identification with Generative Adversarial Training"></a><a href="https://www.ijcai.org/proceedings/2018/0094.pdf" target="_blank" rel="noopener">Cross-Modality Person Re-Identification with Generative Adversarial Training</a></h5><p>studied the Re-ID between infrared and RGB images, which is essentially a cross-modality problem and widely encountered in real-world scenarios.</p>
 <p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-10-29 at 9.40.42 AM.png" alt="creen Shot 2018-10-29 at 9.40.42 A"></p>
 <h5 id="Predicting-Human-Interaction-via-Relative-Attention-Model"><a href="#Predicting-Human-Interaction-via-Relative-Attention-Model" class="headerlink" title="Predicting Human Interaction via Relative Attention Model"></a><a href="https://arxiv.org/pdf/1705.09467.pdf" target="_blank" rel="noopener">Predicting Human Interaction via Relative Attention Model</a></h5><p>Essentially, a good algorithm should effectively model the mutual influence between the two interacting subjects. Also, only a small region in the scene is discriminative for identifying the on-going interaction.</p>
@@ -3717,14 +3721,14 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�493-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�501-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�494-->
+<!--�502-->
 <p>In-order： (left)，root，(right)</p>
-<!--�495-->
+<!--�503-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�496-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�497-->
+<!--�504-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�505-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
