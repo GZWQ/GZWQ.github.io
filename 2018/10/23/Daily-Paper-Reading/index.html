@@ -79,14 +79,16 @@
 
 
 
-<meta name="description" content="2018-11-05Deep Visual Analogy-Making  Person Transfer GAN to Bridge Domain Gap for Person Re-Identification  Hand3D: Hand Pose Estimation using 3D Neural Network  Learning to Estimate 3D Human Pose an">
+<meta name="description" content="2018-11-05Deep Visual Analogy-Making tf code  Given a pair of images $(a,b)$ and a query image $c$, we try to generate $d$, the corresponding image of $c$, such that $a$ is to $b$ as $c$ is to $d$.">
 <meta name="keywords" content="Deep Learning,Paper Everyday,Generative adversarial networks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Daily Paper Reading">
 <meta property="og:url" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="2018-11-05Deep Visual Analogy-Making  Person Transfer GAN to Bridge Domain Gap for Person Re-Identification  Hand3D: Hand Pose Estimation using 3D Neural Network  Learning to Estimate 3D Human Pose an">
+<meta property="og:description" content="2018-11-05Deep Visual Analogy-Making tf code  Given a pair of images $(a,b)$ and a query image $c$, we try to generate $d$, the corresponding image of $c$, such that $a$ is to $b$ as $c$ is to $d$.">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-11-06%20at%209.25.11%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-11-06%20at%209.38.23%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-11-04%20at%2011.17.55%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-11-04%20at%2011.22.15%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-11-05%20at%2010.58.10%20AM.png">
@@ -118,11 +120,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-10-28%20at%2010.05.47%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-10-23%20at%2011.02.50%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-10-26%20at%209.15.48%20AM.png">
-<meta property="og:updated_time" content="2018-11-05T19:02:16.399Z">
+<meta property="og:updated_time" content="2018-11-07T15:22:52.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Daily Paper Reading">
-<meta name="twitter:description" content="2018-11-05Deep Visual Analogy-Making  Person Transfer GAN to Bridge Domain Gap for Person Re-Identification  Hand3D: Hand Pose Estimation using 3D Neural Network  Learning to Estimate 3D Human Pose an">
-<meta name="twitter:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-11-04%20at%2011.17.55%20PM.png">
+<meta name="twitter:description" content="2018-11-05Deep Visual Analogy-Making tf code  Given a pair of images $(a,b)$ and a query image $c$, we try to generate $d$, the corresponding image of $c$, such that $a$ is to $b$ as $c$ is to $d$.">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/23/Daily-Paper-Reading/Screen%20Shot%202018-11-06%20at%209.25.11%20PM.png">
 
 
 
@@ -408,8 +410,14 @@
       
 
       
-        <h1 id="2018-11-05"><a href="#2018-11-05" class="headerlink" title="2018-11-05"></a>2018-11-05</h1><p><a href="https://papers.nips.cc/paper/5845-deep-visual-analogy-making.pdf" target="_blank" rel="noopener">Deep Visual Analogy-Making</a> </p>
-<p><a href="https://arxiv.org/pdf/1711.08565v1.pdf" target="_blank" rel="noopener">Person Transfer GAN to Bridge Domain Gap for Person Re-Identification</a> </p>
+        <h1 id="2018-11-05"><a href="#2018-11-05" class="headerlink" title="2018-11-05"></a>2018-11-05</h1><p><a href="https://papers.nips.cc/paper/5845-deep-visual-analogy-making.pdf" target="_blank" rel="noopener">Deep Visual Analogy-Making</a> <a href="https://github.com/carpedm20/visual-analogy-tensorflow" target="_blank" rel="noopener">tf code</a> </p>
+<p>Given a pair of images $(a,b)$ and a query image $c$, we try to generate $d$, the corresponding image of $c$, such that $a$ is to $b$ as $c$ is to $d$.</p>
+<p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-11-06 at 9.25.11 PM.png" alt="creen Shot 2018-11-06 at 9.25.11 P"></p>
+<p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-11-06 at 9.38.23 PM.png" alt="creen Shot 2018-11-06 at 9.38.23 P"></p>
+<p><a href="https://arxiv.org/pdf/1711.08565v1.pdf" target="_blank" rel="noopener">Person Transfer GAN to Bridge Domain Gap for Person Re-Identification</a> <a href="https://github.com/pkuvmc/PTGAN" target="_blank" rel="noopener">code</a> </p>
+<p>A new Multi-Scene Multi-Time person ReID dataset (MSMT17) is proposed. </p>
+<p><strong>[transfer styles but keep identies]</strong> A method is proposed to bridge the domain gap by transferring persons in dataset A to another dataset B. The transferred persons from A are desired to keep their identities, meanwhile present similar styles, e.g., backgrounds, lightings, etc., with persons in B.</p>
+<p>To keep identity, a identities loss is introduced where the mask region of generated images and gt images should be similar.</p>
 <p><a href="https://arxiv.org/pdf/1704.02224v1.pdf" target="_blank" rel="noopener">Hand3D: Hand Pose Estimation using 3D Neural Network</a> </p>
 <p><a href="https://arxiv.org/pdf/1805.04092v1.pdf" target="_blank" rel="noopener">Learning to Estimate 3D Human Pose and Shape from a Single Color Image</a> </p>
 <p><a href="https://arxiv.org/pdf/1711.06454v5.pdf" target="_blank" rel="noopener">Separating Style and Content for Generalized Style Transfer</a> </p>
