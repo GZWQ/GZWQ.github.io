@@ -376,10 +376,19 @@
       
         
           
-            <h1 id="2018-11-08"><a href="#2018-11-08" class="headerlink" title="2018-11-08"></a>2018-11-08</h1><p><a href="https://arxiv.org/pdf/1706.02823v3.pdf" target="_blank" rel="noopener">TextureGAN: Controlling Deep Image Synthesis with Texture Patches</a></p>
+            <p>2018-11-10</p>
+<p><a href="https://arxiv.org/pdf/1612.03242.pdf" target="_blank" rel="noopener">StackGAN: Text to Photo-realistic Image Synthesis with Stacked Generative Adversarial Networks</a> </p>
+<p><a href="https://arxiv.org/pdf/1703.09695.pdf" target="_blank" rel="noopener">Semi and Weakly Supervised Semantic Segmentation Using Generative Adversarial Network</a> </p>
+<p><a href="https://arxiv.org/pdf/1704.03414.pdf" target="_blank" rel="noopener">A-Fast-RCNN: Hard Positive Generation via Adversary for Object Detection</a> </p>
+<p><a href="https://www.ijcai.org/proceedings/2017/0404.pdf" target="_blank" rel="noopener">Tag Disentangled Generative Adversarial Networks for Object Image Re-rendering</a> </p>
+<h1 id="2018-11-08"><a href="#2018-11-08" class="headerlink" title="2018-11-08"></a>2018-11-08</h1><p><a href="https://arxiv.org/pdf/1706.02823v3.pdf" target="_blank" rel="noopener">TextureGAN: Controlling Deep Image Synthesis with Texture Patches</a></p>
 <p><a href="https://arxiv.org/pdf/1804.04273v1.pdf" target="_blank" rel="noopener">VITAL: VIsual Tracking via Adversarial Learning</a> </p>
+<p>Problem setting : tracking-by-detection, i.e., drawing samples around the target object in the first stage and classifying each sample as the target object or as background in the second stage.</p>
+<p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-11-09 at 10.15.46 AM.png" alt="creen Shot 2018-11-09 at 10.15.46 A"></p>
 <p><a href="https://arxiv.org/pdf/1712.02478v1.pdf" target="_blank" rel="noopener">Stacked Conditional Generative Adversarial Networks for Jointly Learning Shadow Detection and Shadow Removal</a> </p>
 <p><a href="https://arxiv.org/pdf/1708.00159v1.pdf" target="_blank" rel="noopener">Image Denoising via CNNs: An Adversarial Approach</a> </p>
+<p>Image denoising is a fundamental image processing problem whose objective is to remove the noise while preserving the original image structure.</p>
+<p><img src="/2018/10/23/Daily-Paper-Reading/Screen Shot 2018-11-12 at 9.19.33 AM.png" alt="creen Shot 2018-11-12 at 9.19.33 A"></p>
 <p><a href="https://arxiv.org/pdf/1711.09554v2.pdf" target="_blank" rel="noopener">Discriminative Region Proposal Adversarial Networks for High-Quality Image-to-Image Translation</a> </p>
 <p><a href="https://arxiv.org/pdf/1705.08824v2.pdf" target="_blank" rel="noopener">From source to target and back: symmetric bi-directional adaptive GAN</a> </p>
 <p><a href="https://arxiv.org/pdf/1805.00251v1.pdf" target="_blank" rel="noopener">Conditional Image-to-Image Translation</a> </p>
@@ -1819,7 +1828,49 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
       
         
           
-            <h3 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h3><h4 id="Rotate-Array"><a href="#Rotate-Array" class="headerlink" title="Rotate Array"></a>Rotate Array</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/rotate-array/description/" target="_blank" rel="noopener">题目</a></h5><p>Given an array, rotate the array to the right by <em>k</em> steps, where <em>k</em> is non-negative.</p>
+            <h3 id="简单"><a href="#简单" class="headerlink" title="简单"></a>简单</h3><h4 id="Move-Zeros"><a href="#Move-Zeros" class="headerlink" title="Move Zeros"></a>Move Zeros</h4><h5 id="题目-类似"><a href="#题目-类似" class="headerlink" title="题目 类似"></a><a href="https://leetcode.com/problems/move-zeroes/description/" target="_blank" rel="noopener">题目</a> <a href="https://leetcode.com/problems/remove-element/description/" target="_blank" rel="noopener">类似</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Given an array <code>nums</code>, write a function to move all <code>0</code>‘s to the end of it while maintaining the relative order of the non-zero elements.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Input: [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">12</span>]</div>
+<div class="line">Output: [<span class="number">1</span>,<span class="number">3</span>,<span class="number">12</span>,<span class="number">0</span>,<span class="number">0</span>]</div>
+</pre></td></tr></table></figure>
+<p><strong>Note</strong>:</p>
+<ol>
+<li>You must do this <strong>in-place</strong> without making a copy of the array.</li>
+<li>Minimize the total number of operations.</li>
+</ol>
+
+</div></div>
+<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/4822732.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：让我们将一个给定数组中所有的0都移到后面，把非零数前移，要求不能改变非零数的相对应的位置关系，而且不能拷贝额外的数组，那么只能用替换法in-place来做，需要用两个指针，一个不停的向后扫，找到非零位置，然后和前面那个指针交换位置即可</p>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line">class Solution &#123;</div>
+<div class="line">public:</div>
+<div class="line">    void moveZeroes(vector&lt;int&gt;&amp; nums) &#123;</div>
+<div class="line">        int l = nums.size();</div>
+<div class="line">        for (int i=0,j=0;i&lt;l;i++)&#123;</div>
+<div class="line">            if(nums[i]!=0)&#123;</div>
+<div class="line">                swap(nums[i],nums[j++]);</div>
+<div class="line">            &#125;</div>
+<div class="line">        &#125;</div>
+<div class="line">    &#125;</div>
+<div class="line">&#125;;</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Rotate-Array"><a href="#Rotate-Array" class="headerlink" title="Rotate Array"></a>Rotate Array</h4><h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/rotate-array/description/" target="_blank" rel="noopener">题目</a></h5><p>Given an array, rotate the array to the right by <em>k</em> steps, where <em>k</em> is non-negative.</p>
 <p><strong>Example 1:</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -1851,9 +1902,81 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <li>Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.</li>
 <li>Could you do it in-place with O(1) extra space?</li>
 </ul>
-<h5 id="思路"><a href="#思路" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/4298711.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：以k为旋转点旋转数组。</p>
-<p>由于旋转数组的操作也可以看做从数组的末尾取k个数组放入数组的开头，所以我们用STL的push_back和erase可以很容易的实现这些操作。这种方法如果当k大于数组长度是行不通的。</p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><h4 id="Pascal’s-Triangle-II"><a href="#Pascal’s-Triangle-II" class="headerlink" title="Pascal’s Triangle II"></a>Pascal’s Triangle II</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/pascals-triangle-ii/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/4298711.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：以k为旋转点旋转数组。</p>
+<p>为了防止k大于数组的长度，我们需要对k做取余操作。</p>
+<p>法一：由于旋转数组的操作也可以看做从数组的末尾取k个数组放入数组的开头，所以我们用STL的push_back和erase可以很容易的实现这些操作。</p>
+<p>法二：可以利用三次翻转操作，第一次全翻：<code>7,6,5,4,3,2,1</code>；第二次翻转k之前部分<code>5,6,7||4,3,2,1</code>；最后翻转k之后<code>5,6,7||1,2,3,4</code></p>
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">//法一</span></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div>
+<div class="line">        <span class="keyword">int</span> l = nums.size();</div>
+<div class="line">        k = k%l;</div>
+<div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;l-k;i++)&#123;</div>
+<div class="line">            nums.push_back(nums[<span class="number">0</span>]);</div>
+<div class="line">            nums.erase(nums.begin());</div>
+<div class="line">        &#125;</div>
+<div class="line">    &#125;</div>
+<div class="line">&#125;;</div>
+</pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment">//法二</span></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div>
+<div class="line"><span class="keyword">public</span>:</div>
+<div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</div>
+<div class="line">        k = k%nums.size();</div>
+<div class="line">        nums = helper(nums,<span class="number">0</span>,nums.size()<span class="number">-1</span>);</div>
+<div class="line">        nums = helper(nums,<span class="number">0</span>,k<span class="number">-1</span>);</div>
+<div class="line">        nums = helper(nums,k,nums.size()<span class="number">-1</span>);        </div>
+<div class="line">        </div>
+<div class="line">    &#125;</div>
+<div class="line">    <span class="keyword">public</span>: <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; helper(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> s, <span class="keyword">int</span> e)&#123;</div>
+<div class="line">        <span class="keyword">int</span> mid = <span class="number">0</span>;</div>
+<div class="line">        <span class="keyword">while</span>(s&lt;e)&#123;</div>
+<div class="line">            mid = nums[s];</div>
+<div class="line">            nums[s] = nums[e];</div>
+<div class="line">            nums[e] = mid;</div>
+<div class="line">            s++;</div>
+<div class="line">            e--;</div>
+<div class="line">        &#125;</div>
+<div class="line">        <span class="keyword">return</span> nums;</div>
+<div class="line">    &#125;</div>
+<div class="line">&#125;;</div>
+</pre></td></tr></table></figure>
+<h4 id="Pascal’s-Triangle-II"><a href="#Pascal’s-Triangle-II" class="headerlink" title="Pascal’s Triangle II"></a>Pascal’s Triangle II</h4><h5 id="题目-1"><a href="#题目-1" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/pascals-triangle-ii/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given a non-negative index <em>k</em> where <em>k</em> ≤ 33, return the <em>k</em>th index row of the Pascal’s triangle.Note that the row index starts from 0.</p>
 <p><img src="/2018/10/04/Array/PascalTriangleAnimated2.gif" alt="ascalTriangleAnimated"></p>
 <p><strong>Example:</strong></p>
@@ -1866,10 +1989,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <p>Could you optimize your algorithm to use only <em>O</em>(<em>k</em>) extra space?</p>
 
 </div></div>
-<h5 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a><a href="https://www.jianshu.com/p/4b40cb8e4ca3" target="_blank" rel="noopener">思路</a></h5><p>题目大意：返回Pascal三角的第<code>k</code>行。</p>
+<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a><a href="https://www.jianshu.com/p/4b40cb8e4ca3" target="_blank" rel="noopener">思路</a></h5><p>题目大意：返回Pascal三角的第<code>k</code>行。</p>
 <p>第一种想法：借助一个二维数组，用来存储Pascal数列，这样空间复杂度是<code>O(N*N)</code></p>
 <p>第二种想法：借助一个一维动态数组，使用双重循环，外循环处理每一行，每次都插入一个1，内循环处理每一行的元素，则当前元素更新：<code>nums[i]+=nums[i+1]</code></p>
-<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1956,9 +2079,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h5><p>题目大意：一个整数的每一位被存在一个数组里，现在求该整数+1的结果。</p>
+<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>题目大意：一个整数的每一位被存在一个数组里，现在求该整数+1的结果。</p>
 <p>主要的问题就是进位问题：如果该位小于9，那么该位+1，返回数组；否则，该位置空，处理下一位。最极端情况就是每一位都是9，那么数组全置空，增加一位，置1.</p>
-<h5 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2048,8 +2171,8 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h5><p>题目大意：将数组中存在的重复元素剔除，使每个元素只出现一次。要求直接在原数组上修改</p>
-<h5 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>题目大意：将数组中存在的重复元素剔除，使每个元素只出现一次。要求直接在原数组上修改</p>
+<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2106,10 +2229,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h5><p>题目大意：将两个有序的数字合并成有序的数组，要求把合并的数组存在<code>nums1</code>中</p>
+<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h5><p>题目大意：将两个有序的数字合并成有序的数组，要求把合并的数组存在<code>nums1</code>中</p>
 <p>最初的想法是设置一个辅助数组，两个指针分别指向两个数组，同时扫描比较，选择小的元素存在辅助数组中。但是这样空间复杂度是<code>O(m+n)</code>。</p>
 <p>一个比较新颖的思路是：从后往前扫描，每次比较选择大的元素，这样直接存储在<code>nums1</code>中，根本不需要辅助数组。</p>
-<h5 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2168,11 +2291,11 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <p><strong>Note</strong>:<br>Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?</p>
 
 </div></div>
-<h5 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/math/leetcode-268-missing-number/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：找出<code>0,1,2,...,n</code>序列中缺失的一个数。</p>
+<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/math/leetcode-268-missing-number/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：找出<code>0,1,2,...,n</code>序列中缺失的一个数。</p>
 <p>最开始的思路是借助一个map，数组中的值作为map的key，遍历完数组之后，遍历<code>0-n</code>，看看是否在map中存在。但是这样的空间复杂度是<code>O(N)</code>。</p>
 <p>其实有两种做法：</p>
 <p><img src="/2018/10/04/Array/268-ep44.png" alt="68-ep4"></p>
-<h5 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2240,9 +2363,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/4233501.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：数组中存在一个数，其出现的次数大于数组长度的一半，找出这个数。</p>
+<h5 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/4233501.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：数组中存在一个数，其出现的次数大于数组长度的一半，找出这个数。</p>
 <p>用一种叫摩尔投票法 Moore Voting，需要O(n)的时间和O(1)的空间，比前一种方法更好。这种投票法先将第一个数字假设为众数，然后把计数器设为1，比较下一个数和此数是否相等，若相等则计数器加一，反之减一。然后看此时计数器的值，若为零，则将下一个值设为候选众数。以此类推直到遍历完整个数组，当前候选众数即为该数组的众数。不仔细弄懂摩尔投票法的精髓的话，过一阵子还是会忘记的，首先要明确的是这个叼炸天的方法是有前提的，就是数组中一定要有众数的存在才能使用，下面我们来看本算法的思路，这是一种先假设候选者，然后再进行验证的算法。我们现将数组中的第一个数假设为众数，然后进行统计其出现的次数，如果遇到同样的数，则计数器自增1，否则计数器自减1，如果计数器减到了0，则更换下一个数字为候选者。这是一个很巧妙的设定，也是本算法的精髓所在，为啥遇到不同的要计数器减1呢，为啥减到0了又要更换候选者呢？首先是有那个强大的前提存在，一定会有一个出现超过半数的数字存在，那么如果计数器减到0了话，说明目前不是候选者数字的个数已经跟候选者的出现个数相同了，那么这个候选者已经很weak，不一定能出现超过半数，我们选择更换当前的候选者。那有可能你会有疑问，那万一后面又大量的出现了之前的候选者怎么办，不需要担心，如果之前的候选者在后面大量出现的话，其又会重新变为候选者，直到最终验证成为正确的众数.</p>
-<h5 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2303,9 +2426,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-7"><a href="#思路-7" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/4130379.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：一个数组，还有一个目标数target，让我们找到两个数字，使其和为target。</p>
+<h5 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/4130379.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：一个数组，还有一个目标数target，让我们找到两个数字，使其和为target。</p>
 <p>为了提高时间的复杂度，需要用空间来换，这算是一个trade off吧，我们只想用线性的时间复杂度来解决问题，那么就是说只能遍历一个数字，那么另一个数字呢，我们可以事先将其存储起来，使用一个HashMap，来建立数字和其坐标位置之间的映射，我们都知道HashMap是常数级的查找效率，这样，我们在遍历数组的时候，用target减去遍历到的数字，就是另一个需要的数字了，直接在HashMap中查找其是否存在即可。</p>
-<h5 id="代码-7"><a href="#代码-7" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2393,10 +2516,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-8"><a href="#思路-8" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/5983113.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：求数组中第三大的数，如果不存在的话那么就返回最大的数。</p>
+<h5 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/5983113.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：求数组中第三大的数，如果不存在的话那么就返回最大的数。</p>
 <p>用三个变量first, second, third来分别保存第一大，第二大，和第三大的数，然后我们遍历数组，如果遍历到的数字大于当前第一大的数first，那么三个变量各自错位赋值，如果当前数字大于second，小于first，那么就更新second和third，如果当前数字大于third，小于second，那就只更新third。</p>
 <p>虽然这道题不难，但是实现的时候有诸多陷阱：初始化要用长整型long的最小值，否则当数组中有INT_MIN存在时，程序就不知道该返回INT_MIN还是最大值first了。其次，第三大不能和第二大相同，必须是严格的小于，而并非小于等于。即欲更新second，num[i]必须比first小。</p>
-<h5 id="代码-8"><a href="#代码-8" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2469,11 +2592,11 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ul>
 
 </div></div>
-<h5 id="思路-9"><a href="#思路-9" class="headerlink" title="思路"></a>思路</h5><p>题目大意：返回最长的连续1的长度。</p>
+<h5 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h5><p>题目大意：返回最长的连续1的长度。</p>
 <p>两种思路：</p>
 <p>一是遍历，记住连续1的起始index，每次遇到0，则更新。</p>
 <p>二是遍历，使用count遍历记住连续1的个数，每次遇到0，则清空count。</p>
-<h5 id="代码-9"><a href="#代码-9" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2576,7 +2699,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-10"><a href="#思路-10" class="headerlink" title="思路"></a>思路</h5><h5 id="代码-10"><a href="#代码-10" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h5><h5 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2619,11 +2742,11 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <div class="line">Output: <span class="number">6</span></div>
 <div class="line">Explanation: [<span class="number">4</span>,-<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>] has the largest sum = <span class="number">6</span>.</div>
 </pre></td></tr></table></figure>
-<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找出连续和最大的子数组。</p>
+<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找出连续和最大的子数组。</p>
 <p>最初的思路是设置一个数组，存储每个元素可以累积的最大值，其值更新是<code>max(nums[i],nums[i]+nums[i-1])</code>。但是，这样空间复杂度是<code>O(N)</code>。</p>
 <p>改进的想法是：</p>
 <p>不要辅助数组，直接使用一个<code>temp</code>变量记录当前位置可以累积的最大值，<code>temp=max(temp+nums[i],nums[i])</code>；之所以可以这样做，是因为在辅助数组中，在更新的时候，我们只利用到当前元素的前一个元素。</p>
-<h5 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h5 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -2686,9 +2809,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/6545075.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：一个含有重复数字的无序数组，还有一个整数k，让我们找出有多少对不重复的数对(i, j)使得i和j的差刚好为k。</p>
+<h5 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/6545075.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：一个含有重复数字的无序数组，还有一个整数k，让我们找出有多少对不重复的数对(i, j)使得i和j的差刚好为k。</p>
 <p>由于k有可能为0，而只有含有至少两个相同的数字才能形成数对，那么就是说我们需要统计数组中每个数字的个数。我们可以建立每个数字和其出现次数之间的映射，然后遍历哈希表中的数字，如果k为0且该数字出现的次数大于1，则结果res自增1；如果k不为0，且用当前数字加上k后得到的新数字也在数组中存在，则结果res自增1。需要注意的k不可能为负值。</p>
-<h5 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2763,11 +2886,11 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/hashtable/leetcode-561-array-partition-i/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将长度为<code>2n</code>的数组分成<code>n</code>个长度为2的元组，使<code>n</code>个元组小值的和最大。</p>
+<h5 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/hashtable/leetcode-561-array-partition-i/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将长度为<code>2n</code>的数组分成<code>n</code>个长度为2的元组，使<code>n</code>个元组小值的和最大。</p>
 <p>一个很直接的思路就是排序，然后遍历一遍，每次将偶数index上的值相加，这样的时间复杂度由排序控制是<code>O(nlogn)</code>。</p>
 <p>但是，我们可以丢弃排序，增加一个数组，以空间换时间，将时间复杂度降维<code>O(n)</code>，空间复杂度为<code>O(n)</code>。</p>
 <p>由题目看到，元素值范围是<code>[-10000,10000]</code>，这样我们设置一个长度为<code>2*10000</code>的数组，元素值为新数组的下标，新数组的值为下标在已知数组中出现的次数。第一次遍历<code>nums</code>，得到每个元素的频数，而且，隐含了排序。第二次遍历，如果新数组的值为0，则跳过；否则，判断是否为一对元素值得第一个；</p>
-<h5 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2848,9 +2971,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
+<h5 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
 <p>从左向右遍历flowerbed，将满足要求的0设为1。计数与n比较即可。</p>
-<h5 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2912,7 +3035,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <p><strong>Note:</strong> The <code>n</code> belongs to [1, 10,000].</p>
 
 </div></div>
-<h5 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2996,9 +3119,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
+<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
 <p>仔细分析之后，会发现如果字符以<code>1</code>开头，那么它只能是<code>10</code>或者<code>11</code>，如果是<code>0</code>开头，那么只能是<code>0</code>。基于此，我们扫描一遍字符串，如果当前字符是<code>1</code>，那么跳过下一个字符，直接扫描<code>index = i+2</code>的字符；如果当前字符是<code>0</code>，那么扫描下一个字符，判断是否能到达最后一个字符且为<code>0</code>。</p>
-<h5 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3069,10 +3192,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
+<h5 id="思路-18"><a href="#思路-18" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
 <p>第一种方法是遍历每个点，然后分别计算点左边和，点右边和。但是这样的复杂度是$O(n)$.</p>
 <p>第二中方法是同样遍历每个点，但是并不是每次都去计算左边和，右边和。实际上，每一次遍历的时候，左边和、右边和的差异就是当前点：即左边和=上一次的和+当前点，右边和=上一次的和-当前点。</p>
-<h5 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3130,9 +3253,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-18"><a href="#思路-18" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
+<h5 id="思路-19"><a href="#思路-19" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
 <p>遍历一次，找出最大和次大的元素。重点是在次大元素的更新，每次最大元素更新，次大元素继承上一次最大元素值。</p>
-<h5 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3225,9 +3348,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-19"><a href="#思路-19" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
+<h5 id="思路-20"><a href="#思路-20" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
 <p>感觉挺巧的想法，遍历一遍矩阵，每次判断当前元素与其紧邻的对角线元素是否相等。</p>
-<h5 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3308,9 +3431,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-20"><a href="#思路-20" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
+<h5 id="思路-21"><a href="#思路-21" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
 <p>思路很直接，遍历数组，统计相同元素个数。只要最小组的长度大于2且是其他组的除数，就可以。但是，这个对例子<code>[1,1,1,1,2,2,2,2,2,2]</code>是不行的。实际上，只要各组长度之间存在大于1的最大公约数，该最大公倍数即最终划分的长度，则满足题意。</p>
-<h5 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-21"><a href="#代码-21" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3396,10 +3519,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-21"><a href="#思路-21" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
+<h5 id="思路-22"><a href="#思路-22" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
 <p>即对于每一个空座位，需要考虑左边最近人的距离和右边最近人的距离，那么该座位与旁人的最大距离为左右两边距离的较小一个。这样每一个空座位的最大距离求出之后，选择最大距离的座位。</p>
 <p>为了求出每个座位与左右两边人的最近距离，我们使用遍历两次座位数组，第一次遍历求出空座位与周边人的距离；第二次遍历求出与右边人的距离。</p>
-<h5 id="代码-21"><a href="#代码-21" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-22"><a href="#代码-22" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -4289,14 +4412,14 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�536-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�506-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�537-->
+<!--�507-->
 <p>In-order： (left)，root，(right)</p>
-<!--�538-->
+<!--�508-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�539-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�540-->
+<!--�509-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�510-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
