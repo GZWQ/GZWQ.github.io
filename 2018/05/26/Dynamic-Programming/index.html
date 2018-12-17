@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/knight.png">
 <meta property="og:image" content="http://yoursite.com/2018/05/26/Dynamic-Programming/Screen%20Shot%202018-05-29%20at%208.25.29%20PM.png">
-<meta property="og:updated_time" content="2018-06-21T21:00:08.291Z">
+<meta property="og:updated_time" content="2018-11-29T22:13:46.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dynamic Programming">
 <meta name="twitter:description" content="动态规划这篇文章详细记录LeetCode上各种难度的动态规划题目。每道题我都给出题目，思路以及Python代码。">
@@ -319,7 +319,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T00:00:36-05:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-26T00:00:36+08:00">
                 2018-05-26
               </time>
             
@@ -1074,8 +1074,51 @@
 <p>For example,<br>Given <code>[10, 9, 2, 5, 3, 7, 101, 18]</code>,<br>The longest increasing subsequence is <code>[2, 3, 7, 101]</code>, therefore the length is <code>4</code>. Note that there may be more than one LIS combination, it is only necessary for you to return the length.</p>
 </li>
 <li><p>思路</p>
-<p>如果动态规划，则时间复杂度是$O(n^2)$, 第一层循环来更新dp，第二个循环来遍历之前的数字且必须比当前小，不能等于。</p>
+<p>如果动态规划，则时间复杂度是$O(n^2)$, 第一层循环来更新dp，第二个循环来遍历之前的数字且必须比当前小，不能等于。如样例，<code>[10,9,2,5,3,7,101,18]</code>，我们把原数组分成长度<code>2,3,4,5,...,l</code>的子数组求解最长上升，最终选择最佳的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>]，lis = <span class="number">1</span></div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>],lis = <span class="number">1</span></div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>],lis = <span class="number">2</span></div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>],lis = <span class="number">2</span></div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>],lis = <span class="number">3</span>  [<span class="number">2</span>,<span class="number">5</span>,<span class="number">7</span>]</div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">101</span>],lis = <span class="number">3</span></div>
+<div class="line">&gt;   [<span class="number">10</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">101</span>, <span class="number">18</span>], lis = <span class="number">4</span></div>
+<div class="line">&gt;</div>
+</pre></td></tr></table></figure>
 </li>
+</ul>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>  使用dp辅助数组记录每个元素与之前元素形成的最长上升。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>]，dp = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],lis = max(dp)=<span class="number">1</span>, </div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>],dp = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],lis = max(dp)=<span class="number">1</span>, </div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>],dp = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],lis = max(dp)=<span class="number">2</span>, </div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>],dp = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],lis = max(dp)=<span class="number">2</span>, </div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>],dp = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>],lis = max(dp)=<span class="number">3</span>, </div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">101</span>],dp = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>],lis = max(dp)=<span class="number">2</span>, </div>
+<div class="line">&gt;   [<span class="number">10</span>,<span class="number">9</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">101</span>,<span class="number">18</span>],dp = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">4</span>],lis = max(dp)=<span class="number">4</span>, </div>
+<div class="line">&gt;</div>
+</pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<ul>
 <li><p>代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -3491,7 +3534,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

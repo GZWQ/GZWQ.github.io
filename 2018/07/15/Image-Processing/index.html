@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena.jpg&apos;,0)   //  cv2.IMREA">
+<meta name="description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2RGB =(height, width, 3) 图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena">
 <meta name="keywords" content="Image Processing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Image_Processing">
 <meta property="og:url" content="http://yoursite.com/2018/07/15/Image-Processing/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena.jpg&apos;,0)   //  cv2.IMREA">
+<meta property="og:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2RGB =(height, width, 3) 图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-01T03:16:50.345Z">
+<meta property="og:updated_time" content="2018-11-25T03:40:30.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Image_Processing">
-<meta name="twitter:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena.jpg&apos;,0)   //  cv2.IMREA">
+<meta name="twitter:description" content="opencv中感兴趣区域以及mask的使用 不规则区域提取 使用预先定义的ROI Matlab进行图像裁剪 CV2RGB =(height, width, 3) 图片读取cv2.imread()第一个参数是文件路径，第二个参数指定读取方式 点击显/隐内容 1 2 3 4 import numpy as np import cv2 # 以灰度模式读取图片 img = cv2.imread(&apos;lena">
 
 
 
@@ -316,7 +316,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T18:21:08-05:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T18:21:08+08:00">
                 2018-07-15
               </time>
             
@@ -379,7 +379,8 @@
         <p><a href="https://blog.csdn.net/dengtaocs/article/details/38022153" target="_blank" rel="noopener">opencv中感兴趣区域以及mask的使用</a></p>
 <p><a href="https://blog.csdn.net/matlab_matlab/article/details/54015331" target="_blank" rel="noopener">不规则区域提取</a></p>
 <p><a href="https://ask.helplib.com/matlab/post_5759524" target="_blank" rel="noopener">使用预先定义的ROI Matlab进行图像裁剪</a></p>
-<h1 id="CV2"><a href="#CV2" class="headerlink" title="CV2"></a>CV2</h1><p>图片读取<code>cv2.imread()</code>第一个参数是文件路径，第二个参数指定读取方式</p>
+<h1 id="CV2"><a href="#CV2" class="headerlink" title="CV2"></a>CV2</h1><p>RGB =<code>(height, width, 3)</code></p>
+<p>图片读取<code>cv2.imread()</code>第一个参数是文件路径，第二个参数指定读取方式</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -402,6 +403,7 @@
 </div></div>
 <p>使用<code>cv2.imshow()</code>显示一个图像窗口，窗口大小根据图像自动调整。第一个参数是窗口名称，第二个参数是图片。</p>
 <p>使用函数<code>cv2.imwrite()</code>保存图像到文件,第一个参数是文件名，第二个参数是你要保存的文件</p>
+<p>使用<code>cv2.resize(img,(width, height))</code>来改变图像大小。</p>
 <h1 id="VIDEOS"><a href="#VIDEOS" class="headerlink" title="VIDEOS"></a>VIDEOS</h1><p>从视频中提取帧 <a href="https://blog.csdn.net/JNingWei/article/details/77869078" target="_blank" rel="noopener">ref</a>  </p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -768,7 +770,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

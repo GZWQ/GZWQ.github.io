@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235024692.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/20171028235337038.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/CFC5A1C95A84A6D8CF3FFC1DD30597782AEEAE57_size20_w740_h231.jpeg">
-<meta property="og:updated_time" content="2018-09-09T02:47:22.783Z">
+<meta property="og:updated_time" content="2018-11-28T00:12:23.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network">
 <meta name="twitter:description" content="本节介绍最基本的神经网络。">
@@ -334,7 +334,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-24T09:56:04-05:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-24T09:56:04+08:00">
                 2018-07-24
               </time>
             
@@ -486,6 +486,11 @@ $\frac{1}{||w||}$是常量，不影响，$L(w,b)=-\sum_{x_i\in{M}}{{y_i|w\times{
 <p>采用（a）阶跃函数作为激活函数，它将输入值映射为输出值“1”（对应于神经元兴奋）或“0”（神经元抑制），可是阶跃函数不连续、不光滑，故采用sigmoid函数作为激活函数。</p>
 <p><img src="/2018/07/24/Neural-Network/Screen Shot 2018-08-23 at 8.46.24 PM.png" alt="Screen Shot 2018-08-23 at 8.46.24 PM"></p>
 <p>故我们称上述神经元为sigmoid神经元。</p>
+<blockquote>
+<p>  感知机到sigmoid神经元的motivation：</p>
+<p>We want a samll change in a weight (or bias) to cause a small change in output.</p>
+<p>Compared to perceptron, both inputs and outputs of sigmoid neural can take on any values between 0 and 1 instead of just 0 or 1.</p>
+</blockquote>
 <h2 id="神经网络结构"><a href="#神经网络结构" class="headerlink" title="神经网络结构"></a>神经网络结构</h2><p>多个sigmoid神经元构成复杂的神经网络。网络的最左边的一层被称为输入层，其中的神经元被称为输入神经元(input neurons)；最右边的一层是输出层(output layer)，包含的神经元被称为输出神经元(output neurons)。下图中我们的输出层只有一个神经元，网络的中间一层被称为隐层(hidden layer)，因为它既不是输入层，也不是输出层。</p>
 <p><img src="/2018/07/24/Neural-Network/tikz11.png" alt="tikz11"></p>
 <h3 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h3><p><a href="https://ilewseu.github.io/2017/12/17/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E6%8E%A8%E5%AF%BC/" target="_blank" rel="noopener">ref1</a> <a href="https://zhuanlan.zhihu.com/p/34378516" target="_blank" rel="noopener">ref2</a> <a href="https://www.zybuluo.com/hanbingtao/note/476663" target="_blank" rel="noopener">gotta</a> </p>
@@ -1159,7 +1164,7 @@ f(x) = \frac{1}{1+e^{-x}}</script><p><img src="/2018/07/24/Neural-Network/201710
 <p>sigmoid的优缺点</p>
 <ul>
 <li><a href="http://www.sohu.com/a/148114422_500659" target="_blank" rel="noopener">ref1</a> 在GAN中， 给 D 最后的输出加个 Sigmoid 激活函数，让它取值在 0 到 1 之间？事实上这个方案在理论上是没有问题的，然而这会造成训练的困难。因为 Sigmoid 函数具有饱和区，一旦 D 进入了饱和区，就很难传回梯度来更新 G 了。</li>
-<li></li>
+<li>​</li>
 </ul>
 <h2 id="Tanh函数"><a href="#Tanh函数" class="headerlink" title="Tanh函数"></a>Tanh函数</h2><p>将实数压缩到$[-1,1]$</p>
 <script type="math/tex; mode=display">
@@ -1302,7 +1307,7 @@ C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id=
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
