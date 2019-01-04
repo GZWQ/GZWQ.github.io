@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Deep Learning,GAN,Variant GAN," />
+  <meta name="keywords" content="GAN,Deep Learning,Variant GAN," />
 
 
 
@@ -80,31 +80,31 @@
 
 
 <meta name="description" content="我们之前介绍了GAN模型，在本章中，将介绍一些GAN的变体模型。">
-<meta name="keywords" content="Deep Learning,GAN,Variant GAN">
+<meta name="keywords" content="GAN,Deep Learning,Variant GAN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Variant GAN">
 <meta property="og:url" content="http://yoursite.com/2018/08/20/Variant-GAN/index.html">
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="我们之前介绍了GAN模型，在本章中，将介绍一些GAN的变体模型。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/p.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.33.12%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/p.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.33.12%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.36.15%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.36.22%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-04%20at%204.19.29%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.00.41%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.03.51%20AM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.51.26%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-04%20at%204.19.29%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.00.41%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.03.51%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.51.26%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.51.35%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.24%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.48%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%203.34.27%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%205.11.30%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.24%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.48%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%203.34.27%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%205.11.30%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%205.11.57%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-02%20at%207.59.25%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%209.46.02%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-02%20at%207.59.25%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%209.46.02%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/9dd87e799b054c538ead26df0d7394fb_th.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/ac5b965024b647a8954ade2c6bdf22d3_th.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/84bbfddafa9c4d9cb3c2b5aa2ec2e3f2_th.png">
@@ -117,11 +117,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Screen%20Shot%202018-09-03%20at%209.51.47%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Screen%20Shot%202018-09-03%20at%2010.09.37%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Screen%20Shot%202018-09-03%20at%2010.10.36%20AM.png">
-<meta property="og:updated_time" content="2018-11-16T14:58:05.966Z">
+<meta property="og:updated_time" content="2018-12-26T02:34:01.779Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Variant GAN">
 <meta name="twitter:description" content="我们之前介绍了GAN模型，在本章中，将介绍一些GAN的变体模型。">
-<meta name="twitter:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/p.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/p.jpg">
 
 
 
@@ -347,7 +347,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-20T10:54:39+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-20T10:54:39-05:00">
                 2018-08-20
               </time>
             
@@ -421,14 +421,14 @@
 <li>D网络中使用LeakyReLU作为激活函数</li>
 </ul>
 <p>DCGAN极大的提升了GAN训练的稳定性以及生成结果质量。<a href="https://blog.csdn.net/qq_25737169/article/details/78857788" target="_blank" rel="noopener">Ref</a> </p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/p.jpg" alt="p"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/p.jpg" alt="p"></p>
 <p>DCGAN的生成器网络结构如上图所示，相较原始的GAN，DCGAN几乎完全使用了卷积层代替全链接层，判别器几乎是和生成器对称的，从上图中我们可以看到，整个网络没有pooling层和上采样层的存在，实际上是使用了带步长（fractional-strided）的卷积代替了上采样，以增加训练的稳定性。</p>
-<h3 id="Experiment-Settings"><a href="#Experiment-Settings" class="headerlink" title="Experiment Settings"></a>Experiment Settings</h3><p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.33.12%20PM.png" alt="Screen Shot 2018-08-06 at 4.33.12 PM"></p>
+<h3 id="Experiment-Settings"><a href="#Experiment-Settings" class="headerlink" title="Experiment Settings"></a>Experiment Settings</h3><p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.33.12%20PM.png" alt="Screen Shot 2018-08-06 at 4.33.12 PM"></p>
 <p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.36.15%20PM.png" alt="Screen Shot 2018-08-06 at 4.36.15 PM"></p>
 <p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.36.22%20PM.png" alt="Screen Shot 2018-08-06 at 4.36.22 PM"></p>
 <h2 id="LS-GAN"><a href="#LS-GAN" class="headerlink" title="LS-GAN"></a>LS-GAN</h2><p><a href="https://github.com/eriklindernoren/Keras-GAN/blob/master/lsgan/lsgan.py" target="_blank" rel="noopener">code</a> <a href="http://www.myzaker.com/article/58bbd2171bc8e0892800000f/" target="_blank" rel="noopener">ref1</a> </p>
 <p>最小二乘GAN，在gan的基础上将目标函数变成一个平方误差。实现上直接在gan的基础上修改loss函数</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-04%20at%204.19.29%20PM.png" alt="Screen Shot 2018-08-04 at 4.19.29 PM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-04%20at%204.19.29%20PM.png" alt="Screen Shot 2018-08-04 at 4.19.29 PM"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -441,20 +441,20 @@
 <h2 id="Conditional-GAN"><a href="#Conditional-GAN" class="headerlink" title="Conditional GAN"></a>Conditional GAN</h2><p><a href="https://blog.csdn.net/wspba/article/details/54666907" target="_blank" rel="noopener">ref1</a> </p>
 <p>生成对抗网络：Generative Adversarial Networks，通过generator和discriminator的对抗学习，最终可以得到一个与real data分布一致的fake data，但是由于generator的输入z是一个连续的噪声信号，并且没有任何约束，我们很难通过控制z中某数的大小变化让生成的图像发生变化。</p>
 <p>GAN中输入是随机的数据，没有太多意义，那么我们很自然的会想到能否用输入改成一个有意义的数据，最简单的就是数字字体生成，能否输入一个数字，然后输出对应的字体。这就是CGAN要做的事。</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.00.41%20AM.png" alt="Screen Shot 2018-07-31 at 10.00.41 AM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.00.41%20AM.png" alt="Screen Shot 2018-07-31 at 10.00.41 AM"></p>
 <p>To include conditional constrain into the cycleGAN network, the adversarial<br>loss is modified to include the conditional feature vector as part of the input of the generator and<br>discriminator</p>
 <p>在生成器模型中，条件变量y实际上是作为一个额外的输入层（additional input layer），它与生成器的噪声输入p(z)组合形成了一个联合的隐层表达；在判别器模型中，y与真实数据x也是作为输入，并输入到一个判别函数当中。实际上就是将z和x分别于y进行concat，分别作为生成器和判别器的输入，再来进行训练。</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.03.51%20AM.png" alt="Screen Shot 2018-07-31 at 10.03.51 AM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%2010.03.51%20AM.png" alt="Screen Shot 2018-07-31 at 10.03.51 AM"></p>
 <p>训练方式几乎就是不变的，但是从GAN的无监督变成了有监督。只是大家可以看到，这里和传统的图像分类这样的任务正好反过来了，图像分类是输入图片，然后对图像进行分类，而这里是输入分类，要反过来输出图像。</p>
-<h3 id="Experiment-Settings-1"><a href="#Experiment-Settings-1" class="headerlink" title="Experiment Settings"></a>Experiment Settings</h3><p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.51.26%20PM.png" alt="Screen Shot 2018-08-06 at 4.51.26 PM"></p>
+<h3 id="Experiment-Settings-1"><a href="#Experiment-Settings-1" class="headerlink" title="Experiment Settings"></a>Experiment Settings</h3><p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.51.26%20PM.png" alt="Screen Shot 2018-08-06 at 4.51.26 PM"></p>
 <p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%204.51.35%20PM.png" alt="Screen Shot 2018-08-06 at 4.51.35 PM"></p>
 <h2 id="Info-GAN"><a href="#Info-GAN" class="headerlink" title="Info-GAN"></a>Info-GAN</h2><p><a href="http://www.360doc.com/content/17/0930/22/99071_691460743.shtml" target="_blank" rel="noopener">REF1</a> <a href="https://blog.csdn.net/wspba/article/details/54808833" target="_blank" rel="noopener">REF2</a> <a href="https://blog.csdn.net/hjimce/article/details/55657325" target="_blank" rel="noopener">GOTTA</a> <a href="https://github.com/eriklindernoren/Keras-GAN/blob/master/infogan/infogan.py" target="_blank" rel="noopener">CODE in KERAS</a> <a href="https://www.inference.vc/infogan-variational-bound-on-mutual-information-twice/" target="_blank" rel="noopener">to-do</a> </p>
 <p>有了CGAN，我们可以有一个单一输入y，然后通过调整z输出不同的图像。但是CGAN是有监督的，我们需要指定y。那么有没有可能实现无监督的CGAN？这个想法本身就比较疯狂，要实现无监督的CGAN，意味着需要让神经网络不但通过学习提取了特征，还需要把特征表达出来。对于MNIST，如何通过无监督学习让神经网络知道你输入y=2时就输出2的字体？或者用一个连续的值来调整字的粗细，方向？</p>
 <p>怎么做呢？作者引入了信息论的知识，也就是mutual information互信息。作者的思路就是G网络的输入除了z之外同样类似CGAN输入一个c变量，这个变量一开始神经网络并不知道是什么含义，但是没关系，我们希望c与G网络输出的x之间的互信息最大化，也就是让神经网络自己去训练c与输出之间的关系。</p>
 <p>为了引入c，作者利用互信息来对c进行约束，这是因为如果c对于生成数据G(z,c)具有可解释性，那么c和G(z,c)应该具有高度相关性，即互信息大，而如果是无约束的话，那么它们之间没有特定的关系，即互信息接近于0。因此我们希望c与G(z,c)的互信息I(c;G(z,c))越大越好，mutual information在文章中定义如下：</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.24%20PM.png" alt="Screen Shot 2018-07-31 at 4.29.24 PM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.24%20PM.png" alt="Screen Shot 2018-07-31 at 4.29.24 PM"></p>
 <p>基于I，整个GAN的训练目标变成：</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.48%20PM.png" alt="Screen Shot 2018-07-31 at 4.29.48 PM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.29.48%20PM.png" alt="Screen Shot 2018-07-31 at 4.29.48 PM"></p>
 <blockquote>
 <ol>
 <li>超参数$\lambda$设置为1</li>
@@ -463,15 +463,15 @@
 </ol>
 </blockquote>
 <p>在最后实现的时候，infoGAN可以看成三个网络：(1)生成网络$x=G(c,z)$；(2)判别真伪网络$y_1=D_1(x)$；(3)判别类别$c$网络$y_2=D_2(x)$(当$c$代表类别信息的时候，网络最后一层是softmax层，且$D_1,D_2$共享网络参数，除了网络的最后一层外)；</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%203.34.27%20PM.png" alt="Screen Shot 2018-07-31 at 3.34.27 PM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%203.34.27%20PM.png" alt="Screen Shot 2018-07-31 at 3.34.27 PM"></p>
 <p>相比CGAN，InfoGAN在网络上做了一定改变：</p>
 <p>（1）D网络的输入只有x，不加c。</p>
 <p>（2）Q网络和D网络共享同一个网络，只是到最后一层独立输出。</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png" alt="Screen Shot 2018-07-31 at 4.44.58 PM"></p>
-<h3 id="Experiment-Setup"><a href="#Experiment-Setup" class="headerlink" title="Experiment Setup"></a>Experiment Setup</h3><p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%205.11.30%20PM.png" alt="Screen Shot 2018-08-06 at 5.11.30 PM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png" alt="Screen Shot 2018-07-31 at 4.44.58 PM"></p>
+<h3 id="Experiment-Setup"><a href="#Experiment-Setup" class="headerlink" title="Experiment Setup"></a>Experiment Setup</h3><p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%205.11.30%20PM.png" alt="Screen Shot 2018-08-06 at 5.11.30 PM"></p>
 <p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%205.11.57%20PM.png" alt="Screen Shot 2018-08-06 at 5.11.57 PM"></p>
 <h2 id="AC-GAN"><a href="#AC-GAN" class="headerlink" title="AC-GAN"></a>AC-GAN</h2><p><a href="https://github.com/eriklindernoren/Keras-GAN/blob/master/acgan/acgan.py" target="_blank" rel="noopener">ac-gan in keras</a> </p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-02%20at%207.59.25%20PM.png" alt="Screen Shot 2018-08-02 at 7.59.25 PM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-02%20at%207.59.25%20PM.png" alt="Screen Shot 2018-08-02 at 7.59.25 PM"></p>
 <p><strong>Generator Input  [ noise , label ]</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -490,7 +490,7 @@
 </pre></td><td class="code"><pre><div class="line">validity = Dense(<span class="number">1</span>, activation=<span class="string">"sigmoid"</span>)(features)</div>
 <div class="line">label = Dense(self.num_classes+<span class="number">1</span>, activation=<span class="string">"softmax"</span>)(features)</div>
 </pre></td></tr></table></figure>
-<h3 id="Experiment-setup"><a href="#Experiment-setup" class="headerlink" title="Experiment setup"></a>Experiment setup</h3><p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%209.46.02%20PM.png" alt="Screen Shot 2018-08-06 at 9.46.02 PM"></p>
+<h3 id="Experiment-setup"><a href="#Experiment-setup" class="headerlink" title="Experiment setup"></a>Experiment setup</h3><p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-08-06%20at%209.46.02%20PM.png" alt="Screen Shot 2018-08-06 at 9.46.02 PM"></p>
 <h2 id="Context-GAN"><a href="#Context-GAN" class="headerlink" title="Context-GAN"></a>Context-GAN</h2><p><a href="https://arxiv.org/pdf/1604.07379.pdf" target="_blank" rel="noopener">PAPER</a> <a href="https://github.com/eriklindernoren/Keras-GAN/blob/master/context_encoder/context_encoder.py" target="_blank" rel="noopener">CODE</a> </p>
 <h2 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h2><p><a href="https://zhuanlan.zhihu.com/p/25071913" target="_blank" rel="noopener">REF1</a> <a href="http://www.sohu.com/a/148114422_500659" target="_blank" rel="noopener">ref2</a> <a href="https://github.com/eriklindernoren/Keras-GAN/blob/master/wgan/wgan.py" target="_blank" rel="noopener">code</a> </p>
 <p>限制discriminator的权重范围$[-0.01,0.01]$</p>
@@ -572,7 +572,7 @@
 </pre></td></tr></table></figure>
 <blockquote>
 <p>如果是cgan或者info-gan，那么会有额外的输入和输出，如下图：</p>
-<p><img src="/2018/08/20/Variant-GAN/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png" alt="Screen Shot 2018-07-31 at 4.44.58 PM"></p>
+<p><img src="/2018/08/20/Variant-GAN/Generative-Adversarial-Networks/Screen%20Shot%202018-07-31%20at%204.44.58%20PM.png" alt="Screen Shot 2018-07-31 at 4.44.58 PM"></p>
 <p>这是info-gan，可以看到，在gan基础上有了一个额外输入$c(latent)$，有了一个额外的输出$c$。所以generator的input是x = np.concatenate( z , c )，输出是y = ( f_r_label , c ) ，每一个输出都需要一个ground-truth，所以generator的训练代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -635,9 +635,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
-          
             <a href="/tags/GAN/" rel="tag"># GAN</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
           
             <a href="/tags/Variant-GAN/" rel="tag"># Variant GAN</a>
           
@@ -816,7 +816,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

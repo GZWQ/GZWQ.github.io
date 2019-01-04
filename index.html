@@ -314,7 +314,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-02T12:25:44+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-02T12:25:44-06:00">
                 2018-12-02
               </time>
             
@@ -460,7 +460,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-23T22:37:04+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-23T22:37:04-05:00">
                 2018-10-23
               </time>
             
@@ -753,7 +753,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T23:25:46+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T23:25:46-05:00">
                 2018-10-20
               </time>
             
@@ -901,7 +901,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T20:16:00+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T20:16:00-05:00">
                 2018-10-20
               </time>
             
@@ -1048,7 +1048,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-12T10:24:42+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-12T10:24:42-05:00">
                 2018-10-12
               </time>
             
@@ -1943,7 +1943,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-04T15:29:49+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-04T15:29:49-05:00">
                 2018-10-04
               </time>
             
@@ -2852,7 +2852,79 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Friends-Of-Appropriate-Ages"><a href="#Friends-Of-Appropriate-Ages" class="headerlink" title="Friends Of Appropriate Ages"></a>Friends Of Appropriate Ages</h4><h5 id="题目-10"><a href="#题目-10" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/friends-of-appropriate-ages/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h3 id="中等"><a href="#中等" class="headerlink" title="中等"></a>中等</h3><h4 id="Number-of-Subarrays-with-Bounded-Maximum"><a href="#Number-of-Subarrays-with-Bounded-Maximum" class="headerlink" title="Number of Subarrays with Bounded Maximum"></a>Number of Subarrays with Bounded Maximum</h4><h5 id="题目-10"><a href="#题目-10" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>We are given an array <code>A</code> of positive integers, and two positive integers <code>L</code> and <code>R</code> (<code>L &lt;= R</code>).</p>
+<p>Return the number of (contiguous, non-empty) subarrays such that the value of the maximum array element in that subarray is at least <code>L</code> and at most <code>R</code>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">Example :</div>
+<div class="line">Input: </div>
+<div class="line">A = [<span class="number">2</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">3</span>]</div>
+<div class="line">L = <span class="number">2</span></div>
+<div class="line">R = <span class="number">3</span></div>
+<div class="line">Output: <span class="number">3</span></div>
+<div class="line">Explanation: There are three subarrays that meet the requirements: [<span class="number">2</span>], [<span class="number">2</span>, <span class="number">1</span>], [<span class="number">3</span>].</div>
+</pre></td></tr></table></figure>
+<p><strong>Note:</strong></p>
+<ul>
+<li>L, R  and <code>A[i]</code> will be an integer in the range <code>[0, 10^9]</code>.</li>
+<li>The length of <code>A</code> will be in the range of <code>[1, 50000]</code>.</li>
+</ul>
+
+</div></div>
+<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a><a href="https://www.cnblogs.com/AlvinZH/p/8527214.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：找出所有可能的连续子数组，使该数组中的最大值在一个范围里面。</p>
+<p>扫描一遍数组，当前的元素<code>ele</code>可能有三种情况：</p>
+<ol>
+<li>$ele &gt; R$: 那么该元素不能不能在子数组中，而且需要开始一个新的子数组。</li>
+<li>$ele &lt; L$: 那么该元素可以在子数组中，但是该元素与它前面的最近合法数字之间的元素不能单独成为子数组。</li>
+<li>否则，该元素是合法的。</li>
+</ol>
+<p>实现的时候，我们使用两个指针：left=right=-1，left指针指向合法子数组的开始，right指向合法数组中最新的合法元素，即$L&lt;ele&lt;R$, 那么：</p>
+<ol>
+<li>$ele &gt; R$: 连续子数组被割断，则同时更新两个指针，left=right=idx</li>
+<li>$ele &lt; L$: 当前元素加入子数组，但是res += right-left</li>
+<li>否则：right=idx，res += right-left</li>
+</ol>
+<h5 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">numSubarrayBoundedMax</span><span class="params">(self, A, L, R)</span>:</span></div>
+<div class="line">        res = <span class="number">0</span></div>
+<div class="line">        left = <span class="number">-1</span></div>
+<div class="line">        right = <span class="number">-1</span></div>
+<div class="line">        <span class="keyword">for</span> idx,ele <span class="keyword">in</span> enumerate(A):</div>
+<div class="line">            <span class="keyword">if</span> ele&gt;R:</div>
+<div class="line">                left = idx</div>
+<div class="line">                right = idx</div>
+<div class="line">            <span class="keyword">elif</span> ele&lt;L:</div>
+<div class="line">                res += right-left <span class="comment">#little number appended to the legitimate array</span></div>
+<div class="line">            <span class="keyword">else</span>:</div>
+<div class="line">                right = idx</div>
+<div class="line">                res += right-left</div>
+<div class="line">        <span class="keyword">return</span> res</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Friends-Of-Appropriate-Ages"><a href="#Friends-Of-Appropriate-Ages" class="headerlink" title="Friends Of Appropriate Ages"></a>Friends Of Appropriate Ages</h4><h5 id="题目-11"><a href="#题目-11" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/friends-of-appropriate-ages/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Some people will make friend requests. The list of their ages is given and <code>ages[i]</code> is the age of the ith person. </p>
 <p>Person A will NOT friend request person B (B != A) if any of the following conditions are true:</p>
 <ul>
@@ -2894,9 +2966,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ul>
 
 </div></div>
-<h5 id="思路-11"><a href="#思路-11" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2018/04/29/leetcode-friends-of-appropriate-ages/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给出一个年龄列表，在满足条件下，求出最多的好友请求。</p>
+<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2018/04/29/leetcode-friends-of-appropriate-ages/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给出一个年龄列表，在满足条件下，求出最多的好友请求。</p>
 <p>那就遍历一遍好友，对于每一个年龄，求出其可以发出的好友请求的年龄范围，然后加起来。</p>
-<h5 id="代码-11"><a href="#代码-11" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2924,7 +2996,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Image-Overlap"><a href="#Image-Overlap" class="headerlink" title="Image Overlap"></a>Image Overlap</h4><h5 id="题目-11"><a href="#题目-11" class="headerlink" title="题目"></a><a href="">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Image-Overlap"><a href="#Image-Overlap" class="headerlink" title="Image Overlap"></a>Image Overlap</h4><h5 id="题目-12"><a href="#题目-12" class="headerlink" title="题目"></a><a href="">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Two images <code>A</code> and <code>B</code> are given, represented as binary, square matrices of the same size.  (A binary matrix has only 0s and 1s as values.)</p>
 <p>We translate one image however we choose (sliding it left, right, up, or down any number of units), and place it on top of the other image.  After, the <em>overlap</em> of this translation is the number of positions that have a 1 in both images.</p>
 <p>(Note also that a translation does <strong>not</strong> include any kind of rotation.)</p>
@@ -2954,9 +3026,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-12"><a href="#思路-12" class="headerlink" title="思路"></a>思路</h5><p>题目大意：两张图片，使用01矩阵表示，通过移动一个矩阵(即上移，下移，左移和右移)，使最大化两个矩阵相应位置都是1，求出最大重合1的个数。</p>
+<h5 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a>思路</h5><p>题目大意：两张图片，使用01矩阵表示，通过移动一个矩阵(即上移，下移，左移和右移)，使最大化两个矩阵相应位置都是1，求出最大重合1的个数。</p>
 <p>每一个矩阵的元素都与另一个矩阵中每一个元素求距离，即$(\Delta x,\Delta y)$，出现最多的$(\Delta x,\Delta y)$的个数就是结果。</p>
-<h5 id="代码-12"><a href="#代码-12" class="headerlink" title="代码"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/82597238" target="_blank" rel="noopener">代码</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/82597238" target="_blank" rel="noopener">代码</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2996,7 +3068,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div> 
-<h4 id="Length-of-Longest-Fibonacci-Subsequence"><a href="#Length-of-Longest-Fibonacci-Subsequence" class="headerlink" title="Length of Longest Fibonacci Subsequence"></a>Length of Longest Fibonacci Subsequence</h4><h5 id="题目-12"><a href="#题目-12" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/description/" target="_blank" rel="noopener">题目</a></h5><p>A sequence <code>X_1, X_2, ..., X_n</code> is <em>fibonacci-like</em> if:</p>
+<h4 id="Length-of-Longest-Fibonacci-Subsequence"><a href="#Length-of-Longest-Fibonacci-Subsequence" class="headerlink" title="Length of Longest Fibonacci Subsequence"></a>Length of Longest Fibonacci Subsequence</h4><h5 id="题目-13"><a href="#题目-13" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/description/" target="_blank" rel="noopener">题目</a></h5><p>A sequence <code>X_1, X_2, ..., X_n</code> is <em>fibonacci-like</em> if:</p>
 <ul>
 <li><code>n &gt;= 3</code></li>
 <li><code>X_i + X_{i+1} = X_{i+2}</code> for all <code>i + 2 &lt;= n</code></li>
@@ -3025,7 +3097,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <div class="line">The longest subsequence that is fibonacci-like:</div>
 <div class="line">[<span class="number">1</span>,<span class="number">11</span>,<span class="number">12</span>], [<span class="number">3</span>,<span class="number">11</span>,<span class="number">14</span>] <span class="keyword">or</span> [<span class="number">7</span>,<span class="number">11</span>,<span class="number">18</span>].</div>
 </pre></td></tr></table></figure>
-<h5 id="思路-13"><a href="#思路-13" class="headerlink" title="思路"></a><a href="http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-873-length-of-longest-fibonacci-subsequence/" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-13"><a href="#代码-13" class="headerlink" title="代码"></a>代码</h5><h4 id="Best-Time-to-Buy-and-Sell-Stock"><a href="#Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="Best Time to Buy and Sell Stock"></a>Best Time to Buy and Sell Stock</h4><h5 id="题目-13"><a href="#题目-13" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a><a href="http://zxi.mytechroad.com/blog/dynamic-programming/leetcode-873-length-of-longest-fibonacci-subsequence/" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h5><h4 id="Best-Time-to-Buy-and-Sell-Stock"><a href="#Best-Time-to-Buy-and-Sell-Stock" class="headerlink" title="Best Time to Buy and Sell Stock"></a>Best Time to Buy and Sell Stock</h4><h5 id="题目-14"><a href="#题目-14" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Say you have an array for which the <em>i</em>th element is the price of a given stock on day <em>i</em>.</p>
 <p>If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.</p>
 <p>Note that you cannot sell a stock before you buy one.</p>
@@ -3049,7 +3121,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-14"><a href="#思路-14" class="headerlink" title="思路"></a>思路</h5><h5 id="代码-14"><a href="#代码-14" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h5><h5 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3083,7 +3155,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Maximum-Subarray"><a href="#Maximum-Subarray" class="headerlink" title="Maximum Subarray"></a>Maximum Subarray</h4><h5 id="题目-14"><a href="#题目-14" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximum-subarray/description/" target="_blank" rel="noopener">题目</a></h5><p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
+<h4 id="Maximum-Subarray"><a href="#Maximum-Subarray" class="headerlink" title="Maximum Subarray"></a>Maximum Subarray</h4><h5 id="题目-15"><a href="#题目-15" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximum-subarray/description/" target="_blank" rel="noopener">题目</a></h5><p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.</p>
 <p><strong>Example:</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -3092,11 +3164,11 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <div class="line">Output: <span class="number">6</span></div>
 <div class="line">Explanation: [<span class="number">4</span>,-<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>] has the largest sum = <span class="number">6</span>.</div>
 </pre></td></tr></table></figure>
-<h5 id="思路-15"><a href="#思路-15" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找出连续和最大的子数组。</p>
+<h5 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a>思路</h5><p>题目大意：找出连续和最大的子数组。</p>
 <p>最初的思路是设置一个数组，存储每个元素可以累积的最大值，其值更新是<code>max(nums[i],nums[i]+nums[i-1])</code>。但是，这样空间复杂度是<code>O(N)</code>。</p>
 <p>改进的想法是：</p>
 <p>不要辅助数组，直接使用一个<code>temp</code>变量记录当前位置可以累积的最大值，<code>temp=max(temp+nums[i],nums[i])</code>；之所以可以这样做，是因为在辅助数组中，在更新的时候，我们只利用到当前元素的前一个元素。</p>
-<h5 id="代码-15"><a href="#代码-15" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h5 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -3123,7 +3195,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <div class="line">    &#125;</div>
 <div class="line">&#125;;</div>
 </pre></td></tr></table></figure>
-<h4 id="K-diff-Pairs-in-an-Array"><a href="#K-diff-Pairs-in-an-Array" class="headerlink" title="K-diff Pairs in an Array"></a>K-diff Pairs in an Array</h4><h5 id="题目-15"><a href="#题目-15" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/k-diff-pairs-in-an-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="K-diff-Pairs-in-an-Array"><a href="#K-diff-Pairs-in-an-Array" class="headerlink" title="K-diff Pairs in an Array"></a>K-diff Pairs in an Array</h4><h5 id="题目-16"><a href="#题目-16" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/k-diff-pairs-in-an-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array of integers and an integer <strong>k</strong>, you need to find the number of <strong>unique</strong> k-diff pairs in the array. Here a <strong>k-diff</strong> pair is defined as an integer pair (i, j), where <strong>i</strong> and <strong>j</strong> are both numbers in the array and their <a href="https://en.wikipedia.org/wiki/Absolute_difference" target="_blank" rel="noopener">absolute difference</a> is <strong>k</strong>.</p>
 <p><strong>Example 1:</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -3159,9 +3231,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-16"><a href="#思路-16" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/6545075.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：一个含有重复数字的无序数组，还有一个整数k，让我们找出有多少对不重复的数对(i, j)使得i和j的差刚好为k。</p>
+<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/6545075.html" target="_blank" rel="noopener">思路</a></h5><p>题目大意：一个含有重复数字的无序数组，还有一个整数k，让我们找出有多少对不重复的数对(i, j)使得i和j的差刚好为k。</p>
 <p>由于k有可能为0，而只有含有至少两个相同的数字才能形成数对，那么就是说我们需要统计数组中每个数字的个数。我们可以建立每个数字和其出现次数之间的映射，然后遍历哈希表中的数字，如果k为0且该数字出现的次数大于1，则结果res自增1；如果k不为0，且用当前数字加上k后得到的新数字也在数组中存在，则结果res自增1。需要注意的k不可能为负值。</p>
-<h5 id="代码-16"><a href="#代码-16" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3217,7 +3289,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Array-Partition-I"><a href="#Array-Partition-I" class="headerlink" title="Array Partition I"></a>Array Partition I</h4><h5 id="题目-16"><a href="#题目-16" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/array-partition-i/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Array-Partition-I"><a href="#Array-Partition-I" class="headerlink" title="Array Partition I"></a>Array Partition I</h4><h5 id="题目-17"><a href="#题目-17" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/array-partition-i/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array of <strong>2n</strong> integers, your task is to group these integers into <strong>n</strong> pairs of integer, say (a1, b1), (a2, b2), …, (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.</p>
 <p><strong>Example 1:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -3236,11 +3308,11 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-17"><a href="#思路-17" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/hashtable/leetcode-561-array-partition-i/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将长度为<code>2n</code>的数组分成<code>n</code>个长度为2的元组，使<code>n</code>个元组小值的和最大。</p>
+<h5 id="思路-18"><a href="#思路-18" class="headerlink" title="思路"></a><a href="https://zxi.mytechroad.com/blog/hashtable/leetcode-561-array-partition-i/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将长度为<code>2n</code>的数组分成<code>n</code>个长度为2的元组，使<code>n</code>个元组小值的和最大。</p>
 <p>一个很直接的思路就是排序，然后遍历一遍，每次将偶数index上的值相加，这样的时间复杂度由排序控制是<code>O(nlogn)</code>。</p>
 <p>但是，我们可以丢弃排序，增加一个数组，以空间换时间，将时间复杂度降维<code>O(n)</code>，空间复杂度为<code>O(n)</code>。</p>
 <p>由题目看到，元素值范围是<code>[-10000,10000]</code>，这样我们设置一个长度为<code>2*10000</code>的数组，元素值为新数组的下标，新数组的值为下标在已知数组中出现的次数。第一次遍历<code>nums</code>，得到每个元素的频数，而且，隐含了排序。第二次遍历，如果新数组的值为0，则跳过；否则，判断是否为一对元素值得第一个；</p>
-<h5 id="代码-17"><a href="#代码-17" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3298,7 +3370,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h4><h5 id="题目-17"><a href="#题目-17" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/can-place-flowers/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Can-Place-Flowers"><a href="#Can-Place-Flowers" class="headerlink" title="Can Place Flowers"></a>Can Place Flowers</h4><h5 id="题目-18"><a href="#题目-18" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/can-place-flowers/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Suppose you have a long flowerbed in which some of the plots are planted and some are not. However, flowers cannot be planted in adjacent plots - they would compete for water and both would die.</p>
 <p>Given a flowerbed (represented as an array containing 0 and 1, where 0 means empty and 1 means not empty), and a number <strong>n</strong>, return if <strong>n</strong> new flowers can be planted in it without violating the no-adjacent-flowers rule.</p>
 <p><strong>Example 1:</strong></p>
@@ -3321,9 +3393,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-18"><a href="#思路-18" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
+<h5 id="思路-19"><a href="#思路-19" class="headerlink" title="思路"></a><a href="http://bookshadow.com/weblog/2017/06/04/leetcode-can-place-flowers/" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定数组flowerbed表示一个花床，0表示位置为空，1表示位置非空。花不能相邻种植，即不能出现相邻的1。想要种植的花朵数目n，判断是否可以满足要求。</p>
 <p>从左向右遍历flowerbed，将满足要求的0设为1。计数与n比较即可。</p>
-<h5 id="代码-18"><a href="#代码-18" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3363,7 +3435,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Non-decreasing-Array"><a href="#Non-decreasing-Array" class="headerlink" title="Non-decreasing Array"></a>Non-decreasing Array</h4><h5 id="题目-18"><a href="#题目-18" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/non-decreasing-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Non-decreasing-Array"><a href="#Non-decreasing-Array" class="headerlink" title="Non-decreasing Array"></a>Non-decreasing Array</h4><h5 id="题目-19"><a href="#题目-19" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/non-decreasing-array/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>Given an array with <code>n</code> integers, your task is to check if it could become non-decreasing by modifying <strong>at most</strong> <code>1</code> element.</p>
 <p>We define an array is non-decreasing if <code>array[i] &lt;= array[i + 1]</code> holds for every <code>i</code> (1 &lt;= i &lt; n).</p>
 <p><strong>Example 1:</strong></p>
@@ -3385,7 +3457,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 <p><strong>Note:</strong> The <code>n</code> belongs to [1, 10,000].</p>
 
 </div></div>
-<h5 id="思路-19"><a href="#思路-19" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-19"><a href="#代码-19" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="思路-20"><a href="#思路-20" class="headerlink" title="思路"></a><a href="http://www.cnblogs.com/grandyang/p/7565424.html" target="_blank" rel="noopener">思路</a></h5><h5 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3469,9 +3541,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-20"><a href="#思路-20" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
+<h5 id="思路-21"><a href="#思路-21" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断字符串是否只有<code>10,11,0</code>三个子串组成，而且以<code>0</code>结尾。</p>
 <p>仔细分析之后，会发现如果字符以<code>1</code>开头，那么它只能是<code>10</code>或者<code>11</code>，如果是<code>0</code>开头，那么只能是<code>0</code>。基于此，我们扫描一遍字符串，如果当前字符是<code>1</code>，那么跳过下一个字符，直接扫描<code>index = i+2</code>的字符；如果当前字符是<code>0</code>，那么扫描下一个字符，判断是否能到达最后一个字符且为<code>0</code>。</p>
-<h5 id="代码-20"><a href="#代码-20" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-21"><a href="#代码-21" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3542,10 +3614,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-21"><a href="#思路-21" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
+<h5 id="思路-22"><a href="#思路-22" class="headerlink" title="思路"></a>思路</h5><p>题目大意：在一数组中寻找一个点，使该点左边的元素和等于该点的右边元素和。</p>
 <p>第一种方法是遍历每个点，然后分别计算点左边和，点右边和。但是这样的复杂度是$O(n)$.</p>
 <p>第二中方法是同样遍历每个点，但是并不是每次都去计算左边和，右边和。实际上，每一次遍历的时候，左边和、右边和的差异就是当前点：即左边和=上一次的和+当前点，右边和=上一次的和-当前点。</p>
-<h5 id="代码-21"><a href="#代码-21" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-22"><a href="#代码-22" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3603,9 +3675,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-22"><a href="#思路-22" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
+<h5 id="思路-23"><a href="#思路-23" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断数组中最大数是否比剩下每个元素的两倍之大。</p>
 <p>遍历一次，找出最大和次大的元素。重点是在次大元素的更新，每次最大元素更新，次大元素继承上一次最大元素值。</p>
-<h5 id="代码-22"><a href="#代码-22" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-23"><a href="#代码-23" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3698,9 +3770,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-23"><a href="#思路-23" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
+<h5 id="思路-24"><a href="#思路-24" class="headerlink" title="思路"></a>思路</h5><p>题目大意：判断一个矩阵所有对角线上的元素是否相等。</p>
 <p>感觉挺巧的想法，遍历一遍矩阵，每次判断当前元素与其紧邻的对角线元素是否相等。</p>
-<h5 id="代码-23"><a href="#代码-23" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-24"><a href="#代码-24" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3732,7 +3804,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目-19"><a href="#题目-19" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="X-of-a-Kind-in-a-Deck-of-Cards"><a href="#X-of-a-Kind-in-a-Deck-of-Cards" class="headerlink" title="X of a Kind in a Deck of Cards"></a>X of a Kind in a Deck of Cards</h4><h5 id="题目-20"><a href="#题目-20" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a deck of cards, each card has an integer written on it.</p>
 <p>Return <code>true</code> if and only if you can choose <code>X &gt;= 2</code> such that it is possible to split the entire deck into 1 or more groups of cards, where:</p>
 <ul>
@@ -3781,9 +3853,9 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h5 id="思路-24"><a href="#思路-24" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
+<h5 id="思路-25"><a href="#思路-25" class="headerlink" title="思路"></a><a href="https://leetcode.com/problems/x-of-a-kind-in-a-deck-of-cards/discuss/175845/C++JavaPython-Greatest-Common-Divisor" target="_blank" rel="noopener">思路</a></h5><p>题目大意：将数组划分成大小相同的组，每组元素相同且大小不小于2。</p>
 <p>思路很直接，遍历数组，统计相同元素个数。只要最小组的长度大于2且是其他组的除数，就可以。但是，这个对例子<code>[1,1,1,1,2,2,2,2,2,2]</code>是不行的。实际上，只要各组长度之间存在大于1的最大公约数，该最大公倍数即最终划分的长度，则满足题意。</p>
-<h5 id="代码-24"><a href="#代码-24" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-25"><a href="#代码-25" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -3831,7 +3903,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </pre></td></tr></table></figure>
 
 </div></div>
-<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-20"><a href="#题目-20" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h4 id="Maximize-Distance-to-Closest-Person"><a href="#Maximize-Distance-to-Closest-Person" class="headerlink" title="Maximize Distance to Closest Person"></a>Maximize Distance to Closest Person</h4><h5 id="题目-21"><a href="#题目-21" class="headerlink" title="题目"></a><a href="https://leetcode.com/problems/maximize-distance-to-closest-person/description/" target="_blank" rel="noopener">题目</a></h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <p>In a row of <code>seats</code>, <code>1</code> represents a person sitting in that seat, and <code>0</code> represents that the seat is empty. </p>
 <p>There is at least one empty seat, and at least one person sitting.</p>
 <p>Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized. </p>
@@ -3869,10 +3941,10 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 </ol>
 
 </div></div>
-<h5 id="思路-25"><a href="#思路-25" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
+<h5 id="思路-26"><a href="#思路-26" class="headerlink" title="思路"></a><a href="https://blog.csdn.net/fuxuemingzhu/article/details/80643250" target="_blank" rel="noopener">思路</a></h5><p>题目大意：给定一个0/1表示的座位数组，0表示空座位，1表示该位置有人。现要求找一个位置，使最大与旁边人的距离。</p>
 <p>即对于每一个空座位，需要考虑左边最近人的距离和右边最近人的距离，那么该座位与旁人的最大距离为左右两边距离的较小一个。这样每一个空座位的最大距离求出之后，选择最大距离的座位。</p>
 <p>为了求出每个座位与左右两边人的最近距离，我们使用遍历两次座位数组，第一次遍历求出空座位与周边人的距离；第二次遍历求出与右边人的距离。</p>
-<h5 id="代码-25"><a href="#代码-25" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h5 id="代码-26"><a href="#代码-26" class="headerlink" title="代码"></a>代码</h5><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -4013,7 +4085,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-20T22:09:35+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-20T22:09:35-05:00">
                 2018-09-20
               </time>
             
@@ -4161,7 +4233,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-12T17:40:37+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-12T17:40:37-05:00">
                 2018-09-12
               </time>
             
@@ -4361,7 +4433,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T12:11:24+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T12:11:24-05:00">
                 2018-09-11
               </time>
             
@@ -4509,7 +4581,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T11:47:49+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T11:47:49-05:00">
                 2018-09-03
               </time>
             
@@ -4766,7 +4838,7 @@ N(x;\mu,\sum)=\frac{1}{(2\pi)^{\frac{n}{2}}|\sum|^\frac{1}{2}}e^{\frac{1}{2}(x-u
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
