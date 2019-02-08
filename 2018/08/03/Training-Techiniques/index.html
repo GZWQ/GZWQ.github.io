@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="Tensorboard1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 def write_to_tensorboard(self,generator_st">
+<meta name="description" content="Soft labelsThis is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I en">
 <meta name="keywords" content="Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Training Techiniques">
 <meta property="og:url" content="http://yoursite.com/2018/08/03/Training-Techiniques/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Tensorboard1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 def write_to_tensorboard(self,generator_st">
+<meta property="og:description" content="Soft labelsThis is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I en">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-01-30T21:55:55.840Z">
+<meta property="og:updated_time" content="2019-02-07T16:59:09.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
-<meta name="twitter:description" content="Tensorboard1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 def write_to_tensorboard(self,generator_st">
+<meta name="twitter:description" content="Soft labelsThis is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I en">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 
 
@@ -380,7 +380,13 @@
       
 
       
-        <h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+        <h1 id="Soft-labels"><a href="#Soft-labels" class="headerlink" title="Soft labels"></a>Soft labels</h1><p>This is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I ended up using a random number between 0 and 0.1 to represent 0 labels (real images) and a random number between 0.9 and 1.0 to represent 1 labels (generated images). This is not required when training the generator. <a href="https://medium.com/@utk.is.here/keep-calm-and-train-a-gan-pitfalls-and-tips-on-training-generative-adversarial-networks-edd529764aa9" target="_blank" rel="noopener">resource</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">valid = np.random.uniform(<span class="number">0.9</span>,<span class="number">1.0</span>,size=(batch_size,<span class="number">1</span>))</div>
+<div class="line">fake = np.random.uniform(<span class="number">0</span>,<span class="number">0.1</span>,size=(batch_size,<span class="number">1</span>))</div>
+</pre></td></tr></table></figure>
+<h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -745,7 +751,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -800,7 +806,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorboard"><span class="nav-number">1.</span> <span class="nav-text">Tensorboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">2.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">2.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">2.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN"><span class="nav-number">3.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Original"><span class="nav-number">3.0.1.</span> <span class="nav-text">Original</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN-CGAN"><span class="nav-number">3.0.2.</span> <span class="nav-text">DCGAN || CGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-GAN"><span class="nav-number">3.0.3.</span> <span class="nav-text">INFO-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-GAN"><span class="nav-number">3.0.4.</span> <span class="nav-text">AC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">3.0.5.</span> <span class="nav-text">Adversarial Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI-GAN"><span class="nav-number">3.0.6.</span> <span class="nav-text">BI-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">3.0.7.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSGAN"><span class="nav-number">3.0.8.</span> <span class="nav-text">LSGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-GAN"><span class="nav-number">3.0.9.</span> <span class="nav-text">SR-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PixelDA"><span class="nav-number">3.0.10.</span> <span class="nav-text">PixelDA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">4.</span> <span class="nav-text">DC-GAN</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">1.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorboard"><span class="nav-number">2.</span> <span class="nav-text">Tensorboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">3.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">3.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">3.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN"><span class="nav-number">4.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Original"><span class="nav-number">4.0.1.</span> <span class="nav-text">Original</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN-CGAN"><span class="nav-number">4.0.2.</span> <span class="nav-text">DCGAN || CGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-GAN"><span class="nav-number">4.0.3.</span> <span class="nav-text">INFO-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-GAN"><span class="nav-number">4.0.4.</span> <span class="nav-text">AC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">4.0.5.</span> <span class="nav-text">Adversarial Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI-GAN"><span class="nav-number">4.0.6.</span> <span class="nav-text">BI-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">4.0.7.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSGAN"><span class="nav-number">4.0.8.</span> <span class="nav-text">LSGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-GAN"><span class="nav-number">4.0.9.</span> <span class="nav-text">SR-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PixelDA"><span class="nav-number">4.0.10.</span> <span class="nav-text">PixelDA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">5.</span> <span class="nav-text">DC-GAN</span></a></li></ol></div>
             
 
           </div>
