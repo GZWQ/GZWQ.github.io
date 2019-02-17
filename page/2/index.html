@@ -567,14 +567,14 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�564-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�572-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�565-->
+<!--�573-->
 <p>In-order： (left)，root，(right)</p>
-<!--�566-->
+<!--�574-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�567-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�568-->
+<!--�575-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�576-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -2688,12 +2688,62 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
       
         
           
-            <h1 id="Soft-labels"><a href="#Soft-labels" class="headerlink" title="Soft labels"></a>Soft labels</h1><p>This is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I ended up using a random number between 0 and 0.1 to represent 0 labels (real images) and a random number between 0.9 and 1.0 to represent 1 labels (generated images). This is not required when training the generator. <a href="https://medium.com/@utk.is.here/keep-calm-and-train-a-gan-pitfalls-and-tips-on-training-generative-adversarial-networks-edd529764aa9" target="_blank" rel="noopener">resource</a></p>
+            <h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 3.37.19 PM.png" alt="creen Shot 2019-02-17 at 3.37.19 P"></p>
+<h1 id="Soft-labels"><a href="#Soft-labels" class="headerlink" title="Soft labels"></a>Soft labels</h1><p>This is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I ended up using a random number between 0 and 0.1 to represent 0 labels (real images) and a random number between 0.9 and 1.0 to represent 1 labels (generated images). This is not required when training the generator. <a href="https://medium.com/@utk.is.here/keep-calm-and-train-a-gan-pitfalls-and-tips-on-training-generative-adversarial-networks-edd529764aa9" target="_blank" rel="noopener">resource</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 </pre></td><td class="code"><pre><div class="line">valid = np.random.uniform(<span class="number">0.9</span>,<span class="number">1.0</span>,size=(batch_size,<span class="number">1</span>))</div>
 <div class="line">fake = np.random.uniform(<span class="number">0</span>,<span class="number">0.1</span>,size=(batch_size,<span class="number">1</span>))</div>
 </pre></td></tr></table></figure>
+<h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
+<p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
+<p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
+<p>1.首先，“非饱和激活函数”能解决所谓的“梯度消失”问题。 vanishing gradient在网络层数多的时候尤其明显，是加深网络结构的主要障碍之一   </p>
+<p> 2.其次，它能加快收敛速度。    </p>
+<p><img src="/2018/08/03/Training-Techiniques/692825-20180328173642905-311674055.png" alt="692825-20180328173642905-311674055"></p>
+<h2 id="Sigmoid函数"><a href="#Sigmoid函数" class="headerlink" title="Sigmoid函数"></a>Sigmoid函数</h2><p>将实数压缩到$(0,1)$，用来二分类。</p>
+<script type="math/tex; mode=display">
+f(x) = \frac{1}{1+e^{-x}}</script><p><img src="/2018/08/03/Training-Techiniques/20171028233231084.png" alt="20171028233231084"></p>
+<p>sigmoid的优缺点<a href="https://www.learnopencv.com/understanding-activation-functions-in-deep-learning/" target="_blank" rel="noopener">source</a> </p>
+<ul>
+<li><p><strong>Vanishing gradients</strong>: Notice, the sigmoid function is flat near 0 and 1. In other words, the gradient of the sigmoid is near 0 and 1. During backpropagation through the network with sigmoid activation, the gradients in neurons whose output is near 0 or 1 are nearly 0. These neurons are called saturated neurons. Thus, the weights in these neurons do not update. Not only that, the weights of neurons connected to such neurons are also slowly updated. This problem is also known as vanishing gradient. So, imagine if there was a large network comprising of sigmoid neurons in which many of them are in a saturated regime, then the network will not be able to backpropagate.</p>
+<blockquote>
+<p><a href="http://www.sohu.com/a/148114422_500659" target="_blank" rel="noopener">ref1</a> 在GAN中， 给 D 最后的输出加个 Sigmoid 激活函数，让它取值在 0 到 1 之间？事实上这个方案在理论上是没有问题的，然而这会造成训练的困难。因为 Sigmoid 函数具有饱和区，一旦 D 进入了饱和区，就很难传回梯度来更新 G 了。</p>
+</blockquote>
+</li>
+<li><p><strong>Not zero centered</strong>: Sigmoid outputs are not zero-centered. The output is always between 0 and 1, that means that the output after applying sigmoid is always positive hence, i.e. $x_i &gt; 0$.</p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-13%20at%204.07.13%20PM.png" alt="creen Shot 2019-02-13 at 4.07.13 P"></p>
+<p>which means the gradients on the weights $w$ during backpropagation become either all positive or all negative. This could introduce undesirable zig-zagging dynamics in the gradient updates for the weights. Say we </p>
+<blockquote>
+<ul>
+<li>Tanh, Rectified Linear Unit (ReLU), Leaky ReLU and Parametric ReLU are all zero-centered activation functions.</li>
+<li>This is also why you want zero-mean data</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>Computationally expensive</strong>: The exp() function is computationally expensive compared with the other non-linear activation functions.</p>
+</li>
+</ul>
+<h2 id="Tanh函数"><a href="#Tanh函数" class="headerlink" title="Tanh函数"></a>Tanh函数</h2><p>将实数压缩到$[-1,1]$</p>
+<script type="math/tex; mode=display">
+f(x) = tanh(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}\\
+ f'(x)=1-f^2(x)</script><p><img src="/2018/08/03/Training-Techiniques/20171028235024692.png" alt="20171028235024692"></p>
+<blockquote>
+<p>ZERO-centered but still kills gradients when saturated</p>
+</blockquote>
+<h2 id="ReLu函数"><a href="#ReLu函数" class="headerlink" title="ReLu函数"></a>ReLu函数</h2><script type="math/tex; mode=display">
+f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/20171028235337038.png" alt="20171028235337038"></p>
+<blockquote>
+<p><strong>Advantages:</strong> Does not saturate (in +region); Very computationally efficient; Converges much faster than sigmoid/tanh in practice (e.g. 6x); </p>
+<p><strong>Disadvantages:</strong> Not zero-centered output; It kills the gradient when $x \le 0$  </p>
+<p><a href="https://datascience.stackexchange.com/questions/5706/what-is-the-dying-relu-problem-in-neural-networks" target="_blank" rel="noopener">dead unit problem</a> <a href="https://ayearofai.com/rohan-4-the-vanishing-gradient-problem-ec68f76ffb9b" target="_blank" rel="noopener">dying unit</a> </p>
+</blockquote>
+<h2 id="LeakyReLu"><a href="#LeakyReLu" class="headerlink" title="LeakyReLu"></a>LeakyReLu</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.54.22%20PM.png" alt="creen Shot 2019-02-17 at 2.54.22 P"></p>
+<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.55.56%20PM.png" alt="creen Shot 2019-02-17 at 2.55.56 P"></p>
+<h1 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h1><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png" alt="creen Shot 2019-02-17 at 2.58.24 P"></p>
+<h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a>Softmax函数</h2><p>用于多分类问题，输出每类可能出现的概率大小，和为1</p>
+<script type="math/tex; mode=display">
+f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
 <h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
