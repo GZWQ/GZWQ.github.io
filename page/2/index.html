@@ -567,14 +567,14 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�565-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�573-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�566-->
+<!--�574-->
 <p>In-order： (left)，root，(right)</p>
-<!--�567-->
+<!--�575-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�568-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�569-->
+<!--�576-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�577-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -2713,6 +2713,45 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 <p><img src="/2018/08/03/Training-Techiniques/1_QIzXjH8uefVbcaycsjfdmw.png" alt="_QIzXjH8uefVbcaycsjfdm"></p>
 <h3 id="He-initialization"><a href="#He-initialization" class="headerlink" title="He initialization"></a>He initialization</h3><p>When we use relu as activation, we just simply multiply random initialization with:</p>
 <p><img src="/2018/08/03/Training-Techiniques/1_zxD6Nr6TyAb8JEG6oXAjkg.png" alt="_zxD6Nr6TyAb8JEG6oXAjk"></p>
+<h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>Usually, in order to train a neural network, we do some preprocessing to the input data. For example, we could normalize all data (whitening) so that it resembles a normal distribution (that means, zero mean and a unitary variance). Why do we do this preprocessing? Well, there are many reasons for that, some of them being: preventing the early saturation of non-linear activation functions like the sigmoid function, assuring that all input data is in the same range of values, etc.</p>
+<p>But the problem appears in the intermediate layers because the distribution of the activations is constantly changing during training. This slows down the training process because each layer must learn to adapt themselves to a new distribution in every training step. This problem is known as <strong>internal covariate shift</strong>.</p>
+<p>So… what happens if we force the input of every layer to have approximately the same distribution in every training step? <a href="https://towardsdatascience.com/batch-normalization-theory-and-how-to-use-it-with-tensorflow-1892ca0173ad" target="_blank" rel="noopener">ref</a> </p>
+<p>BN的基本思想其实相当直观：因为深层神经网络在做非线性变换前的<strong>激活输入值</strong>（就是那个x=WU+B，U是输入）<strong>随着网络深度加深或者在训练过程中，其分布逐渐发生偏移或者变动，之所以训练收敛慢，一般是整体分布逐渐往非线性函数的取值区间的上下限两端靠近</strong>（对于Sigmoid函数来说，意味着激活输入值WU+B是大的负值或正值），所以这<strong>导致反向传播时低层神经网络的梯度消失</strong>，这是训练深层神经网络收敛越来越慢的<strong>本质原因</strong>，<strong>而BN就是通过一定的规范化手段，把每层神经网络任意神经元这个输入值的分布强行拉回到均值为0方差为1的标准正态分布</strong>，其实就是把越来越偏的分布强制拉回比较标准的分布，这样使得激活输入值落在非线性函数对输入比较敏感的区域，这样输入的小变化就会导致损失函数较大的变化，意思是<strong>这样让梯度变大，避免梯度消失问题产生，而且梯度变大意味着学习收敛速度快，能大大加快训练速度。</strong> <a href="https://www.cnblogs.com/guoyaohua/p/8724433.html" target="_blank" rel="noopener">ref</a> </p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>Batch normalization is a method we can use to normalize the inputs of each layer, in order to fight the internal covariate shift problem.</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405225246905-37854887.png" alt="192699-20180405225246905-3785488"></p>
+<p>假设某个隐层神经元原先的激活输入x取值符合正态分布，正态分布均值是-2，方差是0.5，对应上图中最左端的浅蓝色曲线，通过BN后转换为均值为0，方差是1的正态分布（对应上图中的深蓝色图形），意味着什么，意味着输入x的取值正态分布整体右移2（均值的变化），图形曲线更平缓了（方差增大的变化）。这个图的意思是，BN其实就是把每个隐层神经元的激活输入分布从偏离均值为0方差为1的正态分布通过平移均值压缩或者扩大曲线尖锐程度，调整为均值为0方差为1的正态分布。</p>
+<p>　　那么把激活输入x调整到这个正态分布有什么用？首先我们看下均值为0，方差为1的标准正态分布代表什么含义：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405225314624-527885612.png" alt="192699-20180405225314624-52788561"></p>
+<p>这意味着在一个标准差范围内，也就是说64%的概率x其值落在[-1,1]的范围内，在两个标准差范围内，也就是说95%的概率x其值落在了[-2,2]的范围内。那么这又意味着什么？我们知道，激活值x=WU+B,U是真正的输入，x是某个神经元的激活值，假设非线性函数是sigmoid，那么看下sigmoid(x)其图形：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143109455-1460017374.png" alt="192699-20180407143109455-146001737"></p>
+<p>及sigmoid(x)的导数为：G’=f(x)*(1-f(x))，因为f(x)=sigmoid(x)在0到1之间，所以G’在0到0.25之间，其对应的图如下：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142351924-124461667.png" alt="192699-20180407142351924-12446166"></p>
+<p>假设没有经过BN调整前x的原先正态分布均值是-6，方差是1，那么意味着95%的值落在了[-8,-4]之间，那么对应的Sigmoid（x）函数的值明显接近于0，这是典型的梯度饱和区，在这个区域里梯度变化很慢，为什么是梯度饱和区？请看下sigmoid(x)如果取值接近0或者接近于1的时候对应导数函数取值，接近于0，意味着梯度变化很小甚至消失。而假设经过BN后，均值是0，方差是1，那么意味着95%的x值落在了[-2,2]区间内，很明显这一段是sigmoid(x)函数接近于线性变换的区域，意味着x的小变化会导致非线性函数值较大的变化，也即是梯度变化较大，对应导数函数图中明显大于0的区域，就是梯度非饱和区。</p>
+<p>　　从上面几个图应该看出来BN在干什么了吧？其实就是把隐层神经元激活输入x=WU+B从变化不拘一格的正态分布通过BN操作拉回到了均值为0，方差为1的正态分布，即原始正态分布中心左移或者右移到以0为均值，拉伸或者缩减形态形成以1为方差的图形。什么意思？就是说<strong>经过BN后，目前大部分Activation的值落入非线性函数的线性区内，其对应的导数远离导数饱和区，这样来加速训练收敛过程。</strong></p>
+<p>　　但是很明显，看到这里，稍微了解神经网络的读者一般会提出一个疑问：如果都通过BN，那么不就跟把非线性函数替换成线性函数效果相同了？这意味着什么？我们知道，如果是多层的线性函数变换其实这个深层是没有意义的，因为多层线性网络跟一层线性网络是等价的。这意味着网络的<strong>表达能力</strong>下降了，这也意味着深度的意义就没有了。<strong>所以BN为了保证非线性的获得，对变换后的满足均值为0方差为1的x又进行了scale加上shift操作(y=scale*x+shift)</strong>，每个神经元增加了两个参数scale和shift参数，这两个参数是通过训练学习到的，意思是通过scale和shift把这个值从标准正态分布左移或者右移一点并长胖一点或者变瘦一点，每个实例挪动的程度不一样，这样等价于非线性函数的值从正中心周围的线性区往非线性区动了动。核心思想应该是想找到一个线性和非线性的较好平衡点，既能享受非线性的较强表达能力的好处，又避免太靠非线性区两头使得网络收敛速度太慢。当然，这是我的理解，论文作者并未明确这样说。但是很明显这里的scale和shift操作是会有争议的，因为按照论文作者论文里写的理想状态，就会又通过scale和shift操作把变换后的x调整回未变换的状态，那不是饶了一圈又绕回去原始的“Internal Covariate Shift”问题里去了吗，感觉论文作者并未能够清楚地解释scale和shift操作的理论原因。</p>
+<h4 id="训练阶段如何做BatchNorm"><a href="#训练阶段如何做BatchNorm" class="headerlink" title="训练阶段如何做BatchNorm"></a>训练阶段如何做BatchNorm</h4><p>上面是对BN的抽象分析和解释，具体在Mini-Batch SGD下做BN怎么做？其实论文里面这块写得很清楚也容易理解。为了保证这篇文章完整性，这里简单说明下。</p>
+<p>　　假设对于一个深层神经网络来说，其中两层结构如下：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405213859690-1933561230.png" alt="192699-20180405213859690-193356123"></p>
+<p>要对每个隐层神经元的激活值做BN，可以想象成每个隐层又加上了一层BN操作层，它位于X=WU+B激活值获得之后，非线性函数变换之前，其图示如下：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405213955224-1791925244.png" alt="192699-20180405213955224-179192524"></p>
+<p>对于Mini-Batch SGD来说，一次训练过程里面包含m个训练实例，其具体BN操作就是对于隐层内每个神经元的激活值来说，进行如下变换：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142802238-1209499294.png" alt="192699-20180407142802238-120949929"></p>
+<p>要注意，这里t层某个神经元的x(k)不是指原始输入，就是说不是t-1层每个神经元的输出，而是t层这个神经元的线性激活x=WU+B，这里的U才是t-1层神经元的输出。变换的意思是：某个神经元对应的原始的激活x通过减去mini-Batch内m个实例获得的m个激活x求得的均值E(x)并除以求得的方差Var(x)来进行转换。</p>
+<p>　　上文说过经过这个<strong>变换后某个神经元的激活x形成了均值为0，方差为1的正态分布，目的是把值往后续要进行的非线性变换的线性区拉动，增大导数值，增强反向传播信息流动性，加快训练收敛速度。</strong>但是这样会导致网络表达能力下降，为了防止这一点，每个神经元增加两个调节参数（scale和shift），这两个参数是通过训练来学习到的，用来对变换后的激活反变换，使得网络表达能力增强，即对变换后的激活进行如下的scale和shift操作，这其实是变换的反操作：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142923190-79595046.png" alt="192699-20180407142923190-7959504"></p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142956288-903484055.png" alt="192699-20180407142956288-90348405"></p>
+<h4 id="BatchNorm的推理-Inference-过程"><a href="#BatchNorm的推理-Inference-过程" class="headerlink" title="BatchNorm的推理(Inference)过程"></a>BatchNorm的推理(Inference)过程</h4><p>BN在训练的时候可以根据Mini-Batch里的若干训练实例进行激活数值调整，但是在推理（inference）的过程中，很明显输入就只有一个实例，看不到Mini-Batch其它实例，那么这时候怎么对输入做BN呢？因为很明显一个实例是没法算实例集合求出的均值和方差的。这可如何是好？</p>
+<p>　　既然没有从Mini-Batch数据里可以得到的统计量，那就想其它办法来获得这个统计量，就是均值和方差。可以用从所有训练实例中获得的统计量来代替Mini-Batch里面m个训练实例获得的均值和方差统计量，因为本来就打算用全局的统计量，只是因为计算量等太大所以才会用Mini-Batch这种简化方式的，那么在推理的时候直接用全局统计量即可。</p>
+<p>　　决定了获得统计量的数据范围，那么接下来的问题是如何获得均值和方差的问题。很简单，因为每次做Mini-Batch训练时，都会有那个Mini-Batch里m个训练实例获得的均值和方差，现在要全局统计量，只要把每个Mini-Batch的均值和方差统计量记住，然后对这些均值和方差求其对应的数学期望即可得出全局统计量，即：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143405654-1995556833.png" alt="192699-20180407143405654-199555683"></p>
+<p>有了均值和方差，每个隐层神经元也已经有对应训练好的Scaling参数和Shift参数，就可以在推导的时候对每个神经元的激活数据计算NB进行变换了，在推理过程中进行BN采取如下方式：</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143658338-63450857.png" alt="192699-20180407143658338-6345085"></p>
+<p>这个公式其实和训练时</p>
+<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143807788-1841864822.png" alt="192699-20180407143807788-184186482"></p>
+<p>是等价的，通过简单的合并计算推导就可以得出这个结论。那么为啥要写成这个变换形式呢？我猜作者这么写的意思是：在实际运行的时候，按照这种变体形式可以减少计算量，为啥呢？因为对于每个隐层节点来说：</p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-20 at 4.09.16 PM.png" alt="creen Shot 2019-02-20 at 4.09.16 P"></p>
+<p>都是固定值，这样这两个值可以事先算好存起来，在推理的时候直接用就行了，这样比原始的公式每一步骤都现算少了除法的运算过程，乍一看也没少多少计算量，但是如果隐层节点个数多的话节省的计算量就比较多了。</p>
+<h4 id="BatchNorm的好处"><a href="#BatchNorm的好处" class="headerlink" title="BatchNorm的好处"></a>BatchNorm的好处</h4><p>BatchNorm为什么NB呢，关键还是效果好。<strong>①**</strong>不仅仅极大提升了训练速度，收敛过程大大加快；②还能增加分类效果，一种解释是这是类似于Dropout的一种防止过拟合的正则化表达方式，所以不用Dropout也能达到相当的效果；③另外调参过程也简单多了，对于初始化要求没那么高，而且可以使用大的学习率等。**总而言之，经过这么简单的变换，带来的好处多得很，这也是为何现在BN这么快流行起来的原因。</p>
 <h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
 <p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
 <p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
@@ -2868,7 +2907,7 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
 <div class="line">                generator_step += <span class="number">1</span></div>
 </pre></td></tr></table></figure>
 <h1 id="Residual-Network"><a href="#Residual-Network" class="headerlink" title="Residual Network"></a>Residual Network</h1><p><a href="https://arxiv.org/pdf/1512.03385.pdf" target="_blank" rel="noopener">paper1</a> <a href="https://arxiv.org/pdf/1603.05027v2.pdf" target="_blank" rel="noopener">paper2</a> </p>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>simplely stack layers exhibit higher training error when the depth increases.</p>
+<h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><p>simplely stack layers exhibit higher training error when the depth increases.</p>
 <h2 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h2><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2018-11-16 at 2.33.45 PM.png" alt="creen Shot 2018-11-16 at 2.33.45 P"></p>
 <p><img src="/2018/08/03/Training-Techiniques/residualnet_34.png" alt="esidualnet_3"></p>
 <p>Figure from <a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/residual_net.html" target="_blank" rel="noopener">ref</a> </p>
@@ -3051,6 +3090,7 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
 <div class="line">pose_real_vgg_feature = vgg.predict(pose_imgs)</div>
 <div class="line">pose_loss = pose_ende.train_on_batch(pose_imgs,pose_real_vgg_feature)</div>
 </pre></td></tr></table></figure>
+
           
         
       
