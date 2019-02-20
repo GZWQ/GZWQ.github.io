@@ -567,14 +567,14 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�572-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�565-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�573-->
+<!--�566-->
 <p>In-order： (left)，root，(right)</p>
-<!--�574-->
+<!--�567-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�575-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�576-->
+<!--�568-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�569-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -2695,6 +2695,24 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 </pre></td><td class="code"><pre><div class="line">valid = np.random.uniform(<span class="number">0.9</span>,<span class="number">1.0</span>,size=(batch_size,<span class="number">1</span>))</div>
 <div class="line">fake = np.random.uniform(<span class="number">0</span>,<span class="number">0.1</span>,size=(batch_size,<span class="number">1</span>))</div>
 </pre></td></tr></table></figure>
+<h1 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h1><h2 id="Problem-with-initializing-all-weights-to-0"><a href="#Problem-with-initializing-all-weights-to-0" class="headerlink" title="Problem with initializing all weights to 0"></a>Problem with initializing all weights to 0</h2><p>In this case, the equations of the learning algorithm would fail to make any changes to the network weights, and the model will be stuck. It is important to note that the bias weight in each neuron is set to zero by default, not a small random value. <a href="https://machinelearningmastery.com/why-initialize-a-neural-network-with-random-weights/" target="_blank" rel="noopener">ref</a> </p>
+<p>During forward propagation each unit in hidden layer gets signal:</p>
+<p><img src="/2018/08/03/Training-Techiniques/gif.gif" alt="i"></p>
+<p>That is, each hidden unit gets sum of inputs multiplied by the corresponding weight.</p>
+<p>Now imagine that you initialize all weights to the same value (e.g. zero or one). In this case, <strong>each hidden unit will get exactly the same signal</strong>. E.g. if all weights are initialized to 1, each unit gets signal equal to sum of inputs (and outputs <code>sigmoid(sum(inputs))</code>). If all weights are zeros, which is even worse, every hidden unit will get zero signal. <strong>No matter what was the input - if all weights are the same, all units in hidden layer will be the same too</strong>.</p>
+<p>This is the main issue with symmetry and reason why you should initialize weights randomly (or, at least, with different values). Note, that this issue affects all architectures that use each-to-each connections. <a href="https://stackoverflow.com/questions/20027598/why-should-weights-of-neural-networks-be-initialized-to-random-numbers" target="_blank" rel="noopener">ref</a></p>
+<h2 id="Problems-with-initializing-weights-randomly-ref"><a href="#Problems-with-initializing-weights-randomly-ref" class="headerlink" title="Problems with initializing weights randomly ref"></a>Problems with initializing weights randomly <a href="https://medium.com/usf-msds/deep-learning-best-practices-1-weight-initialization-14e5c0295b94" target="_blank" rel="noopener">ref</a></h2><h3 id="Vanishing-gradients"><a href="#Vanishing-gradients" class="headerlink" title="Vanishing gradients"></a>Vanishing gradients</h3><p>If weights are initialized with low values it gets mapped to 0, then the activation value would be small, say, almost 0. When backpropogating gradients, samll gradients times small weights, it will result in smaller gradients, meaning the earlier layers, the samller gradients, resulting vanishing gradients.</p>
+<h3 id="Exploding-gradients"><a href="#Exploding-gradients" class="headerlink" title="Exploding gradients"></a>Exploding gradients</h3><p>Consider you have non-negative and large weights and small activations A (as can be the case for sigmoid(z)). When these weights are multiplied along the layers, they cause a large change in the cost. Thus, the gradients are also going to be large. This means that the changes in W, by <code>W — ⍺ * dW,</code> will be in huge steps, the downward moment will increase.</p>
+<blockquote>
+<p>This may result in oscillating around the minima or even overshooting the optimum again and again and the model will never learn!</p>
+</blockquote>
+<p>Another impact of exploding gradients is that huge values of the gradients may cause number overflow resulting in incorrect computations or introductions of NaN’s. This might also lead to the loss taking the value NaN.</p>
+<h2 id="New-Initialization-techniques-ref"><a href="#New-Initialization-techniques-ref" class="headerlink" title="New Initialization techniques ref"></a>New Initialization techniques <a href="https://towardsdatascience.com/weight-initialization-techniques-in-neural-networks-26c649eb3b78" target="_blank" rel="noopener">ref</a></h2><h3 id="Xavier-initialization"><a href="#Xavier-initialization" class="headerlink" title="Xavier initialization"></a>Xavier initialization</h3><p>It is used when we use tanh as our activation function.</p>
+<p><img src="/2018/08/03/Training-Techiniques/1_Lv9TNpAXffRnO0p0WMGJwQ.png" alt="_Lv9TNpAXffRnO0p0WMGJw"></p>
+<p>Some also use the following as initialization:</p>
+<p><img src="/2018/08/03/Training-Techiniques/1_QIzXjH8uefVbcaycsjfdmw.png" alt="_QIzXjH8uefVbcaycsjfdm"></p>
+<h3 id="He-initialization"><a href="#He-initialization" class="headerlink" title="He initialization"></a>He initialization</h3><p>When we use relu as activation, we just simply multiply random initialization with:</p>
+<p><img src="/2018/08/03/Training-Techiniques/1_zxD6Nr6TyAb8JEG6oXAjkg.png" alt="_zxD6Nr6TyAb8JEG6oXAjk"></p>
 <h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
 <p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
 <p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
@@ -2990,7 +3008,49 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
 
 </div></div>
 <h1 id="DC-GAN"><a href="#DC-GAN" class="headerlink" title="DC-GAN"></a>DC-GAN</h1><p><a href="https://julianzaidi.wordpress.com/2017/04/24/deep-convolution-gan-dcgan-architecture-and-training/" target="_blank" rel="noopener">Deep Convolutional GAN (DCGAN) : Architecture and choice of the good set of hyper-parameters</a></p>
-
+<h1 id="VGG-FEATURE-LOSS"><a href="#VGG-FEATURE-LOSS" class="headerlink" title="VGG-FEATURE-LOSS"></a>VGG-FEATURE-LOSS</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.applications <span class="keyword">import</span> VGG19</div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_vgg</span><span class="params">()</span>:</span></div>
+<div class="line">    vgg = VGG19(weights=<span class="string">"imagenet"</span>)</div>
+<div class="line">    vgg.outputs = [vgg.layers[<span class="number">9</span>].output]</div>
+<div class="line">    img = layers.Input(shape=self.img_shape)</div>
+<div class="line">    img_features = vgg(img)</div>
+<div class="line">    <span class="keyword">return</span> Model(img, img_features)</div>
+<div class="line"><span class="comment">##########################################</span></div>
+<div class="line">vgg = build_vgg()</div>
+<div class="line">vgg.trainable = <span class="keyword">False</span></div>
+<div class="line">vgg.compile(loss=<span class="string">'mse'</span>,optimizer=optimizer,metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line"><span class="comment">##########################################</span></div>
+<div class="line">fake_pose_vgg_feature = vgg(pose_recons)</div>
+<div class="line">pose_ende = Model(pose_img,fake_pose_vgg_feature)</div>
+<div class="line"> D D</div>
+<div class="line"><span class="comment">##########################################</span></div>
+<div class="line">pose_real_vgg_feature = vgg.predict(pose_imgs)</div>
+<div class="line">pose_loss = pose_ende.train_on_batch(pose_imgs,pose_real_vgg_feature)</div>
+</pre></td></tr></table></figure>
           
         
       
