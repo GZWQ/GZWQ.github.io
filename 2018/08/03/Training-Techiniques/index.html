@@ -79,19 +79,25 @@
 
 
 
-<meta name="description" content="Data Preprocessing Soft labelsThis is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss">
+<meta name="description" content="Data Preprocessing Say we have a binary classification problem where we want to draw a line to separate these red points from these blue points, like the following picture. On the left, thses data poi">
 <meta name="keywords" content="Deep Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Training Techiniques">
 <meta property="og:url" content="http://yoursite.com/2018/08/03/Training-Techiniques/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Data Preprocessing Soft labelsThis is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss">
+<meta property="og:description" content="Data Preprocessing Say we have a binary classification problem where we want to draw a line to separate these red points from these blue points, like the following picture. On the left, thses data poi">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%203.37.19%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-23%20at%203.01.12%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-21%20at%209.52.33%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-21%20at%209.53.03%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-21%20at%2010.01.01%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-21%20at%2010.01.40%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/gif.gif">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1_Lv9TNpAXffRnO0p0WMGJwQ.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1_QIzXjH8uefVbcaycsjfdmw.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1_zxD6Nr6TyAb8JEG6oXAjkg.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-21%20at%2010.12.09%20AM-0765570.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1192699-20180405225246905-37854887.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1192699-20180405225314624-527885612.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1192699-20180407143109455-1460017374.png">
@@ -114,13 +120,15 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.55.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.59.26%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-23%20at%203.14.40%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-23%20at%203.18.02%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-02-20T22:09:58.020Z">
+<meta property="og:updated_time" content="2019-02-24T02:17:05.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
-<meta name="twitter:description" content="Data Preprocessing Soft labelsThis is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss">
+<meta name="twitter:description" content="Data Preprocessing Say we have a binary classification problem where we want to draw a line to separate these red points from these blue points, like the following picture. On the left, thses data poi">
 <meta name="twitter:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%203.37.19%20PM.png">
 
 
@@ -408,12 +416,21 @@
 
       
         <h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 3.37.19 PM.png" alt="creen Shot 2019-02-17 at 3.37.19 P"></p>
+<p>Say we have a binary classification problem where we want to draw a line to separate these red points from these blue points, like the following picture. On the left, thses data points are not normalized and not centered and far away from the origion, although we can still use a line to seperate them, if that line wiggles just a little bit, then our classification is going to get totally destroyed. That kind of means that in the example on the left, the loss function is now extremely sensitive to small perturbations in that linear classifier in our weight matrix. We can still represent the same functions, but that might make learning quite difficult.</p>
+<p>On the right situation, if you take the data cloud and move it into the origin and you make it unit variance, then now again, we can still classfiy that data quite well, but now as we wiggle that line a little bit, our loss function is less sensitive to small perturbations in the parameter values. That maybe makes optimization a little bit easier.</p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.01.12 PM.png" alt="creen Shot 2019-02-23 at 3.01.12 P"></p>
 <h1 id="Soft-labels"><a href="#Soft-labels" class="headerlink" title="Soft labels"></a>Soft labels</h1><p>This is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I ended up using a random number between 0 and 0.1 to represent 0 labels (real images) and a random number between 0.9 and 1.0 to represent 1 labels (generated images). This is not required when training the generator. <a href="https://medium.com/@utk.is.here/keep-calm-and-train-a-gan-pitfalls-and-tips-on-training-generative-adversarial-networks-edd529764aa9" target="_blank" rel="noopener">resource</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 </pre></td><td class="code"><pre><div class="line">valid = np.random.uniform(<span class="number">0.9</span>,<span class="number">1.0</span>,size=(batch_size,<span class="number">1</span>))</div>
 <div class="line">fake = np.random.uniform(<span class="number">0</span>,<span class="number">0.1</span>,size=(batch_size,<span class="number">1</span>))</div>
 </pre></td></tr></table></figure>
+<h1 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h1><p>Loss not going down: learning rate is too low</p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 9.52.33 AM.png" alt="creen Shot 2019-02-21 at 9.52.33 A"></p>
+<p>Loss exploding: learning rate too high</p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 9.53.03 AM.png" alt="creen Shot 2019-02-21 at 9.53.03 A"></p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 10.01.01 AM.png" alt="creen Shot 2019-02-21 at 10.01.01 A"></p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 10.01.40 AM.png" alt="creen Shot 2019-02-21 at 10.01.40 A"></p>
 <h1 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h1><h2 id="Problem-with-initializing-all-weights-to-0"><a href="#Problem-with-initializing-all-weights-to-0" class="headerlink" title="Problem with initializing all weights to 0"></a>Problem with initializing all weights to 0</h2><p>In this case, the equations of the learning algorithm would fail to make any changes to the network weights, and the model will be stuck. It is important to note that the bias weight in each neuron is set to zero by default, not a small random value. <a href="https://machinelearningmastery.com/why-initialize-a-neural-network-with-random-weights/" target="_blank" rel="noopener">ref</a> </p>
 <p>During forward propagation each unit in hidden layer gets signal:</p>
 <p><img src="/2018/08/03/Training-Techiniques/gif.gif" alt="i"></p>
@@ -432,6 +449,7 @@
 <p><img src="/2018/08/03/Training-Techiniques/1_QIzXjH8uefVbcaycsjfdmw.png" alt="_QIzXjH8uefVbcaycsjfdm"></p>
 <h3 id="He-initialization"><a href="#He-initialization" class="headerlink" title="He initialization"></a>He initialization</h3><p>When we use relu as activation, we just simply multiply random initialization with:</p>
 <p><img src="/2018/08/03/Training-Techiniques/1_zxD6Nr6TyAb8JEG6oXAjkg.png" alt="_zxD6Nr6TyAb8JEG6oXAjk"></p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 10.12.09 AM-0765570.png" alt="creen Shot 2019-02-21 at 10.12.09 AM-076557"></p>
 <h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>Usually, in order to train a neural network, we do some preprocessing to the input data. For example, we could normalize all data (whitening) so that it resembles a normal distribution (that means, zero mean and a unitary variance). Why do we do this preprocessing? Well, there are many reasons for that, some of them being: preventing the early saturation of non-linear activation functions like the sigmoid function, assuring that all input data is in the same range of values, etc.</p>
 <p>But the problem appears in the intermediate layers because the distribution of the activations is constantly changing during training. This slows down the training process because each layer must learn to adapt themselves to a new distribution in every training step. This problem is known as <strong>internal covariate shift</strong>.</p>
 <p>So… what happens if we force the input of every layer to have approximately the same distribution in every training step? <a href="https://towardsdatascience.com/batch-normalization-theory-and-how-to-use-it-with-tensorflow-1892ca0173ad" target="_blank" rel="noopener">ref</a> </p>
@@ -520,6 +538,12 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
 <h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a>Softmax函数</h2><p>用于多分类问题，输出每类可能出现的概率大小，和为1</p>
 <script type="math/tex; mode=display">
 f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
+<h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
+<p><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d" target="_blank" rel="noopener">Stochastic Gradient Descent with momentum</a> </p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.14.40 PM.png" alt="creen Shot 2019-02-23 at 3.14.40 P"></p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.18.02 PM.png" alt="creen Shot 2019-02-23 at 3.18.02 P"></p>
+<p>Our gradients come from minibatches so they can be noisy!</p>
+<h2 id="SGD-Momentum"><a href="#SGD-Momentum" class="headerlink" title="SGD+Momentum"></a>SGD+Momentum</h2><p>coefficient momentum tends to be 0.9/0.99</p>
 <h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -804,11 +828,103 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
 <div class="line"><span class="comment">##########################################</span></div>
 <div class="line">fake_pose_vgg_feature = vgg(pose_recons)</div>
 <div class="line">pose_ende = Model(pose_img,fake_pose_vgg_feature)</div>
-<div class="line"> D D</div>
+<div class="line"> </div>
 <div class="line"><span class="comment">##########################################</span></div>
 <div class="line">pose_real_vgg_feature = vgg.predict(pose_imgs)</div>
 <div class="line">pose_loss = pose_ende.train_on_batch(pose_imgs,pose_real_vgg_feature)</div>
 </pre></td></tr></table></figure>
+<h1 id="PatchGan"><a href="#PatchGan" class="headerlink" title="PatchGan"></a>PatchGan</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Calculate output shape of D (PatchGAN)</span></div>
+<div class="line">patch = int(self.img_rows / <span class="number">2</span>**<span class="number">4</span>)</div>
+<div class="line">self.disc_patch = (patch, patch, <span class="number">1</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Build and compile the discriminator</span></div>
+<div class="line">self.discriminator = self.build_discriminator()</div>
+<div class="line">self.discriminator.compile(loss=<span class="string">'mse'</span>,optimizer=optimizer,metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_discriminator</span><span class="params">(self)</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">d_layer</span><span class="params">(layer_input, filters, f_size=<span class="number">4</span>, bn=True)</span>:</span></div>
+<div class="line">        d = Conv2D(filters, kernel_size=f_size, strides=<span class="number">2</span>, padding=<span class="string">'same'</span>)(layer_input)</div>
+<div class="line">        d = LeakyReLU(alpha=<span class="number">0.2</span>)(d)</div>
+<div class="line">        <span class="keyword">if</span> bn:</div>
+<div class="line">            d = BatchNormalization(momentum=<span class="number">0.8</span>)(d)</div>
+<div class="line">        <span class="keyword">return</span> d</div>
+<div class="line">    img_A = Input(shape=self.img_shape)</div>
+<div class="line">    img_B = Input(shape=self.img_shape)</div>
+<div class="line">    combined_imgs = Concatenate(axis=<span class="number">-1</span>)([img_A, img_B])</div>
+<div class="line">    d1 = d_layer(combined_imgs, self.df, bn=<span class="keyword">False</span>)</div>
+<div class="line">    d2 = d_layer(d1, self.df*<span class="number">2</span>)</div>
+<div class="line">    d3 = d_layer(d2, self.df*<span class="number">4</span>)</div>
+<div class="line">    d4 = d_layer(d3, self.df*<span class="number">8</span>)</div>
+<div class="line">    validity = Conv2D(<span class="number">1</span>, kernel_size=<span class="number">4</span>, strides=<span class="number">1</span>, padding=<span class="string">'same'</span>)(d4)</div>
+<div class="line">    <span class="keyword">return</span> Model([img_A, img_B], validity)</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self)</span>:</span></div>
+<div class="line">    valid = np.ones((batch_size,) + self.disc_patch)</div>
+<div class="line">    fake = np.zeros((batch_size,) + self.disc_patch)</div>
+<div class="line">    </div>
+<div class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</div>
+<div class="line">        fake_A = self.generator.predict(imgs_B)</div>
+<div class="line">        d_loss_real = self.discriminator.train_on_batch([imgs_A, imgs_B], valid)</div>
+<div class="line">        d_loss_real = self.discriminator.train_on_batch([imgs_A, imgs_B], valid)</div>
+<div class="line">        d_loss = <span class="number">0.5</span> * np.add(d_loss_real, d_loss_fake)</div>
+<div class="line">        </div>
+<div class="line">        g_loss = self.combined.train_on_batch([imgs_A, imgs_B], [valid, imgs_A])</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><p>The output of discriminator is (None, patch, patch, 1), which can be seen using model.summary(). While the traditional discriminator’s output is (None, 1), distinguishing each image.</p>
+</li>
+<li><p>If traditional discriminator, the last two line codes would be:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">&gt;   d5 = Flatten()(d4)</div>
+<div class="line">&gt;   validity = layers.Dense(<span class="number">1</span>,activation=<span class="string">'sigmoid'</span>)(d5)</div>
+<div class="line">&gt;   <span class="keyword">return</span> Model([img_A, img_B], validity)</div>
+<div class="line">&gt;</div>
+</pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>  ​</p>
+</blockquote>
 
       
     </div>
@@ -983,7 +1099,7 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">3.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">3.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">3.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">3.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">3.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">3.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">3.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">3.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">4.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">4.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">4.2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#训练阶段如何做BatchNorm"><span class="nav-number">4.2.0.1.</span> <span class="nav-text">训练阶段如何做BatchNorm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNorm的推理-Inference-过程"><span class="nav-number">4.2.0.2.</span> <span class="nav-text">BatchNorm的推理(Inference)过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNorm的好处"><span class="nav-number">4.2.0.3.</span> <span class="nav-text">BatchNorm的好处</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">5.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">5.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">5.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">5.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">5.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">5.5.</span> <span class="nav-text">ELU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maxout"><span class="nav-number">6.</span> <span class="nav-text">Maxout</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">6.1.</span> <span class="nav-text">Softmax函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorboard"><span class="nav-number">7.</span> <span class="nav-text">Tensorboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN"><span class="nav-number">9.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Original"><span class="nav-number">9.0.1.</span> <span class="nav-text">Original</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN-CGAN"><span class="nav-number">9.0.2.</span> <span class="nav-text">DCGAN || CGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-GAN"><span class="nav-number">9.0.3.</span> <span class="nav-text">INFO-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-GAN"><span class="nav-number">9.0.4.</span> <span class="nav-text">AC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">9.0.5.</span> <span class="nav-text">Adversarial Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI-GAN"><span class="nav-number">9.0.6.</span> <span class="nav-text">BI-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">9.0.7.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSGAN"><span class="nav-number">9.0.8.</span> <span class="nav-text">LSGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-GAN"><span class="nav-number">9.0.9.</span> <span class="nav-text">SR-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PixelDA"><span class="nav-number">9.0.10.</span> <span class="nav-text">PixelDA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">10.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">11.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#训练阶段如何做BatchNorm"><span class="nav-number">5.2.0.1.</span> <span class="nav-text">训练阶段如何做BatchNorm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNorm的推理-Inference-过程"><span class="nav-number">5.2.0.2.</span> <span class="nav-text">BatchNorm的推理(Inference)过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNorm的好处"><span class="nav-number">5.2.0.3.</span> <span class="nav-text">BatchNorm的好处</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maxout"><span class="nav-number">7.</span> <span class="nav-text">Maxout</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">7.1.</span> <span class="nav-text">Softmax函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">8.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">8.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum"><span class="nav-number">8.2.</span> <span class="nav-text">SGD+Momentum</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorboard"><span class="nav-number">9.</span> <span class="nav-text">Tensorboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">10.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">10.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">10.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN"><span class="nav-number">11.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Original"><span class="nav-number">11.0.1.</span> <span class="nav-text">Original</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN-CGAN"><span class="nav-number">11.0.2.</span> <span class="nav-text">DCGAN || CGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-GAN"><span class="nav-number">11.0.3.</span> <span class="nav-text">INFO-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-GAN"><span class="nav-number">11.0.4.</span> <span class="nav-text">AC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">11.0.5.</span> <span class="nav-text">Adversarial Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI-GAN"><span class="nav-number">11.0.6.</span> <span class="nav-text">BI-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">11.0.7.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSGAN"><span class="nav-number">11.0.8.</span> <span class="nav-text">LSGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-GAN"><span class="nav-number">11.0.9.</span> <span class="nav-text">SR-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PixelDA"><span class="nav-number">11.0.10.</span> <span class="nav-text">PixelDA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">12.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">13.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">14.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
             
 
           </div>
