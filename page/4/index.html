@@ -990,6 +990,12 @@
 <li><p>模型的鲁棒性？？？？</p>
 </li>
 </ul>
+<h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><ol>
+<li>In machine learning terms, this flashlight is called a <strong>filter</strong>(or sometimes referred to as a <strong>neuron</strong> or a <strong>kernel</strong>) and the region that it is shining over is called the <strong>receptive field</strong>.</li>
+<li>A very important note is that the depth of this filter has to be the same as the depth of the input (this makes sure that the math works out), so the dimensions of this filter is 5 x 5 x 3.</li>
+<li>For an input image with size $N \times N \times C$, after going through a filter $5 \times 5$, we have an output feature map with size $(N-5+1) \times (N-5+1) \times 1$.</li>
+<li>​</li>
+</ol>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/04/DP-CNN/#more" rel="contents">
@@ -1673,7 +1679,18 @@
 </pre></td></tr></table></figure>
 <p>放在python脚本的第一行。</p>
 </li>
-<li></li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,...]) <span class="comment"># n</span></div>
+<div class="line">b = np.array([<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,...]) <span class="comment"># m</span></div>
+<div class="line">c = a - b <span class="comment"># error because n != m</span></div>
+<div class="line">c = a.reshape(n,<span class="number">1</span>)-b <span class="comment"># produce a two-dim array (n,m)</span></div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>​</p>
+</li>
 </ol>
 <h1 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Python支持不同的数字类型 -</p>
 <ul>

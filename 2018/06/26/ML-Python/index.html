@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="last 琐碎 warning ignore 1 2 import warnings warnings.filterwarnings(&quot;ignore&quot;)   中文注释乱码 1 # -*- coding:utf8 -*-  放在python脚本的第一行。    Number数据类型Python支持不同的数字类型 -  int (有符号整数): 它们通常被称为只是整数或整数，是正的或负的整数，没有小数">
+<meta name="description" content="last 琐碎 warning ignore 1 2 import warnings warnings.filterwarnings(&quot;ignore&quot;)   中文注释乱码 1 # -*- coding:utf8 -*-  放在python脚本的第一行。  1 2 3 4 a = np.array([1,2,3,...]) # n b = np.array([2,3,4,...]) # m c =">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python">
 <meta property="og:url" content="http://yoursite.com/2018/06/26/ML-Python/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="last 琐碎 warning ignore 1 2 import warnings warnings.filterwarnings(&quot;ignore&quot;)   中文注释乱码 1 # -*- coding:utf8 -*-  放在python脚本的第一行。    Number数据类型Python支持不同的数字类型 -  int (有符号整数): 它们通常被称为只是整数或整数，是正的或负的整数，没有小数">
+<meta property="og:description" content="last 琐碎 warning ignore 1 2 import warnings warnings.filterwarnings(&quot;ignore&quot;)   中文注释乱码 1 # -*- coding:utf8 -*-  放在python脚本的第一行。  1 2 3 4 a = np.array([1,2,3,...]) # n b = np.array([2,3,4,...]) # m c =">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/ML-Python/Screen%20Shot%202018-06-27%20at%2011.09.15%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/ML-Python/Screen%20Shot%202018-06-27%20at%2011.10.03%20AM.png">
@@ -110,10 +110,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/26/ML-Python/Screen%20Shot%202018-07-01%20at%204.19.56%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/ML-Python/Screen%20Shot%202018-07-01%20at%204.21.11%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/26/ML-Python/Screen%20Shot%202018-07-01%20at%204.22.45%20PM.png">
-<meta property="og:updated_time" content="2018-07-30T20:42:34.846Z">
+<meta property="og:updated_time" content="2019-02-26T20:21:01.565Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python">
-<meta name="twitter:description" content="last 琐碎 warning ignore 1 2 import warnings warnings.filterwarnings(&quot;ignore&quot;)   中文注释乱码 1 # -*- coding:utf8 -*-  放在python脚本的第一行。    Number数据类型Python支持不同的数字类型 -  int (有符号整数): 它们通常被称为只是整数或整数，是正的或负的整数，没有小数">
+<meta name="twitter:description" content="last 琐碎 warning ignore 1 2 import warnings warnings.filterwarnings(&quot;ignore&quot;)   中文注释乱码 1 # -*- coding:utf8 -*-  放在python脚本的第一行。  1 2 3 4 a = np.array([1,2,3,...]) # n b = np.array([2,3,4,...]) # m c =">
 <meta name="twitter:image" content="http://yoursite.com/2018/06/26/ML-Python/Screen%20Shot%202018-06-27%20at%2011.09.15%20AM.png">
 
 
@@ -415,7 +415,18 @@
 </pre></td></tr></table></figure>
 <p>放在python脚本的第一行。</p>
 </li>
-<li></li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,...]) <span class="comment"># n</span></div>
+<div class="line">b = np.array([<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,...]) <span class="comment"># m</span></div>
+<div class="line">c = a - b <span class="comment"># error because n != m</span></div>
+<div class="line">c = a.reshape(n,<span class="number">1</span>)-b <span class="comment"># produce a two-dim array (n,m)</span></div>
+</pre></td></tr></table></figure>
+</li>
+<li><p>​</p>
+</li>
 </ol>
 <h1 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>Python支持不同的数字类型 -</p>
 <ul>
