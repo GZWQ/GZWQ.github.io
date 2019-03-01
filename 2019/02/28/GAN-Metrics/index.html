@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Deep Learning," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Blog of Qing">
-<meta property="og:url" content="http://yoursite.com/tags/Hexo/index.html">
+<meta name="description" content="Several metrics to evaluate GAN, including Inception Score.">
+<meta name="keywords" content="Deep Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GAN Metrics">
+<meta property="og:url" content="http://yoursite.com/2019/02/28/GAN-Metrics/index.html">
 <meta property="og:site_name" content="Blog of Qing">
+<meta property="og:description" content="Several metrics to evaluate GAN, including Inception Score.">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-01T04:38:44.030Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Blog of Qing">
+<meta name="twitter:title" content="GAN Metrics">
+<meta name="twitter:description" content="Several metrics to evaluate GAN, including Inception Score.">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Hexo/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/02/28/GAN-Metrics/"/>
 
 
 
 
 
-  <title>Tag: Hexo | Blog of Qing</title>
+  <title>GAN Metrics | Blog of Qing</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -268,54 +273,231 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>Hexo<small>Tag</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/GAN-Metrics/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/05/23/Hexo-Commands/" itemprop="url">
-              
-                <span itemprop="name">Hexo Commands</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">GAN Metrics</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-23T17:53:48-05:00"
-              content="2018-05-23" >
-          05-23
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-28T21:25:48-06:00">
+                2019-02-28
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Several metrics to evaluate GAN, including Inception Score.</p>
+<a id="more"></a>
+<h1 id="Inception-Score"><a href="#Inception-Score" class="headerlink" title="Inception Score"></a><a href="https://sudomake.ai/inception-score-explained/" target="_blank" rel="noopener">Inception Score</a></h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>Consider this setting: a zoo of GANs you’ve trained has generated several sets of images: $X_1, X_2, …, X_N$ that are trying to mimic the original set $X_{real}$. If you had a perfect way to rank the realism if these sets, let’s say, a function $\rho(X)$, then $\rho(X_{real})$ would, obviously, be the highest of all. The real question is:</p>
+<p><strong>How can such function be formulated in terms of statistics / information theory?</strong></p>
+<p>The answer depends on the requirements for the images. Two criteria immediately come to mind:</p>
+<ol>
+<li>A human, looking at a separate image, would be able to confidently determine what’s in there (<strong>saliency</strong>).</li>
+<li>A human, looking at a set of various images, would say that the set has lots of different objects (<strong>diversity</strong>).</li>
+</ol>
+<p>At least, that’s what everyone expects from a good generative model. Those who have tried training GANs themselves have immediately noted the fact that usually you end up getting only one criterion covered.</p>
+<h2 id="Saliency-vs-diversity"><a href="#Saliency-vs-diversity" class="headerlink" title="Saliency vs. diversity"></a>Saliency vs. diversity</h2><p>Broadly speaking, these two criteria are represented by two components of the formula:</p>
+<ol>
+<li>Saliency is expressed as $p(y|x)$ — a distribution of classes for any individual image should have low entropy (think of it as a single high score and the rest very low).</li>
+<li>Diversity is expressed is $p(x)$ — overall distribution of classes across the sampled data should have high entropy, which would mean the absense of dominating classes and something closer to a well-balanced training set.</li>
+</ol>
+<h2 id="Kullback-Leibler-distance-ref"><a href="#Kullback-Leibler-distance-ref" class="headerlink" title="Kullback-Leibler distance ref"></a>Kullback-Leibler distance <a href="https://towardsdatascience.com/demystifying-kl-divergence-7ebe4317ee68" target="_blank" rel="noopener">ref</a></h2><p>KL-distance is a measure of information loss occuring when instead of a true empiric distribution an approximation is used. Note that in the “Saliency vs. diversity” both distributions can be used as approximations of each other: you can guess the most probable class of an image using a mean score distribution or you can estimate the mean by looking at a separate example. Ideally, neither of these approximations shoud be good, that’s why the formula is using KL-distance.</p>
+<h2 id="Kullback-Leibler-distance"><a href="#Kullback-Leibler-distance" class="headerlink" title="Kullback-Leibler distance"></a>Kullback-Leibler distance</h2><p>KL-distance is a measure of information loss occuring when instead of a true empiric distribution an approximation is used. Note that in the “Saliency vs. diversity” both distributions can be used as approximations of each other: you can guess the most probable class of an image using a mean score distribution or you can estimate the mean by looking at a separate example. </p>
+<p><strong>Ideally, neither of these approximations shoud be good, that’s why the formula is using KL-distance.</strong></p>
+<p>And that’s it. One important thing to keep in mind (and, actually, the most fascinating among these), is that to compute this score for a set of generated images you need a good image classifier. Hence the name of the metric — for calculating the distributions the authors used a pretrained Inception.</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> math</div>
+<div class="line"><span class="keyword">import</span> torch</div>
+<div class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</div>
+<div class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</div>
+<div class="line"><span class="keyword">from</span> torchvision.models <span class="keyword">import</span> inception_v3</div>
+<div class="line"></div>
+<div class="line">net = inception_v3(pretrained=<span class="keyword">True</span>).cuda()</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">inception_score</span><span class="params">(images, batch_size=<span class="number">5</span>)</span>:</span></div>
+<div class="line">    scores = []</div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(int(math.ceil(float(len(images)) / float(batch_size)))):</div>
+<div class="line">        batch = Variable(torch.cat(images[i * batch_size: (i + <span class="number">1</span>) * batch_size], <span class="number">0</span>))</div>
+<div class="line">        s, _ = net(batch)  <span class="comment"># skipping aux logits</span></div>
+<div class="line">        scores.append(s)</div>
+<div class="line">    p_yx = F.softmax(torch.cat(scores, <span class="number">0</span>), <span class="number">1</span>)</div>
+<div class="line">    p_y = p_yx.mean(<span class="number">0</span>).unsqueeze(<span class="number">0</span>).expand(p_yx.size(<span class="number">0</span>), <span class="number">-1</span>)</div>
+<div class="line">    KL_d = p_yx * (torch.log(p_yx) - torch.log(p_y))</div>
+<div class="line">    final_score = KL_d.mean()</div>
+<div class="line">    <span class="keyword">return</span> final_score</div>
+</pre></td></tr></table></figure>
+<p><a href="http://bluewidz.blogspot.com/2017/12/inception-score.html" target="_blank" rel="noopener">keras-implementation</a> </p>
+<p><a href="https://zhuanlan.zhihu.com/p/54146307" target="_blank" rel="noopener">Inception Score 的原理和局限性</a> </p>
+<h1 id="Frechet-Inception-Distance"><a href="#Frechet-Inception-Distance" class="headerlink" title="Fréchet Inception Distance"></a>Fréchet Inception Distance</h1><p><a href="https://nealjean.com/ml/frechet-inception-distance/" target="_blank" rel="noopener">ref1</a> <a href="https://zhuanlan.zhihu.com/p/54213305" target="_blank" rel="noopener">Fréchet Inception Distance (FID)</a> </p>
+<p>The FID is supposed to improve on the IS by actually <em>comparing</em> the statistics of generated samples to real samples, instead of evaluating generated samples in a vacuum.</p>
+<script type="math/tex; mode=display">
+\text{FID} = ||\mu_r - \mu_g||^2 + \text{Tr} (\Sigma_r + \Sigma_g - 2 (\Sigma_r \Sigma_g)^{1/2}),</script><p>where $X_r \sim \mathcal{N} (\mu_r, \Sigma_r)$ and $X_g \sim \mathcal{N} (\mu_g, \Sigma_g)$ are the 2048-dimensional activations of the Inception-v3 pool3 layer for real and generated samples respectively. <strong>Lower FID is better</strong>, corresponding to more similar real and generated samples as measured by the distance between their activation distributions.</p>
+<h1 id="SSD-Score"><a href="#SSD-Score" class="headerlink" title="SSD-Score"></a>SSD-Score</h1><h2 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h2><p><a href="https://github.com/AliaksandrSiarohin/pose-gan/blob/master/ssd_score/compute_ssd_score.py" target="_blank" rel="noopener">ref1</a> </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/08/BroadReading/" rel="next" title="BroadReading">
+                <i class="fa fa-chevron-left"></i> BroadReading
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -323,6 +505,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -343,8 +529,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -404,6 +599,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Inception-Score"><span class="nav-number">1.</span> <span class="nav-text">Inception Score</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Saliency-vs-diversity"><span class="nav-number">1.2.</span> <span class="nav-text">Saliency vs. diversity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kullback-Leibler-distance-ref"><span class="nav-number">1.3.</span> <span class="nav-text">Kullback-Leibler distance ref</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kullback-Leibler-distance"><span class="nav-number">1.4.</span> <span class="nav-text">Kullback-Leibler distance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">1.5.</span> <span class="nav-text">Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Frechet-Inception-Distance"><span class="nav-number">2.</span> <span class="nav-text">Fréchet Inception Distance</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSD-Score"><span class="nav-number">3.</span> <span class="nav-text">SSD-Score</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-1"><span class="nav-number">3.1.</span> <span class="nav-text">Implementation</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -537,6 +748,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
