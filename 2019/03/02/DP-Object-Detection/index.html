@@ -88,7 +88,7 @@
 <meta property="og:description" content="In brief, in order to detect objects, we first need to generate region proposals, then to classify the object class and detect the bounding box.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-Object-Detection/1_e6dx5qzUKWwasIVGSuCyDA-1587215.png">
-<meta property="og:updated_time" content="2019-03-03T04:27:05.772Z">
+<meta property="og:updated_time" content="2019-03-03T04:53:57.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-Object Detection">
 <meta name="twitter:description" content="In brief, in order to detect objects, we first need to generate region proposals, then to classify the object class and detect the bounding box.">
@@ -380,8 +380,23 @@
       
         <p>In brief, in order to detect objects, we first need to generate region proposals, then to classify the object class and detect the bounding box.</p>
 <a id="more"></a>
-<h2 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h2><p><strong>In Faster R-CNN, RPN using SS is replaced by RPN using CNN. And this CNN is shared with detection network. This CNN can be ZFNet or VGGNet in the paper.</strong> Thus, the overall network is as below:</p>
+<h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><ol>
+<li>First, R-CNN uses selective search by [2] to <strong>generate about 2K region proposals</strong>, i.e. bounding boxes for image classification.</li>
+<li>Then, for each bounding box, image classification is done through CNN.</li>
+<li>Finally, each bounding box can be refined using regression.</li>
+</ol>
+<h1 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h1><p>It is the first fully differentiable object-detection model that was proposed.</p>
+<p>In Faster R-CNN, RPN using SS is replaced by RPN using CNN. And this CNN is shared with detection network. This CNN can be ZFNet or VGGNet in the paper.** Thus, the overall network is as below:</p>
 <p><img src="/2019/03/02/DP-Object-Detection/../DP-Object-Detection/1_e6dx5qzUKWwasIVGSuCyDA-1587215.png" alt="_e6dx5qzUKWwasIVGSuCyDA-158721"></p>
+<ol>
+<li>First, the picture goes through conv layers and feature maps are extracted.</li>
+<li>Then a <strong>sliding window</strong> is used in RPN for each location over the feature map.</li>
+<li>For each location, <strong>k (k=9) anchor</strong> boxes are used (<strong>3 scales of 128, 256 and 512, and 3 aspect ratios of 1:1, 1:2, 2:1</strong>) for generating region proposals.</li>
+<li>A <strong>cls</strong> layer outputs <em>2k</em> scores <strong>whether there is object or not</strong> for <em>k</em> boxes.</li>
+<li>A <strong>reg</strong> layer outputs <em>4k</em> for the <strong>coordinates</strong> (box center coordinates, width and height) of <em>k</em> boxes.</li>
+<li>With a size of <em>W**</em>×<em>**H</em> feature map, there are <em>WHk</em> anchors in total.</li>
+</ol>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://towardsdatascience.com/review-faster-r-cnn-object-detection-f5685cb30202" target="_blank" rel="noopener">Review: Faster R-CNN (Object Detection)</a> </p>
 
       
     </div>
@@ -423,6 +438,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/03/RL-Double-Q-Learning/" rel="prev" title="RL-Double Q-Learning">
+                RL-Double Q-Learning <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -499,7 +518,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">72</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -510,7 +529,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -521,7 +540,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -554,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Faster-R-CNN"><span class="nav-number">1.</span> <span class="nav-text">Faster R-CNN</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#R-CNN"><span class="nav-number">1.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Faster-R-CNN"><span class="nav-number">2.</span> <span class="nav-text">Faster R-CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
