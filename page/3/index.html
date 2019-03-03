@@ -283,6 +283,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/05/Linux命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/05/Linux命令/" itemprop="url">Linux命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-05T10:35:29-05:00">
+                2018-08-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><p>退出保存</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">:wq</div>
+</pre></td></tr></table></figure>
+<p>利用scp远程上传下载文件/文件夹<a href="https://www.cnblogs.com/zhaofeng555/p/8075279.html" target="_blank" rel="noopener">ref1</a> </p>
+<p>统计文件个数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">ls -l |grep "^-"|wc -l #统计当前目录下文件数量</div>
+<div class="line">ls -l |grep "^ｄ"|wc -l #统计当前目录下文件夹数量</div>
+</pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">cp -r dir1/. /dir2/</div>
+</pre></td></tr></table></figure>
+<p>设置屏幕分辨率</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">xrandr -s 1366x768</div>
+</pre></td></tr></table></figure>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><ul>
+<li><p>删除目录下所有文件</p>
+<p>用通配符*英文星号可以表示“所有文件”这个概念，所以删除文件夹下所有文件的方法就是，先用cd命令切换到这个文件夹下，然后执行rm ./*命令表示删除当前目录下所有的文件，但是注意，如果文件夹下有子目录，这条命令就无法生效了，因为它无法删除子目录（删除子目录要加上-r选项）。</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Training-Techiniques/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2078,501 +2242,6 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/15/Image-Processing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/15/Image-Processing/" itemprop="url">Image_Processing</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-15T18:21:08-05:00">
-                2018-07-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Image-Processing/" itemprop="url" rel="index">
-                    <span itemprop="name">Image Processing</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://blog.csdn.net/dengtaocs/article/details/38022153" target="_blank" rel="noopener">opencv中感兴趣区域以及mask的使用</a></p>
-<p><a href="https://blog.csdn.net/matlab_matlab/article/details/54015331" target="_blank" rel="noopener">不规则区域提取</a></p>
-<p><a href="https://ask.helplib.com/matlab/post_5759524" target="_blank" rel="noopener">使用预先定义的ROI Matlab进行图像裁剪</a></p>
-<h1 id="CV2"><a href="#CV2" class="headerlink" title="CV2"></a>CV2</h1><p>RGB =<code>(height, width, 3)</code></p>
-<p>图片读取<code>cv2.imread()</code>第一个参数是文件路径，第二个参数指定读取方式</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">import</span> cv2</div>
-<div class="line"><span class="comment"># 以灰度模式读取图片</span></div>
-<div class="line">img = cv2.imread(<span class="string">'lena.jpg'</span>,<span class="number">0</span>)   //  cv2.IMREAD_GRAYSCALE</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>cv2.IMREAD_COLOR：加载彩色图片，这个是默认参数。</li>
-<li>cv2.IMREAD_GRAYSCALE：以灰度模式加载图片。</li>
-<li>cv2.IMREAD_UNCHANGED：包括alpha。</li>
-<li>上面三个flag分别对应的值为1，0，-1</li>
-</ul>
-</blockquote>
-
-</div></div>
-<p>使用<code>cv2.imshow()</code>显示一个图像窗口，窗口大小根据图像自动调整。第一个参数是窗口名称，第二个参数是图片。</p>
-<p>使用函数<code>cv2.imwrite()</code>保存图像到文件,第一个参数是文件名，第二个参数是你要保存的文件</p>
-<p>使用<code>cv2.resize(img,(width, height))</code>来改变图像大小。</p>
-<h1 id="VIDEOS"><a href="#VIDEOS" class="headerlink" title="VIDEOS"></a>VIDEOS</h1><p>从视频中提取帧 <a href="https://blog.csdn.net/JNingWei/article/details/77869078" target="_blank" rel="noopener">ref</a>  </p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-<div class="line">36</div>
-<div class="line">37</div>
-<div class="line">38</div>
-<div class="line">39</div>
-<div class="line">40</div>
-<div class="line">41</div>
-<div class="line">42</div>
-<div class="line">43</div>
-<div class="line">44</div>
-<div class="line">45</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=utf-8</span></div>
-<div class="line"></div>
-<div class="line"><span class="comment"># 全局变量</span></div>
-<div class="line">VIDEO_PATH = <span class="string">'./1.avi'</span> <span class="comment"># 视频地址</span></div>
-<div class="line">EXTRACT_FOLDER = <span class="string">'./extract_folder'</span> <span class="comment"># 存放帧图片的位置</span></div>
-<div class="line">EXTRACT_FREQUENCY = <span class="number">100</span> <span class="comment"># 帧提取频率</span></div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract_frames</span><span class="params">(video_path, dst_folder, index)</span>:</span></div>
-<div class="line">    <span class="comment"># 主操作</span></div>
-<div class="line">    <span class="keyword">import</span> cv2</div>
-<div class="line">    video = cv2.VideoCapture()</div>
-<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> video.open(video_path):</div>
-<div class="line">        print(<span class="string">"can not open the video"</span>)</div>
-<div class="line">        exit(<span class="number">1</span>)</div>
-<div class="line">    count = <span class="number">1</span></div>
-<div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div>
-<div class="line">        _, frame = video.read()</div>
-<div class="line">        <span class="keyword">if</span> frame <span class="keyword">is</span> <span class="keyword">None</span>:</div>
-<div class="line">            <span class="keyword">break</span></div>
-<div class="line">        <span class="keyword">if</span> count % EXTRACT_FREQUENCY == <span class="number">0</span>:</div>
-<div class="line">            save_path = <span class="string">"&#123;&#125;/&#123;:&gt;03d&#125;.jpg"</span>.format(dst_folder, index)</div>
-<div class="line">            cv2.imwrite(save_path, frame)</div>
-<div class="line">            index += <span class="number">1</span></div>
-<div class="line">        count += <span class="number">1</span></div>
-<div class="line">    video.release()</div>
-<div class="line">    <span class="comment"># 打印出所提取帧的总数</span></div>
-<div class="line">    print(<span class="string">"Totally save &#123;:d&#125; pics"</span>.format(index<span class="number">-1</span>))</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div>
-<div class="line">    <span class="comment"># 递归删除之前存放帧图片的文件夹，并新建一个</span></div>
-<div class="line">    <span class="keyword">import</span> shutil</div>
-<div class="line">    <span class="keyword">try</span>:</div>
-<div class="line">        shutil.rmtree(EXTRACT_FOLDER)</div>
-<div class="line">    <span class="keyword">except</span> OSError:</div>
-<div class="line">        <span class="keyword">pass</span></div>
-<div class="line">    <span class="keyword">import</span> os</div>
-<div class="line">    os.mkdir(EXTRACT_FOLDER)</div>
-<div class="line">    <span class="comment"># 抽取帧图片，并保存到指定路径</span></div>
-<div class="line">    extract_frames(VIDEO_PATH, EXTRACT_FOLDER, <span class="number">1</span>)</div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
-<div class="line">    main()</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-<div class="line">36</div>
-<div class="line">37</div>
-<div class="line">38</div>
-<div class="line">39</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cv2</div>
-<div class="line"><span class="keyword">import</span> shutil</div>
-<div class="line"><span class="keyword">import</span> os</div>
-<div class="line"></div>
-<div class="line">dataset = <span class="string">"handwaving"</span></div>
-<div class="line">inpath = <span class="string">"/Users/daniel/Desktop/%s/"</span>%dataset</div>
-<div class="line">outpath = <span class="string">"/Users/daniel/Downloads/Nutstore/PythonFile/DATASET/KTH/%s/"</span>%dataset</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">extract_frames</span><span class="params">(video_path,dst_folder,index)</span>:</span></div>
-<div class="line">    video = cv2.VideoCapture()</div>
-<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> video.open(video_path):</div>
-<div class="line">        print(<span class="string">"can not open the video"</span>)</div>
-<div class="line">        exit(<span class="number">1</span>)</div>
-<div class="line">    success = <span class="keyword">True</span></div>
-<div class="line">    <span class="keyword">while</span> success:</div>
-<div class="line">        success, frame = video.read()</div>
-<div class="line">        save_path = dst_folder+<span class="string">"%d.png"</span>%index</div>
-<div class="line">        cv2.imwrite(save_path, frame)</div>
-<div class="line">        index += <span class="number">1</span></div>
-<div class="line">    video.release()</div>
-<div class="line">    <span class="comment"># 打印出所提取帧的总数</span></div>
-<div class="line">    print(<span class="string">"Totally save &#123;:d&#125; pics"</span>.format(index<span class="number">-1</span>))</div>
-<div class="line">    <span class="keyword">return</span> index</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div>
-<div class="line">    index = <span class="number">1</span></div>
-<div class="line">    <span class="keyword">try</span>:</div>
-<div class="line">        shutil.rmtree(outpath)</div>
-<div class="line">    <span class="keyword">except</span> OSError:</div>
-<div class="line">        <span class="keyword">pass</span></div>
-<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(outpath):</div>
-<div class="line">        os.makedirs(outpath)</div>
-<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">21</span>):</div>
-<div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">5</span>):</div>
-<div class="line">            video_path = inpath + <span class="string">"person%02d_handwaving_d%d_uncomp.avi"</span> % (i, j)</div>
-<div class="line">            index = extract_frames(video_path,outpath,index)</div>
-<div class="line"></div>
-<div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div>
-<div class="line">    main()</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h1 id="Depth-Images"><a href="#Depth-Images" class="headerlink" title="Depth Images"></a>Depth Images</h1><p><a href="https://rgbd-dataset.cs.washington.edu/software.html" target="_blank" rel="noopener">rgbd images processing</a> </p>
-<p><a href="http://www.atifanwer.xyz/blog/loading-and-visualizing-kinect-depth-images-in-matlab/" target="_blank" rel="noopener">Loading and Visualizing Kinect Depth images in Matlab</a> </p>
-<p>MSR3D-Daily Activities Dataset</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-<div class="line">36</div>
-<div class="line">37</div>
-<div class="line">38</div>
-<div class="line">39</div>
-<div class="line">40</div>
-<div class="line">41</div>
-<div class="line">42</div>
-<div class="line">43</div>
-<div class="line">44</div>
-<div class="line">45</div>
-<div class="line">46</div>
-<div class="line">47</div>
-<div class="line">48</div>
-<div class="line">49</div>
-<div class="line">50</div>
-<div class="line">51</div>
-<div class="line">52</div>
-<div class="line">53</div>
-<div class="line">54</div>
-<div class="line">55</div>
-<div class="line">56</div>
-<div class="line">57</div>
-<div class="line">58</div>
-<div class="line">59</div>
-<div class="line">60</div>
-<div class="line">61</div>
-<div class="line">62</div>
-<div class="line">63</div>
-<div class="line">64</div>
-<div class="line">65</div>
-<div class="line">66</div>
-<div class="line">67</div>
-<div class="line">68</div>
-<div class="line">69</div>
-<div class="line">70</div>
-<div class="line">71</div>
-<div class="line">72</div>
-<div class="line">73</div>
-</pre></td><td class="code"><pre><div class="line">clear;close all;clc;</div>
-<div class="line">binPath = <span class="string">'/Users/daniel/Downloads/Nutstore/PythonFile/DATASET/msr3d/Depth/'</span>;</div>
-<div class="line">output_path = <span class="string">'/Users/daniel/Downloads/Nutstore/PythonFile/DATASET/msr3d/Depth_Image/'</span>;</div>
-<div class="line">idx = <span class="number">0</span>;</div>
-<div class="line"><span class="keyword">for</span> si = <span class="number">1</span>:<span class="number">1</span></div>
-<div class="line">    <span class="keyword">for</span> ai = <span class="number">1</span>:<span class="number">1</span></div>
-<div class="line">        <span class="keyword">for</span> ei = <span class="number">1</span>:<span class="number">1</span></div>
-<div class="line">            <span class="comment">%%%%%%%%%%%%%</span></div>
-<div class="line">            <span class="comment">%%%%%%%%%%%%%</span></div>
-<div class="line">            acsr = num2str(ai,<span class="string">'%02d'</span>);</div>
-<div class="line">            susr = num2str(si,<span class="string">'%02d'</span>);</div>
-<div class="line">            exsr = num2str(ei,<span class="string">'%02d'</span>);</div>
-<div class="line">            <span class="comment">%%%%%% getsr(ai,si,ei) convert ai,si,ei to double bits</span></div>
-<div class="line">            <span class="comment">%%%%%% for example, if ai=3, acsr is 03</span></div>
-<div class="line">            <span class="comment">%%%%%%%%%%%</span></div>
-<div class="line"></div>
-<div class="line">            binfile = [binPath,<span class="string">'a'</span>,acsr,<span class="string">'_s'</span>,susr,<span class="string">'_e'</span>,exsr,<span class="string">'_depth.bin'</span>]; </div>
-<div class="line">            <span class="keyword">if</span> ~exist(binfile,<span class="string">'file'</span>)</div>
-<div class="line">                <span class="built_in">disp</span>(<span class="string">'error'</span>);</div>
-<div class="line">                <span class="keyword">continue</span>;</div>
-<div class="line">            <span class="keyword">end</span></div>
-<div class="line"></div>
-<div class="line">            fileread = fopen(binfile);      </div>
-<div class="line">            <span class="keyword">if</span> fileread&lt;<span class="number">0</span></div>
-<div class="line">               <span class="built_in">disp</span>(<span class="string">'no such file.'</span>);</div>
-<div class="line">               <span class="keyword">return</span>;</div>
-<div class="line">            <span class="keyword">end</span></div>
-<div class="line"></div>
-<div class="line">       </div>
-<div class="line">            header = fread(fileread,<span class="number">3</span>,<span class="string">'uint=&gt;uint'</span>);</div>
-<div class="line">            nnof = header(<span class="number">1</span>); ncols = header(<span class="number">2</span>); nrows = header(<span class="number">3</span>);</div>
-<div class="line">            </div>
-<div class="line"></div>
-<div class="line">            depths = <span class="built_in">zeros</span>(ncols, nrows, nnof);</div>
-<div class="line">            <span class="keyword">for</span> f = <span class="number">1</span>:nnof</div>
-<div class="line">                idx = idx+<span class="number">1</span>;</div>
-<div class="line">                fprintf(<span class="string">'Processing %d/10, %d/16, %d/2, %d/%d\n'</span>,si,ai,ei,f,nnof);</div>
-<div class="line">                frame = <span class="built_in">zeros</span>( ncols, nrows);</div>
-<div class="line">                <span class="keyword">for</span> row = <span class="number">1</span>:nrows</div>
-<div class="line">                    tempRow = fread(fileread, ncols, <span class="string">'uint=&gt;uint'</span>);</div>
-<div class="line">                    tempRowID = fread(fileread, ncols, <span class="string">'uint8'</span>);<span class="comment">%%%%%</span></div>
-<div class="line">                    frame(:,row) = tempRow;</div>
-<div class="line">                <span class="keyword">end</span></div>
-<div class="line">                depth(:,:,f) = frame;</div>
-<div class="line">                [m,n] = <span class="built_in">size</span>(depth(:,:,f));</div>
-<div class="line">                </div>
-<div class="line">                pic_name = [output_path,num2str(idx),<span class="string">'.jpg'</span>];</div>
-<div class="line">                pic = imrotate(depth(:,:,f),<span class="number">270</span>);</div>
-<div class="line">                <span class="comment">%imshow(depth(:,:,f));</span></div>
-<div class="line">                <span class="comment">%imwrite(uint8(pic),pic_name);</span></div>
-<div class="line">                </div>
-<div class="line">                </div>
-<div class="line">                <span class="comment">%plot3k(depth(:,:,1));</span></div>
-<div class="line">                </div>
-<div class="line">                </div>
-<div class="line"><span class="comment">%                 fig = imagesc(depth(:,:,1)); axis off; % truesize;</span></div>
-<div class="line"><span class="comment">%                 title('Depth in color map');</span></div>
-<div class="line"><span class="comment">%                 colormap parula;</span></div>
-<div class="line"><span class="comment">%                 c = colorbar; c.Label.String = 'Distance in mm';</span></div>
-<div class="line"><span class="comment">%                 clear tempRow tempRowID;</span></div>
-<div class="line">                </div>
-<div class="line">                </div>
-<div class="line"><span class="comment">%                 [counts,binLocations] = imhist(depth(:,:,1),4000);</span></div>
-<div class="line"><span class="comment">%                 binLocations = binLocations(1:4000,1);</span></div>
-<div class="line"><span class="comment">%                 bar( binLocations,counts); xlim([450 4000])</span></div>
-<div class="line"><span class="comment">%                 title('Histogram of depth values');</span></div>
-<div class="line">            <span class="keyword">end</span></div>
-<div class="line"></div>
-<div class="line"></div>
-<div class="line">            fclose(fileread);</div>
-<div class="line">        <span class="keyword">end</span></div>
-<div class="line">    <span class="keyword">end</span></div>
-<div class="line"><span class="keyword">end</span></div>
-</pre></td></tr></table></figure>
-
-</div></div>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2623,7 +2292,7 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

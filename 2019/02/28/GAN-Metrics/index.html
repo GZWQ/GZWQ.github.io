@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Several metrics to evaluate GAN, including Inception Score.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-01T04:38:44.030Z">
+<meta property="og:updated_time" content="2019-03-01T22:03:46.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GAN Metrics">
 <meta name="twitter:description" content="Several metrics to evaluate GAN, including Inception Score.">
@@ -395,6 +395,7 @@
 <h2 id="Kullback-Leibler-distance"><a href="#Kullback-Leibler-distance" class="headerlink" title="Kullback-Leibler distance"></a>Kullback-Leibler distance</h2><p>KL-distance is a measure of information loss occuring when instead of a true empiric distribution an approximation is used. Note that in the “Saliency vs. diversity” both distributions can be used as approximations of each other: you can guess the most probable class of an image using a mean score distribution or you can estimate the mean by looking at a separate example. </p>
 <p><strong>Ideally, neither of these approximations shoud be good, that’s why the formula is using KL-distance.</strong></p>
 <p>And that’s it. One important thing to keep in mind (and, actually, the most fascinating among these), is that to compute this score for a set of generated images you need a good image classifier. Hence the name of the metric — for calculating the distributions the authors used a pretrained Inception.</p>
+<p><strong>Higher Inception score indicates better image quality</strong>.</p>
 <h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -479,6 +480,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/03/02/DP-RNN/" rel="prev" title="DP-RNN">
+                DP-RNN <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -554,7 +559,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
