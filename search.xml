@@ -6,7 +6,7 @@
       <title>RL-Reinforcement Learning</title>
       <link href="/2019/03/03/RL-Reinforcement-Learning/"/>
       <url>/2019/03/03/RL-Reinforcement-Learning/</url>
-      <content type="html"><![CDATA[<p>Reinforcement learning is useful when you have no training data or specific enough expertise about the problem. On a high level, you know WHAT you want, but not really HOW to get there. Luckily, all you need is a reward mechanism, and the reinforcement learning model will figure out how to maximize the reward, if you just let it “play” long enough. This is analogous to teaching a dog to sit down using treats. At first the dog is clueless and tries random things on your command. At some point, it accidentally lands on its butt and gets a sudden reward. As time goes by, and given enough iterations, it’ll figure out the expert strategy of sitting down on cue.</p><a id="more"></a><h1 id="The-Q-learning-algorithm"><a href="#The-Q-learning-algorithm" class="headerlink" title="The Q-learning algorithm"></a>The Q-learning algorithm</h1><p><img src="/2019/03/03/RL-Reinforcement-Learning/1_r-F8AfutP0a8gPWs_5BBLQ.png" alt="_r-F8AfutP0a8gPWs_5BBL"></p><p>It looks a bit intimidating, but what it does is quite simple. We can summarize it as:</p><p><strong>Update the value estimation of an action based on the reward we got and the reward we expect next.</strong></p><p>This is the fundamental thing we are doing. The <strong>learning rate</strong> and <strong>discount</strong>, while required, are just there to tweak the behavior. The discount will define how much we weigh future expected action values over the one we just experienced. The learning rate is sort of an overall gas pedal. Go too fast and you’ll drive past the optimal, go too slow and you’ll never get there.</p><blockquote><p>Why do we need to gamble and take random actions? For the same reason that the accountant got stuck. Since our default strategy is still greedy, that is we take the most lucrative option by default, we need to introduce some stochasticity to ensure all possible \<state, action="">pairs are explored.</state,></p></blockquote><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://towardsdatascience.com/reinforcement-learning-tutorial-part-1-q-learning-cadb36998b28" target="_blank" rel="noopener">Reinforcement Learning Tutorial Part 1: Q-Learning</a> </p>]]></content>
+      <content type="html"><![CDATA[<p>Reinforcement learning is useful when you have no training data or specific enough expertise about the problem. On a high level, you know WHAT you want, but not really HOW to get there. Luckily, all you need is a reward mechanism, and the reinforcement learning model will figure out how to maximize the reward, if you just let it “play” long enough. This is analogous to teaching a dog to sit down using treats. At first the dog is clueless and tries random things on your command. At some point, it accidentally lands on its butt and gets a sudden reward. As time goes by, and given enough iterations, it’ll figure out the expert strategy of sitting down on cue.</p><a id="more"></a><h1 id="The-Q-learning-algorithm"><a href="#The-Q-learning-algorithm" class="headerlink" title="The Q-learning algorithm"></a>The Q-learning algorithm</h1><p><img src="/2019/03/03/RL-Reinforcement-Learning/1_r-F8AfutP0a8gPWs_5BBLQ.png" alt="_r-F8AfutP0a8gPWs_5BBL"></p><p>It looks a bit intimidating, but what it does is quite simple. We can summarize it as:</p><p><strong>Update the value estimation of an action based on the reward we got and the reward we expect next.</strong></p><p>This is the fundamental thing we are doing. The <strong>learning rate</strong> and <strong>discount</strong>, while required, are just there to tweak the behavior. The discount will define how much we weigh future expected action values over the one we just experienced. The learning rate is sort of an overall gas pedal. Go too fast and you’ll drive past the optimal, go too slow and you’ll never get there.</p><blockquote><p>Why do we need to gamble and take random actions? For the same reason that the accountant got stuck. Since our default strategy is still greedy, that is we take the most lucrative option by default, we need to introduce some stochasticity to ensure all possible \<state, action="">pairs are explored.</state,></p></blockquote><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://towardsdatascience.com/reinforcement-learning-tutorial-part-1-q-learning-cadb36998b28" target="_blank" rel="noopener">Reinforcement Learning Tutorial Part 1: Q-Learning</a> </p><p><a href="https://medium.freecodecamp.org/an-introduction-to-q-learning-reinforcement-learning-14ac0b4493cc" target="_blank" rel="noopener">An introduction to Q-Learning: reinforcement learning</a> </p><p><a href="https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/#" target="_blank" rel="noopener">Reinforcement Q-Learning from Scratch in Python with OpenAI Gym</a> </p>]]></content>
       
       <categories>
           
@@ -427,9 +427,9 @@
       
         <tags>
             
-            <tag> GAN </tag>
-            
             <tag> Deep Learning </tag>
+            
+            <tag> GAN </tag>
             
             <tag> Variant GAN </tag>
             
@@ -498,9 +498,9 @@
       
         <tags>
             
-            <tag> GAN </tag>
-            
             <tag> Deep Learning </tag>
+            
+            <tag> GAN </tag>
             
         </tags>
       
