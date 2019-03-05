@@ -88,7 +88,11 @@
 <meta property="og:description" content="Reinforcement learning is useful when you have no training data or specific enough expertise about the problem. On a high level, you know WHAT you want, but not really HOW to get there. Luckily, all y">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/1_r-F8AfutP0a8gPWs_5BBLQ.png">
-<meta property="og:updated_time" content="2019-03-04T02:58:02.408Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/Reinforcement_Learning_Taxi_Env.width-1200.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/Screen%20Shot%202019-03-04%20at%204.50.53%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/Screen%20Shot%202019-03-04%20at%204.56.32%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/Screen%20Shot%202019-03-04%20at%205.07.33%20PM.png">
+<meta property="og:updated_time" content="2019-03-04T23:26:29.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL-Reinforcement Learning">
 <meta name="twitter:description" content="Reinforcement learning is useful when you have no training data or specific enough expertise about the problem. On a high level, you know WHAT you want, but not really HOW to get there. Luckily, all y">
@@ -387,6 +391,197 @@
 <blockquote>
 <p>Why do we need to gamble and take random actions? For the same reason that the accountant got stuck. Since our default strategy is still greedy, that is we take the most lucrative option by default, we need to introduce some stochasticity to ensure all possible \<state, action="">pairs are explored.</state,></p>
 </blockquote>
+<h1 id="Example-Design-Self-Driving-Cab"><a href="#Example-Design-Self-Driving-Cab" class="headerlink" title="Example Design: Self-Driving Cab"></a>Example Design: Self-Driving Cab</h1><h2 id="Problem-illustration"><a href="#Problem-illustration" class="headerlink" title="Problem illustration"></a>Problem illustration</h2><p>In this problem, we try to solve solve a problem with Q-Learning in python with OpenAI Gym. Let’s design a simulation of a self-driving cab. The major goal is to demonstrate, in a simplified environment, how you can use RL techniques to develop an efficient and safe approach for tackling this problem. The Smartcab’s job is to pick up the passenger at one location and drop them off in another. Here are a few things that we’d love our Smartcab to take care of:</p>
+<ul>
+<li>Drop off the passenger to the right location.</li>
+<li>Save passenger’s time by taking minimum time possible to drop off</li>
+<li>Take care of passenger’s safety and traffic rules</li>
+</ul>
+<p>There are different aspects that need to be considered here while modeling an RL solution to this problem: rewards, states, and actions.</p>
+<h3 id="Rewards"><a href="#Rewards" class="headerlink" title="Rewards"></a>Rewards</h3><ul>
+<li>The agent should receive a high positive reward for a successful dropoff because this behavior is highly desired</li>
+<li>The agent should be penalized if it tries to drop off a passenger in wrong locations</li>
+<li>The agent should get a slight negative reward for not making it to the destination after every time-step. “Slight” negative because we would prefer our agent to reach late instead of making wrong moves trying to reach to the destination as fast as possible</li>
+</ul>
+<h3 id="State-Space"><a href="#State-Space" class="headerlink" title="State Space"></a>State Space</h3><p>In Reinforcement Learning, the agent encounters a state, and then takes action according to the state it’s in.</p>
+<p>The <strong>State Space</strong> is the set of all possible situations our taxi could inhabit. The state should contain useful information the agent needs to make the right action.</p>
+<p>Let’s say we have a training area for our Smartcab where we are teaching it to transport people in a parking lot to four different locations (R, G, Y, B):</p>
+<p><img src="/2019/03/03/RL-Reinforcement-Learning/Reinforcement_Learning_Taxi_Env.width-1200.png" alt="einforcement_Learning_Taxi_Env.width-120"></p>
+<p>Let’s assume Smartcab is the only vehicle in this parking lot. We can break up the parking lot into a 5x5 grid, which gives us 25 possible taxi locations. These 25 locations are one part of our state space. Notice the current location state of our taxi is coordinate (3, 1).</p>
+<p>You’ll also notice there are four locations that we can pick up and drop off a passenger: R, G, Y, B or <code>[(0,0), (0,4), (4,0), (4,3)]</code> in (row, col) coordinates. Our illustrated passenger is in location <strong>Y</strong> and they wish to go to location <strong>R</strong>.</p>
+<p>When we also account for one additional passenger state of being inside the taxi, we can take all combinations of passenger locations and destination locations to come to a total number of states for our taxi environment; there’s four destinations and five passenger locations.</p>
+<p>So, our taxi environment has $5\times 5 \times 5 \times 4=500$ total possible states.</p>
+<p>The agent encounters one of the 500 states and it takes an action. The action in our case can be to move in a direction or decide to pickup/dropoff a passenger.</p>
+<p>In other words, we have six possible actions:</p>
+<ol>
+<li><code>south</code></li>
+<li><code>north</code></li>
+<li><code>east</code></li>
+<li><code>west</code></li>
+<li><code>pickup</code></li>
+<li><code>dropoff</code></li>
+</ol>
+<p>This is the <strong>action space</strong>: the set of all the actions that our agent can take in a given state.</p>
+<p>You’ll notice in the illustration above, that the taxi cannot perform certain actions in certain states due to walls. In environment’s code, we will simply provide a -1 penalty for every wall hit and the taxi won’t move anywhere. This will just rack up penalties causing the taxi to consider going around the wall.</p>
+<h3 id="Action-Space"><a href="#Action-Space" class="headerlink" title="Action Space"></a>Action Space</h3><p>The agent encounters one of the 500 states and it takes an action. The action in our case can be to move in a direction or decide to pickup/dropoff a passenger.</p>
+<p>In other words, we have six possible actions:</p>
+<ol>
+<li><code>south</code></li>
+<li><code>north</code></li>
+<li><code>east</code></li>
+<li><code>west</code></li>
+<li><code>pickup</code></li>
+<li><code>dropoff</code></li>
+</ol>
+<p>This is the <strong>action space</strong>: the set of all the actions that our agent can take in a given state.</p>
+<p>You’ll notice in the illustration above, that the taxi cannot perform certain actions in certain states due to walls. In environment’s code, we will simply provide a -1 penalty for every wall hit and the taxi won’t move anywhere. This will just rack up penalties causing the taxi to consider going around the wall.</p>
+<h2 id="Implementation-with-Python"><a href="#Implementation-with-Python" class="headerlink" title="Implementation with Python"></a>Implementation with Python</h2><p>Fortunately, <a href="https://gym.openai.com/" target="_blank" rel="noopener">OpenAI Gym</a> has this exact environment already built for us.</p>
+<p>Gym provides different game environments which we can plug into our code and test an agent. The library takes care of API for providing all the information that our agent would require, like possible actions, score, and current state. We just need to focus just on the algorithm part for our agent.</p>
+<p>We’ll be using the Gym environment called <code>Taxi-V2</code>, which all of the details explained above were pulled from. The objectives, rewards, and actions are all the same.</p>
+<h3 id="Gym’s-interface"><a href="#Gym’s-interface" class="headerlink" title="Gym’s interface"></a>Gym’s interface</h3><p>Firstly, we need to load the game environment and render what it looks like:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> gym</div>
+<div class="line">env = gym.make(<span class="string">"Taxi-v2"</span>).env</div>
+<div class="line">env.render()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/03/03/RL-Reinforcement-Learning/Screen Shot 2019-03-04 at 4.50.53 PM.png" alt="creen Shot 2019-03-04 at 4.50.53 P"></p>
+<p>The core gym interface is <code>env</code>, which is the unified environment interface. The following are the <code>env</code>methods that would be quite helpful to us:</p>
+<ul>
+<li><code>env.reset</code>: Resets the environment and returns a random initial state.</li>
+<li><code>env.step(action)</code>: Step the environment by one timestep. Returns<ul>
+<li><strong>observation</strong>: Observations of the environment</li>
+<li><strong>reward</strong>: If your action was beneficial or not</li>
+<li><strong>done</strong>: Indicates if we have successfully picked up and dropped off a passenger, also called one <em>episode</em></li>
+<li><strong>info</strong>: Additional info such as performance and latency for debugging purposes</li>
+</ul>
+</li>
+<li><code>env.render</code>: Renders one frame of the environment (helpful in visualizing the environment)</li>
+</ul>
+<blockquote>
+<p>Note: We are using the <code>.env</code> on the end of <code>make</code> to avoid training stopping at 200 iterations, which is the default for the new version of Gym</p>
+</blockquote>
+<h3 id="Reminder-of-the-problem"><a href="#Reminder-of-the-problem" class="headerlink" title="Reminder of the problem"></a>Reminder of the problem</h3><p>Here’s our restructured problem statement (from Gym docs):</p>
+<p><em>“There are 4 locations (labeled by different letters), and our job is to pick up the passenger at one location and drop him off at another. We receive +20 points for a successful drop-off and lose 1 point for every time-step it takes. There is also a 10 point penalty for illegal pick-up and drop-off actions.”</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">env.reset() <span class="comment"># rest environment to a new, random state</span></div>
+<div class="line">env.render()</div>
+<div class="line">print(<span class="string">"Action Space &#123;&#125;"</span>.format(env.action_space))</div>
+<div class="line">print(<span class="string">"State Space &#123;&#125;"</span>.format(env.observation_space))</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/03/03/RL-Reinforcement-Learning/Screen Shot 2019-03-04 at 4.56.32 PM.png" alt="creen Shot 2019-03-04 at 4.56.32 P"></p>
+<ul>
+<li>The <strong>filled square</strong> represents the taxi, which is yellow without a passenger and green with a passenger.</li>
+<li>The <strong>pipe (“|”)</strong> represents a wall which the taxi cannot cross.</li>
+<li><strong>R, G, Y, B</strong> are the possible pickup and destination locations. The <strong>blue letter</strong> represents the current passenger pick-up location, and the <strong>purple letter</strong> is the current destination.</li>
+</ul>
+<p>As verified by the prints, we have an <strong>Action Space</strong> of size 6 and a <strong>State Space</strong> of size 500. As you’ll see, our RL algorithm won’t need any more information than these two things. All we need is a way to identify a state uniquely by assigning a unique number to every possible state, and RL learns to choose an action number from 0-5 where:</p>
+<ul>
+<li>0 = south</li>
+<li>1 = north</li>
+<li>2 = east</li>
+<li>3 = west</li>
+<li>4 = pickup</li>
+<li>5 = dropoff</li>
+</ul>
+<p><strong>Recall that the 500 states correspond to a encoding of the taxi’s location, the passenger’s location, and the destination location.</strong></p>
+<p>Reinforcement Learning will learn a mapping of <strong>states</strong> to the optimal <strong>action</strong> to perform in that state by <em>exploration</em>, i.e. the agent explores the environment and takes actions based off rewards defined in the environment.</p>
+<p>The optimal action for each state is the action that has the <strong>highest cumulative long-term reward</strong>.</p>
+<p>We can actually take our illustration above, encode its state, and give it to the environment to render in Gym. Recall that we have the taxi at row 3, column 1, our passenger is at location 2, and our destination is location 0. Using the Taxi-v2 state encoding method, we can do the following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">state = env.encode(<span class="number">3</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>) <span class="comment">#(taxi_row,taxi_column,passenger_position,destination_index)</span></div>
+<div class="line">print(<span class="string">"State: "</span>,state)</div>
+<div class="line">env.s = state</div>
+<div class="line">env.render()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/03/03/RL-Reinforcement-Learning/Screen Shot 2019-03-04 at 5.07.33 PM.png" alt="creen Shot 2019-03-04 at 5.07.33 P"></p>
+<p>We are using our illustration’s coordinates to generate a number corresponding to a state between 0 and 499, which turns out to be <strong>328</strong> for our illustration’s state.</p>
+<p>Then we can set the environment’s state manually with <code>env.env.s</code> using that encoded number. You can play around with the numbers and you’ll see the taxi, passenger, and destination move around.</p>
+<h3 id="The-reward-table"><a href="#The-reward-table" class="headerlink" title="The reward table"></a>The reward table</h3><p>When the Taxi environment is created, there is an initial Reward table that’s also created, called <code>P</code>. We can think of it like a matrix that has the number of states as rows and number of actions as columns, i.e. a $states \times actions$.</p>
+<p>Since every state is in this matrix, we can see the default reward values assigned to our illustration’s state:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">env.P[<span class="number">328</span>]</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">&#123;<span class="number">0</span>: [(<span class="number">1.0</span>, <span class="number">428</span>, <span class="number">-1</span>, <span class="keyword">False</span>)],</div>
+<div class="line"> <span class="number">1</span>: [(<span class="number">1.0</span>, <span class="number">228</span>, <span class="number">-1</span>, <span class="keyword">False</span>)],</div>
+<div class="line"> <span class="number">2</span>: [(<span class="number">1.0</span>, <span class="number">348</span>, <span class="number">-1</span>, <span class="keyword">False</span>)],</div>
+<div class="line"> <span class="number">3</span>: [(<span class="number">1.0</span>, <span class="number">328</span>, <span class="number">-1</span>, <span class="keyword">False</span>)],</div>
+<div class="line"> <span class="number">4</span>: [(<span class="number">1.0</span>, <span class="number">328</span>, <span class="number">-10</span>, <span class="keyword">False</span>)],</div>
+<div class="line"> <span class="number">5</span>: [(<span class="number">1.0</span>, <span class="number">328</span>, <span class="number">-10</span>, <span class="keyword">False</span>)]&#125;</div>
+</pre></td></tr></table></figure>
+<p>This dictionary has the structure <code>{action: [(probability, nextstate, reward, done)]}</code>.</p>
+<p>A few things to note:</p>
+<ul>
+<li>The 0-5 corresponds to the actions (south, north, east, west, pickup, dropoff) the taxi can perform at our current state in the illustration.</li>
+<li>In this env, <code>probability</code> is always 1.0.</li>
+<li>The <code>nextstate</code> is the state we would be in if we take the action at this index of the dict</li>
+<li>All the movement actions have a -1 reward and the pickup/dropoff actions have -10 reward in this particular state. If we are in a state where the taxi has a passenger and is on top of the right destination, we would see a reward of 20 at the dropoff action (5)</li>
+<li><code>done</code> is used to tell us when we have successfully dropped off a passenger in the right location. Each successfull dropoff is the end of an <strong>episode</strong></li>
+</ul>
+<p>Note that if our agent chose to explore action two in this state it would be going East into a wall. The source code has made it impossible to actually move the taxi across a wall, so if the taxi chooses that action, it will just keep accruing -1 penalties, which affects the <strong>long-term reward</strong>.</p>
+<h3 id="Without-Reinforcement-Learning"><a href="#Without-Reinforcement-Learning" class="headerlink" title="Without Reinforcement Learning"></a>Without Reinforcement Learning</h3><p>Let’s see what would happen if we try to brute-force our way to solving the problem without RL.</p>
+<p>Since we have our <code>P</code> table for default rewards in each state, we can try to have our taxi navigate just using that.</p>
+<p>We’ll create an infinite loop which runs until one passenger reaches one destination (one <strong>episode</strong>), or in other words, when the received reward is 20. The <code>env.action_space.sample()</code> method automatically selects one random action from set of all possible actions.</p>
+<p>Let’s see what happens:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+</pre></td><td class="code"><pre><div class="line">env.s = <span class="number">328</span> <span class="comment"># set environment to illustration's state</span></div>
+<div class="line">epochs = <span class="number">0</span></div>
+<div class="line">penalties, reward = <span class="number">0</span>,<span class="number">0</span></div>
+<div class="line">frames = [] <span class="comment"># store each step for visualization</span></div>
+<div class="line">done = <span class="keyword">False</span></div>
+<div class="line"><span class="keyword">while</span> <span class="keyword">not</span> done:</div>
+<div class="line">    action = env.action_space.sample() <span class="comment"># choose next step randomly </span></div>
+<div class="line">    state,reward,done,info = env.step(action)</div>
+<div class="line">    <span class="keyword">if</span> reward == <span class="number">-10</span>: <span class="comment"># illegal pick-up and drop-off actions</span></div>
+<div class="line">        penalties += <span class="number">1</span></div>
+<div class="line">    <span class="comment"># put each rendered frame into dict for visualization    </span></div>
+<div class="line">    frames.append(&#123;</div>
+<div class="line">            <span class="string">'frame'</span>:env.render(mode=<span class="string">'ansi'</span>),</div>
+<div class="line">            <span class="string">'state'</span>:state,</div>
+<div class="line">            <span class="string">'action'</span>:action,</div>
+<div class="line">            <span class="string">'reward'</span>:reward</div>
+<div class="line">        &#125;)</div>
+<div class="line">    epochs += <span class="number">1</span></div>
+<div class="line">print(<span class="string">"Timesteps taken: &#123;&#125;"</span>.format(epochs))</div>
+<div class="line">print(<span class="string">"Penalties incurred: &#123;&#125;"</span>.format(penalties))</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">Timesteps taken: <span class="number">1348</span></div>
+<div class="line">Penalties incurred: <span class="number">431</span></div>
+</pre></td></tr></table></figure>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://towardsdatascience.com/reinforcement-learning-tutorial-part-1-q-learning-cadb36998b28" target="_blank" rel="noopener">Reinforcement Learning Tutorial Part 1: Q-Learning</a> </p>
 <p><a href="https://medium.freecodecamp.org/an-introduction-to-q-learning-reinforcement-learning-14ac0b4493cc" target="_blank" rel="noopener">An introduction to Q-Learning: reinforcement learning</a> </p>
 <p><a href="https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/#" target="_blank" rel="noopener">Reinforcement Q-Learning from Scratch in Python with OpenAI Gym</a> </p>
@@ -429,6 +624,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/04/DP-Data-Preprocessing/" rel="prev" title="DP-Data Preprocessing">
+                DP-Data Preprocessing <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -505,7 +704,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -527,7 +726,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -560,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Q-learning-algorithm"><span class="nav-number">1.</span> <span class="nav-text">The Q-learning algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Q-learning-algorithm"><span class="nav-number">1.</span> <span class="nav-text">The Q-learning algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example-Design-Self-Driving-Cab"><span class="nav-number">2.</span> <span class="nav-text">Example Design: Self-Driving Cab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-illustration"><span class="nav-number">2.1.</span> <span class="nav-text">Problem illustration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rewards"><span class="nav-number">2.1.1.</span> <span class="nav-text">Rewards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State-Space"><span class="nav-number">2.1.2.</span> <span class="nav-text">State Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action-Space"><span class="nav-number">2.1.3.</span> <span class="nav-text">Action Space</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-with-Python"><span class="nav-number">2.2.</span> <span class="nav-text">Implementation with Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gym’s-interface"><span class="nav-number">2.2.1.</span> <span class="nav-text">Gym’s interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reminder-of-the-problem"><span class="nav-number">2.2.2.</span> <span class="nav-text">Reminder of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-reward-table"><span class="nav-number">2.2.3.</span> <span class="nav-text">The reward table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Without-Reinforcement-Learning"><span class="nav-number">2.2.4.</span> <span class="nav-text">Without Reinforcement Learning</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
