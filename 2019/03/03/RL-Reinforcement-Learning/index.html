@@ -92,7 +92,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/Screen%20Shot%202019-03-04%20at%204.50.53%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/Screen%20Shot%202019-03-04%20at%204.56.32%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/Screen%20Shot%202019-03-04%20at%205.07.33%20PM.png">
-<meta property="og:updated_time" content="2019-03-04T23:26:29.134Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/03/RL-Reinforcement-Learning/OpenAI_Gym_Taxi_-Animation-1830599.gif">
+<meta property="og:updated_time" content="2019-03-06T00:33:05.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL-Reinforcement Learning">
 <meta name="twitter:description" content="Reinforcement learning is useful when you have no training data or specific enough expertise about the problem. On a high level, you know WHAT you want, but not really HOW to get there. Luckily, all y">
@@ -385,6 +386,9 @@
         <p>Reinforcement learning is useful when you have no training data or specific enough expertise about the problem. On a high level, you know WHAT you want, but not really HOW to get there. Luckily, all you need is a reward mechanism, and the reinforcement learning model will figure out how to maximize the reward, if you just let it “play” long enough. This is analogous to teaching a dog to sit down using treats. At first the dog is clueless and tries random things on your command. At some point, it accidentally lands on its butt and gets a sudden reward. As time goes by, and given enough iterations, it’ll figure out the expert strategy of sitting down on cue.</p>
 <a id="more"></a>
 <h1 id="The-Q-learning-algorithm"><a href="#The-Q-learning-algorithm" class="headerlink" title="The Q-learning algorithm"></a>The Q-learning algorithm</h1><p><img src="/2019/03/03/RL-Reinforcement-Learning/1_r-F8AfutP0a8gPWs_5BBLQ.png" alt="_r-F8AfutP0a8gPWs_5BBL"></p>
+<blockquote>
+<p>$\lambda$ - determines how much importance we want to give to future rewards. A high value for the discount factor (close to <strong>1</strong>) captures the long-term effective award, whereas, a discount factor of <strong>0</strong> makes our agent consider only immediate reward, hence making it greedy.</p>
+</blockquote>
 <p>It looks a bit intimidating, but what it does is quite simple. We can summarize it as:</p>
 <p><strong>Update the value estimation of an action based on the reward we got and the reward we expect next.</strong></p>
 <p>This is the fundamental thing we are doing. The <strong>learning rate</strong> and <strong>discount</strong>, while required, are just there to tweak the behavior. The discount will define how much we weigh future expected action values over the one we just experienced. The learning rate is sort of an overall gas pedal. Go too fast and you’ll drive past the optimal, go too slow and you’ll never get there.</p>
@@ -582,6 +586,208 @@
 </pre></td><td class="code"><pre><div class="line">Timesteps taken: <span class="number">1348</span></div>
 <div class="line">Penalties incurred: <span class="number">431</span></div>
 </pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> clear_output</div>
+<div class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_frames</span><span class="params">(frames)</span>:</span></div>
+<div class="line">    <span class="keyword">for</span> i,frame <span class="keyword">in</span> enumerate(frames):</div>
+<div class="line">        clear_output(wait=<span class="keyword">True</span>)</div>
+<div class="line">        print(frame[<span class="string">'frame'</span>])</div>
+<div class="line">        print(<span class="string">f"Timestep: <span class="subst">&#123;i+<span class="number">1</span>&#125;</span>"</span>)</div>
+<div class="line">        print(<span class="string">f"State: <span class="subst">&#123;frame[<span class="string">'state'</span>]&#125;</span>"</span>)</div>
+<div class="line">        print(<span class="string">f"Action: <span class="subst">&#123;frame[<span class="string">'action'</span>]&#125;</span>"</span>)</div>
+<div class="line">        print(<span class="string">f"Reward: <span class="subst">&#123;frame[<span class="string">'reward'</span>]&#125;</span>"</span>)</div>
+<div class="line">        sleep(<span class="number">.1</span>)</div>
+<div class="line">print_frames(frames)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/03/03/RL-Reinforcement-Learning/OpenAI_Gym_Taxi_-Animation-1830599.gif" alt="penAI_Gym_Taxi_-Animation-183059"></p>
+<p>Not good. Our agent takes thousands of timesteps and makes lots of wrong drop offs to deliver just one passenger to the right destination.</p>
+<p>This is because we aren’t <em>learning</em> from past experience. We can run this over and over, and it will never optimize. The agent has no memory of which action was best for each state, which is exactly what Reinforcement Learning will do for us.</p>
+<h3 id="Enter-Reinforcement-Learning"><a href="#Enter-Reinforcement-Learning" class="headerlink" title="Enter Reinforcement Learning"></a>Enter Reinforcement Learning</h3><h4 id="Summing-up-the-Q-Learning-Process"><a href="#Summing-up-the-Q-Learning-Process" class="headerlink" title="Summing up the Q-Learning Process"></a>Summing up the Q-Learning Process</h4><p>Breaking it down into steps, we get</p>
+<ul>
+<li>Initialize the Q-table by all zeros.</li>
+<li>Start exploring actions: For each state, select any one among all possible actions for the current state (S).</li>
+<li>Travel to the next state (S’) as a result of that action (a).</li>
+<li>For all possible actions from the state (S’) select the one with the highest Q-value.</li>
+<li>Update Q-table values using the equation.</li>
+<li>Set the next state as the current state.</li>
+<li>If goal state is reached, then end and repeat the process.</li>
+</ul>
+<p>After enough random exploration of actions, the Q-values tend to converge serving our agent as an action-value function which it can exploit to pick the most optimal action from a given state.</p>
+<p>There’s a tradeoff between exploration (choosing a random action) and exploitation (choosing actions based on already learned Q-values). We want to prevent the action from always taking the same route, and possibly overfitting, so we’ll be introducing another parameter called $\epsilon$ “epsilon” to cater to this during training.</p>
+<p>Instead of just selecting the best learned Q-value action, we’ll sometimes favor exploring the action space further. Larger epsilon value results in episodes with more penalties (on average) which is obvious because we are exploring and making random decisions.</p>
+<h4 id="Training-the-agent"><a href="#Training-the-agent" class="headerlink" title="Training the agent"></a>Training the agent</h4><p>First, we’ll initialize the Q-table to a 500×6500×6 matrix of zeros:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">q_table = np.zeros([env.observation_space.n,env.action_space.n])</div>
+</pre></td></tr></table></figure>
+<p>In the first part of <code>while not done</code>, we decide whether to pick a random action or to exploit the already computed Q-values. This is done simply by using the <code>epsilon</code> value and comparing it to the <code>random.uniform(0, 1)</code> function, which returns an arbitrary number between 0 and 1.</p>
+<p>We execute the chosen action in the environment to obtain the <code>next_state</code> and the <code>reward</code> from performing the action. After that, we calculate the maximum Q-value for the actions corresponding to the <code>next_state</code>, and with that, we can easily update our Q-value to the <code>new_q_value</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> random</div>
+<div class="line">alpha = <span class="number">0.1</span> <span class="comment">#learning rate</span></div>
+<div class="line">lambda_ = <span class="number">0.6</span> <span class="comment"># discount</span></div>
+<div class="line">epsilon = <span class="number">0.1</span></div>
+<div class="line">all_epochs = []</div>
+<div class="line">all_penalties = []</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100001</span>):</div>
+<div class="line">    state = env.reset()</div>
+<div class="line">    epochs,penalties,reward = <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span></div>
+<div class="line">    done = <span class="keyword">False</span></div>
+<div class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</div>
+<div class="line">        <span class="keyword">if</span> random.uniform(<span class="number">0</span>,<span class="number">1</span>)&lt;epsilon:</div>
+<div class="line">            action = env.action_space.sample() <span class="comment">#explore action space</span></div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            action = np.argmax(q_table[state]) <span class="comment">#exploit learned values</span></div>
+<div class="line">        next_state, reward, done, info = env.step(action)</div>
+<div class="line">        old_value = q_table[state,action]</div>
+<div class="line">        next_max = np.max(q_table[next_state])</div>
+<div class="line">        new_value = (<span class="number">1</span>-alpha)*old_value + alpha*(reward+lambda_*next_max)</div>
+<div class="line">        q_table[state,action] = new_value</div>
+<div class="line">        <span class="keyword">if</span> reward == <span class="number">-10</span>:</div>
+<div class="line">            penalties += <span class="number">1</span></div>
+<div class="line">        state = next_state</div>
+<div class="line">        epochs += <span class="number">1</span></div>
+<div class="line">    <span class="keyword">if</span> i%<span class="number">100</span>==<span class="number">0</span>:</div>
+<div class="line">        clear_output(wait=<span class="keyword">True</span>)</div>
+<div class="line">        print(<span class="string">f"Episode:<span class="subst">&#123;i&#125;</span>"</span>)</div>
+<div class="line">print(<span class="string">"Training finished.\n"</span>)</div>
+</pre></td></tr></table></figure>
+<p>Now that the Q-table has been established over 100,000 episodes, let’s see what the Q-values are at our illustration’s state:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">q_table[<span class="number">328</span>]</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">array([ <span class="number">-2.41338735</span>,  <span class="number">-2.27325184</span>,  <span class="number">-2.41222668</span>,  <span class="number">-2.36038871</span>,</div>
+<div class="line">       <span class="number">-11.15090102</span>, <span class="number">-10.99517141</span>])</div>
+</pre></td></tr></table></figure>
+<p>The max Q-value is “north” (-2.27325184), so it looks like Q-learning has effectively learned the best action to take in our illustration’s state!</p>
+<h4 id="Evaluating-the-agent"><a href="#Evaluating-the-agent" class="headerlink" title="Evaluating the agent"></a>Evaluating the agent</h4><p>Let’s evaluate the performance of our agent. We don’t need to explore actions any further, so now the next action is always selected using the best Q-value:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line">total_epochs, total_penalties = <span class="number">0</span>, <span class="number">0</span></div>
+<div class="line">episodes = <span class="number">100</span></div>
+<div class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(episodes):</div>
+<div class="line">    state = env.reset()</div>
+<div class="line">    epochs, penalties, reward = <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span></div>
+<div class="line">    done = <span class="keyword">False</span></div>
+<div class="line">    <span class="keyword">while</span> <span class="keyword">not</span> done:</div>
+<div class="line">        action = np.argmax(q_table[state])</div>
+<div class="line">        state, reward, done, info = env.step(action)</div>
+<div class="line">        <span class="keyword">if</span> reward == <span class="number">-10</span>:</div>
+<div class="line">            penalties += <span class="number">1</span></div>
+<div class="line">        epochs += <span class="number">1</span></div>
+<div class="line">    total_penalties += penalties</div>
+<div class="line">    total_epochs += epochs</div>
+<div class="line">print(<span class="string">f"Results after <span class="subst">&#123;episodes&#125;</span> episodes:"</span>)</div>
+<div class="line">print(<span class="string">f"Average timesteps per episode: <span class="subst">&#123;total_epochs / episodes&#125;</span>"</span>)</div>
+<div class="line">print(<span class="string">f"Average penalties per episode: <span class="subst">&#123;total_penalties / episodes&#125;</span>"</span>)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Results after <span class="number">100</span> episodes:</div>
+<div class="line">Average timesteps per episode: <span class="number">12.55</span></div>
+<div class="line">Average penalties per episode: <span class="number">0.0</span></div>
+</pre></td></tr></table></figure>
+<p>We can see from the evaluation, the agent’s performance improved significantly and it incurred no penalties, which means it performed the correct pickup/dropoff actions with 100 different passengers.</p>
+<h4 id="Comparison-between-learning-w-o-rl-and-w-rl"><a href="#Comparison-between-learning-w-o-rl-and-w-rl" class="headerlink" title="Comparison between learning w/o rl and w rl"></a>Comparison between learning w/o rl and w rl</h4><p>With Q-learning agent commits errors initially during exploration but once it has explored enough (seen most of the states), it can act wisely maximizing the rewards making smart moves. Let’s see how much better our Q-learning solution is when compared to the agent making just random moves.</p>
+<p>We evaluate our agents according to the following metrics,</p>
+<ul>
+<li><strong>Average number of penalties per episode:</strong> The smaller the number, the better the performance of our agent. Ideally, we would like this metric to be zero or very close to zero.</li>
+<li><strong>Average number of timesteps per trip:</strong> We want a small number of timesteps per episode as well since we want our agent to take minimum steps(i.e. the shortest path) to reach the destination.</li>
+<li><strong>Average rewards per move:</strong> The larger the reward means the agent is doing the right thing. That’s why deciding rewards is a crucial part of Reinforcement Learning. In our case, as both timesteps and penalties are negatively rewarded, a higher average reward would mean that the agent reaches the destination as fast as possible with the least penalties”</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Measure</th>
+<th style="text-align:center">Random agent’s performance</th>
+<th style="text-align:center">Random agent’s performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Average rewards per move</td>
+<td style="text-align:center">-3.9012092102214075</td>
+<td style="text-align:center">0.6962843295638126</td>
+</tr>
+<tr>
+<td style="text-align:center">Average number of penalties per episode</td>
+<td style="text-align:center">920.45</td>
+<td style="text-align:center">0.0</td>
+</tr>
+<tr>
+<td style="text-align:center">Average number of timesteps per trip</td>
+<td style="text-align:center">2848.14</td>
+<td style="text-align:center">12.38</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="Hyperparameters-and-optimizations"><a href="#Hyperparameters-and-optimizations" class="headerlink" title="Hyperparameters and optimizations"></a>Hyperparameters and optimizations</h4><p>The values of <code>alpha</code>, <code>lambda</code>, and <code>epsilon</code> were mostly based on intuition and some “hit and trial”, but there are better ways to come up with good values.</p>
+<p>Ideally, all three should decrease over time because as the agent continues to learn, it actually builds up more resilient priors;</p>
+<ul>
+<li>$\alpha$: (the learning rate) should decrease as you continue to gain a larger and larger knowledge base.</li>
+<li>$\lambda$: as you get closer and closer to the deadline, your preference for near-term reward should increase, as you won’t be around long enough to get the long-term reward, which means your gamma should decrease.</li>
+<li>$\epsilon$: as we develop our strategy, we have less need of exploration and more exploitation to get more utility from our policy, so as trials increase, epsilon should decrease.</li>
+</ul>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://towardsdatascience.com/reinforcement-learning-tutorial-part-1-q-learning-cadb36998b28" target="_blank" rel="noopener">Reinforcement Learning Tutorial Part 1: Q-Learning</a> </p>
 <p><a href="https://medium.freecodecamp.org/an-introduction-to-q-learning-reinforcement-learning-14ac0b4493cc" target="_blank" rel="noopener">An introduction to Q-Learning: reinforcement learning</a> </p>
 <p><a href="https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/#" target="_blank" rel="noopener">Reinforcement Q-Learning from Scratch in Python with OpenAI Gym</a> </p>
@@ -759,7 +965,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Q-learning-algorithm"><span class="nav-number">1.</span> <span class="nav-text">The Q-learning algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example-Design-Self-Driving-Cab"><span class="nav-number">2.</span> <span class="nav-text">Example Design: Self-Driving Cab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-illustration"><span class="nav-number">2.1.</span> <span class="nav-text">Problem illustration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rewards"><span class="nav-number">2.1.1.</span> <span class="nav-text">Rewards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State-Space"><span class="nav-number">2.1.2.</span> <span class="nav-text">State Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action-Space"><span class="nav-number">2.1.3.</span> <span class="nav-text">Action Space</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-with-Python"><span class="nav-number">2.2.</span> <span class="nav-text">Implementation with Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gym’s-interface"><span class="nav-number">2.2.1.</span> <span class="nav-text">Gym’s interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reminder-of-the-problem"><span class="nav-number">2.2.2.</span> <span class="nav-text">Reminder of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-reward-table"><span class="nav-number">2.2.3.</span> <span class="nav-text">The reward table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Without-Reinforcement-Learning"><span class="nav-number">2.2.4.</span> <span class="nav-text">Without Reinforcement Learning</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Q-learning-algorithm"><span class="nav-number">1.</span> <span class="nav-text">The Q-learning algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example-Design-Self-Driving-Cab"><span class="nav-number">2.</span> <span class="nav-text">Example Design: Self-Driving Cab</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-illustration"><span class="nav-number">2.1.</span> <span class="nav-text">Problem illustration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rewards"><span class="nav-number">2.1.1.</span> <span class="nav-text">Rewards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State-Space"><span class="nav-number">2.1.2.</span> <span class="nav-text">State Space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action-Space"><span class="nav-number">2.1.3.</span> <span class="nav-text">Action Space</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-with-Python"><span class="nav-number">2.2.</span> <span class="nav-text">Implementation with Python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gym’s-interface"><span class="nav-number">2.2.1.</span> <span class="nav-text">Gym’s interface</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reminder-of-the-problem"><span class="nav-number">2.2.2.</span> <span class="nav-text">Reminder of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-reward-table"><span class="nav-number">2.2.3.</span> <span class="nav-text">The reward table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Without-Reinforcement-Learning"><span class="nav-number">2.2.4.</span> <span class="nav-text">Without Reinforcement Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enter-Reinforcement-Learning"><span class="nav-number">2.2.5.</span> <span class="nav-text">Enter Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Summing-up-the-Q-Learning-Process"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">Summing up the Q-Learning Process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-the-agent"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">Training the agent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evaluating-the-agent"><span class="nav-number">2.2.5.3.</span> <span class="nav-text">Evaluating the agent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Comparison-between-learning-w-o-rl-and-w-rl"><span class="nav-number">2.2.5.4.</span> <span class="nav-text">Comparison between learning w/o rl and w rl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hyperparameters-and-optimizations"><span class="nav-number">2.2.5.5.</span> <span class="nav-text">Hyperparameters and optimizations</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
