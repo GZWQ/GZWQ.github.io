@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Data preprocessing including images, texts.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-05T16:48:19.436Z">
+<meta property="og:updated_time" content="2019-03-06T18:00:25.791Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-Data Preprocessing">
 <meta name="twitter:description" content="Data preprocessing including images, texts.">
@@ -379,6 +379,13 @@
         <p>Data preprocessing including images, texts.</p>
 <a id="more"></a>
 <h1 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h1><p>There are two choices normalizing between [-1,1] or using (x-mean)/std. We prefer the former when we know different features do not relate to each other. <a href="https://medium.com/@kushajreal/training-alexnet-with-tips-and-checks-on-how-to-train-cnns-practical-cnns-in-pytorch-1-61daa679c74a" target="_blank" rel="noopener">ref</a> </p>
+<p>To accomplish this, we’ll first implement a dedicated Python class to align faces using an affine transformation, where affine transformations are used for rotating, scaling, translating, etc. We’ll then create an example driver Python script to accept an input image, detect faces, and align them.</p>
+<h2 id="Face-Alignment"><a href="#Face-Alignment" class="headerlink" title="Face Alignment"></a>Face Alignment</h2><p>Face images need alignment preprocessing such that all faces:</p>
+<ol>
+<li>Be centered in the image.</li>
+<li>Be rotated that such the eyes lie on a horizontal line (i.e., the face is rotated such that the eyes lie along the same <em>y</em>-coordinates).</li>
+<li>Be scaled such that the size of the faces are approximately identical.</li>
+</ol>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://towardsdatascience.com/building-blocks-text-pre-processing-641cae8ba3bf" target="_blank" rel="noopener">Building Blocks: Text Pre-Processing</a> </p>
 
       
@@ -556,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Images"><span class="nav-number">1.</span> <span class="nav-text">Images</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Images"><span class="nav-number">1.</span> <span class="nav-text">Images</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Face-Alignment"><span class="nav-number">1.1.</span> <span class="nav-text">Face Alignment</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>

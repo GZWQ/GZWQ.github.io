@@ -101,7 +101,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/Screen%20Shot%202018-08-29%20at%2010.22.09%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/Screen%20Shot%202018-09-02%20at%204.03.40%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/v2-3c6aa9626ee8e4609b0d7c5712baf624_hd.jpg">
-<meta property="og:updated_time" content="2019-03-05T23:57:19.852Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/v2-9618ff8556f19a00ede416312f3e57e6_r.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/Screen%20Shot%202019-03-06%20at%204.05.12%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/Screen%20Shot%202019-03-07%20at%204.24.27%20PM.png">
+<meta property="og:updated_time" content="2019-03-07T22:33:51.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network">
 <meta name="twitter:description" content="本节介绍最基本的神经网络。">
@@ -1063,7 +1066,7 @@ sigmoid'(z)=z(1-z)</script><figure class="highlight python"><table><tr><td class
 <p>$\delta_2=[err_2]^T.*a_1$，$shape=(hidden_size,input_size+1)$</p>
 <h3 id="KERAS版本实现"><a href="#KERAS版本实现" class="headerlink" title="KERAS版本实现"></a>KERAS版本实现</h3><p><code>100epoch</code>训练之后的正确率为<code>94.56%</code>。</p>
 <div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -1103,44 +1106,44 @@ sigmoid'(z)=z(1-z)</script><figure class="highlight python"><table><tr><td class
 <div class="line">38</div>
 <div class="line">39</div>
 <div class="line">40</div>
-</pre></td><td class="code"><pre><div class="line">from keras.layers import Input, Dense</div>
-<div class="line">from keras.optimizers import Adam</div>
-<div class="line">from keras.models import Model</div>
-<div class="line">from scipy.io import loadmat</div>
-<div class="line">from sklearn.preprocessing import OneHotEncoder</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input, Dense</div>
+<div class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> Adam</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Model</div>
+<div class="line"><span class="keyword">from</span> scipy.io <span class="keyword">import</span> loadmat</div>
+<div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> OneHotEncoder</div>
 <div class="line"></div>
 <div class="line"></div>
-<div class="line">class Ann():</div>
-<div class="line">    def __init__(self):</div>
-<div class="line">        self.input_size = 400</div>
-<div class="line">        self.hidden_size = 25</div>
-<div class="line">        self.output_size = 10</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ann</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        self.input_size = <span class="number">400</span></div>
+<div class="line">        self.hidden_size = <span class="number">25</span></div>
+<div class="line">        self.output_size = <span class="number">10</span></div>
 <div class="line"></div>
-<div class="line">        opt = Adam(lr=0.0002,beta_1=0.5)</div>
+<div class="line">        opt = Adam(lr=<span class="number">0.0002</span>,beta_1=<span class="number">0.5</span>)</div>
 <div class="line"></div>
 <div class="line">        self.ann = self.make_model()</div>
-<div class="line">        self.ann.compile(loss=&apos;categorical_crossentropy&apos;,</div>
+<div class="line">        self.ann.compile(loss=<span class="string">'categorical_crossentropy'</span>,</div>
 <div class="line">                         optimizer=opt,</div>
-<div class="line">                         metrics=[&apos;accuracy&apos;])</div>
+<div class="line">                         metrics=[<span class="string">'accuracy'</span>])</div>
 <div class="line"></div>
-<div class="line">    def make_model(self):</div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_model</span><span class="params">(self)</span>:</span></div>
 <div class="line">        inputs = Input((self.input_size,))</div>
-<div class="line">        h = Dense(self.hidden_size,activation=&apos;sigmoid&apos;)(inputs)</div>
-<div class="line">        outputs = Dense(self.output_size,activation=&apos;sigmoid&apos;)(h)</div>
+<div class="line">        h = Dense(self.hidden_size,activation=<span class="string">'sigmoid'</span>)(inputs)</div>
+<div class="line">        outputs = Dense(self.output_size,activation=<span class="string">'sigmoid'</span>)(h)</div>
 <div class="line">        model = Model(inputs,outputs)</div>
 <div class="line">        model.summary()</div>
-<div class="line">        return model</div>
+<div class="line">        <span class="keyword">return</span> model</div>
 <div class="line"></div>
-<div class="line">    def train(self):</div>
-<div class="line">        data = loadmat(&apos;dataset/ex3data1.mat&apos;)</div>
-<div class="line">        X = data[&apos;X&apos;]</div>
-<div class="line">        y = data[&apos;y&apos;]</div>
-<div class="line">        encoder = OneHotEncoder(sparse=False)</div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self)</span>:</span></div>
+<div class="line">        data = loadmat(<span class="string">'dataset/ex3data1.mat'</span>)</div>
+<div class="line">        X = data[<span class="string">'X'</span>]</div>
+<div class="line">        y = data[<span class="string">'y'</span>]</div>
+<div class="line">        encoder = OneHotEncoder(sparse=<span class="keyword">False</span>)</div>
 <div class="line">        y = encoder.fit_transform(y)</div>
 <div class="line"></div>
-<div class="line">        results = self.ann.fit(X,y,epochs=100)</div>
+<div class="line">        results = self.ann.fit(X,y,epochs=<span class="number">100</span>)</div>
 <div class="line"></div>
-<div class="line">if __name__ == &apos;__main__&apos;:</div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
 <div class="line">    ann = Ann()</div>
 <div class="line">    ann.train()</div>
 </pre></td></tr></table></figure>
@@ -1169,6 +1172,49 @@ s_j-s_{y_i}+1& &\text{if otherwise}
 =\sum_{j\ne y_i}max(0,s_j-s_{y_i}+1)
 \right.</script><p>其中，$y_i$是groundtruth label，$s_{y_i}$是分类器给真实分类的分数，$s_j$是分类器给其他类的分数，该损失函数鼓励真实分类的分数大于其他分类的分数+1。</p>
 <p><img src="/2018/07/24/Neural-Network/v2-3c6aa9626ee8e4609b0d7c5712baf624_hd.jpg" alt="2-3c6aa9626ee8e4609b0d7c5712baf624_h"></p>
+<p><img src="/2018/07/24/Neural-Network/v2-9618ff8556f19a00ede416312f3e57e6_r.jpg" alt="2-9618ff8556f19a00ede416312f3e57e6_"></p>
+<p>The two given figures are plots of function $f(x)=max(0,1-x)$ .We can see from the second figure that when x is between 0 and 1, the loss is in range $[0,1]$. </p>
+<p>Say we have an image classification and we use it to classify three images, like the following:</p>
+<p><img src="/2018/07/24/Neural-Network/Screen Shot 2019-03-06 at 4.05.12 PM.png" alt="creen Shot 2019-03-06 at 4.05.12 P"></p>
+<p>The output of classification is a 3d vector, each element of the vector is the probability of image classification. For example, for the cat image, the vector is $[3.2, 5.1, -1.7]$, meaning this picture is cat with probability 3.2, is car with prob 5.1 and frog with prob -1.7.</p>
+<p> Then, the $s_{y_i}=3.2$, $s_1=5.1$ and $s_2=-1.7$，so the loss is:</p>
+<script type="math/tex; mode=display">
+L_{cat}=max(0,5.1+1-3.2)+max(0,-1.7+1-3.2)=max(0,2.9)+max(0,-3.9)=2.9</script><p>Similarily, $L_{car}=0$, $L_{frog}=12.9$.</p>
+<p>So the overall loss is:</p>
+<script type="math/tex; mode=display">
+L=\frac{1}{N}\sum_{i=1}^{N}L_i\\
+L=\frac{(2.9+0+12.9)}{3}=5.27</script><blockquote>
+<ol>
+<li><p>What happens to loss if car scores change a bit?</p>
+<p>The answer is the loss will not change. The SVM loss only cares about getting the correct score to be greater than one more than the incorrect scores. But in this case, the car score is already quite a bit large than the others. So if the scores for this class changes, this margin of one will still be retained and the loss will not change.</p>
+</li>
+<li><p>What is the min/max possible loss?</p>
+<p>The min loss is 0 because across all the classes, if our correct score was much larger then we will incur zero loss across all the classes. </p>
+<p>The max loss is infinite. According to the hinge loss figure, if correct score goes very very negative, then we could incur potentially infinite loss.</p>
+</li>
+<li><p>At initialization W is small so all $s\approx 0$. What is the loss?</p>
+<p>The answer is the number of class minus one.</p>
+</li>
+<li><p>What if the sum was over all classes?(including $j=y_j$).</p>
+<p>The loss increases by one.</p>
+</li>
+<li><p>What if we used mean instead of sum?</p>
+<p>The answer is that it doesn’t change. We just rescale the whole loss function by a constant value and we don’t care about the true value of the loss.</p>
+</li>
+<li><p>What if we used $L_i=\sum_{j\ne y_i}max(0,s_j-s_{y_i}+1)^2$?</p>
+<p>The answer is it is different. We are kind of changing the trade-offs between good and badness in kind of nonlinear way, and this would end up actually computing a different loss function.</p>
+</li>
+<li><p>Suppose we found a W such that $L=0$. Is this W unique?</p>
+<p>The answer is no. $2W$ is also has $L=0$.</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h3><p>The whole idea of regularization is you try to penalize the complexity of the model, instead of explicitly trying to fit the training data.</p>
+<script type="math/tex; mode=display">
+L=\frac{1}{N}\sum_{i=1}^{N}\sum_{j\ne y_i}max(0,f(x_i;W)_j-f(x_i;W)_{y_i}+1)+\lambda R(W)</script><p><img src="/2018/07/24/Neural-Network/Screen Shot 2019-03-07 at 4.24.27 PM.png" alt="creen Shot 2019-03-07 at 4.24.27 P"></p>
+<blockquote>
+<p>$L1$ Regularization prefer the sparse weight vector, which \</p>
+</blockquote>
 <h2 id="均方误差"><a href="#均方误差" class="headerlink" title="均方误差"></a>均方误差</h2><script type="math/tex; mode=display">
 mse = \sum_{i=1}^{n}(y-a)^2</script><h2 id="交叉熵误差-cross-entropy"><a href="#交叉熵误差-cross-entropy" class="headerlink" title="交叉熵误差(cross entropy)"></a>交叉熵误差(cross entropy)</h2><script type="math/tex; mode=display">
 C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id="BatchNormalization"><a href="#BatchNormalization" class="headerlink" title="BatchNormalization"></a>BatchNormalization</h1><p><a href="https://www.zhihu.com/question/38102762" target="_blank" rel="noopener">zhihu</a> <a href="https://blog.csdn.net/whitesilence/article/details/75667002" target="_blank" rel="noopener">过程</a> </p>
@@ -1353,7 +1399,7 @@ C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id=
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前向传播"><span class="nav-number">1.3.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络的矩阵表示"><span class="nav-number">1.3.2.</span> <span class="nav-text">神经网络的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">1.3.3.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出层"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏层"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">隐藏层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法步骤"><span class="nav-number">1.4.</span> <span class="nav-text">算法步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-实现"><span class="nav-number">1.5.</span> <span class="nav-text">Python 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Toy-Example"><span class="nav-number">1.5.1.</span> <span class="nav-text">Toy Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-1"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNIST手写体数字分类"><span class="nav-number">1.5.2.</span> <span class="nav-text">MNIST手写体数字分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据可视化"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-2"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-2"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KERAS版本实现"><span class="nav-number">1.5.3.</span> <span class="nav-text">KERAS版本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度检查"><span class="nav-number">1.5.4.</span> <span class="nav-text">梯度检查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">2.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hinge-Loss"><span class="nav-number">2.1.</span> <span class="nav-text">Hinge Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">2.2.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">2.3.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">3.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">4.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">5.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前向传播"><span class="nav-number">1.3.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络的矩阵表示"><span class="nav-number">1.3.2.</span> <span class="nav-text">神经网络的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">1.3.3.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出层"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏层"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">隐藏层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法步骤"><span class="nav-number">1.4.</span> <span class="nav-text">算法步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-实现"><span class="nav-number">1.5.</span> <span class="nav-text">Python 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Toy-Example"><span class="nav-number">1.5.1.</span> <span class="nav-text">Toy Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-1"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNIST手写体数字分类"><span class="nav-number">1.5.2.</span> <span class="nav-text">MNIST手写体数字分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据可视化"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-2"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-2"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KERAS版本实现"><span class="nav-number">1.5.3.</span> <span class="nav-text">KERAS版本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度检查"><span class="nav-number">1.5.4.</span> <span class="nav-text">梯度检查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">2.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hinge-Loss"><span class="nav-number">2.1.</span> <span class="nav-text">Hinge Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Regularization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Regularization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">2.2.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">2.3.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">3.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">4.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">5.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
             
 
           </div>
