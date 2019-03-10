@@ -375,91 +375,14 @@
 
       
         
-          
-            <h1 id="Day-1-Basic-Commands"><a href="#Day-1-Basic-Commands" class="headerlink" title="Day 1 Basic Commands"></a>Day 1 Basic Commands</h1><ol>
-<li><p><strong>Create a new Django project</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">django-admin.py startproject project_name</div>
-</pre></td></tr></table></figure>
-</li>
-<li><p><strong>Create a new app</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">python manage.py startapp app_name</div>
-</pre></td></tr></table></figure>
-<p>Open the Django project directory, then execute the command. Usually a Django project can have multiple app.</p>
-</li>
-<li><p><strong>Run the app</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line">python manage.py runserver</div>
-<div class="line"><span class="comment"># use specified port</span></div>
-<div class="line">python manage.py runserver <span class="number">8001</span></div>
-<div class="line">python manage.py runserver <span class="number">9999</span></div>
-<div class="line"><span class="comment"># all available ip</span></div>
-<div class="line">python manage.py runserver <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8000</span></div>
-</pre></td></tr></table></figure>
-</li>
-<li><p><strong>Create a database table</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">python manage.py makemigrations</div>
-<div class="line">python manage.py migrate</div>
-</pre></td></tr></table></figure>
-</li>
-<li><p><strong>Clear the database</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">python manage.py flush</div>
-</pre></td></tr></table></figure>
-</li>
-<li><p><strong>Import/Export Data</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">python manage.py dumpdata appname &gt; appname.json</div>
-<div class="line">python manage.py loaddata appname.json</div>
-</pre></td></tr></table></figure>
-</li>
-<li><p>Create supermanager</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">python manage.py createsuperuser</div>
-</pre></td></tr></table></figure>
-</li>
-</ol>
-<h1 id="Day-2-View-and-URL"><a href="#Day-2-View-and-URL" class="headerlink" title="Day 2 View and URL"></a>Day 2 View and URL</h1><p>Here we are going to write a “Hello World!” application to illustrate the relationship between views and urls.</p>
-<p>Firstly, use the command to create a project. Of course we can also pycharm to create a project named “MyWebsite”. We can see the project file structures:</p>
-<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.29.13 PM.png" alt="creen Shot 2019-03-07 at 9.29.13 P"></p>
-<p>Then inside this project, we are going to create an app named “FirstDemo”:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">python manage.py startapp FirstDemo</div>
-</pre></td></tr></table></figure>
-<p>Then, we have the new structures:</p>
-<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.31.49 PM.png" alt="creen Shot 2019-03-07 at 9.31.49 P"></p>
-<p>we can find that there is one added directory “FirstDemo”. After creating a new app, we are going to registering this app to the whole project by add this new app to <code>settings.py</code>:</p>
-<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.34.23 PM.png" alt="creen Shot 2019-03-07 at 9.34.23 P"></p>
-<p>After this, we are going to define a view function. A view function specify what we are going to see when we open the website. Go to “FirstDemo” and open “views.py”:</p>
-<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.37.38 PM.png" alt="creen Shot 2019-03-07 at 9.37.38 P"></p>
-<p>Here, we define a “HelloWorld” function, whose parameter is <code>request</code> and the first parameter can only be <code>request</code>. A <code>request</code> variable includes <code>get</code> and <code>post</code> infomation. This function use <code>HttpResponse</code> to return information to the webpage, like print in python.</p>
-<p>After we define the function of our webpage, but how can be visit it? We are going to define the url that we need to visit the webpage. Open the <code>MyWebsite/MyWebsite/urls.py</code>，we are going to import the view function:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> FirstDemo <span class="keyword">import</span> views <span class="keyword">as</span> fd_views</div>
-</pre></td></tr></table></figure>
-<p>then we define the url:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">path(<span class="string">''</span>,fd_views.HelloWorld),</div>
-</pre></td></tr></table></figure>
-<p>The overall modification is like:</p>
-<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.46.20 PM-2016796.png" alt="creen Shot 2019-03-07 at 9.46.20 PM-201679"></p>
-<p>Finally we can run our project:</p>
-<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.47.39 PM.png" alt="creen Shot 2019-03-07 at 9.47.39 P"></p>
-<p>Open the link, we can see:</p>
-<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.48.17 PM.png" alt="creen Shot 2019-03-07 at 9.48.17 P"></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/deploying-a-keras-deep-learning-model-as-a-web-application-in-p-fc0f2354a7ff" target="_blank" rel="noopener">Deploying a Keras Deep Learning Model as a Web Application in Python</a></p>
-<p><a href="https://summerofhpc.prace-ri.eu/bringing-visualisation-to-the-web-with-python-and-bokeh/" target="_blank" rel="noopener">Bringing visualisation to the web with Python and Bokeh</a> </p>
-
-          
+          <p>Django based website building.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/05/WebSite-Making/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

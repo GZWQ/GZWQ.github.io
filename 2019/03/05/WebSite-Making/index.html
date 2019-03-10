@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Day 1 Basic Commands Create a new Django project 1 django-admin.py startproject project_name   Create a new app 1 python manage.py startapp app_name  Open the Django project directory, then execute th">
+<meta name="description" content="Django based website building.">
 <meta name="keywords" content="Website">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebSite Making">
 <meta property="og:url" content="http://yoursite.com/2019/03/05/WebSite-Making/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Day 1 Basic Commands Create a new Django project 1 django-admin.py startproject project_name   Create a new app 1 python manage.py startapp app_name  Open the Django project directory, then execute th">
+<meta property="og:description" content="Django based website building.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.29.13%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.31.49%20PM.png">
@@ -94,10 +94,13 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.46.20%20PM-2016796.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.47.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.48.17%20PM.png">
-<meta property="og:updated_time" content="2019-03-08T03:48:36.988Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.17.57%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.21.18%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.27.19%20PM.png">
+<meta property="og:updated_time" content="2019-03-10T22:28:42.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebSite Making">
-<meta name="twitter:description" content="Day 1 Basic Commands Create a new Django project 1 django-admin.py startproject project_name   Create a new app 1 python manage.py startapp app_name  Open the Django project directory, then execute th">
+<meta name="twitter:description" content="Django based website building.">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.29.13%20PM.png">
 
 
@@ -384,7 +387,9 @@
       
 
       
-        <h1 id="Day-1-Basic-Commands"><a href="#Day-1-Basic-Commands" class="headerlink" title="Day 1 Basic Commands"></a>Day 1 Basic Commands</h1><ol>
+        <p>Django based website building.</p>
+<a id="more"></a>
+<h1 id="Day1-Basic-Commands"><a href="#Day1-Basic-Commands" class="headerlink" title="Day1 Basic Commands"></a>Day1 Basic Commands</h1><ol>
 <li><p><strong>Create a new Django project</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">django-admin.py startproject project_name</div>
@@ -436,7 +441,7 @@
 </pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="Day-2-View-and-URL"><a href="#Day-2-View-and-URL" class="headerlink" title="Day 2 View and URL"></a>Day 2 View and URL</h1><p>Here we are going to write a “Hello World!” application to illustrate the relationship between views and urls.</p>
+<h1 id="Day2-View-and-URL"><a href="#Day2-View-and-URL" class="headerlink" title="Day2 View and URL"></a>Day2 View and URL</h1><p>Here we are going to write a “Hello World!” application to illustrate the relationship between views and urls.</p>
 <p>Firstly, use the command to create a project. Of course we can also pycharm to create a project named “MyWebsite”. We can see the project file structures:</p>
 <p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.29.13 PM.png" alt="creen Shot 2019-03-07 at 9.29.13 P"></p>
 <p>Then inside this project, we are going to create an app named “FirstDemo”:</p>
@@ -464,6 +469,58 @@
 <p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.47.39 PM.png" alt="creen Shot 2019-03-07 at 9.47.39 P"></p>
 <p>Open the link, we can see:</p>
 <p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.48.17 PM.png" alt="creen Shot 2019-03-07 at 9.48.17 P"></p>
+<h1 id="Day3-Advanced-Views-and-Urls"><a href="#Day3-Advanced-Views-and-Urls" class="headerlink" title="Day3 Advanced Views and Urls"></a>Day3 Advanced Views and Urls</h1><p>Last time, we have learned how to display information in django. This time, we are about to implement a little complex function, i.e., addition, and display the addition result.</p>
+<h2 id="add-a-4-amp-b-5-to-visit-webpage"><a href="#add-a-4-amp-b-5-to-visit-webpage" class="headerlink" title="/add/?a=4&amp;b=5 to visit webpage"></a>/add/?a=4&amp;b=5 to visit webpage</h2><p>Firstly, let’s create a new app named <code>Addition</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">python manage.py startapp Addition</div>
+</pre></td></tr></table></figure>
+<p>We need to define the addition function in <code>views.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</div>
+<div class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(request)</span>:</span></div>
+<div class="line">    a = request.GET[<span class="string">'a'</span>]</div>
+<div class="line">    b = request.GET[<span class="string">'b'</span>]</div>
+<div class="line">    c = int(a)+int(b)</div>
+<div class="line">    <span class="keyword">return</span> HttpResponse(str(c))</div>
+</pre></td></tr></table></figure>
+<p>Here, <code>request.GET</code> return a dictionary, <code>request.GET[&#39;a&#39;]</code> return <code>a</code> value. A better way is <code>request.GET.get(&#39;a&#39;,0)</code> where a default value 0 is return if <code>a</code> is not defined.</p>
+<p>Then we need to modify <code>urls.py</code>:</p>
+<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-10 at 5.17.57 PM.png" alt="creen Shot 2019-03-10 at 5.17.57 P"></p>
+<p>Finally, we can run our program:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">python manage.py runserver <span class="number">8110</span></div>
+</pre></td></tr></table></figure>
+<p>Here, we set the port 8110. And we can use the following url to visit the webpage: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">http:<span class="comment">//127.0.0.1:8110/add/</span></div>
+</pre></td></tr></table></figure>
+<p>But we found that:<img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-10 at 5.21.18 PM.png" alt="creen Shot 2019-03-10 at 5.21.18 P"></p>
+<p>That is because we didn’t give initial value to <code>a</code> and <code>b</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">http:<span class="comment">//127.0.0.1:8110/add/?a=4&amp;b=5</span></div>
+</pre></td></tr></table></figure>
+<p>Using the above url, we can see 9 displayed. </p>
+<h2 id="add-3-4-to-visit-page"><a href="#add-3-4-to-visit-page" class="headerlink" title="/add/3/4 to visit page"></a>/add/3/4 to visit page</h2><p>Here we define another add function in <code>views.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">add2</span><span class="params">(request,a,b)</span>:</span></div>
+<div class="line">    c = int(a)+int(b)</div>
+<div class="line">    <span class="keyword">return</span> HttpResponse(str(c))</div>
+</pre></td></tr></table></figure>
+<p>Then, in <code>urls.py</code>:</p>
+<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-10 at 5.27.19 PM.png" alt="creen Shot 2019-03-10 at 5.27.19 P"></p>
+<p>Finally we run the program and visit the webpage:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">http:<span class="comment">//127.0.0.1:8110/add/3/4/</span></div>
+</pre></td></tr></table></figure>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/deploying-a-keras-deep-learning-model-as-a-web-application-in-p-fc0f2354a7ff" target="_blank" rel="noopener">Deploying a Keras Deep Learning Model as a Web Application in Python</a></p>
 <p><a href="https://summerofhpc.prace-ri.eu/bringing-visualisation-to-the-web-with-python-and-bokeh/" target="_blank" rel="noopener">Bringing visualisation to the web with Python and Bokeh</a> </p>
 
@@ -636,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-1-Basic-Commands"><span class="nav-number">1.</span> <span class="nav-text">Day 1 Basic Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-2-View-and-URL"><span class="nav-number">2.</span> <span class="nav-text">Day 2 View and URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1-Basic-Commands"><span class="nav-number">1.</span> <span class="nav-text">Day1 Basic Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2-View-and-URL"><span class="nav-number">2.</span> <span class="nav-text">Day2 View and URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3-Advanced-Views-and-Urls"><span class="nav-number">3.</span> <span class="nav-text">Day3 Advanced Views and Urls</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-a-4-amp-b-5-to-visit-webpage"><span class="nav-number">3.1.</span> <span class="nav-text">/add/?a=4&amp;b=5 to visit webpage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-3-4-to-visit-page"><span class="nav-number">3.2.</span> <span class="nav-text">/add/3/4 to visit page</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
