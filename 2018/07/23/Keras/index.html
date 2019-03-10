@@ -92,7 +92,11 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170707133932722-715494711.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Keras/CNNArchitecture.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170809132648824-260187979.png">
-<meta property="og:updated_time" content="2019-01-30T21:55:45.172Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Time-Based-Learning-Rate-Schedule.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Drop-Based-Learning-Rate-Schedule-2237380.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_training_dataset.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_validation_dataset.png">
+<meta property="og:updated_time" content="2019-03-10T17:21:57.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras">
 <meta name="twitter:description" content="本文参考了Keras入门">
@@ -1171,23 +1175,469 @@
 </li>
 <li></li>
 </ol>
-<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="Keras-Callback"><a href="#Keras-Callback" class="headerlink" title="Keras-Callback"></a>Keras-Callback</h1><h2 id="ModelCheckpoint"><a href="#ModelCheckpoint" class="headerlink" title="ModelCheckpoint"></a><a href="https://machinelearningmastery.com/check-point-deep-learning-models-keras/" target="_blank" rel="noopener">ModelCheckpoint</a></h2><h3 id="Checkpoint-Neural-Network-Model-Improvements"><a href="#Checkpoint-Neural-Network-Model-Improvements" class="headerlink" title="Checkpoint Neural Network Model Improvements"></a>Checkpoint Neural Network Model Improvements</h3><p>Checkpoint is an approach where a snapshot of the state of the system is taken in case of system failure. If there is a problem, not all is lost. The checkpoint may be used directly, or used as the starting point for a new run, picking up where it left off. When training deep learning models, the checkpoint is the weights of the model. These weights can be used to make predictions as is, or used as the basis for ongoing training.</p>
+<p>The ModelCheckpoint callback class allows you to define where to checkpoint the model weights, how the file should named and under what circumstances to make a checkpoint of the model. The API allows you to specify which metric to monitor, such as loss or accuracy on the training or validation dataset. You can specify whether to look for an improvement in maximizing or minimizing the score. Finally, the filename that you use to store the weights can include variables like the epoch number or metric. The ModelCheckpoint can then be passed to the training process when calling the fit() function on the model.</p>
+<p>Note, you may need to install the <a href="http://www.h5py.org/" target="_blank" rel="noopener">h5py library</a> to output network weights in HDF5 format.</p>
+<p>Checkpointing is setup to save the network weights only when there is an improvement in classification accuracy on the validation dataset (monitor=’val_acc’ and mode=’max’). The weights are stored in a file that includes the score in the filename (weights-improvement-{val_acc=.2f}.hdf5).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Checkpoint the weights when validation accuracy improves</span></div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</div>
+<div class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> numpy</div>
+<div class="line"><span class="comment"># fix random seed for reproducibility</span></div>
+<div class="line">seed = <span class="number">7</span></div>
+<div class="line">numpy.random.seed(seed)</div>
+<div class="line"><span class="comment"># load pima indians dataset</span></div>
+<div class="line">dataset = numpy.loadtxt(<span class="string">"pima-indians-diabetes.csv"</span>, delimiter=<span class="string">","</span>)</div>
+<div class="line"><span class="comment"># split into input (X) and output (Y) variables</span></div>
+<div class="line">X = dataset[:,<span class="number">0</span>:<span class="number">8</span>]</div>
+<div class="line">Y = dataset[:,<span class="number">8</span>]</div>
+<div class="line"><span class="comment"># create model</span></div>
+<div class="line">model = Sequential()</div>
+<div class="line">model.add(Dense(<span class="number">12</span>, input_dim=<span class="number">8</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">8</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">1</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'sigmoid'</span>))</div>
+<div class="line"><span class="comment"># Compile model</span></div>
+<div class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'adam'</span>, metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"><span class="comment"># checkpoint</span></div>
+<div class="line">filepath=<span class="string">"weights-improvement-&#123;epoch:02d&#125;-&#123;val_acc:.2f&#125;.hdf5"</span></div>
+<div class="line">checkpoint = ModelCheckpoint(filepath, monitor=<span class="string">'val_acc'</span>, verbose=<span class="number">1</span>, save_best_only=<span class="keyword">True</span>, mode=<span class="string">'max'</span>)</div>
+<div class="line">callbacks_list = [checkpoint]</div>
+<div class="line"><span class="comment"># Fit the model</span></div>
+<div class="line">model.fit(X, Y, validation_split=<span class="number">0.33</span>, epochs=<span class="number">150</span>, batch_size=<span class="number">10</span>, callbacks=callbacks_list, verbose=<span class="number">0</span>)</div>
+</pre></td></tr></table></figure>
+<p>Running the code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+</pre></td><td class="code"><pre><div class="line">...</div>
+<div class="line">Epoch <span class="number">00134</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00135</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00136</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00137</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00138</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00139</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00140</span>: val_acc improved <span class="keyword">from</span> <span class="number">0.83465</span> to <span class="number">0.83858</span>, saving model to weights-improvement<span class="number">-140</span><span class="number">-0.84</span>.hdf5</div>
+<div class="line">Epoch <span class="number">00141</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00142</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00143</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00144</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00145</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00146</span>: val_acc improved <span class="keyword">from</span> <span class="number">0.83858</span> to <span class="number">0.84252</span>, saving model to weights-improvement<span class="number">-146</span><span class="number">-0.84</span>.hdf5</div>
+<div class="line">Epoch <span class="number">00147</span>: val_acc did <span class="keyword">not</span> improve</div>
+<div class="line">Epoch <span class="number">00148</span>: val_acc improved <span class="keyword">from</span> <span class="number">0.84252</span> to <span class="number">0.84252</span>, saving model to weights-improvement<span class="number">-148</span><span class="number">-0.84</span>.hdf5</div>
+<div class="line">Epoch <span class="number">00149</span>: val_acc did <span class="keyword">not</span> improve</div>
+</pre></td></tr></table></figure>
+<h3 id="Loading-a-Check-Pointed-Neural-Network-Model"><a href="#Loading-a-Check-Pointed-Neural-Network-Model" class="headerlink" title="Loading a Check-Pointed Neural Network Model"></a>Loading a Check-Pointed Neural Network Model</h3><p>Now that you have seen how to checkpoint your deep learning models during training, you need to review how to load and use a checkpointed model. </p>
+<p>In the example below, the model structure is known and the best weights are loaded from the previous experiment, stored in the working directory in the weights.best.hdf5 file.</p>
+<p>The model is then used to make predictions on the entire dataset.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># How to load and use weights from a checkpoint</span></div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</div>
+<div class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> ModelCheckpoint</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> numpy</div>
+<div class="line"><span class="comment"># fix random seed for reproducibility</span></div>
+<div class="line">seed = <span class="number">7</span></div>
+<div class="line">numpy.random.seed(seed)</div>
+<div class="line"><span class="comment"># create model</span></div>
+<div class="line">model = Sequential()</div>
+<div class="line">model.add(Dense(<span class="number">12</span>, input_dim=<span class="number">8</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">8</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">1</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'sigmoid'</span>))</div>
+<div class="line"><span class="comment"># load weights</span></div>
+<div class="line">model.load_weights(<span class="string">"weights.best.hdf5"</span>)</div>
+<div class="line"><span class="comment"># Compile model (required to make predictions)</span></div>
+<div class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'adam'</span>, metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line">print(<span class="string">"Created model and loaded weights from file"</span>)</div>
+<div class="line"><span class="comment"># load pima indians dataset</span></div>
+<div class="line">dataset = numpy.loadtxt(<span class="string">"pima-indians-diabetes.csv"</span>, delimiter=<span class="string">","</span>)</div>
+<div class="line"><span class="comment"># split into input (X) and output (Y) variables</span></div>
+<div class="line">X = dataset[:,<span class="number">0</span>:<span class="number">8</span>]</div>
+<div class="line">Y = dataset[:,<span class="number">8</span>]</div>
+<div class="line"><span class="comment"># estimate accuracy on whole dataset using loaded weights</span></div>
+<div class="line">scores = model.evaluate(X, Y, verbose=<span class="number">0</span>)</div>
+<div class="line">print(<span class="string">"%s: %.2f%%"</span> % (model.metrics_names[<span class="number">1</span>], scores[<span class="number">1</span>]*<span class="number">100</span>))</div>
+</pre></td></tr></table></figure>
+<h2 id="LearningRateScheduler"><a href="#LearningRateScheduler" class="headerlink" title="LearningRateScheduler"></a><a href="https://machinelearningmastery.com/using-learning-rate-schedules-deep-learning-models-python-keras/" target="_blank" rel="noopener">LearningRateScheduler</a></h2><p>Adapting the learning rate for your stochastic gradient descent optimization procedure can increase performance and reduce training time. The simplest and perhaps most used adaptation of learning rate during training are techniques that reduce the learning rate over time. These have the benefit of making large changes at the beginning of the training procedure when larger learning rate values are used, and decreasing the learning rate such that a smaller rate and therefore smaller training updates are made to weights later in the training procedure.</p>
+<p>Two popular and easy to use learning rate schedules are as follows:</p>
+<ul>
+<li>Decrease the learning rate gradually based on the epoch.</li>
+<li>Decrease the learning rate using punctuated large drops at specific epochs.</li>
+</ul>
+<p>Next, we will look at how you can use each of these learning rate schedules in turn with Keras.</p>
+<h3 id="Time-Based-Learning-Rate-Schedule"><a href="#Time-Based-Learning-Rate-Schedule" class="headerlink" title="Time-Based Learning Rate Schedule"></a>Time-Based Learning Rate Schedule</h3><p>Keras has a time-based learning rate schedule built in.</p>
+<p>The stochastic gradient descent optimization algorithm implementation in the SGD class has an argument called decay. This argument is used in the time-based learning rate decay schedule equation as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">LearningRate = LearningRate * <span class="number">1</span>/(<span class="number">1</span> + decay * epoch)</div>
+</pre></td></tr></table></figure>
+<p>When the decay argument is zero (the default), this has no effect on the learning rate.</p>
+<p>When the decay argument is specified, it will decrease the learning rate from the previous epoch by the given fixed amount.</p>
+<p>For example, if we use the initial learning rate value of 0.1 and the decay of 0.001, the first 5 epochs will adapt the learning rate as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">Epoch	Learning Rate</div>
+<div class="line"><span class="number">1</span>	<span class="number">0.1</span></div>
+<div class="line"><span class="number">2</span>	<span class="number">0.0999000999</span></div>
+<div class="line"><span class="number">3</span>	<span class="number">0.0997006985</span></div>
+<div class="line"><span class="number">4</span>	<span class="number">0.09940249103</span></div>
+<div class="line"><span class="number">5</span>	<span class="number">0.09900646517</span></div>
+</pre></td></tr></table></figure>
+<p>Extending this out to 100 epochs will produce the following graph of learning rate (y axis) versus epoch (x axis):</p>
+<p><img src="/2018/07/23/Keras/Time-Based-Learning-Rate-Schedule.png" alt="ime-Based-Learning-Rate-Schedul"></p>
+<p>You can create a nice default schedule by setting the decay value as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">Decay = LearningRate / Epochs</div>
+<div class="line">Decay = <span class="number">0.1</span> / <span class="number">100</span></div>
+<div class="line">Decay = <span class="number">0.001</span></div>
+</pre></td></tr></table></figure>
+<p>The example below demonstrates using the time-based learning rate adaptation schedule in Keras. The learning rate for stochastic gradient descent has been set to a higher value of 0.1. The model is trained for 50 epochs and the decay argument has been set to 0.002, calculated as 0.1/50. Additionally, it can be a good idea to use momentum when using an adaptive learning rate. In this case we use a momentum value of 0.8.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Time Based Learning Rate Decay</span></div>
+<div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> read_csv</div>
+<div class="line"><span class="keyword">import</span> numpy</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</div>
+<div class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> SGD</div>
+<div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</div>
+<div class="line"><span class="comment"># fix random seed for reproducibility</span></div>
+<div class="line">seed = <span class="number">7</span></div>
+<div class="line">numpy.random.seed(seed)</div>
+<div class="line"><span class="comment"># load dataset</span></div>
+<div class="line">dataframe = read_csv(<span class="string">"ionosphere.csv"</span>, header=<span class="keyword">None</span>)</div>
+<div class="line">dataset = dataframe.values</div>
+<div class="line"><span class="comment"># split into input (X) and output (Y) variables</span></div>
+<div class="line">X = dataset[:,<span class="number">0</span>:<span class="number">34</span>].astype(float)</div>
+<div class="line">Y = dataset[:,<span class="number">34</span>]</div>
+<div class="line"><span class="comment"># encode class values as integers</span></div>
+<div class="line">encoder = LabelEncoder()</div>
+<div class="line">encoder.fit(Y)</div>
+<div class="line">Y = encoder.transform(Y)</div>
+<div class="line"><span class="comment"># create model</span></div>
+<div class="line">model = Sequential()</div>
+<div class="line">model.add(Dense(<span class="number">34</span>, input_dim=<span class="number">34</span>, kernel_initializer=<span class="string">'normal'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">1</span>, kernel_initializer=<span class="string">'normal'</span>, activation=<span class="string">'sigmoid'</span>))</div>
+<div class="line"><span class="comment"># Compile model</span></div>
+<div class="line">epochs = <span class="number">50</span></div>
+<div class="line">learning_rate = <span class="number">0.1</span></div>
+<div class="line">decay_rate = learning_rate / epochs</div>
+<div class="line">momentum = <span class="number">0.8</span></div>
+<div class="line">sgd = SGD(lr=learning_rate, momentum=momentum, decay=decay_rate, nesterov=<span class="keyword">False</span>)</div>
+<div class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=sgd, metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"><span class="comment"># Fit the model</span></div>
+<div class="line">model.fit(X, Y, validation_split=<span class="number">0.33</span>, epochs=epochs, batch_size=<span class="number">28</span>, verbose=<span class="number">2</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="Drop-Based-Learning-Rate-Schedule"><a href="#Drop-Based-Learning-Rate-Schedule" class="headerlink" title="Drop-Based Learning Rate Schedule"></a>Drop-Based Learning Rate Schedule</h3><p>Another popular learning rate schedule used with deep learning models is to systematically drop the learning rate at specific times during training.</p>
+<p>Often this method is implemented by dropping the learning rate by half every fixed number of epochs. For example, we may have an initial learning rate of 0.1 and drop it by 0.5 every 10 epochs. The first 10 epochs of training would use a value of 0.1, in the next 10 epochs a learning rate of 0.05 would be used, and so on.</p>
+<p>If we plot out the learning rates for this example out to 100 epochs you get the graph below showing learning rate (y axis) versus epoch (x axis).</p>
+<p><img src="/2018/07/23/Keras/Drop-Based-Learning-Rate-Schedule-2237380.png" alt="rop-Based-Learning-Rate-Schedule-223738"></p>
+<p>We can implement this in Keras using a the <a href="http://keras.io/callbacks/" target="_blank" rel="noopener">LearningRateScheduler</a> callback when fitting the model.</p>
+<p>The LearningRateScheduler callback allows us to define a function to call that takes the epoch number as an argument and returns the learning rate to use in stochastic gradient descent. When used, the learning rate specified by stochastic gradient descent is ignored.</p>
+<p>In the code below, we use the same example before of a single hidden layer network on the Ionosphere dataset. A new step_decay() function is defined that implements the equation:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">LearningRate = InitialLearningRate * DropRate^floor(Epoch / EpochDrop)</div>
+</pre></td></tr></table></figure>
+<p>Where InitialLearningRate is the initial learning rate such as 0.1, the DropRate is the amount that the learning rate is modified each time it is changed such as 0.5, Epoch is the current epoch number and EpochDrop is how often to change the learning rate such as 10.</p>
+<p>Notice that we set the learning rate in the SGD class to 0 to clearly indicate that it is not used. Nevertheless, you can set a momentum term in SGD if you want to use momentum with this learning rate schedule.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Drop-Based Learning Rate Decay</span></div>
+<div class="line"><span class="keyword">import</span> pandas</div>
+<div class="line"><span class="keyword">from</span> pandas <span class="keyword">import</span> read_csv</div>
+<div class="line"><span class="keyword">import</span> numpy</div>
+<div class="line"><span class="keyword">import</span> math</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</div>
+<div class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> SGD</div>
+<div class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> LabelEncoder</div>
+<div class="line"><span class="keyword">from</span> keras.callbacks <span class="keyword">import</span> LearningRateScheduler</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># learning rate schedule</span></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">step_decay</span><span class="params">(epoch)</span>:</span></div>
+<div class="line">	initial_lrate = <span class="number">0.1</span></div>
+<div class="line">	drop = <span class="number">0.5</span></div>
+<div class="line">	epochs_drop = <span class="number">10.0</span></div>
+<div class="line">	lrate = initial_lrate * math.pow(drop, math.floor((<span class="number">1</span>+epoch)/epochs_drop))</div>
+<div class="line">	<span class="keyword">return</span> lrate</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># fix random seed for reproducibility</span></div>
+<div class="line">seed = <span class="number">7</span></div>
+<div class="line">numpy.random.seed(seed)</div>
+<div class="line"><span class="comment"># load dataset</span></div>
+<div class="line">dataframe = read_csv(<span class="string">"ionosphere.csv"</span>, header=<span class="keyword">None</span>)</div>
+<div class="line">dataset = dataframe.values</div>
+<div class="line"><span class="comment"># split into input (X) and output (Y) variables</span></div>
+<div class="line">X = dataset[:,<span class="number">0</span>:<span class="number">34</span>].astype(float)</div>
+<div class="line">Y = dataset[:,<span class="number">34</span>]</div>
+<div class="line"><span class="comment"># encode class values as integers</span></div>
+<div class="line">encoder = LabelEncoder()</div>
+<div class="line">encoder.fit(Y)</div>
+<div class="line">Y = encoder.transform(Y)</div>
+<div class="line"><span class="comment"># create model</span></div>
+<div class="line">model = Sequential()</div>
+<div class="line">model.add(Dense(<span class="number">34</span>, input_dim=<span class="number">34</span>, kernel_initializer=<span class="string">'normal'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">1</span>, kernel_initializer=<span class="string">'normal'</span>, activation=<span class="string">'sigmoid'</span>))</div>
+<div class="line"><span class="comment"># Compile model</span></div>
+<div class="line">sgd = SGD(lr=<span class="number">0.0</span>, momentum=<span class="number">0.9</span>, decay=<span class="number">0.0</span>, nesterov=<span class="keyword">False</span>)</div>
+<div class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=sgd, metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"><span class="comment"># learning schedule callback</span></div>
+<div class="line">lrate = LearningRateScheduler(step_decay)</div>
+<div class="line">callbacks_list = [lrate]</div>
+<div class="line"><span class="comment"># Fit the model</span></div>
+<div class="line">model.fit(X, Y, validation_split=<span class="number">0.33</span>, epochs=<span class="number">50</span>, batch_size=<span class="number">28</span>, callbacks=callbacks_list, verbose=<span class="number">2</span>)</div>
+</pre></td></tr></table></figure>
+<h2 id="History"><a href="#History" class="headerlink" title="History"></a><a href="https://machinelearningmastery.com/display-deep-learning-model-training-history-in-keras/" target="_blank" rel="noopener">History</a></h2><p>History callback records training metrics for each epoch. This includes the loss and the accuracy (for classification problems) as well as the loss and accuracy for the validation dataset, if one is set. The history object is returned from calls to the fit() function used to train the model. Metrics are stored in a dictionary in the history member of the object returned.</p>
+<p>For example, you can list the metrics collected in a history object using the following snippet of code after a model is trained:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># list all data in history</span></div>
+<div class="line">print(history.history.keys())</div>
+</pre></td></tr></table></figure>
+<p>For example, for a model trained on a classification problem with a validation dataset, this might produce the following listing:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">[<span class="string">'acc'</span>, <span class="string">'loss'</span>, <span class="string">'val_acc'</span>, <span class="string">'val_loss'</span>]</div>
+</pre></td></tr></table></figure>
+<h3 id="Visualize-Model-Training-History-in-Keras"><a href="#Visualize-Model-Training-History-in-Keras" class="headerlink" title="Visualize Model Training History in Keras"></a>Visualize Model Training History in Keras</h3><p>The example collects the history, returned from training the model and creates two charts:</p>
+<ol>
+<li>A plot of accuracy on the training and validation datasets over training epochs.</li>
+<li>A plot of loss on the training and validation datasets over training epochs.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Visualize training history</span></div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> numpy</div>
+<div class="line"><span class="comment"># fix random seed for reproducibility</span></div>
+<div class="line">seed = <span class="number">7</span></div>
+<div class="line">numpy.random.seed(seed)</div>
+<div class="line"><span class="comment"># load pima indians dataset</span></div>
+<div class="line">dataset = numpy.loadtxt(<span class="string">"pima-indians-diabetes.csv"</span>, delimiter=<span class="string">","</span>)</div>
+<div class="line"><span class="comment"># split into input (X) and output (Y) variables</span></div>
+<div class="line">X = dataset[:,<span class="number">0</span>:<span class="number">8</span>]</div>
+<div class="line">Y = dataset[:,<span class="number">8</span>]</div>
+<div class="line"><span class="comment"># create model</span></div>
+<div class="line">model = Sequential()</div>
+<div class="line">model.add(Dense(<span class="number">12</span>, input_dim=<span class="number">8</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">8</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'relu'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">1</span>, kernel_initializer=<span class="string">'uniform'</span>, activation=<span class="string">'sigmoid'</span>))</div>
+<div class="line"><span class="comment"># Compile model</span></div>
+<div class="line">model.compile(loss=<span class="string">'binary_crossentropy'</span>, optimizer=<span class="string">'adam'</span>, metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"><span class="comment"># Fit the model</span></div>
+<div class="line">history = model.fit(X, Y, validation_split=<span class="number">0.33</span>, epochs=<span class="number">150</span>, batch_size=<span class="number">10</span>, verbose=<span class="number">0</span>)</div>
+<div class="line"><span class="comment"># list all data in history</span></div>
+<div class="line">print(history.history.keys())</div>
+<div class="line"><span class="comment"># summarize history for accuracy</span></div>
+<div class="line">plt.plot(history.history[<span class="string">'acc'</span>])</div>
+<div class="line">plt.plot(history.history[<span class="string">'val_acc'</span>])</div>
+<div class="line">plt.title(<span class="string">'model accuracy'</span>)</div>
+<div class="line">plt.ylabel(<span class="string">'accuracy'</span>)</div>
+<div class="line">plt.xlabel(<span class="string">'epoch'</span>)</div>
+<div class="line">plt.legend([<span class="string">'train'</span>, <span class="string">'test'</span>], loc=<span class="string">'upper left'</span>)</div>
+<div class="line">plt.show()</div>
+<div class="line"><span class="comment"># summarize history for loss</span></div>
+<div class="line">plt.plot(history.history[<span class="string">'loss'</span>])</div>
+<div class="line">plt.plot(history.history[<span class="string">'val_loss'</span>])</div>
+<div class="line">plt.title(<span class="string">'model loss'</span>)</div>
+<div class="line">plt.ylabel(<span class="string">'loss'</span>)</div>
+<div class="line">plt.xlabel(<span class="string">'epoch'</span>)</div>
+<div class="line">plt.legend([<span class="string">'train'</span>, <span class="string">'test'</span>], loc=<span class="string">'upper left'</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p>The plots are provided below. The history for the validation dataset is labeled test by convention as it is indeed a test dataset for the model.</p>
+<p>From the plot of accuracy we can see that the model could probably be trained a little more as the trend for accuracy on both datasets is still rising for the last few epochs. We can also see that the model has not yet over-learned the training dataset, showing comparable skill on both datasets.</p>
+<p><img src="/2018/07/23/Keras/history_training_dataset.png" alt="istory_training_datase"></p>
+<p>From the plot of loss, we can see that the model has comparable performance on both train and validation datasets (labeled test). If these parallel plots start to depart consistently, it might be a sign to stop training at an earlier epoch.</p>
+<p><img src="/2018/07/23/Keras/history_validation_dataset.png" alt="istory_validation_datase"></p>
 
-</div></div>
-
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-
-</div></div>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-
-</div></div>
-
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-
-</div></div>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-
-</div></div>
       
     </div>
     
@@ -1367,7 +1817,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序贯（Sequential）模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">序贯（Sequential）模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络构造"><span class="nav-number">1.1.2.</span> <span class="nav-text">网络构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.4.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式（Functional）模型"><span class="nav-number">1.1.5.</span> <span class="nav-text">函数式（Functional）模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景1：全连接网络"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">应用场景1：全连接网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景2：多输入多输出模型"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">应用场景2：多输入多输出模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景3：共享层"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">应用场景3：共享层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#层“节点”的概念"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">层“节点”的概念</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras网络层"><span class="nav-number">1.2.</span> <span class="nav-text">Keras网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用层"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense层"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Dense层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dropout层"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Dropout层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flatten层"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Flatten层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lambda层"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Lambda层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积层"><span class="nav-number">1.2.2.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2D层"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Conv2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2DTranspose层"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Conv2DTranspose层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化层"><span class="nav-number">1.2.3.</span> <span class="nav-text">池化层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MaxPooling2D层"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">MaxPooling2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AveragePooling2D层"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">AveragePooling2D层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批正则化"><span class="nav-number">1.2.4.</span> <span class="nav-text">批正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNormalization层"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">BatchNormalization层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">1.3.</span> <span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数loss"><span class="nav-number">1.3.1.</span> <span class="nav-text">损失函数loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化器optimizers"><span class="nav-number">1.3.2.</span> <span class="nav-text">优化器optimizers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adam"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活函数Activations"><span class="nav-number">1.3.3.</span> <span class="nav-text">激活函数Activations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能评估"><span class="nav-number">1.3.4.</span> <span class="nav-text">性能评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化方法"><span class="nav-number">1.3.5.</span> <span class="nav-text">初始化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">1.3.6.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类属性"><span class="nav-number">1.3.7.</span> <span class="nav-text">类属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras后端"><span class="nav-number">1.4.</span> <span class="nav-text">Keras后端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型保存"><span class="nav-number">1.5.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">1.5.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型保存-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型载入"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">1.5.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#符号计算-数据流图"><span class="nav-number">3.1.</span> <span class="nav-text">符号计算(数据流图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量"><span class="nav-number">3.2.</span> <span class="nav-text">张量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">3.3.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">3.4.</span> <span class="nav-text">模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：手写数字识别"><span class="nav-number">4.</span> <span class="nav-text">Example：手写数字识别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：CNN"><span class="nav-number">5.</span> <span class="nav-text">Example：CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text"> </span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.1.</span> <span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#序贯（Sequential）模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">序贯（Sequential）模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络构造"><span class="nav-number">1.1.2.</span> <span class="nav-text">网络构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">1.1.3.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练"><span class="nav-number">1.1.4.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式（Functional）模型"><span class="nav-number">1.1.5.</span> <span class="nav-text">函数式（Functional）模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景1：全连接网络"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">应用场景1：全连接网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景2：多输入多输出模型"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">应用场景2：多输入多输出模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用场景3：共享层"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">应用场景3：共享层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#层“节点”的概念"><span class="nav-number">1.1.5.3.1.</span> <span class="nav-text">层“节点”的概念</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras网络层"><span class="nav-number">1.2.</span> <span class="nav-text">Keras网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用层"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Dense层"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Dense层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dropout层"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">Dropout层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flatten层"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Flatten层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lambda层"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Lambda层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积层"><span class="nav-number">1.2.2.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2D层"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Conv2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2DTranspose层"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Conv2DTranspose层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化层"><span class="nav-number">1.2.3.</span> <span class="nav-text">池化层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MaxPooling2D层"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">MaxPooling2D层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AveragePooling2D层"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">AveragePooling2D层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批正则化"><span class="nav-number">1.2.4.</span> <span class="nav-text">批正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNormalization层"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">BatchNormalization层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络配置"><span class="nav-number">1.3.</span> <span class="nav-text">网络配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数loss"><span class="nav-number">1.3.1.</span> <span class="nav-text">损失函数loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化器optimizers"><span class="nav-number">1.3.2.</span> <span class="nav-text">优化器optimizers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SGD"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adam"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活函数Activations"><span class="nav-number">1.3.3.</span> <span class="nav-text">激活函数Activations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能评估"><span class="nav-number">1.3.4.</span> <span class="nav-text">性能评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化方法"><span class="nav-number">1.3.5.</span> <span class="nav-text">初始化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">1.3.6.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类属性"><span class="nav-number">1.3.7.</span> <span class="nav-text">类属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras后端"><span class="nav-number">1.4.</span> <span class="nav-text">Keras后端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型保存"><span class="nav-number">1.5.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法一"><span class="nav-number">1.5.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模型保存-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模型载入"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法二"><span class="nav-number">1.5.2.</span> <span class="nav-text">方法二</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#符号计算-数据流图"><span class="nav-number">3.1.</span> <span class="nav-text">符号计算(数据流图)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#张量"><span class="nav-number">3.2.</span> <span class="nav-text">张量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据格式"><span class="nav-number">3.3.</span> <span class="nav-text">数据格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型-1"><span class="nav-number">3.4.</span> <span class="nav-text">模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：手写数字识别"><span class="nav-number">4.</span> <span class="nav-text">Example：手写数字识别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example：CNN"><span class="nav-number">5.</span> <span class="nav-text">Example：CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Callback"><span class="nav-number">7.</span> <span class="nav-text">Keras-Callback</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">7.1.</span> <span class="nav-text">ModelCheckpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkpoint-Neural-Network-Model-Improvements"><span class="nav-number">7.1.1.</span> <span class="nav-text">Checkpoint Neural Network Model Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-a-Check-Pointed-Neural-Network-Model"><span class="nav-number">7.1.2.</span> <span class="nav-text">Loading a Check-Pointed Neural Network Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearningRateScheduler"><span class="nav-number">7.2.</span> <span class="nav-text">LearningRateScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Based-Learning-Rate-Schedule"><span class="nav-number">7.2.1.</span> <span class="nav-text">Time-Based Learning Rate Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop-Based-Learning-Rate-Schedule"><span class="nav-number">7.2.2.</span> <span class="nav-text">Drop-Based Learning Rate Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">7.3.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualize-Model-Training-History-in-Keras"><span class="nav-number">7.3.1.</span> <span class="nav-text">Visualize Model Training History in Keras</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
