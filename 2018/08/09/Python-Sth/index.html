@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)  R &amp;amp; W in TXT ref  np.l">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-26T20:18:10.463Z">
+<meta property="og:updated_time" content="2019-03-12T03:08:20.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Sth">
 <meta name="twitter:description" content="目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)  R &amp;amp; W in TXT ref  np.l">
@@ -478,6 +478,81 @@
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div>
 <div class="line">start_time = time.time()</div>
 </pre></td></tr></table></figure>
+<h2 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">name = [ <span class="string">"Manjeet"</span>, <span class="string">"Nikhil"</span>, <span class="string">"Shambhavi"</span>, <span class="string">"Astha"</span> ] </div>
+<div class="line">roll_no = [ <span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span> ] </div>
+<div class="line">marks = [ <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span> ] </div>
+<div class="line"><span class="comment"># using zip() to map values </span></div>
+<div class="line">mapped = zip(name, roll_no, marks) </div>
+<div class="line"><span class="comment"># converting values to print as set </span></div>
+<div class="line">mapped = set(mapped)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">The zipped result <span class="keyword">is</span> : &#123;(<span class="string">'Shambhavi'</span>, <span class="number">3</span>, <span class="number">60</span>), (<span class="string">'Astha'</span>, <span class="number">2</span>, <span class="number">70</span>), (<span class="string">'Manjeet'</span>, <span class="number">4</span>, <span class="number">40</span>), (<span class="string">'Nikhil'</span>, <span class="number">1</span>, <span class="number">50</span>)&#125;</div>
+</pre></td></tr></table></figure>
+<p><strong>How to unzip?</strong><br>Unzipping means converting the zipped values back to the individual self as they were. This is done with the help of “<strong>*</strong>” operator.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line">name = [ <span class="string">"Manjeet"</span>, <span class="string">"Nikhil"</span>, <span class="string">"Shambhavi"</span>, <span class="string">"Astha"</span> ] </div>
+<div class="line">roll_no = [ <span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span> ] </div>
+<div class="line">marks = [ <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span> ] </div>
+<div class="line"><span class="comment"># using zip() to map values </span></div>
+<div class="line">mapped = zip(name, roll_no, marks) </div>
+<div class="line"><span class="comment"># converting values to print as list </span></div>
+<div class="line">mapped = list(mapped) </div>
+<div class="line"><span class="comment"># printing resultant values  </span></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The zipped result is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (mapped) </div>
+<div class="line">print(<span class="string">"\n"</span>) </div>
+<div class="line"><span class="comment"># unzipping values </span></div>
+<div class="line">namz, roll_noz, marksz = zip(*mapped) </div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The unzipped result: \n"</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="comment"># printing initial lists </span></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The name list is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (namz) </div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The roll_no list is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (roll_noz) </div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The marks list is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (marksz)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">The zipped result <span class="keyword">is</span> : [(<span class="string">'Manjeet'</span>, <span class="number">4</span>, <span class="number">40</span>), (<span class="string">'Nikhil'</span>, <span class="number">1</span>, <span class="number">50</span>), </div>
+<div class="line">(<span class="string">'Shambhavi'</span>, <span class="number">3</span>, <span class="number">60</span>), (<span class="string">'Astha'</span>, <span class="number">2</span>, <span class="number">70</span>)]</div>
+<div class="line">The unzipped result: </div>
+<div class="line">The name list <span class="keyword">is</span> : (<span class="string">'Manjeet'</span>, <span class="string">'Nikhil'</span>, <span class="string">'Shambhavi'</span>, <span class="string">'Astha'</span>)</div>
+<div class="line">The roll_no list <span class="keyword">is</span> : (<span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>)</div>
+<div class="line">The marks list <span class="keyword">is</span> : (<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>)</div>
+</pre></td></tr></table></figure>
 <h2 id="Parser"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -690,7 +765,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-amp-W-in-TXT"><span class="nav-number">2.</span> <span class="nav-text">R &amp; W in TXT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作"><span class="nav-number">3.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动"><span class="nav-number">3.1.</span> <span class="nav-text">文件移动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random"><span class="nav-number">4.</span> <span class="nav-text">Random</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-rand"><span class="nav-number">4.1.</span> <span class="nav-text">np.random.rand()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randn"><span class="nav-number">4.2.</span> <span class="nav-text">np.random.randn()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randint"><span class="nav-number">4.3.</span> <span class="nav-text">np.random.randint()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">5.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字补0"><span class="nav-number">5.1.</span> <span class="nav-text">数字补0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plt"><span class="nav-number">6.</span> <span class="nav-text">Plt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time"><span class="nav-number">7.</span> <span class="nav-text">Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parser"><span class="nav-number">8.</span> <span class="nav-text">Parser</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matplotlib"><span class="nav-number"></span> <span class="nav-text">Matplotlib</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-amp-W-in-TXT"><span class="nav-number">2.</span> <span class="nav-text">R &amp; W in TXT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作"><span class="nav-number">3.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动"><span class="nav-number">3.1.</span> <span class="nav-text">文件移动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random"><span class="nav-number">4.</span> <span class="nav-text">Random</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-rand"><span class="nav-number">4.1.</span> <span class="nav-text">np.random.rand()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randn"><span class="nav-number">4.2.</span> <span class="nav-text">np.random.randn()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randint"><span class="nav-number">4.3.</span> <span class="nav-text">np.random.randint()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">5.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字补0"><span class="nav-number">5.1.</span> <span class="nav-text">数字补0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plt"><span class="nav-number">6.</span> <span class="nav-text">Plt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time"><span class="nav-number">7.</span> <span class="nav-text">Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zip"><span class="nav-number">8.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parser"><span class="nav-number">9.</span> <span class="nav-text">Parser</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matplotlib"><span class="nav-number"></span> <span class="nav-text">Matplotlib</span></a></div>
             
 
           </div>

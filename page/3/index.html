@@ -770,6 +770,81 @@
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div>
 <div class="line">start_time = time.time()</div>
 </pre></td></tr></table></figure>
+<h2 id="Zip"><a href="#Zip" class="headerlink" title="Zip"></a>Zip</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line">name = [ <span class="string">"Manjeet"</span>, <span class="string">"Nikhil"</span>, <span class="string">"Shambhavi"</span>, <span class="string">"Astha"</span> ] </div>
+<div class="line">roll_no = [ <span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span> ] </div>
+<div class="line">marks = [ <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span> ] </div>
+<div class="line"><span class="comment"># using zip() to map values </span></div>
+<div class="line">mapped = zip(name, roll_no, marks) </div>
+<div class="line"><span class="comment"># converting values to print as set </span></div>
+<div class="line">mapped = set(mapped)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">The zipped result <span class="keyword">is</span> : &#123;(<span class="string">'Shambhavi'</span>, <span class="number">3</span>, <span class="number">60</span>), (<span class="string">'Astha'</span>, <span class="number">2</span>, <span class="number">70</span>), (<span class="string">'Manjeet'</span>, <span class="number">4</span>, <span class="number">40</span>), (<span class="string">'Nikhil'</span>, <span class="number">1</span>, <span class="number">50</span>)&#125;</div>
+</pre></td></tr></table></figure>
+<p><strong>How to unzip?</strong><br>Unzipping means converting the zipped values back to the individual self as they were. This is done with the help of “<strong>*</strong>” operator.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line">name = [ <span class="string">"Manjeet"</span>, <span class="string">"Nikhil"</span>, <span class="string">"Shambhavi"</span>, <span class="string">"Astha"</span> ] </div>
+<div class="line">roll_no = [ <span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span> ] </div>
+<div class="line">marks = [ <span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span> ] </div>
+<div class="line"><span class="comment"># using zip() to map values </span></div>
+<div class="line">mapped = zip(name, roll_no, marks) </div>
+<div class="line"><span class="comment"># converting values to print as list </span></div>
+<div class="line">mapped = list(mapped) </div>
+<div class="line"><span class="comment"># printing resultant values  </span></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The zipped result is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (mapped) </div>
+<div class="line">print(<span class="string">"\n"</span>) </div>
+<div class="line"><span class="comment"># unzipping values </span></div>
+<div class="line">namz, roll_noz, marksz = zip(*mapped) </div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The unzipped result: \n"</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="comment"># printing initial lists </span></div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The name list is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (namz) </div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The roll_no list is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (roll_noz) </div>
+<div class="line"><span class="keyword">print</span> (<span class="string">"The marks list is : "</span>,end=<span class="string">""</span>) </div>
+<div class="line"><span class="keyword">print</span> (marksz)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">The zipped result <span class="keyword">is</span> : [(<span class="string">'Manjeet'</span>, <span class="number">4</span>, <span class="number">40</span>), (<span class="string">'Nikhil'</span>, <span class="number">1</span>, <span class="number">50</span>), </div>
+<div class="line">(<span class="string">'Shambhavi'</span>, <span class="number">3</span>, <span class="number">60</span>), (<span class="string">'Astha'</span>, <span class="number">2</span>, <span class="number">70</span>)]</div>
+<div class="line">The unzipped result: </div>
+<div class="line">The name list <span class="keyword">is</span> : (<span class="string">'Manjeet'</span>, <span class="string">'Nikhil'</span>, <span class="string">'Shambhavi'</span>, <span class="string">'Astha'</span>)</div>
+<div class="line">The roll_no list <span class="keyword">is</span> : (<span class="number">4</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>)</div>
+<div class="line">The marks list <span class="keyword">is</span> : (<span class="number">40</span>, <span class="number">50</span>, <span class="number">60</span>, <span class="number">70</span>)</div>
+</pre></td></tr></table></figure>
 <h2 id="Parser"><a href="#Parser" class="headerlink" title="Parser"></a>Parser</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -2191,519 +2266,14 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 
       
         
-          
-            <h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 3.37.19 PM.png" alt="creen Shot 2019-02-17 at 3.37.19 P"></p>
-<p>Say we have a binary classification problem where we want to draw a line to separate these red points from these blue points, like the following picture. On the left, thses data points are not normalized and not centered and far away from the origion, although we can still use a line to seperate them, if that line wiggles just a little bit, then our classification is going to get totally destroyed. That kind of means that in the example on the left, the loss function is now extremely sensitive to small perturbations in that linear classifier in our weight matrix. We can still represent the same functions, but that might make learning quite difficult.</p>
-<p>On the right situation, if you take the data cloud and move it into the origin and you make it unit variance, then now again, we can still classfiy that data quite well, but now as we wiggle that line a little bit, our loss function is less sensitive to small perturbations in the parameter values. That maybe makes optimization a little bit easier.</p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.01.12 PM.png" alt="creen Shot 2019-02-23 at 3.01.12 P"></p>
-<h1 id="Soft-labels"><a href="#Soft-labels" class="headerlink" title="Soft labels"></a>Soft labels</h1><p>This is extremely important when training the discriminator. Having hard labels (1 or 0) nearly killed all learning early on, leading the discriminator to approach 0 loss very rapidly. I ended up using a random number between 0 and 0.1 to represent 0 labels (real images) and a random number between 0.9 and 1.0 to represent 1 labels (generated images). This is not required when training the generator. <a href="https://medium.com/@utk.is.here/keep-calm-and-train-a-gan-pitfalls-and-tips-on-training-generative-adversarial-networks-edd529764aa9" target="_blank" rel="noopener">resource</a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">valid = np.random.uniform(<span class="number">0.9</span>,<span class="number">1.0</span>,size=(batch_size,<span class="number">1</span>))</div>
-<div class="line">fake = np.random.uniform(<span class="number">0</span>,<span class="number">0.1</span>,size=(batch_size,<span class="number">1</span>))</div>
-</pre></td></tr></table></figure>
-<h1 id="Learning-Rate"><a href="#Learning-Rate" class="headerlink" title="Learning Rate"></a>Learning Rate</h1><p>Loss not going down: learning rate is too low</p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 9.52.33 AM.png" alt="creen Shot 2019-02-21 at 9.52.33 A"></p>
-<p>Loss exploding: learning rate too high</p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 9.53.03 AM.png" alt="creen Shot 2019-02-21 at 9.53.03 A"></p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 10.01.01 AM.png" alt="creen Shot 2019-02-21 at 10.01.01 A"></p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 10.01.40 AM.png" alt="creen Shot 2019-02-21 at 10.01.40 A"></p>
-<h1 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h1><h2 id="Problem-with-initializing-all-weights-to-0"><a href="#Problem-with-initializing-all-weights-to-0" class="headerlink" title="Problem with initializing all weights to 0"></a>Problem with initializing all weights to 0</h2><p>In this case, the equations of the learning algorithm would fail to make any changes to the network weights, and the model will be stuck. It is important to note that the bias weight in each neuron is set to zero by default, not a small random value. <a href="https://machinelearningmastery.com/why-initialize-a-neural-network-with-random-weights/" target="_blank" rel="noopener">ref</a> </p>
-<p>During forward propagation each unit in hidden layer gets signal:</p>
-<p><img src="/2018/08/03/Training-Techiniques/gif.gif" alt="i"></p>
-<p>That is, each hidden unit gets sum of inputs multiplied by the corresponding weight.</p>
-<p>Now imagine that you initialize all weights to the same value (e.g. zero or one). In this case, <strong>each hidden unit will get exactly the same signal</strong>. E.g. if all weights are initialized to 1, each unit gets signal equal to sum of inputs (and outputs <code>sigmoid(sum(inputs))</code>). If all weights are zeros, which is even worse, every hidden unit will get zero signal. <strong>No matter what was the input - if all weights are the same, all units in hidden layer will be the same too</strong>.</p>
-<p>This is the main issue with symmetry and reason why you should initialize weights randomly (or, at least, with different values). Note, that this issue affects all architectures that use each-to-each connections. <a href="https://stackoverflow.com/questions/20027598/why-should-weights-of-neural-networks-be-initialized-to-random-numbers" target="_blank" rel="noopener">ref</a></p>
-<h2 id="Problems-with-initializing-weights-randomly-ref"><a href="#Problems-with-initializing-weights-randomly-ref" class="headerlink" title="Problems with initializing weights randomly ref"></a>Problems with initializing weights randomly <a href="https://medium.com/usf-msds/deep-learning-best-practices-1-weight-initialization-14e5c0295b94" target="_blank" rel="noopener">ref</a></h2><h3 id="Vanishing-gradients"><a href="#Vanishing-gradients" class="headerlink" title="Vanishing gradients"></a>Vanishing gradients</h3><p>If weights are initialized with low values it gets mapped to 0, then the activation value would be small, say, almost 0. When backpropogating gradients, samll gradients times small weights, it will result in smaller gradients, meaning the earlier layers, the samller gradients, resulting vanishing gradients.</p>
-<h3 id="Exploding-gradients"><a href="#Exploding-gradients" class="headerlink" title="Exploding gradients"></a>Exploding gradients</h3><p>Consider you have non-negative and large weights and small activations A (as can be the case for sigmoid(z)). When these weights are multiplied along the layers, they cause a large change in the cost. Thus, the gradients are also going to be large. This means that the changes in W, by <code>W — ⍺ * dW,</code> will be in huge steps, the downward moment will increase.</p>
-<blockquote>
-<p>This may result in oscillating around the minima or even overshooting the optimum again and again and the model will never learn!</p>
-</blockquote>
-<p>Another impact of exploding gradients is that huge values of the gradients may cause number overflow resulting in incorrect computations or introductions of NaN’s. This might also lead to the loss taking the value NaN.</p>
-<h2 id="New-Initialization-techniques-ref"><a href="#New-Initialization-techniques-ref" class="headerlink" title="New Initialization techniques ref"></a>New Initialization techniques <a href="https://towardsdatascience.com/weight-initialization-techniques-in-neural-networks-26c649eb3b78" target="_blank" rel="noopener">ref</a></h2><h3 id="Xavier-initialization"><a href="#Xavier-initialization" class="headerlink" title="Xavier initialization"></a>Xavier initialization</h3><p>It is used when we use tanh as our activation function.</p>
-<p><img src="/2018/08/03/Training-Techiniques/1_Lv9TNpAXffRnO0p0WMGJwQ.png" alt="_Lv9TNpAXffRnO0p0WMGJw"></p>
-<p>Some also use the following as initialization:</p>
-<p><img src="/2018/08/03/Training-Techiniques/1_QIzXjH8uefVbcaycsjfdmw.png" alt="_QIzXjH8uefVbcaycsjfdm"></p>
-<h3 id="He-initialization"><a href="#He-initialization" class="headerlink" title="He initialization"></a>He initialization</h3><p>When we use relu as activation, we just simply multiply random initialization with:</p>
-<p><img src="/2018/08/03/Training-Techiniques/1_zxD6Nr6TyAb8JEG6oXAjkg.png" alt="_zxD6Nr6TyAb8JEG6oXAjk"></p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-21 at 10.12.09 AM-0765570.png" alt="creen Shot 2019-02-21 at 10.12.09 AM-076557"></p>
-<h1 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h1><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>Usually, in order to train a neural network, we do some preprocessing to the input data. For example, we could normalize all data (whitening) so that it resembles a normal distribution (that means, zero mean and a unitary variance). Why do we do this preprocessing? Well, there are many reasons for that, some of them being: preventing the early saturation of non-linear activation functions like the sigmoid function, assuring that all input data is in the same range of values, etc.</p>
-<p>But the problem appears in the intermediate layers because the distribution of the activations is constantly changing during training. This slows down the training process because each layer must learn to adapt themselves to a new distribution in every training step. This problem is known as <strong>internal covariate shift</strong>.</p>
-<p>So… what happens if we force the input of every layer to have approximately the same distribution in every training step? <a href="https://towardsdatascience.com/batch-normalization-theory-and-how-to-use-it-with-tensorflow-1892ca0173ad" target="_blank" rel="noopener">ref</a> </p>
-<p>BN的基本思想其实相当直观：因为深层神经网络在做非线性变换前的<strong>激活输入值</strong>（就是那个x=WU+B，U是输入）<strong>随着网络深度加深或者在训练过程中，其分布逐渐发生偏移或者变动，之所以训练收敛慢，一般是整体分布逐渐往非线性函数的取值区间的上下限两端靠近</strong>（对于Sigmoid函数来说，意味着激活输入值WU+B是大的负值或正值），所以这<strong>导致反向传播时低层神经网络的梯度消失</strong>，这是训练深层神经网络收敛越来越慢的<strong>本质原因</strong>，<strong>而BN就是通过一定的规范化手段，把每层神经网络任意神经元这个输入值的分布强行拉回到均值为0方差为1的标准正态分布</strong>，其实就是把越来越偏的分布强制拉回比较标准的分布，这样使得激活输入值落在非线性函数对输入比较敏感的区域，这样输入的小变化就会导致损失函数较大的变化，意思是<strong>这样让梯度变大，避免梯度消失问题产生，而且梯度变大意味着学习收敛速度快，能大大加快训练速度。</strong> <a href="https://www.cnblogs.com/guoyaohua/p/8724433.html" target="_blank" rel="noopener">ref</a> </p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>Batch normalization is a method we can use to normalize the inputs of each layer, in order to fight the internal covariate shift problem.</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405225246905-37854887.png" alt="192699-20180405225246905-3785488"></p>
-<p>假设某个隐层神经元原先的激活输入x取值符合正态分布，正态分布均值是-2，方差是0.5，对应上图中最左端的浅蓝色曲线，通过BN后转换为均值为0，方差是1的正态分布（对应上图中的深蓝色图形），意味着什么，意味着输入x的取值正态分布整体右移2（均值的变化），图形曲线更平缓了（方差增大的变化）。这个图的意思是，BN其实就是把每个隐层神经元的激活输入分布从偏离均值为0方差为1的正态分布通过平移均值压缩或者扩大曲线尖锐程度，调整为均值为0方差为1的正态分布。</p>
-<p>　　那么把激活输入x调整到这个正态分布有什么用？首先我们看下均值为0，方差为1的标准正态分布代表什么含义：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405225314624-527885612.png" alt="192699-20180405225314624-52788561"></p>
-<p>这意味着在一个标准差范围内，也就是说64%的概率x其值落在[-1,1]的范围内，在两个标准差范围内，也就是说95%的概率x其值落在了[-2,2]的范围内。那么这又意味着什么？我们知道，激活值x=WU+B,U是真正的输入，x是某个神经元的激活值，假设非线性函数是sigmoid，那么看下sigmoid(x)其图形：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143109455-1460017374.png" alt="192699-20180407143109455-146001737"></p>
-<p>及sigmoid(x)的导数为：G’=f(x)*(1-f(x))，因为f(x)=sigmoid(x)在0到1之间，所以G’在0到0.25之间，其对应的图如下：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142351924-124461667.png" alt="192699-20180407142351924-12446166"></p>
-<p>假设没有经过BN调整前x的原先正态分布均值是-6，方差是1，那么意味着95%的值落在了[-8,-4]之间，那么对应的Sigmoid（x）函数的值明显接近于0，这是典型的梯度饱和区，在这个区域里梯度变化很慢，为什么是梯度饱和区？请看下sigmoid(x)如果取值接近0或者接近于1的时候对应导数函数取值，接近于0，意味着梯度变化很小甚至消失。而假设经过BN后，均值是0，方差是1，那么意味着95%的x值落在了[-2,2]区间内，很明显这一段是sigmoid(x)函数接近于线性变换的区域，意味着x的小变化会导致非线性函数值较大的变化，也即是梯度变化较大，对应导数函数图中明显大于0的区域，就是梯度非饱和区。</p>
-<p>　　从上面几个图应该看出来BN在干什么了吧？其实就是把隐层神经元激活输入x=WU+B从变化不拘一格的正态分布通过BN操作拉回到了均值为0，方差为1的正态分布，即原始正态分布中心左移或者右移到以0为均值，拉伸或者缩减形态形成以1为方差的图形。什么意思？就是说<strong>经过BN后，目前大部分Activation的值落入非线性函数的线性区内，其对应的导数远离导数饱和区，这样来加速训练收敛过程。</strong></p>
-<p>　　但是很明显，看到这里，稍微了解神经网络的读者一般会提出一个疑问：如果都通过BN，那么不就跟把非线性函数替换成线性函数效果相同了？这意味着什么？我们知道，如果是多层的线性函数变换其实这个深层是没有意义的，因为多层线性网络跟一层线性网络是等价的。这意味着网络的<strong>表达能力</strong>下降了，这也意味着深度的意义就没有了。<strong>所以BN为了保证非线性的获得，对变换后的满足均值为0方差为1的x又进行了scale加上shift操作(y=scale*x+shift)</strong>，每个神经元增加了两个参数scale和shift参数，这两个参数是通过训练学习到的，意思是通过scale和shift把这个值从标准正态分布左移或者右移一点并长胖一点或者变瘦一点，每个实例挪动的程度不一样，这样等价于非线性函数的值从正中心周围的线性区往非线性区动了动。核心思想应该是想找到一个线性和非线性的较好平衡点，既能享受非线性的较强表达能力的好处，又避免太靠非线性区两头使得网络收敛速度太慢。当然，这是我的理解，论文作者并未明确这样说。但是很明显这里的scale和shift操作是会有争议的，因为按照论文作者论文里写的理想状态，就会又通过scale和shift操作把变换后的x调整回未变换的状态，那不是饶了一圈又绕回去原始的“Internal Covariate Shift”问题里去了吗，感觉论文作者并未能够清楚地解释scale和shift操作的理论原因。</p>
-<h4 id="训练阶段如何做BatchNorm"><a href="#训练阶段如何做BatchNorm" class="headerlink" title="训练阶段如何做BatchNorm"></a>训练阶段如何做BatchNorm</h4><p>上面是对BN的抽象分析和解释，具体在Mini-Batch SGD下做BN怎么做？其实论文里面这块写得很清楚也容易理解。为了保证这篇文章完整性，这里简单说明下。</p>
-<p>　　假设对于一个深层神经网络来说，其中两层结构如下：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405213859690-1933561230.png" alt="192699-20180405213859690-193356123"></p>
-<p>要对每个隐层神经元的激活值做BN，可以想象成每个隐层又加上了一层BN操作层，它位于X=WU+B激活值获得之后，非线性函数变换之前，其图示如下：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180405213955224-1791925244.png" alt="192699-20180405213955224-179192524"></p>
-<p>对于Mini-Batch SGD来说，一次训练过程里面包含m个训练实例，其具体BN操作就是对于隐层内每个神经元的激活值来说，进行如下变换：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142802238-1209499294.png" alt="192699-20180407142802238-120949929"></p>
-<p>要注意，这里t层某个神经元的x(k)不是指原始输入，就是说不是t-1层每个神经元的输出，而是t层这个神经元的线性激活x=WU+B，这里的U才是t-1层神经元的输出。变换的意思是：某个神经元对应的原始的激活x通过减去mini-Batch内m个实例获得的m个激活x求得的均值E(x)并除以求得的方差Var(x)来进行转换。</p>
-<p>　　上文说过经过这个<strong>变换后某个神经元的激活x形成了均值为0，方差为1的正态分布，目的是把值往后续要进行的非线性变换的线性区拉动，增大导数值，增强反向传播信息流动性，加快训练收敛速度。</strong>但是这样会导致网络表达能力下降，为了防止这一点，每个神经元增加两个调节参数（scale和shift），这两个参数是通过训练来学习到的，用来对变换后的激活反变换，使得网络表达能力增强，即对变换后的激活进行如下的scale和shift操作，这其实是变换的反操作：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142923190-79595046.png" alt="192699-20180407142923190-7959504"></p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142956288-903484055.png" alt="192699-20180407142956288-90348405"></p>
-<h4 id="BatchNorm的推理-Inference-过程"><a href="#BatchNorm的推理-Inference-过程" class="headerlink" title="BatchNorm的推理(Inference)过程"></a>BatchNorm的推理(Inference)过程</h4><p>BN在训练的时候可以根据Mini-Batch里的若干训练实例进行激活数值调整，但是在推理（inference）的过程中，很明显输入就只有一个实例，看不到Mini-Batch其它实例，那么这时候怎么对输入做BN呢？因为很明显一个实例是没法算实例集合求出的均值和方差的。这可如何是好？</p>
-<p>　　既然没有从Mini-Batch数据里可以得到的统计量，那就想其它办法来获得这个统计量，就是均值和方差。可以用从所有训练实例中获得的统计量来代替Mini-Batch里面m个训练实例获得的均值和方差统计量，因为本来就打算用全局的统计量，只是因为计算量等太大所以才会用Mini-Batch这种简化方式的，那么在推理的时候直接用全局统计量即可。</p>
-<p>　　决定了获得统计量的数据范围，那么接下来的问题是如何获得均值和方差的问题。很简单，因为每次做Mini-Batch训练时，都会有那个Mini-Batch里m个训练实例获得的均值和方差，现在要全局统计量，只要把每个Mini-Batch的均值和方差统计量记住，然后对这些均值和方差求其对应的数学期望即可得出全局统计量，即：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143405654-1995556833.png" alt="192699-20180407143405654-199555683"></p>
-<p>有了均值和方差，每个隐层神经元也已经有对应训练好的Scaling参数和Shift参数，就可以在推导的时候对每个神经元的激活数据计算NB进行变换了，在推理过程中进行BN采取如下方式：</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143658338-63450857.png" alt="192699-20180407143658338-6345085"></p>
-<p>这个公式其实和训练时</p>
-<p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143807788-1841864822.png" alt="192699-20180407143807788-184186482"></p>
-<p>是等价的，通过简单的合并计算推导就可以得出这个结论。那么为啥要写成这个变换形式呢？我猜作者这么写的意思是：在实际运行的时候，按照这种变体形式可以减少计算量，为啥呢？因为对于每个隐层节点来说：</p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-20 at 4.09.16 PM.png" alt="creen Shot 2019-02-20 at 4.09.16 P"></p>
-<p>都是固定值，这样这两个值可以事先算好存起来，在推理的时候直接用就行了，这样比原始的公式每一步骤都现算少了除法的运算过程，乍一看也没少多少计算量，但是如果隐层节点个数多的话节省的计算量就比较多了。</p>
-<h4 id="BatchNorm的好处"><a href="#BatchNorm的好处" class="headerlink" title="BatchNorm的好处"></a>BatchNorm的好处</h4><p>BatchNorm为什么NB呢，关键还是效果好。<strong>①**</strong>不仅仅极大提升了训练速度，收敛过程大大加快；②还能增加分类效果，一种解释是这是类似于Dropout的一种防止过拟合的正则化表达方式，所以不用Dropout也能达到相当的效果；③另外调参过程也简单多了，对于初始化要求没那么高，而且可以使用大的学习率等。**总而言之，经过这么简单的变换，带来的好处多得很，这也是为何现在BN这么快流行起来的原因。</p>
-<h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
-<p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
-<p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
-<p>1.首先，“非饱和激活函数”能解决所谓的“梯度消失”问题。 vanishing gradient在网络层数多的时候尤其明显，是加深网络结构的主要障碍之一   </p>
-<p> 2.其次，它能加快收敛速度。    </p>
-<p><img src="/2018/08/03/Training-Techiniques/692825-20180328173642905-311674055.png" alt="692825-20180328173642905-311674055"></p>
-<h2 id="Sigmoid函数"><a href="#Sigmoid函数" class="headerlink" title="Sigmoid函数"></a>Sigmoid函数</h2><p>将实数压缩到$(0,1)$，用来二分类。</p>
-<script type="math/tex; mode=display">
-f(x) = \frac{1}{1+e^{-x}}</script><p><img src="/2018/08/03/Training-Techiniques/20171028233231084.png" alt="20171028233231084"></p>
-<p>sigmoid的优缺点<a href="https://www.learnopencv.com/understanding-activation-functions-in-deep-learning/" target="_blank" rel="noopener">source</a> </p>
-<ul>
-<li><p><strong>Vanishing gradients</strong>: Notice, the sigmoid function is flat near 0 and 1. In other words, the gradient of the sigmoid is near 0 and 1. During backpropagation through the network with sigmoid activation, the gradients in neurons whose output is near 0 or 1 are nearly 0. These neurons are called saturated neurons. Thus, the weights in these neurons do not update. Not only that, the weights of neurons connected to such neurons are also slowly updated. This problem is also known as vanishing gradient. So, imagine if there was a large network comprising of sigmoid neurons in which many of them are in a saturated regime, then the network will not be able to backpropagate.</p>
-<blockquote>
-<p><a href="http://www.sohu.com/a/148114422_500659" target="_blank" rel="noopener">ref1</a> 在GAN中， 给 D 最后的输出加个 Sigmoid 激活函数，让它取值在 0 到 1 之间？事实上这个方案在理论上是没有问题的，然而这会造成训练的困难。因为 Sigmoid 函数具有饱和区，一旦 D 进入了饱和区，就很难传回梯度来更新 G 了。</p>
-</blockquote>
-</li>
-<li><p><strong>Not zero centered</strong>: Sigmoid outputs are not zero-centered. The output is always between 0 and 1, that means that the output after applying sigmoid is always positive hence, i.e. $x_i &gt; 0$.</p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-13%20at%204.07.13%20PM.png" alt="creen Shot 2019-02-13 at 4.07.13 P"></p>
-<p>which means the gradients on the weights $w$ during backpropagation become either all positive or all negative. This could introduce undesirable zig-zagging dynamics in the gradient updates for the weights. Say we </p>
-<blockquote>
-<ul>
-<li>Tanh, Rectified Linear Unit (ReLU), Leaky ReLU and Parametric ReLU are all zero-centered activation functions.</li>
-<li>This is also why you want zero-mean data</li>
-</ul>
-</blockquote>
-</li>
-<li><p><strong>Computationally expensive</strong>: The exp() function is computationally expensive compared with the other non-linear activation functions.</p>
-</li>
-</ul>
-<h2 id="Tanh函数"><a href="#Tanh函数" class="headerlink" title="Tanh函数"></a>Tanh函数</h2><p>将实数压缩到$[-1,1]$</p>
-<script type="math/tex; mode=display">
-f(x) = tanh(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}\\
- f'(x)=1-f^2(x)</script><p><img src="/2018/08/03/Training-Techiniques/20171028235024692.png" alt="20171028235024692"></p>
-<blockquote>
-<p>ZERO-centered but still kills gradients when saturated</p>
-</blockquote>
-<h2 id="ReLu函数"><a href="#ReLu函数" class="headerlink" title="ReLu函数"></a>ReLu函数</h2><script type="math/tex; mode=display">
-f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/20171028235337038.png" alt="20171028235337038"></p>
-<blockquote>
-<p><strong>Advantages:</strong> Does not saturate (in +region); Very computationally efficient; Converges much faster than sigmoid/tanh in practice (e.g. 6x); </p>
-<p><strong>Disadvantages:</strong> Not zero-centered output; It kills the gradient when $x \le 0$  </p>
-<p><a href="https://datascience.stackexchange.com/questions/5706/what-is-the-dying-relu-problem-in-neural-networks" target="_blank" rel="noopener">dead unit problem</a> <a href="https://ayearofai.com/rohan-4-the-vanishing-gradient-problem-ec68f76ffb9b" target="_blank" rel="noopener">dying unit</a> </p>
-</blockquote>
-<h2 id="LeakyReLu"><a href="#LeakyReLu" class="headerlink" title="LeakyReLu"></a>LeakyReLu</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.54.22%20PM.png" alt="creen Shot 2019-02-17 at 2.54.22 P"></p>
-<h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.55.56%20PM.png" alt="creen Shot 2019-02-17 at 2.55.56 P"></p>
-<h1 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h1><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png" alt="creen Shot 2019-02-17 at 2.58.24 P"></p>
-<h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a>Softmax函数</h2><p>用于多分类问题，输出每类可能出现的概率大小，和为1</p>
-<script type="math/tex; mode=display">
-f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
-<h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
-<p><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d" target="_blank" rel="noopener">Stochastic Gradient Descent with momentum</a> </p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.14.40 PM.png" alt="creen Shot 2019-02-23 at 3.14.40 P"></p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.18.02 PM.png" alt="creen Shot 2019-02-23 at 3.18.02 P"></p>
-<p>Our gradients come from minibatches so they can be noisy!</p>
-<h2 id="SGD-Momentum"><a href="#SGD-Momentum" class="headerlink" title="SGD+Momentum"></a>SGD+Momentum</h2><p>coefficient momentum tends to be 0.9/0.99</p>
-<h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-<div class="line">36</div>
-<div class="line">37</div>
-<div class="line">38</div>
-<div class="line">39</div>
-<div class="line">40</div>
-<div class="line">41</div>
-<div class="line">42</div>
-<div class="line">43</div>
-<div class="line">44</div>
-<div class="line">45</div>
-<div class="line">46</div>
-<div class="line">47</div>
-<div class="line">48</div>
-<div class="line">49</div>
-<div class="line">50</div>
-<div class="line">51</div>
-<div class="line">52</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_to_tensorboard</span><span class="params">(self,generator_step, summary_writer,losses)</span>:</span></div>
-<div class="line"></div>
-<div class="line">        summary = tf.Summary()</div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">1</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Real Loss'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">2</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Fake Loss'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">3</span>]</div>
-<div class="line">        value.tag = <span class="string">'Generator Loss'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">1</span>] - losses[<span class="number">2</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Loss (D_real - D_fake)'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">1</span>] + losses[<span class="number">2</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Loss (D_fake + D_real)'</span></div>
-<div class="line"></div>
-<div class="line">        summary_writer.add_summary(summary, generator_step)</div>
-<div class="line">        summary_writer.flush()</div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self,epochs,batch_size=<span class="number">10</span>,sample_interval=<span class="number">100</span>)</span>:</span></div>
-<div class="line">        summary_writer = tf.summary.FileWriter(<span class="string">'./logs/trainBoth'</span>)</div>
-<div class="line">        generator_step = <span class="number">1</span></div>
-<div class="line"></div>
-<div class="line">        <span class="keyword">for</span> epoch <span class="keyword">in</span> tqdm(range(<span class="number">1</span>, epochs + <span class="number">1</span>)):</div>
-<div class="line">            <span class="keyword">for</span> e, (figure_imgs, pose_imgs) <span class="keyword">in</span> tqdm(enumerate(self.data_loader.load_batch(batch_size=batch_size))):</div>
-<div class="line">                    <span class="comment"># Train the critic</span></div>
-<div class="line"></div>
-<div class="line">                    figure_loss_real = self.figure_critic.train_on_batch(figure_imgs, valid)</div>
-<div class="line">                    figure_loss_fake = self.figure_critic.train_on_batch(gen_figure_imgs, fake)</div>
-<div class="line">                    d_figure_loss = <span class="number">0.5</span> * np.add(figure_loss_real, figure_loss_fake)</div>
-<div class="line"></div>
-<div class="line">                print(self.figure_critic.metrics_names,d_figure_loss)</div>
-<div class="line">                losses = np.empty(shape=<span class="number">1</span>)</div>
-<div class="line">                losses = np.append(losses, figure_loss_real)</div>
-<div class="line">                losses = np.append(losses, figure_loss_fake)</div>
-<div class="line"></div>
-<div class="line">                <span class="comment"># ---------------------</span></div>
-<div class="line">                <span class="comment">#  Train Generator</span></div>
-<div class="line">                <span class="comment"># ---------------------</span></div>
-<div class="line"></div>
-<div class="line">                figure_loss = self.figure_EN.train_on_batch([figure_noise,pose_imgs],valid)</div>
-<div class="line">                print(self.figure_EN.metrics_names,figure_loss)</div>
-<div class="line">                losses = np.append(losses, figure_loss)</div>
-<div class="line">                self.write_to_tensorboard(generator_step, summary_writer, losses)</div>
-<div class="line">                generator_step += <span class="number">1</span></div>
-</pre></td></tr></table></figure>
-<h1 id="Residual-Network"><a href="#Residual-Network" class="headerlink" title="Residual Network"></a>Residual Network</h1><p><a href="https://arxiv.org/pdf/1512.03385.pdf" target="_blank" rel="noopener">paper1</a> <a href="https://arxiv.org/pdf/1603.05027v2.pdf" target="_blank" rel="noopener">paper2</a> </p>
-<h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><p>simplely stack layers exhibit higher training error when the depth increases.</p>
-<h2 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h2><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2018-11-16 at 2.33.45 PM.png" alt="creen Shot 2018-11-16 at 2.33.45 P"></p>
-<p><img src="/2018/08/03/Training-Techiniques/residualnet_34.png" alt="esidualnet_3"></p>
-<p>Figure from <a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/residual_net.html" target="_blank" rel="noopener">ref</a> </p>
-<p><img src="/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png" alt="228224-1a6202911b46d1d"></p>
-<p><a href="https://www.jianshu.com/p/e502e4b43e6d" target="_blank" rel="noopener">pic</a> </p>
-<h1 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h1><p><strong>Optimizer(优化器)</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.optimizers.Adam(lr=<span class="number">0.001</span>, beta_1=<span class="number">0.9</span>, beta_2=<span class="number">0.999</span>, epsilon=<span class="keyword">None</span>, decay=<span class="number">0.0</span>, amsgrad=<span class="keyword">False</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>decay, learning rate decay over each update</li>
-<li>epsilon, fuzz factor, almost zero but greater than zero, to avoid denominator being zero </li>
-<li>according to my search, lr is usually among [0.001, 0.0001, 0.0002], beta_1 is chosen as 0.5</li>
-</ul>
-</blockquote>
-<p><strong>LeakyReLU(激活函数)</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.layers.LeakyReLU(alpha=<span class="number">0.3</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>It allows a small gradient when the unit is not active: <code>f(x) = alpha * x for x &lt; 0</code>, <code>f(x) = x for x &gt;= 0</code></li>
-<li>alpha is usually chosen 0.2</li>
-</ul>
-</blockquote>
-<p><strong>BatchNormalization(批正则化)</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.layers.BatchNormalization(axis=<span class="number">-1</span>, momentum=<span class="number">0.99</span>, epsilon=<span class="number">0.001</span>, center=<span class="keyword">True</span>, scale=<span class="keyword">True</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>momentum</strong>: </li>
-<li><strong>epsilon</strong>: Small float added to variance to avoid dividing by zero.</li>
-</ul>
-</blockquote>
-<p><strong>Dropout</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.layers.Dropout(rate, noise_shape=<span class="keyword">None</span>, seed=<span class="keyword">None</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>rate</strong>: float between 0 and 1. Fraction of the input units to drop. It seems that it has many options, like 0.1, 0.2, 0.5.</li>
-</ul>
-</blockquote>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<h3 id="Original"><a href="#Original" class="headerlink" title="Original"></a>Original</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">opt  = RMSprop(lr=<span class="number">0.0003</span>, decay=<span class="number">1e-6</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-</pre></td><td class="code"><pre><div class="line">Encoder-Decoder</div>
-<div class="line">BatchNormalization(momentum=<span class="number">0.8</span>)</div>
-<div class="line">LeakyReLU(<span class="number">0.2</span>)</div>
-<div class="line"></div>
-<div class="line">Discriminator</div>
-<div class="line">BatchNormalization(momentum=<span class="number">0.9</span>)</div>
-<div class="line">LeakyReLU(<span class="number">0.2</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="DCGAN-CGAN"><a href="#DCGAN-CGAN" class="headerlink" title="DCGAN || CGAN"></a><a href="https://github.com/carpedm20/DCGAN-tensorflow" target="_blank" rel="noopener">DCGAN</a> || <a href="https://github.com/zhangqianhui/Conditional-Gans" target="_blank" rel="noopener">CGAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">optim = tf.train.AdamOptimizer(lr=<span class="number">0.0002</span>, beta1=<span class="number">0.5</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<p>beta1 is Momentum term of adam [0.5]</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(0.2) </div>
-<div class="line">batch_norm(epsilon=1e-5, momentum = 0.9)</div>
-</pre></td></tr></table></figure>
-<h3 id="INFO-GAN"><a href="#INFO-GAN" class="headerlink" title="INFO-GAN"></a><a href="https://github.com/openai/InfoGAN" target="_blank" rel="noopener">INFO-GAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">d_opt = tf.train.AdamOptimizer(lr = <span class="number">0.0002</span>, beta1=<span class="number">0.5</span>)</div>
-<div class="line">g_opt = tf.train.AdamOptimizer(lr = <span class="number">0.001</span>, beta1=<span class="number">0.5</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">batch_norm(epsilon=<span class="number">1e-5</span>,momentum=<span class="number">0.1</span>)</div>
-<div class="line">Lrelu(<span class="number">0.1</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="AC-GAN"><a href="#AC-GAN" class="headerlink" title="AC-GAN"></a><a href="https://arxiv.org/pdf/1610.09585.pdf" target="_blank" rel="noopener">AC-GAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">optim = Adam(lr=[<span class="number">0.0001</span>,<span class="number">0.0002</span>,<span class="number">0.00003</span>],beta1=<span class="number">0.5</span>,beta2=<span class="number">0.999</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">LRELU(<span class="number">0.2</span>)</div>
-<div class="line">dropout(<span class="number">0.5</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">optim = tf.train.AdamOptimizer(learning_rate=<span class="number">0.001</span>,beta1=<span class="number">0.9</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">dropout(<span class="number">0.2</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="BI-GAN"><a href="#BI-GAN" class="headerlink" title="BI-GAN"></a>BI-GAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">optim = Adam(lr=<span class="number">0.0002</span>,beta1=<span class="number">0.5</span>,beta2=<span class="number">0.999</span>)</div>
-<div class="line">lr decays exponentially to <span class="number">0.000002</span> starting halfway through training.</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(<span class="number">0.2</span>)</div>
-<div class="line">(params free) batch_normalization()</div>
-</pre></td></tr></table></figure>
-<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">Adam(lr=0.0001,beta1=0,beta2=0.9) -&gt; WGAN with Gradient penalty</div>
-<div class="line">RMSProp(lr=0.00005) -&gt; WGAN with weight clipping</div>
-</pre></td></tr></table></figure>
-<h3 id="LSGAN"><a href="#LSGAN" class="headerlink" title="LSGAN"></a>LSGAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">RMSProp(lr=<span class="number">0.0001</span>)[chosen by search over lr=<span class="number">.001</span>,<span class="number">.0002</span>,<span class="number">.0001</span>]</div>
-</pre></td></tr></table></figure>
-<h3 id="SR-GAN"><a href="#SR-GAN" class="headerlink" title="SR-GAN"></a>SR-GAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">Adam(lr=<span class="number">0.0001</span>,beta1=<span class="number">0.9</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(0.2)</div>
-<div class="line">batch_normalization()</div>
-</pre></td></tr></table></figure>
-<h3 id="PixelDA"><a href="#PixelDA" class="headerlink" title="PixelDA"></a>PixelDA</h3><p><a href="https://arxiv.org/pdf/1612.05424.pdf" target="_blank" rel="noopener">loss weights</a> </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">Adam(lr=[<span class="number">0.0002</span>,<span class="number">0.001</span>],beta1=<span class="number">0.5</span>)</div>
-<div class="line">Learning rate decayed by <span class="number">0.95</span> every <span class="number">20</span>,<span class="number">000</span> steps</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(<span class="number">0.2</span>)</div>
-<div class="line">dropout(<span class="number">0.1</span>) <span class="comment"># with keep probability of 90%</span></div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h1 id="DC-GAN"><a href="#DC-GAN" class="headerlink" title="DC-GAN"></a>DC-GAN</h1><p><a href="https://julianzaidi.wordpress.com/2017/04/24/deep-convolution-gan-dcgan-architecture-and-training/" target="_blank" rel="noopener">Deep Convolutional GAN (DCGAN) : Architecture and choice of the good set of hyper-parameters</a></p>
-<h1 id="VGG-FEATURE-LOSS"><a href="#VGG-FEATURE-LOSS" class="headerlink" title="VGG-FEATURE-LOSS"></a>VGG-FEATURE-LOSS</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.applications <span class="keyword">import</span> VGG19</div>
-<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_vgg</span><span class="params">()</span>:</span></div>
-<div class="line">    vgg = VGG19(weights=<span class="string">"imagenet"</span>)</div>
-<div class="line">    vgg.outputs = [vgg.layers[<span class="number">9</span>].output]</div>
-<div class="line">    img = layers.Input(shape=self.img_shape)</div>
-<div class="line">    img_features = vgg(img)</div>
-<div class="line">    <span class="keyword">return</span> Model(img, img_features)</div>
-<div class="line"><span class="comment">##########################################</span></div>
-<div class="line">vgg = build_vgg()</div>
-<div class="line">vgg.trainable = <span class="keyword">False</span></div>
-<div class="line">vgg.compile(loss=<span class="string">'mse'</span>,optimizer=optimizer,metrics=[<span class="string">'accuracy'</span>])</div>
-<div class="line"></div>
-<div class="line"><span class="comment">##########################################</span></div>
-<div class="line">fake_pose_vgg_feature = vgg(pose_recons)</div>
-<div class="line">pose_ende = Model(pose_img,fake_pose_vgg_feature)</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">##########################################</span></div>
-<div class="line">pose_real_vgg_feature = vgg.predict(pose_imgs)</div>
-<div class="line">pose_loss = pose_ende.train_on_batch(pose_imgs,pose_real_vgg_feature)</div>
-</pre></td></tr></table></figure>
-<h1 id="PatchGan"><a href="#PatchGan" class="headerlink" title="PatchGan"></a>PatchGan</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-</pre></td><td class="code"><pre><div class="line"><span class="comment"># Calculate output shape of D (PatchGAN)</span></div>
-<div class="line">patch = int(self.img_rows / <span class="number">2</span>**<span class="number">4</span>)</div>
-<div class="line">self.disc_patch = (patch, patch, <span class="number">1</span>)</div>
-<div class="line"></div>
-<div class="line"><span class="comment"># Build and compile the discriminator</span></div>
-<div class="line">self.discriminator = self.build_discriminator()</div>
-<div class="line">self.discriminator.compile(loss=<span class="string">'mse'</span>,optimizer=optimizer,metrics=[<span class="string">'accuracy'</span>])</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_discriminator</span><span class="params">(self)</span>:</span></div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">d_layer</span><span class="params">(layer_input, filters, f_size=<span class="number">4</span>, bn=True)</span>:</span></div>
-<div class="line">        d = Conv2D(filters, kernel_size=f_size, strides=<span class="number">2</span>, padding=<span class="string">'same'</span>)(layer_input)</div>
-<div class="line">        d = LeakyReLU(alpha=<span class="number">0.2</span>)(d)</div>
-<div class="line">        <span class="keyword">if</span> bn:</div>
-<div class="line">            d = BatchNormalization(momentum=<span class="number">0.8</span>)(d)</div>
-<div class="line">        <span class="keyword">return</span> d</div>
-<div class="line">    img_A = Input(shape=self.img_shape)</div>
-<div class="line">    img_B = Input(shape=self.img_shape)</div>
-<div class="line">    combined_imgs = Concatenate(axis=<span class="number">-1</span>)([img_A, img_B])</div>
-<div class="line">    d1 = d_layer(combined_imgs, self.df, bn=<span class="keyword">False</span>)</div>
-<div class="line">    d2 = d_layer(d1, self.df*<span class="number">2</span>)</div>
-<div class="line">    d3 = d_layer(d2, self.df*<span class="number">4</span>)</div>
-<div class="line">    d4 = d_layer(d3, self.df*<span class="number">8</span>)</div>
-<div class="line">    validity = Conv2D(<span class="number">1</span>, kernel_size=<span class="number">4</span>, strides=<span class="number">1</span>, padding=<span class="string">'same'</span>)(d4)</div>
-<div class="line">    <span class="keyword">return</span> Model([img_A, img_B], validity)</div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self)</span>:</span></div>
-<div class="line">    valid = np.ones((batch_size,) + self.disc_patch)</div>
-<div class="line">    fake = np.zeros((batch_size,) + self.disc_patch)</div>
-<div class="line">    </div>
-<div class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(epochs):</div>
-<div class="line">        fake_A = self.generator.predict(imgs_B)</div>
-<div class="line">        d_loss_real = self.discriminator.train_on_batch([imgs_A, imgs_B], valid)</div>
-<div class="line">        d_loss_real = self.discriminator.train_on_batch([imgs_A, imgs_B], valid)</div>
-<div class="line">        d_loss = <span class="number">0.5</span> * np.add(d_loss_real, d_loss_fake)</div>
-<div class="line">        </div>
-<div class="line">        g_loss = self.combined.train_on_batch([imgs_A, imgs_B], [valid, imgs_A])</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><p>The output of discriminator is (None, patch, patch, 1), which can be seen using model.summary(). While the traditional discriminator’s output is (None, 1), distinguishing each image.</p>
-</li>
-<li><p>If traditional discriminator, the last two line codes would be:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-</pre></td><td class="code"><pre><div class="line">&gt;   d5 = Flatten()(d4)</div>
-<div class="line">&gt;   validity = layers.Dense(<span class="number">1</span>,activation=<span class="string">'sigmoid'</span>)(d5)</div>
-<div class="line">&gt;   <span class="keyword">return</span> Model([img_A, img_B], validity)</div>
-<div class="line">&gt;</div>
-</pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<p>&gt;</p>
-<blockquote>
-<p>  ​</p>
-</blockquote>
-
-          
+          <p>Techniques for training a Deep Learning model.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/03/Training-Techiniques/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
