@@ -79,14 +79,16 @@
 
 
 
-<meta name="description" content="Django based website building.">
+<meta name="description" content="We are going to write a Django project so that we can learn the basic concepts and operations. Our website is a basic poll application, which consist of two parts:  A pyblic site that lets people view">
 <meta name="keywords" content="Website">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebSite Making">
 <meta property="og:url" content="http://yoursite.com/2019/03/05/WebSite-Making/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Django based website building.">
+<meta property="og:description" content="We are going to write a Django project so that we can learn the basic concepts and operations. Our website is a basic poll application, which consist of two parts:  A pyblic site that lets people view">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.29.13%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-12%20at%201.41.00%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.29.13%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.31.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.34.23%20PM.png">
@@ -97,10 +99,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.17.57%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.21.18%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.27.19%20PM.png">
-<meta property="og:updated_time" content="2019-03-10T22:28:42.605Z">
+<meta property="og:updated_time" content="2019-03-12T19:00:14.739Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebSite Making">
-<meta name="twitter:description" content="Django based website building.">
+<meta name="twitter:description" content="We are going to write a Django project so that we can learn the basic concepts and operations. Our website is a basic poll application, which consist of two parts:  A pyblic site that lets people view">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.29.13%20PM.png">
 
 
@@ -387,8 +389,109 @@
       
 
       
-        <p>Django based website building.</p>
+        <p>We are going to write a Django project so that we can learn the basic concepts and operations. Our website is a basic poll application, which consist of two parts:</p>
+<ul>
+<li>A pyblic site that lets people view polls and vote in them</li>
+<li>An admin site that lets you add, change, and delete polls.</li>
+</ul>
 <a id="more"></a>
+<h1 id="Create-a-project"><a href="#Create-a-project" class="headerlink" title="Create a project"></a>Create a project</h1><p>The first thing we need to do is to create a Django project, which is a collection of settings for an instance of Django, including database configuration, Django-specific options and application-specific settings.</p>
+<p>From the command line, <code>cd</code> into the directory where you would like to store your project, then run the following command:</p>
+<p><code>django-admin startproject MyWebsite</code></p>
+<p>This will result in a directory in your current directory and the directory structure is like:</p>
+<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-07 at 9.29.13 PM.png" alt="creen Shot 2019-03-07 at 9.29.13 P"></p>
+<ol>
+<li>The outter <code>MyWebsite/</code> root directory is just a container for our project. It is name doesn’t matter to Django; so you can rename it whenever you want.</li>
+<li>The inner <code>MyWebsite/</code> directory is the actural Python package for our project.<ul>
+<li><code>MyWebsite/.settings.py</code> is for configuration for this Django project.</li>
+<li><code>MyWebsite/urls.py</code> is for URL declarations for Django project.</li>
+<li><code>MyWebsite/wsgi.py</code> is an entery-point for WSGI-compatible web servers to serve the project.</li>
+</ul>
+</li>
+<li><code>manage.py</code> is a command-line utility that lets you interact with the Django project.</li>
+</ol>
+<h1 id="Development-server"><a href="#Development-server" class="headerlink" title="Development server"></a>Development server</h1><p>Once we created the project, we can verify whether it works by running the following command:</p>
+<p><code>python manage.py runserver</code></p>
+<p>The following output will be on the terminal:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line">Performing system checks...</div>
+<div class="line">System check identified no issues (<span class="number">0</span> silenced).</div>
+<div class="line">You have unapplied migrations; your app may <span class="keyword">not</span> work properly until they are applied.</div>
+<div class="line">Run <span class="string">'python manage.py migrate'</span> to apply them.</div>
+<div class="line">February <span class="number">28</span>, <span class="number">2019</span> - <span class="number">15</span>:<span class="number">50</span>:<span class="number">53</span></div>
+<div class="line">Django version <span class="number">2.1</span>, using settings <span class="string">'mysite.settings'</span></div>
+<div class="line">Starting development server at http://<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8000</span>/</div>
+<div class="line">Quit the server <span class="keyword">with</span> CONTROL-C.</div>
+</pre></td></tr></table></figure>
+<p>Then we can visit <code>http://127.0.0.1:8000/</code> with browser.</p>
+<p>By default, the runserver command starts the development server on the internal IP at port 8000. If you want to use another port, you can pass it as a command-line argument.</p>
+<p><code>python manage.py runserver 8080</code></p>
+<p>If you want to change the server’s IP, pass it along with the prot.</p>
+<p><code>python manage.py runserver 0:8080</code></p>
+<h1 id="Create-the-Polls-app"><a href="#Create-the-Polls-app" class="headerlink" title="Create the Polls app"></a>Create the Polls app</h1><p>Now that we can create the apps under this project. To be clear, <strong>an app is a Web application</strong> that does something – e.g., a Weblog system, a database of public records or a simple poll app. <strong>A project is a collection of configuration and apps</strong> for a particular website. A project can contain multiple apps. An app can be in multiple projects.</p>
+<p>To create our app, make sure we are in the same directory as <code>manage.py</code> and type the command:</p>
+<p><code>ppython manage.py startapp polls</code></p>
+<p>we will get a directory like this:</p>
+<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-12 at 1.41.00 PM.png" alt="creen Shot 2019-03-12 at 1.41.00 P"></p>
+<h2 id="Write-a-view"><a href="#Write-a-view" class="headerlink" title="Write a view"></a>Write a view</h2><p>Open <code>polls/views.py</code> and put the following code in it:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"Hello World!"</span>)</div>
+</pre></td></tr></table></figure>
+<p>To call the view, we need to map it to a URL. Therefore we need to create a <code>urls.py</code> and write the codes:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</div>
+<div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> views</div>
+<div class="line">urlpatterns = [</div>
+<div class="line">    path(<span class="string">''</span>,views.index,name=<span class="string">'index'</span>)</div>
+<div class="line">]</div>
+</pre></td></tr></table></figure>
+<p>The next step is to point the root URLconf at the <code>polls.urls</code> module. Open <code>MyWebsite/urls.py</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div>
+<div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> include, path</div>
+<div class="line">urlpatterns = [</div>
+<div class="line">    path(<span class="string">'polls/'</span>, include(<span class="string">'polls.urls'</span>)),</div>
+<div class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</div>
+<div class="line">]</div>
+</pre></td></tr></table></figure>
+<p>Here, the <code>include()</code> function allows referencing other URLconfs. We should always use <code>include()</code> when you include other URL patterns. <code>admin.site.urls</code> is the only exception to this.</p>
+<p>Finally, run the command <code>python manage.py runserver</code> and go to <code>http://127.0.0.1:8000/polls/</code>, we should see the text <code>Hello World!</code>, which is defined in the index view.</p>
+<p>The <code>path()</code> function takes four arguments, two required: <code>route</code> and <code>view</code>, and two optional:<code>kwargs</code> and <code>name.</code></p>
+<ol>
+<li><p><a href="https://docs.djangoproject.com/en/2.1/ref/urls/#django.urls.path" target="_blank" rel="noopener"><code>path()</code></a> argument: <code>route</code></p>
+<p><code>route</code> is a string that contains a URL pattern. When processing a request, Django starts at the first pattern in <code>urlpatterns</code> and makes its way down the list, comparing the requested URL against each pattern until it finds one that matches.</p>
+<p>Patterns don’t search GET and POST parameters, or the domain name. For example, in a request to <code>https://www.example.com/myapp/</code>, the URLconf will look for<code>myapp/</code>. In a request to <code>https://www.example.com/myapp/?page=3</code>, the URLconf will also look for <code>myapp/</code>.</p>
+</li>
+<li><p><a href="https://docs.djangoproject.com/en/2.1/ref/urls/#django.urls.path" target="_blank" rel="noopener"><code>path()</code></a> argument: <code>view</code></p>
+<p>When Django finds a matching pattern, it calls the specified view function with an <a href="https://docs.djangoproject.com/en/2.1/ref/request-response/#django.http.HttpRequest" target="_blank" rel="noopener"><code>HttpRequest</code></a> object as the first argument and any “captured” values from the route as keyword arguments. We’ll give an example of this in a bit.</p>
+</li>
+<li><p><a href="https://docs.djangoproject.com/en/2.1/ref/urls/#django.urls.path" target="_blank" rel="noopener"><code>path()</code></a> argument: <code>kwargs</code></p>
+<p>Arbitrary keyword arguments can be passed in a dictionary to the target view. We aren’t going to use this feature of Django in the tutorial.</p>
+</li>
+<li><p><a href="https://docs.djangoproject.com/en/2.1/ref/urls/#django.urls.path" target="_blank" rel="noopener"><code>path()</code></a> argument: <code>name</code></p>
+<p>Naming your URL lets you refer to it unambiguously from elsewhere in Django, especially from within templates. This powerful feature allows you to make global changes to the URL patterns of your project while only touching a single file.</p>
+</li>
+</ol>
 <h1 id="Day1-Basic-Commands"><a href="#Day1-Basic-Commands" class="headerlink" title="Day1 Basic Commands"></a>Day1 Basic Commands</h1><ol>
 <li><p><strong>Create a new Django project</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -523,6 +626,7 @@
 </pre></td></tr></table></figure>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/deploying-a-keras-deep-learning-model-as-a-web-application-in-p-fc0f2354a7ff" target="_blank" rel="noopener">Deploying a Keras Deep Learning Model as a Web Application in Python</a></p>
 <p><a href="https://summerofhpc.prace-ri.eu/bringing-visualisation-to-the-web-with-python-and-bokeh/" target="_blank" rel="noopener">Bringing visualisation to the web with Python and Bokeh</a> </p>
+<p><a href="https://docs.djangoproject.com/en/2.1/intro/tutorial01/" target="_blank" rel="noopener">Django tutorials</a></p>
 
       
     </div>
@@ -693,7 +797,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1-Basic-Commands"><span class="nav-number">1.</span> <span class="nav-text">Day1 Basic Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2-View-and-URL"><span class="nav-number">2.</span> <span class="nav-text">Day2 View and URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3-Advanced-Views-and-Urls"><span class="nav-number">3.</span> <span class="nav-text">Day3 Advanced Views and Urls</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-a-4-amp-b-5-to-visit-webpage"><span class="nav-number">3.1.</span> <span class="nav-text">/add/?a=4&amp;b=5 to visit webpage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-3-4-to-visit-page"><span class="nav-number">3.2.</span> <span class="nav-text">/add/3/4 to visit page</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-a-project"><span class="nav-number">1.</span> <span class="nav-text">Create a project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Development-server"><span class="nav-number">2.</span> <span class="nav-text">Development server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-the-Polls-app"><span class="nav-number">3.</span> <span class="nav-text">Create the Polls app</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-a-view"><span class="nav-number">3.1.</span> <span class="nav-text">Write a view</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1-Basic-Commands"><span class="nav-number">4.</span> <span class="nav-text">Day1 Basic Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2-View-and-URL"><span class="nav-number">5.</span> <span class="nav-text">Day2 View and URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3-Advanced-Views-and-Urls"><span class="nav-number">6.</span> <span class="nav-text">Day3 Advanced Views and Urls</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-a-4-amp-b-5-to-visit-webpage"><span class="nav-number">6.1.</span> <span class="nav-text">/add/?a=4&amp;b=5 to visit webpage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-3-4-to-visit-page"><span class="nav-number">6.2.</span> <span class="nav-text">/add/3/4 to visit page</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
