@@ -283,6 +283,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/21/Algorithm/" itemprop="url">Algorithm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-21T15:19:42-05:00">
+                2018-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:</p>
+<ul>
+<li>clear(unambiguous), doable(terminate)</li>
+<li>does what it is supposed to do</li>
+<li>does not have any redundancy(several steps together caused redundacy, not caused by a single step)</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/21/Algorithm/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/20/Variant-GAN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -744,10 +895,13 @@
 <h3 id="np-random-randint"><a href="#np-random-randint" class="headerlink" title="np.random.randint()"></a>np.random.randint()</h3><p><code>numpy.random.randint(low, high, size)</code></p>
 <ul>
 <li>返回开区间 <strong>[low, high)</strong>范围内的整数值</li>
-<li><p>默认high是None,如果只有low，那范围就是[0,low)。如果有high，范围就是[low,high)</p>
-</li>
-<li><p>size是输出数组的维度（形状），可以是列表，或者元组 </p>
-</li>
+<li>默认high是None,如果只有low，那范围就是[0,low)。如果有high，范围就是[low,high)</li>
+<li>size是输出数组的维度（形状），可以是列表，或者元组</li>
+</ul>
+<h3 id="np-random-choice"><a href="#np-random-choice" class="headerlink" title="np.random.choice()"></a>np.random.choice()</h3><p><code>numpy.random.choice(a, size)</code></p>
+<ul>
+<li>a可以是一个数或者一个array，如果是一个数则sample范围是【0，a);如果是array，则从中sample</li>
+<li>size为sample大小；如果size=(m,n,k)，则采样$m<em>n</em>k$个。</li>
 </ul>
 <h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="数字补0"><a href="#数字补0" class="headerlink" title="数字补0"></a>数字补0</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -2558,156 +2712,10 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 
       
         
-          <p>本文参考了<a href="http://www.cnblogs.com/lc1217/p/7132364.html" target="_blank" rel="noopener">Keras入门</a></p>
+          <p>Keras使用技巧。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/23/Keras/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/AutoEncoder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/22/AutoEncoder/" itemprop="url">AutoEncoder</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-22T00:19:32-05:00">
-                2018-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>AutoEncoder通过设计encode和decode过程使输入和输出越来越接近，是一种自监督学习过程，输入图片通过encode进行处理，得到code，再经过decode处理得到输出，我们可以控制encode的输出维数，就相当于强迫encode过程以低维参数学习高维特征。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/22/AutoEncoder/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -2795,7 +2803,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

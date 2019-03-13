@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-03-12T19:01:18.948Z">
+<meta property="og:updated_time" content="2019-03-13T15:34:18.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
 <meta name="twitter:description" content="Techniques for training a Deep Learning model.">
@@ -468,7 +468,8 @@
 <p>假设没有经过BN调整前x的原先正态分布均值是-6，方差是1，那么意味着95%的值落在了[-8,-4]之间，那么对应的Sigmoid（x）函数的值明显接近于0，这是典型的梯度饱和区，在这个区域里梯度变化很慢，为什么是梯度饱和区？请看下sigmoid(x)如果取值接近0或者接近于1的时候对应导数函数取值，接近于0，意味着梯度变化很小甚至消失。而假设经过BN后，均值是0，方差是1，那么意味着95%的x值落在了[-2,2]区间内，很明显这一段是sigmoid(x)函数接近于线性变换的区域，意味着x的小变化会导致非线性函数值较大的变化，也即是梯度变化较大，对应导数函数图中明显大于0的区域，就是梯度非饱和区。</p>
 <p>　　从上面几个图应该看出来BN在干什么了吧？其实就是把隐层神经元激活输入x=WU+B从变化不拘一格的正态分布通过BN操作拉回到了均值为0，方差为1的正态分布，即原始正态分布中心左移或者右移到以0为均值，拉伸或者缩减形态形成以1为方差的图形。什么意思？就是说<strong>经过BN后，目前大部分Activation的值落入非线性函数的线性区内，其对应的导数远离导数饱和区，这样来加速训练收敛过程。</strong></p>
 <p>　　但是很明显，看到这里，稍微了解神经网络的读者一般会提出一个疑问：如果都通过BN，那么不就跟把非线性函数替换成线性函数效果相同了？这意味着什么？我们知道，如果是多层的线性函数变换其实这个深层是没有意义的，因为多层线性网络跟一层线性网络是等价的。这意味着网络的<strong>表达能力</strong>下降了，这也意味着深度的意义就没有了。<strong>所以BN为了保证非线性的获得，对变换后的满足均值为0方差为1的x又进行了scale加上shift操作(y=scale*x+shift)</strong>，每个神经元增加了两个参数scale和shift参数，这两个参数是通过训练学习到的，意思是通过scale和shift把这个值从标准正态分布左移或者右移一点并长胖一点或者变瘦一点，每个实例挪动的程度不一样，这样等价于非线性函数的值从正中心周围的线性区往非线性区动了动。核心思想应该是想找到一个线性和非线性的较好平衡点，既能享受非线性的较强表达能力的好处，又避免太靠非线性区两头使得网络收敛速度太慢。当然，这是我的理解，论文作者并未明确这样说。但是很明显这里的scale和shift操作是会有争议的，因为按照论文作者论文里写的理想状态，就会又通过scale和shift操作把变换后的x调整回未变换的状态，那不是饶了一圈又绕回去原始的“Internal Covariate Shift”问题里去了吗，感觉论文作者并未能够清楚地解释scale和shift操作的理论原因。</p>
-<h4 id="训练阶段如何做BatchNorm"><a href="#训练阶段如何做BatchNorm" class="headerlink" title="训练阶段如何做BatchNorm"></a>训练阶段如何做BatchNorm</h4><p>上面是对BN的抽象分析和解释，具体在Mini-Batch SGD下做BN怎么做？其实论文里面这块写得很清楚也容易理解。为了保证这篇文章完整性，这里简单说明下。</p>
+<p><strong>训练阶段如何做BatchNorm</strong></p>
+<p>上面是对BN的抽象分析和解释，具体在Mini-Batch SGD下做BN怎么做？其实论文里面这块写得很清楚也容易理解。为了保证这篇文章完整性，这里简单说明下。</p>
 <p>　　假设对于一个深层神经网络来说，其中两层结构如下：</p>
 <p><img src="/2018/08/03/Training-Techiniques/1192699-20180405213859690-1933561230.png" alt="192699-20180405213859690-193356123"></p>
 <p>要对每个隐层神经元的激活值做BN，可以想象成每个隐层又加上了一层BN操作层，它位于X=WU+B激活值获得之后，非线性函数变换之前，其图示如下：</p>
@@ -479,7 +480,8 @@
 <p>　　上文说过经过这个<strong>变换后某个神经元的激活x形成了均值为0，方差为1的正态分布，目的是把值往后续要进行的非线性变换的线性区拉动，增大导数值，增强反向传播信息流动性，加快训练收敛速度。</strong>但是这样会导致网络表达能力下降，为了防止这一点，每个神经元增加两个调节参数（scale和shift），这两个参数是通过训练来学习到的，用来对变换后的激活反变换，使得网络表达能力增强，即对变换后的激活进行如下的scale和shift操作，这其实是变换的反操作：</p>
 <p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142923190-79595046.png" alt="192699-20180407142923190-7959504"></p>
 <p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142956288-903484055.png" alt="192699-20180407142956288-90348405"></p>
-<h4 id="BatchNorm的推理-Inference-过程"><a href="#BatchNorm的推理-Inference-过程" class="headerlink" title="BatchNorm的推理(Inference)过程"></a>BatchNorm的推理(Inference)过程</h4><p>BN在训练的时候可以根据Mini-Batch里的若干训练实例进行激活数值调整，但是在推理（inference）的过程中，很明显输入就只有一个实例，看不到Mini-Batch其它实例，那么这时候怎么对输入做BN呢？因为很明显一个实例是没法算实例集合求出的均值和方差的。这可如何是好？</p>
+<p><strong>BatchNorm的推理(Inference)过程</strong></p>
+<p>BN在训练的时候可以根据Mini-Batch里的若干训练实例进行激活数值调整，但是在推理（inference）的过程中，很明显输入就只有一个实例，看不到Mini-Batch其它实例，那么这时候怎么对输入做BN呢？因为很明显一个实例是没法算实例集合求出的均值和方差的。这可如何是好？</p>
 <p>　　既然没有从Mini-Batch数据里可以得到的统计量，那就想其它办法来获得这个统计量，就是均值和方差。可以用从所有训练实例中获得的统计量来代替Mini-Batch里面m个训练实例获得的均值和方差统计量，因为本来就打算用全局的统计量，只是因为计算量等太大所以才会用Mini-Batch这种简化方式的，那么在推理的时候直接用全局统计量即可。</p>
 <p>　　决定了获得统计量的数据范围，那么接下来的问题是如何获得均值和方差的问题。很简单，因为每次做Mini-Batch训练时，都会有那个Mini-Batch里m个训练实例获得的均值和方差，现在要全局统计量，只要把每个Mini-Batch的均值和方差统计量记住，然后对这些均值和方差求其对应的数学期望即可得出全局统计量，即：</p>
 <p><img src="/2018/08/03/Training-Techiniques/1192699-20180407143405654-1995556833.png" alt="192699-20180407143405654-199555683"></p>
@@ -490,8 +492,9 @@
 <p>是等价的，通过简单的合并计算推导就可以得出这个结论。那么为啥要写成这个变换形式呢？我猜作者这么写的意思是：在实际运行的时候，按照这种变体形式可以减少计算量，为啥呢？因为对于每个隐层节点来说：</p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-20 at 4.09.16 PM.png" alt="creen Shot 2019-02-20 at 4.09.16 P"></p>
 <p>都是固定值，这样这两个值可以事先算好存起来，在推理的时候直接用就行了，这样比原始的公式每一步骤都现算少了除法的运算过程，乍一看也没少多少计算量，但是如果隐层节点个数多的话节省的计算量就比较多了。</p>
-<h4 id="BatchNorm的好处"><a href="#BatchNorm的好处" class="headerlink" title="BatchNorm的好处"></a>BatchNorm的好处</h4><p>BatchNorm为什么NB呢，关键还是效果好。<strong>①**</strong>不仅仅极大提升了训练速度，收敛过程大大加快；②还能增加分类效果，一种解释是这是类似于Dropout的一种防止过拟合的正则化表达方式，所以不用Dropout也能达到相当的效果；③另外调参过程也简单多了，对于初始化要求没那么高，而且可以使用大的学习率等。**总而言之，经过这么简单的变换，带来的好处多得很，这也是为何现在BN这么快流行起来的原因。</p>
-<h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
+<p><strong>BatchNorm的好处</strong></p>
+<p>BatchNorm为什么NB呢，关键还是效果好。<strong>①**</strong>不仅仅极大提升了训练速度，收敛过程大大加快；②还能增加分类效果，一种解释是这是类似于Dropout的一种防止过拟合的正则化表达方式，所以不用Dropout也能达到相当的效果；③另外调参过程也简单多了，对于初始化要求没那么高，而且可以使用大的学习率等。**总而言之，经过这么简单的变换，带来的好处多得很，这也是为何现在BN这么快流行起来的原因。</p>
+<h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
 <p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
 <p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
 <p>1.首先，“非饱和激活函数”能解决所谓的“梯度消失”问题。 vanishing gradient在网络层数多的时候尤其明显，是加深网络结构的主要障碍之一   </p>
@@ -536,17 +539,61 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
 </blockquote>
 <h2 id="LeakyReLu"><a href="#LeakyReLu" class="headerlink" title="LeakyReLu"></a>LeakyReLu</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.54.22%20PM.png" alt="creen Shot 2019-02-17 at 2.54.22 P"></p>
 <h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.55.56%20PM.png" alt="creen Shot 2019-02-17 at 2.55.56 P"></p>
-<h1 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h1><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png" alt="creen Shot 2019-02-17 at 2.58.24 P"></p>
-<h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a>Softmax函数</h2><p>用于多分类问题，输出每类可能出现的概率大小，和为1</p>
+<h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png" alt="creen Shot 2019-02-17 at 2.58.24 P"></p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
+<h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a><a href="https://deepnotes.io/softmax-crossentropy" target="_blank" rel="noopener">Softmax函数</a></h2><p>Softmax function takes an N-dimensional vector of real number and transforms it into a vector of real number in range $(0,1)$ which add up to 1.</p>
 <script type="math/tex; mode=display">
-f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
-<h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
-<p><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d" target="_blank" rel="noopener">Stochastic Gradient Descent with momentum</a> </p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.14.40 PM.png" alt="creen Shot 2019-02-23 at 3.14.40 P"></p>
-<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.18.02 PM.png" alt="creen Shot 2019-02-23 at 3.18.02 P"></p>
-<p>Our gradients come from minibatches so they can be noisy!</p>
-<h2 id="SGD-Momentum-ref"><a href="#SGD-Momentum-ref" class="headerlink" title="SGD+Momentum ref"></a>SGD+Momentum <a href="https://deepnotes.io/sgd-momentum-adaptive" target="_blank" rel="noopener">ref</a></h2><p>coefficient momentum tends to be 0.9/0.99</p>
-<h1 id="Tensorboard"><a href="#Tensorboard" class="headerlink" title="Tensorboard"></a>Tensorboard</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+f(x_j)=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p>In python, we have the code for softmax function as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></div>
+<div class="line">    exps = np.exp(x)</div>
+<div class="line">    <span class="keyword">return</span> exps/np.sum(exps)</div>
+</pre></td></tr></table></figure>
+<p>We have to note that the numerical range of float number in numpy is limited. For <code>float64</code> the upper bound is $10^{308}$. For exponential, it is not difficult to overshoot that limit, in which case python returns <code>nan</code>.</p>
+<p>To make our softmax function numerically stable, we simply normalize the values in the vector, by multiplying the numerator and denominator with a constant $C$.</p>
+<script type="math/tex; mode=display">
+\begin{align}
+p_i &= \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}} \\
+&= \frac{Ce^{a_i}}{C\sum_{k=1}^N e^{a_k}} \\
+&= \frac{e^{a_i + \log(C)}}{\sum_{k=1}^N e^{a_k + \log(C)}} \\
+\end{align}</script><p>We can choose an arbitrary value for $log(C)$ term, but generally $log(C)=−max(a)$ is chosen, as it shifts all of elements in the vector to negative to zero, and negatives with large exponents saturate to zero rather than the infinity, avoiding overflowing and resulting in <code>nan</code>.</p>
+<p>The code for our stable softmax is as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></div>
+<div class="line">    exps = np.exp(x-np.max(x))</div>
+<div class="line">    <span class="keyword">return</span> exps/np.sum(exps)</div>
+</pre></td></tr></table></figure>
+<h3 id="Derivative-of-softmax"><a href="#Derivative-of-softmax" class="headerlink" title="Derivative of softmax"></a>Derivative of softmax</h3><p>Due to the desirable property of softmax function outputting a probability distribution, we use it as the final layer in neural networks. For this we need to calculate the derivative or gradient and pass it back to the previous layer during backpropagation.</p>
+<p>For each node $a_j$ in the output layer, we want to calculate:</p>
+<script type="math/tex; mode=display">
+\frac{\partial p_i}{\partial a_j} = \frac{\partial  \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}}}{\partial a_j}</script><p>If $i=j$:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial  \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}}}{\partial a_j}&= \frac{e^{a_i} \sum_{k=1}^N e^{a_k} - e^{a_j}e^{a_i}}{\left( \sum_{k=1}^N e^{a_k}\right)^2} \\
+&= \frac{e^{a_i} \left( \sum_{k=1}^N e^{a_k} - e^{a_j}\right )}{\left( \sum_{k=1}^N e^{a_k}\right)^2} \\
+&= \frac{ e^{a_j} }{\sum_{k=1}^N e^{a_k} } \times \frac{\left( \sum_{k=1}^N e^{a_k} - e^{a_j}\right ) }{\sum_{k=1}^N e^{a_k} } \\
+&= p_i(1-p_j)
+\end{align}</script><p>For $i\ne j$:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial  \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}}}{\partial a_j}&= \frac{0 - e^{a_j}e^{a_i}}{\left( \sum_{k=1}^N e^{a_k}\right)^2} \\
+&= \frac{- e^{a_j} }{\sum_{k=1}^N e^{a_k} } \times \frac{e^{a_i} }{\sum_{k=1}^N e^{a_k} } \\
+&= - p_j.p_i
+\end{align}</script><p>So the derivative of the softmax function is given as,</p>
+<script type="math/tex; mode=display">
+\frac{\partial p_i}{\partial a_j} = 
+\begin{cases}p_i(1-p_j) &  if & i=j \\
+-p_j.p_i & if & i \neq j
+\end{cases}</script><p>Or using Kronecker delta $\delta{ij} = \begin{cases} 1 &amp; if &amp; i=j \\ 0 &amp; if &amp; i\neq j \end{cases}$ </p>
+<script type="math/tex; mode=display">
+\frac{\partial p_i}{\partial a_j} =  p_i(\delta_{ij}-p_j)</script><h3 id="Cross-Entropy-Loss"><a href="#Cross-Entropy-Loss" class="headerlink" title="Cross Entropy Loss"></a>Cross Entropy Loss</h3><p>Corss entropy loss indicates the distance between what the model belives the output distribution should be, and what the original distribution really is. It is defined as:</p>
+<script type="math/tex; mode=display">
+H(y,p) = - \sum_i y_i log(p_i)</script><p>It is widely used as an alternative of squared error. It is used when node activations can be understand as representing the probability that each hypothesis might be true, i.e. when the output is a probability is a probability distribution. Thus it is used as a loss function in neural networks which have softmax activations in the output layer:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -555,102 +602,22 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
 <div class="line">7</div>
 <div class="line">8</div>
 <div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-<div class="line">25</div>
-<div class="line">26</div>
-<div class="line">27</div>
-<div class="line">28</div>
-<div class="line">29</div>
-<div class="line">30</div>
-<div class="line">31</div>
-<div class="line">32</div>
-<div class="line">33</div>
-<div class="line">34</div>
-<div class="line">35</div>
-<div class="line">36</div>
-<div class="line">37</div>
-<div class="line">38</div>
-<div class="line">39</div>
-<div class="line">40</div>
-<div class="line">41</div>
-<div class="line">42</div>
-<div class="line">43</div>
-<div class="line">44</div>
-<div class="line">45</div>
-<div class="line">46</div>
-<div class="line">47</div>
-<div class="line">48</div>
-<div class="line">49</div>
-<div class="line">50</div>
-<div class="line">51</div>
-<div class="line">52</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_to_tensorboard</span><span class="params">(self,generator_step, summary_writer,losses)</span>:</span></div>
-<div class="line"></div>
-<div class="line">        summary = tf.Summary()</div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">1</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Real Loss'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">2</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Fake Loss'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">3</span>]</div>
-<div class="line">        value.tag = <span class="string">'Generator Loss'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">1</span>] - losses[<span class="number">2</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Loss (D_real - D_fake)'</span></div>
-<div class="line"></div>
-<div class="line">        value = summary.value.add()</div>
-<div class="line">        value.simple_value = losses[<span class="number">1</span>] + losses[<span class="number">2</span>]</div>
-<div class="line">        value.tag = <span class="string">'Critic Loss (D_fake + D_real)'</span></div>
-<div class="line"></div>
-<div class="line">        summary_writer.add_summary(summary, generator_step)</div>
-<div class="line">        summary_writer.flush()</div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self,epochs,batch_size=<span class="number">10</span>,sample_interval=<span class="number">100</span>)</span>:</span></div>
-<div class="line">        summary_writer = tf.summary.FileWriter(<span class="string">'./logs/trainBoth'</span>)</div>
-<div class="line">        generator_step = <span class="number">1</span></div>
-<div class="line"></div>
-<div class="line">        <span class="keyword">for</span> epoch <span class="keyword">in</span> tqdm(range(<span class="number">1</span>, epochs + <span class="number">1</span>)):</div>
-<div class="line">            <span class="keyword">for</span> e, (figure_imgs, pose_imgs) <span class="keyword">in</span> tqdm(enumerate(self.data_loader.load_batch(batch_size=batch_size))):</div>
-<div class="line">                    <span class="comment"># Train the critic</span></div>
-<div class="line"></div>
-<div class="line">                    figure_loss_real = self.figure_critic.train_on_batch(figure_imgs, valid)</div>
-<div class="line">                    figure_loss_fake = self.figure_critic.train_on_batch(gen_figure_imgs, fake)</div>
-<div class="line">                    d_figure_loss = <span class="number">0.5</span> * np.add(figure_loss_real, figure_loss_fake)</div>
-<div class="line"></div>
-<div class="line">                print(self.figure_critic.metrics_names,d_figure_loss)</div>
-<div class="line">                losses = np.empty(shape=<span class="number">1</span>)</div>
-<div class="line">                losses = np.append(losses, figure_loss_real)</div>
-<div class="line">                losses = np.append(losses, figure_loss_fake)</div>
-<div class="line"></div>
-<div class="line">                <span class="comment"># ---------------------</span></div>
-<div class="line">                <span class="comment">#  Train Generator</span></div>
-<div class="line">                <span class="comment"># ---------------------</span></div>
-<div class="line"></div>
-<div class="line">                figure_loss = self.figure_EN.train_on_batch([figure_noise,pose_imgs],valid)</div>
-<div class="line">                print(self.figure_EN.metrics_names,figure_loss)</div>
-<div class="line">                losses = np.append(losses, figure_loss)</div>
-<div class="line">                self.write_to_tensorboard(generator_step, summary_writer, losses)</div>
-<div class="line">                generator_step += <span class="number">1</span></div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cross_entropy</span><span class="params">(x,y)</span>:</span></div>
+<div class="line">    <span class="comment">#X is the output from fully connected layer (num_examples x num_classes)</span></div>
+<div class="line">    <span class="comment">#y is groundtruth labels (num_examples x 1)</span></div>
+<div class="line">    l = y.shape[<span class="number">0</span>]</div>
+<div class="line">    prob = softmax(x)</div>
+<div class="line">    prob_of_groundtruth = [row[y[i]] <span class="keyword">for</span> i,row <span class="keyword">in</span> enumerate(prob)]</div>
+<div class="line">    log_likelihood = -np.log(prob_of_groundtruth)</div>
+<div class="line">    loss = np.sum(log_likelihood)</div>
+<div class="line">    <span class="keyword">return</span> loss</div>
 </pre></td></tr></table></figure>
+<h3 id="Derivative-of-Cross-Entropy-Loss-with-Softmax"><a href="#Derivative-of-Cross-Entropy-Loss-with-Softmax" class="headerlink" title="Derivative of Cross Entropy Loss with Softmax"></a>Derivative of Cross Entropy Loss with Softmax</h3><h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
+<p><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d" target="_blank" rel="noopener">Stochastic Gradient Descent with momentum</a> </p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.14.40 PM.png" alt="creen Shot 2019-02-23 at 3.14.40 P"></p>
+<p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.18.02 PM.png" alt="creen Shot 2019-02-23 at 3.18.02 P"></p>
+<p>Our gradients come from minibatches so they can be noisy!</p>
+<h2 id="SGD-Momentum-ref"><a href="#SGD-Momentum-ref" class="headerlink" title="SGD+Momentum ref"></a>SGD+Momentum <a href="https://deepnotes.io/sgd-momentum-adaptive" target="_blank" rel="noopener">ref</a></h2><p>coefficient momentum tends to be 0.9/0.99</p>
 <h1 id="Residual-Network"><a href="#Residual-Network" class="headerlink" title="Residual Network"></a>Residual Network</h1><p><a href="https://arxiv.org/pdf/1512.03385.pdf" target="_blank" rel="noopener">paper1</a> <a href="https://arxiv.org/pdf/1603.05027v2.pdf" target="_blank" rel="noopener">paper2</a> </p>
 <h2 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h2><p>simplely stack layers exhibit higher training error when the depth increases.</p>
 <h2 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h2><p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2018-11-16 at 2.33.45 PM.png" alt="creen Shot 2018-11-16 at 2.33.45 P"></p>
@@ -1046,7 +1013,7 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1101,7 +1068,7 @@ f(x)_j=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p><img src="/2018/08/03/Tr
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#训练阶段如何做BatchNorm"><span class="nav-number">5.2.0.1.</span> <span class="nav-text">训练阶段如何做BatchNorm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNorm的推理-Inference-过程"><span class="nav-number">5.2.0.2.</span> <span class="nav-text">BatchNorm的推理(Inference)过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BatchNorm的好处"><span class="nav-number">5.2.0.3.</span> <span class="nav-text">BatchNorm的好处</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#激活函数"><span class="nav-number">5.3.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">5.4.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">5.5.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">5.6.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">5.7.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">5.8.</span> <span class="nav-text">ELU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maxout"><span class="nav-number">6.</span> <span class="nav-text">Maxout</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">6.1.</span> <span class="nav-text">Softmax函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorboard"><span class="nav-number">8.</span> <span class="nav-text">Tensorboard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">9.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">9.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">9.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN"><span class="nav-number">10.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Original"><span class="nav-number">10.0.1.</span> <span class="nav-text">Original</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN-CGAN"><span class="nav-number">10.0.2.</span> <span class="nav-text">DCGAN || CGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-GAN"><span class="nav-number">10.0.3.</span> <span class="nav-text">INFO-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-GAN"><span class="nav-number">10.0.4.</span> <span class="nav-text">AC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">10.0.5.</span> <span class="nav-text">Adversarial Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI-GAN"><span class="nav-number">10.0.6.</span> <span class="nav-text">BI-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">10.0.7.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSGAN"><span class="nav-number">10.0.8.</span> <span class="nav-text">LSGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-GAN"><span class="nav-number">10.0.9.</span> <span class="nav-text">SR-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PixelDA"><span class="nav-number">10.0.10.</span> <span class="nav-text">PixelDA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">11.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">12.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">13.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">6.7.</span> <span class="nav-text">Softmax函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-softmax"><span class="nav-number">6.7.1.</span> <span class="nav-text">Derivative of softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Entropy-Loss"><span class="nav-number">6.7.2.</span> <span class="nav-text">Cross Entropy Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-Cross-Entropy-Loss-with-Softmax"><span class="nav-number">6.7.3.</span> <span class="nav-text">Derivative of Cross Entropy Loss with Softmax</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN"><span class="nav-number">9.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Original"><span class="nav-number">9.0.1.</span> <span class="nav-text">Original</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN-CGAN"><span class="nav-number">9.0.2.</span> <span class="nav-text">DCGAN || CGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-GAN"><span class="nav-number">9.0.3.</span> <span class="nav-text">INFO-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-GAN"><span class="nav-number">9.0.4.</span> <span class="nav-text">AC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">9.0.5.</span> <span class="nav-text">Adversarial Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI-GAN"><span class="nav-number">9.0.6.</span> <span class="nav-text">BI-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">9.0.7.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSGAN"><span class="nav-number">9.0.8.</span> <span class="nav-text">LSGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-GAN"><span class="nav-number">9.0.9.</span> <span class="nav-text">SR-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PixelDA"><span class="nav-number">9.0.10.</span> <span class="nav-text">PixelDA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">10.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">11.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">12.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
             
 
           </div>
