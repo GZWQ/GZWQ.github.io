@@ -89,6 +89,11 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.29.13%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-12%20at%201.41.00%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-14%20at%2012.26.11%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-14%20at%2012.47.20%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/admin01.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/admin02.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/admin03t.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.29.13%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.31.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-07%20at%209.34.23%20PM.png">
@@ -99,7 +104,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.17.57%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.21.18%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/05/WebSite-Making/Screen%20Shot%202019-03-10%20at%205.27.19%20PM.png">
-<meta property="og:updated_time" content="2019-03-12T19:00:14.739Z">
+<meta property="og:updated_time" content="2019-03-15T17:27:57.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebSite Making">
 <meta name="twitter:description" content="We are going to write a Django project so that we can learn the basic concepts and operations. Our website is a basic poll application, which consist of two parts:  A pyblic site that lets people view">
@@ -492,6 +497,76 @@
 <p>Naming your URL lets you refer to it unambiguously from elsewhere in Django, especially from within templates. This powerful feature allows you to make global changes to the URL patterns of your project while only touching a single file.</p>
 </li>
 </ol>
+<h1 id="Database-setup"><a href="#Database-setup" class="headerlink" title="Database setup"></a><a href="https://docs.djangoproject.com/en/2.1/intro/tutorial02/" target="_blank" rel="noopener">Database setup</a></h1><p>By default, the configuration uses SQLite, which is included in Python and thus we won’t need to install anything else to support your database. Now, open <code>Mywebsite/settings.py</code>.We can see that in <code>INSTALLED_APPS</code>, there are several predefined applications as a convenience of common use.</p>
+<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-14 at 12.26.11 PM.png" alt="creen Shot 2019-03-14 at 12.26.11 P"></p>
+<p>Note that these applications use at least one database table. Then we need to create tables for them before we use them by running the following command:</p>
+<p><code>python manage.py migrate</code></p>
+<p>The <a href="https://docs.djangoproject.com/en/2.1/ref/django-admin/#django-admin-migrate" target="_blank" rel="noopener"><code>migrate</code></a> command looks at the <a href="https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS" target="_blank" rel="noopener"><code>INSTALLED_APPS</code></a> setting and creates any necessary database tables according to the database settings in your <code>mysite/settings.py</code> file .</p>
+<h2 id="Create-models"><a href="#Create-models" class="headerlink" title="Create models"></a>Create models</h2><p>A model is the single, definitive source of truth about your data. It contains the essential fields and behaviors of the data you’re storing.</p>
+<p>In our poll application, we are going to create two tables: <strong>Question</strong> and <strong>Choice</strong>. Question model has two fields: question_text and pub_date. Choice has two fields too: choice_text and votes tally. And each Choice is associated with a Question. Open <code>polls/models.py</code> and put the following codes:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span><span class="params">(models.Model)</span>:</span></div>
+<div class="line">    question_text = models.CharField(max_length=<span class="number">200</span>)</div>
+<div class="line">    pub_date = models.DateTimeField(<span class="string">'date published'</span>)</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Choice</span><span class="params">(models.Model)</span>:</span></div>
+<div class="line">    question = models.ForeignKey(Question,on_delete=models.CASCADE)</div>
+<div class="line">    choice_text = models.CharField(max_length=<span class="number">200</span>)</div>
+<div class="line">    votes = models.IntegerField(default=<span class="number">0</span>)</div>
+</pre></td></tr></table></figure>
+<p>The code is straightforward. Each model is represented by a class that subclasses <a href="https://docs.djangoproject.com/en/2.1/ref/models/instances/#django.db.models.Model" target="_blank" rel="noopener"><code>django.db.models.Model</code></a>. Each model has a number of class variables, each of which represents a database field in the model.</p>
+<p>Each field is represented by an instance of a <a href="https://docs.djangoproject.com/en/2.1/ref/models/fields/#django.db.models.Field" target="_blank" rel="noopener"><code>Field</code></a> class – e.g., <a href="https://docs.djangoproject.com/en/2.1/ref/models/fields/#django.db.models.CharField" target="_blank" rel="noopener"><code>CharField</code></a> for character fields and <a href="https://docs.djangoproject.com/en/2.1/ref/models/fields/#django.db.models.DateTimeField" target="_blank" rel="noopener"><code>DateTimeField</code></a> for datetimes. This tells Django what type of data each field holds.</p>
+<p>The name of each <a href="https://docs.djangoproject.com/en/2.1/ref/models/fields/#django.db.models.Field" target="_blank" rel="noopener"><code>Field</code></a> instance (e.g. <code>question_text</code> or <code>pub_date</code>) is the field’s name, in machine-friendly format. You’ll use this value in your Python code, and your database will use it as the column name.</p>
+<p>Finally, note a relationship is defined, using <a href="https://docs.djangoproject.com/en/2.1/ref/models/fields/#django.db.models.ForeignKey" target="_blank" rel="noopener"><code>ForeignKey</code></a>. That tells Django each <code>Choice</code> is related to a single <code>Question</code>. Django supports all the common database relationships: many-to-one, many-to-many, and one-to-one.</p>
+<h2 id="Activate-models"><a href="#Activate-models" class="headerlink" title="Activate models"></a>Activate models</h2><p>With the above codes, we can create a database schema (CREATE TABLE statements) for this app and create a Python database-access API for accessing Question and Choice objects. But first we need to tell our project that the <code>polls</code> app is installed. Therefore, we need to add models to <code>INSTALLED_APPS</code> setting. The <code>PollsConfig</code> class is in the <code>polls/apps.py</code> file, so its dotted path is <code>&#39;polls.apps.PollsConfig&#39;</code>. Edit the <code>mysite/settings.py</code> file and add that dotted path to the <a href="https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS" target="_blank" rel="noopener"><code>INSTALLED_APPS</code></a> setting. It’ll look like this:</p>
+<p><img src="/2019/03/05/WebSite-Making/Screen Shot 2019-03-14 at 12.47.20 PM.png" alt="creen Shot 2019-03-14 at 12.47.20 P"></p>
+<p>Now Django knows to include the <code>polls</code> app. Let’s run another command:</p>
+<p><code>python manage.py makemigrations polls</code></p>
+<p>By running <code>makemigrations</code>, you’re telling Django that you’ve made some changes to your models (in this case, you’ve made new ones) and that you’d like the changes to be stored as a <em>migration</em>.</p>
+<p>Now we can run <code>migrate</code> again to create those model table:</p>
+<p><code>python manage.py migrate</code></p>
+<p>The <a href="https://docs.djangoproject.com/en/2.1/ref/django-admin/#django-admin-migrate" target="_blank" rel="noopener"><code>migrate</code></a> command takes all the migrations that haven’t been applied (Django tracks which ones are applied using a special table in your database called <code>django_migrations</code>) and runs them against your database - essentially, synchronizing the changes you made to your models with the schema in the database.</p>
+<p>In summary, there three steps to make model changes:</p>
+<ul>
+<li>Change your model (in models.py)</li>
+<li>Run <a href="https://docs.djangoproject.com/en/2.1/ref/django-admin/#django-admin-makemigrations" target="_blank" rel="noopener"><code>python manage.py makemigrations</code></a> to create migrations for those changes</li>
+<li>Run <a href="https://docs.djangoproject.com/en/2.1/ref/django-admin/#django-admin-migrate" target="_blank" rel="noopener"><code>python manage.py migrate</code></a> to apply those changes to the database.</li>
+</ul>
+<h2 id="Playing-with-the-API"><a href="#Playing-with-the-API" class="headerlink" title="Playing with the API"></a><a href="https://docs.djangoproject.com/en/2.1/intro/tutorial02/" target="_blank" rel="noopener">Playing with the API</a></h2><p>Now, let’s hop into the interactive Python shell and play around with the free API Django gives you. To invoke the Python shell, use this command:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">python manage.py shell</div>
+</pre></td></tr></table></figure>
+<p>Once we are in the shell, explore the database API.</p>
+<h1 id="Django-Admin"><a href="#Django-Admin" class="headerlink" title="Django Admin"></a>Django Admin</h1><h2 id="Create-an-admin-user"><a href="#Create-an-admin-user" class="headerlink" title="Create an admin user"></a>Create an admin user</h2><p>Firstly, we need to create a user who can login to the admin site. In order to create such user, we can use the command like this:</p>
+<p><code>python manage.py createsuperuser</code></p>
+<p>Then enter username, email address and password:</p>
+<p><code>Username:admin</code></p>
+<p><code>Email address: admin@example.com</code></p>
+<p><code>Password:admin123</code></p>
+<p>The Django admin site is activated by default. Let’s start server and explore it:</p>
+<p><code>python manage.py runserver</code></p>
+<p>Now, open a web browser and go to “/admin/“ on your local domain, e.g., <code>http://127.0.0.1:8000/admin/</code></p>
+<p><img src="/2019/03/05/WebSite-Making/admin01.png" alt="dmin0"></p>
+<p>Once you login to the website using username and password, we can see:</p>
+<p><img src="/2019/03/05/WebSite-Making/admin02.png" alt="dmin0">We should see a few types of editable content: groups and users. They are provided by <a href="https://docs.djangoproject.com/en/2.1/topics/auth/#module-django.contrib.auth" target="_blank" rel="noopener"><code>django.contrib.auth</code></a>, the authentication framework shipped by Django. </p>
+<h2 id="Make-the-poll-app-modifiable-in-the-admin"><a href="#Make-the-poll-app-modifiable-in-the-admin" class="headerlink" title="Make the poll app modifiable in the admin"></a>Make the poll app modifiable in the admin</h2><p>But where’s our poll app? It’s not displayed on the admin index page.</p>
+<p>Just one thing to do: we need to tell the admin that <code>Question</code> objects have an admin interface. To do this, open the <code>polls/admin.py</code> file, and edit it to look like this:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</div>
+<div class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Question</div>
+<div class="line">admin.site.register(Question)</div>
+</pre></td></tr></table></figure>
+<p>Now that we’ve registered <code>Question</code>, Django knows that it should be displayed on the admin index page:</p>
+<p><img src="/2019/03/05/WebSite-Making/admin03t.png" alt="dmin03"></p>
 <h1 id="Day1-Basic-Commands"><a href="#Day1-Basic-Commands" class="headerlink" title="Day1 Basic Commands"></a>Day1 Basic Commands</h1><ol>
 <li><p><strong>Create a new Django project</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -801,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-a-project"><span class="nav-number">1.</span> <span class="nav-text">Create a project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Development-server"><span class="nav-number">2.</span> <span class="nav-text">Development server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-the-Polls-app"><span class="nav-number">3.</span> <span class="nav-text">Create the Polls app</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-a-view"><span class="nav-number">3.1.</span> <span class="nav-text">Write a view</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1-Basic-Commands"><span class="nav-number">4.</span> <span class="nav-text">Day1 Basic Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2-View-and-URL"><span class="nav-number">5.</span> <span class="nav-text">Day2 View and URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3-Advanced-Views-and-Urls"><span class="nav-number">6.</span> <span class="nav-text">Day3 Advanced Views and Urls</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-a-4-amp-b-5-to-visit-webpage"><span class="nav-number">6.1.</span> <span class="nav-text">/add/?a=4&amp;b=5 to visit webpage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-3-4-to-visit-page"><span class="nav-number">6.2.</span> <span class="nav-text">/add/3/4 to visit page</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-a-project"><span class="nav-number">1.</span> <span class="nav-text">Create a project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Development-server"><span class="nav-number">2.</span> <span class="nav-text">Development server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-the-Polls-app"><span class="nav-number">3.</span> <span class="nav-text">Create the Polls app</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Write-a-view"><span class="nav-number">3.1.</span> <span class="nav-text">Write a view</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database-setup"><span class="nav-number">4.</span> <span class="nav-text">Database setup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-models"><span class="nav-number">4.1.</span> <span class="nav-text">Create models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Activate-models"><span class="nav-number">4.2.</span> <span class="nav-text">Activate models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Playing-with-the-API"><span class="nav-number">4.3.</span> <span class="nav-text">Playing with the API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Django-Admin"><span class="nav-number">5.</span> <span class="nav-text">Django Admin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-an-admin-user"><span class="nav-number">5.1.</span> <span class="nav-text">Create an admin user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Make-the-poll-app-modifiable-in-the-admin"><span class="nav-number">5.2.</span> <span class="nav-text">Make the poll app modifiable in the admin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day1-Basic-Commands"><span class="nav-number">6.</span> <span class="nav-text">Day1 Basic Commands</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day2-View-and-URL"><span class="nav-number">7.</span> <span class="nav-text">Day2 View and URL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day3-Advanced-Views-and-Urls"><span class="nav-number">8.</span> <span class="nav-text">Day3 Advanced Views and Urls</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-a-4-amp-b-5-to-visit-webpage"><span class="nav-number">8.1.</span> <span class="nav-text">/add/?a=4&amp;b=5 to visit webpage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-3-4-to-visit-page"><span class="nav-number">8.2.</span> <span class="nav-text">/add/3/4 to visit page</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">9.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>

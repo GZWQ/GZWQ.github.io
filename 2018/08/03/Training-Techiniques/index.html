@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-03-13T15:34:18.173Z">
+<meta property="og:updated_time" content="2019-03-14T03:12:33.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
 <meta name="twitter:description" content="Techniques for training a Deep Learning model.">
@@ -541,9 +541,9 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
 <h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.55.56%20PM.png" alt="creen Shot 2019-02-17 at 2.55.56 P"></p>
 <h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png" alt="creen Shot 2019-02-17 at 2.58.24 P"></p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
-<h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a><a href="https://deepnotes.io/softmax-crossentropy" target="_blank" rel="noopener">Softmax函数</a></h2><p>Softmax function takes an N-dimensional vector of real number and transforms it into a vector of real number in range $(0,1)$ which add up to 1.</p>
+<h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a><a href="https://deepnotes.io/softmax-crossentropy" target="_blank" rel="noopener">Softmax函数</a></h2><p>Softmax function takes an N-dimensional vector of real number and transforms it into a vector of real number in range $(0,1)$ which add up to 1. For each output element $a_j$ in the last layer:</p>
 <script type="math/tex; mode=display">
-f(x_j)=\frac{e^{x_j}}{\sum_{i=1}^{k}e^{x_i}}</script><p>In python, we have the code for softmax function as follows:</p>
+f(a_j)=\frac{e^{a_j}}{\sum_{i=1}^{k}e^{a_i}}</script><p>In python, we have the code for softmax function as follows:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -602,9 +602,17 @@ H(y,p) = - \sum_i y_i log(p_i)</script><p>It is widely used as an alternative of
 <div class="line">7</div>
 <div class="line">8</div>
 <div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
 </pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cross_entropy</span><span class="params">(x,y)</span>:</span></div>
-<div class="line">    <span class="comment">#X is the output from fully connected layer (num_examples x num_classes)</span></div>
-<div class="line">    <span class="comment">#y is groundtruth labels (num_examples x 1)</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    X is the output from fully connected layer (num_examples x num_classes)</span></div>
+<div class="line"><span class="string">    y is labels (num_examples x 1)</span></div>
+<div class="line"><span class="string">    	Note that y is not one-hot encoded vector. </span></div>
+<div class="line"><span class="string">    	It can be computed as y.argmax(axis=1) from one-hot encoded vectors of labels if required.</span></div>
+<div class="line"><span class="string">    """</span></div>
 <div class="line">    l = y.shape[<span class="number">0</span>]</div>
 <div class="line">    prob = softmax(x)</div>
 <div class="line">    prob_of_groundtruth = [row[y[i]] <span class="keyword">for</span> i,row <span class="keyword">in</span> enumerate(prob)]</div>
@@ -612,7 +620,50 @@ H(y,p) = - \sum_i y_i log(p_i)</script><p>It is widely used as an alternative of
 <div class="line">    loss = np.sum(log_likelihood)</div>
 <div class="line">    <span class="keyword">return</span> loss</div>
 </pre></td></tr></table></figure>
-<h3 id="Derivative-of-Cross-Entropy-Loss-with-Softmax"><a href="#Derivative-of-Cross-Entropy-Loss-with-Softmax" class="headerlink" title="Derivative of Cross Entropy Loss with Softmax"></a>Derivative of Cross Entropy Loss with Softmax</h3><h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
+<h3 id="Derivative-of-Cross-Entropy-Loss-with-Softmax"><a href="#Derivative-of-Cross-Entropy-Loss-with-Softmax" class="headerlink" title="Derivative of Cross Entropy Loss with Softmax"></a>Derivative of Cross Entropy Loss with Softmax</h3><p>Cross Entropy Loss with Softmax function are used as the output layer extensively. Now we use the derivative of softmax that we derived earlier to derive the derivative of the cross entropy loss function.</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L &= - \sum_i y_i log(p_i) \\
+\frac{\partial L}{\partial o_i} &= - \sum_k y_k \frac{\partial log(p_k)}{\partial o_i } \\
+&= - \sum_k y_k \frac{\partial log(p_k)}{\partial p_k} \times \frac{\partial p_k}{ \partial o_i} \\
+&= - \sum y_k \frac{1}{p_k} \times \frac{\partial p_k}{\partial o_i} \\
+
+\end{align}</script><p>From derivative of softmax we derived earlier that $\frac{\partial p_i}{\partial a_j} = \begin{cases}p_i(1-p_j)&amp;  if &amp; i=j \-p_j.p_i &amp; if &amp; i \neq j\end{cases}$,</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial L}{\partial o_i}  &= -y_i(1-p_i) - \sum_{k\neq i} y_k \frac{1}{p_k}(-p_k.p_i) \\
+&= -y_i(1-p_i) + \sum_{k \neq 1} y_k.p_i \\
+&= - y_i + y_ip_i + \sum_{k \neq 1} y_k.p_i \\
+&= p_i\left( y_i +  \sum_{k \neq 1} y_k\right) - y_i \\
+&= p_i\left( y_i +  \sum_{k \neq 1} y_k\right)  - y_i
+\end{align}</script><p>$y$ is a one hot encoded vector for the label, so $\sum_{k}y_k =1$, and $y_i + \sum_{k\ne i}y_k =1$. So we have,</p>
+<script type="math/tex; mode=display">
+\frac{\partial L}{\partial o_i} = p_i - y_i</script><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">delta_cross_entropy</span><span class="params">(x,y)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    X is the output from fully connected layer (num_examples x num_classes)</span></div>
+<div class="line"><span class="string">    y is labels (num_examples x 1)</span></div>
+<div class="line"><span class="string">    	Note that y is not one-hot encoded vector. </span></div>
+<div class="line"><span class="string">    	It can be computed as y.argmax(axis=1) from one-hot encoded vectors of labels if required.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    m = y.shape[<span class="number">0</span>]</div>
+<div class="line">    prob = softmax(x)</div>
+<div class="line">    prob_of_groundtruth = [row[y[i]] <span class="keyword">for</span> i,row <span class="keyword">in</span> enumerate(prob)]</div>
+<div class="line">    prob_of_groundtruth -= <span class="number">1</span></div>
+<div class="line">    <span class="keyword">return</span> prob_of_groundtruth/m</div>
+</pre></td></tr></table></figure>
+<h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
 <p><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d" target="_blank" rel="noopener">Stochastic Gradient Descent with momentum</a> </p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.14.40 PM.png" alt="creen Shot 2019-02-23 at 3.14.40 P"></p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.18.02 PM.png" alt="creen Shot 2019-02-23 at 3.18.02 P"></p>
@@ -625,139 +676,6 @@ H(y,p) = - \sum_i y_i log(p_i)</script><p>It is widely used as an alternative of
 <p>Figure from <a href="https://leonardoaraujosantos.gitbooks.io/artificial-inteligence/content/residual_net.html" target="_blank" rel="noopener">ref</a> </p>
 <p><img src="/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png" alt="228224-1a6202911b46d1d"></p>
 <p><a href="https://www.jianshu.com/p/e502e4b43e6d" target="_blank" rel="noopener">pic</a> </p>
-<h1 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h1><p><strong>Optimizer(优化器)</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.optimizers.Adam(lr=<span class="number">0.001</span>, beta_1=<span class="number">0.9</span>, beta_2=<span class="number">0.999</span>, epsilon=<span class="keyword">None</span>, decay=<span class="number">0.0</span>, amsgrad=<span class="keyword">False</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>decay, learning rate decay over each update</li>
-<li>epsilon, fuzz factor, almost zero but greater than zero, to avoid denominator being zero </li>
-<li>according to my search, lr is usually among [0.001, 0.0001, 0.0002], beta_1 is chosen as 0.5</li>
-</ul>
-</blockquote>
-<p><strong>LeakyReLU(激活函数)</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.layers.LeakyReLU(alpha=<span class="number">0.3</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li>It allows a small gradient when the unit is not active: <code>f(x) = alpha * x for x &lt; 0</code>, <code>f(x) = x for x &gt;= 0</code></li>
-<li>alpha is usually chosen 0.2</li>
-</ul>
-</blockquote>
-<p><strong>BatchNormalization(批正则化)</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.layers.BatchNormalization(axis=<span class="number">-1</span>, momentum=<span class="number">0.99</span>, epsilon=<span class="number">0.001</span>, center=<span class="keyword">True</span>, scale=<span class="keyword">True</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>momentum</strong>: </li>
-<li><strong>epsilon</strong>: Small float added to variance to avoid dividing by zero.</li>
-</ul>
-</blockquote>
-<p><strong>Dropout</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">keras.layers.Dropout(rate, noise_shape=<span class="keyword">None</span>, seed=<span class="keyword">None</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><strong>rate</strong>: float between 0 and 1. Fraction of the input units to drop. It seems that it has many options, like 0.1, 0.2, 0.5.</li>
-</ul>
-</blockquote>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<h3 id="Original"><a href="#Original" class="headerlink" title="Original"></a>Original</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">opt  = RMSprop(lr=<span class="number">0.0003</span>, decay=<span class="number">1e-6</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-</pre></td><td class="code"><pre><div class="line">Encoder-Decoder</div>
-<div class="line">BatchNormalization(momentum=<span class="number">0.8</span>)</div>
-<div class="line">LeakyReLU(<span class="number">0.2</span>)</div>
-<div class="line"></div>
-<div class="line">Discriminator</div>
-<div class="line">BatchNormalization(momentum=<span class="number">0.9</span>)</div>
-<div class="line">LeakyReLU(<span class="number">0.2</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="DCGAN-CGAN"><a href="#DCGAN-CGAN" class="headerlink" title="DCGAN || CGAN"></a><a href="https://github.com/carpedm20/DCGAN-tensorflow" target="_blank" rel="noopener">DCGAN</a> || <a href="https://github.com/zhangqianhui/Conditional-Gans" target="_blank" rel="noopener">CGAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">optim = tf.train.AdamOptimizer(lr=<span class="number">0.0002</span>, beta1=<span class="number">0.5</span>)</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<p>beta1 is Momentum term of adam [0.5]</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(0.2) </div>
-<div class="line">batch_norm(epsilon=1e-5, momentum = 0.9)</div>
-</pre></td></tr></table></figure>
-<h3 id="INFO-GAN"><a href="#INFO-GAN" class="headerlink" title="INFO-GAN"></a><a href="https://github.com/openai/InfoGAN" target="_blank" rel="noopener">INFO-GAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">d_opt = tf.train.AdamOptimizer(lr = <span class="number">0.0002</span>, beta1=<span class="number">0.5</span>)</div>
-<div class="line">g_opt = tf.train.AdamOptimizer(lr = <span class="number">0.001</span>, beta1=<span class="number">0.5</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">batch_norm(epsilon=<span class="number">1e-5</span>,momentum=<span class="number">0.1</span>)</div>
-<div class="line">Lrelu(<span class="number">0.1</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="AC-GAN"><a href="#AC-GAN" class="headerlink" title="AC-GAN"></a><a href="https://arxiv.org/pdf/1610.09585.pdf" target="_blank" rel="noopener">AC-GAN</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">optim = Adam(lr=[<span class="number">0.0001</span>,<span class="number">0.0002</span>,<span class="number">0.00003</span>],beta1=<span class="number">0.5</span>,beta2=<span class="number">0.999</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">LRELU(<span class="number">0.2</span>)</div>
-<div class="line">dropout(<span class="number">0.5</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">optim = tf.train.AdamOptimizer(learning_rate=<span class="number">0.001</span>,beta1=<span class="number">0.9</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">dropout(<span class="number">0.2</span>)</div>
-</pre></td></tr></table></figure>
-<h3 id="BI-GAN"><a href="#BI-GAN" class="headerlink" title="BI-GAN"></a>BI-GAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">optim = Adam(lr=<span class="number">0.0002</span>,beta1=<span class="number">0.5</span>,beta2=<span class="number">0.999</span>)</div>
-<div class="line">lr decays exponentially to <span class="number">0.000002</span> starting halfway through training.</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(<span class="number">0.2</span>)</div>
-<div class="line">(params free) batch_normalization()</div>
-</pre></td></tr></table></figure>
-<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">Adam(lr=0.0001,beta1=0,beta2=0.9) -&gt; WGAN with Gradient penalty</div>
-<div class="line">RMSProp(lr=0.00005) -&gt; WGAN with weight clipping</div>
-</pre></td></tr></table></figure>
-<h3 id="LSGAN"><a href="#LSGAN" class="headerlink" title="LSGAN"></a>LSGAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">RMSProp(lr=<span class="number">0.0001</span>)[chosen by search over lr=<span class="number">.001</span>,<span class="number">.0002</span>,<span class="number">.0001</span>]</div>
-</pre></td></tr></table></figure>
-<h3 id="SR-GAN"><a href="#SR-GAN" class="headerlink" title="SR-GAN"></a>SR-GAN</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-</pre></td><td class="code"><pre><div class="line">Adam(lr=<span class="number">0.0001</span>,beta1=<span class="number">0.9</span>)</div>
-</pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(0.2)</div>
-<div class="line">batch_normalization()</div>
-</pre></td></tr></table></figure>
-<h3 id="PixelDA"><a href="#PixelDA" class="headerlink" title="PixelDA"></a>PixelDA</h3><p><a href="https://arxiv.org/pdf/1612.05424.pdf" target="_blank" rel="noopener">loss weights</a> </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">Adam(lr=[<span class="number">0.0002</span>,<span class="number">0.001</span>],beta1=<span class="number">0.5</span>)</div>
-<div class="line">Learning rate decayed by <span class="number">0.95</span> every <span class="number">20</span>,<span class="number">000</span> steps</div>
-</pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">lrelu(<span class="number">0.2</span>)</div>
-<div class="line">dropout(<span class="number">0.1</span>) <span class="comment"># with keep probability of 90%</span></div>
-</pre></td></tr></table></figure>
-
-</div></div>
 <h1 id="DC-GAN"><a href="#DC-GAN" class="headerlink" title="DC-GAN"></a>DC-GAN</h1><p><a href="https://julianzaidi.wordpress.com/2017/04/24/deep-convolution-gan-dcgan-architecture-and-training/" target="_blank" rel="noopener">Deep Convolutional GAN (DCGAN) : Architecture and choice of the good set of hyper-parameters</a></p>
 <h1 id="VGG-FEATURE-LOSS"><a href="#VGG-FEATURE-LOSS" class="headerlink" title="VGG-FEATURE-LOSS"></a>VGG-FEATURE-LOSS</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -1068,7 +986,7 @@ H(y,p) = - \sum_i y_i log(p_i)</script><p>It is widely used as an alternative of
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">6.7.</span> <span class="nav-text">Softmax函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-softmax"><span class="nav-number">6.7.1.</span> <span class="nav-text">Derivative of softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Entropy-Loss"><span class="nav-number">6.7.2.</span> <span class="nav-text">Cross Entropy Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-Cross-Entropy-Loss-with-Softmax"><span class="nav-number">6.7.3.</span> <span class="nav-text">Derivative of Cross Entropy Loss with Softmax</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GAN"><span class="nav-number">9.</span> <span class="nav-text">GAN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Original"><span class="nav-number">9.0.1.</span> <span class="nav-text">Original</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DCGAN-CGAN"><span class="nav-number">9.0.2.</span> <span class="nav-text">DCGAN || CGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INFO-GAN"><span class="nav-number">9.0.3.</span> <span class="nav-text">INFO-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-GAN"><span class="nav-number">9.0.4.</span> <span class="nav-text">AC-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Adversarial-Autoencoder"><span class="nav-number">9.0.5.</span> <span class="nav-text">Adversarial Autoencoder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI-GAN"><span class="nav-number">9.0.6.</span> <span class="nav-text">BI-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">9.0.7.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSGAN"><span class="nav-number">9.0.8.</span> <span class="nav-text">LSGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SR-GAN"><span class="nav-number">9.0.9.</span> <span class="nav-text">SR-GAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PixelDA"><span class="nav-number">9.0.10.</span> <span class="nav-text">PixelDA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">10.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">11.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">12.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">6.7.</span> <span class="nav-text">Softmax函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-softmax"><span class="nav-number">6.7.1.</span> <span class="nav-text">Derivative of softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Entropy-Loss"><span class="nav-number">6.7.2.</span> <span class="nav-text">Cross Entropy Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-Cross-Entropy-Loss-with-Softmax"><span class="nav-number">6.7.3.</span> <span class="nav-text">Derivative of Cross Entropy Loss with Softmax</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">9.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">10.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">11.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
             
 
           </div>
