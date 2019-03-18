@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-C.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-o-2079403.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/1_jhi5uOm9PvZfmxvfaCektw.png">
-<meta property="og:updated_time" content="2019-03-15T16:29:13.508Z">
+<meta property="og:updated_time" content="2019-03-16T17:35:50.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-RNN">
 <meta name="twitter:description" content="Recurrent Neural Networks, which are a type of artificial neural network designed to recognize patterns in sequences of data, such as text, genomes, handwriting, the spoken word, or numerical times se">
@@ -1046,8 +1046,516 @@ L=\sum_{t=1}^{n}L^{(t)}\\
 <div class="line">['R'] -&gt; S</div>
 </pre></td></tr></table></figure>
 <p>As we expected, the network is able to use the within-sequence context to learn the alphabet, achieving 100% accuracy on the training data.</p>
-<p>Importantly, the network can make accurate predictions for the next letter in the alphabet for randomly selected characters. Very impressive.</p>
-<h2 id="Stateful-LSTM-for-a-One-Char-to-One-Char-Mapping"><a href="#Stateful-LSTM-for-a-One-Char-to-One-Char-Mapping" class="headerlink" title="Stateful LSTM for a One-Char to One-Char Mapping"></a>Stateful LSTM for a One-Char to One-Char Mapping</h2><h2 id="LSTM-with-Variable-Length-Input-to-One-Char-Output"><a href="#LSTM-with-Variable-Length-Input-to-One-Char-Output" class="headerlink" title="LSTM with Variable-Length Input to One-Char Output"></a>LSTM with Variable-Length Input to One-Char Output</h2><h1 id="Referneces"><a href="#Referneces" class="headerlink" title="Referneces"></a>Referneces</h1><p><a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="noopener">The Unreasonable Effectiveness of Recurrent Neural Networks</a> </p>
+<p>Importantly, the network can make accurate predictions for the next letter in the alphabet for randomly selected characters. </p>
+<h2 id="Stateful-LSTM-for-a-One-Char-to-One-Char-Mapping"><a href="#Stateful-LSTM-for-a-One-Char-to-One-Char-Mapping" class="headerlink" title="Stateful LSTM for a One-Char to One-Char Mapping"></a>Stateful LSTM for a One-Char to One-Char Mapping</h2><p>Ideally, we want to expose the network to the entire sequence and let it learn the inter-dependencies, rather than us define those dependencies explicitly in the framing of the problem.</p>
+<p>We can do this in Keras by making the LSTM layers stateful and manually resetting the state of the network at the end of the epoch, which is also the end of the training sequence.</p>
+<p>This is truly how the LSTM networks are intended to be used. We find that by allowing the network itself to learn the dependencies between the characters, that we need a smaller network (half the number of units) and fewer training epochs (almost half).</p>
+<p>We first need to define our LSTM layer as stateful. In so doing, we must explicitly specify the batch size as a dimension on the input shape. This also means that when we evaluate the network or make predictions, we must also specify and adhere to this same batch size. This is not a problem now as we are using a batch size of 1. This could introduce difficulties when making predictions when the batch size is not one as predictions will need to be made in batch and in sequence.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">batch_size = <span class="number">1</span></div>
+<div class="line">model.add(LSTM(<span class="number">50</span>, batch_input_shape=(batch_size, X.shape[<span class="number">1</span>], X.shape[<span class="number">2</span>]), stateful=<span class="keyword">True</span>))</div>
+</pre></td></tr></table></figure>
+<p>An important difference in training the stateful LSTM is that we train it manually one epoch at a time and reset the state after each epoch. We can do this in a for loop. Again, we do not shuffle the input, preserving the sequence in which the input training data was created.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">300</span>):</div>
+<div class="line">	model.fit(X, y, epochs=<span class="number">1</span>, batch_size=batch_size, verbose=<span class="number">2</span>, shuffle=<span class="keyword">False</span>)</div>
+<div class="line">	model.reset_states()</div>
+</pre></td></tr></table></figure>
+<p>As mentioned, we specify the batch size when evaluating the performance of the network on the entire training dataset.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># summarize performance of the model</span></div>
+<div class="line">scores = model.evaluate(X, y, batch_size=batch_size, verbose=<span class="number">0</span>)</div>
+<div class="line">model.reset_states()</div>
+<div class="line">print(<span class="string">"Model Accuracy: %.2f%%"</span> % (scores[<span class="number">1</span>]*<span class="number">100</span>))</div>
+</pre></td></tr></table></figure>
+<p>Finally, we can demonstrate that the network has indeed learned the entire alphabet. We can seed it with the first letter “A”, request a prediction, feed the prediction back in as an input, and repeat the process all the way to “Z”.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># demonstrate some model predictions</span></div>
+<div class="line">seed = [char_to_int[alphabet[<span class="number">0</span>]]]</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, len(alphabet)<span class="number">-1</span>):</div>
+<div class="line">	x = numpy.reshape(seed, (<span class="number">1</span>, len(seed), <span class="number">1</span>))</div>
+<div class="line">	x = x / float(len(alphabet))</div>
+<div class="line">	prediction = model.predict(x, verbose=<span class="number">0</span>)</div>
+<div class="line">	index = numpy.argmax(prediction)</div>
+<div class="line">	print(int_to_char[seed[<span class="number">0</span>]], <span class="string">"-&gt;"</span>, int_to_char[index])</div>
+<div class="line">	seed = [index]</div>
+<div class="line">model.reset_states()</div>
+</pre></td></tr></table></figure>
+<p>We can also see if the network can make predictions starting from an arbitrary letter.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># demonstrate a random starting point</span></div>
+<div class="line">letter = <span class="string">"K"</span></div>
+<div class="line">seed = [char_to_int[letter]]</div>
+<div class="line">print(<span class="string">"New start: "</span>, letter)</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">5</span>):</div>
+<div class="line">	x = numpy.reshape(seed, (<span class="number">1</span>, len(seed), <span class="number">1</span>))</div>
+<div class="line">	x = x / float(len(alphabet))</div>
+<div class="line">	prediction = model.predict(x, verbose=<span class="number">0</span>)</div>
+<div class="line">	index = numpy.argmax(prediction)</div>
+<div class="line">	print(int_to_char[seed[<span class="number">0</span>]], <span class="string">"-&gt;"</span>, int_to_char[index])</div>
+<div class="line">	seed = [index]</div>
+<div class="line">model.reset_states()</div>
+</pre></td></tr></table></figure>
+<p>The entire code listing is provided below for completeness.</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</div>
+<div class="line"><span class="keyword">from</span> keras.utils <span class="keyword">import</span> np_utils</div>
+<div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</div>
+<div class="line"><span class="keyword">from</span> keras.preprocessing.sequence <span class="keyword">import</span> pad_sequences</div>
+<div class="line">np.random.seed(<span class="number">7</span>)</div>
+<div class="line">alphabet = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span></div>
+<div class="line">char2int = defaultdict(int)</div>
+<div class="line">int2char = defaultdict(str)</div>
+<div class="line"><span class="keyword">for</span> idx,val <span class="keyword">in</span> enumerate(alphabet):</div>
+<div class="line">    char2int[val] = idx</div>
+<div class="line">    int2char[idx] = val</div>
+<div class="line"></div>
+<div class="line">seq_length = <span class="number">1</span></div>
+<div class="line">dataX = []</div>
+<div class="line">dataY = []</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(alphabet)-seq_length):</div>
+<div class="line">    seq_in = alphabet[i:i+seq_length]</div>
+<div class="line">    seq_out = alphabet[i+seq_length]</div>
+<div class="line">    dataX.append([char2int[idx] <span class="keyword">for</span> idx <span class="keyword">in</span> seq_in])</div>
+<div class="line">    dataY.append([char2int[idx] <span class="keyword">for</span> idx <span class="keyword">in</span> seq_out])</div>
+<div class="line">    print(seq_in,<span class="string">'-&gt;'</span>,seq_out)</div>
+<div class="line">dataX = pad_sequences(dataX,maxlen=seq_length,dtype=<span class="string">'float32'</span>)</div>
+<div class="line">input_shape = (len(dataX),seq_length,<span class="number">1</span>)</div>
+<div class="line"><span class="comment">#[batch_size,time_stamps,features]</span></div>
+<div class="line">X = np.reshape(dataX,input_shape)</div>
+<div class="line">X = X/float(len(alphabet))</div>
+<div class="line"></div>
+<div class="line">y = np_utils.to_categorical(dataY)</div>
+<div class="line"></div>
+<div class="line">batch_size = <span class="number">1</span></div>
+<div class="line">model = Sequential()</div>
+<div class="line">model.add(layers.LSTM(<span class="number">50</span>,batch_input_shape=(batch_size,X.shape[<span class="number">1</span>],X.shape[<span class="number">2</span>]),stateful=<span class="keyword">True</span>))</div>
+<div class="line">model.add(layers.Dense(y.shape[<span class="number">1</span>],activation=<span class="string">'softmax'</span>))</div>
+<div class="line">model.compile(loss=<span class="string">'categorical_crossentropy'</span>,optimizer=<span class="string">'adam'</span>,metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(model)</span>:</span></div>
+<div class="line">    seed = [char2int[alphabet[<span class="number">0</span>]]]</div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(alphabet)<span class="number">-1</span>):</div>
+<div class="line">        x = np.reshape(seed,(<span class="number">1</span>,len(seed),<span class="number">1</span>))</div>
+<div class="line">        x = x/float(len(alphabet))</div>
+<div class="line">        prediction = model.predict(x)</div>
+<div class="line">        index = np.argmax(prediction)</div>
+<div class="line">        result = int2char[index]</div>
+<div class="line">        print(int2char[seed[<span class="number">0</span>]],<span class="string">'-&gt;'</span>,result)</div>
+<div class="line">        seed = [index]</div>
+<div class="line">    model.reset_states()</div>
+<div class="line"></div>
+<div class="line">    print(<span class="string">"Random Test &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;"</span>)</div>
+<div class="line">    seed = [char2int[<span class="string">'K'</span>]]</div>
+<div class="line">    print(<span class="string">"New start: "</span>, <span class="string">'K'</span>)</div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</div>
+<div class="line">        x = np.reshape(seed, (<span class="number">1</span>, len(seed), <span class="number">1</span>))</div>
+<div class="line">        x = x / float(len(alphabet))</div>
+<div class="line">        prediction = model.predict(x)</div>
+<div class="line">        index = np.argmax(prediction)</div>
+<div class="line">        result = int2char[index]</div>
+<div class="line">        print(int2char[seed[<span class="number">0</span>]], <span class="string">'-&gt;'</span>, result)</div>
+<div class="line">        seed = [index]</div>
+<div class="line">    model.reset_states()</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">naive_lstm</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">300</span>):</div>
+<div class="line">        model.fit(X,y,epochs=<span class="number">1</span>,batch_size=batch_size,verbose=<span class="number">1</span>,shuffle=<span class="keyword">False</span>)</div>
+<div class="line">        model.reset_states()</div>
+<div class="line">    scores = model.evaluate(X,y,batch_size=batch_size,verbose=<span class="number">1</span>)</div>
+<div class="line">    model.reset_states()</div>
+<div class="line">    print(<span class="string">"Model Accuracy: %.2f%%"</span>%(scores[<span class="number">1</span>]*<span class="number">100</span>))</div>
+<div class="line">    predict(model)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    naive_lstm()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>Running the example provides the following output.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+</pre></td><td class="code"><pre><div class="line">Model Accuracy: <span class="number">96.00</span>%</div>
+<div class="line">A -&gt; B</div>
+<div class="line">B -&gt; C</div>
+<div class="line">...</div>
+<div class="line">W -&gt; X</div>
+<div class="line">X -&gt; Y</div>
+<div class="line">Y -&gt; Y</div>
+<div class="line">Random Test &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;</div>
+<div class="line">New start:  K</div>
+<div class="line">K -&gt; B</div>
+<div class="line">B -&gt; C</div>
+<div class="line">C -&gt; D</div>
+<div class="line">D -&gt; E</div>
+<div class="line">E -&gt; F</div>
+</pre></td></tr></table></figure>
+<p>We can see that the network has memorized the entire alphabet perfectly. It used the context of the samples themselves and learned whatever dependency it needed to predict the next character in the sequence.</p>
+<p>We can also see that if we seed the network with the first letter, that it can correctly rattle off the rest of the alphabet.</p>
+<p>We can also see that it has only learned the full alphabet sequence and that from a cold start. When asked to predict the next letter from “K” that it predicts “B” and falls back into regurgitating the entire alphabet.</p>
+<p>To truly predict “K” the state of the network would need to be warmed up iteratively fed the letters from “A” to “J”. This tells us that we could achieve the same effect with a “stateless” LSTM by preparing training data like:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">---a -&gt; b</div>
+<div class="line">--ab -&gt; c</div>
+<div class="line">-abc -&gt; d</div>
+<div class="line">abcd -&gt; e</div>
+</pre></td></tr></table></figure>
+<p>Where the input sequence is fixed at 25 (a-to-y to predict z) and patterns are prefixed with zero-padding.</p>
+<p>Finally, this raises the question of training an LSTM network using variable length input sequences to predict the next character.</p>
+<h2 id="LSTM-with-Variable-Length-Input-to-One-Char-Output"><a href="#LSTM-with-Variable-Length-Input-to-One-Char-Output" class="headerlink" title="LSTM with Variable-Length Input to One-Char Output"></a>LSTM with Variable-Length Input to One-Char Output</h2><p>In the previous section, we discovered that the Keras “stateful” LSTM was really only a shortcut to replaying the first n-sequences, but didn’t really help us learn a generic model of the alphabet.</p>
+<p>In this section we explore a variation of the “stateless” LSTM that learns random subsequences of the alphabet and an effort to build a model that can be given arbitrary letters or subsequences of letters and predict the next letter in the alphabet.</p>
+<p>Firstly, we are changing the framing of the problem. To simplify we will define a maximum input sequence length and set it to a small value like 5 to speed up training. This defines the maximum length of subsequences of the alphabet will be drawn for training. In extensions, this could just as set to the full alphabet (26) or longer if we allow looping back to the start of the sequence.</p>
+<p>We also need to define the number of random sequences to create, in this case 1000. This too could be more or less. I expect less patterns are actually required.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line">num_inputs = <span class="number">1000</span></div>
+<div class="line">max_len = <span class="number">5</span></div>
+<div class="line">dataX = []</div>
+<div class="line">dataY = []</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_inputs):</div>
+<div class="line">    start = np.random.randint(len(alphabet)<span class="number">-2</span>)</div>
+<div class="line">    end = np.random.randint(start,min(start+max_len,len(alphabet)<span class="number">-1</span>))</div>
+<div class="line">    seq_in = alphabet[start:end+<span class="number">1</span>]</div>
+<div class="line">    seq_out = alphabet[end+<span class="number">1</span>]</div>
+<div class="line">    dataX.append([char2int[idx] <span class="keyword">for</span> idx <span class="keyword">in</span> seq_in])</div>
+<div class="line">    dataY.append([char2int[idx] <span class="keyword">for</span> idx <span class="keyword">in</span> seq_out])</div>
+<div class="line">    print(seq_in,<span class="string">'-&gt;'</span>,seq_out)</div>
+<div class="line">dataX = pad_sequences(dataX,maxlen=max_len,dtype=<span class="string">'float32'</span>)</div>
+<div class="line">input_shape = (len(dataX),max_len,<span class="number">1</span>)</div>
+<div class="line"><span class="comment">#[batch_size,time_stamps,features]</span></div>
+<div class="line">X = np.reshape(dataX,input_shape)</div>
+<div class="line">X = X/float(len(alphabet))</div>
+<div class="line">y = np_utils.to_categorical(dataY)</div>
+</pre></td></tr></table></figure>
+<p>Running the code, we create input patterns that look like the following:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">STUV -&gt; W</div>
+<div class="line">IJKLM -&gt; N</div>
+<div class="line">STUV -&gt; W</div>
+<div class="line">TUVWX -&gt; Y</div>
+<div class="line">RSTU -&gt; V</div>
+</pre></td></tr></table></figure>
+<p>The input sequences vary in length between 1 and <strong>max_len</strong> and therefore require zero padding. Here, we use left-hand-side (prefix) padding with the Keras built in <strong>pad_sequences()</strong> function.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">dataX = pad_sequences(dataX,maxlen=max_len,dtype=<span class="string">'float32'</span>)</div>
+</pre></td></tr></table></figure>
+<p>The trained model is evaluated on randomly selected input patterns. This could just as easily be new randomly generated sequences of characters. I also believe this could also be a linear sequence seeded with “A” with outputs fes back in as single character inputs.</p>
+<p>The full code listing is provided below for completeness.</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</div>
+<div class="line"><span class="keyword">from</span> keras.utils <span class="keyword">import</span> np_utils</div>
+<div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</div>
+<div class="line"><span class="keyword">from</span> keras.preprocessing.sequence <span class="keyword">import</span> pad_sequences</div>
+<div class="line">np.random.seed(<span class="number">7</span>)</div>
+<div class="line">alphabet = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span></div>
+<div class="line">char2int = defaultdict(int)</div>
+<div class="line">int2char = defaultdict(str)</div>
+<div class="line"><span class="keyword">for</span> idx,val <span class="keyword">in</span> enumerate(alphabet):</div>
+<div class="line">    char2int[val] = idx</div>
+<div class="line">    int2char[idx] = val</div>
+<div class="line"></div>
+<div class="line">num_inputs = <span class="number">1000</span></div>
+<div class="line">max_len = <span class="number">5</span></div>
+<div class="line">dataX = []</div>
+<div class="line">dataY = []</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(num_inputs):</div>
+<div class="line">    start = np.random.randint(len(alphabet)<span class="number">-2</span>)</div>
+<div class="line">    end = np.random.randint(start,min(start+max_len,len(alphabet)<span class="number">-1</span>))</div>
+<div class="line">    seq_in = alphabet[start:end+<span class="number">1</span>]</div>
+<div class="line">    seq_out = alphabet[end+<span class="number">1</span>]</div>
+<div class="line">    dataX.append([char2int[idx] <span class="keyword">for</span> idx <span class="keyword">in</span> seq_in])</div>
+<div class="line">    dataY.append([char2int[idx] <span class="keyword">for</span> idx <span class="keyword">in</span> seq_out])</div>
+<div class="line">    print(seq_in,<span class="string">'-&gt;'</span>,seq_out)</div>
+<div class="line">dataX = pad_sequences(dataX,maxlen=max_len,dtype=<span class="string">'float32'</span>)</div>
+<div class="line">input_shape = (len(dataX),max_len,<span class="number">1</span>)</div>
+<div class="line"><span class="comment">#[batch_size,time_stamps,features]</span></div>
+<div class="line">X = np.reshape(dataX,input_shape)</div>
+<div class="line">X = X/float(len(alphabet))</div>
+<div class="line">y = np_utils.to_categorical(dataY)</div>
+<div class="line"></div>
+<div class="line">batch_size = <span class="number">1</span></div>
+<div class="line">model = Sequential()</div>
+<div class="line">model.add(layers.LSTM(<span class="number">32</span>,input_shape=(X.shape[<span class="number">1</span>],X.shape[<span class="number">2</span>])))</div>
+<div class="line">model.add(layers.Dense(y.shape[<span class="number">1</span>],activation=<span class="string">'softmax'</span>))</div>
+<div class="line">model.compile(loss=<span class="string">'categorical_crossentropy'</span>,optimizer=<span class="string">'adam'</span>,metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(model)</span>:</span></div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</div>
+<div class="line">        pattern_index = np.random.randint(len(dataX))</div>
+<div class="line">        pattern = dataX[pattern_index]</div>
+<div class="line">        x = pad_sequences([pattern], maxlen=max_len, dtype=<span class="string">'float32'</span>)</div>
+<div class="line">        x = np.reshape(x, (<span class="number">1</span>, max_len, <span class="number">1</span>))</div>
+<div class="line">        x = x / float(len(alphabet))</div>
+<div class="line">        prediction = model.predict(x, verbose=<span class="number">0</span>)</div>
+<div class="line">        index = np.argmax(prediction)</div>
+<div class="line">        result = int2char[index]</div>
+<div class="line">        seq_in = [int2char[value] <span class="keyword">for</span> value <span class="keyword">in</span> pattern]</div>
+<div class="line">        print(seq_in, <span class="string">"-&gt;"</span>, result)</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">naive_lstm</span><span class="params">()</span>:</span></div>
+<div class="line">    model.fit(X,y,epochs=<span class="number">500</span>,batch_size=batch_size,verbose=<span class="number">1</span>)</div>
+<div class="line">    model.reset_states()</div>
+<div class="line">    scores = model.evaluate(X,y,verbose=<span class="number">1</span>)</div>
+<div class="line">    model.reset_states()</div>
+<div class="line">    print(<span class="string">"Model Accuracy: %.2f%%"</span>%(scores[<span class="number">1</span>]*<span class="number">100</span>))</div>
+<div class="line">    predict(model)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    naive_lstm()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>Running this code produces the following output:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line">Model Accuracy: <span class="number">98.90</span>%</div>
+<div class="line">['Q', 'R'] -&gt; S</div>
+<div class="line">['W', 'X'] -&gt; Y</div>
+<div class="line">['W', 'X'] -&gt; Y</div>
+<div class="line">['C', 'D'] -&gt; E</div>
+<div class="line">['E'] -&gt; F</div>
+<div class="line">['S', 'T', 'U'] -&gt; V</div>
+<div class="line">['G', 'H', 'I', 'J', 'K'] -&gt; L</div>
+<div class="line">['O', 'P', 'Q', 'R', 'S'] -&gt; T</div>
+<div class="line">['C', 'D'] -&gt; E</div>
+<div class="line">['O'] -&gt; P</div>
+<div class="line">['N', 'O', 'P'] -&gt; Q</div>
+<div class="line">['D', 'E', 'F', 'G', 'H'] -&gt; I</div>
+<div class="line">['X'] -&gt; Y</div>
+<div class="line">['K'] -&gt; L</div>
+<div class="line">['M'] -&gt; N</div>
+<div class="line">['R'] -&gt; T</div>
+<div class="line">['K'] -&gt; L</div>
+<div class="line">['E', 'F', 'G'] -&gt; H</div>
+<div class="line">['Q'] -&gt; R</div>
+<div class="line">['Q', 'R', 'S'] -&gt; T</div>
+</pre></td></tr></table></figure>
+<p>We can see that although the model did not learn the alphabet perfectly from the randomly generated subsequences, it did very well. The model was not tuned and may require more training or a larger network, or both (an exercise for the reader).</p>
+<p>This is a good natural extension to the “<em>all sequential input examples in each batch</em>” alphabet model learned above in that it can handle ad hoc queries, but this time of arbitrary sequence length (up to the max length).</p>
+<h1 id="Referneces"><a href="#Referneces" class="headerlink" title="Referneces"></a>Referneces</h1><p><a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="noopener">The Unreasonable Effectiveness of Recurrent Neural Networks</a> </p>
 <p><a href="http://www.sohu.com/a/118587343_487514" target="_blank" rel="noopener">零基础入门深度学习(四)：循环神经网络 </a> </p>
 <p><a href="https://blog.csdn.net/zhaojc1995/article/details/80572098" target="_blank" rel="noopener">RNN</a> </p>
 <p><a href="https://www.cnblogs.com/zhbzz2007/p/6339346.html" target="_blank" rel="noopener">BPTT Python implementation</a> </p>
@@ -1174,7 +1682,7 @@ L=\sum_{t=1}^{n}L^{(t)}\\
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">75</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1196,7 +1704,7 @@ L=\sum_{t=1}^{n}L^{(t)}\\
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
