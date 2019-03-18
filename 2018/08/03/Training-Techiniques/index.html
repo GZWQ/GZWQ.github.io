@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-03-18T01:18:06.627Z">
+<meta property="og:updated_time" content="2019-03-18T23:52:49.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
 <meta name="twitter:description" content="Techniques for training a Deep Learning model.">
@@ -541,7 +541,7 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
 <h2 id="ELU"><a href="#ELU" class="headerlink" title="ELU"></a>ELU</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.55.56%20PM.png" alt="creen Shot 2019-02-17 at 2.55.56 P"></p>
 <h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png" alt="creen Shot 2019-02-17 at 2.58.24 P"></p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
-<h2 id="Softmax函数"><a href="#Softmax函数" class="headerlink" title="Softmax函数"></a><a href="https://deepnotes.io/softmax-crossentropy" target="_blank" rel="noopener">Softmax函数</a></h2><p>Softmax function takes an N-dimensional vector of real number and transforms it into a vector of real number in range $(0,1)$ which add up to 1. For each output element $a_j$ in the last layer:</p>
+<h2 id="Softmax函数-ref"><a href="#Softmax函数-ref" class="headerlink" title=" Softmax函数 ref"></a><a href="https://deepnotes.io/softmax-crossentropy" target="_blank" rel="noopener"> Softmax函数</a> <a href="http://bigstuffgoingon.com/blog/posts/softmax-loss-gradient/#The-gradient-of-the-softmax-classifier-loss-function" target="_blank" rel="noopener">ref</a></h2><p>Softmax function takes an N-dimensional vector of real number and transforms it into a vector of real number in range $(0,1)$ which add up to 1. For each output element $a_j$ in the last layer:</p>
 <script type="math/tex; mode=display">
 f(a_j)=\frac{e^{a_j}}{\sum_{i=1}^{k}e^{a_i}}</script><p>In python, we have the code for softmax function as follows:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -621,10 +621,15 @@ H(y,p) = - \sum_i y_i log(p_i)</script><p>It is widely used as an alternative of
 <div class="line">    <span class="keyword">return</span> loss</div>
 </pre></td></tr></table></figure>
 <h3 id="Derivative-of-Cross-Entropy-Loss-with-Softmax"><a href="#Derivative-of-Cross-Entropy-Loss-with-Softmax" class="headerlink" title="Derivative of Cross Entropy Loss with Softmax"></a>Derivative of Cross Entropy Loss with Softmax</h3><p>Cross Entropy Loss with Softmax function are used as the output layer extensively. Now we use the derivative of softmax that we derived earlier to derive the derivative of the cross entropy loss function.</p>
+<p>For each sample $(x_i,y_i)$, there are $c$ classes</p>
 <script type="math/tex; mode=display">
 \begin{align}
-L &= - \sum_i y_i log(p_i) \\
-\frac{\partial L}{\partial o_i} &= - \sum_k y_k \frac{\partial log(p_k)}{\partial o_i } \\
+L_i &= - \sum_i^c y_i log(p_i) \\
+\end{align}</script><p>Then for each output node $o_i$:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+
+\frac{\partial L_i}{\partial o_i} &= - \sum_k y_k \frac{\partial log(p_k)}{\partial o_i } \\
 &= - \sum_k y_k \frac{\partial log(p_k)}{\partial p_k} \times \frac{\partial p_k}{ \partial o_i} \\
 &= - \sum y_k \frac{1}{p_k} \times \frac{\partial p_k}{\partial o_i} \\
 
@@ -663,7 +668,144 @@ L &= - \sum_i y_i log(p_i) \\
 <div class="line">    prob_of_groundtruth -= <span class="number">1</span></div>
 <div class="line">    <span class="keyword">return</span> prob_of_groundtruth/m</div>
 </pre></td></tr></table></figure>
-<p>In summary, </p>
+<p>In summary, the overall loss of cross entropy loss with sigmoid function is as following:</p>
+<p>for each sample $(x_i,y_i)$, </p>
+<script type="math/tex; mode=display">
+Loss=-\frac{1}{n}\sum_{i}^{n}y_ilog(p_i) + \frac{1}{2}\sum_{m}\sum_{n}w_{m,n}^{2}\\
+p_i=\frac{e^{o_i}}{\sum_{k}^{c}e^{o_k}}</script><p>where $o_i$ is the non-logit output, $p_i$ is the probability of being class $i$, $y_i$ is the groundtruth class. The second part of $Loss$ is the regularization.</p>
+<p>Then the gradient is:</p>
+<p>The plaint implementation is as following:</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></div>
+<div class="line">  <span class="string">"""</span></div>
+<div class="line"><span class="string">  Softmax loss function, naive implementation (with loops)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs have dimension D, there are C classes, and we operate on minibatches</span></div>
+<div class="line"><span class="string">  of N examples.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs:</span></div>
+<div class="line"><span class="string">  - W: A numpy array of shape (D, C) containing weights.</span></div>
+<div class="line"><span class="string">  - X: A numpy array of shape (N, D) containing a minibatch of data.</span></div>
+<div class="line"><span class="string">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></div>
+<div class="line"><span class="string">    that X[i] has label c, where 0 &lt;= c &lt; C.</span></div>
+<div class="line"><span class="string">  - reg: (float) regularization strength</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Returns a tuple of:</span></div>
+<div class="line"><span class="string">  - loss as single float</span></div>
+<div class="line"><span class="string">  - gradient with respect to weights W; an array of same shape as W</span></div>
+<div class="line"><span class="string">  """</span></div>
+<div class="line">  <span class="comment"># Initialize the loss and gradient to zero.</span></div>
+<div class="line">  loss = <span class="number">0.0</span></div>
+<div class="line">  dW = np.zeros_like(W)</div>
+<div class="line">  train_num = X.shape[<span class="number">0</span>]</div>
+<div class="line">  class_num = W.shape[<span class="number">1</span>]</div>
+<div class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(train_num):</div>
+<div class="line">    sample = X[i] <span class="comment"># (1,D)</span></div>
+<div class="line">    score = X[i].dot(W) <span class="comment"># (1,D)*(D,C) = (1,C)</span></div>
+<div class="line">    normalized_score = score-max(score)</div>
+<div class="line">    exp_score = np.exp(normalized_score)</div>
+<div class="line">    prob = exp_score/sum(exp_score)</div>
+<div class="line">    loss += -np.log(prob[y[i]])</div>
+<div class="line">    </div>
+<div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(class_num):</div>
+<div class="line">        <span class="keyword">if</span> k==y[i]: <span class="comment">#correct class</span></div>
+<div class="line">            dW[:,y[i]] += (prob[y[i]]<span class="number">-1</span>)*sample</div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            dW[:,k] += prob[k]*sample</div>
+<div class="line">  loss = loss/train_num + <span class="number">0.5</span>*reg*np.sum(W*W) <span class="comment"># must use np.sum() instead of sum()</span></div>
+<div class="line">  dw = dW/train_num + reg*W</div>
+<div class="line"></div>
+<div class="line">  <span class="keyword">return</span> loss, dW</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></div>
+<div class="line">  <span class="string">"""</span></div>
+<div class="line"><span class="string">  Softmax loss function, vectorized version.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs and outputs are the same as softmax_loss_naive.</span></div>
+<div class="line"><span class="string">  """</span></div>
+<div class="line">  <span class="comment"># Initialize the loss and gradient to zero.</span></div>
+<div class="line">  loss = <span class="number">0.0</span></div>
+<div class="line">  dW = np.zeros_like(W)</div>
+<div class="line">  train_num = X.shape[<span class="number">0</span>]</div>
+<div class="line">  class_num = W.shape[<span class="number">1</span>]</div>
+<div class="line">  score = X.dot(W) <span class="comment">#(N,C)</span></div>
+<div class="line">  score -= np.max(score,axis=<span class="number">1</span>,keepdims=<span class="keyword">True</span>) <span class="comment"># normalized</span></div>
+<div class="line">  prob = np.exp(score)/np.sum(np.exp(score),axis=<span class="number">1</span>,keepdims=<span class="keyword">True</span>) <span class="comment">#(N,C)</span></div>
+<div class="line">  loss = -np.sum(np.log(prob[np.arange(train_num),y])) <span class="comment">#for ith row of prob, pick y[i] value of that row</span></div>
+<div class="line">  loss = loss/train_num + <span class="number">0.5</span>*reg*np.sum(W*W)</div>
+<div class="line">    </div>
+<div class="line">  y_ = np.zeros_like(prob)</div>
+<div class="line">  y_[np.arange(train_num),y] = <span class="number">1</span></div>
+<div class="line">  dW = X.T.dot(prob-y_)</div>
+<div class="line">  dw = dW/train_num + reg*W</div>
+<div class="line">  </div>
+<div class="line">  <span class="keyword">return</span> loss, dW</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h1 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h1><h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
 <p><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d" target="_blank" rel="noopener">Stochastic Gradient Descent with momentum</a> </p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.14.40 PM.png" alt="creen Shot 2019-02-23 at 3.14.40 P"></p>
@@ -987,7 +1129,7 @@ L &= - \sum_i y_i log(p_i) \\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数"><span class="nav-number">6.7.</span> <span class="nav-text">Softmax函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-softmax"><span class="nav-number">6.7.1.</span> <span class="nav-text">Derivative of softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Entropy-Loss"><span class="nav-number">6.7.2.</span> <span class="nav-text">Cross Entropy Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-Cross-Entropy-Loss-with-Softmax"><span class="nav-number">6.7.3.</span> <span class="nav-text">Derivative of Cross Entropy Loss with Softmax</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">9.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">10.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">11.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数-ref"><span class="nav-number">6.7.</span> <span class="nav-text"> Softmax函数 ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-softmax"><span class="nav-number">6.7.1.</span> <span class="nav-text">Derivative of softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Entropy-Loss"><span class="nav-number">6.7.2.</span> <span class="nav-text">Cross Entropy Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-Cross-Entropy-Loss-with-Softmax"><span class="nav-number">6.7.3.</span> <span class="nav-text">Derivative of Cross Entropy Loss with Softmax</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">9.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">10.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">11.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
             
 
           </div>
