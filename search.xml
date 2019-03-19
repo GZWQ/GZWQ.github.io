@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>NLP-Attention</title>
+      <link href="/2019/03/18/NLP-Attention/"/>
+      <url>/2019/03/18/NLP-Attention/</url>
+      <content type="html"><![CDATA[<p>Attention in DP and NLP.</p><a id="more"></a><h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><h2 id="Random-Reading"><a href="#Random-Reading" class="headerlink" title="Random Reading"></a>Random Reading</h2><ol><li><a href="https://zhuanlan.zhihu.com/p/53682800" target="_blank" rel="noopener">nlp中的Attention注意力机制+Transformer详解</a> </li><li><a href="https://zhuanlan.zhihu.com/p/37601161" target="_blank" rel="noopener">great intriduction</a></li></ol>]]></content>
+      
+      <categories>
+          
+          <category> NLP </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Deep Learning </tag>
+            
+            <tag> NLP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>DP-Tensorflow</title>
       <link href="/2019/03/18/DP-Tensorflow/"/>
       <url>/2019/03/18/DP-Tensorflow/</url>
@@ -519,9 +542,9 @@
       
         <tags>
             
-            <tag> Deep Learning </tag>
-            
             <tag> GAN </tag>
+            
+            <tag> Deep Learning </tag>
             
             <tag> Variant GAN </tag>
             
@@ -590,9 +613,9 @@
       
         <tags>
             
-            <tag> Deep Learning </tag>
-            
             <tag> GAN </tag>
+            
+            <tag> Deep Learning </tag>
             
         </tags>
       
