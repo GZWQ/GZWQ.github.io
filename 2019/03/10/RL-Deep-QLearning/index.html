@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/10/RL-Deep-QLearning/1_js8r4Aq2ZZoiLK0mMp_ocg.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/10/RL-Deep-QLearning/1_Zplt-1wTWu_7BGmZCBFjbQ.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/10/RL-Deep-QLearning/cartpole1.gif">
-<meta property="og:updated_time" content="2019-03-15T21:53:04.773Z">
+<meta property="og:updated_time" content="2019-03-19T16:14:07.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RL-Deep QLearning">
 <meta name="twitter:description" content="Q-Learning needs to maintain a Q-table that an agent uses to find the best action to take given a state. However, producing and updating a Q-table can become ineffective in big state space environment">
@@ -441,130 +441,7 @@
 <h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a><a href="https://gist.github.com/simoninithomas/7611db5d8a6f3edde269e18b97fa4d0c#file-deep-q-learning-with-doom-ipynb" target="_blank" rel="noopener">Implementation</a></h1><p><a href="https://keon.io/deep-q-learning/" target="_blank" rel="noopener">keras</a> <a href="https://pytorch.org/tutorials/intermediate/reinforcement_q_learning.html" target="_blank" rel="noopener">pytorch</a> </p>
 <p>In this implementation, we are going to train a Deep Q Learning agent on the CartPole-v0 task. In this task, the agent can take two actions - moving the cart left or right, so that the pole attached to it stays upright.</p>
 <p><img src="/2019/03/10/RL-Deep-QLearning/cartpole1.gif" alt="artpole"></p>
-<h2 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h2><p>The first thing we need to do is to import packages.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> gym</div>
-<div class="line"><span class="keyword">import</span> math</div>
-<div class="line"><span class="keyword">import</span> random</div>
-<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
-<div class="line"><span class="keyword">import</span> matplotlib</div>
-<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
-<div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</div>
-<div class="line"><span class="keyword">from</span> itertools <span class="keyword">import</span> count</div>
-<div class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</div>
-<div class="line"><span class="keyword">import</span> torch</div>
-<div class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</div>
-<div class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</div>
-<div class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</div>
-<div class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> T</div>
-<div class="line">env = gym.make(<span class="string">'CartPole-v0'</span>).make</div>
-<div class="line">device = torch.device(<span class="string">"cuda"</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">"cpu"</span>)</div>
-</pre></td></tr></table></figure>
-<h2 id="Reply-Memory"><a href="#Reply-Memory" class="headerlink" title="Reply Memory"></a>Reply Memory</h2><p>One of the challenges for DQN is that neural network used in the algorithm tends to forget the previous experiences as it overwrites them with new experiences. So we need a list of previous experiences and observations to re-train the model with the previous experiences. We will call this array of experiences <code>momory</code>. It has been shown that this greatly stabilizes and improves the DQN training procedure. For this, we need two classes:</p>
-<ul>
-<li><code>Transition</code> - a named tuple representing a single transition in our environment. It maps essentially maps (state, action) pairs to their (next_state, reward) result, with the state being the screen difference image as described later on.</li>
-<li><code>ReplayMemory</code> - a cyclic buffer of bounded size that holds the transitions observed recently. It also implements a <code>.sample()</code> method for selecting a random batch of transitions for training.</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-</pre></td><td class="code"><pre><div class="line">Transition = namedtuple(<span class="string">'Transition'</span>,(<span class="string">'state'</span>,<span class="string">'action'</span>,<span class="string">'next_state'</span>,<span class="string">'reward'</span>))</div>
-<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ReplayMemory</span><span class="params">(object)</span>:</span></div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,capacity)</span>:</span></div>
-<div class="line">        self.capacity = capacity</div>
-<div class="line">        self.memory = []</div>
-<div class="line">        self.position = <span class="number">0</span></div>
-<div class="line">        </div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self,*args)</span>:</span></div>
-<div class="line">        <span class="keyword">if</span> len(self.memory)&lt;self.capacity:</div>
-<div class="line">            self.memory.append(<span class="keyword">None</span>)</div>
-<div class="line">        self.memory[self.position] = Transition(*args)</div>
-<div class="line">        self.position = (self.position+<span class="number">1</span>)%self.capacity</div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sample</span><span class="params">(self,batch_size)</span>:</span></div>
-<div class="line">        <span class="keyword">return</span> random.sample(self.memory,batch_size)</div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></div>
-<div class="line">        <span class="keyword">return</span> len(self.memory)</div>
-</pre></td></tr></table></figure>
-<h2 id="Q-network"><a href="#Q-network" class="headerlink" title="Q-network"></a>Q-network</h2><p>Our model will be a convolutional neural network that takes in the difference between the current and previous screen patches. It has two outputs, representing $Q(s,left)$and$ Q(s,right)$(where $s$ is the input to the network). In effect, the network is trying to predict the <em>expected return</em> of taking each action given the current input.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-<div class="line">24</div>
-</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DNQ</span><span class="params">(nn.Module)</span>:</span></div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,h,w)</span>:</span> <span class="comment"># h:input height, w:input width</span></div>
-<div class="line">        super(DNQ, self).__init__()</div>
-<div class="line">        self.conv1 = nn.Conv2d(in_channels=<span class="number">3</span>, out_channels=<span class="number">16</span>, kernel_size=<span class="number">5</span>, stride=<span class="number">2</span>)</div>
-<div class="line">        self.bn1 = nn.BatchNorm2d(num_features=<span class="number">16</span>)</div>
-<div class="line">        self.conv2 = nn.Conv2d(<span class="number">16</span>, <span class="number">32</span>, kernel_size=<span class="number">5</span>, stride=<span class="number">2</span>)</div>
-<div class="line">        self.bn2 = nn.BatchNorm2d(<span class="number">32</span>)</div>
-<div class="line">        self.conv2 = nn.Conv2d(<span class="number">32</span>, <span class="number">32</span>, kernel_size=<span class="number">5</span>, stride=<span class="number">2</span>)</div>
-<div class="line">        self.bn2 = nn.BatchNorm2d(<span class="number">32</span>)</div>
-<div class="line"></div>
-<div class="line">        <span class="comment"># Number of Linear input connections depends on output of conv2d layers</span></div>
-<div class="line">        <span class="comment"># and therefore the input image size, so compute it.</span></div>
-<div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">conv2d_size_out</span><span class="params">(size,kernel_size=<span class="number">5</span>,stride=<span class="number">2</span>)</span>:</span></div>
-<div class="line">            <span class="keyword">return</span> (size-(kernel_size<span class="number">-1</span>)<span class="number">-1</span>)//stride+<span class="number">1</span></div>
-<div class="line">        convw = conv2d_size_out(conv2d_size_out(conv2d_size_out(w)))</div>
-<div class="line">        convh = conv2d_size_out(conv2d_size_out(conv2d_size_out(h)))</div>
-<div class="line">        linear_input_size = convw*convh*<span class="number">32</span></div>
-<div class="line">        self.head = nn.Linear(linear_input_size,<span class="number">2</span>)</div>
-<div class="line"></div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></div>
-<div class="line">        x = F.relu(self.bn1(self.conv1(x)))</div>
-<div class="line">        x = F.relu(self.bn2(self.conv2(x)))</div>
-<div class="line">        x = F.relu(self.bn3(self.conv3(x)))</div>
-<div class="line">        <span class="keyword">return</span> self.head(x.view(x.size(<span class="number">0</span>),<span class="number">-1</span>)) <span class="comment">#view is reshape function</span></div>
-</pre></td></tr></table></figure>
-<h2 id="Input-preprocessing"><a href="#Input-preprocessing" class="headerlink" title="Input preprocessing"></a>Input preprocessing</h2><p>The code below are utilities for extracting and processing rendered images from the environment. It uses the <code>torchvision</code>package, which makes it easy to compose image transforms. Once you run the cell it will display an example patch that it extracted.</p>
-
+<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2>
       
     </div>
     
@@ -740,7 +617,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overall-Structure"><span class="nav-number">1.</span> <span class="nav-text">Overall Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preprocessing"><span class="nav-number">1.1.</span> <span class="nav-text">Preprocessing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-problem-of-temporal-limitation"><span class="nav-number">1.1.1.</span> <span class="nav-text">The problem of temporal limitation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Convolution-network"><span class="nav-number">1.2.</span> <span class="nav-text">Convolution network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deep-Q-Learning-algorithm"><span class="nav-number">2.</span> <span class="nav-text">Deep Q-Learning algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Packages"><span class="nav-number">3.1.</span> <span class="nav-text">Packages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reply-Memory"><span class="nav-number">3.2.</span> <span class="nav-text">Reply Memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-network"><span class="nav-number">3.3.</span> <span class="nav-text">Q-network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input-preprocessing"><span class="nav-number">3.4.</span> <span class="nav-text">Input preprocessing</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overall-Structure"><span class="nav-number">1.</span> <span class="nav-text">Overall Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preprocessing"><span class="nav-number">1.1.</span> <span class="nav-text">Preprocessing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-problem-of-temporal-limitation"><span class="nav-number">1.1.1.</span> <span class="nav-text">The problem of temporal limitation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Convolution-network"><span class="nav-number">1.2.</span> <span class="nav-text">Convolution network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deep-Q-Learning-algorithm"><span class="nav-number">2.</span> <span class="nav-text">Deep Q-Learning algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">3.1.</span> <span class="nav-text"> </span></a></li></ol></li></ol></div>
             
 
           </div>

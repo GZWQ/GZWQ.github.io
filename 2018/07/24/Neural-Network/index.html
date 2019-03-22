@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/Screen%20Shot%202019-03-08%20at%202.24.14%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/Screen%20Shot%202019-03-08%20at%202.29.26%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/24/Neural-Network/Screen%20Shot%202019-03-08%20at%202.34.05%20PM.png">
-<meta property="og:updated_time" content="2019-03-12T02:52:27.915Z">
+<meta property="og:updated_time" content="2019-03-22T19:03:03.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Neural Network">
 <meta name="twitter:description" content="本节介绍最基本的神经网络。">
@@ -401,7 +401,7 @@
         <p>本节介绍最基本的神经网络。</p>
 <a id="more"></a>
 <h1 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h1><h2 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h2><p><a href="https://hit-scir.gitbooks.io/neural-networks-and-deep-learning-zh_cn/content/chap1/c1s1.html" target="_blank" rel="noopener">ref1</a> <a href="https://www.leiphone.com/news/201706/QFydbeV7FXQtRIOl.html" target="_blank" rel="noopener">ref2</a> </p>
-<h4 id="二分类线性模型"><a href="#二分类线性模型" class="headerlink" title="二分类线性模型"></a>二分类线性模型</h4><p>感知机作为一种二元线性分类模型，能（且一定能）将线性可分的数据集分开。什么叫线性可分？在二维平面上、线性可分意味着能用一条线将正负样本分开，在三维空间中、线性可分意味着能用一个平面将正负样本分开。</p>
+<h3 id="二分类线性模型"><a href="#二分类线性模型" class="headerlink" title="二分类线性模型"></a>二分类线性模型</h3><p>感知机作为一种二元线性分类模型，能（且一定能）将线性可分的数据集分开。什么叫线性可分？在二维平面上、线性可分意味着能用一条线将正负样本分开，在三维空间中、线性可分意味着能用一个平面将正负样本分开。</p>
 <p>虽然简单，但它既可以发展成支持向量机（通过简单地修改损失函数），又可以发展为神经网络（通过简单地叠加），它的模型如下：</p>
 <p><img src="/2018/07/24/Neural-Network/Screen Shot 2018-08-24 at 9.39.12 AM.png" alt="Screen Shot 2018-08-24 at 9.39.12 AM"></p>
 <p>感知机接受几个输入$x_i$，对每一个权重赋予一个权重衡量该输入对输入的重要性，其输出为0或者1，由加权和$\sum_{j}{w_jx_j}$是否小于或者大于某一个阈值决定。和权重一样，阈值也是一个实数，同时它是神经元的一个参数。使用更严密的代数形式来表示：</p>
@@ -413,7 +413,7 @@
 \begin{eqnarray} \mbox{output} = \left\{ \begin{array}{ll} 0 & \mbox{if } w\cdot x + b \leq 0 \\ 1 & \mbox{if } w\cdot x + b > 0 \end{array} \right. \tag{2}\end{eqnarray}</script><p>如下图所示。</p>
 <p><img src="/2018/07/24/Neural-Network/perceptron.png" alt="perceptron"></p>
 <p>可以将偏置理解为感知机为了得到输出为1的容易度的度量，如果一个感知机的偏置非常大，那么这个感知机的输出很容易为1，相反如果偏置非常小，那么输出1就很困难。</p>
-<h4 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h4><blockquote>
+<h3 id="感知机学习策略"><a href="#感知机学习策略" class="headerlink" title="感知机学习策略"></a>感知机学习策略</h3><blockquote>
 <p>为确定感知机模型参数$w​$和$b​$,需要定义一个损失函数并将损失函数最小化。样本点到超平面的距离:</p>
 </blockquote>
 <script type="math/tex; mode=display">
@@ -433,7 +433,7 @@ $\frac{1}{||w||}$是常量，不影响，$L(w,b)=-\sum_{x_i\in{M}}{{y_i|w\times{
 <p>则参数更新公式为：</p>
 <p>$w=w+\eta y_ix_i, b = b+\eta y_i$ </p>
 </blockquote>
-<h4 id="逻辑计算"><a href="#逻辑计算" class="headerlink" title="逻辑计算"></a>逻辑计算</h4><p>感知机可以用于计算初等逻辑函数：与、或、非。</p>
+<h3 id="逻辑计算"><a href="#逻辑计算" class="headerlink" title="逻辑计算"></a>逻辑计算</h3><p>感知机可以用于计算初等逻辑函数：与、或、非。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -1238,7 +1238,271 @@ L=\frac{1}{N}\sum_{i=1}^{N}\sum_{j\ne y_i}max(0,f(x_i;W)_j-f(x_i;W)_{y_i}+1)+\la
 </ol>
 </blockquote>
 <p><img src="/2018/07/24/Neural-Network/Screen Shot 2019-03-08 at 2.34.05 PM.png" alt="creen Shot 2019-03-08 at 2.34.05 P"></p>
-<h3 id="Deep-Understanding"><a href="#Deep-Understanding" class="headerlink" title="Deep Understanding"></a><a href="https://deepnotes.io/softmax-crossentropy" target="_blank" rel="noopener">Deep Understanding</a></h3><h2 id="均方误差"><a href="#均方误差" class="headerlink" title="均方误差"></a>均方误差</h2><script type="math/tex; mode=display">
+<h2 id="Softmax函数-ref"><a href="#Softmax函数-ref" class="headerlink" title=" Softmax函数 ref"></a><a href="https://deepnotes.io/softmax-crossentropy" target="_blank" rel="noopener"> Softmax函数</a> <a href="http://bigstuffgoingon.com/blog/posts/softmax-loss-gradient/#The-gradient-of-the-softmax-classifier-loss-function" target="_blank" rel="noopener">ref</a></h2><p>Softmax function takes an N-dimensional vector of real number and transforms it into a vector of real number in range $(0,1)$ which add up to 1. For each output element $a_j$ in the last layer:</p>
+<script type="math/tex; mode=display">
+f(a_j)=\frac{e^{a_j}}{\sum_{i=1}^{k}e^{a_i}}</script><p>In python, we have the code for softmax function as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></div>
+<div class="line">    exps = np.exp(x)</div>
+<div class="line">    <span class="keyword">return</span> exps/np.sum(exps)</div>
+</pre></td></tr></table></figure>
+<p>We have to note that the numerical range of float number in numpy is limited. For <code>float64</code> the upper bound is $10^{308}$. For exponential, it is not difficult to overshoot that limit, in which case python returns <code>nan</code>.</p>
+<p>To make our softmax function numerically stable, we simply normalize the values in the vector, by multiplying the numerator and denominator with a constant $C$.</p>
+<script type="math/tex; mode=display">
+\begin{align}
+p_i &= \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}} \\
+&= \frac{Ce^{a_i}}{C\sum_{k=1}^N e^{a_k}} \\
+&= \frac{e^{a_i + \log(C)}}{\sum_{k=1}^N e^{a_k + \log(C)}} \\
+\end{align}</script><p>We can choose an arbitrary value for $log(C)$ term, but generally $log(C)=−max(a)$ is chosen, as it shifts all of elements in the vector to negative to zero, and negatives with large exponents saturate to zero rather than the infinity, avoiding overflowing and resulting in <code>nan</code>.</p>
+<p>The code for our stable softmax is as follows:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></div>
+<div class="line">    exps = np.exp(x-np.max(x))</div>
+<div class="line">    <span class="keyword">return</span> exps/np.sum(exps)</div>
+</pre></td></tr></table></figure>
+<h3 id="Derivative-of-softmax"><a href="#Derivative-of-softmax" class="headerlink" title="Derivative of softmax"></a>Derivative of softmax</h3><p>Due to the desirable property of softmax function outputting a probability distribution, we use it as the final layer in neural networks. For this we need to calculate the derivative or gradient and pass it back to the previous layer during backpropagation.</p>
+<p>For each node $a_j$ in the output layer, we want to calculate:</p>
+<script type="math/tex; mode=display">
+\frac{\partial p_i}{\partial a_j} = \frac{\partial  \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}}}{\partial a_j}</script><p>If $i=j$:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial  \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}}}{\partial a_j}&= \frac{e^{a_i} \sum_{k=1}^N e^{a_k} - e^{a_j}e^{a_i}}{\left( \sum_{k=1}^N e^{a_k}\right)^2} \\
+&= \frac{e^{a_i} \left( \sum_{k=1}^N e^{a_k} - e^{a_j}\right )}{\left( \sum_{k=1}^N e^{a_k}\right)^2} \\
+&= \frac{ e^{a_j} }{\sum_{k=1}^N e^{a_k} } \times \frac{\left( \sum_{k=1}^N e^{a_k} - e^{a_j}\right ) }{\sum_{k=1}^N e^{a_k} } \\
+&= p_i(1-p_j)
+\end{align}</script><p>For $i\ne j$:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial  \frac{e^{a_i}}{\sum_{k=1}^N e^{a_k}}}{\partial a_j}&= \frac{0 - e^{a_j}e^{a_i}}{\left( \sum_{k=1}^N e^{a_k}\right)^2} \\
+&= \frac{- e^{a_j} }{\sum_{k=1}^N e^{a_k} } \times \frac{e^{a_i} }{\sum_{k=1}^N e^{a_k} } \\
+&= - p_j.p_i
+\end{align}</script><p>So the derivative of the softmax function is given as,</p>
+<script type="math/tex; mode=display">
+\frac{\partial p_i}{\partial a_j} = 
+\begin{cases}p_i(1-p_j) &  if & i=j \\
+-p_j.p_i & if & i \neq j
+\end{cases}</script><p>Or using Kronecker delta $\delta{ij} = \begin{cases} 1 &amp; if &amp; i=j \\ 0 &amp; if &amp; i\neq j \end{cases}$ </p>
+<script type="math/tex; mode=display">
+\frac{\partial p_i}{\partial a_j} =  p_i(\delta_{ij}-p_j)</script><h3 id="Cross-Entropy-Loss"><a href="#Cross-Entropy-Loss" class="headerlink" title="Cross Entropy Loss"></a>Cross Entropy Loss</h3><p>Corss entropy loss indicates the distance between what the model belives the output distribution should be, and what the original distribution really is. It is defined as:</p>
+<script type="math/tex; mode=display">
+H(y,p) = - \sum_i y_i log(p_i)</script><p>It is widely used as an alternative of squared error. It is used when node activations can be understand as representing the probability that each hypothesis might be true, i.e. when the output is a probability is a probability distribution. Thus it is used as a loss function in neural networks which have softmax activations in the output layer:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cross_entropy</span><span class="params">(x,y)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    X is the output from fully connected layer (num_examples x num_classes)</span></div>
+<div class="line"><span class="string">    y is labels (num_examples x 1)</span></div>
+<div class="line"><span class="string">    	Note that y is not one-hot encoded vector. </span></div>
+<div class="line"><span class="string">    	It can be computed as y.argmax(axis=1) from one-hot encoded vectors of labels if required.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    l = y.shape[<span class="number">0</span>]</div>
+<div class="line">    prob = softmax(x)</div>
+<div class="line">    prob_of_groundtruth = [row[y[i]] <span class="keyword">for</span> i,row <span class="keyword">in</span> enumerate(prob)]</div>
+<div class="line">    log_likelihood = -np.log(prob_of_groundtruth)</div>
+<div class="line">    loss = np.sum(log_likelihood)</div>
+<div class="line">    <span class="keyword">return</span> loss</div>
+</pre></td></tr></table></figure>
+<h3 id="Derivative-of-Cross-Entropy-Loss-with-Softmax"><a href="#Derivative-of-Cross-Entropy-Loss-with-Softmax" class="headerlink" title="Derivative of Cross Entropy Loss with Softmax"></a>Derivative of Cross Entropy Loss with Softmax</h3><p>Cross Entropy Loss with Softmax function are used as the output layer extensively. Now we use the derivative of softmax that we derived earlier to derive the derivative of the cross entropy loss function.</p>
+<p>For each sample $(x_i,y_i)$, there are $c$ classes</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L_i &= - \sum_i^c y_i log(p_i) \\
+\end{align}</script><p>Then for each output node $o_i$:</p>
+<script type="math/tex; mode=display">
+\begin{align}
+
+\frac{\partial L_i}{\partial o_i} &= - \sum_k y_k \frac{\partial log(p_k)}{\partial o_i } \\
+&= - \sum_k y_k \frac{\partial log(p_k)}{\partial p_k} \times \frac{\partial p_k}{ \partial o_i} \\
+&= - \sum y_k \frac{1}{p_k} \times \frac{\partial p_k}{\partial o_i} \\
+
+\end{align}</script><p>From derivative of softmax we derived earlier that $\frac{\partial p_i}{\partial a_j} = \begin{cases}p_i(1-p_j)&amp;  if &amp; i=j \\ -p_j.p_i &amp; if &amp; i \neq j\end{cases}$,</p>
+<script type="math/tex; mode=display">
+\begin{align}
+\frac{\partial L}{\partial o_i}  &= -y_i(1-p_i) - \sum_{k\neq i} y_k \frac{1}{p_k}(-p_k.p_i) \\
+&= -y_i(1-p_i) + \sum_{k \neq 1} y_k.p_i \\
+&= - y_i + y_ip_i + \sum_{k \neq 1} y_k.p_i \\
+&= p_i\left( y_i +  \sum_{k \neq 1} y_k\right) - y_i \\
+&= p_i\left( y_i +  \sum_{k \neq 1} y_k\right)  - y_i
+\end{align}</script><p>$y$ is a one hot encoded vector for the label, so $\sum_{k}y_k =1$, and $y_i + \sum_{k\ne i}y_k =1$. So we have,</p>
+<script type="math/tex; mode=display">
+\frac{\partial L}{\partial o_i} = p_i - y_i</script><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">delta_cross_entropy</span><span class="params">(x,y)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    X is the output from fully connected layer (num_examples x num_classes)</span></div>
+<div class="line"><span class="string">    y is labels (num_examples x 1)</span></div>
+<div class="line"><span class="string">    	Note that y is not one-hot encoded vector. </span></div>
+<div class="line"><span class="string">    	It can be computed as y.argmax(axis=1) from one-hot encoded vectors of labels if required.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    m = y.shape[<span class="number">0</span>]</div>
+<div class="line">    prob = softmax(x)</div>
+<div class="line">    prob_of_groundtruth = [row[y[i]] <span class="keyword">for</span> i,row <span class="keyword">in</span> enumerate(prob)]</div>
+<div class="line">    prob_of_groundtruth -= <span class="number">1</span></div>
+<div class="line">    <span class="keyword">return</span> prob_of_groundtruth/m</div>
+</pre></td></tr></table></figure>
+<p>In summary, the overall loss of cross entropy loss with sigmoid function is as following:</p>
+<p>for each sample $(x_i,y_i)$, </p>
+<script type="math/tex; mode=display">
+Loss=-\frac{1}{n}\sum_{i}^{n}y_ilog(p_i) + \frac{1}{2}\sum_{m}\sum_{n}w_{m,n}^{2}\\
+p_i=\frac{e^{o_i}}{\sum_{k}^{c}e^{o_k}}</script><p>where $o_i$ is the non-logit output, $p_i$ is the probability of being class $i$, $y_i$ is the groundtruth class. The second part of $Loss$ is the regularization.</p>
+<p>The plaint implementation is as following:</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></div>
+<div class="line">  <span class="string">"""</span></div>
+<div class="line"><span class="string">  Softmax loss function, naive implementation (with loops)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs have dimension D, there are C classes, and we operate on minibatches</span></div>
+<div class="line"><span class="string">  of N examples.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs:</span></div>
+<div class="line"><span class="string">  - W: A numpy array of shape (D, C) containing weights.</span></div>
+<div class="line"><span class="string">  - X: A numpy array of shape (N, D) containing a minibatch of data.</span></div>
+<div class="line"><span class="string">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></div>
+<div class="line"><span class="string">    that X[i] has label c, where 0 &lt;= c &lt; C.</span></div>
+<div class="line"><span class="string">  - reg: (float) regularization strength</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Returns a tuple of:</span></div>
+<div class="line"><span class="string">  - loss as single float</span></div>
+<div class="line"><span class="string">  - gradient with respect to weights W; an array of same shape as W</span></div>
+<div class="line"><span class="string">  """</span></div>
+<div class="line">  <span class="comment"># Initialize the loss and gradient to zero.</span></div>
+<div class="line">  loss = <span class="number">0.0</span></div>
+<div class="line">  dW = np.zeros_like(W)</div>
+<div class="line">  train_num = X.shape[<span class="number">0</span>]</div>
+<div class="line">  class_num = W.shape[<span class="number">1</span>]</div>
+<div class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(train_num):</div>
+<div class="line">    sample = X[i] <span class="comment"># (1,D)</span></div>
+<div class="line">    score = X[i].dot(W) <span class="comment"># (1,D)*(D,C) = (1,C)</span></div>
+<div class="line">    normalized_score = score-max(score)</div>
+<div class="line">    exp_score = np.exp(normalized_score)</div>
+<div class="line">    prob = exp_score/sum(exp_score)</div>
+<div class="line">    loss += -np.log(prob[y[i]])</div>
+<div class="line">    </div>
+<div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(class_num):</div>
+<div class="line">        <span class="keyword">if</span> k==y[i]: <span class="comment">#correct class</span></div>
+<div class="line">            dW[:,y[i]] += (prob[y[i]]<span class="number">-1</span>)*sample</div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            dW[:,k] += prob[k]*sample</div>
+<div class="line">  loss = loss/train_num + <span class="number">0.5</span>*reg*np.sum(W*W) <span class="comment"># must use np.sum() instead of sum()</span></div>
+<div class="line">  dw = dW/train_num + reg*W</div>
+<div class="line"></div>
+<div class="line">  <span class="keyword">return</span> loss, dW</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></div>
+<div class="line">  <span class="string">"""</span></div>
+<div class="line"><span class="string">  Softmax loss function, vectorized version.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs and outputs are the same as softmax_loss_naive.</span></div>
+<div class="line"><span class="string">  """</span></div>
+<div class="line">  <span class="comment"># Initialize the loss and gradient to zero.</span></div>
+<div class="line">  loss = <span class="number">0.0</span></div>
+<div class="line">  dW = np.zeros_like(W)</div>
+<div class="line">  train_num = X.shape[<span class="number">0</span>]</div>
+<div class="line">  class_num = W.shape[<span class="number">1</span>]</div>
+<div class="line">  score = X.dot(W) <span class="comment">#(N,C)</span></div>
+<div class="line">  score -= np.max(score,axis=<span class="number">1</span>,keepdims=<span class="keyword">True</span>) <span class="comment"># normalized</span></div>
+<div class="line">  prob = np.exp(score)/np.sum(np.exp(score),axis=<span class="number">1</span>,keepdims=<span class="keyword">True</span>) <span class="comment">#(N,C)</span></div>
+<div class="line">  loss = -np.sum(np.log(prob[np.arange(train_num),y])) <span class="comment">#for ith row of prob, pick y[i] value of that row</span></div>
+<div class="line">  loss = loss/train_num + <span class="number">0.5</span>*reg*np.sum(W*W)</div>
+<div class="line">    </div>
+<div class="line">  y_ = np.zeros_like(prob)</div>
+<div class="line">  y_[np.arange(train_num),y] = <span class="number">1</span></div>
+<div class="line">  dW = X.T.dot(prob-y_)</div>
+<div class="line">  dw = dW/train_num + reg*W</div>
+<div class="line">  </div>
+<div class="line">  <span class="keyword">return</span> loss, dW</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="均方误差"><a href="#均方误差" class="headerlink" title="均方误差"></a>均方误差</h2><script type="math/tex; mode=display">
 mse = \sum_{i=1}^{n}(y-a)^2</script><h2 id="交叉熵误差-cross-entropy"><a href="#交叉熵误差-cross-entropy" class="headerlink" title="交叉熵误差(cross entropy)"></a>交叉熵误差(cross entropy)</h2><script type="math/tex; mode=display">
 C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id="BatchNormalization"><a href="#BatchNormalization" class="headerlink" title="BatchNormalization"></a>BatchNormalization</h1><p><a href="https://www.zhihu.com/question/38102762" target="_blank" rel="noopener">zhihu</a> <a href="https://blog.csdn.net/whitesilence/article/details/75667002" target="_blank" rel="noopener">过程</a> </p>
 <h1 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h1><p>pooling的本质是降维，</p>
@@ -1422,7 +1686,7 @@ C =\frac{1}{n}\sum_{i=1}^{n}-[y\cdot log(a)+(1-y)\cdot log(1-a)]</script><h1 id=
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前向传播"><span class="nav-number">1.3.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络的矩阵表示"><span class="nav-number">1.3.2.</span> <span class="nav-text">神经网络的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">1.3.3.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出层"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏层"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">隐藏层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法步骤"><span class="nav-number">1.4.</span> <span class="nav-text">算法步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-实现"><span class="nav-number">1.5.</span> <span class="nav-text">Python 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Toy-Example"><span class="nav-number">1.5.1.</span> <span class="nav-text">Toy Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-1"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNIST手写体数字分类"><span class="nav-number">1.5.2.</span> <span class="nav-text">MNIST手写体数字分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据可视化"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-2"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-2"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KERAS版本实现"><span class="nav-number">1.5.3.</span> <span class="nav-text">KERAS版本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度检查"><span class="nav-number">1.5.4.</span> <span class="nav-text">梯度检查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">2.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hinge-Loss"><span class="nav-number">2.1.</span> <span class="nav-text">Hinge Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Regularization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Regularization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax"><span class="nav-number">2.2.</span> <span class="nav-text">Softmax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Understanding"><span class="nav-number">2.2.1.</span> <span class="nav-text">Deep Understanding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">2.3.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">2.4.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">3.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">4.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">5.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#神经网络"><span class="nav-number">1.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二分类线性模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">二分类线性模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习策略"><span class="nav-number">1.1.2.</span> <span class="nav-text">感知机学习策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑计算"><span class="nav-number">1.1.3.</span> <span class="nav-text">逻辑计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经元模型"><span class="nav-number">1.2.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络结构"><span class="nav-number">1.3.</span> <span class="nav-text">神经网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前向传播"><span class="nav-number">1.3.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络的矩阵表示"><span class="nav-number">1.3.2.</span> <span class="nav-text">神经网络的矩阵表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向传播"><span class="nav-number">1.3.3.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输出层"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐藏层"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">隐藏层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法步骤"><span class="nav-number">1.4.</span> <span class="nav-text">算法步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-实现"><span class="nav-number">1.5.</span> <span class="nav-text">Python 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Toy-Example"><span class="nav-number">1.5.1.</span> <span class="nav-text">Toy Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-1"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-1"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MNIST手写体数字分类"><span class="nav-number">1.5.2.</span> <span class="nav-text">MNIST手写体数字分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据可视化"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">数据可视化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前向传播-2"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">前向传播</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播-2"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KERAS版本实现"><span class="nav-number">1.5.3.</span> <span class="nav-text">KERAS版本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度检查"><span class="nav-number">1.5.4.</span> <span class="nav-text">梯度检查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代价函数"><span class="nav-number">2.</span> <span class="nav-text">代价函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hinge-Loss"><span class="nav-number">2.1.</span> <span class="nav-text">Hinge Loss</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Regularization"><span class="nav-number">2.1.1.</span> <span class="nav-text">Regularization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax"><span class="nav-number">2.2.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Softmax函数-ref"><span class="nav-number">2.3.</span> <span class="nav-text"> Softmax函数 ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-softmax"><span class="nav-number">2.3.1.</span> <span class="nav-text">Derivative of softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cross-Entropy-Loss"><span class="nav-number">2.3.2.</span> <span class="nav-text">Cross Entropy Loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Derivative-of-Cross-Entropy-Loss-with-Softmax"><span class="nav-number">2.3.3.</span> <span class="nav-text">Derivative of Cross Entropy Loss with Softmax</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均方误差"><span class="nav-number">2.4.</span> <span class="nav-text">均方误差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交叉熵误差-cross-entropy"><span class="nav-number">2.5.</span> <span class="nav-text">交叉熵误差(cross entropy)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BatchNormalization"><span class="nav-number">3.</span> <span class="nav-text">BatchNormalization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pooling"><span class="nav-number">4.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dropout"><span class="nav-number">5.</span> <span class="nav-text">Dropout</span></a></li></ol></div>
             
 
           </div>
