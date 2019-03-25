@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Machine Learning," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,13 @@
 
 
 
-<meta name="description" content="The Naive Bayesian classifier is based on Bayes’ theorem with the independence assumptions between predictors (data attributes). A Naive Bayesian model is easy to build, with no complicated iterative">
-<meta name="keywords" content="Machine Learning">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ML - Naive Bayes">
-<meta property="og:url" content="http://yoursite.com/2018/06/10/ML-Naive-Bayes/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog of Qing">
+<meta property="og:url" content="http://yoursite.com/tags/Statistics/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="The Naive Bayesian classifier is based on Bayes’ theorem with the independence assumptions between predictors (data attributes). A Naive Bayesian model is easy to build, with no complicated iterative">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-30T17:40:56.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ML - Naive Bayes">
-<meta name="twitter:description" content="The Naive Bayesian classifier is based on Bayes’ theorem with the independence assumptions between predictors (data attributes). A Naive Bayesian model is easy to build, with no complicated iterative">
+<meta name="twitter:title" content="Blog of Qing">
 
 
 
@@ -120,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/10/ML-Naive-Bayes/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/Statistics/"/>
 
 
 
 
 
-  <title>ML - Naive Bayes | Blog of Qing</title>
+  <title>Tag: Statistics | Blog of Qing</title>
   
 
 
@@ -145,7 +140,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-right ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -273,330 +268,54 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>Statistics<small>Tag</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/10/ML-Naive-Bayes/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2018/05/30/Statistic-110/" itemprop="url">
+              
+                <span itemprop="name">Statistic 110</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">ML - Naive Bayes</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-10T01:01:53-05:00">
-                2018-06-10
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-05-30T16:20:26-05:00"
+              content="2018-05-30" >
+          05-30
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>The Naive Bayesian classifier is based on Bayes’ theorem with the independence assumptions between predictors (data attributes). A Naive Bayesian model is easy to build, with no complicated iterative parameter estimation which makes it particularly useful for very large datasets. Despite its simplicity, the Naive Bayesian classifier often does surprisingly well and is widely used because it often outperforms more sophisticated classification methods. </p>
-<p>The meaning of “Naive”:</p>
-<ol>
-<li>Features are independent to each other.</li>
-<li>Features are equally important.</li>
-</ol>
-<a id="more"></a>
-<h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>The classifer uses bayes rule to make predictions. Bayes classifier assume that the effect of the value of a predictor (attribute <em>x</em>) on a given class (<em>c</em>) is independent of the values of other predictors.</p>
-<script type="math/tex; mode=display">
-p(c|X)=\frac{P(c)P(X|c)}{P(X)}\\</script><p>Assuming that $X$ has $n$ independent attributes, that is, $X=\{x_1,x_2,…,x_n\}$, so, we can write above formula as:</p>
-<script type="math/tex; mode=display">
-P(X|c)=P(x_1|c)P(x_2|c)...P(x_n|c)\\
-P(X)=\sum_{i=1}^{m}P(C_i)P(X|c_i)</script><p>so using above two to replace：</p>
-<script type="math/tex; mode=display">
-\begin{equation}
-
-\begin{aligned}
-
-p(c|X)&==\frac{P(c)P(X|c)}{P(X)}\\
-
-&=\frac{P(c)P(x_1|c)P(x_2|c)...P(x_n|c)}{\sum_{i=1}^{m}P(C_i)P(X|c_i)}
-
-\end{aligned}
-
-\end{equation}</script><p>And we can find that the denominator is same to all class $c_i$, so</p>
-<script type="math/tex; mode=display">
-P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><blockquote>
-<p>So whenever we want to predict a unknown $X=\{x_i,x_2,…,x_n\}$, we only need to calculate $P(c_j)$ for each class label and $P(x_i|c_j)$ for each attribute.</p>
-</blockquote>
-<h1 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h1><p>We use the same simple Weather dataset here.</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Outlook</th>
-<th style="text-align:center">Temperature</th>
-<th style="text-align:center">Humidity</th>
-<th style="text-align:center">Windy</th>
-<th style="text-align:center">Play Golf</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">rainy</td>
-<td style="text-align:center">hot</td>
-<td style="text-align:center">high</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">no</td>
-</tr>
-<tr>
-<td style="text-align:center">rainy</td>
-<td style="text-align:center">hot</td>
-<td style="text-align:center">high</td>
-<td style="text-align:center">true</td>
-<td style="text-align:center">no</td>
-</tr>
-<tr>
-<td style="text-align:center">overcast</td>
-<td style="text-align:center">hot</td>
-<td style="text-align:center">high</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">sunny</td>
-<td style="text-align:center">mild</td>
-<td style="text-align:center">high</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">sunny</td>
-<td style="text-align:center">cool</td>
-<td style="text-align:center">normal</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">sunny</td>
-<td style="text-align:center">cool</td>
-<td style="text-align:center">normal</td>
-<td style="text-align:center">true</td>
-<td style="text-align:center">no</td>
-</tr>
-<tr>
-<td style="text-align:center">overcast</td>
-<td style="text-align:center">cool</td>
-<td style="text-align:center">normal</td>
-<td style="text-align:center">true</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">rainy</td>
-<td style="text-align:center">mild</td>
-<td style="text-align:center">high</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">no</td>
-</tr>
-<tr>
-<td style="text-align:center">rainy</td>
-<td style="text-align:center">cool</td>
-<td style="text-align:center">normal</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">sunny</td>
-<td style="text-align:center">mild</td>
-<td style="text-align:center">normal</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">rainy</td>
-<td style="text-align:center">mild</td>
-<td style="text-align:center">normal</td>
-<td style="text-align:center">true</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">overcast</td>
-<td style="text-align:center">mild</td>
-<td style="text-align:center">high</td>
-<td style="text-align:center">true</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">overcast</td>
-<td style="text-align:center">hot</td>
-<td style="text-align:center">normal</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">yes</td>
-</tr>
-<tr>
-<td style="text-align:center">sunny</td>
-<td style="text-align:center">mild</td>
-<td style="text-align:center">high</td>
-<td style="text-align:center">true</td>
-<td style="text-align:center">no</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ol>
-<li><ul>
-<li></li>
-</ul>
-</li>
-</ol>
-<h1 id="Zero-frequency-problem"><a href="#Zero-frequency-problem" class="headerlink" title="Zero-frequency problem"></a>Zero-frequency problem</h1><p>See the prediction formula again:</p>
-<script type="math/tex; mode=display">
-P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><p>if one of the $P(x_i|c)$ is zero, then the probability of $P(c|X)$ is zero, no matter how higher probability of other $P(x_j|c)$. </p>
-<p>One of the solutions is to add a small positive number to all counts:</p>
-<p>For example, $N$ is the number of all classes in the training data $D$, in the above example $N=2$, Yes or No. And $N_i$ is the number of under one of class, the numebr of records which have attribute $x_i$.</p>
-<script type="math/tex; mode=display">
-\hat{P}(c)=\frac{|D_c|+1}{|D|+N}\\
-\hat{P}(x_i|c)=\frac{|D_{c,x_i}|+1}{|D_c|+N_i}</script><h1 id="Numerical-Attributes"><a href="#Numerical-Attributes" class="headerlink" title="Numerical Attributes"></a>Numerical Attributes</h1><p>The naive bayes </p>
-<p><a href="https://github.com/Wellat/MLaction/tree/master/Ch04_NaiveBayes" target="_blank" rel="noopener">Emais Classification</a></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/06/10/ML-K-Nearest-Neighbors/" rel="next" title="ML - K-Nearest Neighbors">
-                <i class="fa fa-chevron-left"></i> ML - K-Nearest Neighbors
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/06/10/DP-Related-Paper/" rel="prev" title="DP - Related Paper">
-                DP - Related Paper <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -604,10 +323,6 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><p>
 
 
           
-
-  
-
-
 
         </div>
         
@@ -628,17 +343,8 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><p>
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -698,22 +404,6 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><p>
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Example"><span class="nav-number">2.</span> <span class="nav-text">Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Zero-frequency-problem"><span class="nav-number">3.</span> <span class="nav-text">Zero-frequency problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numerical-Attributes"><span class="nav-number">4.</span> <span class="nav-text">Numerical Attributes</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -847,10 +537,6 @@ P(c|X)=P(x_1|c)\times P(x_2|c)\times ...\times P(x_n|c)\times P(c)\\</script><p>
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
