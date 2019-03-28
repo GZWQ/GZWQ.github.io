@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_training_dataset.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_validation_dataset.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Screen%20Shot%202019-03-13%20at%2010.25.34%20PM.png">
-<meta property="og:updated_time" content="2019-03-14T03:25:48.631Z">
+<meta property="og:updated_time" content="2019-03-28T18:17:26.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras">
 <meta name="twitter:description" content="Keras使用技巧。">
@@ -1141,6 +1141,208 @@
 <div class="line">    main()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/07/23/Keras/Screen Shot 2019-03-13 at 10.25.34 PM.png" alt="creen Shot 2019-03-13 at 10.25.34 P"></p>
+<h1 id="Customerize-Optimizer"><a href="#Customerize-Optimizer" class="headerlink" title="Customerize Optimizer"></a>Customerize Optimizer</h1><p>The following example is an example of modifing the implementation of Adam optimizer, so that it can support differential privacy.</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> Optimizer</div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> backend <span class="keyword">as</span> K</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">clip_norm</span><span class="params">(g, c, n)</span>:</span></div>
+<div class="line">    <span class="keyword">if</span> c &gt; <span class="number">0</span>:</div>
+<div class="line">        g = K.switch(n &gt;= c, g * c / n, g)</div>
+<div class="line">    <span class="keyword">return</span> g</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NoisyAdam</span><span class="params">(Optimizer)</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lr=<span class="number">0.001</span>, beta_1=<span class="number">0.9</span>, beta_2=<span class="number">0.999</span>,</span></span></div>
+<div class="line"><span class="function"><span class="params">                 epsilon=<span class="number">1e-8</span>, decay=<span class="number">0.</span>, noise=<span class="number">0.</span>, **kwargs)</span>:</span></div>
+<div class="line">        super(NoisyAdam, self).__init__(**kwargs)</div>
+<div class="line">        self.iterations = K.variable(<span class="number">0</span>, name=<span class="string">'iterations'</span>)</div>
+<div class="line">        self.lr = K.variable(lr, name=<span class="string">'lr'</span>)</div>
+<div class="line">        self.beta_1 = K.variable(beta_1, name=<span class="string">'beta_1'</span>)</div>
+<div class="line">        self.beta_2 = K.variable(beta_2, name=<span class="string">'beta_2'</span>)</div>
+<div class="line">        self.epsilon = epsilon</div>
+<div class="line">        self.decay = K.variable(decay, name=<span class="string">'decay'</span>)</div>
+<div class="line">        self.initial_decay = decay</div>
+<div class="line">        self.noise = noise</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_gradients</span><span class="params">(self, loss, params)</span>:</span></div>
+<div class="line">        grads = K.gradients(loss, params)</div>
+<div class="line">        <span class="keyword">if</span> hasattr(self, <span class="string">'clipnorm'</span>) <span class="keyword">and</span> self.clipnorm &gt; <span class="number">0</span>:</div>
+<div class="line">            norm = K.sqrt(sum([K.sum(K.square(g)) <span class="keyword">for</span> g <span class="keyword">in</span> grads]))</div>
+<div class="line">            grads = [clip_norm(g, self.clipnorm, norm) <span class="keyword">for</span> g <span class="keyword">in</span> grads]</div>
+<div class="line">        <span class="keyword">if</span> hasattr(self, <span class="string">'clipvalue'</span>) <span class="keyword">and</span> self.clipvalue &gt; <span class="number">0</span>:</div>
+<div class="line">            grads = [K.clip(g, -self.clipvalue, self.clipvalue) <span class="keyword">for</span> g <span class="keyword">in</span> grads]</div>
+<div class="line"></div>
+<div class="line">        <span class="keyword">if</span> self.noise &gt; <span class="number">0</span>:</div>
+<div class="line">            grads = [(g + K.random_normal(g.shape, mean=<span class="number">0</span>,</div>
+<div class="line">                                          stddev=(self.noise * self.clipnorm)))</div>
+<div class="line">                     <span class="keyword">for</span> g <span class="keyword">in</span> grads]</div>
+<div class="line">        <span class="keyword">return</span> grads</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_updates</span><span class="params">(self, loss,params)</span>:</span></div>
+<div class="line">        grads = self.get_gradients(loss, params)</div>
+<div class="line">        self.updates = [K.update_add(self.iterations, <span class="number">1</span>)]</div>
+<div class="line"></div>
+<div class="line">        lr = self.lr</div>
+<div class="line">        <span class="keyword">if</span> self.initial_decay &gt; <span class="number">0</span>:</div>
+<div class="line">            lr *= (<span class="number">1.</span> / (<span class="number">1.</span> + self.decay * self.iterations))</div>
+<div class="line"></div>
+<div class="line">        t = self.iterations + <span class="number">1</span></div>
+<div class="line">        lr_t = lr * (K.sqrt(<span class="number">1.</span> - K.pow(self.beta_2, t)) /</div>
+<div class="line">                     (<span class="number">1.</span> - K.pow(self.beta_1, t)))</div>
+<div class="line"></div>
+<div class="line">        shapes = [K.get_variable_shape(p) <span class="keyword">for</span> p <span class="keyword">in</span> params]</div>
+<div class="line">        ms = [K.zeros(shape) <span class="keyword">for</span> shape <span class="keyword">in</span> shapes]</div>
+<div class="line">        vs = [K.zeros(shape) <span class="keyword">for</span> shape <span class="keyword">in</span> shapes]</div>
+<div class="line">        self.weights = [self.iterations] + ms + vs</div>
+<div class="line"></div>
+<div class="line">        <span class="keyword">for</span> p, g, m, v <span class="keyword">in</span> zip(params, grads, ms, vs):</div>
+<div class="line">            m_t = (self.beta_1 * m) + (<span class="number">1.</span> - self.beta_1) * g</div>
+<div class="line">            v_t = (self.beta_2 * v) + (<span class="number">1.</span> - self.beta_2) * K.square(g)</div>
+<div class="line">            p_t = p - lr_t * m_t / (K.sqrt(v_t) + self.epsilon)</div>
+<div class="line"></div>
+<div class="line">            self.updates.append(K.update(m, m_t))</div>
+<div class="line">            self.updates.append(K.update(v, v_t))</div>
+<div class="line">            new_p = p_t</div>
+<div class="line">            <span class="comment"># Apply constraints.</span></div>
+<div class="line">            <span class="keyword">if</span> getattr(p, <span class="string">'constraint'</span>, <span class="keyword">None</span>) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div>
+<div class="line">                new_p = p.constraint(new_p)</div>
+<div class="line"></div>
+<div class="line">            self.updates.append(K.update(p, new_p))</div>
+<div class="line">        <span class="keyword">return</span> self.updates</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_config</span><span class="params">(self)</span>:</span></div>
+<div class="line">        config = &#123;<span class="string">'lr'</span>: float(K.get_value(self.lr)),</div>
+<div class="line">                  <span class="string">'beta_1'</span>: float(K.get_value(self.beta_1)),</div>
+<div class="line">                  <span class="string">'beta_2'</span>: float(K.get_value(self.beta_2)),</div>
+<div class="line">                  <span class="string">'decay'</span>: float(K.get_value(self.decay)),</div>
+<div class="line">                  <span class="string">'epsilon'</span>: self.epsilon&#125;</div>
+<div class="line">        base_config = super(NoisyAdam, self).get_config()</div>
+<div class="line">        <span class="keyword">return</span> dict(list(base_config.items()) + list(config.items()))</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h1 id="VGG-Feature-Loss"><a href="#VGG-Feature-Loss" class="headerlink" title="VGG Feature Loss"></a>VGG Feature Loss</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.applications <span class="keyword">import</span> VGG19</div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_vgg</span><span class="params">()</span>:</span></div>
+<div class="line">    vgg = VGG19(weights=<span class="string">"imagenet"</span>)</div>
+<div class="line">    vgg.outputs = [vgg.layers[<span class="number">9</span>].output]</div>
+<div class="line">    img = layers.Input(shape=self.img_shape)</div>
+<div class="line">    img_features = vgg(img)</div>
+<div class="line">    <span class="keyword">return</span> Model(img, img_features)</div>
+<div class="line"><span class="comment">##########################################</span></div>
+<div class="line">vgg = build_vgg()</div>
+<div class="line">vgg.trainable = <span class="keyword">False</span></div>
+<div class="line">vgg.compile(loss=<span class="string">'mse'</span>,optimizer=optimizer,metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line"><span class="comment">##########################################</span></div>
+<div class="line">fake_pose_vgg_feature = vgg(pose_recons)</div>
+<div class="line">pose_ende = Model(pose_img,fake_pose_vgg_feature)</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">##########################################</span></div>
+<div class="line">pose_real_vgg_feature = vgg.predict(pose_imgs)</div>
+<div class="line">pose_loss = pose_ende.train_on_batch(pose_imgs,pose_real_vgg_feature)</div>
+</pre></td></tr></table></figure>
 
       
     </div>
@@ -1266,7 +1468,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1321,7 +1523,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型保存"><span class="nav-number">3.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型保存-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型载入"><span class="nav-number">3.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Callback"><span class="nav-number">4.</span> <span class="nav-text">Keras-Callback</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">4.1.</span> <span class="nav-text">ModelCheckpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkpoint-Neural-Network-Model-Improvements"><span class="nav-number">4.1.1.</span> <span class="nav-text">Checkpoint Neural Network Model Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-a-Check-Pointed-Neural-Network-Model"><span class="nav-number">4.1.2.</span> <span class="nav-text">Loading a Check-Pointed Neural Network Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearningRateScheduler"><span class="nav-number">4.2.</span> <span class="nav-text">LearningRateScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Based-Learning-Rate-Schedule"><span class="nav-number">4.2.1.</span> <span class="nav-text">Time-Based Learning Rate Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop-Based-Learning-Rate-Schedule"><span class="nav-number">4.2.2.</span> <span class="nav-text">Drop-Based Learning Rate Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">4.3.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualize-Model-Training-History-in-Keras"><span class="nav-number">4.3.1.</span> <span class="nav-text">Visualize Model Training History in Keras</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorboard"><span class="nav-number">4.4.</span> <span class="nav-text">Tensorboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensorflow"><span class="nav-number">4.4.1.</span> <span class="nav-text">Tensorflow</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型保存"><span class="nav-number">3.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">3.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型保存-1"><span class="nav-number">3.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型载入"><span class="nav-number">3.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">3.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Callback"><span class="nav-number">4.</span> <span class="nav-text">Keras-Callback</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">4.1.</span> <span class="nav-text">ModelCheckpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkpoint-Neural-Network-Model-Improvements"><span class="nav-number">4.1.1.</span> <span class="nav-text">Checkpoint Neural Network Model Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-a-Check-Pointed-Neural-Network-Model"><span class="nav-number">4.1.2.</span> <span class="nav-text">Loading a Check-Pointed Neural Network Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearningRateScheduler"><span class="nav-number">4.2.</span> <span class="nav-text">LearningRateScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Based-Learning-Rate-Schedule"><span class="nav-number">4.2.1.</span> <span class="nav-text">Time-Based Learning Rate Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop-Based-Learning-Rate-Schedule"><span class="nav-number">4.2.2.</span> <span class="nav-text">Drop-Based Learning Rate Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">4.3.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualize-Model-Training-History-in-Keras"><span class="nav-number">4.3.1.</span> <span class="nav-text">Visualize Model Training History in Keras</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorboard"><span class="nav-number">4.4.</span> <span class="nav-text">Tensorboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensorflow"><span class="nav-number">4.4.1.</span> <span class="nav-text">Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Customerize-Optimizer"><span class="nav-number">5.</span> <span class="nav-text">Customerize Optimizer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-Feature-Loss"><span class="nav-number">6.</span> <span class="nav-text">VGG Feature Loss</span></a></li></ol></div>
             
 
           </div>

@@ -125,7 +125,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-03-22T19:00:41.884Z">
+<meta property="og:updated_time" content="2019-03-28T18:17:29.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
 <meta name="twitter:description" content="Techniques for training a Deep Learning model.">
@@ -555,49 +555,6 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
 <p><img src="/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png" alt="228224-1a6202911b46d1d"></p>
 <p><a href="https://www.jianshu.com/p/e502e4b43e6d" target="_blank" rel="noopener">pic</a> </p>
 <h1 id="DC-GAN"><a href="#DC-GAN" class="headerlink" title="DC-GAN"></a>DC-GAN</h1><p><a href="https://julianzaidi.wordpress.com/2017/04/24/deep-convolution-gan-dcgan-architecture-and-training/" target="_blank" rel="noopener">Deep Convolutional GAN (DCGAN) : Architecture and choice of the good set of hyper-parameters</a></p>
-<h1 id="VGG-FEATURE-LOSS"><a href="#VGG-FEATURE-LOSS" class="headerlink" title="VGG-FEATURE-LOSS"></a>VGG-FEATURE-LOSS</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.applications <span class="keyword">import</span> VGG19</div>
-<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> layers</div>
-<div class="line"></div>
-<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_vgg</span><span class="params">()</span>:</span></div>
-<div class="line">    vgg = VGG19(weights=<span class="string">"imagenet"</span>)</div>
-<div class="line">    vgg.outputs = [vgg.layers[<span class="number">9</span>].output]</div>
-<div class="line">    img = layers.Input(shape=self.img_shape)</div>
-<div class="line">    img_features = vgg(img)</div>
-<div class="line">    <span class="keyword">return</span> Model(img, img_features)</div>
-<div class="line"><span class="comment">##########################################</span></div>
-<div class="line">vgg = build_vgg()</div>
-<div class="line">vgg.trainable = <span class="keyword">False</span></div>
-<div class="line">vgg.compile(loss=<span class="string">'mse'</span>,optimizer=optimizer,metrics=[<span class="string">'accuracy'</span>])</div>
-<div class="line"></div>
-<div class="line"><span class="comment">##########################################</span></div>
-<div class="line">fake_pose_vgg_feature = vgg(pose_recons)</div>
-<div class="line">pose_ende = Model(pose_img,fake_pose_vgg_feature)</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">##########################################</span></div>
-<div class="line">pose_real_vgg_feature = vgg.predict(pose_imgs)</div>
-<div class="line">pose_loss = pose_ende.train_on_batch(pose_imgs,pose_real_vgg_feature)</div>
-</pre></td></tr></table></figure>
 <h1 id="PatchGan"><a href="#PatchGan" class="headerlink" title="PatchGan"></a>PatchGan</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -809,7 +766,7 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -864,7 +821,7 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">9.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGG-FEATURE-LOSS"><span class="nav-number">10.</span> <span class="nav-text">VGG-FEATURE-LOSS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">11.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">9.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">10.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
             
 
           </div>
