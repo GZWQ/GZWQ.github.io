@@ -89,12 +89,13 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170707133635659-888158147.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/1119747-20170707133932722-715494711.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Screen%20Shot%202019-03-29%20at%201.06.19%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Time-Based-Learning-Rate-Schedule.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Drop-Based-Learning-Rate-Schedule-2237380.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_training_dataset.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_validation_dataset.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Screen%20Shot%202019-03-13%20at%2010.25.34%20PM.png">
-<meta property="og:updated_time" content="2019-03-28T23:45:16.089Z">
+<meta property="og:updated_time" content="2019-03-31T17:25:21.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras">
 <meta name="twitter:description" content="Keras使用技巧。 TODO  [ ] LSTM [ ] CONV1D [ ] TIMEDISTRIBUTED-VIDEOS [ ] FIT_GENERATOR [ ] STATEFUL_RNN">
@@ -396,6 +397,265 @@
 <a id="more"></a>
 <h1 id="Keras模块结构"><a href="#Keras模块结构" class="headerlink" title="Keras模块结构"></a>Keras模块结构</h1><p><img src="/2018/07/23/Keras/1119747-20170707133635659-888158147.png" alt="1119747-20170707133635659-888158147"></p>
 <h1 id="Keras构建神经网络"><a href="#Keras构建神经网络" class="headerlink" title="Keras构建神经网络"></a>Keras构建神经网络</h1><p><img src="/2018/07/23/Keras/1119747-20170707133932722-715494711.png" alt="1119747-20170707133932722-715494711"></p>
+<h1 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h1><p>There are two ways to implement a keras model, Sequential and Model. We will use an image classification example to see how these ways work and their corresponding properties.</p>
+<p>We use MNIST hand-written recognition as the example. We will implement a three-layers convolution network, i.e., <code>input_layer -&gt; conv2d -&gt; conv2d -&gt; dense -&gt; output_layer</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense, Conv2D, Flatten</div>
+<div class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist</div>
+<div class="line"><span class="keyword">from</span> keras.utils <span class="keyword">import</span> to_categorical</div>
+<div class="line">(X_train, y_train), (X_test, y_test) = mnist.load_data()</div>
+<div class="line">X_train = X_train.reshape(<span class="number">60000</span>,<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>)</div>
+<div class="line">X_test = X_test.reshape(<span class="number">10000</span>,<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>)</div>
+<div class="line">y_train = to_categorical(y_train)</div>
+<div class="line">y_test = to_categorical(y_test)</div>
+<div class="line">model = Sequential()</div>
+<div class="line"><span class="comment">#add model layers</span></div>
+<div class="line">model.add(Conv2D(<span class="number">64</span>, kernel_size=<span class="number">3</span>, activation=<span class="string">'relu'</span>, input_shape=(<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>),name=<span class="string">'conv1'</span>))</div>
+<div class="line">model.add(Conv2D(<span class="number">32</span>, kernel_size=<span class="number">3</span>, activation=<span class="string">'relu'</span>,name=<span class="string">'conv2'</span>))</div>
+<div class="line">model.add(Flatten(name=<span class="string">'flatten'</span>))</div>
+<div class="line">model.add(Dense(<span class="number">10</span>, activation=<span class="string">'softmax'</span>,name=<span class="string">'dense'</span>))</div>
+<div class="line">model.compile(optimizer=<span class="string">'adam'</span>, loss=<span class="string">'categorical_crossentropy'</span>, metrics=[<span class="string">'accuracy'</span>])</div>
+</pre></td></tr></table></figure>
+<h2 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h2><p><code>model.layers</code>: return a flattened list of the layers comprising the model.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">print(model.layers)</div>
+<div class="line"><span class="comment">##[&lt;keras.layers.convolutional.Conv2D object at 0x11b62a780&gt;, &lt;keras.layers.convolutional.Conv2D object at 0x11b63df98&gt;, &lt;keras.layers.core.Flatten object at 0x11eb17588&gt;, &lt;keras.layers.core.Dense object at 0x11eb170f0&gt;]</span></div>
+</pre></td></tr></table></figure>
+<p><code>model.inputs</code>: return the list of input tensors of the model.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">print(model.inputs)</div>
+<div class="line"><span class="comment">##[&lt;tf.Tensor 'conv1_input:0' shape=(?, 28, 28, 1) dtype=float32&gt;]</span></div>
+</pre></td></tr></table></figure>
+<p><code>model.outputs</code>: return the list of output tensors of the model.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">print(model.outputs)</div>
+<div class="line"><span class="comment">##[&lt;tf.Tensor 'dense/Softmax:0' shape=(?, 10) dtype=float32&gt;]</span></div>
+</pre></td></tr></table></figure>
+<p><code>model.summary</code>: prints a summary representation of the model.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line">_________________________________________________________________</div>
+<div class="line">Layer (type)                 Output Shape              Param <span class="comment">#   </span></div>
+<div class="line">=================================================================</div>
+<div class="line">conv1 (Conv2D)               (<span class="keyword">None</span>, <span class="number">26</span>, <span class="number">26</span>, <span class="number">64</span>)        <span class="number">640</span>       </div>
+<div class="line">_________________________________________________________________</div>
+<div class="line">conv2 (Conv2D)               (<span class="keyword">None</span>, <span class="number">24</span>, <span class="number">24</span>, <span class="number">32</span>)        <span class="number">18464</span>     </div>
+<div class="line">_________________________________________________________________</div>
+<div class="line">flatten (Flatten)            (<span class="keyword">None</span>, <span class="number">18432</span>)             <span class="number">0</span>         </div>
+<div class="line">_________________________________________________________________</div>
+<div class="line">dense (Dense)                (<span class="keyword">None</span>, <span class="number">10</span>)                <span class="number">184330</span>    </div>
+<div class="line">=================================================================</div>
+<div class="line">Total params: <span class="number">203</span>,<span class="number">434</span></div>
+<div class="line">Trainable params: <span class="number">203</span>,<span class="number">434</span></div>
+<div class="line">Non-trainable params: <span class="number">0</span></div>
+<div class="line">_________________________________________________________________</div>
+</pre></td></tr></table></figure>
+<p><code>model.get_weights()</code>: return a list of all weights tensors as Numpy arrays, where weights are stored in model.get_weights()[0] and bias are stored in model.get_weights()[2].</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">print(model.get_weights())</div>
+</pre></td></tr></table></figure>
+<h2 id="Model-subclassing"><a href="#Model-subclassing" class="headerlink" title="Model subclassing"></a>Model subclassing</h2><p>In addition to these two types of models, you may create your own fully-customizable models by subclassing the <code>Model</code> class and implementing your own forward pass in the <code>call</code> method.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> keras</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleMLP</span><span class="params">(keras.Model)</span>:</span></div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, use_bn=False, use_dp=False, num_classes=<span class="number">10</span>)</span>:</span></div>
+<div class="line">        super(SimpleMLP, self).__init__(name=<span class="string">'mlp'</span>)</div>
+<div class="line">        self.use_bn = use_bn</div>
+<div class="line">        self.use_dp = use_dp</div>
+<div class="line">        self.num_classes = num_classes</div>
+<div class="line"></div>
+<div class="line">        self.dense1 = keras.layers.Dense(<span class="number">32</span>, activation=<span class="string">'relu'</span>)</div>
+<div class="line">        self.dense2 = keras.layers.Dense(num_classes, activation=<span class="string">'softmax'</span>)</div>
+<div class="line">        <span class="keyword">if</span> self.use_dp:</div>
+<div class="line">            self.dp = keras.layers.Dropout(<span class="number">0.5</span>)</div>
+<div class="line">        <span class="keyword">if</span> self.use_bn:</div>
+<div class="line">            self.bn = keras.layers.BatchNormalization(axis=<span class="number">-1</span>)</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs)</span>:</span></div>
+<div class="line">        x = self.dense1(inputs)</div>
+<div class="line">        <span class="keyword">if</span> self.use_dp:</div>
+<div class="line">            x = self.dp(x)</div>
+<div class="line">        <span class="keyword">if</span> self.use_bn:</div>
+<div class="line">            x = self.bn(x)</div>
+<div class="line">        <span class="keyword">return</span> self.dense2(x)</div>
+<div class="line"></div>
+<div class="line">model = SimpleMLP()</div>
+<div class="line">model.compile(...)</div>
+<div class="line">model.fit(...)</div>
+</pre></td></tr></table></figure>
+<p>In <code>call</code>, you may specify custom losses by calling <code>self.add_loss(loss_tensor)</code> (like you would in a custom layer).</p>
+<p>But in subclassed models, the following methods and attributes are not available:</p>
+<p><img src="/2018/07/23/Keras/Screen Shot 2019-03-29 at 1.06.19 PM.png" alt="creen Shot 2019-03-29 at 1.06.19 P"></p>
+<h2 id="Model-class-API"><a href="#Model-class-API" class="headerlink" title="Model class API"></a>Model class API</h2><h3 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h3><h4 id="compile"><a href="#compile" class="headerlink" title="compile"></a>compile</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">compile(optimizer, loss=<span class="keyword">None</span>, metrics=<span class="keyword">None</span>, loss_weights=<span class="keyword">None</span>, sample_weight_mode=<span class="keyword">None</span>, weighted_metrics=<span class="keyword">None</span>, target_tensors=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<h4 id="fit"><a href="#fit" class="headerlink" title="fit"></a>fit</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">fit(x=<span class="keyword">None</span>, y=<span class="keyword">None</span>, batch_size=<span class="keyword">None</span>, epochs=<span class="number">1</span>, verbose=<span class="number">1</span>, callbacks=<span class="keyword">None</span>, validation_split=<span class="number">0.0</span>, validation_data=<span class="keyword">None</span>, shuffle=<span class="keyword">True</span>, class_weight=<span class="keyword">None</span>, sample_weight=<span class="keyword">None</span>, initial_epoch=<span class="number">0</span>, steps_per_epoch=<span class="keyword">None</span>, validation_steps=<span class="keyword">None</span>, validation_freq=<span class="number">1</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>verbose</strong>: Integer. 0, 1, or 2. Verbosity mode. 0 = silent, 1 = progress bar, 2 = one line per epoch.</li>
+<li>A <code>History</code> object. Its <code>History.history</code> attribute is a record of training loss values and metrics values at successive epochs, as well as validation loss values and validation metrics values (if applicable).</li>
+</ul>
+</blockquote>
+<h4 id="evaluate"><a href="#evaluate" class="headerlink" title="evaluate"></a>evaluate</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">evaluate(x=<span class="keyword">None</span>, y=<span class="keyword">None</span>, batch_size=<span class="keyword">None</span>, verbose=<span class="number">1</span>, sample_weight=<span class="keyword">None</span>, steps=<span class="keyword">None</span>, callbacks=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>Returns scalar test loss (if the model has a single output and no metrics) or list of scalars (if the model has multiple outputs and/or metrics). The attribute <code>model.metrics_names</code> will give you the display labels for the scalar outputs.</p>
+<p>Computation is done in batches.</p>
+<ul>
+<li><strong>verbose</strong>: 0 or 1. Verbosity mode. 0 = silent, 1 = progress bar.</li>
+</ul>
+</blockquote>
+<h4 id="predict"><a href="#predict" class="headerlink" title="predict"></a>predict</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">predict(x, batch_size=<span class="keyword">None</span>, verbose=<span class="number">0</span>, steps=<span class="keyword">None</span>, callbacks=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><strong>verbose</strong>: Verbosity mode, 0 or 1.</li>
+</ul>
+</blockquote>
+<h4 id="train-on-batch"><a href="#train-on-batch" class="headerlink" title="train_on_batch"></a>train_on_batch</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">train_on_batch(x, y, sample_weight=<span class="keyword">None</span>, class_weight=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>Scalar training loss (if the model has a single output and no metrics) or list of scalars (if the model has multiple outputs and/or metrics). The attribute <code>model.metrics_names</code> will give you the display labels for the scalar outputs.</li>
+<li>Runs a single gradient update on a single batch of data.</li>
+</ul>
+</blockquote>
+<h4 id="test-on-batch"><a href="#test-on-batch" class="headerlink" title="test_on_batch"></a>test_on_batch</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">test_on_batch(x, y, sample_weight=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>Test the model on a single batch of samples.</li>
+<li>Scalar test loss (if the model has a single output and no metrics) or list of scalars (if the model has multiple outputs and/or metrics). The attribute <code>model.metrics_names</code> will give you the display labels for the scalar outputs.</li>
+</ul>
+</blockquote>
+<h4 id="predict-on-batch"><a href="#predict-on-batch" class="headerlink" title="predict_on_batch"></a>predict_on_batch</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">predict_on_batch(x)</div>
+</pre></td></tr></table></figure>
+<h4 id="fit-generator"><a href="#fit-generator" class="headerlink" title="fit_generator"></a>fit_generator</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">fit_generator(generator, steps_per_epoch=<span class="keyword">None</span>, epochs=<span class="number">1</span>, verbose=<span class="number">1</span>, callbacks=<span class="keyword">None</span>, validation_data=<span class="keyword">None</span>, validation_steps=<span class="keyword">None</span>, validation_freq=<span class="number">1</span>, class_weight=<span class="keyword">None</span>, max_queue_size=<span class="number">10</span>, workers=<span class="number">1</span>, use_multiprocessing=<span class="keyword">False</span>, shuffle=<span class="keyword">True</span>, initial_epoch=<span class="number">0</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><p>Return a <code>History</code> object. Its <code>History.history</code> attribute is a record of training loss values and metrics values at successive epochs, as well as validation loss values and validation metrics values (if applicable).</p>
+</li>
+<li><p><strong>generator</strong>: A generator or an instance of <code>Sequence</code> (<code>keras.utils.Sequence</code>) object in order to avoid duplicate data when using multiprocessing. The output of the generator must be either</p>
+<ul>
+<li>a tuple <code>(inputs, targets)</code></li>
+<li>a tuple <code>(inputs, targets, sample_weights)</code>.</li>
+</ul>
+<p>This tuple (a single output of the generator) makes a single batch. Therefore, all arrays in this tuple must have the same length (equal to the size of this batch). Different batches may have different sizes. For example, the last batch of the epoch is commonly smaller than the others, if the size of the dataset is not divisible by the batch size. The generator is expected to loop over its data indefinitely. An epoch finishes when <code>steps_per_epoch</code> batches have been seen by the model.</p>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_arrays_from_file</span><span class="params">(path)</span>:</span></div>
+<div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div>
+<div class="line">        <span class="keyword">with</span> open(path) <span class="keyword">as</span> f:</div>
+<div class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> f:</div>
+<div class="line">                <span class="comment"># create numpy arrays of input data</span></div>
+<div class="line">                <span class="comment"># and labels, from each line in the file</span></div>
+<div class="line">                x1, x2, y = process_line(line)</div>
+<div class="line">                <span class="keyword">yield</span> (&#123;<span class="string">'input_1'</span>: x1, <span class="string">'input_2'</span>: x2&#125;, &#123;<span class="string">'output'</span>: y&#125;)</div>
+<div class="line"></div>
+<div class="line">model.fit_generator(generate_arrays_from_file(<span class="string">'/my_file.txt'</span>),</div>
+<div class="line">                    steps_per_epoch=<span class="number">10000</span>, epochs=<span class="number">10</span>)</div>
+</pre></td></tr></table></figure>
+<h4 id="evaluate-generator"><a href="#evaluate-generator" class="headerlink" title="evaluate_generator"></a>evaluate_generator</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">evaluate_generator(generator, steps=<span class="keyword">None</span>, callbacks=<span class="keyword">None</span>, max_queue_size=<span class="number">10</span>, workers=<span class="number">1</span>, use_multiprocessing=<span class="keyword">False</span>, verbose=<span class="number">0</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>Evaluates the model on a data generator.</p>
+<p>Scalar test loss (if the model has a single output and no metrics) or list of scalars (if the model has multiple outputs and/or metrics). The attribute <code>model.metrics_names</code> will give you the display labels for the scalar outputs.</p>
+</blockquote>
+<h4 id="predict-generator"><a href="#predict-generator" class="headerlink" title="predict_generator"></a>predict_generator</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">predict_generator(generator, steps=<span class="keyword">None</span>, callbacks=<span class="keyword">None</span>, max_queue_size=<span class="number">10</span>, workers=<span class="number">1</span>, use_multiprocessing=<span class="keyword">False</span>, verbose=<span class="number">0</span>)</div>
+</pre></td></tr></table></figure>
+<h4 id="get-layer"><a href="#get-layer" class="headerlink" title="get_layer"></a>get_layer</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">get_layer(name=<span class="keyword">None</span>, index=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>Retrieves a layer based on either its name (unique) or index.</p>
+<p>If <code>name</code> and <code>index</code> are both provided, <code>index</code> will take precedence.</p>
+<p>Indices are based on order of horizontal graph traversal (bottom-up).</p>
+<p>Return a layer instance.</p>
+</blockquote>
 <h1 id="Layers"><a href="#Layers" class="headerlink" title="Layers"></a>Layers</h1><h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><h3 id="Get-output-shape"><a href="#Get-output-shape" class="headerlink" title="Get output/shape"></a>Get output/shape</h3><p>Whenever you are calling a layer on some input, you are creating a new tensor (the output of the layer), and you are adding a “node” to the layer, linking the input tensor to the output tensor. When you are calling the same layer multiple times, that layer owns multiple nodes indexed as 0, 1, 2…</p>
 <p>In previous versions of Keras, you could obtain the output tensor of a layer instance via <code>layer.get_output()</code>, or its output shape via <code>layer.output_shape</code>. You still can (except <code>get_output()</code> has been replaced by the property <code>output</code>). But what if a layer is connected to multiple inputs?</p>
 <p>As long as a layer is only connected to one input, there is no confusion, and <code>.output</code> will return the one output of the layer:</p>
@@ -1605,7 +1865,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Layers"><span class="nav-number">3.</span> <span class="nav-text">Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">3.1.</span> <span class="nav-text">Properties</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-output-shape"><span class="nav-number">3.1.1.</span> <span class="nav-text">Get output/shape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Obtain-output-of-an-intermediate-layer"><span class="nav-number">3.1.2.</span> <span class="nav-text">Obtain output of an intermediate layer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型保存"><span class="nav-number">4.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">4.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型保存-1"><span class="nav-number">4.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型载入"><span class="nav-number">4.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">4.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Callback"><span class="nav-number">5.</span> <span class="nav-text">Keras-Callback</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">5.1.</span> <span class="nav-text">ModelCheckpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkpoint-Neural-Network-Model-Improvements"><span class="nav-number">5.1.1.</span> <span class="nav-text">Checkpoint Neural Network Model Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-a-Check-Pointed-Neural-Network-Model"><span class="nav-number">5.1.2.</span> <span class="nav-text">Loading a Check-Pointed Neural Network Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearningRateScheduler"><span class="nav-number">5.2.</span> <span class="nav-text">LearningRateScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Based-Learning-Rate-Schedule"><span class="nav-number">5.2.1.</span> <span class="nav-text">Time-Based Learning Rate Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop-Based-Learning-Rate-Schedule"><span class="nav-number">5.2.2.</span> <span class="nav-text">Drop-Based Learning Rate Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">5.3.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualize-Model-Training-History-in-Keras"><span class="nav-number">5.3.1.</span> <span class="nav-text">Visualize Model Training History in Keras</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorboard"><span class="nav-number">5.4.</span> <span class="nav-text">Tensorboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensorflow"><span class="nav-number">5.4.1.</span> <span class="nav-text">Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Customerize-Optimizer"><span class="nav-number">6.</span> <span class="nav-text">Customerize Optimizer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feature-Extraction"><span class="nav-number">7.</span> <span class="nav-text">Feature Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG-Feature-Loss"><span class="nav-number">7.1.</span> <span class="nav-text">VGG Feature Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fine-tune-ref"><span class="nav-number">7.2.</span> <span class="nav-text">Fine tune ref</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Models"><span class="nav-number">3.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Attributes"><span class="nav-number">3.1.</span> <span class="nav-text">Attributes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-subclassing"><span class="nav-number">3.2.</span> <span class="nav-text">Model subclassing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-class-API"><span class="nav-number">3.3.</span> <span class="nav-text">Model class API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Methods"><span class="nav-number">3.3.1.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#compile"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">compile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fit"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">fit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#evaluate"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">evaluate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict"><span class="nav-number">3.3.1.4.</span> <span class="nav-text">predict</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#train-on-batch"><span class="nav-number">3.3.1.5.</span> <span class="nav-text">train_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-on-batch"><span class="nav-number">3.3.1.6.</span> <span class="nav-text">test_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict-on-batch"><span class="nav-number">3.3.1.7.</span> <span class="nav-text">predict_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fit-generator"><span class="nav-number">3.3.1.8.</span> <span class="nav-text">fit_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#evaluate-generator"><span class="nav-number">3.3.1.9.</span> <span class="nav-text">evaluate_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict-generator"><span class="nav-number">3.3.1.10.</span> <span class="nav-text">predict_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-layer"><span class="nav-number">3.3.1.11.</span> <span class="nav-text">get_layer</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Layers"><span class="nav-number">4.</span> <span class="nav-text">Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">4.1.</span> <span class="nav-text">Properties</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-output-shape"><span class="nav-number">4.1.1.</span> <span class="nav-text">Get output/shape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Obtain-output-of-an-intermediate-layer"><span class="nav-number">4.1.2.</span> <span class="nav-text">Obtain output of an intermediate layer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型保存"><span class="nav-number">5.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">5.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型保存-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型载入"><span class="nav-number">5.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">5.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Callback"><span class="nav-number">6.</span> <span class="nav-text">Keras-Callback</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">6.1.</span> <span class="nav-text">ModelCheckpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkpoint-Neural-Network-Model-Improvements"><span class="nav-number">6.1.1.</span> <span class="nav-text">Checkpoint Neural Network Model Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-a-Check-Pointed-Neural-Network-Model"><span class="nav-number">6.1.2.</span> <span class="nav-text">Loading a Check-Pointed Neural Network Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearningRateScheduler"><span class="nav-number">6.2.</span> <span class="nav-text">LearningRateScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Based-Learning-Rate-Schedule"><span class="nav-number">6.2.1.</span> <span class="nav-text">Time-Based Learning Rate Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop-Based-Learning-Rate-Schedule"><span class="nav-number">6.2.2.</span> <span class="nav-text">Drop-Based Learning Rate Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">6.3.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualize-Model-Training-History-in-Keras"><span class="nav-number">6.3.1.</span> <span class="nav-text">Visualize Model Training History in Keras</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorboard"><span class="nav-number">6.4.</span> <span class="nav-text">Tensorboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensorflow"><span class="nav-number">6.4.1.</span> <span class="nav-text">Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Customerize-Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Customerize Optimizer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feature-Extraction"><span class="nav-number">8.</span> <span class="nav-text">Feature Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG-Feature-Loss"><span class="nav-number">8.1.</span> <span class="nav-text">VGG Feature Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fine-tune-ref"><span class="nav-number">8.2.</span> <span class="nav-text">Fine tune ref</span></a></li></ol></li></ol></div>
             
 
           </div>
