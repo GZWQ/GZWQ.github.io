@@ -111,6 +111,17 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1192699-20180407143658338-63450857.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/1192699-20180407143807788-1841864822.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-20%20at%204.09.16%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/BNcircuit.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step9.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step8.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step7.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step6.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step5.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step4-4426132.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step3.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step2.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step1.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/step0.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/692825-20180328173642905-311674055.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/20171028233231084.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-13%20at%204.07.13%20PM.png">
@@ -125,7 +136,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-03-28T18:17:29.057Z">
+<meta property="og:updated_time" content="2019-04-05T01:08:28.179Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
 <meta name="twitter:description" content="Techniques for training a Deep Learning model.">
@@ -480,6 +491,8 @@
 <p>　　上文说过经过这个<strong>变换后某个神经元的激活x形成了均值为0，方差为1的正态分布，目的是把值往后续要进行的非线性变换的线性区拉动，增大导数值，增强反向传播信息流动性，加快训练收敛速度。</strong>但是这样会导致网络表达能力下降，为了防止这一点，每个神经元增加两个调节参数（scale和shift），这两个参数是通过训练来学习到的，用来对变换后的激活反变换，使得网络表达能力增强，即对变换后的激活进行如下的scale和shift操作，这其实是变换的反操作：</p>
 <p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142923190-79595046.png" alt="192699-20180407142923190-7959504"></p>
 <p><img src="/2018/08/03/Training-Techiniques/1192699-20180407142956288-903484055.png" alt="192699-20180407142956288-90348405"></p>
+<p>Look at the last line of the algorithm. After normalizing the input <code>x</code> the result is squashed through a linear function with parameters <code>gamma</code> and <code>beta</code>. These are learnable parameters of the BatchNorm Layer and make it basically possible to say “Hey!! I don’t want zero mean/unit variance input, give me back the raw input - it’s better for me.” If <code>gamma = sqrt(var(x))</code> and <code>beta = mean(x)</code>, the original activation is restored. This is, what makes BatchNorm really powerful. We initialize the BatchNorm Parameters to transform the input to zero mean/unit variance distributions but during training they can learn that any other distribution might be better. </p>
+<p>Btw: it’s called “Batch” Normalization because we perform this transformation and calculate the statistics only for a subpart (a batch) of the entire training set. <a href="https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html" target="_blank" rel="noopener">source</a> </p>
 <p><strong>BatchNorm的推理(Inference)过程</strong></p>
 <p>BN在训练的时候可以根据Mini-Batch里的若干训练实例进行激活数值调整，但是在推理（inference）的过程中，很明显输入就只有一个实例，看不到Mini-Batch其它实例，那么这时候怎么对输入做BN呢？因为很明显一个实例是没法算实例集合求出的均值和方差的。这可如何是好？</p>
 <p>　　既然没有从Mini-Batch数据里可以得到的统计量，那就想其它办法来获得这个统计量，就是均值和方差。可以用从所有训练实例中获得的统计量来代替Mini-Batch里面m个训练实例获得的均值和方差统计量，因为本来就打算用全局的统计量，只是因为计算量等太大所以才会用Mini-Batch这种简化方式的，那么在推理的时候直接用全局统计量即可。</p>
@@ -494,6 +507,158 @@
 <p>都是固定值，这样这两个值可以事先算好存起来，在推理的时候直接用就行了，这样比原始的公式每一步骤都现算少了除法的运算过程，乍一看也没少多少计算量，但是如果隐层节点个数多的话节省的计算量就比较多了。</p>
 <p><strong>BatchNorm的好处</strong></p>
 <p>BatchNorm为什么NB呢，关键还是效果好。<strong>①**</strong>不仅仅极大提升了训练速度，收敛过程大大加快；②还能增加分类效果，一种解释是这是类似于Dropout的一种防止过拟合的正则化表达方式，所以不用Dropout也能达到相当的效果；③另外调参过程也简单多了，对于初始化要求没那么高，而且可以使用大的学习率等。**总而言之，经过这么简单的变换，带来的好处多得很，这也是为何现在BN这么快流行起来的原因。</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><h3 id="Forward"><a href="#Forward" class="headerlink" title="Forward"></a>Forward</h3><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">batchnorm_forward</span><span class="params">(x, gamma, beta, bn_param)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Forward pass for batch normalization.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    During training the sample mean and (uncorrected) sample variance are</span></div>
+<div class="line"><span class="string">    computed from minibatch statistics and used to normalize the incoming data.</span></div>
+<div class="line"><span class="string">    During training we also keep an exponentially decaying running mean of the</span></div>
+<div class="line"><span class="string">    mean and variance of each feature, and these averages are used to normalize</span></div>
+<div class="line"><span class="string">    data at test-time.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    At each timestep we update the running averages for mean and variance using</span></div>
+<div class="line"><span class="string">    an exponential decay based on the momentum parameter:</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    running_mean = momentum * running_mean + (1 - momentum) * sample_mean</span></div>
+<div class="line"><span class="string">    running_var = momentum * running_var + (1 - momentum) * sample_var</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Note that the batch normalization paper suggests a different test-time</span></div>
+<div class="line"><span class="string">    behavior: they compute sample mean and variance for each feature using a</span></div>
+<div class="line"><span class="string">    large number of training images rather than using a running average. For</span></div>
+<div class="line"><span class="string">    this implementation we have chosen to use running averages instead since</span></div>
+<div class="line"><span class="string">    they do not require an additional estimation step; the torch7</span></div>
+<div class="line"><span class="string">    implementation of batch normalization also uses running averages.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Input:</span></div>
+<div class="line"><span class="string">    - x: Data of shape (N, D)</span></div>
+<div class="line"><span class="string">    - gamma: Scale parameter of shape (D,)</span></div>
+<div class="line"><span class="string">    - beta: Shift paremeter of shape (D,)</span></div>
+<div class="line"><span class="string">    - bn_param: Dictionary with the following keys:</span></div>
+<div class="line"><span class="string">      - mode: 'train' or 'test'; required</span></div>
+<div class="line"><span class="string">      - eps: Constant for numeric stability</span></div>
+<div class="line"><span class="string">      - momentum: Constant for running mean / variance.</span></div>
+<div class="line"><span class="string">      - running_mean: Array of shape (D,) giving running mean of features</span></div>
+<div class="line"><span class="string">      - running_var Array of shape (D,) giving running variance of features</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Returns a tuple of:</span></div>
+<div class="line"><span class="string">    - out: of shape (N, D)</span></div>
+<div class="line"><span class="string">    - cache: A tuple of values needed in the backward pass</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    mode = bn_param[<span class="string">'mode'</span>]</div>
+<div class="line">    eps = bn_param.get(<span class="string">'eps'</span>, <span class="number">1e-5</span>)</div>
+<div class="line">    momentum = bn_param.get(<span class="string">'momentum'</span>, <span class="number">0.9</span>)</div>
+<div class="line"></div>
+<div class="line">    N, D = x.shape</div>
+<div class="line">    running_mean = bn_param.get(<span class="string">'running_mean'</span>, np.zeros(D, dtype=x.dtype))</div>
+<div class="line">    running_var = bn_param.get(<span class="string">'running_var'</span>, np.zeros(D, dtype=x.dtype))</div>
+<div class="line"></div>
+<div class="line">    out, cache = <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line">    <span class="keyword">if</span> mode == <span class="string">'train'</span>:</div>
+<div class="line">        <span class="comment">#sample mean and variance</span></div>
+<div class="line">        sample_mean = np.mean(x,axis=<span class="number">0</span>)</div>
+<div class="line">        sample_var = np.var(x,axis=<span class="number">0</span>)</div>
+<div class="line">        <span class="comment">#normalized sample</span></div>
+<div class="line">        norm_x = (x-sample_mean)/np.sqrt(sample_var+eps)</div>
+<div class="line">        out = gamma*norm_x+beta</div>
+<div class="line">        running_mean = momentum * running_mean + (<span class="number">1</span> - momentum) * sample_mean</div>
+<div class="line">        running_var = momentum * running_var + (<span class="number">1</span> - momentum) * sample_var</div>
+<div class="line">    <span class="keyword">elif</span> mode == <span class="string">'test'</span>:</div>
+<div class="line">        norm_x = (x-running_mean)/np.sqrt(running_var+eps)</div>
+<div class="line">        out = gamma*norm_x+beta</div>
+<div class="line">    <span class="keyword">else</span>:</div>
+<div class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'Invalid forward batchnorm mode "%s"'</span> % mode)</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Store the updated running means back into bn_param</span></div>
+<div class="line">    bn_param[<span class="string">'running_mean'</span>] = running_mean</div>
+<div class="line">    bn_param[<span class="string">'running_var'</span>] = running_var</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> out, cache</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h3 id="Backward"><a href="#Backward" class="headerlink" title="Backward"></a><a href="https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html" target="_blank" rel="noopener">Backward</a></h3><p><img src="/2018/08/03/Training-Techiniques/BNcircuit.png" alt="Ncircui"></p>
+<h4 id="Step-9"><a href="#Step-9" class="headerlink" title="Step 9"></a>Step 9</h4><p><img src="/2018/08/03/Training-Techiniques/step9.png" alt="tep"></p>
+<h4 id="Step-8"><a href="#Step-8" class="headerlink" title="Step 8"></a>Step 8</h4><p><img src="/2018/08/03/Training-Techiniques/step8.png" alt="tep"></p>
+<h4 id="Step-7"><a href="#Step-7" class="headerlink" title="Step 7"></a>Step 7</h4><p><img src="/2018/08/03/Training-Techiniques/step7.png" alt="tep"></p>
+<h4 id="Step-6"><a href="#Step-6" class="headerlink" title="Step 6"></a>Step 6</h4><p><img src="/2018/08/03/Training-Techiniques/step6.png" alt="tep"></p>
+<h4 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a>Step 5</h4><p><img src="/2018/08/03/Training-Techiniques/step5.png" alt="tep"></p>
+<h4 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a>Step 4</h4><p><img src="/2018/08/03/Training-Techiniques/step4-4426132.png" alt="tep4-442613"></p>
+<h4 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h4><p><img src="/2018/08/03/Training-Techiniques/step3.png" alt="tep"></p>
+<h4 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h4><p><img src="/2018/08/03/Training-Techiniques/step2.png" alt="tep"></p>
+<h4 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h4><p><img src="/2018/08/03/Training-Techiniques/step1.png" alt="tep"></p>
+<h4 id="Step-0"><a href="#Step-0" class="headerlink" title="Step 0"></a>Step 0</h4><p><img src="/2018/08/03/Training-Techiniques/step0.png" alt="tep"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
 <h1 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h1><p><a href="https://blog.csdn.net/Jaster_wisdom/article/details/78380839" target="_blank" rel="noopener">ref1</a> <a href="https://www.zhihu.com/question/22334626" target="_blank" rel="noopener">zhihu</a> <a href="http://www.sohu.com/a/200918239_206784" target="_blank" rel="noopener">intuition</a> <a href="https://www.cnblogs.com/rgvb178/p/6055213.html" target="_blank" rel="noopener">details</a> <a href="https://towardsdatascience.com/deep-learning-concepts-part-1-ea0b14b234c8" target="_blank" rel="noopener">to do</a> </p>
 <p>根据是否饱和，激活函数可以分类为“饱和激活函数”和“非饱和激活函数”。</p>
 <p><strong>sigmoid和tanh</strong>是“饱和激活函数”，而ReLU及其变体则是“非饱和激活函数”，但是他们都属于非线性激活函数。使用“非饱和激活函数”的优势在于两点：     </p>
@@ -766,7 +931,7 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -788,7 +953,7 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -821,7 +986,7 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">9.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">10.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Preprocessing"><span class="nav-number">1.</span> <span class="nav-text">Data Preprocessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Soft-labels"><span class="nav-number">2.</span> <span class="nav-text">Soft labels</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-Rate"><span class="nav-number">3.</span> <span class="nav-text">Learning Rate</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">4.</span> <span class="nav-text">Weight Initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-with-initializing-all-weights-to-0"><span class="nav-number">4.1.</span> <span class="nav-text">Problem with initializing all weights to 0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Problems-with-initializing-weights-randomly-ref"><span class="nav-number">4.2.</span> <span class="nav-text">Problems with initializing weights randomly ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vanishing-gradients"><span class="nav-number">4.2.1.</span> <span class="nav-text">Vanishing gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exploding-gradients"><span class="nav-number">4.2.2.</span> <span class="nav-text">Exploding gradients</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Initialization-techniques-ref"><span class="nav-number">4.3.</span> <span class="nav-text">New Initialization techniques ref</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Xavier-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Xavier initialization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#He-initialization"><span class="nav-number">4.3.2.</span> <span class="nav-text">He initialization</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batch-Normalization"><span class="nav-number">5.</span> <span class="nav-text">Batch Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">5.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">5.2.</span> <span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">5.3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward"><span class="nav-number">5.3.1.</span> <span class="nav-text">Forward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Backward"><span class="nav-number">5.3.2.</span> <span class="nav-text">Backward</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-9"><span class="nav-number">5.3.2.1.</span> <span class="nav-text">Step 9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-8"><span class="nav-number">5.3.2.2.</span> <span class="nav-text">Step 8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-7"><span class="nav-number">5.3.2.3.</span> <span class="nav-text">Step 7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-6"><span class="nav-number">5.3.2.4.</span> <span class="nav-text">Step 6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-5"><span class="nav-number">5.3.2.5.</span> <span class="nav-text">Step 5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-4"><span class="nav-number">5.3.2.6.</span> <span class="nav-text">Step 4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-3"><span class="nav-number">5.3.2.7.</span> <span class="nav-text">Step 3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-2"><span class="nav-number">5.3.2.8.</span> <span class="nav-text">Step 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-1"><span class="nav-number">5.3.2.9.</span> <span class="nav-text">Step 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-0"><span class="nav-number">5.3.2.10.</span> <span class="nav-text">Step 0</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#激活函数"><span class="nav-number">6.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">6.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tanh函数"><span class="nav-number">6.2.</span> <span class="nav-text">Tanh函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReLu函数"><span class="nav-number">6.3.</span> <span class="nav-text">ReLu函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeakyReLu"><span class="nav-number">6.4.</span> <span class="nav-text">LeakyReLu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELU"><span class="nav-number">6.5.</span> <span class="nav-text">ELU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maxout"><span class="nav-number">6.6.</span> <span class="nav-text">Maxout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Optimizer"><span class="nav-number">7.</span> <span class="nav-text">Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD"><span class="nav-number">7.1.</span> <span class="nav-text">SGD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SGD-Momentum-ref"><span class="nav-number">7.2.</span> <span class="nav-text">SGD+Momentum ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Residual-Network"><span class="nav-number">8.</span> <span class="nav-text">Residual Network</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation-1"><span class="nav-number">8.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">8.2.</span> <span class="nav-text">Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DC-GAN"><span class="nav-number">9.</span> <span class="nav-text">DC-GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PatchGan"><span class="nav-number">10.</span> <span class="nav-text">PatchGan</span></a></li></ol></div>
             
 
           </div>
