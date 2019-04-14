@@ -97,7 +97,21 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen%20Shot%202019-04-05%20at%2012.48.33%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen%20Shot%202019-04-05%20at%2012.53.29%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen%20Shot%202019-04-05%20at%2012.57.06%20PM.png">
-<meta property="og:updated_time" content="2019-04-05T20:49:23.054Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen%20Shot%202019-04-09%20at%2012.44.43%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen%20Shot%202019-04-09%20at%2012.46.55%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-9.53.20-AM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-16-at-10.34.02-PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-10.15.09-AM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-12.26.53-PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-12.10.25-PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-1.46.43-PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-24-at-10.46.16-PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/Screen%20Shot%202019-04-13%20at%202.23.41%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131430474.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131434053.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131451012.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/1_U8uoGoZDs8nwzQE3tOhfkw@2x.png">
+<meta property="og:updated_time" content="2019-04-13T20:30:19.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-FullyConvolutionalSegmentation">
 <meta name="twitter:description" content="This post is based on the paper Fully Convolutional Networks for Semantic Segmentation, which aims to perform image segmentation.">
@@ -429,7 +443,340 @@
 <p>Since the stride step is 2, so we are going to combine the above two matrix:</p>
 <p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen Shot 2019-04-05 at 12.57.06 PM.png" alt="creen Shot 2019-04-05 at 12.57.06 P"></p>
 <p>we get $3 \times 5$ matrix.</p>
-<p>For the third matrix, we have </p>
+<p>For the third and fouth matrix, we have </p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen Shot 2019-04-09 at 12.44.43 PM.png" alt="creen Shot 2019-04-09 at 12.44.43 P"></p>
+<p>So after the deconvolution, we have $5\times 5$ matrix:</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen Shot 2019-04-09 at 12.46.55 PM.png" alt="creen Shot 2019-04-09 at 12.46.55 P"></p>
+<h2 id="Network-Structures"><a href="#Network-Structures" class="headerlink" title="Network Structures"></a>Network Structures</h2><p>The original paper use well-studied <em>image classification</em> networks (eg. AlexNet) to serve as the encoder module of the network, appending a decoder module with transpose convolutional layers to upsample the coarse feature maps into a full-resolution segmentation map. The encoder structure looks like the following:</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-9.53.20-AM.png" alt="creen-Shot-2018-05-20-at-9.53.20-A"></p>
+<p>The full network, as shown below, is trained according to a pixel-wise cross entropy loss.</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-16-at-10.34.02-PM.png" alt="creen-Shot-2018-05-16-at-10.34.02-P"></p>
+<p>However, because the encoder module reduces the resolution of the input by a factor of 32, the decoder module <strong>struggles to produce fine-grained segmentations</strong> (as shown below).</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-10.15.09-AM.png" alt="creen-Shot-2018-05-20-at-10.15.09-A"></p>
+<p>The paper’s authors comment eloquently on this struggle:</p>
+<blockquote>
+<p>Semantic segmentation faces an inherent tension between semantics and location: global information resolves <strong>what</strong> while local information resolves <strong>where</strong>… Combining fine layers and coarse layers lets the model make local predictions that respect global structure. ― <a href="https://arxiv.org/abs/1411.4038" target="_blank" rel="noopener">Long et al.</a></p>
+</blockquote>
+<h2 id="Skip-Connections"><a href="#Skip-Connections" class="headerlink" title="Skip Connections"></a>Skip Connections</h2><p>The authors address this tension by slowly upsampling (in stages) the encoded representation, adding “skip connections” from earlier layers, and summing these two feature maps.</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-12.26.53-PM.png" alt="creen-Shot-2018-05-20-at-12.26.53-P"></p>
+<p>These skip connections from earlier layers in the network (prior to a downsampling operation) should provide the necessary detail in order to reconstruct accurate shapes for segmentation boundaries. Indeed, we can recover more fine-grain detail with the addition of these skip connections.</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-12.10.25-PM.png" alt="creen-Shot-2018-05-20-at-12.10.25-P"></p>
+<p><a href="https://arxiv.org/abs/1505.04597" target="_blank" rel="noopener">Ronneberger et al.</a> improve upon the “fully convolutional” architecture primarily through <strong>expanding the capacity of the decoder</strong> module of the network. More concretely, they propose the <strong>U-Net architecture</strong> which “consists of a contracting path to capture context and a <strong>symmetric</strong> expanding path that enables precise localization.” This simpler architecture has grown to be very popular and has been adapted for a variety of segmentation problems.</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-1.46.43-PM.png" alt="creen-Shot-2018-05-20-at-1.46.43-P"></p>
+<h2 id="Loss-function"><a href="#Loss-function" class="headerlink" title="Loss function"></a>Loss function</h2><p>The most commonly used loss function for the task of image segmentation is a <strong>pixel-wise cross entropy loss</strong>. This loss examines <em>each pixel individually</em>, comparing the class predictions (depth-wise pixel vector) to our one-hot encoded target vector.</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-24-at-10.46.16-PM.png" alt="creen-Shot-2018-05-24-at-10.46.16-P"></p>
+<p>Because the cross entropy loss evaluates the class predictions for each pixel vector individually and then averages over all pixels, we’re essentially asserting equal learning to each pixel in the image. This can be a problem if your various classes have unbalanced representation in the image, as training can be dominated by the most prevalent class. <a href="https://arxiv.org/abs/1411.4038" target="_blank" rel="noopener">Long et al.</a> (FCN paper) discuss weighting this loss for each <strong>output channel</strong> in order to counteract a class imbalance present in the dataset.</p>
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p>In order to get a full understanding of FCN, we will get our hands on streetview images segmentation. The state of the art dataset is pascal VOC2012, however it requires preprocessing and is kind of large, we choose a <a href="https://drive.google.com/file/d/0B0d9ZiqAgFkiOHR1NTJhWVJMNEU/view" target="_blank" rel="noopener">streetview dataset</a> with 12 object classes which includes 367 training dataset and 101 test images. It is perfect for us to feel how FCN works in image segmentation.</p>
+<h2 id="Data-exploration"><a href="#Data-exploration" class="headerlink" title="Data exploration"></a>Data exploration</h2><p>The data directory looks like the following:</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen Shot 2019-04-13 at 2.23.41 PM.png" alt="creen Shot 2019-04-13 at 2.23.41 P"></p>
+<p>where in the <code>images_prepped_train</code> there are original images for training, while in <code>annotations_prepped_train</code> is our groundtruth for each image. For a groundtruth image, it is the same size with the original image where each pixel is labeled with a class. It is same with the test images directory.</p>
+<p>The first thing to do is to visualize a single segmentation image. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cv2,os</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div>
+<div class="line"></div>
+<div class="line">dir_seg = <span class="string">"/Users/daniel/Desktop/streets/annotations_prepped_train/"</span></div>
+<div class="line">dir_img = <span class="string">"/Users/daniel/Desktop/streets/images_prepped_train/"</span></div>
+<div class="line"></div>
+<div class="line">n_classes = <span class="number">12</span> <span class="comment">#total classes for segmentation</span></div>
+<div class="line"></div>
+<div class="line">ldseg = os.listdir(dir_seg)</div>
+<div class="line">firstimage = ldseg[<span class="number">0</span>] <span class="comment"># choose the first image for visualization</span></div>
+<div class="line"></div>
+<div class="line">seg = cv2.imread(dir_seg+firstimage) <span class="comment"># read segmentation groundtruth</span></div>
+<div class="line">img = cv2.imread(dir_img+firstimage) <span class="comment"># read original image</span></div>
+<div class="line"></div>
+<div class="line">mi,ma = np.min(seg),np.max(seg) <span class="comment">#get the range for classes</span></div>
+<div class="line">total_classes = ma-mi+<span class="number">1</span> </div>
+<div class="line"><span class="comment"># print("The total segmentation classes are : &#123;&#125;".format(ma-mi+1))</span></div>
+<div class="line"></div>
+<div class="line">fig = plt.figure(figsize=(<span class="number">5</span>,<span class="number">5</span>))</div>
+<div class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</div>
+<div class="line">ax.imshow(img)</div>
+<div class="line">ax.set_title(<span class="string">"Original Image"</span>)</div>
+<div class="line"></div>
+<div class="line">fig = plt.figure(figsize=(<span class="number">15</span>,<span class="number">10</span>))</div>
+<div class="line"><span class="keyword">for</span> k <span class="keyword">in</span> range(mi,ma+<span class="number">1</span>):</div>
+<div class="line">    ax = fig.add_subplot(<span class="number">3</span>,total_classes/<span class="number">3</span>,k+<span class="number">1</span>) <span class="comment">#the first digit is the number of rows, the second the number of columns, and the third the index of the subplot.</span></div>
+<div class="line">    ax.imshow((seg==k)*<span class="number">1.0</span>) <span class="comment">#(seg==k) return a True/False list</span></div>
+<div class="line">    ax.set_title(<span class="string">"label=&#123;&#125;"</span>.format(k))</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131430474.png" alt="mage-20190413143047">  </p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131434053.png" alt="mage-20190413143405"></p>
+<p>We can roughly observe from the segmentaion image that the first class is buildings, while the <code>class label=8</code> is cars.</p>
+<p>Next, I will give the different objects with different colors to visualize them in one image.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">img_colorized</span><span class="params">(seg,n_classes)</span>:</span></div>
+<div class="line">    <span class="keyword">if</span> len(seg.shape) == <span class="number">3</span>:</div>
+<div class="line">        seg = seg[:, :, <span class="number">0</span>]</div>
+<div class="line">    seg_img = np.zeros((seg.shape[<span class="number">0</span>], seg.shape[<span class="number">1</span>], <span class="number">3</span>)).astype(<span class="string">'float'</span>)</div>
+<div class="line">    colors = sns.color_palette(<span class="string">"hls"</span>, n_classes) <span class="comment"># return n_classes colors</span></div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(n_classes):</div>
+<div class="line">        segc = (seg == c)</div>
+<div class="line">        seg_img[:, :, <span class="number">0</span>] += (segc * (colors[c][<span class="number">0</span>]))</div>
+<div class="line">        seg_img[:, :, <span class="number">1</span>] += (segc * (colors[c][<span class="number">1</span>]))</div>
+<div class="line">        seg_img[:, :, <span class="number">2</span>] += (segc * (colors[c][<span class="number">2</span>]))</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> (seg_img)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line">color_img = img_colorized(seg,n_classes)</div>
+<div class="line">fig = plt.figure(figsize=(<span class="number">5</span>,<span class="number">5</span>))</div>
+<div class="line">ax = fig.add_subplot(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>)</div>
+<div class="line">ax.imshow(color_img)</div>
+<div class="line">ax.set_title(<span class="string">"Colored Image"</span>)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131451012.png" alt="mage-20190413145101"></p>
+<h2 id="Data-preprocessing"><a href="#Data-preprocessing" class="headerlink" title="Data preprocessing"></a>Data preprocessing</h2><p>We will resize the image to <code>(224,224)</code>. In the following code, we resize the image and normalize the image to range <code>(-1,1)</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dataProcessing</span><span class="params">(path,width,height)</span>:</span></div>
+<div class="line">    img = cv2.imread(path,<span class="number">1</span>)</div>
+<div class="line">    img = np.float32(cv2.resize(img,(width,height)))/<span class="number">127.5</span><span class="number">-1</span></div>
+<div class="line">    <span class="keyword">return</span> img</div>
+</pre></td></tr></table></figure>
+<p>Then considering we are going to predict class label for each pixel, so for each pixel, there are going to be <code>total_classes</code> output. So for a input image with size <code>(row,col)</code>, the output should be <code>(row, col, total_classes)</code>. Therefore, for each groundtruth image, we are going to generate <code>total_classes</code> groundtruth lable images, where in the first image, the pixel belonging to class 0 has value 1 while the rest has value 0. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getSegmentationArr</span><span class="params">(path,nClasses,width,height)</span>:</span></div>
+<div class="line">    seg_labels = np.zeros((height,width,nClasses))</div>
+<div class="line">    img = cv2.imread(path,<span class="number">1</span>)</div>
+<div class="line">    img = cv2.resize(img,(width,height))</div>
+<div class="line">    img = img[:,:,<span class="number">0</span>]</div>
+<div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(nClasses):</div>
+<div class="line">        seg_labels[:, :, c] = (img == c).astype(int)</div>
+<div class="line">    <span class="keyword">return</span> seg_labels</div>
+</pre></td></tr></table></figure>
+<p>Then we create our training dataset:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line">images = os.listdir(dir_img)</div>
+<div class="line">images.sort()</div>
+<div class="line">segmentations = os.listdir(dir_seg)</div>
+<div class="line">segmentations.sort()</div>
+<div class="line"></div>
+<div class="line">X = []</div>
+<div class="line">Y = []</div>
+<div class="line"><span class="keyword">for</span> im, seg <span class="keyword">in</span> zip(images, segmentations):</div>
+<div class="line">    X.append(dataProcessing(dir_img + im, <span class="number">224</span>, <span class="number">224</span>))</div>
+<div class="line">    Y.append(getSegmentationArr(dir_seg + seg, total_classes, <span class="number">224</span>, <span class="number">224</span>))</div>
+<div class="line"></div>
+<div class="line">X, Y = np.array(X), np.array(Y)</div>
+</pre></td></tr></table></figure>
+<h2 id="Network-architecture"><a href="#Network-architecture" class="headerlink" title="Network architecture"></a>Network architecture</h2><p>Then we can implement the network, here we use the <code>vgg16</code> architecture, where the architecture looks like:</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/1_U8uoGoZDs8nwzQE3tOhfkw@2x.png" alt="_U8uoGoZDs8nwzQE3tOhfkw@2"></p>
+<p>Since the <code>vgg16</code> downsample the input image to the original size of $1/2^5=1/32$ due to <code>maxpooling</code>. Therefore we need to ensure the input size can be divided by 32. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> *</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> *</div>
+<div class="line">warnings.filterwarnings(<span class="string">"ignore"</span>)</div>
+<div class="line"></div>
+<div class="line">vgg_weights = <span class="string">'vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5'</span></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">FCN8</span><span class="params">(nClasses,input_height=<span class="number">224</span>,input_width=<span class="number">224</span>)</span>:</span></div>
+<div class="line">    <span class="keyword">assert</span>  input_height%<span class="number">32</span> == <span class="number">0</span></div>
+<div class="line">    <span class="keyword">assert</span> input_width%<span class="number">32</span> == <span class="number">0</span></div>
+<div class="line"></div>
+<div class="line">    img_input = Input(shape=(input_height, input_width, <span class="number">3</span>))  <span class="comment">## Assume 224,224,3</span></div>
+<div class="line"></div>
+<div class="line">    <span class="comment">## Block 1</span></div>
+<div class="line">    x = Conv2D(<span class="number">64</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block1_conv1'</span>)(</div>
+<div class="line">        img_input)</div>
+<div class="line">    x = Conv2D(<span class="number">64</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block1_conv2'</span>)(x)</div>
+<div class="line">    x = MaxPooling2D((<span class="number">2</span>, <span class="number">2</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">'block1_pool'</span>)(x)</div>
+<div class="line">    f1 = x</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Block 2</span></div>
+<div class="line">    x = Conv2D(<span class="number">128</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block2_conv1'</span>)(x)</div>
+<div class="line">    x = Conv2D(<span class="number">128</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block2_conv2'</span>)(x)</div>
+<div class="line">    x = MaxPooling2D((<span class="number">2</span>, <span class="number">2</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">'block2_pool'</span>)(x)</div>
+<div class="line">    f2 = x</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Block 3</span></div>
+<div class="line">    x = Conv2D(<span class="number">256</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block3_conv1'</span>)(x)</div>
+<div class="line">    x = Conv2D(<span class="number">256</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block3_conv2'</span>)(x)</div>
+<div class="line">    x = Conv2D(<span class="number">256</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block3_conv3'</span>)(x)</div>
+<div class="line">    x = MaxPooling2D((<span class="number">2</span>, <span class="number">2</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">'block3_pool'</span>)(x)</div>
+<div class="line">    pool3 = x</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Block 4</span></div>
+<div class="line">    x = Conv2D(<span class="number">512</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block4_conv1'</span>)(x)</div>
+<div class="line">    x = Conv2D(<span class="number">512</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block4_conv2'</span>)(x)</div>
+<div class="line">    x = Conv2D(<span class="number">512</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block4_conv3'</span>)(x)</div>
+<div class="line">    pool4 = MaxPooling2D((<span class="number">2</span>, <span class="number">2</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">'block4_pool'</span>)(x)  <span class="comment">## (None, 14, 14, 512)</span></div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Block 5</span></div>
+<div class="line">    x = Conv2D(<span class="number">512</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block5_conv1'</span>)(pool4)</div>
+<div class="line">    x = Conv2D(<span class="number">512</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block5_conv2'</span>)(x)</div>
+<div class="line">    x = Conv2D(<span class="number">512</span>, (<span class="number">3</span>, <span class="number">3</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">'block5_conv3'</span>)(x)</div>
+<div class="line">    pool5 = MaxPooling2D((<span class="number">2</span>, <span class="number">2</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), name=<span class="string">'block5_pool'</span>)(x)  <span class="comment">## (None, 7, 7, 512)</span></div>
+<div class="line"></div>
+<div class="line">    vgg = Model(img_input, pool5)</div>
+<div class="line">    vgg.load_weights(vgg_weights)  <span class="comment">## loading VGG weights for the encoder parts of FCN8</span></div>
+<div class="line"><span class="comment">#########################################################</span></div>
+<div class="line">    n = <span class="number">4096</span></div>
+<div class="line">    o = Conv2D(n, (<span class="number">7</span>, <span class="number">7</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">"conv6"</span>)(pool5)</div>
+<div class="line">    conv7 = Conv2D(n, (<span class="number">1</span>, <span class="number">1</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">"conv7"</span>)(o)</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">## 4 times upsamping for pool4 layer</span></div>
+<div class="line">    conv7_4 = Conv2DTranspose(nClasses, kernel_size=(<span class="number">4</span>, <span class="number">4</span>), strides=(<span class="number">4</span>, <span class="number">4</span>), use_bias=<span class="keyword">False</span>)(conv7)</div>
+<div class="line">    <span class="comment">## (None, 224, 224, 10)</span></div>
+<div class="line">    <span class="comment">## 2 times upsampling for pool411</span></div>
+<div class="line">    pool411 = Conv2D(nClasses, (<span class="number">1</span>, <span class="number">1</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">"pool4_11"</span>)(pool4)</div>
+<div class="line">    pool411_2 =Conv2DTranspose(nClasses, kernel_size=(<span class="number">2</span>, <span class="number">2</span>), strides=(<span class="number">2</span>, <span class="number">2</span>), use_bias=<span class="keyword">False</span>)(pool411)</div>
+<div class="line"></div>
+<div class="line">    pool311 = Conv2D(nClasses, (<span class="number">1</span>, <span class="number">1</span>), activation=<span class="string">'relu'</span>, padding=<span class="string">'same'</span>, name=<span class="string">"pool3_11"</span>)(pool3)</div>
+<div class="line"></div>
+<div class="line">    o = Add(name=<span class="string">"add"</span>)([pool411_2, pool311, conv7_4])</div>
+<div class="line">    o = Conv2DTranspose(nClasses, kernel_size=(<span class="number">8</span>, <span class="number">8</span>), strides=(<span class="number">8</span>, <span class="number">8</span>), use_bias=<span class="keyword">False</span>)(o)</div>
+<div class="line">    o = Activation(<span class="string">'softmax'</span>)(o)</div>
+<div class="line"></div>
+<div class="line">    model = Model(img_input, o)</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> model</div>
+<div class="line"></div>
+<div class="line">model = FCN8(nClasses=n_classes,input_height=<span class="number">224</span>,input_width=<span class="number">224</span>)</div>
+<div class="line">model.summary()</div>
+</pre></td></tr></table></figure>
 
       
     </div>
@@ -473,6 +820,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/13/Spanish/" rel="prev" title="Spanish">
+                Spanish <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -549,7 +900,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -560,7 +911,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -571,7 +922,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -604,7 +955,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Representing-the-task"><span class="nav-number">2.</span> <span class="nav-text">Representing the task</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fully-convolutional-networks"><span class="nav-number">3.</span> <span class="nav-text">Fully convolutional networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Upsampling-ref"><span class="nav-number">3.1.</span> <span class="nav-text">Upsampling ref</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Representing-the-task"><span class="nav-number">2.</span> <span class="nav-text">Representing the task</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fully-convolutional-networks"><span class="nav-number">3.</span> <span class="nav-text">Fully convolutional networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Upsampling-ref"><span class="nav-number">3.1.</span> <span class="nav-text">Upsampling ref</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Structures"><span class="nav-number">3.2.</span> <span class="nav-text">Network Structures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Connections"><span class="nav-number">3.3.</span> <span class="nav-text">Skip Connections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-function"><span class="nav-number">3.4.</span> <span class="nav-text">Loss function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">4.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-exploration"><span class="nav-number">4.1.</span> <span class="nav-text">Data exploration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-preprocessing"><span class="nav-number">4.2.</span> <span class="nav-text">Data preprocessing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-architecture"><span class="nav-number">4.3.</span> <span class="nav-text">Network architecture</span></a></li></ol></li></ol></div>
             
 
           </div>
