@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Deep Learning,Object Segmentation,Computer Vision," />
+  <meta name="keywords" content="Deep Learning,Computer Vision,Object Segmentation," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="This post is based on the paper Fully Convolutional Networks for Semantic Segmentation, which aims to perform image segmentation.">
-<meta name="keywords" content="Deep Learning,Object Segmentation,Computer Vision">
+<meta name="keywords" content="Deep Learning,Computer Vision,Object Segmentation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP-FullyConvolutionalSegmentation">
 <meta property="og:url" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/index.html">
@@ -111,7 +111,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131434053.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/image-201904131451012.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/1_U8uoGoZDs8nwzQE3tOhfkw@2x.png">
-<meta property="og:updated_time" content="2019-04-13T20:30:19.851Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/iou_stop_sign.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/iou_equation.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/05/DP-FullyConvolutionalSegmentation/iou_examples.png">
+<meta property="og:updated_time" content="2019-04-14T21:04:56.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-FullyConvolutionalSegmentation">
 <meta name="twitter:description" content="This post is based on the paper Fully Convolutional Networks for Semantic Segmentation, which aims to perform image segmentation.">
@@ -447,6 +450,7 @@
 <p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen Shot 2019-04-09 at 12.44.43 PM.png" alt="creen Shot 2019-04-09 at 12.44.43 P"></p>
 <p>So after the deconvolution, we have $5\times 5$ matrix:</p>
 <p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen Shot 2019-04-09 at 12.46.55 PM.png" alt="creen Shot 2019-04-09 at 12.46.55 P"></p>
+<p>To sum up, the convolution transpose is the opposite of convolution. Since for convolution, the new size is  <code>(old_row - k + 2*p ) / s + 1</code>, so for convolution transpose, its size is <code>(old_row - 1) * s - 2*p + k</code>. If we use no padding and kernel size equals stride step, then new size is <code>old_row * s</code>.</p>
 <h2 id="Network-Structures"><a href="#Network-Structures" class="headerlink" title="Network Structures"></a>Network Structures</h2><p>The original paper use well-studied <em>image classification</em> networks (eg. AlexNet) to serve as the encoder module of the network, appending a decoder module with transpose convolutional layers to upsample the coarse feature maps into a full-resolution segmentation map. The encoder structure looks like the following:</p>
 <p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/Screen-Shot-2018-05-20-at-9.53.20-AM.png" alt="creen-Shot-2018-05-20-at-9.53.20-A"></p>
 <p>The full network, as shown below, is trained according to a pixel-wise cross entropy loss.</p>
@@ -635,7 +639,8 @@
 </pre></td></tr></table></figure>
 <h2 id="Network-architecture"><a href="#Network-architecture" class="headerlink" title="Network architecture"></a>Network architecture</h2><p>Then we can implement the network, here we use the <code>vgg16</code> architecture, where the architecture looks like:</p>
 <p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/1_U8uoGoZDs8nwzQE3tOhfkw@2x.png" alt="_U8uoGoZDs8nwzQE3tOhfkw@2"></p>
-<p>Since the <code>vgg16</code> downsample the input image to the original size of $1/2^5=1/32$ due to <code>maxpooling</code>. Therefore we need to ensure the input size can be divided by 32. </p>
+<p>Since the <code>vgg16</code> downsample the input image to the original size of $1/2^5=1/32$ due to <code>maxpooling</code>. Therefore we need to ensure the input size can be divided by 32. In the beginning, we implement the structure of <code>vgg16</code>: <code>block1 -&gt; block2 -&gt; block3 -&gt; block4 -&gt; block5</code> .</p>
+<p>In order to keep more information, we directly use output from <code>block3</code> and <code>block4</code> to combine them with the output of <code>block5</code>. To be specific, for the output of <code>block5</code>, we use <code>conv2d_k4096_s7 + conv2d_k4096_s1 + conv2dT_k12_s4_p4</code>; for the output of <code>block4</code>, we need to upsample it by 2, <code>conv2d_k12_s1 + conv2dT_k12_s2_p2</code>; for output of <code>block3</code>, <code>conv2d_k12_s1</code>. And finally, combine them by adding them.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -777,6 +782,138 @@
 <div class="line">model = FCN8(nClasses=n_classes,input_height=<span class="number">224</span>,input_width=<span class="number">224</span>)</div>
 <div class="line">model.summary()</div>
 </pre></td></tr></table></figure>
+<h2 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.utils <span class="keyword">import</span> shuffle</div>
+<div class="line">train_rate = <span class="number">0.85</span></div>
+<div class="line">index_train = np.random.choice(X.shape[<span class="number">0</span>],int(X.shape[<span class="number">0</span>]*train_rate),replace=<span class="keyword">False</span>)</div>
+<div class="line">index_test  = list(set(range(X.shape[<span class="number">0</span>])) - set(index_train))</div>
+<div class="line">X, Y = shuffle(X,Y)</div>
+<div class="line">X_train, y_train = X[index_train],Y[index_train]</div>
+<div class="line">X_test, y_test = X[index_test],Y[index_test]</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> optimizers</div>
+<div class="line">sgd = optimizers.SGD(lr=<span class="number">1e-2</span>,decay=<span class="number">5</span>**(<span class="number">-4</span>),momentum=<span class="number">0.9</span>,nesterov=<span class="keyword">True</span>)</div>
+<div class="line">model.compile(loss=<span class="string">'categorical_crossentropy'</span>,optimizer=sgd,metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line">hist = model.fit(X_train,y_train,validation_data=(X_test,y_test),</div>
+<div class="line">                 batch_size=<span class="number">32</span>,epochs=<span class="number">200</span>,verbose=<span class="number">2</span>)</div>
+<div class="line">model.save(<span class="string">"seg_model.h5"</span>)</div>
+</pre></td></tr></table></figure>
+<h2 id="mean-Intersection-over-Union"><a href="#mean-Intersection-over-Union" class="headerlink" title="mean Intersection over Union"></a>mean Intersection over Union</h2><p>Intersection over Union is an evaluation metric used to measure the accuracy of an object detector on a particular dataset. However, Any algorithm that provides predicted bounding boxes as output can be evaluated using IoU. </p>
+<p>More formally, in order to apply Intersection over Union to evaluate an (arbitrary) object detector we need:</p>
+<ol>
+<li>The <em>ground-truth bounding boxes</em> (i.e., the hand labeled bounding boxes from the testing set that specify <em>where</em> in the image our object is).</li>
+<li>The <em>predicted bounding boxes</em> from our model.</li>
+</ol>
+<p>As long as we have these two sets of bounding boxes we can apply Intersection over Union.</p>
+<p>Below I have included a visual example of a ground-truth bounding box versus a predicted bounding box:</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/iou_stop_sign.jpg" alt="ou_stop_sig"></p>
+<p>Computing Intersection over Union can therefore be determined via:</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/iou_equation.png" alt="ou_equatio"></p>
+<p>In the numerator we compute the <strong>area of overlap</strong> between the <em>predicted</em> bounding box and the <em>ground-truth</em> bounding box.</p>
+<p>The denominator is the <strong>area of union</strong>, or more simply, the area encompassed by <em>both</em> the predicted bounding box and the ground-truth bounding box.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">IoU</span><span class="params">(Yi, y_predi)</span>:</span></div>
+<div class="line">    <span class="comment">## mean Intersection over Union</span></div>
+<div class="line">    <span class="comment">## Mean IoU = TP/(FN + TP + FP)</span></div>
+<div class="line"></div>
+<div class="line">    IoUs = []</div>
+<div class="line">    Nclass = int(np.max(Yi)) + <span class="number">1</span></div>
+<div class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> range(Nclass):</div>
+<div class="line">        TP = np.sum((Yi == c) &amp; (y_predi == c))</div>
+<div class="line">        FP = np.sum((Yi != c) &amp; (y_predi == c))</div>
+<div class="line">        FN = np.sum((Yi == c) &amp; (y_predi != c))</div>
+<div class="line">        IoU = TP / float(TP + FP + FN)</div>
+<div class="line">        print(<span class="string">"class &#123;:02.0f&#125;: #TP=&#123;:6.0f&#125;, #FP=&#123;:6.0f&#125;, #FN=&#123;:5.0f&#125;, IoU=&#123;:4.3f&#125;"</span>.format(c, TP, FP, FN, IoU))</div>
+<div class="line">        IoUs.append(IoU)</div>
+<div class="line">    mIoU = np.mean(IoUs)</div>
+<div class="line">    print(<span class="string">"_________________"</span>)</div>
+<div class="line">    print(<span class="string">"Mean IoU: &#123;:4.3f&#125;"</span>.format(mIoU))</div>
+<div class="line"></div>
+<div class="line">y_pred = model.predict(X_test)</div>
+<div class="line">y_predi = np.argmax(y_pred, axis=<span class="number">3</span>)</div>
+<div class="line">y_testi = np.argmax(y_test, axis=<span class="number">3</span>)</div>
+<div class="line">IoU(y_testi, y_predi)</div>
+</pre></td></tr></table></figure>
+<p><strong>WHY WE USE IoU?</strong></p>
+<p>In all reality, it’s <em>extremely unlikely</em> that the <em>(x, y)</em>-coordinates of our predicted bounding box are going to <strong>exactly match</strong> the <em>(x, y)</em>-coordinates of the ground-truth bounding box.</p>
+<p>Due to varying parameters of our model (image pyramid scale, sliding window size, feature extraction method, etc.), a complete and total match between predicted and ground-truth bounding boxes is simply unrealistic.</p>
+<p>Because of this, we need to define an evaluation metric that <strong><em>rewards</em> predicted bounding boxes for heavily overlapping with the ground-truth</strong>.</p>
+<p><img src="/2019/04/05/DP-FullyConvolutionalSegmentation/iou_examples.png" alt="ou_example"></p>
+<p>As you can see, predicted bounding boxes that heavily overlap with the ground-truth bounding boxes have higher scores than those with less overlap. This makes Intersection over Union an excellent metric for evaluating custom object detectors.</p>
+<p>We aren’t concerned with an <em>exact</em> match of <em>(x, y)</em>-coordinates, but we do want to ensure that our predicted bounding boxes match as closely as possible — Intersection over Union is able to take this into account.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div>
+<div class="line">    img_is = (X_test[i] + <span class="number">1</span>) * (<span class="number">255.0</span> / <span class="number">2</span>)</div>
+<div class="line">    seg = y_predi[i]</div>
+<div class="line">    segtest = y_testi[i]</div>
+<div class="line"></div>
+<div class="line">    fig = plt.figure(figsize=(<span class="number">10</span>, <span class="number">30</span>))</div>
+<div class="line">    ax = fig.add_subplot(<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>)</div>
+<div class="line">    ax.imshow(img_is / <span class="number">255.0</span>)</div>
+<div class="line">    ax.set_title(<span class="string">"original"</span>)</div>
+<div class="line"></div>
+<div class="line">    ax = fig.add_subplot(<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>)</div>
+<div class="line">    ax.imshow(img_colorized(seg, n_classes))</div>
+<div class="line">    ax.set_title(<span class="string">"predicted class"</span>)</div>
+<div class="line"></div>
+<div class="line">    ax = fig.add_subplot(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3</span>)</div>
+<div class="line">    ax.imshow(img_colorized(segtest, n_classes))</div>
+<div class="line">    ax.set_title(<span class="string">"true class"</span>)</div>
+<div class="line">    plt.savefig(<span class="string">'&#123;&#125;.png'</span>.format(i))</div>
+</pre></td></tr></table></figure>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>Overall, in this paper, the most important thing is how use convolution transpose to upsample the feature to the original image size and utilize <code>u-net</code> structure to preserve features for acurate pixel classification. And in the convolution network, we only use convolution and its transpose, that is why it is called <strong>Fully Convolution Network</strong>. </p>
 
       
     </div>
@@ -796,9 +933,9 @@
           
             <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
           
-            <a href="/tags/Object-Segmentation/" rel="tag"># Object Segmentation</a>
-          
             <a href="/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
+          
+            <a href="/tags/Object-Segmentation/" rel="tag"># Object Segmentation</a>
           
         </div>
       
@@ -900,7 +1037,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -955,7 +1092,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Representing-the-task"><span class="nav-number">2.</span> <span class="nav-text">Representing the task</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fully-convolutional-networks"><span class="nav-number">3.</span> <span class="nav-text">Fully convolutional networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Upsampling-ref"><span class="nav-number">3.1.</span> <span class="nav-text">Upsampling ref</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Structures"><span class="nav-number">3.2.</span> <span class="nav-text">Network Structures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Connections"><span class="nav-number">3.3.</span> <span class="nav-text">Skip Connections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-function"><span class="nav-number">3.4.</span> <span class="nav-text">Loss function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">4.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-exploration"><span class="nav-number">4.1.</span> <span class="nav-text">Data exploration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-preprocessing"><span class="nav-number">4.2.</span> <span class="nav-text">Data preprocessing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-architecture"><span class="nav-number">4.3.</span> <span class="nav-text">Network architecture</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Representing-the-task"><span class="nav-number">2.</span> <span class="nav-text">Representing the task</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fully-convolutional-networks"><span class="nav-number">3.</span> <span class="nav-text">Fully convolutional networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Upsampling-ref"><span class="nav-number">3.1.</span> <span class="nav-text">Upsampling ref</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-Structures"><span class="nav-number">3.2.</span> <span class="nav-text">Network Structures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Connections"><span class="nav-number">3.3.</span> <span class="nav-text">Skip Connections</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loss-function"><span class="nav-number">3.4.</span> <span class="nav-text">Loss function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">4.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-exploration"><span class="nav-number">4.1.</span> <span class="nav-text">Data exploration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-preprocessing"><span class="nav-number">4.2.</span> <span class="nav-text">Data preprocessing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-architecture"><span class="nav-number">4.3.</span> <span class="nav-text">Network architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Training"><span class="nav-number">4.4.</span> <span class="nav-text">Training</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mean-Intersection-over-Union"><span class="nav-number">4.5.</span> <span class="nav-text">mean Intersection over Union</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-number">5.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
             
 
           </div>

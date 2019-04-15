@@ -283,6 +283,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/20/Naive-Bayes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/20/Naive-Bayes/" itemprop="url">Naive Bayes</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-20T22:09:35-05:00">
+                2018-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>机器学习中的分类方法，通常是基于有限的训练样本尽可能准确地估计后验概率$P(c|x)$。大体上，对后验概率的估计有两种策略：给定$x$，直接建模$P(c|x)$来预测$c$，这样得到的模型是“判别式模型”（discriminative models）；也可以先对联合概率分布$P(x,c)$建模，然后再由此获得$P(c|x)$，这样得到的是“生成式模型”（generative models）。决策树，神经网络，支持向量机都归入判别式模型；而朴素贝叶斯法则属于生成式模型。</p>
+<p>朴素贝叶斯法是基于<strong>贝叶斯定理</strong>与<strong>特征条件独立</strong>假设的分类方法。对于给定的训练数据集，首先基于特征条件独立假设学习输入|输出的联合概率分布；然后基于此模型，对于给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。朴素贝叶斯法广泛应用于文本分类以及垃圾邮件检测。</p>
+<p>本章叙述朴素贝叶斯法，包括朴素贝叶斯的学习与分类、朴素贝叶斯法的参数估计算法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/20/Naive-Bayes/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/12/C-Programing-Language/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -915,14 +1063,14 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�649-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�642-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�650-->
+<!--�643-->
 <p>In-order： (left)，root，(right)</p>
-<!--�651-->
+<!--�644-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�652-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�653-->
+<!--�645-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�646-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -2416,435 +2564,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/Linear-Regression/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/06/Linear-Regression/" itemprop="url">Linear Regression</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-06T10:47:44-05:00">
-                2018-08-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Machine Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<h1 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h1><h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>线性回归模型，顾名思义就是线性模型求解回归问题。</p>
-<h3 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h3><p>【<strong>定义</strong>】给定具有$d$个属性的数据样本$x=\{x_1,x_2,…,x_d\}$，$x_i$是$x$在第$i$个属性上的取值，线性模型通过对属性的线性组合来进行预测的函数：</p>
-<script type="math/tex; mode=display">
-f(x)=w_1x_1+w_2x_2+...+w_dx_d+b</script><p>向量形式表示为：</p>
-<script type="math/tex; mode=display">
-f(x)=w^Tx+b</script><p>其中$w=(w_1;w_2;…;w_d)$，只要确定了$w$和$b$，模型就得以确定。</p>
-<blockquote>
-<p>向量都表示成竖直的一条直线。</p>
-</blockquote>
-<h3 id="回归问题"><a href="#回归问题" class="headerlink" title="回归问题"></a>回归问题</h3><p>回归属于监督学习的范畴，用于预测输入变量与输出变量的关系。其本质就是数据拟合，选择一条函数曲线使其很好地拟合已知的数据，同时能够预测未知的数据。</p>
-<p>按照输入变量的属性个数，分为一元回归和多元回归；按照输入变量和输出变量之间的映射关系，分为线性回归和非线性回归。</p>
-<h3 id="线性回归-1"><a href="#线性回归-1" class="headerlink" title="线性回归"></a>线性回归</h3><p>线性模型描述的是属性间的组合关系，而回归问题求解的是输入与输出的关系。</p>
-<p>即使用一个线性函数去建模输入变量属性间的线性关系，从而发现输入变量与输出变量的关系。给定数据集$D=\{(x_1,y_1),(x_2,y_2),…,(x_m,y_m)\}$，其中$x_i=(x_i1;x_i2;…;x_id)$。</p>
-<p><strong>问题描述</strong>：线性回归试图学习一个线性模型$f(x_i)=w^Tx_i+b$，使$f(x_i)\approx y_i$。</p>
-<blockquote>
-<p>又称为多元线性回归，或者多变量线性回归。</p>
-</blockquote>
-<h2 id="算法求解"><a href="#算法求解" class="headerlink" title="算法求解"></a>算法求解</h2><h3 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h3><p>只要确定了权重$w$和偏差$b$的值，那么我们就可以得到模型了，而我们想让预测值$f(x_i)$无限接近真实值$y_i$，所以使用均方误差作为性能度量，即我们试图让均方差最小：</p>
-<script type="math/tex; mode=display">
-Loss(w^*,b^*)=\sum_{i=1}^{m}(f(x_i)-y_i)^2</script><p>均方误差对应了常用的欧几里得距离，基于均方误差最小化进行模型求解的方法称为“最小二乘法”，实际上，最小二乘法就是试图找到一条直线，使样本到直线的欧氏距离之和最小。</p>
-<blockquote>
-<ul>
-<li>关于为什么使用均方误差作为损失度量，一个是因为其本质是最大似然法，<a href="https://blog.csdn.net/saltriver/article/details/57544704" target="_blank" rel="noopener">ref</a> </li>
-<li>常用损失函数对比<a href="https://www.jiqizhixin.com/articles/2018-06-21-3" target="_blank" rel="noopener">ref2</a> </li>
-</ul>
-</blockquote>
-<h3 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h3><h4 id="Loss函数求导取极值"><a href="#Loss函数求导取极值" class="headerlink" title="Loss函数求导取极值"></a>Loss函数求导取极值</h4><p>我们可以对损失函数$Loss$求导，并令导数为零来求得最优参数：</p>
-<script type="math/tex; mode=display">
-\begin{cases} 
-w=\frac{\sum_{i=1}^{n}y_i(x_i-\bar{x})}{\sum_{i=1}^{n}x_{i}^{2}-\frac{1}{n}(\sum_{i=1}^{n}x_i)^2}\\
-b=\frac{1}{m}\sum_{i=1}^{n}(y_i-wx_i)
-    \end{cases}</script><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<p><strong>公式推导</strong></p>
-<ol>
-<li><p>偏导</p>
-<script type="math/tex; mode=display">
-\begin{cases} 
-\frac{\partial{}E}{\partial{w}}=2[w\sum_{i=1}^{n}x_{i}^{2}-\sum_{i=1}^{n}(y_i-b)x_i]\\
-\frac{\partial{}E}{\partial{b}}=2[mb-\sum^{n}_{i=1}(y_i-wx_i)]
-    \end{cases}</script></li>
-<li><p>求解b，$\frac{\partial{}E}{\partial{b}}=0$</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-mb&=\sum^{n}_{i=1}(y_i-wx_i)\\
-&=(y_1-wx_1)+(y_2-wx_2)+...+(y_n-wx_n)=(y_1+y_2+...+y_n)-w(x_1+x_2+...+x_n)\\
-&=\sum{y_i}-w\sum{x_i}
-\end{align*}</script><p>则$b=\frac{1}{n}\sum_{i=1}^{n}(y_i-wx_i)=\bar{y}-w\bar{x}$</p>
-</li>
-<li><p>求解w，$\frac{\partial{}E}{\partial{w}}=0$</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-w\sum_{i=1}^{n}x_{i}^{2}&=\sum_{i=1}^{n}(y_i-\bar{y}+w\bar{x})x_i\\
-&=(y_1-\bar{y}+w\bar{x})x_1+(y_2-\bar{y}+w\bar{x})x_2+...+(x_n-\bar{y}+w\bar{x})x_n\\
-&=(y_1x_1+y_2x_2+...+y_nx_n)-\bar{y}(x_1+x_2+...+x_n)+w\bar{x}(x_1+x_2+...+x_n)\\
-&=\sum_{i=1}^{n}x_iy_i-\bar{y}\sum_{i=1}^{n}x_i+w\bar{x}\sum_{i=1}^{n}x_i\\
-&=\sum_{i=1}^{n}x_iy_i-n\bar{y}\bar{x}+w\bar{x}n\bar{x}
-\end{align*}</script><p>则$w(\sum_{i=1}^{n}x_{i}^{2}-n\bar{x}^2)=\sum_{i=1}^{n}x_iy_i-n\bar{y}\bar{x}$，故</p>
-<script type="math/tex; mode=display">
-w=\frac{\sum_{i=1}^{n}x_iy_i-n\bar{y}\bar{x}}{\sum_{i=1}^{n}x_{i}^{2}-n\bar{x}^2}</script></li>
-</ol>
-
-</div></div>
-<h4 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h4><p>损失函数是：</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-Loss(w,b)&=\sum_{i=1}^{n}(f(x_i)-y_i)^2\\
-&=\sum_{i=1}^{n}(wx_i+b-y_i)^2
-\end{align*}</script><p>参数更新：</p>
-<script type="math/tex; mode=display">
-\begin{cases} 
-w=w-\alpha(f(x)-y){x}\\
-b=b-\alpha(f(x)-y)
-    \end{cases}</script><blockquote>
-<script type="math/tex; mode=display">
-\begin{align*}
-\frac{\partial{E}}{\partial{w}}&=\frac{\partial{}}{\partial{w}}{\frac{1}{2}(f(x)-y)^2}\\
-&=(f(x)-y)\frac{\partial}{\partial{w}}(wx+b-y)\\
-&=(f(x)-y)x
-\end{align*}</script></blockquote>
-<p>即：</p>
-<script type="math/tex; mode=display">
-w_i=w_i-\alpha\frac{1}{m}\sum_{i=1}^{m}(f(x_i)-y_i)\cdot x_i</script><p>此时，$b=w_0$，$x_0=1$。</p>
-<h4 id="正则化的损失函数"><a href="#正则化的损失函数" class="headerlink" title="正则化的损失函数"></a>正则化的损失函数</h4><p>此时目标函数为：</p>
-<script type="math/tex; mode=display">
-\begin{align*}
-E(w,b)&=\sum_{i=1}^{n}(wx_i+b-y_i)^2+\lambda\sum_{i=1}^{n}w_{i}^{2}
-\end{align*}</script><blockquote>
-<p>$w_0$不需要正则化</p>
-</blockquote>
-<p>此时梯度下降法为：</p>
-<script type="math/tex; mode=display">
-w_0=w_0-\alpha\frac{1}{n}\sum_{i=1}^{n}(h_w(x^{(i)})-y^{(i)})x_0^{(i)}\\
-w_j=w_j-\alpha[\frac{1}{n}\sum_{i=1}^{n}(h_w(x^{(i)})-y^{(i)})x_j^{(i)}-\frac{\lambda}{n}w_j]</script><h1 id="Data-Preprocessing"><a href="#Data-Preprocessing" class="headerlink" title="Data Preprocessing"></a>Data Preprocessing</h1><p><strong>Feature Scaling</strong></p>
-<p>It involves <strong>dividing the input values by the range</strong> (i.e. the maximum value minus the minimum value) of the input variable, resulting in <strong>a new range of just 1</strong>.</p>
-<p><strong>Mean normalization</strong> </p>
-<p>This involves <strong>subtracting the average value</strong> for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero. </p>
-<p>By combining the two techniques and adjust the input values as shown in the following formula:</p>
-<script type="math/tex; mode=display">
-x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the values for feature $(i)$ and $s_i$ is the range of values (max - min), or $s_i$ is the standard deviation.</p>
-<h1 id="Convergence-Figure"><a href="#Convergence-Figure" class="headerlink" title="Convergence Figure"></a>Convergence Figure</h1><p>In order to make sure that our algorithm runs correctly, we need to debug gradient descent. Make a plot with <em>number of iterations</em> on the x-axis. Now plot the cost function, $J(\theta)$ over the number of iterations of gradient descent. If $J(\theta)$ ever increases, then you probably need to decrease learning rate $\alpha$.</p>
-<p><strong>Summary</strong></p>
-<ul>
-<li><p>If $\alpha$ is too small, it could result in slow convergence.</p>
-</li>
-<li><p>If $\alpha$ is too large, it may not decrease on every iteration and thus may not converge, like the following pic:</p>
-</li>
-</ul>
-<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-06 at 12.58.12 PM.png" alt="Screen Shot 2018-08-06 at 12.58.12 PM"></p>
-<p><strong>Example</strong></p>
-<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-06 at 12.54.04 PM.png" alt="Screen Shot 2018-08-06 at 12.54.04 PM"></p>
-<blockquote>
-<p>A is $\alpha=0.1$, B is $\alpha=0.01$, A is $\alpha=1$.</p>
-<p>In graph C, the cost function is increasing, so the learning rate is set too high. Both graphs A and B converge to an optimum of the cost function, but graph B does so very slowly, so its learning rate is set too low. Graph A lies between the two.</p>
-</blockquote>
-<h1 id="Polynomial-Regression"><a href="#Polynomial-Regression" class="headerlink" title="Polynomial Regression"></a>Polynomial Regression</h1><p>Our hypothesis function need not be linear (a straight line) if that does not fit the data well.</p>
-<p> We can <strong>change the behavior or curve</strong> of our hypothesis function by making it a quadratic, cubic or square root function (or any other form).</p>
-<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-07 at 12.18.01 AM.png" alt="Screen Shot 2018-08-07 at 12.18.01 AM"></p>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="线性回归预测一维数据"><a href="#线性回归预测一维数据" class="headerlink" title="线性回归预测一维数据"></a>线性回归预测一维数据</h2><p>来自Andrew Ng第二周的课程练习，给出城市人口及该市的商店利润，预测如何进行店铺扩展，即选择哪座城市开分店？给定的数据只有一个人口特征及利润目标值。</p>
-<p>第一步就是进行<strong>数据的可视化</strong>。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">()</span>:</span></div>
-<div class="line">    data = np.loadtxt(<span class="string">'./dataset/ex1data1.txt'</span>, delimiter=<span class="string">','</span>)</div>
-<div class="line">    x = data[:, <span class="number">0</span>]</div>
-<div class="line">    y = data[:, <span class="number">1</span>]</div>
-<div class="line">    plt.scatter(x, y, marker=<span class="string">'x'</span>)</div>
-<div class="line">    plt.xlabel(<span class="string">"Population of City in 10,000s"</span>)</div>
-<div class="line">    plt.ylabel(<span class="string">"Profit in $10,000s"</span>)</div>
-<div class="line">    plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/08/06/Linear-Regression/image-20180815174124083.png" alt="image-20180815174124083"></p>
-
-</div></div>
-<p>第二步：数据处理及参数初始化</p>
-<p>我们为数据增加一列全一</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-</pre></td><td class="code"><pre><div class="line">length = x.shape[<span class="number">0</span>]</div>
-<div class="line">z = np.ones(length)</div>
-<div class="line">x = np.array(list(zip(z,x)))  <span class="comment"># add a column of ones to x</span></div>
-<div class="line">theta = np.zeros([x.shape[<span class="number">1</span>],<span class="number">1</span>]) <span class="comment"># initialize fitting parameters</span></div>
-<div class="line">alpha = <span class="number">0.01</span></div>
-<div class="line">iters = <span class="number">1500</span></div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<p>第三步：损失函数</p>
-<p>我们使用公式</p>
-<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-15 at 6.19.39 PM.png" alt="Screen Shot 2018-08-15 at 6.19.39 PM"></p>
-<p>初次调用，返回值是32.07。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cost_function</span><span class="params">(x,y,theta)</span>:</span></div>
-<div class="line">    y_ = x.dot(theta)</div>
-<div class="line">    loss = (y-y_)**<span class="number">2</span></div>
-<div class="line">    cost = sum(loss) / (<span class="number">2</span>*length)</div>
-<div class="line">    <span class="keyword">return</span> cost</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<p>第四步：梯度下降法</p>
-<p>检查梯度下降法是否正确的一个手段：查看损失函数是否在逐步减小。我们使用梯度更新公式：</p>
-<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-15 at 6.26.20 PM.png" alt="Screen Shot 2018-08-15 at 6.26.20 PM"></p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_descent</span><span class="params">(x,y,theta,alpha,iters)</span>:</span></div>
-<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(iters):</div>
-<div class="line">        <span class="comment"># cost_function(x,y,theta)</span></div>
-<div class="line">        y_ = x.dot(theta)</div>
-<div class="line">        loss = (y_ - y)</div>
-<div class="line">        gd = loss.T.dot(x) <span class="comment"># shape = (1,2)</span></div>
-<div class="line">        gd = alpha * gd.T / length</div>
-<div class="line">        theta = theta - gd</div>
-<div class="line">    <span class="keyword">return</span> theta</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<p>需要注意的一个点是：loss = ( y_pred - y )。反过来的话，会出现loss趋于无穷大。这个是对loss函数求导得到的，无论$(h_\theta(x)-y )^2$还是$(y-h_\theta(x) )^2$，都是一样的。</p>
-</blockquote>
-
-</div></div>
-<p>第五步：可视化拟合曲线</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_data</span><span class="params">(x,y,theta)</span>:</span></div>
-<div class="line">    plt.scatter(x, y, marker=<span class="string">'x'</span>,label=<span class="string">'Training data'</span>)</div>
-<div class="line">    plt.xlabel(<span class="string">"Population of City in 10,000s"</span>)</div>
-<div class="line">    plt.ylabel(<span class="string">"Profit in $10,000s"</span>)</div>
-<div class="line">    x_ = np.linspace(min(x),max(x),<span class="number">1000</span>)</div>
-<div class="line">    y_ = x_*theta[<span class="number">1</span>] + theta[<span class="number">0</span>]</div>
-<div class="line">    plt.plot(x_,y_,label=<span class="string">'Linear regression'</span>)</div>
-<div class="line">    plt.show()</div>
-</pre></td></tr></table></figure>
-<p><img src="/2018/08/06/Linear-Regression/image-20180816163328931.png" alt="image-20180816163328931"></p>
-
-</div></div>
-<h2 id="线性回归预测多特征数据"><a href="#线性回归预测多特征数据" class="headerlink" title="线性回归预测多特征数据"></a>线性回归预测多特征数据</h2><p>我们使用线性回归预测房价，数据集有两个特征：第一列是房屋面积(单位：$feet^2$)，第二列是房间数，最后一列是房价。</p>
-<h3 id="特征正则化"><a href="#特征正则化" class="headerlink" title="特征正则化"></a>特征正则化</h3><p>发现两个特征数据范围相差特别大，所以需要对数据进行正则化，这样可以加快梯度下降法的收敛。</p>
-<ul>
-<li>减去均值</li>
-<li>除以标准差</li>
-</ul>
-<p>正则化之后，别忘记加一个全一列。</p>
-<p><strong>注意：</strong>记得存储mean和std的值，这样我们在预测位置数据的时候，第一步就是使用mean和std对未知数据做同样的处理。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">feature_norm</span><span class="params">(x)</span>:</span></div>
-<div class="line">    mean = np.mean(x,axis=<span class="number">0</span>)</div>
-<div class="line">    std = np.std(x,axis=<span class="number">0</span>)</div>
-<div class="line">    x = (x-mean)/std</div>
-<div class="line">    ones = np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>))</div>
-<div class="line">    x = np.concatenate([ones, x], axis=<span class="number">1</span>)</div>
-<div class="line">    <span class="keyword">return</span> x,mean,std</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<h3 id="梯度下降法-1"><a href="#梯度下降法-1" class="headerlink" title="梯度下降法"></a>梯度下降法</h3><p>先实现损失函数</p>
-<p><img src="/2018/08/06/Linear-Regression/Screen Shot 2018-08-15 at 6.19.39 PM.png" alt="Screen Shot 2018-08-15 at 6.19.39 PM"></p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cost_func</span><span class="params">(x,y,thetas)</span>:</span></div>
-<div class="line">    y_pred = x.dot(thetas)</div>
-<div class="line">    loss = sum((y_pred-y)**<span class="number">2</span>)/(<span class="number">2</span>*x.shape[<span class="number">0</span>])</div>
-<div class="line">    <span class="keyword">return</span> loss</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<p>再实现梯度下降法，损失函数都是10次方。</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradient_dec</span><span class="params">(x,y,thetas,lr,iter)</span>:</span></div>
-<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(iter):</div>
-<div class="line">        y_pred = x.dot(thetas)</div>
-<div class="line">        gd = (y_pred - y).T.dot(x)</div>
-<div class="line">        thetas -= lr * gd.T / x.shape[<span class="number">0</span>]</div>
-<div class="line">        loss = cost_func(x, y, thetas)</div>
-<div class="line">        print(loss)</div>
-<div class="line">    <span class="keyword">return</span> thetas</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2895,7 +2614,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
