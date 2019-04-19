@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)  R &amp;amp; W in TXT ref  np.l">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-24T02:45:29.867Z">
+<meta property="og:updated_time" content="2019-04-17T21:18:19.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Sth">
 <meta name="twitter:description" content="目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)  R &amp;amp; W in TXT ref  np.l">
@@ -573,6 +573,7 @@
 <div class="line">14</div>
 <div class="line">15</div>
 <div class="line">16</div>
+<div class="line">17</div>
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> argparse</div>
 <div class="line">    parser = argparse.ArgumentParser(description=<span class="string">"Process some parameters."</span>)</div>
 <div class="line">    parser.add_argument(<span class="string">'--trainFeature'</span>, <span class="string">'-tf'</span>, type=int, required=<span class="keyword">True</span>, default=<span class="number">1</span>, help=<span class="string">'train feature'</span>)</div>
@@ -582,6 +583,7 @@
 <div class="line">    parser.add_argument(<span class="string">'--clipRange'</span>, <span class="string">'-cr'</span>, type=float, required=<span class="keyword">True</span>,default=<span class="number">0.01</span>, help=<span class="string">'clip range'</span>)</div>
 <div class="line"></div>
 <div class="line">    args = parser.parse_args()</div>
+<div class="line">    opts = &#123;k:v <span class="keyword">for</span> k,v <span class="keyword">in</span> args._get_kwagrs()&#125;</div>
 <div class="line">    n_critic = args.criticNum</div>
 <div class="line">    train_initial = args.trainInitial</div>
 <div class="line">    train_feature = args.trainFeature</div>
@@ -714,7 +716,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
