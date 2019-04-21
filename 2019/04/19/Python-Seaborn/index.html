@@ -100,7 +100,9 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419200208063.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419200409974.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419200524568.png">
-<meta property="og:updated_time" content="2019-04-20T01:05:56.612Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/Screen%20Shot%202019-04-20%20at%208.47.30%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904202049285.png">
+<meta property="og:updated_time" content="2019-04-21T01:51:18.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python-Seaborn">
 <meta name="twitter:description" content="A high-level plotting library built on top of matplotlab.">
@@ -515,7 +517,21 @@
 <div class="line">    sns.jointplot(<span class="string">"x"</span>, <span class="string">"y"</span>, data, kind=<span class="string">'hex'</span>)</div>
 </pre></td></tr></table></figure>
 <p><img src="/2019/04/19/Python-Seaborn/image-20190419200524568.png" alt="image-20190419200524568"></p>
-<h2 id="Pair-plots"><a href="#Pair-plots" class="headerlink" title="Pair plots"></a>Pair plots</h2><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.tutorialspoint.com/seaborn/index.htm" target="_blank" rel="noopener">Seaborn Tutorial</a></p>
+<h2 id="Pair-plots"><a href="#Pair-plots" class="headerlink" title="Pair plots"></a>Pair plots</h2><p>When you generalize joint plots to datasets of larger dimensions, you end up with <em>pair plots</em>. This is very useful for exploring correlations between multidimensional data, when you’d like to plot all pairs of values against each other.</p>
+<p>We’ll demo this with the well-known Iris dataset, which lists measurements of petals and sepals of three iris species:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">iris = sns.load_dataset(<span class="string">'iris'</span>)</div>
+<div class="line">print(iris.head())</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/Screen Shot 2019-04-20 at 8.47.30 PM.png" alt="creen Shot 2019-04-20 at 8.47.30 P"></p>
+<p>Visualizing the multidimensional relationships among the samples is as easy as calling <code>sns.pairplot</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">sns.pairplot(iris,hue=<span class="string">'species'</span>)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904202049285.png" alt="mage-20190420204928"></p>
+<p>We can see that if we want to do classification, we can use <code>petal_width</code> and <code>petal_length</code> because from figure 15, these three species are distinguished.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.tutorialspoint.com/seaborn/index.htm" target="_blank" rel="noopener">Seaborn Tutorial</a></p>
 <p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html" target="_blank" rel="noopener">Visualization with Seaborn</a></p>
 <p><a href="https://elitedatascience.com/python-seaborn-tutorial" target="_blank" rel="noopener"><a href="https://elitedatascience.com/python-seaborn-tutorial" target="_blank" rel="noopener">The Ultimate Python Seaborn Tutorial: Gotta Catch ‘Em All</a></a> </p>
 
