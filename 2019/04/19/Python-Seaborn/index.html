@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="A high-level plotting library built on top of matplotlab.">
+<meta name="description" content="A high-level plotting library built on top of matplotlab. Seaborn helps resolve the two major problems faced by Matplotlib; the problems are：  Default Matplotlib parameters Working with data frames">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-Seaborn">
 <meta property="og:url" content="http://yoursite.com/2019/04/19/Python-Seaborn/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="A high-level plotting library built on top of matplotlab.">
+<meta property="og:description" content="A high-level plotting library built on top of matplotlab. Seaborn helps resolve the two major problems faced by Matplotlib; the problems are：  Default Matplotlib parameters Working with data frames">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419163334245.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419163402652.png">
@@ -94,6 +94,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419163705284.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419163841209.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419163953491.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904212015382.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904212017206.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419195725160.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419195851654.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419200042425.png">
@@ -102,10 +104,10 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419200524568.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/Screen%20Shot%202019-04-20%20at%208.47.30%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904202049285.png">
-<meta property="og:updated_time" content="2019-04-21T01:51:18.917Z">
+<meta property="og:updated_time" content="2019-04-22T01:29:11.440Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python-Seaborn">
-<meta name="twitter:description" content="A high-level plotting library built on top of matplotlab.">
+<meta name="twitter:description" content="A high-level plotting library built on top of matplotlab. Seaborn helps resolve the two major problems faced by Matplotlib; the problems are：  Default Matplotlib parameters Working with data frames">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419163334245.png">
 
 
@@ -392,10 +394,31 @@
       
 
       
-        <p>A high-level plotting library built on top of matplotlab.</p>
+        <p>A high-level plotting library built on top of matplotlab. Seaborn helps resolve the two major problems faced by Matplotlib; the problems are：</p>
+<ul>
+<li>Default Matplotlib parameters</li>
+<li>Working with data frames</li>
+</ul>
 <a id="more"></a>
-<h1 id="Figure-style"><a href="#Figure-style" class="headerlink" title="Figure style"></a>Figure style</h1><p>Seaborn provides five preset themes: white grid, dark grid, white, dark, and ticks,</p>
-<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><h3 id="Darkgrid"><a href="#Darkgrid" class="headerlink" title="Darkgrid"></a>Darkgrid</h3><p>It is the default one.</p>
+<h1 id="Quick-Guide"><a href="#Quick-Guide" class="headerlink" title="Quick Guide"></a>Quick Guide</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div>
+<div class="line">print(sns.get_dataset_names())</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">[<span class="string">u'anscombe'</span>, <span class="string">u'attention'</span>, <span class="string">u'brain_networks'</span>, <span class="string">u'car_crashes'</span>, <span class="string">u'dots'</span>, </div>
+<div class="line"><span class="string">u'exercise'</span>, <span class="string">u'flights'</span>, <span class="string">u'fmri'</span>, <span class="string">u'gammas'</span>, <span class="string">u'iris'</span>, <span class="string">u'planets'</span>, <span class="string">u'tips'</span>, </div>
+<div class="line"><span class="string">u'titanic'</span>]</div>
+</pre></td></tr></table></figure>
+<h2 id="Figure-Aesthetic"><a href="#Figure-Aesthetic" class="headerlink" title="Figure Aesthetic"></a>Figure Aesthetic</h2><p>Basically, Seaborn splits the Matplotlib parameters into two groups−</p>
+<ul>
+<li>Plot styles</li>
+<li>Plot scale</li>
+</ul>
+<h3 id="Figure-style"><a href="#Figure-style" class="headerlink" title="Figure style"></a>Figure style</h3><p>Seaborn provides five preset themes: white grid, dark grid, white, dark, and ticks. The interface for manipulating the styles is <strong>set_style()</strong>. </p>
+<h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><h5 id="Darkgrid"><a href="#Darkgrid" class="headerlink" title="Darkgrid"></a>Darkgrid</h5><p>It is the default one.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -418,7 +441,7 @@
 <div class="line">plt.show()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2019/04/19/Python-Seaborn/image-20190419163334245.png" alt="image-20190419163334245"></p>
-<h3 id="whitegrid"><a href="#whitegrid" class="headerlink" title="whitegrid"></a>whitegrid</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h4 id="whitegrid"><a href="#whitegrid" class="headerlink" title="whitegrid"></a>whitegrid</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -428,7 +451,7 @@
 <div class="line">plt.show()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2019/04/19/Python-Seaborn/image-20190419163402652.png" alt="image-20190419163402652"></p>
-<h3 id="dark"><a href="#dark" class="headerlink" title="dark"></a>dark</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h4 id="dark"><a href="#dark" class="headerlink" title="dark"></a>dark</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
 <div class="line">4</div>
@@ -438,9 +461,9 @@
 <div class="line">plt.show()</div>
 </pre></td></tr></table></figure>
 <p><img src="/2019/04/19/Python-Seaborn/image-20190419163435391.png" alt="image-20190419163435391"></p>
-<h3 id="white"><a href="#white" class="headerlink" title="white"></a>white</h3><p><img src="/2019/04/19/Python-Seaborn/image-20190419163501257.png" alt="image-20190419163501257"></p>
-<h3 id="ticks"><a href="#ticks" class="headerlink" title="ticks"></a>ticks</h3><p><img src="/2019/04/19/Python-Seaborn/image-20190419163705284.png" alt="image-20190419163705284"></p>
-<h2 id="Axes"><a href="#Axes" class="headerlink" title="Axes"></a>Axes</h2><h3 id="Remove-axes-spines"><a href="#Remove-axes-spines" class="headerlink" title="Remove axes spines"></a>Remove axes spines</h3><p>You can call <code>despine</code> function to remove them:</p>
+<h4 id="white"><a href="#white" class="headerlink" title="white"></a>white</h4><p><img src="/2019/04/19/Python-Seaborn/image-20190419163501257.png" alt="image-20190419163501257"></p>
+<h4 id="ticks"><a href="#ticks" class="headerlink" title="ticks"></a>ticks</h4><p><img src="/2019/04/19/Python-Seaborn/image-20190419163705284.png" alt="image-20190419163705284"></p>
+<h4 id="Axes"><a href="#Axes" class="headerlink" title="Axes"></a>Axes</h4><h5 id="Remove-axes-spines"><a href="#Remove-axes-spines" class="headerlink" title="Remove axes spines"></a>Remove axes spines</h5><p>You can call <code>despine</code> function to remove them:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -455,7 +478,48 @@
 <p><img src="/2019/04/19/Python-Seaborn/image-20190419163841209.png" alt="image-20190419163841209"></p>
 <p>You can also control which spines are removed with additional arguments to despine:</p>
 <p><img src="/2019/04/19/Python-Seaborn/image-20190419163953491.png" alt="image-20190419163953491"></p>
-<h1 id="Figures"><a href="#Figures" class="headerlink" title="Figures"></a>Figures</h1><h2 id="Histograms-KDE-and-densities"><a href="#Histograms-KDE-and-densities" class="headerlink" title="Histograms, KDE, and densities"></a>Histograms, KDE, and densities</h2><p>In matplotlib, </p>
+<h3 id="Scaling-plot-elements"><a href="#Scaling-plot-elements" class="headerlink" title="Scaling plot elements"></a>Scaling plot elements</h3><p>We also have control on the plot elements and can control the scale of plot using the <strong>set_context()</strong> function. We have four preset templates for contexts, based on relative size, the contexts are named as follows</p>
+<ul>
+<li>Paper</li>
+<li>Notebook</li>
+<li>Talk</li>
+<li>Poster</li>
+</ul>
+<p>By default, context is set to notebook;</p>
+<h2 id="Color-Palette"><a href="#Color-Palette" class="headerlink" title="Color Palette"></a>Color Palette</h2><p>Seaborn provides a function called <strong>color_palette()</strong>, which can be used to give colors to plots and adding more aesthetic value to it.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">seaborn.color_palette(palette = <span class="keyword">None</span>, n_colors = <span class="keyword">None</span>, desat = <span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<p>Return refers to the list of RGB tuples. Following are the readily available Seaborn palettes −</p>
+<ul>
+<li>Deep</li>
+<li>Muted</li>
+<li>Bright</li>
+<li>Pastel</li>
+<li>Dark</li>
+<li>Colorblind</li>
+</ul>
+<h3 id="Qualitative-Color-Palettes"><a href="#Qualitative-Color-Palettes" class="headerlink" title="Qualitative Color Palettes"></a>Qualitative Color Palettes</h3><p>Qualitative or categorical palettes are best suitable to plot the categorical data.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">current_palette = sns.color_palette()</div>
+<div class="line">sns.palplot(current_palette)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904212015382.png" alt="mage-20190421201538"></p>
+<p>Here, the <strong>palplot()</strong> is used to plot the array of colors horizontally.</p>
+<h3 id="Sequential-Color-Palettes"><a href="#Sequential-Color-Palettes" class="headerlink" title="Sequential Color Palettes"></a>Sequential Color Palettes</h3><p>Sequential plots are suitable to express the distribution of data ranging from relative lower values to higher values within a range.</p>
+<p>Appending an additional character ‘s’ to the color passed to the color parameter will plot the Sequential plot.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line">current_palette = sns.color_palette(<span class="string">"Greens"</span>)</div>
+<div class="line">sns.palplot(current_palette)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904212017206.png" alt="mage-20190421201720"></p>
+<h3 id="Diverging-Color-Palette"><a href="#Diverging-Color-Palette" class="headerlink" title="Diverging Color Palette"></a>Diverging Color Palette</h3><h1 id="Figures"><a href="#Figures" class="headerlink" title="Figures"></a>Figures</h1><h2 id="Histograms-KDE-and-densities"><a href="#Histograms-KDE-and-densities" class="headerlink" title="Histograms, KDE, and densities"></a>Histograms, KDE, and densities</h2><p>In matplotlib, </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -671,7 +735,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -704,7 +768,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Figure-style"><span class="nav-number">1.</span> <span class="nav-text">Figure style</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-number">1.1.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Darkgrid"><span class="nav-number">1.1.1.</span> <span class="nav-text">Darkgrid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#whitegrid"><span class="nav-number">1.1.2.</span> <span class="nav-text">whitegrid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dark"><span class="nav-number">1.1.3.</span> <span class="nav-text">dark</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#white"><span class="nav-number">1.1.4.</span> <span class="nav-text">white</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ticks"><span class="nav-number">1.1.5.</span> <span class="nav-text">ticks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Axes"><span class="nav-number">1.2.</span> <span class="nav-text">Axes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Remove-axes-spines"><span class="nav-number">1.2.1.</span> <span class="nav-text">Remove axes spines</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figures"><span class="nav-number">2.</span> <span class="nav-text">Figures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Histograms-KDE-and-densities"><span class="nav-number">2.1.</span> <span class="nav-text">Histograms, KDE, and densities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pair-plots"><span class="nav-number">2.2.</span> <span class="nav-text">Pair plots</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Quick-Guide"><span class="nav-number">1.</span> <span class="nav-text">Quick Guide</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset"><span class="nav-number">1.1.</span> <span class="nav-text">Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Figure-Aesthetic"><span class="nav-number">1.2.</span> <span class="nav-text">Figure Aesthetic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Figure-style"><span class="nav-number">1.2.1.</span> <span class="nav-text">Figure style</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Darkgrid"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">Darkgrid</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whitegrid"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">whitegrid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dark"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">dark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#white"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">white</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ticks"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">ticks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Axes"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">Axes</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Remove-axes-spines"><span class="nav-number">1.2.1.6.1.</span> <span class="nav-text">Remove axes spines</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scaling-plot-elements"><span class="nav-number">1.2.2.</span> <span class="nav-text">Scaling plot elements</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Color-Palette"><span class="nav-number">1.3.</span> <span class="nav-text">Color Palette</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Qualitative-Color-Palettes"><span class="nav-number">1.3.1.</span> <span class="nav-text">Qualitative Color Palettes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequential-Color-Palettes"><span class="nav-number">1.3.2.</span> <span class="nav-text">Sequential Color Palettes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Diverging-Color-Palette"><span class="nav-number">1.3.3.</span> <span class="nav-text">Diverging Color Palette</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figures"><span class="nav-number">2.</span> <span class="nav-text">Figures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Histograms-KDE-and-densities"><span class="nav-number">2.1.</span> <span class="nav-text">Histograms, KDE, and densities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pair-plots"><span class="nav-number">2.2.</span> <span class="nav-text">Pair plots</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
