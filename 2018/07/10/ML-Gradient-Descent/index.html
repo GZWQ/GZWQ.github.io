@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="adaptive moment estimation">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-22T01:59:55.582Z">
+<meta property="og:updated_time" content="2019-04-22T02:37:53.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Sth">
 <meta name="twitter:description" content="adaptive moment estimation">
@@ -378,8 +378,16 @@
       
         <p>adaptive moment estimation </p>
 <a id="more"></a>
-<p>Hyperparameter</p>
-<p>It cannot be </p>
+<p><strong>Hyperparameter</strong></p>
+<p>It cannot be learnt from the training dataset.</p>
+<p><strong>Validation set</strong></p>
+<p>While test dataset is used to estimate the generalization error of a model, validation dataset is used to choose the model, i.e., determining hyperparameters. It is constructed from the training dataset.</p>
+<p><strong>Variance and Standard Variance</strong></p>
+<p>The variance or standard error, of an estimator provides a measure of how we would expect the estimator we compute from data to vary as we independently resample the dataset from the underlying data-generating process.</p>
+<p><strong>Bias</strong></p>
+<script type="math/tex; mode=display">
+bias(\hat \theta_m)=E(\hat \theta_m)-\theta</script><p>where the expectation is over the data (seen as samples from a random variable) and $\hat \theta$ is the true underlying value of $\theta$ used to deﬁne the data-generating distribution.</p>
+<p>Bias and variance measure two diﬀerent sources of error in an estimator. Bias measures the expected deviation from the true value of the function or parameter. Variance on the other hand, provides a measure of the deviation from the expected estimator value that any particular sampling of the data is likely to cause.</p>
 
       
     </div>
