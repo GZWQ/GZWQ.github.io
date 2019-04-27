@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_training_dataset.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/history_validation_dataset.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/Keras/Screen%20Shot%202019-03-13%20at%2010.25.34%20PM.png">
-<meta property="og:updated_time" content="2019-04-21T03:18:31.050Z">
+<meta property="og:updated_time" content="2019-04-22T15:32:07.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Keras">
 <meta name="twitter:description" content="Keras使用技巧。 TODO  [ ] LSTM [ ] CONV1D [ ] TIMEDISTRIBUTED-VIDEOS [ ] FIT_GENERATOR [ ] STATEFUL_RNN">
@@ -2206,6 +2206,394 @@
 <div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(gradients)):</div>
 <div class="line">    print(i, np.shape(gradients[i]))</div>
 </pre></td></tr></table></figure>
+<h1 id="HyperparametersSearching"><a href="#HyperparametersSearching" class="headerlink" title="HyperparametersSearching"></a>HyperparametersSearching</h1><p><a href="https://github.com/ray-project/ray/blob/master/python/ray/tune/examples/tune_mnist_keras.py" target="_blank" rel="noopener">source</a></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+<div class="line">102</div>
+<div class="line">103</div>
+<div class="line">104</div>
+<div class="line">105</div>
+<div class="line">106</div>
+<div class="line">107</div>
+<div class="line">108</div>
+<div class="line">109</div>
+<div class="line">110</div>
+<div class="line">111</div>
+<div class="line">112</div>
+<div class="line">113</div>
+<div class="line">114</div>
+<div class="line">115</div>
+<div class="line">116</div>
+<div class="line">117</div>
+<div class="line">118</div>
+<div class="line">119</div>
+<div class="line">120</div>
+<div class="line">121</div>
+<div class="line">122</div>
+<div class="line">123</div>
+<div class="line">124</div>
+<div class="line">125</div>
+<div class="line">126</div>
+<div class="line">127</div>
+<div class="line">128</div>
+<div class="line">129</div>
+<div class="line">130</div>
+<div class="line">131</div>
+<div class="line">132</div>
+<div class="line">133</div>
+<div class="line">134</div>
+<div class="line">135</div>
+<div class="line">136</div>
+<div class="line">137</div>
+<div class="line">138</div>
+<div class="line">139</div>
+<div class="line">140</div>
+<div class="line">141</div>
+<div class="line">142</div>
+<div class="line">143</div>
+<div class="line">144</div>
+<div class="line">145</div>
+<div class="line">146</div>
+<div class="line">147</div>
+<div class="line">148</div>
+<div class="line">149</div>
+<div class="line">150</div>
+<div class="line">151</div>
+<div class="line">152</div>
+<div class="line">153</div>
+<div class="line">154</div>
+<div class="line">155</div>
+<div class="line">156</div>
+<div class="line">157</div>
+<div class="line">158</div>
+<div class="line">159</div>
+<div class="line">160</div>
+<div class="line">161</div>
+<div class="line">162</div>
+<div class="line">163</div>
+<div class="line">164</div>
+<div class="line">165</div>
+<div class="line">166</div>
+<div class="line">167</div>
+<div class="line">168</div>
+<div class="line">169</div>
+<div class="line">170</div>
+<div class="line">171</div>
+<div class="line">172</div>
+<div class="line">173</div>
+<div class="line">174</div>
+<div class="line">175</div>
+<div class="line">176</div>
+<div class="line">177</div>
+<div class="line">178</div>
+<div class="line">179</div>
+<div class="line">180</div>
+<div class="line">181</div>
+<div class="line">182</div>
+<div class="line">183</div>
+<div class="line">184</div>
+<div class="line">185</div>
+<div class="line">186</div>
+<div class="line">187</div>
+<div class="line">188</div>
+<div class="line">189</div>
+<div class="line">190</div>
+<div class="line">191</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Original Code here:</span></div>
+<div class="line"><span class="comment"># https://github.com/pytorch/examples/blob/master/mnist/main.py</span></div>
+<div class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">import</span> argparse</div>
+<div class="line"><span class="keyword">import</span> torch</div>
+<div class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</div>
+<div class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</div>
+<div class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</div>
+<div class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> datasets, transforms</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># Training settings</span></div>
+<div class="line">parser = argparse.ArgumentParser(description=<span class="string">"PyTorch MNIST Example"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--batch-size"</span>,</div>
+<div class="line">    type=int,</div>
+<div class="line">    default=<span class="number">64</span>,</div>
+<div class="line">    metavar=<span class="string">"N"</span>,</div>
+<div class="line">    help=<span class="string">"input batch size for training (default: 64)"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--test-batch-size"</span>,</div>
+<div class="line">    type=int,</div>
+<div class="line">    default=<span class="number">1000</span>,</div>
+<div class="line">    metavar=<span class="string">"N"</span>,</div>
+<div class="line">    help=<span class="string">"input batch size for testing (default: 1000)"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--epochs"</span>,</div>
+<div class="line">    type=int,</div>
+<div class="line">    default=<span class="number">1</span>,</div>
+<div class="line">    metavar=<span class="string">"N"</span>,</div>
+<div class="line">    help=<span class="string">"number of epochs to train (default: 1)"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--lr"</span>,</div>
+<div class="line">    type=float,</div>
+<div class="line">    default=<span class="number">0.01</span>,</div>
+<div class="line">    metavar=<span class="string">"LR"</span>,</div>
+<div class="line">    help=<span class="string">"learning rate (default: 0.01)"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--momentum"</span>,</div>
+<div class="line">    type=float,</div>
+<div class="line">    default=<span class="number">0.5</span>,</div>
+<div class="line">    metavar=<span class="string">"M"</span>,</div>
+<div class="line">    help=<span class="string">"SGD momentum (default: 0.5)"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--no-cuda"</span>,</div>
+<div class="line">    action=<span class="string">"store_true"</span>,</div>
+<div class="line">    default=<span class="keyword">False</span>,</div>
+<div class="line">    help=<span class="string">"disables CUDA training"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--seed"</span>,</div>
+<div class="line">    type=int,</div>
+<div class="line">    default=<span class="number">1</span>,</div>
+<div class="line">    metavar=<span class="string">"S"</span>,</div>
+<div class="line">    help=<span class="string">"random seed (default: 1)"</span>)</div>
+<div class="line">parser.add_argument(</div>
+<div class="line">    <span class="string">"--smoke-test"</span>, action=<span class="string">"store_true"</span>, help=<span class="string">"Finish quickly for testing"</span>)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_mnist</span><span class="params">(args, config, reporter)</span>:</span></div>
+<div class="line">    vars(args).update(config)</div>
+<div class="line">    args.cuda = <span class="keyword">not</span> args.no_cuda <span class="keyword">and</span> torch.cuda.is_available()</div>
+<div class="line"></div>
+<div class="line">    torch.manual_seed(args.seed)</div>
+<div class="line">    <span class="keyword">if</span> args.cuda:</div>
+<div class="line">        torch.cuda.manual_seed(args.seed)</div>
+<div class="line"></div>
+<div class="line">    kwargs = &#123;<span class="string">"num_workers"</span>: <span class="number">1</span>, <span class="string">"pin_memory"</span>: <span class="keyword">True</span>&#125; <span class="keyword">if</span> args.cuda <span class="keyword">else</span> &#123;&#125;</div>
+<div class="line">    train_loader = torch.utils.data.DataLoader(</div>
+<div class="line">        datasets.MNIST(</div>
+<div class="line">            <span class="string">"~/data"</span>,</div>
+<div class="line">            train=<span class="keyword">True</span>,</div>
+<div class="line">            download=<span class="keyword">False</span>,</div>
+<div class="line">            transform=transforms.Compose([</div>
+<div class="line">                transforms.ToTensor(),</div>
+<div class="line">                transforms.Normalize((<span class="number">0.1307</span>, ), (<span class="number">0.3081</span>, ))</div>
+<div class="line">            ])),</div>
+<div class="line">        batch_size=args.batch_size,</div>
+<div class="line">        shuffle=<span class="keyword">True</span>,</div>
+<div class="line">        **kwargs)</div>
+<div class="line">    test_loader = torch.utils.data.DataLoader(</div>
+<div class="line">        datasets.MNIST(</div>
+<div class="line">            <span class="string">"~/data"</span>,</div>
+<div class="line">            train=<span class="keyword">False</span>,</div>
+<div class="line">            transform=transforms.Compose([</div>
+<div class="line">                transforms.ToTensor(),</div>
+<div class="line">                transforms.Normalize((<span class="number">0.1307</span>, ), (<span class="number">0.3081</span>, ))</div>
+<div class="line">            ])),</div>
+<div class="line">        batch_size=args.test_batch_size,</div>
+<div class="line">        shuffle=<span class="keyword">True</span>,</div>
+<div class="line">        **kwargs)</div>
+<div class="line"></div>
+<div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></div>
+<div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">            super(Net, self).__init__()</div>
+<div class="line">            self.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">10</span>, kernel_size=<span class="number">5</span>)</div>
+<div class="line">            self.conv2 = nn.Conv2d(<span class="number">10</span>, <span class="number">20</span>, kernel_size=<span class="number">5</span>)</div>
+<div class="line">            self.conv2_drop = nn.Dropout2d()</div>
+<div class="line">            self.fc1 = nn.Linear(<span class="number">320</span>, <span class="number">50</span>)</div>
+<div class="line">            self.fc2 = nn.Linear(<span class="number">50</span>, <span class="number">10</span>)</div>
+<div class="line"></div>
+<div class="line">        <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></div>
+<div class="line">            x = F.relu(F.max_pool2d(self.conv1(x), <span class="number">2</span>))</div>
+<div class="line">            x = F.relu(F.max_pool2d(self.conv2_drop(self.conv2(x)), <span class="number">2</span>))</div>
+<div class="line">            x = x.view(<span class="number">-1</span>, <span class="number">320</span>)</div>
+<div class="line">            x = F.relu(self.fc1(x))</div>
+<div class="line">            x = F.dropout(x, training=self.training)</div>
+<div class="line">            x = self.fc2(x)</div>
+<div class="line">            <span class="keyword">return</span> F.log_softmax(x, dim=<span class="number">1</span>)</div>
+<div class="line"></div>
+<div class="line">    model = Net()</div>
+<div class="line">    <span class="keyword">if</span> args.cuda:</div>
+<div class="line">        model.cuda()</div>
+<div class="line"></div>
+<div class="line">    optimizer = optim.SGD(</div>
+<div class="line">        model.parameters(), lr=args.lr, momentum=args.momentum)</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(epoch)</span>:</span></div>
+<div class="line">        model.train()</div>
+<div class="line">        <span class="keyword">for</span> batch_idx, (data, target) <span class="keyword">in</span> enumerate(train_loader):</div>
+<div class="line">            <span class="keyword">if</span> args.cuda:</div>
+<div class="line">                data, target = data.cuda(), target.cuda()</div>
+<div class="line">            optimizer.zero_grad()</div>
+<div class="line">            output = model(data)</div>
+<div class="line">            loss = F.nll_loss(output, target)</div>
+<div class="line">            loss.backward()</div>
+<div class="line">            optimizer.step()</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></div>
+<div class="line">        model.eval()</div>
+<div class="line">        test_loss = <span class="number">0</span></div>
+<div class="line">        correct = <span class="number">0</span></div>
+<div class="line">        <span class="keyword">with</span> torch.no_grad():</div>
+<div class="line">            <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:</div>
+<div class="line">                <span class="keyword">if</span> args.cuda:</div>
+<div class="line">                    data, target = data.cuda(), target.cuda()</div>
+<div class="line">                output = model(data)</div>
+<div class="line">                <span class="comment"># sum up batch loss</span></div>
+<div class="line">                test_loss += F.nll_loss(output, target, reduction=<span class="string">"sum"</span>).item()</div>
+<div class="line">                <span class="comment"># get the index of the max log-probability</span></div>
+<div class="line">                pred = output.argmax(dim=<span class="number">1</span>, keepdim=<span class="keyword">True</span>)</div>
+<div class="line">                correct += pred.eq(</div>
+<div class="line">                    target.data.view_as(pred)).long().cpu().sum()</div>
+<div class="line"></div>
+<div class="line">        test_loss = test_loss / len(test_loader.dataset)</div>
+<div class="line">        accuracy = correct.item() / len(test_loader.dataset)</div>
+<div class="line">        reporter(mean_loss=test_loss, mean_accuracy=accuracy)</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>, args.epochs + <span class="number">1</span>):</div>
+<div class="line">        train(epoch)</div>
+<div class="line">        test()</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div>
+<div class="line">    datasets.MNIST(<span class="string">"~/data"</span>, train=<span class="keyword">True</span>, download=<span class="keyword">True</span>)</div>
+<div class="line">    args = parser.parse_args()</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line">    <span class="keyword">import</span> ray</div>
+<div class="line">    <span class="keyword">from</span> ray <span class="keyword">import</span> tune</div>
+<div class="line">    <span class="keyword">from</span> ray.tune.schedulers <span class="keyword">import</span> AsyncHyperBandScheduler</div>
+<div class="line"></div>
+<div class="line">    ray.init()</div>
+<div class="line">    sched = AsyncHyperBandScheduler(</div>
+<div class="line">        time_attr=<span class="string">"training_iteration"</span>,</div>
+<div class="line">        reward_attr=<span class="string">"neg_mean_loss"</span>,</div>
+<div class="line">        max_t=<span class="number">400</span>,</div>
+<div class="line">        grace_period=<span class="number">20</span>)</div>
+<div class="line">    tune.register_trainable(</div>
+<div class="line">        <span class="string">"TRAIN_FN"</span>,</div>
+<div class="line">        <span class="keyword">lambda</span> config, reporter: train_mnist(args, config, reporter))</div>
+<div class="line">    tune.run(</div>
+<div class="line">        <span class="string">"TRAIN_FN"</span>,</div>
+<div class="line">        name=<span class="string">"exp"</span>,</div>
+<div class="line">        scheduler=sched,</div>
+<div class="line">        **&#123;</div>
+<div class="line">            <span class="string">"stop"</span>: &#123;</div>
+<div class="line">                <span class="string">"mean_accuracy"</span>: <span class="number">0.98</span>,</div>
+<div class="line">                <span class="string">"training_iteration"</span>: <span class="number">1</span> <span class="keyword">if</span> args.smoke_test <span class="keyword">else</span> <span class="number">20</span></div>
+<div class="line">            &#125;,</div>
+<div class="line">            <span class="string">"resources_per_trial"</span>: &#123;</div>
+<div class="line">                <span class="string">"cpu"</span>: <span class="number">3</span>,</div>
+<div class="line">                <span class="string">"gpu"</span>: int(<span class="keyword">not</span> args.no_cuda)</div>
+<div class="line">            &#125;,</div>
+<div class="line">            <span class="string">"num_samples"</span>: <span class="number">1</span> <span class="keyword">if</span> args.smoke_test <span class="keyword">else</span> <span class="number">10</span>,</div>
+<div class="line">            <span class="string">"config"</span>: &#123;</div>
+<div class="line">                <span class="string">"lr"</span>: tune.sample_from(</div>
+<div class="line">                    <span class="keyword">lambda</span> spec: np.random.uniform(<span class="number">0.001</span>, <span class="number">0.1</span>)),</div>
+<div class="line">                <span class="string">"momentum"</span>: tune.sample_from(</div>
+<div class="line">                    <span class="keyword">lambda</span> spec: np.random.uniform(<span class="number">0.1</span>, <span class="number">0.9</span>)),</div>
+<div class="line">            &#125;</div>
+<div class="line">        &#125;)</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+
       
     </div>
     
@@ -2330,7 +2718,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2352,7 +2740,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2385,7 +2773,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Models"><span class="nav-number">3.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Attributes"><span class="nav-number">3.1.</span> <span class="nav-text">Attributes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-subclassing"><span class="nav-number">3.2.</span> <span class="nav-text">Model subclassing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-class-API"><span class="nav-number">3.3.</span> <span class="nav-text">Model class API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Methods"><span class="nav-number">3.3.1.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#compile"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">compile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fit"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">fit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#evaluate"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">evaluate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict"><span class="nav-number">3.3.1.4.</span> <span class="nav-text">predict</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#train-on-batch"><span class="nav-number">3.3.1.5.</span> <span class="nav-text">train_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-on-batch"><span class="nav-number">3.3.1.6.</span> <span class="nav-text">test_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict-on-batch"><span class="nav-number">3.3.1.7.</span> <span class="nav-text">predict_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fit-generator"><span class="nav-number">3.3.1.8.</span> <span class="nav-text">fit_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#evaluate-generator"><span class="nav-number">3.3.1.9.</span> <span class="nav-text">evaluate_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict-generator"><span class="nav-number">3.3.1.10.</span> <span class="nav-text">predict_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-layer"><span class="nav-number">3.3.1.11.</span> <span class="nav-text">get_layer</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Layers"><span class="nav-number">4.</span> <span class="nav-text">Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">4.1.</span> <span class="nav-text">Properties</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-weights"><span class="nav-number">4.1.1.</span> <span class="nav-text">Get weights</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-input-output-shape"><span class="nav-number">4.1.2.</span> <span class="nav-text">Get input/output/shape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Obtain-output-of-an-intermediate-layer"><span class="nav-number">4.1.3.</span> <span class="nav-text">Obtain output of an intermediate layer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-Layers"><span class="nav-number">4.2.</span> <span class="nav-text">Core Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dense"><span class="nav-number">4.2.1.</span> <span class="nav-text">Dense()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flatten"><span class="nav-number">4.2.2.</span> <span class="nav-text">Flatten()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">4.2.3.</span> <span class="nav-text">Input()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reshape"><span class="nav-number">4.2.4.</span> <span class="nav-text">Reshape()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permute"><span class="nav-number">4.2.5.</span> <span class="nav-text">Permute()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RepeatVector"><span class="nav-number">4.2.6.</span> <span class="nav-text">RepeatVector()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conv2D"><span class="nav-number">4.2.7.</span> <span class="nav-text">Conv2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conv2DTranspose"><span class="nav-number">4.2.8.</span> <span class="nav-text">Conv2DTranspose()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UpSampling2D"><span class="nav-number">4.2.9.</span> <span class="nav-text">UpSampling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroPadding2D"><span class="nav-number">4.2.10.</span> <span class="nav-text">ZeroPadding2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MaxPooling2D"><span class="nav-number">4.2.11.</span> <span class="nav-text">MaxPooling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AveragePooling2D"><span class="nav-number">4.2.12.</span> <span class="nav-text">AveragePooling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GlobalMaxPooling2D"><span class="nav-number">4.2.13.</span> <span class="nav-text">GlobalMaxPooling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GlobalAveragePooling2D"><span class="nav-number">4.2.14.</span> <span class="nav-text">GlobalAveragePooling2D()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ImageProcessing"><span class="nav-number">5.</span> <span class="nav-text">ImageProcessing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageDataGenerator-class"><span class="nav-number">5.1.</span> <span class="nav-text">ImageDataGenerator class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-1"><span class="nav-number">5.2.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apply-transform"><span class="nav-number">5.2.1.</span> <span class="nav-text">apply_transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fit-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">fit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flow"><span class="nav-number">5.2.3.</span> <span class="nav-text">flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flow-from-directory"><span class="nav-number">5.2.4.</span> <span class="nav-text">flow_from_directory</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型保存"><span class="nav-number">6.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">6.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型保存-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型载入"><span class="nav-number">6.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">6.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Callback"><span class="nav-number">7.</span> <span class="nav-text">Keras-Callback</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">7.1.</span> <span class="nav-text">ModelCheckpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkpoint-Neural-Network-Model-Improvements"><span class="nav-number">7.1.1.</span> <span class="nav-text">Checkpoint Neural Network Model Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-a-Check-Pointed-Neural-Network-Model"><span class="nav-number">7.1.2.</span> <span class="nav-text">Loading a Check-Pointed Neural Network Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearningRateScheduler"><span class="nav-number">7.2.</span> <span class="nav-text">LearningRateScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Based-Learning-Rate-Schedule"><span class="nav-number">7.2.1.</span> <span class="nav-text">Time-Based Learning Rate Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop-Based-Learning-Rate-Schedule"><span class="nav-number">7.2.2.</span> <span class="nav-text">Drop-Based Learning Rate Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">7.3.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualize-Model-Training-History-in-Keras"><span class="nav-number">7.3.1.</span> <span class="nav-text">Visualize Model Training History in Keras</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorboard"><span class="nav-number">7.4.</span> <span class="nav-text">Tensorboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensorflow"><span class="nav-number">7.4.1.</span> <span class="nav-text">Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Customerize-Optimizer"><span class="nav-number">8.</span> <span class="nav-text">Customerize Optimizer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feature-Extraction"><span class="nav-number">9.</span> <span class="nav-text">Feature Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG-Feature-Loss"><span class="nav-number">9.1.</span> <span class="nav-text">VGG Feature Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fine-tune-ref"><span class="nav-number">9.2.</span> <span class="nav-text">Fine tune ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Print-Gradients-ref"><span class="nav-number">10.</span> <span class="nav-text">Print Gradients ref</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras模块结构"><span class="nav-number">1.</span> <span class="nav-text">Keras模块结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras构建神经网络"><span class="nav-number">2.</span> <span class="nav-text">Keras构建神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Models"><span class="nav-number">3.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Attributes"><span class="nav-number">3.1.</span> <span class="nav-text">Attributes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-subclassing"><span class="nav-number">3.2.</span> <span class="nav-text">Model subclassing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-class-API"><span class="nav-number">3.3.</span> <span class="nav-text">Model class API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Methods"><span class="nav-number">3.3.1.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#compile"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">compile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fit"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">fit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#evaluate"><span class="nav-number">3.3.1.3.</span> <span class="nav-text">evaluate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict"><span class="nav-number">3.3.1.4.</span> <span class="nav-text">predict</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#train-on-batch"><span class="nav-number">3.3.1.5.</span> <span class="nav-text">train_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-on-batch"><span class="nav-number">3.3.1.6.</span> <span class="nav-text">test_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict-on-batch"><span class="nav-number">3.3.1.7.</span> <span class="nav-text">predict_on_batch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fit-generator"><span class="nav-number">3.3.1.8.</span> <span class="nav-text">fit_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#evaluate-generator"><span class="nav-number">3.3.1.9.</span> <span class="nav-text">evaluate_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#predict-generator"><span class="nav-number">3.3.1.10.</span> <span class="nav-text">predict_generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-layer"><span class="nav-number">3.3.1.11.</span> <span class="nav-text">get_layer</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Layers"><span class="nav-number">4.</span> <span class="nav-text">Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties"><span class="nav-number">4.1.</span> <span class="nav-text">Properties</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-weights"><span class="nav-number">4.1.1.</span> <span class="nav-text">Get weights</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Get-input-output-shape"><span class="nav-number">4.1.2.</span> <span class="nav-text">Get input/output/shape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Obtain-output-of-an-intermediate-layer"><span class="nav-number">4.1.3.</span> <span class="nav-text">Obtain output of an intermediate layer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-Layers"><span class="nav-number">4.2.</span> <span class="nav-text">Core Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dense"><span class="nav-number">4.2.1.</span> <span class="nav-text">Dense()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flatten"><span class="nav-number">4.2.2.</span> <span class="nav-text">Flatten()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">4.2.3.</span> <span class="nav-text">Input()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reshape"><span class="nav-number">4.2.4.</span> <span class="nav-text">Reshape()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permute"><span class="nav-number">4.2.5.</span> <span class="nav-text">Permute()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RepeatVector"><span class="nav-number">4.2.6.</span> <span class="nav-text">RepeatVector()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conv2D"><span class="nav-number">4.2.7.</span> <span class="nav-text">Conv2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conv2DTranspose"><span class="nav-number">4.2.8.</span> <span class="nav-text">Conv2DTranspose()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UpSampling2D"><span class="nav-number">4.2.9.</span> <span class="nav-text">UpSampling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZeroPadding2D"><span class="nav-number">4.2.10.</span> <span class="nav-text">ZeroPadding2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MaxPooling2D"><span class="nav-number">4.2.11.</span> <span class="nav-text">MaxPooling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AveragePooling2D"><span class="nav-number">4.2.12.</span> <span class="nav-text">AveragePooling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GlobalMaxPooling2D"><span class="nav-number">4.2.13.</span> <span class="nav-text">GlobalMaxPooling2D()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GlobalAveragePooling2D"><span class="nav-number">4.2.14.</span> <span class="nav-text">GlobalAveragePooling2D()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ImageProcessing"><span class="nav-number">5.</span> <span class="nav-text">ImageProcessing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageDataGenerator-class"><span class="nav-number">5.1.</span> <span class="nav-text">ImageDataGenerator class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-1"><span class="nav-number">5.2.</span> <span class="nav-text">Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apply-transform"><span class="nav-number">5.2.1.</span> <span class="nav-text">apply_transform</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fit-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">fit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flow"><span class="nav-number">5.2.3.</span> <span class="nav-text">flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flow-from-directory"><span class="nav-number">5.2.4.</span> <span class="nav-text">flow_from_directory</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型保存"><span class="nav-number">6.</span> <span class="nav-text">模型保存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">6.1.</span> <span class="nav-text">方法一</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型保存-1"><span class="nav-number">6.1.1.</span> <span class="nav-text">模型保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型载入"><span class="nav-number">6.1.2.</span> <span class="nav-text">模型载入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">6.2.</span> <span class="nav-text">方法二</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Callback"><span class="nav-number">7.</span> <span class="nav-text">Keras-Callback</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ModelCheckpoint"><span class="nav-number">7.1.</span> <span class="nav-text">ModelCheckpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Checkpoint-Neural-Network-Model-Improvements"><span class="nav-number">7.1.1.</span> <span class="nav-text">Checkpoint Neural Network Model Improvements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-a-Check-Pointed-Neural-Network-Model"><span class="nav-number">7.1.2.</span> <span class="nav-text">Loading a Check-Pointed Neural Network Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LearningRateScheduler"><span class="nav-number">7.2.</span> <span class="nav-text">LearningRateScheduler</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-Based-Learning-Rate-Schedule"><span class="nav-number">7.2.1.</span> <span class="nav-text">Time-Based Learning Rate Schedule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drop-Based-Learning-Rate-Schedule"><span class="nav-number">7.2.2.</span> <span class="nav-text">Drop-Based Learning Rate Schedule</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#History"><span class="nav-number">7.3.</span> <span class="nav-text">History</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visualize-Model-Training-History-in-Keras"><span class="nav-number">7.3.1.</span> <span class="nav-text">Visualize Model Training History in Keras</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensorboard"><span class="nav-number">7.4.</span> <span class="nav-text">Tensorboard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tensorflow"><span class="nav-number">7.4.1.</span> <span class="nav-text">Tensorflow</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Customerize-Optimizer"><span class="nav-number">8.</span> <span class="nav-text">Customerize Optimizer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feature-Extraction"><span class="nav-number">9.</span> <span class="nav-text">Feature Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG-Feature-Loss"><span class="nav-number">9.1.</span> <span class="nav-text">VGG Feature Loss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fine-tune-ref"><span class="nav-number">9.2.</span> <span class="nav-text">Fine tune ref</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Print-Gradients-ref"><span class="nav-number">10.</span> <span class="nav-text">Print Gradients ref</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HyperparametersSearching"><span class="nav-number">11.</span> <span class="nav-text">HyperparametersSearching</span></a></li></ol></div>
             
 
           </div>
