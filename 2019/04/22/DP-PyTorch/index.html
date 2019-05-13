@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Tutorials of PyTorch and some useful tips.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-22T15:37:12.812Z">
+<meta property="og:updated_time" content="2019-05-13T19:28:45.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-PyTorch">
 <meta name="twitter:description" content="Tutorials of PyTorch and some useful tips.">
@@ -378,7 +378,169 @@
       
         <p>Tutorials of PyTorch and some useful tips.</p>
 <a id="more"></a>
+<h1 id="Torch"><a href="#Torch" class="headerlink" title="Torch"></a><a href="https://pytorch.org/docs/stable/torch.html#" target="_blank" rel="noopener">Torch</a></h1><h2 id="Autograd"><a href="#Autograd" class="headerlink" title="Autograd"></a>Autograd</h2><p><code>torch.autograd</code> provides classes and functions implementing automatic differentiation of arbitrary scalar valued functions. </p>
+<h3 id="Variable-deprecated"><a href="#Variable-deprecated" class="headerlink" title="Variable (deprecated)"></a>Variable (deprecated)</h3><p>The Variable API has been deprecated: Variables are no longer necessary to use autograd with tensors. Autograd automatically supports Tensors with <code>requires_grad</code> set to <code>True</code>. Below please find a quick guide on what has changed:</p>
+<ul>
+<li><code>Variable(tensor)</code> and <code>Variable(tensor, requires_grad)</code> still work as expected, but they return Tensors instead of Variables.</li>
+<li><code>var.data</code> is the same thing as <code>tensor.data</code>.</li>
+<li>Methods such as <code>var.backward(), var.detach(), var.register_hook()</code> now work on tensors with the same method names.</li>
+</ul>
+<h2 id="max"><a href="#max" class="headerlink" title="max"></a>max</h2><ol>
+<li><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.max(input) -&gt; Tensor</div>
+</pre></td></tr></table></figure>
+<p>Returns the maximum value of all elements in the <code>input</code> tensor.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">1</span>, <span class="number">3</span>)</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div>
+<div class="line">tensor([[ <span class="number">0.6763</span>,  <span class="number">0.7445</span>, <span class="number">-2.2369</span>]])</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>torch.max(a)</div>
+<div class="line">tensor(<span class="number">0.7445</span>)</div>
+</pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.max(input, dim, keepdim=False, out=None) -&gt; (Tensor, LongTensor)</div>
+</pre></td></tr></table></figure>
+<p>Returns a namedtuple <code>(values, indices)</code> where <code>values</code> is the maximum value of each row of the <code>input</code> tensor in the given dimension <code>dim</code>. And <code>indices</code> is the index location of each maximum value found (argmax).</p>
+<p>If <code>keepdim</code> is <code>True</code>, the output tensors are of the same size as <code>input</code> except in the dimension <code>dim</code> where they are of size 1. Otherwise, <code>dim</code> is squeezed (see <a href="https://pytorch.org/docs/stable/torch.html#torch.squeeze" target="_blank" rel="noopener"><code>torch.squeeze()</code></a>), resulting in the output tensors having 1 fewer dimension than <code>input</code>.</p>
+<ul>
+<li><strong>input</strong> (<a href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" target="_blank" rel="noopener"><em>Tensor</em></a>) – the input tensor</li>
+<li><strong>dim</strong> (<a href="https://docs.python.org/3/library/functions.html#int" target="_blank" rel="noopener"><em>int</em></a>) – the dimension to reduce</li>
+<li><strong>keepdim</strong> (<a href="https://docs.python.org/3/library/functions.html#bool" target="_blank" rel="noopener"><em>bool</em></a><em>,</em> <em>optional</em>) – whether the output tensors have <code>dim</code> retained or not. Default: <code>False</code>.</li>
+<li><strong>out</strong> (<a href="https://docs.python.org/3/library/stdtypes.html#tuple" target="_blank" rel="noopener"><em>tuple</em></a><em>,</em> <em>optional</em>) – the result tuple of two output tensors (max, max_indices)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">4</span>, <span class="number">4</span>)</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div>
+<div class="line">tensor([[<span class="number">-1.2360</span>, <span class="number">-0.2942</span>, <span class="number">-0.1222</span>,  <span class="number">0.8475</span>],</div>
+<div class="line">        [ <span class="number">1.1949</span>, <span class="number">-1.1127</span>, <span class="number">-2.2379</span>, <span class="number">-0.6702</span>],</div>
+<div class="line">        [ <span class="number">1.5717</span>, <span class="number">-0.9207</span>,  <span class="number">0.1297</span>, <span class="number">-1.8768</span>],</div>
+<div class="line">        [<span class="number">-0.6172</span>,  <span class="number">1.0036</span>, <span class="number">-0.6060</span>, <span class="number">-0.2432</span>]])</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>torch.max(a, <span class="number">1</span>)</div>
+<div class="line">torch.return_types.max(values=tensor([<span class="number">0.8475</span>, <span class="number">1.1949</span>, <span class="number">1.5717</span>, <span class="number">1.0036</span>]), indices=tensor([<span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]))</div>
+</pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.max(input, other, out=<span class="keyword">None</span>) → Tensor</div>
+</pre></td></tr></table></figure>
+<p>Each element of the tensor <code>input</code> is compared with the corresponding element of the tensor <code>other</code> and an element-wise maximum is taken.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.randn(<span class="number">4</span>)</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>a</div>
+<div class="line">tensor([ <span class="number">0.2942</span>, <span class="number">-0.7416</span>,  <span class="number">0.2653</span>, <span class="number">-0.1584</span>])</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>b = torch.randn(<span class="number">4</span>)</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div>
+<div class="line">tensor([ <span class="number">0.8722</span>, <span class="number">-1.7421</span>, <span class="number">-0.4141</span>, <span class="number">-0.5055</span>])</div>
+<div class="line"><span class="meta">&gt;&gt;&gt; </span>torch.max(a, b)</div>
+<div class="line">tensor([ <span class="number">0.8722</span>, <span class="number">-0.7416</span>,  <span class="number">0.2653</span>, <span class="number">-0.1584</span>])</div>
+</pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Torchvision"><a href="#Torchvision" class="headerlink" title="Torchvision"></a>Torchvision</h1><h2 id="Models"><a href="#Models" class="headerlink" title="Models"></a><a href="https://pytorch.org/docs/stable/torchvision/models.html" target="_blank" rel="noopener">Models</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</div>
+<div class="line">resnet18 = models.resnet18(pretrained=<span class="keyword">True</span>)</div>
+<div class="line">alexnet = models.alexnet(pretrained=<span class="keyword">True</span>)</div>
+<div class="line">squeezenet = models.squeezenet1_0(pretrained=<span class="keyword">True</span>)</div>
+<div class="line">vgg16 = models.vgg16(pretrained=<span class="keyword">True</span>)</div>
+<div class="line">densenet = models.densenet161(pretrained=<span class="keyword">True</span>)</div>
+<div class="line">inception = models.inception_v3(pretrained=<span class="keyword">True</span>)</div>
+<div class="line">googlenet = models.googlenet(pretrained=<span class="keyword">True</span>)</div>
+<div class="line">shufflenet = models.shufflenetv2(pretrained=<span class="keyword">True</span>)</div>
+</pre></td></tr></table></figure>
+<p>All pre-trained models expect input images normalized in the same way, i.e. mini-batches of 3-channel RGB images of shape (3 x H x W), where H and W are expected to be at least 224. The images have to be loaded in to a range of [0, 1] and then normalized using <code>mean = [0.485, 0.456, 0.406]</code> and <code>std = [0.229, 0.224, 0.225]</code>. You can use the following transform to normalize:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">normalize = transforms.Normalize(mean=[<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>],</div>
+<div class="line">                                 std=[<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>])</div>
+</pre></td></tr></table></figure>
+<h3 id="Stop-undating"><a href="#Stop-undating" class="headerlink" title="Stop-undating"></a>Stop-undating</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Download and load the pretrained SqueezeNet model.</span></div>
+<div class="line">model = torchvision.models.squeezenet1_1(pretrained=<span class="keyword">True</span>)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># We don't want to train the model, so tell PyTorch not to compute gradients</span></div>
+<div class="line"><span class="comment"># with respect to model parameters.</span></div>
+<div class="line"><span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</div>
+<div class="line">    param.requires_grad = <span class="keyword">False</span></div>
+</pre></td></tr></table></figure>
+<h1 id="Transforms"><a href="#Transforms" class="headerlink" title="Transforms"></a>Transforms</h1><h3 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torchvision.transforms.Compose(transforms)</div>
+</pre></td></tr></table></figure>
+<p>Composes several transforms together.</p>
+<ul>
+<li><strong>transforms</strong> (list of <code>Transform</code> objects) – list of transforms to compose.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line">transforms.Compose([</div>
+<div class="line">   transforms.CenterCrop(<span class="number">10</span>),</div>
+<div class="line">   transforms.ToTensor(),</div>
+<div class="line">])</div>
+</pre></td></tr></table></figure>
+<h3 id="Resize"><a href="#Resize" class="headerlink" title="Resize"></a>Resize</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torchvision.transforms.Resize(size, interpolation=<span class="number">2</span>)</div>
+</pre></td></tr></table></figure>
+<p>Resize the input PIL Image to the given size.</p>
+<ul>
+<li><strong>size</strong> (<em>sequence</em> <em>or</em> <a href="https://docs.python.org/3/library/functions.html#int" target="_blank" rel="noopener"><em>int</em></a>) – Desired output size. If size is a sequence like (h, w), output size will be matched to this. If size is an int, smaller edge of the image will be matched to this number. i.e, if height &gt; width, then image will be rescaled to (size * height / width, size)</li>
+<li><strong>interpolation</strong> (<a href="https://docs.python.org/3/library/functions.html#int" target="_blank" rel="noopener"><em>int</em></a><em>,</em> <em>optional</em>) – Desired interpolation. Default is <code>PIL.Image.BILINEAR</code></li>
+</ul>
+<blockquote>
+<p><code>torchvision.transforms.``Scale</code>(<strong>args*, </strong>*kwargs*) is deprecated in favor of Resize.</p>
+</blockquote>
+<h3 id="ToTensor"><a href="#ToTensor" class="headerlink" title="ToTensor"></a>ToTensor</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torchvision.transforms.ToTensor()</div>
+</pre></td></tr></table></figure>
+<p>Convert a <code>PIL Image</code> or <code>numpy.ndarray</code> to tensor.</p>
+<h3 id="Normalize"><a href="#Normalize" class="headerlink" title="Normalize"></a>Normalize</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torchvision.transforms.Normalize(mean, std, inplace=<span class="keyword">False</span>)</div>
+</pre></td></tr></table></figure>
+<p>Normalize a tensor image with mean and standard deviation. Given mean: <code>(M1,...,Mn)</code> and std: <code>(S1,..,Sn)</code> for <code>n</code>channels, this transform will normalize each channel of the input <code>torch.*Tensor</code> i.e. <code>input[channel] =(input[channel] - mean[channel]) / std[channel]</code></p>
+<blockquote>
+<p>This transform acts out of place, i.e., it does not mutates the input tensor.</p>
+</blockquote>
+<h3 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torchvision.transforms.Lambda(lambd)</div>
+</pre></td></tr></table></figure>
+<p>Apply a user-defined lambda as a transform.</p>
+<ul>
+<li><strong>lambd</strong> (<em>function</em>) – Lambda/function to be used for transform.</li>
+</ul>
 <h1 id="HyperParameters-Search"><a href="#HyperParameters-Search" class="headerlink" title="HyperParameters Search"></a>HyperParameters Search</h1><p><a href="https://github.com/ray-project/ray/tree/master/python/ray/tune/examples" target="_blank" rel="noopener">source</a> </p>
+<h1 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h1><p><a href="http://visualdl.paddlepaddle.org/documentation/visualdl/en/develop/getting_started/demo/pytorch/TUTORIAL_EN.html" target="_blank" rel="noopener">source</a></p>
 
       
     </div>
@@ -551,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HyperParameters-Search"><span class="nav-number">1.</span> <span class="nav-text">HyperParameters Search</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Torch"><span class="nav-number">1.</span> <span class="nav-text">Torch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Autograd"><span class="nav-number">1.1.</span> <span class="nav-text">Autograd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variable-deprecated"><span class="nav-number">1.1.1.</span> <span class="nav-text">Variable (deprecated)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max"><span class="nav-number">1.2.</span> <span class="nav-text">max</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Torchvision"><span class="nav-number">2.</span> <span class="nav-text">Torchvision</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">2.1.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stop-undating"><span class="nav-number">2.1.1.</span> <span class="nav-text">Stop-undating</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transforms"><span class="nav-number">3.</span> <span class="nav-text">Transforms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compose"><span class="nav-number">3.0.1.</span> <span class="nav-text">Compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resize"><span class="nav-number">3.0.2.</span> <span class="nav-text">Resize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ToTensor"><span class="nav-number">3.0.3.</span> <span class="nav-text">ToTensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalize"><span class="nav-number">3.0.4.</span> <span class="nav-text">Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda"><span class="nav-number">3.0.5.</span> <span class="nav-text">Lambda</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HyperParameters-Search"><span class="nav-number">4.</span> <span class="nav-text">HyperParameters Search</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualization"><span class="nav-number">5.</span> <span class="nav-text">Visualization</span></a></li></ol></div>
             
 
           </div>

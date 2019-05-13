@@ -104,7 +104,14 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-20190419200524568.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/Screen%20Shot%202019-04-20%20at%208.47.30%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904202049285.png">
-<meta property="og:updated_time" content="2019-04-22T01:29:11.440Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904292101502.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904292102451.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904292105091.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904292108136.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904292109264.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904292111234.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/19/Python-Seaborn/image-201904292114337.png">
+<meta property="og:updated_time" content="2019-04-30T02:27:09.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python-Seaborn">
 <meta name="twitter:description" content="A high-level plotting library built on top of matplotlab. Seaborn helps resolve the two major problems faced by Matplotlib; the problems are：  Default Matplotlib parameters Working with data frames">
@@ -400,7 +407,7 @@
 <li>Working with data frames</li>
 </ul>
 <a id="more"></a>
-<h1 id="Quick-Guide"><a href="#Quick-Guide" class="headerlink" title="Quick Guide"></a>Quick Guide</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h1 id="Seaborn-Quick-Guide"><a href="#Seaborn-Quick-Guide" class="headerlink" title="Seaborn Quick Guide"></a>Seaborn Quick Guide</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div>
 <div class="line">print(sns.get_dataset_names())</div>
@@ -581,7 +588,7 @@
 <div class="line">    sns.jointplot(<span class="string">"x"</span>, <span class="string">"y"</span>, data, kind=<span class="string">'hex'</span>)</div>
 </pre></td></tr></table></figure>
 <p><img src="/2019/04/19/Python-Seaborn/image-20190419200524568.png" alt="image-20190419200524568"></p>
-<h2 id="Pair-plots"><a href="#Pair-plots" class="headerlink" title="Pair plots"></a>Pair plots</h2><p>When you generalize joint plots to datasets of larger dimensions, you end up with <em>pair plots</em>. This is very useful for exploring correlations between multidimensional data, when you’d like to plot all pairs of values against each other.</p>
+<h2 id="Pairwise-plots"><a href="#Pairwise-plots" class="headerlink" title="Pairwise plots"></a>Pairwise plots</h2><p>When you generalize joint plots to datasets of larger dimensions, you end up with <em>pair plots</em>. This is very useful for exploring correlations between multidimensional data, when you’d like to plot all pairs of values against each other.</p>
 <p>We’ll demo this with the well-known Iris dataset, which lists measurements of petals and sepals of three iris species:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -595,7 +602,66 @@
 </pre></td></tr></table></figure>
 <p><img src="/2019/04/19/Python-Seaborn/image-201904202049285.png" alt="mage-20190420204928"></p>
 <p>We can see that if we want to do classification, we can use <code>petal_width</code> and <code>petal_length</code> because from figure 15, these three species are distinguished.</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.tutorialspoint.com/seaborn/index.htm" target="_blank" rel="noopener">Seaborn Tutorial</a></p>
+<h2 id="categorical-data"><a href="#categorical-data" class="headerlink" title="categorical data"></a>categorical data</h2><h3 id="stripplot"><a href="#stripplot" class="headerlink" title="stripplot()"></a>stripplot()</h3><p>stripplot() is used when one of the variable under study is categorical. It represents the data in sorted order along any one of the axis.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div>
+<div class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</div>
+<div class="line">df = sb.load_dataset(<span class="string">'iris'</span>)</div>
+<div class="line">sns.stripplot(x = <span class="string">"species"</span>, y = <span class="string">"petal_length"</span>, data = df)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904292101502.png" alt="mage-20190429210150"></p>
+<p>In the above plot, we can clearly see the difference of <strong>petal_length</strong> in each species. But, the major problem with the above scatter plot is that the points on the scatter plot are overlapped. We use the ‘Jitter’ parameter to handle this kind of scenario.</p>
+<p>Jitter adds some random noise to the data. This parameter will adjust the positions along the categorical axis.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">sns.stripplot(x = <span class="string">"species"</span>, y = <span class="string">"petal_length"</span>, data = df,jitter=<span class="keyword">True</span>)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904292102451.png" alt="mage-20190429210245"></p>
+<p>We can see that the x-axis of point is changed but not y_axis. So that we can see the petal_length of each point without any overlay.</p>
+<h3 id="swarmplot"><a href="#swarmplot" class="headerlink" title="swarmplot()"></a>swarmplot()</h3><p>Another option which can be used as an alternate to ‘Jitter’ is function <strong>swarmplot()</strong>. This function positions each point of scatter plot on the categorical axis and thereby avoids overlapping points </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">sns.swarmplot(x = <span class="string">"species"</span>, y = <span class="string">"petal_length"</span>, data = df)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904292105091.png" alt="mage-20190429210509"></p>
+<h2 id="Distribution-of-observations"><a href="#Distribution-of-observations" class="headerlink" title="Distribution of observations"></a>Distribution of observations</h2><h3 id="boxplot"><a href="#boxplot" class="headerlink" title="boxplot()"></a>boxplot()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">sns.boxplot(x = <span class="string">"species"</span>, y = <span class="string">"petal_length"</span>, data = df)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904292108136.png" alt="mage-20190429210813"></p>
+<h3 id="violinplot"><a href="#violinplot" class="headerlink" title="violinplot()"></a>violinplot()</h3><p>Violin Plots are a combination of the box plot with the kernel density estimates. So, these plots are easier to analyze and understand the distribution of the data.</p>
+<p>Let us use tips dataset called to learn more into violin plots. This dataset contains the information related to the tips given by the customers in a restaurant.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div>
+<div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div>
+<div class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</div>
+<div class="line">df = sb.load_dataset(<span class="string">'tips'</span>)</div>
+<div class="line">sns.violinplot(x = <span class="string">"day"</span>, y = <span class="string">"total_bill"</span>, data=df)</div>
+<div class="line">plt.show()</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904292109264.png" alt="mage-20190429210926"></p>
+<p>The quartile and whisker values from the boxplot are shown inside the violin. As the violin plot uses KDE, <strong>the wider portion of violin indicates the higher density and narrow region represents relatively lower density</strong>. The Inter-Quartile range in boxplot and higher density portion in kde fall in the same region of each category of violin plot.</p>
+<p>The above plot shows the distribution of total_bill on four days of the week. But, in addition to that, if we want to see how the distribution behaves with respect to sex, lets explore it in below example.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">sns.violinplot(x = <span class="string">"day"</span>, y = <span class="string">"total_bill"</span>,hue = <span class="string">'sex'</span>, data = df)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904292111234.png" alt="mage-20190429211123"></p>
+<p>Now we can clearly see the spending behavior between male and female. We can easily say that, men make more bill than women by looking at the plot.</p>
+<p>And, if the hue variable has only two classes, we can beautify the plot by splitting each violin into two instead of two violins on a given day. Either parts of the violin refer to each class in the hue variable.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">sb.violinplot(x = <span class="string">"day"</span>, y=<span class="string">"total_bill"</span>,hue = <span class="string">'sex'</span>, data = df,split=<span class="keyword">True</span>)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2019/04/19/Python-Seaborn/image-201904292114337.png" alt="mage-20190429211433"></p>
+<h1 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.tutorialspoint.com/seaborn/index.htm" target="_blank" rel="noopener">Seaborn Tutorial</a></p>
 <p><a href="https://jakevdp.github.io/PythonDataScienceHandbook/04.14-visualization-with-seaborn.html" target="_blank" rel="noopener">Visualization with Seaborn</a></p>
 <p><a href="https://elitedatascience.com/python-seaborn-tutorial" target="_blank" rel="noopener"><a href="https://elitedatascience.com/python-seaborn-tutorial" target="_blank" rel="noopener">The Ultimate Python Seaborn Tutorial: Gotta Catch ‘Em All</a></a> </p>
 
@@ -772,7 +838,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Quick-Guide"><span class="nav-number">1.</span> <span class="nav-text">Quick Guide</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset"><span class="nav-number">1.1.</span> <span class="nav-text">Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Figure-Aesthetic"><span class="nav-number">1.2.</span> <span class="nav-text">Figure Aesthetic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Figure-style"><span class="nav-number">1.2.1.</span> <span class="nav-text">Figure style</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Darkgrid"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">Darkgrid</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whitegrid"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">whitegrid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dark"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">dark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#white"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">white</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ticks"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">ticks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Axes"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">Axes</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Remove-axes-spines"><span class="nav-number">1.2.1.6.1.</span> <span class="nav-text">Remove axes spines</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scaling-plot-elements"><span class="nav-number">1.2.2.</span> <span class="nav-text">Scaling plot elements</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Color-Palette"><span class="nav-number">1.3.</span> <span class="nav-text">Color Palette</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Qualitative-Color-Palettes"><span class="nav-number">1.3.1.</span> <span class="nav-text">Qualitative Color Palettes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequential-Color-Palettes"><span class="nav-number">1.3.2.</span> <span class="nav-text">Sequential Color Palettes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Diverging-Color-Palette"><span class="nav-number">1.3.3.</span> <span class="nav-text">Diverging Color Palette</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figures"><span class="nav-number">2.</span> <span class="nav-text">Figures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Histograms-KDE-and-densities"><span class="nav-number">2.1.</span> <span class="nav-text">Histograms, KDE, and densities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pair-plots"><span class="nav-number">2.2.</span> <span class="nav-text">Pair plots</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Seaborn-Quick-Guide"><span class="nav-number">1.</span> <span class="nav-text">Seaborn Quick Guide</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dataset"><span class="nav-number">1.1.</span> <span class="nav-text">Dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Figure-Aesthetic"><span class="nav-number">1.2.</span> <span class="nav-text">Figure Aesthetic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Figure-style"><span class="nav-number">1.2.1.</span> <span class="nav-text">Figure style</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Darkgrid"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">Darkgrid</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#whitegrid"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">whitegrid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dark"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">dark</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#white"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">white</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ticks"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">ticks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Axes"><span class="nav-number">1.2.1.6.</span> <span class="nav-text">Axes</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Remove-axes-spines"><span class="nav-number">1.2.1.6.1.</span> <span class="nav-text">Remove axes spines</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scaling-plot-elements"><span class="nav-number">1.2.2.</span> <span class="nav-text">Scaling plot elements</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Color-Palette"><span class="nav-number">1.3.</span> <span class="nav-text">Color Palette</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Qualitative-Color-Palettes"><span class="nav-number">1.3.1.</span> <span class="nav-text">Qualitative Color Palettes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sequential-Color-Palettes"><span class="nav-number">1.3.2.</span> <span class="nav-text">Sequential Color Palettes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Diverging-Color-Palette"><span class="nav-number">1.3.3.</span> <span class="nav-text">Diverging Color Palette</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Figures"><span class="nav-number">2.</span> <span class="nav-text">Figures</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Histograms-KDE-and-densities"><span class="nav-number">2.1.</span> <span class="nav-text">Histograms, KDE, and densities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pairwise-plots"><span class="nav-number">2.2.</span> <span class="nav-text">Pairwise plots</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#categorical-data"><span class="nav-number">2.3.</span> <span class="nav-text">categorical data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stripplot"><span class="nav-number">2.3.1.</span> <span class="nav-text">stripplot()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swarmplot"><span class="nav-number">2.3.2.</span> <span class="nav-text">swarmplot()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distribution-of-observations"><span class="nav-number">2.4.</span> <span class="nav-text">Distribution of observations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#boxplot"><span class="nav-number">2.4.1.</span> <span class="nav-text">boxplot()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#violinplot"><span class="nav-number">2.4.2.</span> <span class="nav-text">violinplot()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matplotlib"><span class="nav-number">3.</span> <span class="nav-text">Matplotlib</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
