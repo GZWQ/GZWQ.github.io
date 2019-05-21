@@ -88,7 +88,7 @@
 <meta property="og:description" content="Instructions of various sofware installation.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/Software-Installation/Screen%20Shot%202019-04-06%20at%2012.00.31%20PM.png">
-<meta property="og:updated_time" content="2019-04-06T17:00:52.064Z">
+<meta property="og:updated_time" content="2019-05-17T22:53:58.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Software Installation">
 <meta name="twitter:description" content="Instructions of various sofware installation.">
@@ -431,6 +431,55 @@
 </pre></td></tr></table></figure>
 <h1 id="移动硬盘"><a href="#移动硬盘" class="headerlink" title="移动硬盘"></a>移动硬盘</h1><p>用mac磁盘工具，插上移动硬盘，点击抹掉之后，格式选择exfat就可以了。</p>
 <h1 id="sh"><a href="#sh" class="headerlink" title=".sh"></a>.sh</h1><p><img src="/2018/07/04/Software-Installation/Screen Shot 2019-04-06 at 12.00.31 PM.png" alt="creen Shot 2019-04-06 at 12.00.31 P"></p>
+<h1 id="Colab读文件"><a href="#Colab读文件" class="headerlink" title="Colab读文件"></a>Colab读文件</h1><p><a href="https://blog.csdn.net/code_nie/article/details/85029074" target="_blank" rel="noopener">colab 读入 google drive 的文件</a></p>
+<ol>
+<li><p>首先需要让colab获得google drive的授权，在google colab里执行如下代码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+</pre></td><td class="code"><pre><div class="line">!apt-get install -y -qq software-properties-common python-software-properties module-init-tools</div>
+<div class="line">!add-apt-repository -y ppa:alessandro-strada/ppa 2&gt;&amp;1 &gt; /dev/null</div>
+<div class="line">!apt-get update -qq 2&gt;&amp;1 &gt; /dev/null</div>
+<div class="line">!apt-get -y install -qq google-drive-ocamlfuse fuse</div>
+<div class="line">from google.colab import auth</div>
+<div class="line">auth.authenticate_user()</div>
+<div class="line">from oauth2client.client import GoogleCredentials</div>
+<div class="line">creds = GoogleCredentials.get_application_default()</div>
+<div class="line">import getpass</div>
+<div class="line">!google-drive-ocamlfuse -headless -id=&#123;creds.client_id&#125; -secret=&#123;creds.client_secret&#125; &lt; /dev/null 2&gt;&amp;1 | grep URL</div>
+<div class="line">vcode = getpass.getpass()</div>
+<div class="line">!<span class="built_in">echo</span> &#123;vcode&#125; | google-drive-ocamlfuse -headless -id=&#123;creds.client_id&#125; -secret=&#123;creds.client_secret&#125;</div>
+</pre></td></tr></table></figure>
+<p>执行时会打印一个网址和一个授权码的输入框，此时你需要点击网址，登陆google account，授权colab使用你的google drive，然后系统会分配给你一个授权码，你需要将授权码粘贴到输入框里，回车继续。</p>
+</li>
+<li><p>关联Google drive</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash"> 指定Google Drive云端硬盘的根目录，名为drive</span></div>
+<div class="line">!mkdir -p drive</div>
+<div class="line">!google-drive-ocamlfuse drive</div>
+</pre></td></tr></table></figure>
+<p>此时colab中出现drive的文件夹，里面就是你的google drive的根目录文件</p>
+</li>
+<li><p>更换工作目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line">import os</div>
+<div class="line">os.chdir("drive/Colab Notebooks")</div>
+</pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ol>
 
       
     </div>
@@ -605,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow"><span class="nav-number">1.</span> <span class="nav-text">Tensorflow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gpu"><span class="nav-number">1.3.</span> <span class="nav-text">Gpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dlib"><span class="nav-number">1.4.</span> <span class="nav-text">Dlib</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pytorch"><span class="nav-number">2.</span> <span class="nav-text">Pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Octave"><span class="nav-number">3.</span> <span class="nav-text">Octave</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ffmpeg"><span class="nav-number">4.</span> <span class="nav-text">Ffmpeg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matlab"><span class="nav-number">5.</span> <span class="nav-text">Matlab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda"><span class="nav-number">6.</span> <span class="nav-text">Anaconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动硬盘"><span class="nav-number">7.</span> <span class="nav-text">移动硬盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sh"><span class="nav-number">8.</span> <span class="nav-text">.sh</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow"><span class="nav-number">1.</span> <span class="nav-text">Tensorflow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gpu"><span class="nav-number">1.3.</span> <span class="nav-text">Gpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dlib"><span class="nav-number">1.4.</span> <span class="nav-text">Dlib</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pytorch"><span class="nav-number">2.</span> <span class="nav-text">Pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Octave"><span class="nav-number">3.</span> <span class="nav-text">Octave</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ffmpeg"><span class="nav-number">4.</span> <span class="nav-text">Ffmpeg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matlab"><span class="nav-number">5.</span> <span class="nav-text">Matlab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda"><span class="nav-number">6.</span> <span class="nav-text">Anaconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动硬盘"><span class="nav-number">7.</span> <span class="nav-text">移动硬盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sh"><span class="nav-number">8.</span> <span class="nav-text">.sh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Colab读文件"><span class="nav-number">9.</span> <span class="nav-text">Colab读文件</span></a></li></ol></div>
             
 
           </div>

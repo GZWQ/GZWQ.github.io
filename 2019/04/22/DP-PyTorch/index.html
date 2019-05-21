@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Tutorials of PyTorch and some useful tips.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-13T19:28:45.782Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/22/DP-PyTorch/Screen%20Shot%202019-05-18%20at%2011.57.01%20AM.png">
+<meta property="og:updated_time" content="2019-05-19T17:39:00.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-PyTorch">
 <meta name="twitter:description" content="Tutorials of PyTorch and some useful tips.">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/22/DP-PyTorch/Screen%20Shot%202019-05-18%20at%2011.57.01%20AM.png">
 
 
 
@@ -378,7 +380,32 @@
       
         <p>Tutorials of PyTorch and some useful tips.</p>
 <a id="more"></a>
-<h1 id="Torch"><a href="#Torch" class="headerlink" title="Torch"></a><a href="https://pytorch.org/docs/stable/torch.html#" target="_blank" rel="noopener">Torch</a></h1><h2 id="Autograd"><a href="#Autograd" class="headerlink" title="Autograd"></a>Autograd</h2><p><code>torch.autograd</code> provides classes and functions implementing automatic differentiation of arbitrary scalar valued functions. </p>
+<h1 id="Torch"><a href="#Torch" class="headerlink" title="Torch"></a><a href="https://pytorch.org/docs/stable/torch.html#" target="_blank" rel="noopener">Torch</a></h1><h2 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h2><p>The torch package contains data structures for multi-dimensional tensors and mathematical operations over these are defined. </p>
+<p><img src="/2019/04/22/DP-PyTorch/Screen Shot 2019-05-18 at 11.57.01 AM.png" alt="creen Shot 2019-05-18 at 11.57.01 A"></p>
+<h3 id="Creation-Ops"><a href="#Creation-Ops" class="headerlink" title="Creation Ops"></a>Creation Ops</h3><h4 id="tensor"><a href="#tensor" class="headerlink" title="tensor"></a>tensor</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.tensor(data, dtype=<span class="keyword">None</span>, device=<span class="keyword">None</span>, requires_grad=<span class="keyword">False</span>, pin_memory=<span class="keyword">False</span>) → Tensor</div>
+</pre></td></tr></table></figure>
+<p>Constructs a tensor with <code>data</code>.</p>
+<h4 id="topk"><a href="#topk" class="headerlink" title="topk"></a>topk</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">topk(k, dim=None, largest=True, sorted=True) -&gt; (Tensor, LongTensor)</div>
+</pre></td></tr></table></figure>
+<p>Returns the <code>k</code> largest elements of the given <code>input</code> tensor along a given dimension.</p>
+<p>If <code>dim</code> is not given, the last dimension of the input is chosen.</p>
+<p>If <code>largest</code> is <code>False</code> then the k smallest elements are returned.</p>
+<p>A namedtuple of (values, indices) is returned, where the indices are the indices of the elements in the original input tensor.</p>
+<h4 id="view"><a href="#view" class="headerlink" title="view"></a><a href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor.view" target="_blank" rel="noopener">view</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">view(*shape) → Tensor</div>
+</pre></td></tr></table></figure>
+<p>Returns a new tensor with the same data as the <code>self</code> tensor but of a different <code>shape</code>.</p>
+<h4 id="size"><a href="#size" class="headerlink" title="size"></a><a href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor.size" target="_blank" rel="noopener">size</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">size() → torch.Size</div>
+</pre></td></tr></table></figure>
+<p>Returns the size of the <code>self</code> tensor. The returned value is a subclass of <a href="https://docs.python.org/3/library/stdtypes.html#tuple" target="_blank" rel="noopener"><code>tuple</code></a>.</p>
+<h4 id="div"><a href="#div" class="headerlink" title="div"></a><a href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor.div" target="_blank" rel="noopener">div</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">div_(value) → Tensor</div>
+</pre></td></tr></table></figure>
+<p>Divides each element of the input <code>input</code> with the scalar <code>value</code> and returns a new resulting tensor.</p>
+<h2 id="Autograd"><a href="#Autograd" class="headerlink" title="Autograd"></a>Autograd</h2><p><code>torch.autograd</code> provides classes and functions implementing automatic differentiation of arbitrary scalar valued functions. </p>
 <h3 id="Variable-deprecated"><a href="#Variable-deprecated" class="headerlink" title="Variable (deprecated)"></a>Variable (deprecated)</h3><p>The Variable API has been deprecated: Variables are no longer necessary to use autograd with tensors. Autograd automatically supports Tensors with <code>requires_grad</code> set to <code>True</code>. Below please find a quick guide on what has changed:</p>
 <ul>
 <li><code>Variable(tensor)</code> and <code>Variable(tensor, requires_grad)</code> still work as expected, but they return Tensors instead of Variables.</li>
@@ -454,6 +481,62 @@
 </pre></td></tr></table></figure>
 </li>
 </ol>
+<h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.cat(tensors, dim=<span class="number">0</span>, out=<span class="keyword">None</span>) → Tensor</div>
+</pre></td></tr></table></figure>
+<h2 id="multinomial"><a href="#multinomial" class="headerlink" title="multinomial"></a><a href="https://pytorch.org/docs/stable/torch.html#torch.multinomial" target="_blank" rel="noopener">multinomial</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.multinomial(input, num_samples, replacement=<span class="keyword">False</span>, out=<span class="keyword">None</span>) → LongTensor</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p><a href="https://blog.csdn.net/monchin/article/details/79787621" target="_blank" rel="noopener">understanding</a> </p>
+</blockquote>
+<h2 id="nn"><a href="#nn" class="headerlink" title="nn"></a>nn</h2><h3 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.Softmax(dim=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+\operatorname{Softmax}\left(x_{i}\right)=\frac{\exp \left(x_{i}\right)}{\sum_{j} \exp \left(x_{j}\right)}\</script><h3 id="LogSoftmax"><a href="#LogSoftmax" class="headerlink" title="LogSoftmax"></a>LogSoftmax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.LogSoftmax(dim=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<p>Applies the Log(Softmax(x)) function to an n-dimensional input Tensor. </p>
+<h3 id="CrossEntropyLoss"><a href="#CrossEntropyLoss" class="headerlink" title="CrossEntropyLoss"></a>CrossEntropyLoss</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.CrossEntropyLoss(weight=<span class="keyword">None</span>, size_average=<span class="keyword">None</span>, ignore_index=<span class="number">-100</span>, reduce=<span class="keyword">None</span>, reduction=<span class="string">'mean'</span>)</div>
+</pre></td></tr></table></figure>
+<p>This criterion combines <code>nn.LogSoftmax()</code> and <code>nn.NLLLoss()</code> in one single class.</p>
+<blockquote>
+<p>Therefore, in network architecture, we should not define a softmax layer.</p>
+</blockquote>
+<h3 id="NLLLoss"><a href="#NLLLoss" class="headerlink" title="NLLLoss()"></a>NLLLoss()</h3><blockquote>
+<p>go with LogSoftmax.</p>
+</blockquote>
+<h3 id="Layers"><a href="#Layers" class="headerlink" title="Layers"></a>Layers</h3><h4 id="Embedding"><a href="#Embedding" class="headerlink" title="Embedding"></a><a href="https://pytorch.org/docs/stable/nn.html#torch.nn.Embedding" target="_blank" rel="noopener">Embedding</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.Embedding(num_embeddings, embedding_dim, padding_idx=<span class="keyword">None</span>, max_norm=<span class="keyword">None</span>, norm_type=<span class="number">2.0</span>, scale_grad_by_freq=<span class="keyword">False</span>, sparse=<span class="keyword">False</span>, _weight=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<p><strong>Shape</strong></p>
+<ul>
+<li>Input: (*)(∗), LongTensor of arbitrary shape containing the indices to extract</li>
+<li>Output: (<em>, H)(∗,H), where </em> is the input shape and $H=\text{embedding_dim}$</li>
+</ul>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>num_embeddings(int) - </li>
+<li>embedding_dim(int) - size of each embedding vector</li>
+<li>padding_idx(int,optional) - If given, pads the output with the embedding vector at <code>padding_idx</code>(initialized to zeros) whenever it encounters the index.</li>
+</ul>
+<blockquote>
+<p><a href="https://stackoverflow.com/questions/50747947/embedding-in-pytorch" target="_blank" rel="noopener">understanding</a>  </p>
+</blockquote>
+<h4 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a><a href="https://pytorch.org/docs/stable/nn.html#torch.nn.GRU" target="_blank" rel="noopener">GRU</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.GRU(*args, **kwargs)</div>
+</pre></td></tr></table></figure>
+<p><strong>Parameters</strong></p>
+<ul>
+<li>input_size - The number of expected features in the input x</li>
+<li>hidden_szie - The number of features in the hidden state h</li>
+<li>num_layers - Number of recurrent layers. E.g., setting <code>num_layers=2</code> would mean stacking two GRUs together to form a stacked GRU, with the second GRU taking in outputs of the first GRU and computing the final results. Default: 1</li>
+</ul>
+<h2 id="optim"><a href="#optim" class="headerlink" title="optim"></a><a href="https://pytorch.org/docs/stable/optim.html" target="_blank" rel="noopener">optim</a></h2><h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Adam" target="_blank" rel="noopener">Adam</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.optim.Adam(params, lr=<span class="number">0.001</span>, betas=(<span class="number">0.9</span>, <span class="number">0.999</span>), eps=<span class="number">1e-08</span>, weight_decay=<span class="number">0</span>, amsgrad=<span class="keyword">False</span>)</div>
+</pre></td></tr></table></figure>
 <h1 id="Torchvision"><a href="#Torchvision" class="headerlink" title="Torchvision"></a>Torchvision</h1><h2 id="Models"><a href="#Models" class="headerlink" title="Models"></a><a href="https://pytorch.org/docs/stable/torchvision/models.html" target="_blank" rel="noopener">Models</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -713,7 +796,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Torch"><span class="nav-number">1.</span> <span class="nav-text">Torch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Autograd"><span class="nav-number">1.1.</span> <span class="nav-text">Autograd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variable-deprecated"><span class="nav-number">1.1.1.</span> <span class="nav-text">Variable (deprecated)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max"><span class="nav-number">1.2.</span> <span class="nav-text">max</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Torchvision"><span class="nav-number">2.</span> <span class="nav-text">Torchvision</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">2.1.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stop-undating"><span class="nav-number">2.1.1.</span> <span class="nav-text">Stop-undating</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transforms"><span class="nav-number">3.</span> <span class="nav-text">Transforms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compose"><span class="nav-number">3.0.1.</span> <span class="nav-text">Compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resize"><span class="nav-number">3.0.2.</span> <span class="nav-text">Resize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ToTensor"><span class="nav-number">3.0.3.</span> <span class="nav-text">ToTensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalize"><span class="nav-number">3.0.4.</span> <span class="nav-text">Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda"><span class="nav-number">3.0.5.</span> <span class="nav-text">Lambda</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HyperParameters-Search"><span class="nav-number">4.</span> <span class="nav-text">HyperParameters Search</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualization"><span class="nav-number">5.</span> <span class="nav-text">Visualization</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Torch"><span class="nav-number">1.</span> <span class="nav-text">Torch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensor"><span class="nav-number">1.1.</span> <span class="nav-text">Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creation-Ops"><span class="nav-number">1.1.1.</span> <span class="nav-text">Creation Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tensor"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">tensor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#topk"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">topk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#view"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">view</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#size"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#div"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">div</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autograd"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variable-deprecated"><span class="nav-number">1.2.1.</span> <span class="nav-text">Variable (deprecated)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max"><span class="nav-number">1.3.</span> <span class="nav-text">max</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cat"><span class="nav-number">1.4.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multinomial"><span class="nav-number">1.5.</span> <span class="nav-text">multinomial</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nn"><span class="nav-number">1.6.</span> <span class="nav-text">nn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax"><span class="nav-number">1.6.1.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogSoftmax"><span class="nav-number">1.6.2.</span> <span class="nav-text">LogSoftmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CrossEntropyLoss"><span class="nav-number">1.6.3.</span> <span class="nav-text">CrossEntropyLoss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NLLLoss"><span class="nav-number">1.6.4.</span> <span class="nav-text">NLLLoss()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layers"><span class="nav-number">1.6.5.</span> <span class="nav-text">Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Embedding"><span class="nav-number">1.6.5.1.</span> <span class="nav-text">Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GRU"><span class="nav-number">1.6.5.2.</span> <span class="nav-text">GRU</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optim"><span class="nav-number">1.7.</span> <span class="nav-text">optim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam"><span class="nav-number">1.7.1.</span> <span class="nav-text">Adam</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Torchvision"><span class="nav-number">2.</span> <span class="nav-text">Torchvision</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">2.1.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stop-undating"><span class="nav-number">2.1.1.</span> <span class="nav-text">Stop-undating</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transforms"><span class="nav-number">3.</span> <span class="nav-text">Transforms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compose"><span class="nav-number">3.0.1.</span> <span class="nav-text">Compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resize"><span class="nav-number">3.0.2.</span> <span class="nav-text">Resize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ToTensor"><span class="nav-number">3.0.3.</span> <span class="nav-text">ToTensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalize"><span class="nav-number">3.0.4.</span> <span class="nav-text">Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda"><span class="nav-number">3.0.5.</span> <span class="nav-text">Lambda</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HyperParameters-Search"><span class="nav-number">4.</span> <span class="nav-text">HyperParameters Search</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualization"><span class="nav-number">5.</span> <span class="nav-text">Visualization</span></a></li></ol></div>
             
 
           </div>
