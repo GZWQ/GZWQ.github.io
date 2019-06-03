@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/0_Ta3qx5CQsrJloyCA.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/word2vec_weight_matrix_lookup_table.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/matrix_mult_w_one_hot.png">
-<meta property="og:updated_time" content="2019-06-03T20:31:33.045Z">
+<meta property="og:updated_time" content="2019-06-03T20:33:15.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Word2Vec">
 <meta name="twitter:description" content="Word embedding, i.e., vector representations of a particular word and also called word vectoring, is important in NLP. It is capable of capturing context of a word in a document, semantic and syntacti">
@@ -402,7 +402,26 @@
 </blockquote>
 <p>And what does it mean for two words to have similar contexts? I think you could expect that synonyms like “intelligent” and “smart” would have very similar contexts. Or that words that are related, like “engine” and “transmission”, would probably have similar contexts as well.</p>
 <p>This can also handle stemming for you – the network will likely learn similar word vectors for the words “ant” and “ants” because these should have similar contexts.</p>
-<h3 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h3><h2 id="Negative-sampling"><a href="#Negative-sampling" class="headerlink" title="Negative sampling"></a>Negative sampling</h2><p>You may have noticed that the skip-gram neural network contains a huge number of weights… For our example with 300 features and a vocab of 10,000 words, that’s 3M weights in the hidden layer and output layer each! Training this on a large dataset would be prohibitive.</p>
+<h3 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h3><p>Say we have a word documents with $T$ words, our task is to predict context words within a window of fixed size $m$, given center word $w_j$:</p>
+<script type="math/tex; mode=display">
+max \ L(\theta)=max \ \prod_{t=1}^{T} \prod_{-m \leq j \leq m \atop j \neq 0} P\left(w_{t+j} | w_{t} ; \theta\right)</script><p>to simplify it:</p>
+<script type="math/tex; mode=display">
+min \ J(\theta)=min \ -\frac{1}{T} \log L(\theta)=min \ -\frac{1}{T} \sum_{t=1}^{T} \sum_{-m \leq j \leq m \atop j \neq 0} \log P\left(w_{t+j} | w_{t} ; \theta\right)</script><p>Here, we transform max to min by put a negative sign in front of the formula.</p>
+<p>In order to calculate $P\left(w_{t+j} | w_{t} ; \theta\right)$, we need to introduce two vectors for each word in the document:</p>
+<ul>
+<li>$v_w$ when $w$ is a center word</li>
+<li>$u_w$ when $w$ is a context word</li>
+</ul>
+<p>Then for a center word $c$ and a context word $o$:</p>
+<script type="math/tex; mode=display">
+P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}</script><p>which equals the softmax function if we take $x_i=u_{o}^{T} v_{c}$, </p>
+<script type="math/tex; mode=display">
+\operatorname{softmax}\left(x_{i}\right)=\frac{\exp \left(x_{i}\right)}{\sum_{j=1}^{n} \exp \left(x_{j}\right)}=p_{i}</script><p>The softmax function maps arbitrary values $x_i$ to a probability distribution $p_i$,</p>
+<ul>
+<li>“max” because amplifies probability of largest $x_i$,</li>
+<li>“soft” because still assigns some probability to smaller $x_i$</li>
+</ul>
+<h3 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h3><h2 id="Negative-sampling"><a href="#Negative-sampling" class="headerlink" title="Negative sampling"></a>Negative sampling</h2><p>You may have noticed that the skip-gram neural network contains a huge number of weights… For our example with 300 features and a vocab of 10,000 words, that’s 3M weights in the hidden layer and output layer each! Training this on a large dataset would be prohibitive.</p>
 <p>Negative sampling addresses this by having each training sample only modify a small percentage of the weights, rather than all of them. Here’s how it works.</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/introduction-to-word-embedding-and-word2vec-652d0c2060fa" target="_blank" rel="noopener">Introduction to Word Embedding and Word2Vec</a> </p>
 <p><a href="http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/" target="_blank" rel="noopener">Word2Vec Tutorial - The Skip-Gram Model</a> </p>
@@ -580,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-do-we-need-them"><span class="nav-number">1.</span> <span class="nav-text">Why do we need them?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-Word2Vec-work"><span class="nav-number">2.</span> <span class="nav-text">How does Word2Vec work?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CBOW-Model"><span class="nav-number">2.1.</span> <span class="nav-text">CBOW Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Gram-Model"><span class="nav-number">2.2.</span> <span class="nav-text">Skip-Gram Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Hidden-Layer"><span class="nav-number">2.2.1.</span> <span class="nav-text">The Hidden Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intuition"><span class="nav-number">2.2.2.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss-Function"><span class="nav-number">2.2.3.</span> <span class="nav-text">Loss Function</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Negative-sampling"><span class="nav-number">2.3.</span> <span class="nav-text">Negative sampling</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-do-we-need-them"><span class="nav-number">1.</span> <span class="nav-text">Why do we need them?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-Word2Vec-work"><span class="nav-number">2.</span> <span class="nav-text">How does Word2Vec work?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CBOW-Model"><span class="nav-number">2.1.</span> <span class="nav-text">CBOW Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Gram-Model"><span class="nav-number">2.2.</span> <span class="nav-text">Skip-Gram Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Hidden-Layer"><span class="nav-number">2.2.1.</span> <span class="nav-text">The Hidden Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intuition"><span class="nav-number">2.2.2.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss-Function"><span class="nav-number">2.2.3.</span> <span class="nav-text">Loss Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient"><span class="nav-number">2.2.4.</span> <span class="nav-text">Gradient</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Negative-sampling"><span class="nav-number">2.3.</span> <span class="nav-text">Negative sampling</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
