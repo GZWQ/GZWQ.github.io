@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/0_Ta3qx5CQsrJloyCA.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/word2vec_weight_matrix_lookup_table.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/matrix_mult_w_one_hot.png">
-<meta property="og:updated_time" content="2019-06-03T20:33:15.968Z">
+<meta property="og:updated_time" content="2019-06-03T20:47:25.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Word2Vec">
 <meta name="twitter:description" content="Word embedding, i.e., vector representations of a particular word and also called word vectoring, is important in NLP. It is capable of capturing context of a word in a document, semantic and syntacti">
@@ -421,7 +421,29 @@ P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w
 <li>“max” because amplifies probability of largest $x_i$,</li>
 <li>“soft” because still assigns some probability to smaller $x_i$</li>
 </ul>
-<h3 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h3><h2 id="Negative-sampling"><a href="#Negative-sampling" class="headerlink" title="Negative sampling"></a>Negative sampling</h2><p>You may have noticed that the skip-gram neural network contains a huge number of weights… For our example with 300 features and a vocab of 10,000 words, that’s 3M weights in the hidden layer and output layer each! Training this on a large dataset would be prohibitive.</p>
+<h3 id="Gradient"><a href="#Gradient" class="headerlink" title="Gradient"></a>Gradient</h3><p>Say we want to calculate the derivative of <strong>center vector</strong> $v_c$, </p>
+<script type="math/tex; mode=display">
+\\
+\begin{equation}
+
+\begin{aligned}
+
+\frac{\partial}{\partial v_c}logP(o | c)&= \frac{\partial}{\partial v_c}log \frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
+&=\frac{\partial}{\partial v_c}log{\exp \left(u_{o}^{T} v_{c}\right)}-\frac{\partial}{\partial v_c}log {\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
+&=\frac{\partial}{\partial v_c}{ \left(u_{o}^{T} v_{c}\right)} - \frac{1}{\sum_{w \in V}\exp(u_{w}^{T}v_{c})}\frac{\partial}{\partial v_c}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
+&= u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\frac{\partial}{\partial v_c}\exp \left(u_{w}^{T} v_{c}\right) \\
+&=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\exp \left(u_{w}^{T} v_{c}\right)\frac{\partial}{\partial v_c}(u_w^Tv_c)  \\
+&=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\exp \left(u_{w}^{T} v_{c}\right)(u_w) \\
+&=u_o-\sum_{w\in V}P(o|c)u_w
+
+
+\end{aligned}
+
+\end{equation}</script><p>Here $\sum_{w\in V}P(o|center)u_w$ is the expected context word by our trained model, and $u_o$ is our target context, </p>
+<p>it is like the difference between the target and prediction.</p>
+<p>Then we need to calculate the derivative for context vector $u_w$:</p>
+<script type="math/tex; mode=display">
+\frac{\partial \log p(o | c)}{\partial u_{o}}=v_{c}-v_{c} p(o | c)</script><h2 id="Negative-sampling"><a href="#Negative-sampling" class="headerlink" title="Negative sampling"></a>Negative sampling</h2><p>You may have noticed that the skip-gram neural network contains a huge number of weights… For our example with 300 features and a vocab of 10,000 words, that’s 3M weights in the hidden layer and output layer each! Training this on a large dataset would be prohibitive.</p>
 <p>Negative sampling addresses this by having each training sample only modify a small percentage of the weights, rather than all of them. Here’s how it works.</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/introduction-to-word-embedding-and-word2vec-652d0c2060fa" target="_blank" rel="noopener">Introduction to Word Embedding and Word2Vec</a> </p>
 <p><a href="http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/" target="_blank" rel="noopener">Word2Vec Tutorial - The Skip-Gram Model</a> </p>
