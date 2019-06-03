@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/Screen%20Shot%202018-06-10%20at%2011.48.30%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/Screen%20Shot%202018-06-11%20at%2012.29.41%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/06/10/ML-K-Nearest-Neighbors/Screen%20Shot%202018-06-11%20at%2012.34.40%20AM.png">
-<meta property="og:updated_time" content="2018-06-11T20:33:53.931Z">
+<meta property="og:updated_time" content="2019-06-03T17:16:51.653Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML - K-Nearest Neighbors">
 <meta name="twitter:description" content="How kNN algorithm works k nearest neighbor (kNN): how it works How K-Nearest Neighbors (kNN) Classifier Works kNN (k-Nearest Neighbors) is a classification algorithm. It is a simple algorithm that sto">
@@ -474,6 +474,207 @@ d =\sqrt{(x_1-y_1)^2+(x_2-y_2)^2}</script><p>We can get the following:</p>
 <h2 id="Example2"><a href="#Example2" class="headerlink" title="Example2"></a>Example2</h2><p>One major drawback in calculating distance measures directly from the training set is in the case where variables have different measurement scales or there is a mixture of numerical and categorical variables. For example, if one variable is based on annual income in dollars, and the other is based on age in years then income will have a much higher influence on the distance calculated. One solution is to standardize the training set as shown below.</p>
 <script type="math/tex; mode=display">
 X_s=\frac{X-X_{min}}{X_{max}-X_{min}}</script><p><img src="/2018/06/10/ML-K-Nearest-Neighbors/Screen Shot 2018-06-11 at 12.34.40 AM.png" alt="Screen Shot 2018-06-11 at 12.34.40 AM"></p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">KNearestNeighbor</span><span class="params">()</span>:</span></div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self,X,y)</span>:</span></div>
+<div class="line">        self.X_train = X</div>
+<div class="line">        self.y_train = y</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_distances_two_loops</span><span class="params">(self, X)</span>:</span></div>
+<div class="line">        num_test = X.shape[<span class="number">0</span>]</div>
+<div class="line">        num_train = self.X_train.shape[<span class="number">0</span>]</div>
+<div class="line">        dists = np.zeros((num_test, num_train))</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num_test):</div>
+<div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(num_train):</div>
+<div class="line">                dists[i, j] = np.linalg.norm(X[i] - self.X_train[j])</div>
+<div class="line">        <span class="keyword">return</span> dists</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_distances_one_loop</span><span class="params">(self, X)</span>:</span></div>
+<div class="line">        num_test = X.shape[<span class="number">0</span>]</div>
+<div class="line">        num_train = self.X_train.shape[<span class="number">0</span>]</div>
+<div class="line">        dists = np.zeros((num_test, num_train))</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num_test):</div>
+<div class="line">            dists[i] = np.linalg.norm(X[i] - self.X_train, axis=<span class="number">1</span>)</div>
+<div class="line">        <span class="keyword">return</span> dists</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">compute_distances_no_loops</span><span class="params">(self, X)</span>:</span></div>
+<div class="line">        num_test = X.shape[<span class="number">0</span>]</div>
+<div class="line">        num_train = self.X_train.shape[<span class="number">0</span>]</div>
+<div class="line">        dists = np.zeros((num_test, num_train))</div>
+<div class="line">        <span class="comment"># https://medium.com/dataholiks-distillery/l2-distance-matrix-vectorization-trick-26aa3247ac6c</span></div>
+<div class="line">        x = np.sum(X ** <span class="number">2</span>, axis=<span class="number">1</span>).reshape(num_test, <span class="number">1</span>)  <span class="comment"># shape = (num_test,1)</span></div>
+<div class="line">        y = np.sum(self.X_train ** <span class="number">2</span>, axis=<span class="number">1</span>)  <span class="comment"># shape = (1,num_train)</span></div>
+<div class="line">        xy = np.dot(X, self.X_train.T)</div>
+<div class="line">        dists = np.sqrt(x + y - <span class="number">2</span> * xy)  <span class="comment"># shape of (x+y) = (num_test,num_train)</span></div>
+<div class="line">        <span class="keyword">return</span> dists</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict_labels</span><span class="params">(self, dists, k=<span class="number">1</span>)</span>:</span></div>
+<div class="line">        num_test = dists.shape[<span class="number">0</span>]</div>
+<div class="line">        y_pred = np.zeros(num_test)</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num_test):</div>
+<div class="line">            closest_y = []</div>
+<div class="line">            dist = dists[i, :]</div>
+<div class="line">            idx = np.argsort(dist)[:k]  <span class="comment"># choose least distance</span></div>
+<div class="line">            closest_y = self.y_train[idx]</div>
+<div class="line">            b = Counter(sorted(closest_y))</div>
+<div class="line">            c = b.most_common(<span class="number">1</span>)[<span class="number">0</span>][<span class="number">0</span>]</div>
+<div class="line">            y_pred[i] = c</div>
+<div class="line">        <span class="keyword">return</span> y_pred</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X, k=<span class="number">1</span>, num_loops=<span class="number">0</span>)</span>:</span></div>
+<div class="line">        <span class="keyword">if</span> num_loops == <span class="number">0</span>:</div>
+<div class="line">            dists = self.compute_distances_no_loops(X)</div>
+<div class="line">        <span class="keyword">elif</span> num_loops == <span class="number">1</span>:</div>
+<div class="line">            dists = self.compute_distances_one_loop(X)</div>
+<div class="line">        <span class="keyword">elif</span> num_loops == <span class="number">2</span>:</div>
+<div class="line">            dists = self.compute_distances_two_loops(X)</div>
+<div class="line">        <span class="keyword">else</span>:</div>
+<div class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'Invalid value %d for num_loops'</span> % num_loops)</div>
+<div class="line"></div>
+<div class="line">        <span class="keyword">return</span> self.predict_labels(dists, k=k)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    X_train = []</div>
+<div class="line">    y_train = []</div>
+<div class="line"></div>
+<div class="line">    classifier = KNearestNeighbor()</div>
+<div class="line"></div>
+<div class="line">    num_folds = <span class="number">5</span></div>
+<div class="line">    k_choices = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">15</span>, <span class="number">20</span>, <span class="number">50</span>, <span class="number">100</span>]</div>
+<div class="line"></div>
+<div class="line">    X_train_folds = np.array_split(X_train, num_folds)</div>
+<div class="line">    y_train_folds = np.array_split(y_train, num_folds)</div>
+<div class="line"></div>
+<div class="line">    k_to_accuracies = &#123;&#125;</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> k_choices:</div>
+<div class="line">        accuracy = []</div>
+<div class="line">        <span class="keyword">for</span> f <span class="keyword">in</span> range(num_folds):</div>
+<div class="line">            xtrain = np.concatenate((X_train_folds[:f] + X_train_folds[f + <span class="number">1</span>:]), axis=<span class="number">0</span>)  <span class="comment"># have to use '+'</span></div>
+<div class="line">            ytrain = np.concatenate((y_train_folds[:f] + y_train_folds[f + <span class="number">1</span>:]), axis=<span class="number">0</span>)</div>
+<div class="line">            xval = X_train_folds[f]</div>
+<div class="line">            yval = y_train_folds[f]</div>
+<div class="line"></div>
+<div class="line">            num_val = len(xval)</div>
+<div class="line"></div>
+<div class="line">            classifier.train(xtrain, ytrain)</div>
+<div class="line">            y_predict = classifier.predict(xval, k)</div>
+<div class="line"></div>
+<div class="line">            num_correct = np.sum(y_predict == yval)</div>
+<div class="line">            accuracy.append(float(num_correct) / num_val)</div>
+<div class="line">        k_to_accuracies[k] = accuracy</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Print out the computed accuracies</span></div>
+<div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> sorted(k_to_accuracies):</div>
+<div class="line">        <span class="keyword">for</span> accuracy <span class="keyword">in</span> k_to_accuracies[k]:</div>
+<div class="line">            print(<span class="string">'k = %d, accuracy = %f'</span> % (k, accuracy))</div>
+</pre></td></tr></table></figure>
 
       
     </div>
@@ -593,7 +794,7 @@ X_s=\frac{X-X_{min}}{X_{max}-X_{min}}</script><p><img src="/2018/06/10/ML-K-Near
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -648,7 +849,7 @@ X_s=\frac{X-X_{min}}{X_{max}-X_{min}}</script><p><img src="/2018/06/10/ML-K-Near
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#distance"><span class="nav-number">1.1.</span> <span class="nav-text">distance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#normalization"><span class="nav-number">1.2.</span> <span class="nav-text">normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-choice"><span class="nav-number">1.3.</span> <span class="nav-text">K choice</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example1"><span class="nav-number">2.</span> <span class="nav-text">Example1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example2"><span class="nav-number">3.</span> <span class="nav-text">Example2</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm"><span class="nav-number">1.</span> <span class="nav-text">Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#distance"><span class="nav-number">1.1.</span> <span class="nav-text">distance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#normalization"><span class="nav-number">1.2.</span> <span class="nav-text">normalization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-choice"><span class="nav-number">1.3.</span> <span class="nav-text">K choice</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example1"><span class="nav-number">2.</span> <span class="nav-text">Example1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example2"><span class="nav-number">3.</span> <span class="nav-text">Example2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">4.</span> <span class="nav-text">Implementation</span></a></li></ol></div>
             
 
           </div>
