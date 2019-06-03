@@ -92,11 +92,13 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-13%20at%206.07.12%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-13%20at%206.07.01%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/image-20180918214002918.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202019-06-03%20at%204.04.02%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202019-06-03%20at%204.27.50%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-15%20at%2010.42.27%20PM%20(2">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1260px-Kernel_trick_idea.svg.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%2010.16.55%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%209.44.08%20AM.png">
-<meta property="og:updated_time" content="2018-09-20T17:46:37.942Z">
+<meta property="og:updated_time" content="2019-06-03T21:37:11.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Support Vector Machine">
 <meta name="twitter:description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
@@ -465,7 +467,216 @@ hinge损失：l_{hinge}(z)=max(0,1-z)\\
 <p>则线性支持向量机的学习问题变成了如下凸二次规划问题:</p>
 <script type="math/tex; mode=display">
 \min\limits_{w, b,\xi}\frac{1}{2}||w||^2+C\sum_{i=1}^{N}\xi_i\\
-\begin{align*}s.t. &y_i(w\dot{x_i}+b)\ge1-\xi_{i}, i=1,2,...,N\\&\xi_i\ge0, i=1,2,...,m\end{align*}</script><h1 id="核方法"><a href="#核方法" class="headerlink" title="核方法"></a>核方法</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>通俗说，只要涉及空间的变换和內积的运算，我们就可以使用Kernel trick来简化运算。</p>
+\begin{align*}s.t. &y_i(w\dot{x_i}+b)\ge1-\xi_{i}, i=1,2,...,N\\&\xi_i\ge0, i=1,2,...,m\end{align*}</script><h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>Say given an example $(x_i,y_i)$, and use the shorthand for the scores vector: $s=f(x_i,W)$, then the SVM loss has the following form:</p>
+<script type="math/tex; mode=display">
+L_i = \sum_{j\ne y_i}\left\{
+
+\begin{align} 
+
+0& & \text{if   }  s_{y_i}\ge s_j+1 \\
+
+s_j-s_{y_i}+1& &\text{if otherwise}
+
+\end{align}
+=\sum_{j\ne y_i}max(0,s_j-s_{y_i}+1)
+\right.</script><p>其中，$y_i$是groundtruth label，$s_{y_i}$是分类器给真实分类的分数，$s_j$是分类器给其他类的分数，该损失函数鼓励真实分类的分数大于其他分类的分数+1。</p>
+<p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2019-06-03 at 4.04.02 PM.png" alt="creen Shot 2019-06-03 at 4.04.02 P"></p>
+<p>The two given figures are plots of function $f(x)=max(0,1-x)$ .We can see from the second figure that when x is between 0 and 1, the loss is in range $[0,1]$. </p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><p>Say we have an image classification and we use it to classify three images, like the following:</p>
+<p><img src="/2018/09/11/Support-Vector-Machine/Screen Shot 2019-06-03 at 4.27.50 PM.png" alt="creen Shot 2019-06-03 at 4.27.50 P"></p>
+<p>The output of classification is a 3d vector, each element of the vector is the probability of image classification. For example, for the cat image, the vector is $[3.2, 5.1, -1.7]$, meaning this picture is cat with probability 3.2, is car with prob 5.1 and frog with prob -1.7.</p>
+<p> Then, the $s_{y_i}=3.2$, $s_1=5.1$ and $s_2=-1.7$，so the loss is:</p>
+<script type="math/tex; mode=display">
+L_{cat}=max(0,5.1+1-3.2)+max(0,-1.7+1-3.2)=max(0,2.9)+max(0,-3.9)=2.9</script><p>Similarily, $L_{car}=0$, $L_{frog}=12.9$.</p>
+<p>So the overall loss is:</p>
+<script type="math/tex; mode=display">
+L=\frac{1}{N}\sum_{i=1}^{N}L_i\\
+L=\frac{(2.9+0+12.9)}{3}=5.27</script><blockquote>
+<ol>
+<li><p>What happens to loss if car scores change a bit?</p>
+<p>The answer is the loss will not change. The SVM loss only cares about getting the correct score to be greater than one more than the incorrect scores. But in this case, the car score is already quite a bit large than the others. So if the scores for this class changes, this margin of one will still be retained and the loss will not change.</p>
+</li>
+<li><p>What is the min/max possible loss?</p>
+<p>The min loss is 0 because across all the classes, if our correct score was much larger then we will incur zero loss across all the classes. </p>
+<p>The max loss is infinite. According to the hinge loss figure, if correct score goes very very negative, then we could incur potentially infinite loss.</p>
+</li>
+<li><p>At initialization W is small so all $s\approx 0$. What is the loss?</p>
+<p>The answer is the number of class minus one.</p>
+</li>
+<li><p>What if the sum was over all classes?(including $j=y_j$).</p>
+<p>The loss increases by one.</p>
+</li>
+<li><p>What if we used mean instead of sum?</p>
+<p>The answer is that it doesn’t change. We just rescale the whole loss function by a constant value and we don’t care about the true value of the loss.</p>
+</li>
+<li><p>What if we used $L_i=\sum_{j\ne y_i}max(0,s_j-s_{y_i}+1)^2$?</p>
+<p>The answer is it is different. We are kind of changing the trade-offs between good and badness in kind of nonlinear way, and this would end up actually computing a different loss function.</p>
+</li>
+<li><p>Suppose we found a W such that $L=0$. Is this W unique?</p>
+<p>The answer is no. $2W$ is also has $L=0$.</p>
+</li>
+</ol>
+</blockquote>
+<h1 id="Derivative-ref"><a href="#Derivative-ref" class="headerlink" title="Derivative ref"></a>Derivative <a href="https://mlxai.github.io/2017/01/06/vectorized-implementation-of-svm-loss-and-gradient-update.html" target="_blank" rel="noopener">ref</a></h1><p>Say for a single datapoint $(x_i,y_i)$, we have the following hinge loss:</p>
+<script type="math/tex; mode=display">
+L_i=\sum_{j\ne y_i}^{c} max(0, s_j+1-s_i)</script><p>where $c$ is the class number and $s_j=w_j^T x_i$ is the score for the $j{th}$ class. What we do here is to iterate scores for all classes and compare them with the score of truth class.</p>
+<p>To spread out, </p>
+<script type="math/tex; mode=display">
+\begin{align*}
+L_i = &\max(0,1+w_1x_i-w_{y_i}x_i) + \\
+ &\max(0, 1+w_2x_i-w_{y_i}x_i) + \\
+& \quad \quad \quad \quad \quad \quad \vdots \\
+&\max(0, 1+w_cx_i-w_{y_i}x_i)
+\end{align*}</script><p>If $(w_jx_i+1-w_{y_i}x_i)&gt;0$, $\frac{dL_i}{dw_j}=x_i$.</p>
+<p>But for $w_{y_i}$,</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{dL_i}{dw_{y_i}} &= - \sum_{j\neq y_i} \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta > 0) x_i \tag{3}
+\end{align*}</script><p>So the non-vectorized implementation is:</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></div>
+<div class="line">  <span class="string">"""</span></div>
+<div class="line"><span class="string">  Structured SVM loss function, naive implementation (with loops).</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs have dimension D, there are C classes, and we operate on minibatches</span></div>
+<div class="line"><span class="string">  of N examples.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs:</span></div>
+<div class="line"><span class="string">  - W: A numpy array of shape (D, C) containing weights.</span></div>
+<div class="line"><span class="string">  - X: A numpy array of shape (N, D) containing a minibatch of data.</span></div>
+<div class="line"><span class="string">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></div>
+<div class="line"><span class="string">    that X[i] has label c, where 0 &lt;= c &lt; C.</span></div>
+<div class="line"><span class="string">  - reg: (float) regularization strength</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Returns a tuple of:</span></div>
+<div class="line"><span class="string">  - loss as single float</span></div>
+<div class="line"><span class="string">  - gradient with respect to weights W; an array of same shape as W</span></div>
+<div class="line"><span class="string">  """</span></div>
+<div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div>
+<div class="line"></div>
+<div class="line">  <span class="comment"># compute the loss and the gradient</span></div>
+<div class="line">  num_classes = W.shape[<span class="number">1</span>]</div>
+<div class="line">  num_train = X.shape[<span class="number">0</span>]</div>
+<div class="line">  loss = <span class="number">0.0</span></div>
+<div class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(num_train):</div>
+<div class="line">    scores = X[i].dot(W)</div>
+<div class="line">    correct_class_score = scores[y[i]]</div>
+<div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(num_classes):</div>
+<div class="line">      <span class="keyword">if</span> j == y[i]:</div>
+<div class="line">        <span class="keyword">continue</span></div>
+<div class="line">      margin = scores[j] - correct_class_score + <span class="number">1</span> <span class="comment"># note delta = 1</span></div>
+<div class="line">      <span class="keyword">if</span> margin &gt; <span class="number">0</span>:</div>
+<div class="line">        loss += margin</div>
+<div class="line">        dW[:,j] += X[i]</div>
+<div class="line">        dW[:,y[i]] -= X[i]</div>
+<div class="line"></div>
+<div class="line">  <span class="comment"># Right now the loss is a sum over all training examples, but we want it</span></div>
+<div class="line">  <span class="comment"># to be an average instead so we divide by num_train.</span></div>
+<div class="line">    loss /= num_train</div>
+<div class="line">    dW /= num_train</div>
+<div class="line">  <span class="comment"># Add regularization to the loss.</span></div>
+<div class="line">    loss += reg * np.sum(W * W)</div>
+<div class="line">    dW += <span class="number">2</span>*reg*W</div>
+<div class="line">  <span class="keyword">return</span> loss, dW</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<p>The vectorized implementation is:</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></div>
+<div class="line">  <span class="string">"""</span></div>
+<div class="line"><span class="string">  Structured SVM loss function, vectorized implementation.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">  Inputs and outputs are the same as svm_loss_naive.</span></div>
+<div class="line"><span class="string">  """</span></div>
+<div class="line">  loss = <span class="number">0.0</span></div>
+<div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div>
+<div class="line">  score = X.dot(W)</div>
+<div class="line">  num_train = np.shape(X)[<span class="number">0</span>]</div>
+<div class="line">  num_class = np.shape(W)[<span class="number">1</span>]</div>
+<div class="line">  correct_score = score[np.arange(num_train),y].reshape(num_train,<span class="number">-1</span>)</div>
+<div class="line">  loss_ = score - correct_score+<span class="number">1</span></div>
+<div class="line">  loss_[np.arange(num_train),y] = <span class="number">0</span></div>
+<div class="line">  loss = np.sum(loss_[loss_&gt;<span class="number">0</span>])/num_train</div>
+<div class="line">  loss += reg * np.sum(W * W)</div>
+<div class="line">  mask = np.zeros_like(score)</div>
+<div class="line">  mask[score&gt;<span class="number">0</span>] = <span class="number">1</span></div>
+<div class="line">  mask[:,y] -= np.sum(mask,axis=<span class="number">1</span>)</div>
+<div class="line">  dW += X.T.dot(mask)</div>
+<div class="line">  dW /= num_train</div>
+<div class="line">  dW += <span class="number">2</span>*reg*W</div>
+<div class="line">  <span class="keyword">return</span> loss, dW</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h1 id="核方法"><a href="#核方法" class="headerlink" title="核方法"></a>核方法</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>通俗说，只要涉及空间的变换和內积的运算，我们就可以使用Kernel trick来简化运算。</p>
 <p>一般的，在高维空间计算內积，我们需要分两步：</p>
 <ol>
 <li><p>将原始低维数据空间$X$映射到更高维的$Z$空间：</p>
@@ -707,7 +918,7 @@ K(x_i,x_j)=z_i^Tz_j=\phi(x_i)^T\phi(x_j)</script><p>即，$K(x_i,x_j)$计算得�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软间隔最大化"><span class="nav-number">3.</span> <span class="nav-text">软间隔最大化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核方法"><span class="nav-number">4.</span> <span class="nav-text">核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">4.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-Trick-in-SVM"><span class="nav-number">4.2.</span> <span class="nav-text">Kernel Trick in SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用核函数"><span class="nav-number">4.3.</span> <span class="nav-text">常用核函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">5.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise1"><span class="nav-number">5.1.</span> <span class="nav-text">Exercise1</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软间隔最大化"><span class="nav-number">3.</span> <span class="nav-text">软间隔最大化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">4.1.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Derivative-ref"><span class="nav-number">5.</span> <span class="nav-text">Derivative ref</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核方法"><span class="nav-number">6.</span> <span class="nav-text">核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">6.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-Trick-in-SVM"><span class="nav-number">6.2.</span> <span class="nav-text">Kernel Trick in SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用核函数"><span class="nav-number">6.3.</span> <span class="nav-text">常用核函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">7.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise1"><span class="nav-number">7.1.</span> <span class="nav-text">Exercise1</span></a></li></ol></li></ol></div>
             
 
           </div>

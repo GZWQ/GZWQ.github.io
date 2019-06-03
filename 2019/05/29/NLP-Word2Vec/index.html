@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/0_Ta3qx5CQsrJloyCA.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/word2vec_weight_matrix_lookup_table.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/matrix_mult_w_one_hot.png">
-<meta property="og:updated_time" content="2019-06-03T20:47:25.056Z">
+<meta property="og:updated_time" content="2019-06-03T20:47:35.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Word2Vec">
 <meta name="twitter:description" content="Word embedding, i.e., vector representations of a particular word and also called word vectoring, is important in NLP. It is capable of capturing context of a word in a document, semantic and syntacti">
@@ -425,9 +425,7 @@ P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w
 <script type="math/tex; mode=display">
 \\
 \begin{equation}
-
 \begin{aligned}
-
 \frac{\partial}{\partial v_c}logP(o | c)&= \frac{\partial}{\partial v_c}log \frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
 &=\frac{\partial}{\partial v_c}log{\exp \left(u_{o}^{T} v_{c}\right)}-\frac{\partial}{\partial v_c}log {\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
 &=\frac{\partial}{\partial v_c}{ \left(u_{o}^{T} v_{c}\right)} - \frac{1}{\sum_{w \in V}\exp(u_{w}^{T}v_{c})}\frac{\partial}{\partial v_c}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
@@ -435,10 +433,7 @@ P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w
 &=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\exp \left(u_{w}^{T} v_{c}\right)\frac{\partial}{\partial v_c}(u_w^Tv_c)  \\
 &=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\exp \left(u_{w}^{T} v_{c}\right)(u_w) \\
 &=u_o-\sum_{w\in V}P(o|c)u_w
-
-
 \end{aligned}
-
 \end{equation}</script><p>Here $\sum_{w\in V}P(o|center)u_w$ is the expected context word by our trained model, and $u_o$ is our target context, </p>
 <p>it is like the difference between the target and prediction.</p>
 <p>Then we need to calculate the derivative for context vector $u_w$:</p>
