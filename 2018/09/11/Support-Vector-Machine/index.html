@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/1260px-Kernel_trick_idea.svg.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%2010.16.55%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/11/Support-Vector-Machine/Screen%20Shot%202018-09-11%20at%209.44.08%20AM.png">
-<meta property="og:updated_time" content="2019-06-03T21:37:11.737Z">
+<meta property="og:updated_time" content="2019-06-05T15:59:40.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Support Vector Machine">
 <meta name="twitter:description" content="支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。 支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。 在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，">
@@ -532,8 +532,7 @@ L_i = &\max(0,1+w_1x_i-w_{y_i}x_i) + \\
 <script type="math/tex; mode=display">
 \begin{align*}
 \frac{dL_i}{dw_{y_i}} &= - \sum_{j\neq y_i} \mathbb{1}(x_iw_j - x_iw_{y_i} + \Delta > 0) x_i \tag{3}
-\end{align*}</script><p>So the non-vectorized implementation is:</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+\end{align*}</script><h1 id="Numpy-Implementation"><a href="#Numpy-Implementation" class="headerlink" title="Numpy Implementation"></a>Numpy Implementation</h1><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -578,101 +577,164 @@ L_i = &\max(0,1+w_1x_i-w_{y_i}x_i) + \\
 <div class="line">42</div>
 <div class="line">43</div>
 <div class="line">44</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_naive</span><span class="params">(W, X, y, reg)</span>:</span></div>
-<div class="line">  <span class="string">"""</span></div>
-<div class="line"><span class="string">  Structured SVM loss function, naive implementation (with loops).</span></div>
-<div class="line"><span class="string"></span></div>
-<div class="line"><span class="string">  Inputs have dimension D, there are C classes, and we operate on minibatches</span></div>
-<div class="line"><span class="string">  of N examples.</span></div>
-<div class="line"><span class="string"></span></div>
-<div class="line"><span class="string">  Inputs:</span></div>
-<div class="line"><span class="string">  - W: A numpy array of shape (D, C) containing weights.</span></div>
-<div class="line"><span class="string">  - X: A numpy array of shape (N, D) containing a minibatch of data.</span></div>
-<div class="line"><span class="string">  - y: A numpy array of shape (N,) containing training labels; y[i] = c means</span></div>
-<div class="line"><span class="string">    that X[i] has label c, where 0 &lt;= c &lt; C.</span></div>
-<div class="line"><span class="string">  - reg: (float) regularization strength</span></div>
-<div class="line"><span class="string"></span></div>
-<div class="line"><span class="string">  Returns a tuple of:</span></div>
-<div class="line"><span class="string">  - loss as single float</span></div>
-<div class="line"><span class="string">  - gradient with respect to weights W; an array of same shape as W</span></div>
-<div class="line"><span class="string">  """</span></div>
-<div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
 <div class="line"></div>
-<div class="line">  <span class="comment"># compute the loss and the gradient</span></div>
-<div class="line">  num_classes = W.shape[<span class="number">1</span>]</div>
-<div class="line">  num_train = X.shape[<span class="number">0</span>]</div>
-<div class="line">  loss = <span class="number">0.0</span></div>
-<div class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(num_train):</div>
-<div class="line">    scores = X[i].dot(W)</div>
-<div class="line">    correct_class_score = scores[y[i]]</div>
-<div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(num_classes):</div>
-<div class="line">      <span class="keyword">if</span> j == y[i]:</div>
-<div class="line">        <span class="keyword">continue</span></div>
-<div class="line">      margin = scores[j] - correct_class_score + <span class="number">1</span> <span class="comment"># note delta = 1</span></div>
-<div class="line">      <span class="keyword">if</span> margin &gt; <span class="number">0</span>:</div>
-<div class="line">        loss += margin</div>
-<div class="line">        dW[:,j] += X[i]</div>
-<div class="line">        dW[:,y[i]] -= X[i]</div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SVM</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        self.W = <span class="keyword">None</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">svm_loss_naive</span><span class="params">(self,W, X, y, reg)</span>:</span></div>
+<div class="line">        <span class="string">'''</span></div>
+<div class="line"><span class="string">        :param W:A numpy array of shape (D, C) containing weights.</span></div>
+<div class="line"><span class="string">        :param X:A numpy array of shape (N, D) containing a minibatch of data.</span></div>
+<div class="line"><span class="string">        :param y:A numpy array of shape (N,) containing training labels; y[i] = c means</span></div>
+<div class="line"><span class="string">        that X[i] has label c, where 0 &lt;= c &lt; C.</span></div>
+<div class="line"><span class="string">        :param reg:(float) regularization strength</span></div>
+<div class="line"><span class="string">        :return:a tuple of:</span></div>
+<div class="line"><span class="string">                 - loss as single float</span></div>
+<div class="line"><span class="string">                 - gradient with respect to weights W; an array of same shape as W</span></div>
+<div class="line"><span class="string">        '''</span></div>
+<div class="line">        dW = np.zeros(W.shape)</div>
+<div class="line">        num_classes = W.shape[<span class="number">1</span>]</div>
+<div class="line">        num_train = X.shape[<span class="number">0</span>]</div>
+<div class="line">        loss = <span class="number">0.0</span></div>
+<div class="line">        scores = np.dot(X, W)</div>
+<div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num_train):</div>
+<div class="line">            target = y[i]</div>
+<div class="line">            score = scores[i]</div>
+<div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(num_classes):</div>
+<div class="line">                <span class="keyword">if</span> target == j:</div>
+<div class="line">                    <span class="keyword">continue</span></div>
+<div class="line">                <span class="keyword">if</span> score[j] - score[target] + <span class="number">1</span> &gt; <span class="number">0</span>:</div>
+<div class="line">                    loss += score[j] - score[target] + <span class="number">1</span></div>
+<div class="line">                    dW[:, j] += X[i]</div>
+<div class="line">                    dW[:, target] -= X[i]</div>
+<div class="line">        loss /= num_train</div>
+<div class="line">        loss += reg * np.sum(W ** <span class="number">2</span>)</div>
+<div class="line">        dW = dW / num_train + <span class="number">2</span> * reg * W</div>
+<div class="line">        <span class="keyword">return</span> loss, dW</div>
 <div class="line"></div>
-<div class="line">  <span class="comment"># Right now the loss is a sum over all training examples, but we want it</span></div>
-<div class="line">  <span class="comment"># to be an average instead so we divide by num_train.</span></div>
-<div class="line">    loss /= num_train</div>
-<div class="line">    dW /= num_train</div>
-<div class="line">  <span class="comment"># Add regularization to the loss.</span></div>
-<div class="line">    loss += reg * np.sum(W * W)</div>
-<div class="line">    dW += <span class="number">2</span>*reg*W</div>
-<div class="line">  <span class="keyword">return</span> loss, dW</div>
-</pre></td></tr></table></figure>
-
-</div></div>
-<p>The vectorized implementation is:</p>
-<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-<div class="line">3</div>
-<div class="line">4</div>
-<div class="line">5</div>
-<div class="line">6</div>
-<div class="line">7</div>
-<div class="line">8</div>
-<div class="line">9</div>
-<div class="line">10</div>
-<div class="line">11</div>
-<div class="line">12</div>
-<div class="line">13</div>
-<div class="line">14</div>
-<div class="line">15</div>
-<div class="line">16</div>
-<div class="line">17</div>
-<div class="line">18</div>
-<div class="line">19</div>
-<div class="line">20</div>
-<div class="line">21</div>
-<div class="line">22</div>
-<div class="line">23</div>
-</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(W, X, y, reg)</span>:</span></div>
-<div class="line">  <span class="string">"""</span></div>
-<div class="line"><span class="string">  Structured SVM loss function, vectorized implementation.</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">svm_loss_vectorized</span><span class="params">(self,W, X, y, reg)</span>:</span></div>
+<div class="line">        N = np.shape(X)[<span class="number">0</span>]</div>
+<div class="line">        C = np.shape(W)[<span class="number">1</span>]</div>
+<div class="line">        loss = <span class="number">0.0</span></div>
+<div class="line">        dW = np.zeros(W.shape)</div>
+<div class="line"></div>
+<div class="line">        scores = np.dot(X, W)</div>
+<div class="line">        target_scores = scores[np.arange(N), y].reshape(<span class="number">-1</span>, <span class="number">1</span>)</div>
+<div class="line">        scores_pos = scores - target_scores + <span class="number">1</span></div>
+<div class="line">        scores_pos[np.arange(N), y] = <span class="number">0</span></div>
+<div class="line">        scores_pos = np.maximum(scores_pos, <span class="number">0</span>)</div>
+<div class="line">        loss = np.sum(scores_pos) / N</div>
+<div class="line"></div>
+<div class="line">        mask = np.zeros(scores_pos.shape)</div>
+<div class="line">        mask[scores_pos &gt; <span class="number">0</span>] = <span class="number">1</span></div>
+<div class="line">        mask[np.arange(N), y] -= np.sum(mask, axis=<span class="number">1</span>)  <span class="comment"># attention:"-"</span></div>
+<div class="line">        dW = np.dot(X.T, mask)</div>
+<div class="line">        dW = dW / N + <span class="number">2</span> * reg * W</div>
+<div class="line"></div>
+<div class="line">        <span class="keyword">return</span> loss, dW</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">loss</span><span class="params">(self, X_batch, y_batch, reg)</span>:</span></div>
+<div class="line">        <span class="keyword">return</span> self.svm_loss_vectorized(self.W, X_batch, y_batch, reg)</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, X, y, learning_rate=<span class="number">1e-3</span>, reg=<span class="number">1e-5</span>, num_iters=<span class="number">100</span>,</span></span></div>
+<div class="line"><span class="function"><span class="params">              batch_size=<span class="number">200</span>, verbose=False)</span>:</span></div>
+<div class="line">        <span class="string">'''</span></div>
 <div class="line"><span class="string"></span></div>
-<div class="line"><span class="string">  Inputs and outputs are the same as svm_loss_naive.</span></div>
-<div class="line"><span class="string">  """</span></div>
-<div class="line">  loss = <span class="number">0.0</span></div>
-<div class="line">  dW = np.zeros(W.shape) <span class="comment"># initialize the gradient as zero</span></div>
-<div class="line">  score = X.dot(W)</div>
-<div class="line">  num_train = np.shape(X)[<span class="number">0</span>]</div>
-<div class="line">  num_class = np.shape(W)[<span class="number">1</span>]</div>
-<div class="line">  correct_score = score[np.arange(num_train),y].reshape(num_train,<span class="number">-1</span>)</div>
-<div class="line">  loss_ = score - correct_score+<span class="number">1</span></div>
-<div class="line">  loss_[np.arange(num_train),y] = <span class="number">0</span></div>
-<div class="line">  loss = np.sum(loss_[loss_&gt;<span class="number">0</span>])/num_train</div>
-<div class="line">  loss += reg * np.sum(W * W)</div>
-<div class="line">  mask = np.zeros_like(score)</div>
-<div class="line">  mask[score&gt;<span class="number">0</span>] = <span class="number">1</span></div>
-<div class="line">  mask[:,y] -= np.sum(mask,axis=<span class="number">1</span>)</div>
-<div class="line">  dW += X.T.dot(mask)</div>
-<div class="line">  dW /= num_train</div>
-<div class="line">  dW += <span class="number">2</span>*reg*W</div>
-<div class="line">  <span class="keyword">return</span> loss, dW</div>
+<div class="line"><span class="string">        :param X:A numpy array of shape (N, D) containing training data; there are N</span></div>
+<div class="line"><span class="string">          training samples each of dimension D.</span></div>
+<div class="line"><span class="string">        :param y:A numpy array of shape (N,) containing training labels; y[i] = c</span></div>
+<div class="line"><span class="string">          means that X[i] has label 0 &lt;= c &lt; C for C classes.</span></div>
+<div class="line"><span class="string">        :param learning_rate:(float) learning rate for optimization.</span></div>
+<div class="line"><span class="string">        :param reg:(float) regularization strength.</span></div>
+<div class="line"><span class="string">        :param num_iters:(integer) number of steps to take when optimizing</span></div>
+<div class="line"><span class="string">        :param batch_size:(integer) number of training examples to use at each step.</span></div>
+<div class="line"><span class="string">        :param verbose:(boolean) If true, print progress during optimization.</span></div>
+<div class="line"><span class="string">        :return:A list containing the value of the loss function at each training iteration.</span></div>
+<div class="line"><span class="string">        '''</span></div>
+<div class="line">        num_train, dim = X.shape</div>
+<div class="line">        num_classes = np.max(y) + <span class="number">1</span>  <span class="comment"># assume y takes values 0...K-1 where K is number of classes</span></div>
+<div class="line">        <span class="keyword">if</span> self.W <span class="keyword">is</span> <span class="keyword">None</span>:</div>
+<div class="line">            <span class="comment"># lazily initialize W</span></div>
+<div class="line">            self.W = <span class="number">0.001</span> * np.random.randn(dim, num_classes)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Run stochastic gradient descent to optimize W</span></div>
+<div class="line">        loss_history = []</div>
+<div class="line">        <span class="keyword">for</span> it <span class="keyword">in</span> range(num_iters):</div>
+<div class="line">            mask = np.random.choice(num_train, batch_size)</div>
+<div class="line">            X_batch = X[mask]</div>
+<div class="line">            y_batch = y[mask]</div>
+<div class="line"></div>
+<div class="line">            <span class="comment"># evaluate loss and gradient</span></div>
+<div class="line">            loss, grad = self.loss(X_batch, y_batch, reg)</div>
+<div class="line">            loss_history.append(loss)</div>
+<div class="line">            self.W -= learning_rate * grad</div>
+<div class="line">            <span class="keyword">if</span> verbose <span class="keyword">and</span> it % <span class="number">100</span> == <span class="number">0</span>:</div>
+<div class="line">                print(<span class="string">'iteration %d / %d: loss %f'</span> % (it, num_iters, loss))</div>
+<div class="line">        <span class="keyword">return</span> loss_history</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X)</span>:</span></div>
+<div class="line">        y_pred = np.zeros(X.shape[<span class="number">0</span>])</div>
+<div class="line">        scores = X.dot(self.W)</div>
+<div class="line">        y_pred = np.argmax(scores,axis=<span class="number">1</span>)</div>
+<div class="line">        <span class="keyword">return</span> y_pred</div>
 </pre></td></tr></table></figure>
 
 </div></div>
@@ -918,7 +980,7 @@ K(x_i,x_j)=z_i^Tz_j=\phi(x_i)^T\phi(x_j)</script><p>即，$K(x_i,x_j)$计算得�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软间隔最大化"><span class="nav-number">3.</span> <span class="nav-text">软间隔最大化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">4.1.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Derivative-ref"><span class="nav-number">5.</span> <span class="nav-text">Derivative ref</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核方法"><span class="nav-number">6.</span> <span class="nav-text">核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">6.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-Trick-in-SVM"><span class="nav-number">6.2.</span> <span class="nav-text">Kernel Trick in SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用核函数"><span class="nav-number">6.3.</span> <span class="nav-text">常用核函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">7.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise1"><span class="nav-number">7.1.</span> <span class="nav-text">Exercise1</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型"><span class="nav-number">2.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软间隔最大化"><span class="nav-number">3.</span> <span class="nav-text">软间隔最大化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#损失函数"><span class="nav-number">4.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Examples"><span class="nav-number">4.1.</span> <span class="nav-text">Examples</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Derivative-ref"><span class="nav-number">5.</span> <span class="nav-text">Derivative ref</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numpy-Implementation"><span class="nav-number">6.</span> <span class="nav-text">Numpy Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#核方法"><span class="nav-number">7.</span> <span class="nav-text">核方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">7.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel-Trick-in-SVM"><span class="nav-number">7.2.</span> <span class="nav-text">Kernel Trick in SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用核函数"><span class="nav-number">7.3.</span> <span class="nav-text">常用核函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python"><span class="nav-number">8.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Exercise1"><span class="nav-number">8.1.</span> <span class="nav-text">Exercise1</span></a></li></ol></li></ol></div>
             
 
           </div>
