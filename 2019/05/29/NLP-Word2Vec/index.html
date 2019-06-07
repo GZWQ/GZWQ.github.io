@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/0_Ta3qx5CQsrJloyCA.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/word2vec_weight_matrix_lookup_table.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/matrix_mult_w_one_hot.png">
-<meta property="og:updated_time" content="2019-06-03T20:47:35.978Z">
+<meta property="og:updated_time" content="2019-06-07T16:56:31.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Word2Vec">
 <meta name="twitter:description" content="Word embedding, i.e., vector representations of a particular word and also called word vectoring, is important in NLP. It is capable of capturing context of a word in a document, semantic and syntacti">
@@ -434,12 +434,214 @@ P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w
 &=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\exp \left(u_{w}^{T} v_{c}\right)(u_w) \\
 &=u_o-\sum_{w\in V}P(o|c)u_w
 \end{aligned}
-\end{equation}</script><p>Here $\sum_{w\in V}P(o|center)u_w$ is the expected context word by our trained model, and $u_o$ is our target context, </p>
-<p>it is like the difference between the target and prediction.</p>
-<p>Then we need to calculate the derivative for context vector $u_w$:</p>
+\end{equation}</script><p>Here $\sum_{w\in V}P(o|center)u_w$ is the expected context word by our trained model, and $u_o$ is our target context, it is like the difference between the target and prediction.</p>
+<p>We can treat $u_0$ as we choose the target row from contect matrix $U$, which is $U^T\cdot y$; as for $u_w$, we can see it as we also choose a row from context matrix, but which row? Actually, it is each row of the matrix and average them. Because $P(o|c)$ is the prediction, which is the output of our model, so we can treat it as $\hat y$. Therefor $\sum_{w\in V}P(o|c)u_w=U^T \cdot \hat y$ , so the gradient for center word vector is:</p>
 <script type="math/tex; mode=display">
-\frac{\partial \log p(o | c)}{\partial u_{o}}=v_{c}-v_{c} p(o | c)</script><h2 id="Negative-sampling"><a href="#Negative-sampling" class="headerlink" title="Negative sampling"></a>Negative sampling</h2><p>You may have noticed that the skip-gram neural network contains a huge number of weights… For our example with 300 features and a vocab of 10,000 words, that’s 3M weights in the hidden layer and output layer each! Training this on a large dataset would be prohibitive.</p>
+\frac{\partial}{\partial v_c}logP(o | c)= U^T \cdot (\hat y-y)</script><p>Then we need to calculate the derivative for context vector $u_w$:</p>
+<p>if $w=o$, then:</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}{\frac{\partial logP(o | c)}{\partial \boldsymbol{u}_{w}}} \\ {=-\boldsymbol{v}_{c}+\frac{1}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \frac{\partial \sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)}{\partial \boldsymbol{u}_{o}}} \\ {=-\boldsymbol{v}_{c}+\frac{1}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \frac{\partial \exp \left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)}{\partial \boldsymbol{u}_{o}}} \\ {=-\boldsymbol{v}_{c}+\frac{\exp \left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \boldsymbol{v}_{c}} \\ {=(P(O=o | C=c)-1) \boldsymbol{v}_{c}}\end{array}</script><p>if $w \ne o$, </p>
+<script type="math/tex; mode=display">
+\begin{array}{c}{\frac{\partial logP(o | c)}{\partial \boldsymbol{u}_{w}}}\\ {=\frac{\exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \boldsymbol{v}_{c}} \\ {=P(O=w | C=c) \boldsymbol{v}_{c}}\end{array}</script><p>Similarly, we can combine $P(O=o | C=c)-1$ and $P(O=o | C=c)$ as $\hat y - y$,</p>
+<script type="math/tex; mode=display">
+\frac{\partial \log p(o | c)}{\partial u_{o}}=(\hat y-y) \cdot v_{c}</script><h2 id="Negative-sampling"><a href="#Negative-sampling" class="headerlink" title="Negative sampling"></a>Negative sampling</h2><p>You may have noticed that the skip-gram neural network contains a huge number of weights… For our example with 300 features and a vocab of 10,000 words, that’s 3M weights in the hidden layer and output layer each! Training this on a large dataset would be prohibitive.</p>
 <p>Negative sampling addresses this by having each training sample only modify a small percentage of the weights, rather than all of them. Here’s how it works.</p>
+<p>Assume that $K$ negative samples (words) are drawn from the vocabulary. For simplicity of notation we shall refer to them as $w_1,w_2,..,w_k$ and their outside vectors as $u_1,u_2,…,u_k$. Note that $o \notin \{w_1,w_2,…,w_k\}$. For a center word $c$ and an outside word $o$, the negative sampling loss function is given by:</p>
+<script type="math/tex; mode=display">
+J_{\mathrm{neg}-\text { sample }}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)=-\log \left(\sigma\left(\boldsymbol{u}_{o}^{\top} \boldsymbol{v}_{c}\right)\right)-\sum_{k=1}^{K} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{\top} \boldsymbol{v}_{c}\right)\right)</script><p>for a sample $w_1,…,w_k$, where $\sigma(\cdot)$ is the sigmoid function.</p>
+<h3 id="Gradient-1"><a href="#Gradient-1" class="headerlink" title="Gradient"></a>Gradient</h3><p><strong>For center word vector $v_c$:</strong></p>
+<script type="math/tex; mode=display">
+\begin{array}{c}{\frac{\partial J_{\text {neg-sample}}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)}{\partial \boldsymbol{v}_{c}} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right)} \\ {=\frac{\partial\left(-\log \left(\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right)-\sum_{k=1}^{K} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right)\right)}{\partial \boldsymbol{v}_{c}}} \\ {=-\frac{\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\left(1-\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right)}{\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)} \frac{\partial \boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}}{\partial \boldsymbol{v}_{c}}-\sum_{k=1}^{K} \frac{\partial \log \left(\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right)}{\partial \boldsymbol{v}_{c}}} \\ {=-\left(1-\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right) \boldsymbol{u}_{o}+\sum_{k=1}^{K}\left(1-\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right) \boldsymbol{u}_{k}}\end{array}</script><p><strong>For outside target word vector $u_o$:</strong></p>
+<script type="math/tex; mode=display">
+=\frac{\partial\left(-\log \left(\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right)\right.}{\partial \boldsymbol{u}_{o}}=-\left(1-\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right) \boldsymbol{v}_{c}</script><p><strong>For sampling outside word vector $u_w$:</strong></p>
+<script type="math/tex; mode=display">
+=\frac{\partial\left(-\log \left(\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right)\right.}{\partial \boldsymbol{u}_{k}}=\left(1-\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right) \boldsymbol{v}_{c}</script><h1 id="Numpy-Implementation"><a href="#Numpy-Implementation" class="headerlink" title="Numpy Implementation"></a>Numpy Implementation</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">skipgram</span><span class="params">(currentCenterWord, windowSize, outsideWords, word2Ind,</span></span></div>
+<div class="line"><span class="function"><span class="params">             centerWordVectors, outsideVectors, dataset,</span></span></div>
+<div class="line"><span class="function"><span class="params">             word2vecLossAndGradient=naiveSoftmaxLossAndGradient)</span>:</span></div>
+<div class="line">    <span class="string">'''</span></div>
+<div class="line"><span class="string">    :param currentCenterWord: one current center word</span></div>
+<div class="line"><span class="string">    :param windowSize: integer, context window size</span></div>
+<div class="line"><span class="string">    :param outsideWords: list of no more than 2*windowSize strings, the outside words</span></div>
+<div class="line"><span class="string">    :param word2Ind: a dictionary that maps words to their indices in</span></div>
+<div class="line"><span class="string">              the word vector list</span></div>
+<div class="line"><span class="string">    :param centerWordVectors: center word vectors (as rows) for all words in vocab</span></div>
+<div class="line"><span class="string">    :param outsideVectors: outside word vectors (as rows) for all words in vocab</span></div>
+<div class="line"><span class="string">    :param dataset:</span></div>
+<div class="line"><span class="string">    :param word2vecLossAndGradient: he loss and gradient function for</span></div>
+<div class="line"><span class="string">                               a prediction vector given the outsideWordIdx</span></div>
+<div class="line"><span class="string">                               word vectors, could be one of the two</span></div>
+<div class="line"><span class="string">                               loss functions you implemented above.</span></div>
+<div class="line"><span class="string">    :return:</span></div>
+<div class="line"><span class="string">    loss -- the loss function value for the skip-gram model</span></div>
+<div class="line"><span class="string">    gradCenterVecs -- the gradient with respect to the center word vectors</span></div>
+<div class="line"><span class="string">    gradOutsideVectors -- the gradient with respect to the outside word vectors</span></div>
+<div class="line"><span class="string">    '''</span></div>
+<div class="line">    loss = <span class="number">0.0</span></div>
+<div class="line">    gradCenterVecs = np.zeros(centerWordVectors.shape)</div>
+<div class="line">    gradOutsideVectors = np.zeros(outsideVectors.shape)</div>
+<div class="line"></div>
+<div class="line">    idx = word2Ind[currentCenterWord]</div>
+<div class="line">    center_word_vector = centerWordVectors[idx]</div>
+<div class="line">    <span class="keyword">for</span> outside_word <span class="keyword">in</span> outsideWords:</div>
+<div class="line">        outside_word_idx = word2Ind[outside_word]</div>
+<div class="line">        loss_, gradCenterVec_, gradOutsideVecs_ = word2vecLossAndGradient(center_word_vector, outside_word_idx,</div>
+<div class="line">                                                                          outsideVectors, dataset)</div>
+<div class="line"></div>
+<div class="line">        loss += loss_</div>
+<div class="line">        gradCenterVecs[idx] += gradCenterVec_</div>
+<div class="line">        gradOutsideVectors += gradOutsideVecs_</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> loss, gradCenterVecs, gradOutsideVectors</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">naiveSoftmaxLossAndGradient</span><span class="params">(centerWordVec,outsideWordIdx,outsideVectors)</span>:</span></div>
+<div class="line">    <span class="string">'''</span></div>
+<div class="line"><span class="string">    :param centerWordVec: shape=(D,)</span></div>
+<div class="line"><span class="string">    :param outsideWordIdx: target word index</span></div>
+<div class="line"><span class="string">    :param outsideVectors: shape=(W,D)</span></div>
+<div class="line"><span class="string">    :return:</span></div>
+<div class="line"><span class="string">    '''</span></div>
+<div class="line"></div>
+<div class="line">    W,D = outsideVectors.shape</div>
+<div class="line">    scores = centerWordVec.dot(outsideVectors.T)</div>
+<div class="line">    prob = softmax(scores)</div>
+<div class="line"></div>
+<div class="line">    loss = <span class="number">-1</span>*np.log(prob)[outsideWordIdx]</div>
+<div class="line"></div>
+<div class="line">    target = np.zeros(W)</div>
+<div class="line">    target[outsideWordIdx] = <span class="number">1</span></div>
+<div class="line">    gradCenterVec = outsideVectors.T.dot(prob-target)</div>
+<div class="line">    gradOutsideVecs = (prob-target).reshape(<span class="number">-1</span>,<span class="number">1</span>).dot(centerWordVec.reshape((<span class="number">1</span>,<span class="number">-1</span>)))</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> loss, gradCenterVec, gradOutsideVecs</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">negSamplingLossAndGradient</span><span class="params">(centerWordVec,outsideWordIdx,outsideVectors,dataset,K=<span class="number">10</span>)</span>:</span></div>
+<div class="line">    <span class="string">'''</span></div>
+<div class="line"><span class="string">    :param centerWordVec: size [D,]</span></div>
+<div class="line"><span class="string">    :param outsideWordIdx: size [1,]</span></div>
+<div class="line"><span class="string">    :param outsideVectors: size [W,D]</span></div>
+<div class="line"><span class="string">    :param dataset:</span></div>
+<div class="line"><span class="string">    :param K:</span></div>
+<div class="line"><span class="string">    :return:</span></div>
+<div class="line"><span class="string">    '''</span></div>
+<div class="line">    negSampleWordIndices = getNegativeSamples(outsideWordIdx, dataset, K)</div>
+<div class="line"></div>
+<div class="line">    indices = [outsideWordIdx] + negSampleWordIndices</div>
+<div class="line"></div>
+<div class="line">    gradCenterVec = np.zeros_like(centerWordVec)</div>
+<div class="line">    gradOutsideVecs = np.zeros_like(outsideVectors)</div>
+<div class="line">    loss = <span class="number">0</span></div>
+<div class="line"></div>
+<div class="line">    scores1 = centerWordVec.dot(outsideVectors[outsideWordIdx].T)</div>
+<div class="line">    scores2 = np.dot(outsideVectors[outsideWordIdx],centerWordVec)</div>
+<div class="line">    prob = sigmoid(scores2)</div>
+<div class="line">    loss -= np.log(prob)</div>
+<div class="line"></div>
+<div class="line">    gradCenterVec += (prob<span class="number">-1</span>)*outsideVectors[outsideWordIdx]</div>
+<div class="line">    gradOutsideVecs[outsideWordIdx] += (prob<span class="number">-1</span>)* centerWordVec</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(K):</div>
+<div class="line">        idx = indices[i+<span class="number">1</span>]</div>
+<div class="line">        s = centerWordVec.dot(<span class="number">-1</span>*outsideVectors[idx].T)</div>
+<div class="line">        p = sigmoid(s)</div>
+<div class="line">        loss -= np.log(p)</div>
+<div class="line"></div>
+<div class="line">        gradCenterVec += (<span class="number">1</span>-p)*outsideVectors[idx]</div>
+<div class="line">        gradOutsideVecs[idx] += (<span class="number">1</span>-p)*centerWordVec</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> loss, gradCenterVec, gradOutsideVecs</div>
+</pre></td></tr></table></figure>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/introduction-to-word-embedding-and-word2vec-652d0c2060fa" target="_blank" rel="noopener">Introduction to Word Embedding and Word2Vec</a> </p>
 <p><a href="http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/" target="_blank" rel="noopener">Word2Vec Tutorial - The Skip-Gram Model</a> </p>
 <p><a href="https://www.analyticsvidhya.com/blog/2017/06/word-embeddings-count-word2veec/" target="_blank" rel="noopener">An Intuitive Understanding of Word Embeddings: From Count Vectors to Word2Vec</a> - calculation examples</p>
@@ -616,7 +818,7 @@ P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-do-we-need-them"><span class="nav-number">1.</span> <span class="nav-text">Why do we need them?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-Word2Vec-work"><span class="nav-number">2.</span> <span class="nav-text">How does Word2Vec work?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CBOW-Model"><span class="nav-number">2.1.</span> <span class="nav-text">CBOW Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Gram-Model"><span class="nav-number">2.2.</span> <span class="nav-text">Skip-Gram Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Hidden-Layer"><span class="nav-number">2.2.1.</span> <span class="nav-text">The Hidden Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intuition"><span class="nav-number">2.2.2.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss-Function"><span class="nav-number">2.2.3.</span> <span class="nav-text">Loss Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient"><span class="nav-number">2.2.4.</span> <span class="nav-text">Gradient</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Negative-sampling"><span class="nav-number">2.3.</span> <span class="nav-text">Negative sampling</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Why-do-we-need-them"><span class="nav-number">1.</span> <span class="nav-text">Why do we need them?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-does-Word2Vec-work"><span class="nav-number">2.</span> <span class="nav-text">How does Word2Vec work?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CBOW-Model"><span class="nav-number">2.1.</span> <span class="nav-text">CBOW Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Gram-Model"><span class="nav-number">2.2.</span> <span class="nav-text">Skip-Gram Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Hidden-Layer"><span class="nav-number">2.2.1.</span> <span class="nav-text">The Hidden Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Intuition"><span class="nav-number">2.2.2.</span> <span class="nav-text">Intuition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss-Function"><span class="nav-number">2.2.3.</span> <span class="nav-text">Loss Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient"><span class="nav-number">2.2.4.</span> <span class="nav-text">Gradient</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Negative-sampling"><span class="nav-number">2.3.</span> <span class="nav-text">Negative sampling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gradient-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">Gradient</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Numpy-Implementation"><span class="nav-number">3.</span> <span class="nav-text">Numpy Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
