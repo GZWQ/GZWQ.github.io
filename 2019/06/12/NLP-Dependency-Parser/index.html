@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/12/NLP-Dependency-Parser/Screen%20Shot%202019-06-12%20at%205.34.07%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/NLP-Dependency-Parser/Screen%20Shot%202019-06-12%20at%205.35.18%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/12/NLP-Dependency-Parser/Screen%20Shot%202019-06-12%20at%205.36.31%20PM.png">
-<meta property="og:updated_time" content="2019-06-12T22:46:00.349Z">
+<meta property="og:updated_time" content="2019-06-13T16:55:46.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Dependency Parser">
 <meta name="twitter:description" content="Dependency structure of sentences shows which words depend on (modify or are arguments of) which other words. These binary asymmetric relations between the words are called dependencies and are depict">
@@ -664,7 +664,483 @@
 <div class="line">    <span class="comment">### END YOUR CODE</span></div>
 <div class="line">    <span class="keyword">return</span> dependencies</div>
 </pre></td></tr></table></figure>
-<h2 id="Train-Parser-Network"><a href="#Train-Parser-Network" class="headerlink" title="Train Parser Network"></a>Train Parser Network</h2>
+<h2 id="Train-Parser-Network"><a href="#Train-Parser-Network" class="headerlink" title="Train Parser Network"></a>Train Parser Network</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+<div class="line">102</div>
+<div class="line">103</div>
+<div class="line">104</div>
+<div class="line">105</div>
+<div class="line">106</div>
+<div class="line">107</div>
+<div class="line">108</div>
+<div class="line">109</div>
+<div class="line">110</div>
+<div class="line">111</div>
+<div class="line">112</div>
+<div class="line">113</div>
+<div class="line">114</div>
+<div class="line">115</div>
+<div class="line">116</div>
+<div class="line">117</div>
+<div class="line">118</div>
+<div class="line">119</div>
+<div class="line">120</div>
+<div class="line">121</div>
+<div class="line">122</div>
+<div class="line">123</div>
+<div class="line">124</div>
+<div class="line">125</div>
+<div class="line">126</div>
+<div class="line">127</div>
+<div class="line">128</div>
+<div class="line">129</div>
+<div class="line">130</div>
+<div class="line">131</div>
+<div class="line">132</div>
+<div class="line">133</div>
+<div class="line">134</div>
+<div class="line">135</div>
+<div class="line">136</div>
+<div class="line">137</div>
+<div class="line">138</div>
+<div class="line">139</div>
+<div class="line">140</div>
+<div class="line">141</div>
+<div class="line">142</div>
+<div class="line">143</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> torch</div>
+<div class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</div>
+<div class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ParserModel</span><span class="params">(nn.Module)</span>:</span></div>
+<div class="line">    <span class="string">""" Feedforward neural network with an embedding layer and single hidden layer.</span></div>
+<div class="line"><span class="string">    The ParserModel will predict which transition should be applied to a</span></div>
+<div class="line"><span class="string">    given partial parse configuration.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    PyTorch Notes:</span></div>
+<div class="line"><span class="string">        - Note that "ParserModel" is a subclass of the "nn.Module" class. In PyTorch all neural networks</span></div>
+<div class="line"><span class="string">            are a subclass of this "nn.Module".</span></div>
+<div class="line"><span class="string">        - The "__init__" method is where you define all the layers and their respective parameters</span></div>
+<div class="line"><span class="string">            (embedding layers, linear layers, dropout layers, etc.).</span></div>
+<div class="line"><span class="string">        - "__init__" gets automatically called when you create a new instance of your class, e.g.</span></div>
+<div class="line"><span class="string">            when you write "m = ParserModel()".</span></div>
+<div class="line"><span class="string">        - Other methods of ParserModel can access variables that have "self." prefix. Thus,</span></div>
+<div class="line"><span class="string">            you should add the "self." prefix layers, values, etc. that you want to utilize</span></div>
+<div class="line"><span class="string">            in other ParserModel methods.</span></div>
+<div class="line"><span class="string">        - For further documentation on "nn.Module" please see https://pytorch.org/docs/stable/nn.html.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, embeddings, n_features=<span class="number">36</span>,</span></span></div>
+<div class="line"><span class="function"><span class="params">        hidden_size=<span class="number">200</span>, n_classes=<span class="number">3</span>, dropout_prob=<span class="number">0.5</span>)</span>:</span></div>
+<div class="line">        <span class="string">""" Initialize the parser model.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">        @param embeddings (Tensor): word embeddings (num_words, embedding_size)</span></div>
+<div class="line"><span class="string">        @param n_features (int): number of input features</span></div>
+<div class="line"><span class="string">        @param hidden_size (int): number of hidden units</span></div>
+<div class="line"><span class="string">        @param n_classes (int): number of output classes</span></div>
+<div class="line"><span class="string">        @param dropout_prob (float): dropout probability</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        super(ParserModel, self).__init__()</div>
+<div class="line">        self.n_features = n_features</div>
+<div class="line">        self.n_classes = n_classes</div>
+<div class="line">        self.dropout_prob = dropout_prob</div>
+<div class="line">        self.embed_size = embeddings.shape[<span class="number">1</span>]</div>
+<div class="line">        self.hidden_size = hidden_size</div>
+<div class="line">        self.pretrained_embeddings = nn.Embedding(embeddings.shape[<span class="number">0</span>], self.embed_size)</div>
+<div class="line">        self.pretrained_embeddings.weight = nn.Parameter(torch.tensor(embeddings))</div>
+<div class="line"></div>
+<div class="line">        <span class="comment">### YOUR CODE HERE (~5 Lines)</span></div>
+<div class="line">        <span class="comment">### <span class="doctag">TODO:</span></span></div>
+<div class="line">        <span class="comment">###     1) Construct `self.embed_to_hidden` linear layer, initializing the weight matrix</span></div>
+<div class="line">        <span class="comment">###         with the `nn.init.xavier_uniform_` function with `gain = 1` (default)</span></div>
+<div class="line">        <span class="comment">###     2) Construct `self.dropout` layer.</span></div>
+<div class="line">        <span class="comment">###     3) Construct `self.hidden_to_logits` linear layer, initializing the weight matrix</span></div>
+<div class="line">        <span class="comment">###         with the `nn.init.xavier_uniform_` function with `gain = 1` (default)</span></div>
+<div class="line">        <span class="comment">###</span></div>
+<div class="line">        <span class="comment">### Note: Here, we use Xavier Uniform Initialization for our Weight initialization.</span></div>
+<div class="line">        <span class="comment">###         It has been shown empirically, that this provides better initial weights</span></div>
+<div class="line">        <span class="comment">###         for training networks than random uniform initialization.</span></div>
+<div class="line">        <span class="comment">###         For more details checkout this great blogpost:</span></div>
+<div class="line">        <span class="comment">###             http://andyljones.tumblr.com/post/110998971763/an-explanation-of-xavier-initialization </span></div>
+<div class="line">        <span class="comment">### Hints:</span></div>
+<div class="line">        <span class="comment">###     - After you create a linear layer you can access the weight</span></div>
+<div class="line">        <span class="comment">###       matrix via:</span></div>
+<div class="line">        <span class="comment">###         linear_layer.weight</span></div>
+<div class="line">        <span class="comment">###</span></div>
+<div class="line">        <span class="comment">### Please see the following docs for support:</span></div>
+<div class="line">        <span class="comment">###     Linear Layer: https://pytorch.org/docs/stable/nn.html#torch.nn.Linear</span></div>
+<div class="line">        <span class="comment">###     Xavier Init: https://pytorch.org/docs/stable/nn.html#torch.nn.init.xavier_uniform_</span></div>
+<div class="line">        <span class="comment">###     Dropout: https://pytorch.org/docs/stable/nn.html#torch.nn.Dropout</span></div>
+<div class="line"></div>
+<div class="line">        self.embed_to_hidden = nn.Linear(self.embed_size*self.n_features,self.hidden_size) <span class="comment"># input_size = n_features * embedding_size</span></div>
+<div class="line">        nn.init.xavier_uniform_(self.embed_to_hidden.weight)</div>
+<div class="line">        self.dropout = nn.Dropout(self.dropout_prob)</div>
+<div class="line">        self.hidden_to_logits = nn.Linear(hidden_size,self.n_classes)</div>
+<div class="line">        nn.init.xavier_uniform_(self.hidden_to_logits.weight)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment">### END YOUR CODE</span></div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">embedding_lookup</span><span class="params">(self, t)</span>:</span></div>
+<div class="line">        <span class="string">""" Utilize `self.pretrained_embeddings` to map input `t` from input tokens (integers)</span></div>
+<div class="line"><span class="string">            to embedding vectors.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">            PyTorch Notes:</span></div>
+<div class="line"><span class="string">                - `self.pretrained_embeddings` is a torch.nn.Embedding object that we defined in __init__</span></div>
+<div class="line"><span class="string">                - Here `t` is a tensor where each row represents a list of features. Each feature is represented by an integer (input token).</span></div>
+<div class="line"><span class="string">                - In PyTorch the Embedding object, e.g. `self.pretrained_embeddings`, allows you to</span></div>
+<div class="line"><span class="string">                    go from an index to embedding. Please see the documentation (https://pytorch.org/docs/stable/nn.html#torch.nn.Embedding)</span></div>
+<div class="line"><span class="string">                    to learn how to use `self.pretrained_embeddings` to extract the embeddings for your tensor `t`.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">            @param t (Tensor): input tensor of tokens (batch_size, n_features)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">            @return x (Tensor): tensor of embeddings for words represented in t</span></div>
+<div class="line"><span class="string">                                (batch_size, n_features * embed_size)</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        <span class="comment">### YOUR CODE HERE (~1-3 Lines)</span></div>
+<div class="line">        <span class="comment">### <span class="doctag">TODO:</span></span></div>
+<div class="line">        <span class="comment">###     1) Use `self.pretrained_embeddings` to lookup the embeddings for the input tokens in `t`.</span></div>
+<div class="line">        <span class="comment">###     2) After you apply the embedding lookup, you will have a tensor shape (batch_size, n_features, embedding_size).</span></div>
+<div class="line">        <span class="comment">###         Use the tensor `view` method to reshape the embeddings tensor to (batch_size, n_features * embedding_size)</span></div>
+<div class="line">        <span class="comment">###</span></div>
+<div class="line">        <span class="comment">### Note: In order to get batch_size, you may need use the tensor .size() function:</span></div>
+<div class="line">        <span class="comment">###         https://pytorch.org/docs/stable/tensors.html#torch.Tensor.size</span></div>
+<div class="line">        <span class="comment">###</span></div>
+<div class="line">        <span class="comment">###  Please see the following docs for support:</span></div>
+<div class="line">        <span class="comment">###     Embedding Layer: https://pytorch.org/docs/stable/nn.html#torch.nn.Embedding</span></div>
+<div class="line">        <span class="comment">###     View: https://pytorch.org/docs/stable/tensors.html#torch.Tensor.view</span></div>
+<div class="line">        batch_size = t.shape[<span class="number">0</span>]</div>
+<div class="line">        x = self.pretrained_embeddings(t).view(batch_size,<span class="number">-1</span>)</div>
+<div class="line">        <span class="comment">### END YOUR CODE</span></div>
+<div class="line">        <span class="keyword">return</span> x</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, t)</span>:</span></div>
+<div class="line">        <span class="string">""" Run the model forward.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">            Note that we will not apply the softmax function here because it is included in the loss function nn.CrossEntropyLoss</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">            PyTorch Notes:</span></div>
+<div class="line"><span class="string">                - Every nn.Module object (PyTorch model) has a `forward` function.</span></div>
+<div class="line"><span class="string">                - When you apply your nn.Module to an input tensor `t` this function is applied to the tensor.</span></div>
+<div class="line"><span class="string">                    For example, if you created an instance of your ParserModel and applied it to some `t` as follows,</span></div>
+<div class="line"><span class="string">                    the `forward` function would called on `t` and the result would be stored in the `output` variable:</span></div>
+<div class="line"><span class="string">                        model = ParserModel()</span></div>
+<div class="line"><span class="string">                        output = model(t) # this calls the forward function</span></div>
+<div class="line"><span class="string">                - For more details checkout: https://pytorch.org/docs/stable/nn.html#torch.nn.Module.forward</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">        @param t (Tensor): input tensor of tokens (batch_size, n_features)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">        @return logits (Tensor): tensor of predictions (output after applying the layers of the network)</span></div>
+<div class="line"><span class="string">                                 without applying softmax (batch_size, n_classes)</span></div>
+<div class="line"><span class="string">        """</span></div>
+<div class="line">        <span class="comment">###  YOUR CODE HERE (~3-5 lines)</span></div>
+<div class="line">        <span class="comment">### <span class="doctag">TODO:</span></span></div>
+<div class="line">        <span class="comment">###     1) Apply `self.embedding_lookup` to `t` to get the embeddings</span></div>
+<div class="line">        <span class="comment">###     2) Apply `embed_to_hidden` linear layer to the embeddings</span></div>
+<div class="line">        <span class="comment">###     3) Apply relu non-linearity to the output of step 2 to get the hidden units.</span></div>
+<div class="line">        <span class="comment">###     4) Apply dropout layer to the output of step 3.</span></div>
+<div class="line">        <span class="comment">###     5) Apply `hidden_to_logits` layer to the output of step 4 to get the logits.</span></div>
+<div class="line">        <span class="comment">###</span></div>
+<div class="line">        <span class="comment">### Note: We do not apply the softmax to the logits here, because</span></div>
+<div class="line">        <span class="comment">### the loss function (torch.nn.CrossEntropyLoss) applies it more efficiently.</span></div>
+<div class="line">        <span class="comment">###</span></div>
+<div class="line">        <span class="comment">### Please see the following docs for support:</span></div>
+<div class="line">        <span class="comment">###     ReLU: https://pytorch.org/docs/stable/nn.html?highlight=relu#torch.nn.functional.relu</span></div>
+<div class="line">        features_embeddings = self.embedding_lookup(t)</div>
+<div class="line">        o = F.relu(self.embed_to_hidden(features_embeddings))</div>
+<div class="line">        o = self.dropout(o)</div>
+<div class="line">        logits = self.hidden_to_logits(o)</div>
+<div class="line">        <span class="comment">### END YOUR CODE</span></div>
+<div class="line">        <span class="keyword">return</span> logits</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(parser, train_data, dev_data, output_path, batch_size=<span class="number">1024</span>, n_epochs=<span class="number">10</span>, lr=<span class="number">0.0005</span>)</span>:</span></div>
+<div class="line">    <span class="string">""" Train the neural dependency parser.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    @param parser (Parser): Neural Dependency Parser</span></div>
+<div class="line"><span class="string">    @param train_data ():</span></div>
+<div class="line"><span class="string">    @param dev_data ():</span></div>
+<div class="line"><span class="string">    @param output_path (str): Path to which model weights and results are written.</span></div>
+<div class="line"><span class="string">    @param batch_size (int): Number of examples in a single batch</span></div>
+<div class="line"><span class="string">    @param n_epochs (int): Number of training epochs</span></div>
+<div class="line"><span class="string">    @param lr (float): Learning rate</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    best_dev_UAS = <span class="number">0</span></div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">    <span class="comment">### YOUR CODE HERE (~2-7 lines)</span></div>
+<div class="line">    <span class="comment">### <span class="doctag">TODO:</span></span></div>
+<div class="line">    <span class="comment">###      1) Construct Adam Optimizer in variable `optimizer`</span></div>
+<div class="line">    <span class="comment">###      2) Construct the Cross Entropy Loss Function in variable `loss_func`</span></div>
+<div class="line">    <span class="comment">###</span></div>
+<div class="line">    <span class="comment">### Hint: Use `parser.model.parameters()` to pass optimizer</span></div>
+<div class="line">    <span class="comment">###       necessary parameters to tune.</span></div>
+<div class="line">    <span class="comment">### Please see the following docs for support:</span></div>
+<div class="line">    <span class="comment">###     Adam Optimizer: https://pytorch.org/docs/stable/optim.html</span></div>
+<div class="line">    <span class="comment">###     Cross Entropy Loss: https://pytorch.org/docs/stable/nn.html#crossentropyloss</span></div>
+<div class="line">    optimizer = optim.Adam(parser.model.parameters(),lr=lr)</div>
+<div class="line">    loss_func = nn.CrossEntropyLoss()</div>
+<div class="line"></div>
+<div class="line">    <span class="comment">### END YOUR CODE</span></div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(n_epochs):</div>
+<div class="line">        print(<span class="string">"Epoch &#123;:&#125; out of &#123;:&#125;"</span>.format(epoch + <span class="number">1</span>, n_epochs))</div>
+<div class="line">        dev_UAS = train_for_epoch(parser, train_data, dev_data, optimizer, loss_func, batch_size)</div>
+<div class="line">        <span class="keyword">if</span> dev_UAS &gt; best_dev_UAS:</div>
+<div class="line">            best_dev_UAS = dev_UAS</div>
+<div class="line">            print(<span class="string">"New best dev UAS! Saving model."</span>)</div>
+<div class="line">            torch.save(parser.model.state_dict(), output_path)</div>
+<div class="line">        print(<span class="string">""</span>)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_for_epoch</span><span class="params">(parser, train_data, dev_data, optimizer, loss_func, batch_size)</span>:</span></div>
+<div class="line">    <span class="string">""" Train the neural dependency parser for single epoch.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Note: In PyTorch we can signify train versus test and automatically have</span></div>
+<div class="line"><span class="string">    the Dropout Layer applied and removed, accordingly, by specifying</span></div>
+<div class="line"><span class="string">    whether we are training, `model.train()`, or evaluating, `model.eval()`</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    @param parser (Parser): Neural Dependency Parser</span></div>
+<div class="line"><span class="string">    @param train_data ():</span></div>
+<div class="line"><span class="string">    @param dev_data ():</span></div>
+<div class="line"><span class="string">    @param optimizer (nn.Optimizer): Adam Optimizer</span></div>
+<div class="line"><span class="string">    @param loss_func (nn.CrossEntropyLoss): Cross Entropy Loss Function</span></div>
+<div class="line"><span class="string">    @param batch_size (int): batch size</span></div>
+<div class="line"><span class="string">    @param lr (float): learning rate</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    @return dev_UAS (float): Unlabeled Attachment Score (UAS) for dev data</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    parser.model.train() <span class="comment"># Places model in "train" mode, i.e. apply dropout layer</span></div>
+<div class="line">    n_minibatches = math.ceil(len(train_data) / batch_size)</div>
+<div class="line">    loss_meter = AverageMeter()</div>
+<div class="line">    dev_UAS, _ = parser.parse(dev_data)</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">with</span> tqdm(total=(n_minibatches)) <span class="keyword">as</span> prog:</div>
+<div class="line">        <span class="keyword">for</span> i, (train_x, train_y) <span class="keyword">in</span> enumerate(minibatches(train_data, batch_size)):</div>
+<div class="line">            optimizer.zero_grad()   <span class="comment"># remove any baggage in the optimizer</span></div>
+<div class="line">            loss = <span class="number">0.</span> <span class="comment"># store loss for this batch here</span></div>
+<div class="line">            train_x = torch.from_numpy(train_x).long()</div>
+<div class="line">            train_y = torch.from_numpy(train_y.nonzero()[<span class="number">1</span>]).long()</div>
+<div class="line"></div>
+<div class="line">            <span class="comment">### YOUR CODE HERE (~5-10 lines)</span></div>
+<div class="line">            <span class="comment">### <span class="doctag">TODO:</span></span></div>
+<div class="line">            <span class="comment">###      1) Run train_x forward through model to produce `logits`</span></div>
+<div class="line">            <span class="comment">###      2) Use the `loss_func` parameter to apply the PyTorch CrossEntropyLoss function.</span></div>
+<div class="line">            <span class="comment">###         This will take `logits` and `train_y` as inputs. It will output the CrossEntropyLoss</span></div>
+<div class="line">            <span class="comment">###         between softmax(`logits`) and `train_y`. Remember that softmax(`logits`)</span></div>
+<div class="line">            <span class="comment">###         are the predictions (y^ from the PDF).</span></div>
+<div class="line">            <span class="comment">###      3) Backprop losses</span></div>
+<div class="line">            <span class="comment">###      4) Take step with the optimizer</span></div>
+<div class="line">            <span class="comment">### Please see the following docs for support:</span></div>
+<div class="line">            <span class="comment">###     Optimizer Step: https://pytorch.org/docs/stable/optim.html#optimizer-step</span></div>
+<div class="line">            logits = parser.model(train_x)</div>
+<div class="line">            loss = loss_func(logits,train_y)</div>
+<div class="line">            loss.backward()</div>
+<div class="line">            optimizer.step()</div>
+<div class="line">            <span class="comment">### END YOUR CODE</span></div>
+<div class="line">            prog.update(<span class="number">1</span>)</div>
+<div class="line">            loss_meter.update(loss.item())</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">print</span> (<span class="string">"Average Train Loss: &#123;&#125;"</span>.format(loss_meter.avg))</div>
+<div class="line"></div>
+<div class="line">    print(<span class="string">"Evaluating on dev set"</span>,)</div>
+<div class="line">    parser.model.eval() <span class="comment"># Places model in "eval" mode, i.e. don't apply dropout layer</span></div>
+<div class="line">    dev_UAS, _ = parser.parse(dev_data)</div>
+<div class="line">    print(<span class="string">"- dev UAS: &#123;:.2f&#125;"</span>.format(dev_UAS * <span class="number">100.0</span>))</div>
+<div class="line">    <span class="keyword">return</span> dev_UAS</div>
+</pre></td></tr></table></figure>
+
       
     </div>
     
