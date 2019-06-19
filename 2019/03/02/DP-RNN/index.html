@@ -88,6 +88,7 @@
 <meta property="og:description" content="Recurrent Neural Networks, which are a type of artificial neural network designed to recognize patterns in sequences of data, such as text, genomes, handwriting, the spoken word, or numerical times se">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/diags-1578838.jpeg">
+<meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-06-19%20at%2012.15.53%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/1042406-20170306142253375-175971779.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/rnn-bptt1.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/rnn-bptt-with-gradients.png">
@@ -104,7 +105,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-o-2079403.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/1_jhi5uOm9PvZfmxvfaCektw.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/68747470733a2f2f692e696d6775722e636f6d2f5a32786279534f2e706e67.png">
-<meta property="og:updated_time" content="2019-06-19T02:54:06.711Z">
+<meta property="og:updated_time" content="2019-06-19T17:33:58.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-RNN">
 <meta name="twitter:description" content="Recurrent Neural Networks, which are a type of artificial neural network designed to recognize patterns in sequences of data, such as text, genomes, handwriting, the spoken word, or numerical times se">
@@ -400,6 +401,47 @@
 <p><img src="/2019/03/02/DP-RNN/diags-1578838.jpeg" alt="iags-157883"></p>
 <p>Each rectangle is a vector and arrows represent functions (e.g. matrix multiply). Input vectors are in red, output vectors are in blue and green vectors hold the RNN’s state (more on this soon). From left to right: <strong>(1)</strong> Vanilla mode of processing without RNN, from fixed-sized input to fixed-sized output (e.g. image classification). <strong>(2)</strong> Sequence output (e.g. image captioning takes an image and outputs a sentence of words). <strong>(3)</strong> Sequence input (e.g. sentiment analysis where a given sentence is classified as expressing positive or negative sentiment). <strong>(4)</strong> Sequence input and sequence output (e.g. Machine Translation: an RNN reads a sentence in English and then outputs a sentence in French). <strong>(5)</strong> Synced sequence input and output (e.g. video classification where we wish to label each frame of the video). Notice that in every case are no pre-specified constraints on the lengths sequences because the recurrent transformation (green) is fixed and can be applied as many times as we like.</p>
 <h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><p>At a high level, a<a href="http://karpathy.github.io/2015/05/21/rnn-effectiveness/" target="_blank" rel="noopener"> recurrent neural network</a> (RNN) processes sequences — whether daily stock prices, sentences, or sensor measurements — one element at a time while retaining a <em>memory</em> (called a state) of what has come previously in the sequence.</p>
+<p><a href="https://arxiv.org/pdf/1610.02583.pdf" target="_blank" rel="noopener">A Gentle Tutorial of Recurrent Neural Network with Error Backpropagation</a> </p>
+<p>given an observation sequence $\mathbf{x}=\left\{\mathbf{x}_{1}, \mathbf{x}_{2}, \ldots, \mathbf{x}_{T}\right\}$ and its corresponding label $y=\left\{y_{1}, y_{2}, \ldots, y_{T}\right\}$, we want to learn a map $f : \mathbf{x} \mapsto y$. </p>
+<p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-06-19 at 12.15.53 PM.png" alt="creen Shot 2019-06-19 at 12.15.53 P"></p>
+<p>Suppose that we have the following RNN model, such that </p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{\mathbf{h}_{t}=\tanh \left(W_{h h} \mathbf{h}_{t-1}+W_{x h} \mathbf{x}_{t}+\mathbf{b}_{\mathbf{h}}\right)} \\ {z_{t}=\operatorname{softmax}\left(W_{h z} \mathbf{h}_{t}+\mathbf{b}_{z}\right)}\end{array}</script><p>where $z_t$ is the prediction at the time step $t$.</p>
+<p>We can minimize the negative log likelihood objective function:</p>
+<script type="math/tex; mode=display">
+\mathcal{L}(\mathrm{x}, \mathrm{y})=-\sum_{t} y_{t} \log z_{t}</script><p>In the following, we will use notation $L$ as the objective function for simplicity. And further we will use $L(t + 1)$ to indicate the output at the time step t + 1, s.t. $L(t + 1) = -y_{t+1}logz_{t+1}$. </p>
+<p>Let’s set $\alpha_{t}=W_{h z} \mathbf{h}_{t}+\mathbf{b}_{z}$ and then we have $z_t=softmax(\alpha_t)$. By taking the derivative with respect to $ \alpha_t$, we get the following:</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}}{\partial \alpha_{t}}=-\left(y_{t}-z_{t}\right)</script><p>Note the weight $W_{hz}$ is shared across all time sequence, thus we can dierentiate to it at each time</p>
+<p>step and sum all together</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}}{\partial W_{h z}}=\sum_{t} \frac{\partial \mathcal{L}}{\partial z_{t}} \frac{\partial z_{t}}{\partial W_{h z}}</script><p>Similarly, we can get the gradient w.r.t. bias $b_z$</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}}{\partial b_{z}}=\sum_{t} \frac{\partial \mathcal{L}}{\partial z_{t}} \frac{\partial z_{t}}{\partial b_{z}}</script><p>Now let’s go through the details to derive the gradient w.r.t. $W_{hh}$. Considering at the time step $t \to t+1$ in figure1, </p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}(t+1)}{\partial W_{h h}}=\frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial z_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial W_{h h}}</script><p>where we only consider one step $t \to t+1$. And because the hidden state $h_{t+1}$ partially dependents</p>
+<p>on $h_t$, so we can use backpropagation to compute the above partial derivative. Think further $W_{hh}$ is shared cross the whole time sequence. Thus, at the time step $(t -1) \to t$, we can further get the partial derivative w.r.t. $W_{hh}$ as follows</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}(t+1)}{\partial W_{h h}}=\frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial z_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{t}} \frac{\partial \mathbf{h}_{t}}{\partial W_{h h}}</script><p>Thus, at the time step $t+1$, we can compute gradient w.r.t. $z_{t+1}$ and further use backpropagation</p>
+<p>through time (BPTT) from t to 0 to calculate gradient w.r.t. $W_{hh}$, shown as the red chain in Fig. 1.</p>
+<p>Thus, if we only consider the output $z_{t+1}$ at the time step $t+1$, we can yield the following gradient</p>
+<p>w.r.t. $W_{hh}$</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}(t+1)}{\partial W_{h h}}=\sum_{k=1}^{t} \frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}} \frac{\partial \mathbf{h}_{t}}{\partial W_{h h}}</script><p>Aggregate the gradients w.r.t. $W_{hh}$ over the whole time sequence with back propagation, we can</p>
+<p>finally yield the following gradient w.r.t. $W_{hh}$</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}}{\partial W_{h h}}=\sum_{t} \sum_{k=1}^{t+1} \frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial z_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}} \frac{\partial \mathbf{h}_{k}}{\partial W_{h h}}</script><p>Now we turn to derive the gradient w.r.t. $W_{xh}$. Similarly, we consider the time step $t + 1$ (only</p>
+<p>contribution from $x_{t+1}$) and calculate the gradient w.r.t. to $W_{xh}$ as follows</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}(t+1)}{\partial W_{x h}}=\frac{\partial \mathcal{L}(t+1)}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial W_{x h}}</script><p>Because $h_t$ and $x_{t+1}$ both make contribution to $h_{t+1}$, we need to backpropagte to $h_t$ as well. If we</p>
+<p>consider the contribution from the time step $t$, we can further get</p>
+<script type="math/tex; mode=display">
+\begin{aligned} & \frac{\partial \mathcal{L}(t+1)}{\partial W_{x h}}=\frac{\partial \mathcal{L}(t+1)}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial W_{x h}}+\frac{\partial \mathcal{L}(t+1)}{\partial \mathbf{h}_{t}} \frac{\partial \mathbf{h}_{t}}{\partial W_{x h}} \\=& \frac{\partial \mathcal{L}(t+1)}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial W_{x h}}+\frac{\partial \mathcal{L}(t+1)}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{t}} \frac{\partial \mathbf{h}_{t}}{\partial W_{x h}} \end{aligned}</script><p>Thus, summing up all contributions from $t$ to 0 via backpropagation, we can yield the gradient at</p>
+<p>the time step $t + 1$</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}(t+1)}{\partial W_{x h}}=\sum_{k=1}^{t+1} \frac{\partial \mathcal{L}(t+1)}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}} \frac{\partial \mathbf{h}_{k}}{\partial W_{x h}}</script><p>Further, we can take derivative w.r.t. $W_{xh}$ over the whole sequence as</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathcal{L}}{\partial W_{x h}}=\sum_{t} \sum_{k=1}^{t+1} \frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial z_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}} \frac{\partial \mathbf{h}_{k}}{\partial W_{x h}}</script><p>However, there are gradient vanishing or exploding problems to RNNs. Notice that $\frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}}$ indicates matrix multiplication over the sequence. Because RNNs need to backpropagate gradients over a long sequence (with small values in the matrix multiplication), gradient value will shrink layer over layer, and eventually vanish after a few time steps. Thus, the states that are far away from the current time step does not contribute to the parameters’ gradient computing (or parameters that RNNs is learning). Another direction is the gradient exploding, which attributed to large values in matrix multiplication.</p>
 <h2 id="Forward-propagation"><a href="#Forward-propagation" class="headerlink" title="Forward propagation"></a>Forward propagation</h2><p><img src="/2019/03/02/DP-RNN/1042406-20170306142253375-175971779.png" alt="042406-20170306142253375-17597177"></p>
 <p>$x$: input, $h$: hidden layer, $o$: output, $y$: target label, $L$: loss function, $t$: time </p>
 <p>At time t, we have hidden state:</p>
