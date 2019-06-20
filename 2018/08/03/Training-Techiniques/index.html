@@ -138,7 +138,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-06-18T22:13:51.166Z">
+<meta property="og:updated_time" content="2019-06-19T22:59:20.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
 <meta name="twitter:description" content="Techniques for training a Deep Learning model.">
@@ -778,7 +778,14 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
 <h2 id="Maxout"><a href="#Maxout" class="headerlink" title="Maxout"></a>Maxout</h2><p><img src="/2018/08/03/Training-Techiniques/Screen%20Shot%202019-02-17%20at%202.58.24%20PM.png" alt="creen Shot 2019-02-17 at 2.58.24 P"></p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-17 at 2.59.26 PM.png" alt="creen Shot 2019-02-17 at 2.59.26 P"></p>
 <h1 id="Optimizer-ref"><a href="#Optimizer-ref" class="headerlink" title="Optimizer ref"></a>Optimizer <a href="http://ruder.io/optimizing-gradient-descent/index.html" target="_blank" rel="noopener">ref</a></h1><p><a href="https://wiseodd.github.io/techblog/2016/06/22/nn-optimization/" target="_blank" rel="noopener">ref</a> </p>
-<h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
+<h2 id="SGD"><a href="#SGD" class="headerlink" title="SGD"></a>SGD</h2><p>The simplest form of update is to change the parameters along the negative gradient direction (<strong>since the gradient indicates the direction of increase</strong>, but we usually wish to minimize a loss function). Assuming a vector of parameters <code>x</code> and the gradient <code>dx</code>, the simplest update has the form:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+</pre></td><td class="code"><pre><div class="line"><span class="comment"># Vanilla update</span></div>
+<div class="line">x += - learning_rate * dx</div>
+</pre></td></tr></table></figure>
+<p>where <code>learning_rate</code> is a hyperparameter - a fixed constant. When evaluated on the full dataset, and when the learning rate is low enough, this is guaranteed to make non-negative progress on the loss function.</p>
+<p><a href="https://medium.com/@julsimon/tumbling-down-the-sgd-rabbit-hole-part-1-740fa402f0d7" target="_blank" rel="noopener">problem in sgd</a> </p>
 <p><a href="https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d" target="_blank" rel="noopener">Stochastic Gradient Descent with momentum</a> </p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.14.40 PM.png" alt="creen Shot 2019-02-23 at 3.14.40 P"></p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-02-23 at 3.18.02 PM.png" alt="creen Shot 2019-02-23 at 3.18.02 P"></p>
@@ -809,14 +816,194 @@ g_{t, i}=\nabla_{\theta} J\left(\theta_{t, i}\right)</script><p>The SGD update f
 <script type="math/tex; mode=display">
 E\left[g^{2}\right]_{t}=\gamma E\left[g^{2}\right]_{t-1}+(1-\gamma) g_{t}^{2} \\
 \theta_{t+1}=\theta_{t}-\frac{\eta}{\sqrt{E\left[g^{2}\right]_{t}+\epsilon}} g_{t}</script><p>RMSprop as well divides the learning rate by an exponentially decaying average of squared gradients. Hinton suggests $\gamma$ to be set to 0.9, while a good default value for the learning rate is 0.001.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rmsprop</span><span class="params">(w, dw, config=None)</span>:</span>  </div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Uses the RMSProp update rule, which uses a moving average of squared</span></div>
+<div class="line"><span class="string">    gradient values to set adaptive per-parameter learning rates.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    config format:</span></div>
+<div class="line"><span class="string">    - learning_rate: Scalar learning rate.</span></div>
+<div class="line"><span class="string">    - decay_rate: Scalar between 0 and 1 giving the decay rate for the squared</span></div>
+<div class="line"><span class="string">      gradient cache.</span></div>
+<div class="line"><span class="string">    - epsilon: Small scalar used for smoothing to avoid dividing by zero.</span></div>
+<div class="line"><span class="string">    - cache: Moving average of second moments of gradients.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    <span class="keyword">if</span> config <span class="keyword">is</span> <span class="keyword">None</span>: config = &#123;&#125;</div>
+<div class="line">    config.setdefault(<span class="string">'learning_rate'</span>, <span class="number">1e-2</span>)</div>
+<div class="line">    config.setdefault(<span class="string">'decay_rate'</span>, <span class="number">0.99</span>)</div>
+<div class="line">    config.setdefault(<span class="string">'epsilon'</span>, <span class="number">1e-8</span>)</div>
+<div class="line">    config.setdefault(<span class="string">'cache'</span>, np.zeros_like(w))</div>
+<div class="line"></div>
+<div class="line">    next_w = <span class="keyword">None</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the RMSprop update formula, storing the next value of w #</span></div>
+<div class="line">    <span class="comment"># in the next_w variable. Don't forget to update cache value stored in    #</span></div>
+<div class="line">    <span class="comment"># config['cache'].                                                        #</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line">    <span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"></div>
+<div class="line">    next_cache = config[<span class="string">'decay_rate'</span>] * config[<span class="string">'cache'</span>] + (<span class="number">1</span> - config[<span class="string">'decay_rate'</span>]) * dw ** <span class="number">2</span></div>
+<div class="line">    next_w = w - config[<span class="string">'learning_rate'</span>] * dw / np.sqrt(next_cache + config[<span class="string">'epsilon'</span>])</div>
+<div class="line">    config[<span class="string">'cache'</span>] = next_cache</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> next_w, config</div>
+</pre></td></tr></table></figure>
 <h2 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h2><p>In addition to storing an exponentially decaying average of past squared gradients like RMSprop, Adam also keeps an exponentially decaying average of past gradients. Whereas momentum can be seen as a ball running down a slope, Adam behaves like a heavy ball with friction, which thus prefers flat minima in the error surface. We compute the decaying averages of past and past squared gradients $m_t$ and $v_t$ respectively as follows:</p>
 <script type="math/tex; mode=display">
 \begin{aligned} m_{t} &=\beta_{1} m_{t-1}+\left(1-\beta_{1}\right) g_{t} \\ v_{t} &=\beta_{2} v_{t-1}+\left(1-\beta_{2}\right) g_{t}^{2} \end{aligned}</script><p>$m_t$ and $v_t$ are estimates of the first moment (the mean) and the second moment (the uncentered variance) of the gradients respectively, hence the name of the method. As $m_t$ and $v_t$ are initialized as vectors of 0’s, the authors of Adam observe that they are biased towards zero, especially during the initial time steps, and especially when the decay rates are small (i.e. $\beta_1$ and $\beta_2$ are close to 1).</p>
 <p>They counteract these biases by computing bias-corrected first and second moment estimates:</p>
 <script type="math/tex; mode=display">
-\begin{aligned} \hat{m}_{t} &=\frac{m_{t}}{1-\beta_{1}^{t}} \\ \hat{v}_{t} &=\frac{v_{t}}{1-\beta_{2}^{t}} \end{aligned}</script><p>They then use these to update the parameters, which yields the Adam update rule:</p>
+\begin{aligned} \hat{m}_{t} &=\frac{m_{t}}{1-\beta_{1}^{t}} \\ \hat{v}_{t} &=\frac{v_{t}}{1-\beta_{2}^{t}} \end{aligned}</script><p><strong>Note that $t$ is the iteration number.</strong></p>
+<p>They then use these to update the parameters, which yields the Adam update rule:</p>
 <script type="math/tex; mode=display">
-\theta_{t+1}=\theta_{t}-\frac{\eta}{\sqrt{\hat{v}_{t}}+\epsilon} \hat{m}_{t}</script><p>The authors propose default values of 0.9 for $\beta_1​$, 0.999 for $\beta_2​$ and $10^{-8}​$ for $\epsilon​$. </p>
+\theta_{t+1}=\theta_{t}-\frac{\eta}{\sqrt{\hat{v}_{t}}+\epsilon} \hat{m}_{t}</script><p>The authors propose default values of 0.9 for $\beta_1$, 0.999 for $\beta_2$ and $10^{-8}$ for $\epsilon$. </p>
+<p>It is worth noting that the next new <code>m</code> should be <code>mt</code> instead of $\hat m_t$.  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">adam</span><span class="params">(w, dw, config=None)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Uses the Adam update rule, which incorporates moving averages of both the</span></div>
+<div class="line"><span class="string">    gradient and its square and a bias correction term.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    config format:</span></div>
+<div class="line"><span class="string">    - learning_rate: Scalar learning rate.</span></div>
+<div class="line"><span class="string">    - beta1: Decay rate for moving average of first moment of gradient.</span></div>
+<div class="line"><span class="string">    - beta2: Decay rate for moving average of second moment of gradient.</span></div>
+<div class="line"><span class="string">    - epsilon: Small scalar used for smoothing to avoid dividing by zero.</span></div>
+<div class="line"><span class="string">    - m: Moving average of gradient.</span></div>
+<div class="line"><span class="string">    - v: Moving average of squared gradient.</span></div>
+<div class="line"><span class="string">    - t: Iteration number.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    <span class="keyword">if</span> config <span class="keyword">is</span> <span class="keyword">None</span>: config = &#123;&#125;</div>
+<div class="line">    config.setdefault(<span class="string">'learning_rate'</span>, <span class="number">1e-3</span>)</div>
+<div class="line">    config.setdefault(<span class="string">'beta1'</span>, <span class="number">0.9</span>)</div>
+<div class="line">    config.setdefault(<span class="string">'beta2'</span>, <span class="number">0.999</span>)</div>
+<div class="line">    config.setdefault(<span class="string">'epsilon'</span>, <span class="number">1e-8</span>)</div>
+<div class="line">    config.setdefault(<span class="string">'m'</span>, np.zeros_like(w))</div>
+<div class="line">    config.setdefault(<span class="string">'v'</span>, np.zeros_like(w))</div>
+<div class="line">    config.setdefault(<span class="string">'t'</span>, <span class="number">0</span>)</div>
+<div class="line"></div>
+<div class="line">    next_w = <span class="keyword">None</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the Adam update formula, storing the next value of w in #</span></div>
+<div class="line">    <span class="comment"># the next_w variable. Don't forget to update the m, v, and t variables   #</span></div>
+<div class="line">    <span class="comment"># stored in config.                                                       #</span></div>
+<div class="line">    <span class="comment">#                                                                         #</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">NOTE:</span> In order to match the reference output, please modify t _before_  #</span></div>
+<div class="line">    <span class="comment"># using it in any calculations.                                           #</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line">    <span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"></div>
+<div class="line">    mt = config[<span class="string">'beta1'</span>] * config[<span class="string">'m'</span>] + (<span class="number">1</span> - config[<span class="string">'beta1'</span>]) * dw</div>
+<div class="line">    vt = config[<span class="string">'beta2'</span>] * config[<span class="string">'v'</span>] + (<span class="number">1</span> - config[<span class="string">'beta2'</span>]) * dw ** <span class="number">2</span></div>
+<div class="line"></div>
+<div class="line">    t = config[<span class="string">'t'</span>] + <span class="number">1</span></div>
+<div class="line"></div>
+<div class="line">    mu_mt = mt / (<span class="number">1</span> - config[<span class="string">'beta1'</span>] ** t)</div>
+<div class="line">    mu_vt = vt / (<span class="number">1</span> - config[<span class="string">'beta2'</span>] ** t)</div>
+<div class="line"></div>
+<div class="line">    next_w = w - config[<span class="string">'learning_rate'</span>] * mu_mt / (np.sqrt(mu_vt) + config[<span class="string">'epsilon'</span>])</div>
+<div class="line">    config[<span class="string">'m'</span>] = mt</div>
+<div class="line">    config[<span class="string">'v'</span>] = vt</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line">    <span class="comment">#                             END OF YOUR CODE                            #</span></div>
+<div class="line">    <span class="comment">###########################################################################</span></div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> next_w, config</div>
+</pre></td></tr></table></figure>
 <h1 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h1><p><a href="https://towardsdatascience.com/coding-neural-network-dropout-3095632d25ce" target="_blank" rel="noopener">ref</a> <a href="https://pgaleone.eu/deep-learning/regularization/2017/01/10/anaysis-of-dropout/" target="_blank" rel="noopener">ref2</a> </p>
 <p><strong>Dropout</strong> is a regularization technique. On each iteration, we randomly shut down some neurons (units) on each layer and don’t use those neurons in both forward propagation and back-propagation. <strong>Since the units that will be dropped out on each iteration will be random, the learning algorithm will have no idea which neurons will be shut down on every iteration; therefore, force the learning algorithm to spread out the weights and not focus on some specific feattures (units).</strong> Moreover, dropout help improving generalization error by:</p>
 <ul>

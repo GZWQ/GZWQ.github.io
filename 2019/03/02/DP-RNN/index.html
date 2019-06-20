@@ -103,9 +103,11 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-i.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-C.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-o-2079403.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/1_jhi5uOm9PvZfmxvfaCektw.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-06-20%20at%2012.39.27%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-06-20%20at%2012.49.39%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-06-20%20at%2012.51.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/68747470733a2f2f692e696d6775722e636f6d2f5a32786279534f2e706e67.png">
-<meta property="og:updated_time" content="2019-06-19T17:33:58.996Z">
+<meta property="og:updated_time" content="2019-06-20T17:52:30.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-RNN">
 <meta name="twitter:description" content="Recurrent Neural Networks, which are a type of artificial neural network designed to recognize patterns in sequences of data, such as text, genomes, handwriting, the spoken word, or numerical times se">
@@ -427,7 +429,7 @@
 <p>Thus, if we only consider the output $z_{t+1}$ at the time step $t+1$, we can yield the following gradient</p>
 <p>w.r.t. $W_{hh}$</p>
 <script type="math/tex; mode=display">
-\frac{\partial \mathcal{L}(t+1)}{\partial W_{h h}}=\sum_{k=1}^{t} \frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}} \frac{\partial \mathbf{h}_{t}}{\partial W_{h h}}</script><p>Aggregate the gradients w.r.t. $W_{hh}$ over the whole time sequence with back propagation, we can</p>
+\frac{\partial \mathcal{L}(t+1)}{\partial W_{h h}}=\sum_{k=1}^{t} \frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}} \frac{\partial \mathbf{h}_{k}}{\partial W_{h h}}</script><p>Aggregate the gradients w.r.t. $W_{hh}$ over the whole time sequence with back propagation, we can</p>
 <p>finally yield the following gradient w.r.t. $W_{hh}$</p>
 <script type="math/tex; mode=display">
 \frac{\partial \mathcal{L}}{\partial W_{h h}}=\sum_{t} \sum_{k=1}^{t+1} \frac{\partial \mathcal{L}(t+1)}{\partial z_{t+1}} \frac{\partial z_{t+1}}{\partial \mathbf{h}_{t+1}} \frac{\partial \mathbf{h}_{t+1}}{\partial \mathbf{h}_{k}} \frac{\partial \mathbf{h}_{k}}{\partial W_{h h}}</script><p>Now we turn to derive the gradient w.r.t. $W_{xh}$. Similarly, we consider the time step $t + 1$ (only</p>
@@ -524,8 +526,16 @@ S_{3}=S_2 \cdot W_{r e c}+X_{3} \cdot W_{x}</script><p>We define the MSE loss fu
 <p>Finally, we need to decide what we’re going to output. This output will be based on our cell state, but will be a filtered version. First, we run a sigmoid layer which decides what parts of the cell state we’re going to output. Then, we put the cell state through tanh (to push the values to be between -1 and 1) and multiply it by the output of the sigmoid gate, so that we only output the parts we decided to.</p>
 <p>For the language model example, since it just saw a subject, it might want to output information relevant to a verb, in case that’s what is coming next. For example, it might output whether the subject is singular or plural, so that we know what form a verb should be conjugated into if that’s what follows next.</p>
 <p><img src="/2019/03/02/DP-RNN/LSTM3-focus-o-2079403.png" alt="STM3-focus-o-207940"></p>
-<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a>GRU</h1><p>So now we know how an LSTM work, let’s briefly look at the GRU. The GRU is the newer generation of Recurrent Neural networks and is pretty similar to an LSTM. GRU’s got rid of the cell state and used the hidden state to transfer information. It also only has two gates, a reset gate and update gate.<img src="/2019/03/02/DP-RNN/1_jhi5uOm9PvZfmxvfaCektw.png" alt="_jhi5uOm9PvZfmxvfaCekt"></p>
-<h1 id="Keras-Learn-the-Alphabet"><a href="#Keras-Learn-the-Alphabet" class="headerlink" title="Keras - Learn the Alphabet"></a>Keras - Learn the Alphabet</h1><p>In this implementation, we are going to develop and constrast a number of different LSTM networks. The task we are going to perform is that given a letter of the alphabet, predict the next letter. This is a simple sequence prediction problem that once understood can be generalized to other sequence prediction problems like time series prediction and sequence classification.</p>
+<h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a><a href="https://www.d2l.ai/chapter_recurrent-neural-networks/gru.html" target="_blank" rel="noopener">GRU</a></h1><p>So now we know how an LSTM work, let’s briefly look at the GRU. The GRU is the newer generation of Recurrent Neural networks and is pretty similar to an LSTM. GRU’s got rid of the cell state and used the hidden state to transfer information. It also only has two gates, a reset gate and update gate.</p>
+<p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-06-20 at 12.39.27 PM.png" alt="creen Shot 2019-06-20 at 12.39.27 P"></p>
+<p><strong>Reset Gate</strong></p>
+<p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-06-20 at 12.49.39 PM.png" alt="creen Shot 2019-06-20 at 12.49.39 P"></p>
+<script type="math/tex; mode=display">
+\mathbf{R}_{t}=\sigma\left(\mathbf{X}_{t} \mathbf{W}_{x r}+\mathbf{H}_{t-1} \mathbf{W}_{h r}+\mathbf{b}_{r}\right)</script><script type="math/tex; mode=display">
+\mathbf{Z}_{t}=\sigma\left(\mathbf{X}_{t} \mathbf{W}_{x z}+\mathbf{H}_{t-1} \mathbf{W}_{h z}+\mathbf{b}_{z}\right)</script><p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-06-20 at 12.51.45 PM.png" alt="creen Shot 2019-06-20 at 12.51.45 P"></p>
+<script type="math/tex; mode=display">
+\tilde{\mathbf{H}}_{t}=\tanh \left(\mathbf{X}_{t} \mathbf{W}_{x h}+\left(\mathbf{R}_{t} \odot \mathbf{H}_{t-1}\right) \mathbf{W}_{h h}+\mathbf{b}_{h}\right)</script><script type="math/tex; mode=display">
+\mathbf{H}_{t}=\mathbf{Z}_{t} \odot \mathbf{H}_{t-1}+\left(1-\mathbf{Z}_{t}\right) \odot \tilde{\mathbf{H}}_{t}</script><h1 id="Keras-Learn-the-Alphabet"><a href="#Keras-Learn-the-Alphabet" class="headerlink" title="Keras - Learn the Alphabet"></a>Keras - Learn the Alphabet</h1><p>In this implementation, we are going to develop and constrast a number of different LSTM networks. The task we are going to perform is that given a letter of the alphabet, predict the next letter. This is a simple sequence prediction problem that once understood can be generalized to other sequence prediction problems like time series prediction and sequence classification.</p>
 <h2 id="Data-Preparation"><a href="#Data-Preparation" class="headerlink" title="Data Preparation"></a>Data Preparation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
