@@ -88,7 +88,7 @@
 <meta property="og:description" content="Tutorials of PyTorch and some useful tips.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/04/22/DP-PyTorch/Screen%20Shot%202019-05-18%20at%2011.57.01%20AM.png">
-<meta property="og:updated_time" content="2019-06-13T16:29:53.417Z">
+<meta property="og:updated_time" content="2019-06-25T15:42:56.539Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-PyTorch">
 <meta name="twitter:description" content="Tutorials of PyTorch and some useful tips.">
@@ -380,6 +380,70 @@
       
         <p>Tutorials of PyTorch and some useful tips.</p>
 <a id="more"></a>
+<h1 id="Pytorch-101"><a href="#Pytorch-101" class="headerlink" title="Pytorch 101"></a>Pytorch 101</h1><h2 id="GPU-vs-CPU"><a href="#GPU-vs-CPU" class="headerlink" title="GPU vs CPU"></a>GPU vs CPU</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> torch.cuda.is_available():</div>
+<div class="line">    device = torch.device(<span class="string">'cuda'</span>)</div>
+<div class="line"><span class="keyword">else</span>:</div>
+<div class="line">    device = torch.device(<span class="string">'cpu'</span>)</div>
+<div class="line"><span class="comment"># Move the data to the proper device (GPU or CPU)</span></div>
+<div class="line">x = x.to(device=device, dtype=dtype)</div>
+<div class="line">y = y.to(device=device, dtype=torch.long)</div>
+<div class="line">model = model.to(device=device)  <span class="comment"># move the model parameters to CPU/GPU</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="Weight-Initialization"><a href="#Weight-Initialization" class="headerlink" title="Weight Initialization"></a>Weight Initialization</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_weight</span><span class="params">(shape)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Create random Tensors for weights; setting requires_grad=True means that we</span></div>
+<div class="line"><span class="string">    want to compute gradients for these Tensors during the backward pass.</span></div>
+<div class="line"><span class="string">    We use Kaiming normalization: sqrt(2 / fan_in)</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    <span class="keyword">if</span> len(shape) == <span class="number">2</span>:  <span class="comment"># FC weight</span></div>
+<div class="line">        fan_in = shape[<span class="number">0</span>]</div>
+<div class="line">    <span class="keyword">else</span>:</div>
+<div class="line">        fan_in = np.prod(shape[<span class="number">1</span>:]) <span class="comment"># conv weight [out_channel, in_channel, kH, kW]</span></div>
+<div class="line">    <span class="comment"># randn is standard normal distribution generator. </span></div>
+<div class="line">    w = torch.randn(shape, device=device, dtype=dtype) * np.sqrt(<span class="number">2.</span> / fan_in)</div>
+<div class="line">    w.requires_grad = <span class="keyword">True</span></div>
+<div class="line">    <span class="keyword">return</span> w</div>
+<div class="line"><span class="comment"># nn.init.kaiming_normal_(self.fc.weight)</span></div>
+<div class="line">----------------------------------------------------------</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">zero_weight</span><span class="params">(shape)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> torch.zeros(shape, device=device, dtype=dtype, requires_grad=<span class="keyword">True</span>)</div>
+<div class="line"><span class="comment"># nn.init.constant_(self.conv1.bias, 0)</span></div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h1 id="Torch"><a href="#Torch" class="headerlink" title="Torch"></a><a href="https://pytorch.org/docs/stable/torch.html#" target="_blank" rel="noopener">Torch</a></h1><h2 id="Tensor"><a href="#Tensor" class="headerlink" title="Tensor"></a>Tensor</h2><p>The torch package contains data structures for multi-dimensional tensors and mathematical operations over these are defined. </p>
 <p><img src="/2019/04/22/DP-PyTorch/Screen Shot 2019-05-18 at 11.57.01 AM.png" alt="creen Shot 2019-05-18 at 11.57.01 A"></p>
 <h3 id="Creation-Ops"><a href="#Creation-Ops" class="headerlink" title="Creation Ops"></a>Creation Ops</h3><h4 id="tensor"><a href="#tensor" class="headerlink" title="tensor"></a>tensor</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
@@ -405,6 +469,10 @@
 </pre></td><td class="code"><pre><div class="line">div_(value) → Tensor</div>
 </pre></td></tr></table></figure>
 <p>Divides each element of the input <code>input</code> with the scalar <code>value</code> and returns a new resulting tensor.</p>
+<h4 id="mm"><a href="#mm" class="headerlink" title="mm"></a><a href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor.mm" target="_blank" rel="noopener">mm</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">mm(mat2) → Tensor</div>
+</pre></td></tr></table></figure>
+<p>matrxi multiply. see <a href="https://pytorch.org/docs/stable/torch.html#torch.mm" target="_blank" rel="noopener">torch.mm()</a>. </p>
 <h4 id="torch-from-numpy"><a href="#torch-from-numpy" class="headerlink" title="torch.from_numpy"></a><a href="https://pytorch.org/docs/stable/torch.html#torch.from_numpy" target="_blank" rel="noopener">torch.from_numpy</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">torch.from_numpy(ndarray) → Tensor</div>
 </pre></td></tr></table></figure>
@@ -495,7 +563,27 @@
 <blockquote>
 <p><a href="https://blog.csdn.net/monchin/article/details/79787621" target="_blank" rel="noopener">understanding</a> </p>
 </blockquote>
-<h2 id="nn"><a href="#nn" class="headerlink" title="nn"></a>nn</h2><h3 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<h2 id="nn"><a href="#nn" class="headerlink" title="nn"></a>nn</h2><h3 id="functional"><a href="#functional" class="headerlink" title="functional"></a><a href="https://pytorch.org/docs/stable/nn.html#torch-nn-functional" target="_blank" rel="noopener">functional</a></h3><h3 id="Linear-layers"><a href="#Linear-layers" class="headerlink" title="Linear layers"></a><a href="https://pytorch.org/docs/stable/nn.html#linear-layers" target="_blank" rel="noopener">Linear layers</a></h3><h4 id="Linear"><a href="#Linear" class="headerlink" title="Linear"></a>Linear</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.Linear(in_features, out_features, bias=<span class="keyword">True</span>)</div>
+</pre></td></tr></table></figure>
+<p>Applies a linear transformation to the incoming data: $y=x A^{T}+b$.</p>
+<ul>
+<li><strong>in_features</strong> – size of each input sample</li>
+<li><strong>out_features</strong> – size of each output sample</li>
+<li><strong>bias</strong> – If set to <code>False</code>, the layer will not learn an additive bias. Default: <code>True</code></li>
+</ul>
+<p><strong>Variables</strong> - Linear<strong>.weight</strong> and <strong>Linear.bias</strong> </p>
+<h3 id="Convolution-layers"><a href="#Convolution-layers" class="headerlink" title="Convolution layers"></a><a href="https://pytorch.org/docs/stable/nn.html#convolution-layers" target="_blank" rel="noopener">Convolution layers</a></h3><h4 id="Conv2d"><a href="#Conv2d" class="headerlink" title="Conv2d"></a><a href="https://pytorch.org/docs/stable/nn.html#conv2d" target="_blank" rel="noopener">Conv2d</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=<span class="number">1</span>, padding=<span class="number">0</span>, dilation=<span class="number">1</span>, groups=<span class="number">1</span>, bias=<span class="keyword">True</span>, padding_mode=<span class="string">'zeros'</span>)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li><code>dilation</code> controls the spacing between the kernel points; also known as the à trous algorithm. It is harder to describe, but this <a href="https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md" target="_blank" rel="noopener">link</a> has a nice visualization of what <code>dilation</code> does.</li>
+</ul>
+<p><strong>Variables</strong> - <strong>Conv2d.weight</strong> and <strong>Conv2d.bias</strong> </p>
+<h3 id="Non-linear-activations"><a href="#Non-linear-activations" class="headerlink" title="Non-linear activations"></a><a href="https://pytorch.org/docs/stable/nn.html#non-linear-activations-weighted-sum-nonlinearity" target="_blank" rel="noopener">Non-linear activations</a></h3><h4 id="Relu"><a href="#Relu" class="headerlink" title="Relu"></a>Relu</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.nn.ReLU(inplace=<span class="keyword">False</span>)</div>
+</pre></td></tr></table></figure>
+<h3 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">torch.nn.Softmax(dim=<span class="keyword">None</span>)</div>
 </pre></td></tr></table></figure>
 <script type="math/tex; mode=display">
@@ -542,6 +630,29 @@
 <h2 id="optim"><a href="#optim" class="headerlink" title="optim"></a><a href="https://pytorch.org/docs/stable/optim.html" target="_blank" rel="noopener">optim</a></h2><h3 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a><a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Adam" target="_blank" rel="noopener">Adam</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">torch.optim.Adam(params, lr=<span class="number">0.001</span>, betas=(<span class="number">0.9</span>, <span class="number">0.999</span>), eps=<span class="number">1e-08</span>, weight_decay=<span class="number">0</span>, amsgrad=<span class="keyword">False</span>)</div>
 </pre></td></tr></table></figure>
+<h2 id="Utils"><a href="#Utils" class="headerlink" title="[Utils]"></a>[Utils]</h2><h3 id="DATA"><a href="#DATA" class="headerlink" title="DATA"></a><a href="https://pytorch.org/docs/stable/data.html" target="_blank" rel="noopener">DATA</a></h3><h4 id="torch-utils-data-DataLoader"><a href="#torch-utils-data-DataLoader" class="headerlink" title="torch.utils.data.DataLoader"></a><a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader" target="_blank" rel="noopener">torch.utils.data.DataLoader</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.utils.data.DataLoader(dataset, batch_size=<span class="number">1</span>, shuffle=<span class="keyword">False</span>, sampler=<span class="keyword">None</span>, batch_sampler=<span class="keyword">None</span>, num_workers=<span class="number">0</span>, collate_fn=&lt;function default_collate&gt;, pin_memory=<span class="keyword">False</span>, drop_last=<span class="keyword">False</span>, timeout=<span class="number">0</span>, worker_init_fn=<span class="keyword">None</span>)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li><strong>dataset</strong> (<a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset" target="_blank" rel="noopener"><em>Dataset</em></a>) – dataset from which to load the data.</li>
+<li><strong>batch_size</strong> (<a href="https://docs.python.org/3/library/functions.html#int" target="_blank" rel="noopener"><em>int</em></a><em>,</em> <em>optional</em>) – how many samples per batch to load (default: <code>1</code>).</li>
+<li><strong>shuffle</strong> (<a href="https://docs.python.org/3/library/functions.html#bool" target="_blank" rel="noopener"><em>bool</em></a><em>,</em> <em>optional</em>) – set to <code>True</code> to have the data reshuffled at every epoch (default: <code>False</code>).</li>
+<li><strong>sampler</strong> (<a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Sampler" target="_blank" rel="noopener"><em>Sampler</em></a><em>,</em> <em>optional</em>) – defines the strategy to draw samples from the dataset. If specified, <code>shuffle</code>must be False.</li>
+<li><strong>batch_sampler</strong> (<a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Sampler" target="_blank" rel="noopener"><em>Sampler</em></a><em>,</em> <em>optional</em>) – like sampler, but returns a batch of indices at a time. Mutually exclusive with <code>batch_size</code>, <code>shuffle</code>, <code>sampler</code>, and <code>drop_last</code>.</li>
+<li><strong>num_workers</strong> (<a href="https://docs.python.org/3/library/functions.html#int" target="_blank" rel="noopener"><em>int</em></a><em>,</em> <em>optional</em>) – how many subprocesses to use for data loading. 0 means that the data will be loaded in the main process. (default: <code>0</code>)</li>
+</ul>
+<h4 id="torch-utils-data-Sampler"><a href="#torch-utils-data-Sampler" class="headerlink" title="torch.utils.data.Sampler"></a><a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Sampler" target="_blank" rel="noopener">torch.utils.data.Sampler</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.utils.data.Sampler(data_source)</div>
+</pre></td></tr></table></figure>
+<p>Base class for all Samplers.</p>
+<p>Every Sampler subclass has to provide an <strong>iter</strong> method, providing a way to iterate over indices of dataset elements, and a <strong>len</strong> method that returns the length of the returned iterators.</p>
+<h4 id="torch-utils-data-SubsetRandomSampler"><a href="#torch-utils-data-SubsetRandomSampler" class="headerlink" title="torch.utils.data.SubsetRandomSampler"></a><a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.SubsetRandomSampler" target="_blank" rel="noopener">torch.utils.data.SubsetRandomSampler</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torch.utils.data.SubsetRandomSampler(indices)</div>
+</pre></td></tr></table></figure>
+<p>Samples elements randomly from a given list of indices, without replacement.</p>
+<ul>
+<li><strong>indices</strong> (<em>sequence</em>) – a sequence of indices</li>
+</ul>
 <h1 id="Torchvision"><a href="#Torchvision" class="headerlink" title="Torchvision"></a>Torchvision</h1><h2 id="Models"><a href="#Models" class="headerlink" title="Models"></a><a href="https://pytorch.org/docs/stable/torchvision/models.html" target="_blank" rel="noopener">Models</a></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -582,6 +693,30 @@
 <div class="line"><span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():</div>
 <div class="line">    param.requires_grad = <span class="keyword">False</span></div>
 </pre></td></tr></table></figure>
+<h2 id="Datasets"><a href="#Datasets" class="headerlink" title="Datasets"></a><a href="https://pytorch.org/docs/stable/torchvision/datasets.html" target="_blank" rel="noopener">Datasets</a></h2><p>All datasets are subclasses of <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset" target="_blank" rel="noopener"><code>torch.utils.data.Dataset</code></a> i.e, they have <code>__getitem__</code> and <code>__len__</code> methods implemented. Hence, they can all be passed to a <a href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader" target="_blank" rel="noopener"><code>torch.utils.data.DataLoader</code></a> which can load multiple samples parallelly using <code>torch.multiprocessing</code> workers. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line">imagenet_data = torchvision.datasets.ImageNet(<span class="string">'path/to/imagenet_root/'</span>)</div>
+<div class="line">data_loader = torch.utils.data.DataLoader(imagenet_data,</div>
+<div class="line">                                          batch_size=<span class="number">4</span>,</div>
+<div class="line">                                          shuffle=<span class="keyword">True</span>,</div>
+<div class="line">                                          num_workers=args.nThreads)</div>
+</pre></td></tr></table></figure>
+<p>The following datasets are available: MNIST, COCO (Captions and Detection), LSUN, ImageNet, CIFAR etc.</p>
+<p>All the datasets have almost similar API. They all have two common arguments: <code>transform</code> and <code>target_transform</code> to transform the input and target respectively.</p>
+<h3 id="MNIST"><a href="#MNIST" class="headerlink" title="MNIST"></a><a href="https://pytorch.org/docs/stable/torchvision/datasets.html#mnist" target="_blank" rel="noopener">MNIST</a></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">torchvision.datasets.MNIST(root, train=<span class="keyword">True</span>, transform=<span class="keyword">None</span>, target_transform=<span class="keyword">None</span>, download=<span class="keyword">False</span>)</div>
+</pre></td></tr></table></figure>
+<ul>
+<li><strong>root</strong> (<em>string</em>) – Root directory of dataset where <code>MNIST/processed/training.pt</code> and<code>MNIST/processed/test.pt</code> exist.</li>
+<li><strong>train</strong> (bool, <em>optional</em>) – If True, creates dataset from <code>training.pt</code>, otherwise from <code>test.pt</code>.</li>
+<li><strong>download</strong> (bool, <em>optional</em>) – If true, downloads the dataset from the internet and puts it in root directory. If dataset is already downloaded, it is not downloaded again.</li>
+<li><strong>transform</strong> (callable, <em>optional</em>) – A function/transform that takes in an PIL image and returns a transformed version. E.g, <code>transforms.RandomCrop</code></li>
+<li><strong>target_transform</strong> (callable, <em>optional</em>) – A function/transform that takes in the target and transforms it.</li>
+</ul>
 <h1 id="Transforms"><a href="#Transforms" class="headerlink" title="Transforms"></a>Transforms</h1><h3 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">torchvision.transforms.Compose(transforms)</div>
 </pre></td></tr></table></figure>
@@ -805,7 +940,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Torch"><span class="nav-number">1.</span> <span class="nav-text">Torch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensor"><span class="nav-number">1.1.</span> <span class="nav-text">Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creation-Ops"><span class="nav-number">1.1.1.</span> <span class="nav-text">Creation Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tensor"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">tensor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#topk"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">topk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#view"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">view</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#size"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#div"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">div</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#torch-from-numpy"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">torch.from_numpy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autograd"><span class="nav-number">1.2.</span> <span class="nav-text">Autograd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variable-deprecated"><span class="nav-number">1.2.1.</span> <span class="nav-text">Variable (deprecated)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max"><span class="nav-number">1.3.</span> <span class="nav-text">max</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cat"><span class="nav-number">1.4.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multinomial"><span class="nav-number">1.5.</span> <span class="nav-text">multinomial</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nn"><span class="nav-number">1.6.</span> <span class="nav-text">nn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax"><span class="nav-number">1.6.1.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogSoftmax"><span class="nav-number">1.6.2.</span> <span class="nav-text">LogSoftmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CrossEntropyLoss"><span class="nav-number">1.6.3.</span> <span class="nav-text">CrossEntropyLoss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NLLLoss"><span class="nav-number">1.6.4.</span> <span class="nav-text">NLLLoss()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layers"><span class="nav-number">1.6.5.</span> <span class="nav-text">Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Embedding"><span class="nav-number">1.6.5.1.</span> <span class="nav-text">Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GRU"><span class="nav-number">1.6.5.2.</span> <span class="nav-text">GRU</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optim"><span class="nav-number">1.7.</span> <span class="nav-text">optim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam"><span class="nav-number">1.7.1.</span> <span class="nav-text">Adam</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Torchvision"><span class="nav-number">2.</span> <span class="nav-text">Torchvision</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">2.1.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stop-undating"><span class="nav-number">2.1.1.</span> <span class="nav-text">Stop-undating</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transforms"><span class="nav-number">3.</span> <span class="nav-text">Transforms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compose"><span class="nav-number">3.0.1.</span> <span class="nav-text">Compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resize"><span class="nav-number">3.0.2.</span> <span class="nav-text">Resize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ToTensor"><span class="nav-number">3.0.3.</span> <span class="nav-text">ToTensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalize"><span class="nav-number">3.0.4.</span> <span class="nav-text">Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda"><span class="nav-number">3.0.5.</span> <span class="nav-text">Lambda</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HyperParameters-Search"><span class="nav-number">4.</span> <span class="nav-text">HyperParameters Search</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualization"><span class="nav-number">5.</span> <span class="nav-text">Visualization</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pytorch-101"><span class="nav-number">1.</span> <span class="nav-text">Pytorch 101</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GPU-vs-CPU"><span class="nav-number">1.1.</span> <span class="nav-text">GPU vs CPU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Weight-Initialization"><span class="nav-number">1.2.</span> <span class="nav-text">Weight Initialization</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Torch"><span class="nav-number">2.</span> <span class="nav-text">Torch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tensor"><span class="nav-number">2.1.</span> <span class="nav-text">Tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Creation-Ops"><span class="nav-number">2.1.1.</span> <span class="nav-text">Creation Ops</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tensor"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">tensor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#topk"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">topk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#view"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">view</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#size"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#div"><span class="nav-number">2.1.1.5.</span> <span class="nav-text">div</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mm"><span class="nav-number">2.1.1.6.</span> <span class="nav-text">mm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#torch-from-numpy"><span class="nav-number">2.1.1.7.</span> <span class="nav-text">torch.from_numpy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Autograd"><span class="nav-number">2.2.</span> <span class="nav-text">Autograd</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Variable-deprecated"><span class="nav-number">2.2.1.</span> <span class="nav-text">Variable (deprecated)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#max"><span class="nav-number">2.3.</span> <span class="nav-text">max</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cat"><span class="nav-number">2.4.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multinomial"><span class="nav-number">2.5.</span> <span class="nav-text">multinomial</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nn"><span class="nav-number">2.6.</span> <span class="nav-text">nn</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#functional"><span class="nav-number">2.6.1.</span> <span class="nav-text">functional</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-layers"><span class="nav-number">2.6.2.</span> <span class="nav-text">Linear layers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linear"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">Linear</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolution-layers"><span class="nav-number">2.6.3.</span> <span class="nav-text">Convolution layers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Conv2d"><span class="nav-number">2.6.3.1.</span> <span class="nav-text">Conv2d</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-linear-activations"><span class="nav-number">2.6.4.</span> <span class="nav-text">Non-linear activations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Relu"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">Relu</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softmax"><span class="nav-number">2.6.5.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogSoftmax"><span class="nav-number">2.6.6.</span> <span class="nav-text">LogSoftmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CrossEntropyLoss"><span class="nav-number">2.6.7.</span> <span class="nav-text">CrossEntropyLoss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NLLLoss"><span class="nav-number">2.6.8.</span> <span class="nav-text">NLLLoss()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Layers"><span class="nav-number">2.6.9.</span> <span class="nav-text">Layers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Embedding"><span class="nav-number">2.6.9.1.</span> <span class="nav-text">Embedding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GRU"><span class="nav-number">2.6.9.2.</span> <span class="nav-text">GRU</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optim"><span class="nav-number">2.7.</span> <span class="nav-text">optim</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adam"><span class="nav-number">2.7.1.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utils"><span class="nav-number">2.8.</span> <span class="nav-text">[Utils]</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DATA"><span class="nav-number">2.8.1.</span> <span class="nav-text">DATA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#torch-utils-data-DataLoader"><span class="nav-number">2.8.1.1.</span> <span class="nav-text">torch.utils.data.DataLoader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#torch-utils-data-Sampler"><span class="nav-number">2.8.1.2.</span> <span class="nav-text">torch.utils.data.Sampler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#torch-utils-data-SubsetRandomSampler"><span class="nav-number">2.8.1.3.</span> <span class="nav-text">torch.utils.data.SubsetRandomSampler</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Torchvision"><span class="nav-number">3.</span> <span class="nav-text">Torchvision</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Models"><span class="nav-number">3.1.</span> <span class="nav-text">Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stop-undating"><span class="nav-number">3.1.1.</span> <span class="nav-text">Stop-undating</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Datasets"><span class="nav-number">3.2.</span> <span class="nav-text">Datasets</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MNIST"><span class="nav-number">3.2.1.</span> <span class="nav-text">MNIST</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transforms"><span class="nav-number">4.</span> <span class="nav-text">Transforms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compose"><span class="nav-number">4.0.1.</span> <span class="nav-text">Compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resize"><span class="nav-number">4.0.2.</span> <span class="nav-text">Resize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ToTensor"><span class="nav-number">4.0.3.</span> <span class="nav-text">ToTensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normalize"><span class="nav-number">4.0.4.</span> <span class="nav-text">Normalize</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda"><span class="nav-number">4.0.5.</span> <span class="nav-text">Lambda</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HyperParameters-Search"><span class="nav-number">5.</span> <span class="nav-text">HyperParameters Search</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visualization"><span class="nav-number">6.</span> <span class="nav-text">Visualization</span></a></li></ol></div>
             
 
           </div>
