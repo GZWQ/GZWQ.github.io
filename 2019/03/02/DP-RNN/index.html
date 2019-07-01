@@ -103,11 +103,13 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-i.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-C.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/LSTM3-focus-o-2079403.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-07-01%20at%204.30.58%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-07-01%20at%204.34.08%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-06-20%20at%2012.39.27%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-06-20%20at%2012.49.39%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/Screen%20Shot%202019-06-20%20at%2012.51.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/02/DP-RNN/68747470733a2f2f692e696d6775722e636f6d2f5a32786279534f2e706e67.png">
-<meta property="og:updated_time" content="2019-06-20T17:52:30.371Z">
+<meta property="og:updated_time" content="2019-07-01T21:38:23.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-RNN">
 <meta name="twitter:description" content="Recurrent Neural Networks, which are a type of artificial neural network designed to recognize patterns in sequences of data, such as text, genomes, handwriting, the spoken word, or numerical times se">
@@ -498,6 +500,370 @@ S_{3}=S_2 \cdot W_{r e c}+X_{3} \cdot W_{x}</script><p>We define the MSE loss fu
 \frac{d \xi}{d W_{x}}=\frac{d \xi}{d S_{1}} \cdot \frac{d S_{3}}{d S_2}\cdot \frac{d S_{2}}{d S_1}\cdot \frac{d S_{1}}{d W_x}=\frac{2}{m}\left(S_{3}-y\right) \cdot W_{rec}\cdot W_{rec}\cdot x_{2}\\
 \frac{d \xi}{d W_{rec}}=\frac{d \xi}{d S_{1}} \cdot \frac{d S_{3}}{d S_2}\cdot \frac{d S_{2}}{d S_1}\cdot \frac{d S_{1}}{d W_{rec}}=\frac{2}{m}\left(S_{3}-y\right) \cdot W_{rec}\cdot W_{rec}\cdot S_{1}\\</script><p>So that’s it! The simple math behind training RNN.</p>
 <p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-06-18 at 9.53.34 PM.png" alt="creen Shot 2019-06-18 at 9.53.34 P"></p>
+<h2 id="Numpy-Implementation"><a href="#Numpy-Implementation" class="headerlink" title="Numpy Implementation"></a>Numpy Implementation</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rnn_step_forward</span><span class="params">(x, prev_h, Wx, Wh, b)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Run the forward pass for a single timestep of a vanilla RNN that uses a tanh</span></div>
+<div class="line"><span class="string">    activation function.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    The input data has dimension D, the hidden state has dimension H, and we use</span></div>
+<div class="line"><span class="string">    a minibatch size of N.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Inputs:</span></div>
+<div class="line"><span class="string">    - x: Input data for this timestep, of shape (N, D).</span></div>
+<div class="line"><span class="string">    - prev_h: Hidden state from previous timestep, of shape (N, H)</span></div>
+<div class="line"><span class="string">    - Wx: Weight matrix for input-to-hidden connections, of shape (D, H)</span></div>
+<div class="line"><span class="string">    - Wh: Weight matrix for hidden-to-hidden connections, of shape (H, H)</span></div>
+<div class="line"><span class="string">    - b: Biases of shape (H,)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Returns a tuple of:</span></div>
+<div class="line"><span class="string">    - next_h: Next hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">    - cache: Tuple of values needed for the backward pass.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    next_h, cache = <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement a single forward step for the vanilla RNN. Store the next  #</span></div>
+<div class="line">    <span class="comment"># hidden state and any values you need for the backward pass in the next_h   #</span></div>
+<div class="line">    <span class="comment"># and cache variables respectively.                                          #</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"></div>
+<div class="line">    raw_h = x.dot(Wx) + prev_h.dot(Wh) + b</div>
+<div class="line">    next_h = np.tanh(raw_h)</div>
+<div class="line">    cache = (x, prev_h, Wx, Wh, raw_h, next_h)</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="keyword">return</span> next_h, cache</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rnn_step_backward</span><span class="params">(dnext_h, cache)</span>:</span></div>
+<div class="line"></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Backward pass for a single timestep of a vanilla RNN.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Inputs:</span></div>
+<div class="line"><span class="string">- dnext_h: Gradient of loss with respect to next hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">- cache: Cache object from the forward pass</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Returns a tuple of:</span></div>
+<div class="line"><span class="string">- dx: Gradients of input data, of shape (N, D)</span></div>
+<div class="line"><span class="string">- dprev_h: Gradients of previous hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">- dWx: Gradients of input-to-hidden weights, of shape (D, H)</span></div>
+<div class="line"><span class="string">- dWh: Gradients of hidden-to-hidden weights, of shape (H, H)</span></div>
+<div class="line"><span class="string">- db: Gradients of bias vector, of shape (H,)</span></div>
+<div class="line"><span class="string">"""</span></div>
+<div class="line">dx, dprev_h, dWx, dWh, db = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="comment"># <span class="doctag">TODO:</span> Implement the backward pass for a single step of a vanilla RNN.      #</span></div>
+<div class="line"><span class="comment">#                                                                            #</span></div>
+<div class="line"><span class="comment"># HINT: For the tanh function, you can compute the local derivative in terms #</span></div>
+<div class="line"><span class="comment"># of the output value from tanh.                                             #</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"></div>
+<div class="line">x, prev_h, Wx, Wh, raw_h, next_h = cache</div>
+<div class="line"></div>
+<div class="line">draw_h = (<span class="number">1</span>-next_h**<span class="number">2</span>)*dnext_h</div>
+<div class="line">db = np.sum(draw_h,axis=<span class="number">0</span>)</div>
+<div class="line">dx = draw_h.dot(Wx.T)</div>
+<div class="line">dWx = x.T.dot(draw_h)</div>
+<div class="line">dprev_h = draw_h.dot(Wh.T)</div>
+<div class="line">dWh = prev_h.T.dot(draw_h)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="keyword">return</span> dx, dprev_h, dWx, dWh, db</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rnn_forward</span><span class="params">(x, h0, Wx, Wh, b)</span>:</span></div>
+<div class="line"></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Run a vanilla RNN forward on an entire sequence of data. We assume an input</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    sequence composed of T vectors, each of dimension D. The RNN uses a hidden</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    size of H, and we work over a minibatch containing N sequences. After running</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    the RNN forward, we return the hidden states for all timesteps.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Inputs:</span></div>
+<div class="line"><span class="string">- x: Input data for the entire timeseries, of shape (N, T, D).</span></div>
+<div class="line"><span class="string">- h0: Initial hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">- Wx: Weight matrix for input-to-hidden connections, of shape (D, H)</span></div>
+<div class="line"><span class="string">- Wh: Weight matrix for hidden-to-hidden connections, of shape (H, H)</span></div>
+<div class="line"><span class="string">- b: Biases of shape (H,)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Returns a tuple of:</span></div>
+<div class="line"><span class="string">- h: Hidden states for the entire timeseries, of shape (N, T, H).</span></div>
+<div class="line"><span class="string">- cache: Values needed in the backward pass</span></div>
+<div class="line"><span class="string">"""</span></div>
+<div class="line">h, cache = <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="comment"># <span class="doctag">TODO:</span> Implement forward pass for a vanilla RNN running on a sequence of    #</span></div>
+<div class="line"><span class="comment"># input data. You should use the rnn_step_forward function that you defined  #</span></div>
+<div class="line"><span class="comment"># above. You can use a for loop to help compute the forward pass.            #</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">N, T, D = x.shape</div>
+<div class="line">_, H = h0.shape</div>
+<div class="line">h = np.zeros((N,T,H))</div>
+<div class="line">cache = &#123;&#125;</div>
+<div class="line">prev_h = h0</div>
+<div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(T):</div>
+<div class="line">    x_ = x[:,i,:]</div>
+<div class="line">    next_h, cache_ = rnn_step_forward(x_, prev_h, Wx, Wh, b)</div>
+<div class="line">    prev_h = next_h</div>
+<div class="line">    h[:,i,:] = next_h</div>
+<div class="line">    cache[i] = cache_</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="keyword">return</span> h, cache</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rnn_backward</span><span class="params">(dh, cache)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Compute the backward pass for a vanilla RNN over an entire sequence of data.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Inputs:</span></div>
+<div class="line"><span class="string">    - dh: Upstream gradients of all hidden states, of shape (N, T, H). </span></div>
+<div class="line"><span class="string">    </span></div>
+<div class="line"><span class="string">    NOTE: 'dh' contains the upstream gradients produced by the </span></div>
+<div class="line"><span class="string">    individual loss functions at each timestep, *not* the gradients</span></div>
+<div class="line"><span class="string">    being passed between timesteps (which you'll have to compute yourself</span></div>
+<div class="line"><span class="string">    by calling rnn_step_backward in a loop).</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Returns a tuple of:</span></div>
+<div class="line"><span class="string">    - dx: Gradient of inputs, of shape (N, T, D)</span></div>
+<div class="line"><span class="string">    - dh0: Gradient of initial hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">    - dWx: Gradient of input-to-hidden weights, of shape (D, H)</span></div>
+<div class="line"><span class="string">    - dWh: Gradient of hidden-to-hidden weights, of shape (H, H)</span></div>
+<div class="line"><span class="string">    - db: Gradient of biases, of shape (H,)</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    dx, dh0, dWx, dWh, db = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the backward pass for a vanilla RNN running an entire      #</span></div>
+<div class="line">    <span class="comment"># sequence of data. You should use the rnn_step_backward function that you   #</span></div>
+<div class="line">    <span class="comment"># defined above. You can use a for loop to help compute the backward pass.   #</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    </div>
+<div class="line">    N, T, H = dh.shape</div>
+<div class="line">    x = cache[<span class="number">0</span>][<span class="number">0</span>]</div>
+<div class="line">    _,D  = x.shape</div>
+<div class="line">    dx = np.zeros((N, T, D))</div>
+<div class="line">    dh0 = np.zeros((N, H))</div>
+<div class="line">    dWx = np.zeros((D, H))</div>
+<div class="line">    dWh = np.zeros((H, H))</div>
+<div class="line">    db = np.zeros(H)</div>
+<div class="line">    </div>
+<div class="line">    dprev_h = np.zeros((N, H))</div>
+<div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(T)):</div>
+<div class="line">        dnext_h = dh[:,i,:] + dprev_h</div>
+<div class="line">        dx[:, i, :], dprev_h, dWx_, dWh_, db_ = rnn_step_backward(dnext_h, cache[i])</div>
+<div class="line">        dWx += dWx_</div>
+<div class="line">        dWh += dWh_</div>
+<div class="line">        db += db_</div>
+<div class="line">    dh0 = dprev_h</div>
+<div class="line">        </div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="keyword">return</span> dx, dh0, dWx, dWh, db</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h1 id="Long-Short-Term-Memory-networks"><a href="#Long-Short-Term-Memory-networks" class="headerlink" title="Long Short Term Memory networks"></a><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">Long Short Term Memory networks</a></h1><p>It is usually just called “LSTMs” – are a special kind of RNN, capable of learning long-term dependencies.</p>
 <p>All recurrent neural networks have the form of a chain of repeating modules of neural network. In standard RNNs, this repeating module will have a very simple structure, such as a single tanh layer.</p>
 <p><img src="/2019/03/02/DP-RNN/LSTM3-SimpleRNN.png" alt="STM3-SimpleRN"></p>
@@ -526,6 +892,424 @@ S_{3}=S_2 \cdot W_{r e c}+X_{3} \cdot W_{x}</script><p>We define the MSE loss fu
 <p>Finally, we need to decide what we’re going to output. This output will be based on our cell state, but will be a filtered version. First, we run a sigmoid layer which decides what parts of the cell state we’re going to output. Then, we put the cell state through tanh (to push the values to be between -1 and 1) and multiply it by the output of the sigmoid gate, so that we only output the parts we decided to.</p>
 <p>For the language model example, since it just saw a subject, it might want to output information relevant to a verb, in case that’s what is coming next. For example, it might output whether the subject is singular or plural, so that we know what form a verb should be conjugated into if that’s what follows next.</p>
 <p><img src="/2019/03/02/DP-RNN/LSTM3-focus-o-2079403.png" alt="STM3-focus-o-207940"></p>
+<h2 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h2><p>Recall that the forward pass of LSTM is like:</p>
+<p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-07-01 at 4.30.58 PM.png" alt="creen Shot 2019-07-01 at 4.30.58 P"></p>
+<p>The unrolled network during the forward pass is shown above. The cell state at time T, $c^T$ is  responsible for computing h as well as the next cell state $c^{T+1}$. At each time step, the cell output h is shown to be passed to some more layers on which cost function C is computed, as the way an LSTM would be used in a typical application like captioning or language modeling. <a href="http://arunmallya.github.io/writeups/nn/lstm/index.html#/6" target="_blank" rel="noopener">source</a></p>
+<p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-07-01 at 4.34.08 PM.png" alt="creen Shot 2019-07-01 at 4.34.08 P"></p>
+<p>The unrolled network during the backward pass is shown below. All the arrows in the previous slide have now changed their direction. The cell state at time T, $c^{T}$ receive gradients from $h^T$ as well as the next cell state $c^{T+1}$. </p>
+<p>Note that for the last node, since it dosen’t have a next time stamp, it receive no gradients from $c^{T+1}$ and $h^T$, which means $d_{next_state} = 0$ and $d_{next_hidden}=0$. </p>
+<h2 id="Numpy-Implementation-1"><a href="#Numpy-Implementation-1" class="headerlink" title="Numpy Implementation"></a>Numpy Implementation</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lstm_step_forward</span><span class="params">(x, prev_h, prev_c, Wx, Wh, b)</span>:</span></div>
+<div class="line"></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Forward pass for a single timestep of an LSTM.</span></div>
+<div class="line"><span class="string">The input data has dimension D, the hidden state has dimension H, and we use</span></div>
+<div class="line"><span class="string">a minibatch size of N.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Note that a sigmoid() function has already been provided for you in this file.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Inputs:</span></div>
+<div class="line"><span class="string">- x: Input data, of shape (N, D)</span></div>
+<div class="line"><span class="string">- prev_h: Previous hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">- prev_c: previous cell state, of shape (N, H)</span></div>
+<div class="line"><span class="string">- Wx: Input-to-hidden weights, of shape (D, 4H)</span></div>
+<div class="line"><span class="string">- Wh: Hidden-to-hidden weights, of shape (H, 4H)</span></div>
+<div class="line"><span class="string">- b: Biases, of shape (4H,)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">Returns a tuple of:</span></div>
+<div class="line"><span class="string">- next_h: Next hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">- next_c: Next cell state, of shape (N, H)</span></div>
+<div class="line"><span class="string">- cache: Tuple of values needed for backward pass.</span></div>
+<div class="line"><span class="string">"""</span></div>
+<div class="line">next_h, next_c, cache = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line"><span class="comment">#############################################################################</span></div>
+<div class="line"><span class="comment"># <span class="doctag">TODO:</span> Implement the forward pass for a single timestep of an LSTM.        #</span></div>
+<div class="line"><span class="comment"># You may want to use the numerically stable sigmoid implementation above.  #</span></div>
+<div class="line"><span class="comment">#############################################################################</span></div>
+<div class="line"><span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"></div>
+<div class="line">N,D = x.shape</div>
+<div class="line">_,H = prev_h.shape</div>
+<div class="line"></div>
+<div class="line">gates = x.dot(Wx) + prev_h.dot(Wh) + b <span class="comment"># (N, 4H)</span></div>
+<div class="line">gate_i = sigmoid(gates[:,:H]) <span class="comment"># (N,H)</span></div>
+<div class="line">gate_f = sigmoid(gates[:,H:<span class="number">2</span>*H])</div>
+<div class="line">gate_o = sigmoid(gates[:,<span class="number">2</span>*H:<span class="number">3</span>*H])</div>
+<div class="line">gate_g = np.tanh(gates[:,<span class="number">3</span>*H:])</div>
+<div class="line"></div>
+<div class="line">next_c = prev_c*gate_f + gate_g*gate_i</div>
+<div class="line">next_h = gate_o*np.tanh(next_c)</div>
+<div class="line"></div>
+<div class="line">cache = (x, prev_h, prev_c, Wx, Wh, gate_i, gate_f, gate_o, gate_g, next_c)</div>
+<div class="line"></div>
+<div class="line"><span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"><span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line"><span class="comment">##############################################################################</span></div>
+<div class="line"></div>
+<div class="line"><span class="keyword">return</span> next_h, next_c, cache</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lstm_step_backward</span><span class="params">(dnext_h, dnext_c, cache)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Backward pass for a single timestep of an LSTM.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Inputs:</span></div>
+<div class="line"><span class="string">    - dnext_h: Gradients of next hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">    - dnext_c: Gradients of next cell state, of shape (N, H)</span></div>
+<div class="line"><span class="string">    - cache: Values from the forward pass</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Returns a tuple of:</span></div>
+<div class="line"><span class="string">    - dx: Gradient of input data, of shape (N, D)</span></div>
+<div class="line"><span class="string">    - dprev_h: Gradient of previous hidden state, of shape (N, H)</span></div>
+<div class="line"><span class="string">    - dprev_c: Gradient of previous cell state, of shape (N, H)</span></div>
+<div class="line"><span class="string">    - dWx: Gradient of input-to-hidden weights, of shape (D, 4H)</span></div>
+<div class="line"><span class="string">    - dWh: Gradient of hidden-to-hidden weights, of shape (H, 4H)</span></div>
+<div class="line"><span class="string">    - db: Gradient of biases, of shape (4H,)</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    dx, dprev_h, dprev_c, dWx, dWh, db = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line">    <span class="comment">#############################################################################</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the backward pass for a single timestep of an LSTM.       #</span></div>
+<div class="line">    <span class="comment">#                                                                           #</span></div>
+<div class="line">    <span class="comment"># HINT: For sigmoid and tanh you can compute local derivatives in terms of  #</span></div>
+<div class="line">    <span class="comment"># the output value from the nonlinearity.                                   #</span></div>
+<div class="line">    <span class="comment">#############################################################################</span></div>
+<div class="line">    <span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    </div>
+<div class="line">    (x, prev_h, prev_c, Wx, Wh, gate_i, gate_f, gate_o, gate_g, next_c) = cache</div>
+<div class="line">    N,H = dnext_h.shape</div>
+<div class="line">    _,D = x.shape</div>
+<div class="line">    </div>
+<div class="line">    dgate_o = dnext_h*np.tanh(next_c)</div>
+<div class="line">    dtanh_next_c = dnext_h*gate_o <span class="comment">#(N, H)</span></div>
+<div class="line">    </div>
+<div class="line">    dnext_c_ = dtanh_next_c*(<span class="number">1</span>-np.tanh(next_c)**<span class="number">2</span>)</div>
+<div class="line">    dnext_c = dnext_c_ + dnext_c</div>
+<div class="line">    </div>
+<div class="line">    dgate_f = dnext_c*prev_c</div>
+<div class="line">    dprev_c = dnext_c*gate_f</div>
+<div class="line">    </div>
+<div class="line">    dgate_g = dnext_c*gate_i</div>
+<div class="line">    dgate_i = dnext_c*gate_g</div>
+<div class="line">    </div>
+<div class="line">    dgate_g = dgate_g*(<span class="number">1</span>-gate_g**<span class="number">2</span>)</div>
+<div class="line">    dgate_o = dgate_o*gate_o*(<span class="number">1</span>-gate_o)</div>
+<div class="line">    dgate_f = dgate_f*gate_f*(<span class="number">1</span>-gate_f)</div>
+<div class="line">    dgate_i = dgate_i*gate_i*(<span class="number">1</span>-gate_i)</div>
+<div class="line">    </div>
+<div class="line">    dgate = np.concatenate([dgate_i,dgate_f,dgate_o,dgate_g],axis=<span class="number">1</span>)</div>
+<div class="line">    db = np.sum(dgate,axis=<span class="number">0</span>)</div>
+<div class="line">    dx = dgate.dot(Wx.T)</div>
+<div class="line">    dprev_h = dgate.dot(Wh.T)</div>
+<div class="line">    dWx = x.T.dot(dgate)</div>
+<div class="line">    dWh = prev_h.T.dot(dgate)</div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> dx, dprev_h, dprev_c, dWx, dWh, db</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lstm_forward</span><span class="params">(x, h0, Wx, Wh, b)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Forward pass for an LSTM over an entire sequence of data. We assume an input</span></div>
+<div class="line"><span class="string">    sequence composed of T vectors, each of dimension D. The LSTM uses a hidden</span></div>
+<div class="line"><span class="string">    size of H, and we work over a minibatch containing N sequences. After running</span></div>
+<div class="line"><span class="string">    the LSTM forward, we return the hidden states for all timesteps.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Note that the initial cell state is passed as input, but the initial cell</span></div>
+<div class="line"><span class="string">    state is set to zero. Also note that the cell state is not returned; it is</span></div>
+<div class="line"><span class="string">    an internal variable to the LSTM and is not accessed from outside.</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Inputs:</span></div>
+<div class="line"><span class="string">    - x: Input data of shape (N, T, D)</span></div>
+<div class="line"><span class="string">    - h0: Initial hidden state of shape (N, H)</span></div>
+<div class="line"><span class="string">    - Wx: Weights for input-to-hidden connections, of shape (D, 4H)</span></div>
+<div class="line"><span class="string">    - Wh: Weights for hidden-to-hidden connections, of shape (H, 4H)</span></div>
+<div class="line"><span class="string">    - b: Biases of shape (4H,)</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Returns a tuple of:</span></div>
+<div class="line"><span class="string">    - h: Hidden states for all timesteps of all sequences, of shape (N, T, H)</span></div>
+<div class="line"><span class="string">    - cache: Values needed for the backward pass.</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    h, cache = <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line">    <span class="comment">#############################################################################</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the forward pass for an LSTM over an entire timeseries.   #</span></div>
+<div class="line">    <span class="comment"># You should use the lstm_step_forward function that you just defined.      #</span></div>
+<div class="line">    <span class="comment">#############################################################################</span></div>
+<div class="line">    <span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    cache = &#123;&#125;</div>
+<div class="line">    N, T, D = x.shape</div>
+<div class="line">    _, H = h0.shape</div>
+<div class="line">    h = np.zeros((N,T,H))</div>
+<div class="line">    prev_h = h0</div>
+<div class="line">    prev_c = np.zeros_like(h0)</div>
+<div class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> range(T):</div>
+<div class="line">        prev_h, prev_c, cache[t] = lstm_step_forward(x[:,t,:], prev_h, prev_c, Wx, Wh, b)</div>
+<div class="line">        h[:,t,:] = prev_h</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> h, cache</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">lstm_backward</span><span class="params">(dh, cache)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Backward pass for an LSTM over an entire sequence of data.]</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Inputs:</span></div>
+<div class="line"><span class="string">    - dh: Upstream gradients of hidden states, of shape (N, T, H)</span></div>
+<div class="line"><span class="string">    - cache: Values from the forward pass</span></div>
+<div class="line"><span class="string"></span></div>
+<div class="line"><span class="string">    Returns a tuple of:</span></div>
+<div class="line"><span class="string">    - dx: Gradient of input data of shape (N, T, D)</span></div>
+<div class="line"><span class="string">    - dh0: Gradient of initial hidden state of shape (N, H)</span></div>
+<div class="line"><span class="string">    - dWx: Gradient of input-to-hidden weight matrix of shape (D, 4H)</span></div>
+<div class="line"><span class="string">    - dWh: Gradient of hidden-to-hidden weight matrix of shape (H, 4H)</span></div>
+<div class="line"><span class="string">    - db: Gradient of biases, of shape (4H,)</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    dx, dh0, dWx, dWh, db = <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span>, <span class="keyword">None</span></div>
+<div class="line">    <span class="comment">#############################################################################</span></div>
+<div class="line">    <span class="comment"># <span class="doctag">TODO:</span> Implement the backward pass for an LSTM over an entire timeseries.  #</span></div>
+<div class="line">    <span class="comment"># You should use the lstm_step_backward function that you just defined.     #</span></div>
+<div class="line">    <span class="comment">#############################################################################</span></div>
+<div class="line">    <span class="comment"># *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line"></div>
+<div class="line">    N, T, H = dh.shape</div>
+<div class="line">    _, D = cache[<span class="number">0</span>][<span class="number">0</span>].shape</div>
+<div class="line">    dx = np.zeros((N,T,D))</div>
+<div class="line">    dWx = np.zeros((D,<span class="number">4</span>*H))</div>
+<div class="line">    dWh = np.zeros((H,<span class="number">4</span>*H))</div>
+<div class="line">    db = np.zeros((<span class="number">4</span>*H))</div>
+<div class="line">    dprev_c = np.zeros((N, H)) </div>
+<div class="line">    dprev_h = np.zeros((N, H)) </div>
+<div class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> range(T<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</div>
+<div class="line">        dnext_h = dprev_h + dh[:,t,:]</div>
+<div class="line">        dnext_c = dprev_c</div>
+<div class="line">        dx[:,t,:], dprev_h, dprev_c, dWx_, dWh_, db_ = lstm_step_backward(dnext_h, dnext_c, cache[t])</div>
+<div class="line">        dWx += dWx_</div>
+<div class="line">        dWh += dWh_</div>
+<div class="line">        db += db_</div>
+<div class="line">    dh0 = dprev_h</div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line">    <span class="comment">#                               END OF YOUR CODE                             #</span></div>
+<div class="line">    <span class="comment">##############################################################################</span></div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> dx, dh0, dWx, dWh, db</div>
+</pre></td></tr></table></figure>
+
+</div></div>
 <h1 id="GRU"><a href="#GRU" class="headerlink" title="GRU"></a><a href="https://www.d2l.ai/chapter_recurrent-neural-networks/gru.html" target="_blank" rel="noopener">GRU</a></h1><p>So now we know how an LSTM work, let’s briefly look at the GRU. The GRU is the newer generation of Recurrent Neural networks and is pretty similar to an LSTM. GRU’s got rid of the cell state and used the hidden state to transfer information. It also only has two gates, a reset gate and update gate.</p>
 <p><img src="/2019/03/02/DP-RNN/Screen Shot 2019-06-20 at 12.39.27 PM.png" alt="creen Shot 2019-06-20 at 12.39.27 P"></p>
 <p><strong>Reset Gate</strong></p>
@@ -1777,7 +2561,7 @@ S_{3}=S_2 \cdot W_{r e c}+X_{3} \cdot W_{x}</script><p>We define the MSE loss fu
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1832,7 +2616,7 @@ S_{3}=S_2 \cdot W_{r e c}+X_{3} \cdot W_{x}</script><p>We define the MSE loss fu
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problems-with-Vanilla-NN-link"><span class="nav-number">1.</span> <span class="nav-text">Problems with Vanilla NN link</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN"><span class="nav-number">2.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Forward-propagation"><span class="nav-number">2.1.</span> <span class="nav-text">Forward propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Back-Propagation-through-Time"><span class="nav-number">2.2.</span> <span class="nav-text">Back Propagation through Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hand-Written-RNN"><span class="nav-number">2.3.</span> <span class="nav-text">Hand-Written RNN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Long-Short-Term-Memory-networks"><span class="nav-number">3.</span> <span class="nav-text">Long Short Term Memory networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-core-idea-behind-LSTMs"><span class="nav-number">3.1.</span> <span class="nav-text">The core idea behind LSTMs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-by-Step-LSTM-Walk-Through"><span class="nav-number">3.2.</span> <span class="nav-text">Step-by-Step LSTM Walk Through</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GRU"><span class="nav-number">4.</span> <span class="nav-text">GRU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Learn-the-Alphabet"><span class="nav-number">5.</span> <span class="nav-text">Keras - Learn the Alphabet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Preparation"><span class="nav-number">5.1.</span> <span class="nav-text">Data Preparation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#One-Char-to-One-Char"><span class="nav-number">5.2.</span> <span class="nav-text">One-Char to One-Char</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Three-Char-Feature-Window-to-One-Char-Mapping"><span class="nav-number">5.3.</span> <span class="nav-text">A Three-Char Feature Window to One-Char Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Three-Char-Time-Step-Window-to-One-Char-Mapping"><span class="nav-number">5.4.</span> <span class="nav-text">A Three-Char Time Step Window to One-Char Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM-State-Within-A-Batch"><span class="nav-number">5.5.</span> <span class="nav-text">LSTM State Within A Batch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stateful-LSTM-for-a-One-Char-to-One-Char-Mapping"><span class="nav-number">5.6.</span> <span class="nav-text">Stateful LSTM for a One-Char to One-Char Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM-with-Variable-Length-Input-to-One-Char-Output"><span class="nav-number">5.7.</span> <span class="nav-text">LSTM with Variable-Length Input to One-Char Output</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch-Classify-Names-with-a-Character-Level-RNN"><span class="nav-number">6.</span> <span class="nav-text">PyTorch - Classify Names with a Character-Level RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preparing-data"><span class="nav-number">6.1.</span> <span class="nav-text">Preparing data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Train-the-Network"><span class="nav-number">6.2.</span> <span class="nav-text">Train the Network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Referneces"><span class="nav-number">7.</span> <span class="nav-text">Referneces</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Problems-with-Vanilla-NN-link"><span class="nav-number">1.</span> <span class="nav-text">Problems with Vanilla NN link</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN"><span class="nav-number">2.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Forward-propagation"><span class="nav-number">2.1.</span> <span class="nav-text">Forward propagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Back-Propagation-through-Time"><span class="nav-number">2.2.</span> <span class="nav-text">Back Propagation through Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hand-Written-RNN"><span class="nav-number">2.3.</span> <span class="nav-text">Hand-Written RNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Numpy-Implementation"><span class="nav-number">2.4.</span> <span class="nav-text">Numpy Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Long-Short-Term-Memory-networks"><span class="nav-number">3.</span> <span class="nav-text">Long Short Term Memory networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-core-idea-behind-LSTMs"><span class="nav-number">3.1.</span> <span class="nav-text">The core idea behind LSTMs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-by-Step-LSTM-Walk-Through"><span class="nav-number">3.2.</span> <span class="nav-text">Step-by-Step LSTM Walk Through</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Backpropagation"><span class="nav-number">3.3.</span> <span class="nav-text">Backpropagation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Numpy-Implementation-1"><span class="nav-number">3.4.</span> <span class="nav-text">Numpy Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GRU"><span class="nav-number">4.</span> <span class="nav-text">GRU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Keras-Learn-the-Alphabet"><span class="nav-number">5.</span> <span class="nav-text">Keras - Learn the Alphabet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Preparation"><span class="nav-number">5.1.</span> <span class="nav-text">Data Preparation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#One-Char-to-One-Char"><span class="nav-number">5.2.</span> <span class="nav-text">One-Char to One-Char</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Three-Char-Feature-Window-to-One-Char-Mapping"><span class="nav-number">5.3.</span> <span class="nav-text">A Three-Char Feature Window to One-Char Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-Three-Char-Time-Step-Window-to-One-Char-Mapping"><span class="nav-number">5.4.</span> <span class="nav-text">A Three-Char Time Step Window to One-Char Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM-State-Within-A-Batch"><span class="nav-number">5.5.</span> <span class="nav-text">LSTM State Within A Batch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stateful-LSTM-for-a-One-Char-to-One-Char-Mapping"><span class="nav-number">5.6.</span> <span class="nav-text">Stateful LSTM for a One-Char to One-Char Mapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM-with-Variable-Length-Input-to-One-Char-Output"><span class="nav-number">5.7.</span> <span class="nav-text">LSTM with Variable-Length Input to One-Char Output</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch-Classify-Names-with-a-Character-Level-RNN"><span class="nav-number">6.</span> <span class="nav-text">PyTorch - Classify Names with a Character-Level RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preparing-data"><span class="nav-number">6.1.</span> <span class="nav-text">Preparing data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Train-the-Network"><span class="nav-number">6.2.</span> <span class="nav-text">Train the Network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Referneces"><span class="nav-number">7.</span> <span class="nav-text">Referneces</span></a></li></ol></div>
             
 
           </div>
