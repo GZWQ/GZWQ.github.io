@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="AlexNet is introduced in the seminal paper ImageNet Classification with Deep Convolutional Neural Networks, which is a deep convolutional neural network and kicked ass on the ImageNet LSVRC-2010 conte">
+<meta name="description" content="In this post, we’ll go into summarizing a lot of the new and important developments in the field of computer vision and convolutional neural networks.  The 9 Deep Learning Papers You Need To Know Abou">
 <meta name="keywords" content="Deep Learning,CNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AlexNet">
-<meta property="og:url" content="http://yoursite.com/2018/12/02/AlexNet/index.html">
+<meta property="og:title" content="DP-Clasical CNNs">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="AlexNet is introduced in the seminal paper ImageNet Classification with Deep Convolutional Neural Networks, which is a deep convolutional neural network and kicked ass on the ImageNet LSVRC-2010 conte">
+<meta property="og:description" content="In this post, we’ll go into summarizing a lot of the new and important developments in the field of computer vision and convolutional neural networks.  The 9 Deep Learning Papers You Need To Know Abou">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/12/02/AlexNet/AlexNet-1.png">
-<meta property="og:updated_time" content="2019-02-18T20:09:31.854Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/AlexNet-1.png">
+<meta property="og:updated_time" content="2019-07-08T02:48:51.755Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AlexNet">
-<meta name="twitter:description" content="AlexNet is introduced in the seminal paper ImageNet Classification with Deep Convolutional Neural Networks, which is a deep convolutional neural network and kicked ass on the ImageNet LSVRC-2010 conte">
-<meta name="twitter:image" content="http://yoursite.com/2018/12/02/AlexNet/AlexNet-1.png">
+<meta name="twitter:title" content="DP-Clasical CNNs">
+<meta name="twitter:description" content="In this post, we’ll go into summarizing a lot of the new and important developments in the field of computer vision and convolutional neural networks.  The 9 Deep Learning Papers You Need To Know Abou">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/AlexNet-1.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/02/AlexNet/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/"/>
 
 
 
 
 
-  <title>AlexNet | Blog of Qing</title>
+  <title>DP-Clasical CNNs | Blog of Qing</title>
   
 
 
@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/02/AlexNet/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -306,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AlexNet</h1>
+          <h1 class="post-title" itemprop="name headline">DP-Clasical CNNs</h1>
         
 
         <div class="post-meta">
@@ -318,8 +318,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-02T12:25:44-06:00">
-                2018-12-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-07T21:40:23-05:00">
+                2019-07-07
               </time>
             
 
@@ -378,9 +378,11 @@
       
 
       
-        <p>AlexNet is introduced in the seminal paper <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf" target="_blank" rel="noopener">ImageNet Classification with Deep Convolutional Neural Networks</a>, which is a deep convolutional neural network and kicked ass on the ImageNet LSVRC-2010 contest. AlexNet does a pretty good job classifying the 1.2 million high-resolution images into 1000 different classes. Actually, top-1 and top-5 error rate of 37.5% and 17.5% are achieved on the test data, which is way better than the previous state-of-the-art. In this article, I will introduce what AlexNet is, namely the network architecture, how they deal with overfitting, and evaluation results.</p>
+        <p>In this post, we’ll go into summarizing a lot of the new and important developments in the field of computer vision and convolutional neural networks. </p>
+<p><a href="https://adeshpande3.github.io/The-9-Deep-Learning-Papers-You-Need-To-Know-About.html" target="_blank" rel="noopener">The 9 Deep Learning Papers You Need To Know About (Understanding CNNs Part 3)</a> </p>
 <a id="more"></a>
-<h1 id="The-Architecture"><a href="#The-Architecture" class="headerlink" title="The Architecture"></a>The Architecture</h1><p><img src="/2018/12/02/AlexNet/AlexNet-1.png" alt="lexNet-"></p>
+<h1 id="Alex"><a href="#Alex" class="headerlink" title="Alex"></a>Alex</h1><p>AlexNet is introduced in the seminal paper <a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf" target="_blank" rel="noopener">ImageNet Classification with Deep Convolutional Neural Networks</a>, which is a deep convolutional neural network and kicked ass on the ImageNet LSVRC-2010 contest. AlexNet does a pretty good job classifying the 1.2 million high-resolution images into 1000 different classes. Actually, top-1 and top-5 error rate of 37.5% and 17.5% are achieved on the test data, which is way better than the previous state-of-the-art. In this article, I will introduce what AlexNet is, namely the network architecture, how they deal with overfitting, and evaluation results.</p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/2019/07/07/DP-Clasical-CNNs/AlexNet-1.png" alt="lexNet-"></p>
 <p>The <a href="https://www.learnopencv.com/understanding-alexnet/" target="_blank" rel="noopener">picture</a> above shows the architecture of AlexNet.We can eyeball the graph and find that AlexNet contains eight layers  —  five convolutional and three fully-connected layers. <a href="https://medium.com/coinmonks/paper-review-of-alexnet-caffenet-winner-in-ilsvrc-2012-image-classification-b93598314160" target="_blank" rel="noopener">ref</a> </p>
 <p><strong>Input</strong>: $227 \times 227 \times 3$ images</p>
 <p><strong>1st Convolutional Layers</strong>: 96 kernels with kernel size $11 \times 11$, strides=4, pad=0, activation=”relu”</p>
@@ -412,14 +414,8 @@
 <p><strong>6th Fully-Connected Layers</strong>: 4096 neurons, activation=’tanh’</p>
 <p><strong>7th Fully-Connected Layers</strong>: 4096 neurons, activation=’tanh’</p>
 <p><strong>8th Fully-Connected Layers</strong>: 1000 neurons (since there 1000 classes), activation=’softmax’</p>
-<h1 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h1><p>The author also proposed several methods to attack the overfitting problem, i.e. data argmentation and dropout. </p>
-<h2 id="Data-Argmentation"><a href="#Data-Argmentation" class="headerlink" title="Data Argmentation"></a>Data Argmentation</h2><p>The easiest and most common way to reduce overfitting on image data is to artificially enlarge the dataset using label-preserving transformations. The authors employ two distinct forms of data augmentation.</p>
-<p>The first form is to generated cropped images and horizontal reflections. For each training image of size $256 \times 256$, multiple patches of size $227 \times 227$ are extracted. Then, we can get 841$227 \times 227$ patches from a single image ($(256-227) \times (256-227)=841$). And for each patch we take a horizontal reflection, resulting in increasing the size of training set by a factor of 1682. <a href="https://stats.stackexchange.com/questions/178184/data-augmentation-step-in-krizhevsky-et-al-paper" target="_blank" rel="noopener">ref</a> </p>
-<p>The second form consists of altering the intensities of the RGB channels in training set, which is performed by PCA.</p>
-<h2 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h2><h1 id="Training-Details"><a href="#Training-Details" class="headerlink" title="Training Details"></a>Training Details</h1><p>Stochastic Gradient Descent is harnessed to train the model with a batch size of 128 images, momentum of 0.9, and weight decay of 0.0005. </p>
-<p>The weights in each layer are initialized from a zero-mean Gaussian distribution with standard deviation 0.01. We initialized the neuron biases in the second, fourth, and fifth convolutional layers, as well as in the fully-connected hidden layers, with the constant 1. This initialization accelerates the early stages of learning by providing the ReLUs with positive inputs. We initialized the neuron biases in the remaining layers with the constant 0.</p>
-<p>All layers use the same learning rate, which is adjusted manually throughout training. The heuristic is to divide the learning rate by 10 when the validation error rate stopped improving with the current learning rate. The learning rate is initialized at 0.01 and reduced three times prior to termination.</p>
-<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><h1 id="Pythpn-Implementation"><a href="#Pythpn-Implementation" class="headerlink" title="Pythpn Implementation"></a>Pythpn Implementation</h1><p>Alright, let’s write a program that learns how to recognize images using cifar10 dataset. We’ll do this with a short keras program. </p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p>Alright, let’s write a program that learns how to recognize images using cifar10 dataset. We’ll do this with a short keras program. </p>
 <p>Let me explain the dataset cifar10 firstly before going to the architecture implementation. Instead of all images, we just use two categories, i.e. cat and dog. <a href="https://www.kaggle.com/c/dogs-vs-cats/data" target="_blank" rel="noopener">Dog vs Cat</a> consists of 12500 training cat images and 12500 training dog images. We are going to use 1000 cat images and 1000 dog images as training dataset while 400 cat images and 400 dog images as testing datasets. Here’s the code we use to organize the training and test datasets.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -877,10 +873,11 @@
 <div class="line">    alexnet = AlexNet()</div>
 <div class="line">    alexnet.train(<span class="number">500</span>)</div>
 </pre></td></tr></table></figure>
-<h1 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h1><ol>
-<li>Evidence shows that the best ImageNet models using convolutional and fully-connected layers typically contain between 16 and 30 layers. <a href="https://towardsdatascience.com/introduction-to-resnets-c0a830a288a4" target="_blank" rel="noopener">source</a> </li>
-<li>​</li>
-</ol>
+
+</div></div>
+<h2 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h2><p>The author also proposed several methods to attack the overfitting problem, i.e. data argmentation.</p>
+<p> The authors employ two distinct forms of data augmentation.</p>
+<p>The first form is to generated cropped images and horizontal reflections. For each training image of size $256 \times 256$, multiple patches of size $227 \times 227$ are extracted. Then, we can get 841$227 \times 227$ patches from a single image ($(256-227) \times (256-227)=841$). And for each patch we take a horizontal reflection, resulting in increasing the size of training set by a factor of 1682. <a href="https://stats.stackexchange.com/questions/178184/data-augmentation-step-in-krizhevsky-et-al-paper" target="_blank" rel="noopener">ref</a> </p>
 
       
     </div>
@@ -913,8 +910,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Daily-Paper-Reading/" rel="next" title="Daily Paper Reading">
-                <i class="fa fa-chevron-left"></i> Daily Paper Reading
+              <a href="/2019/07/01/NLP-Seq2Seq/" rel="next" title="NLP-Seq2Seq">
+                <i class="fa fa-chevron-left"></i> NLP-Seq2Seq
               </a>
             
           </div>
@@ -922,10 +919,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/08/BroadReading/" rel="prev" title="BroadReading">
-                BroadReading <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -1057,7 +1050,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Architecture"><span class="nav-number">1.</span> <span class="nav-text">The Architecture</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Overfitting"><span class="nav-number">2.</span> <span class="nav-text">Overfitting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Argmentation"><span class="nav-number">2.1.</span> <span class="nav-text">Data Argmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dropout"><span class="nav-number">2.2.</span> <span class="nav-text">Dropout</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Training-Details"><span class="nav-number">3.</span> <span class="nav-text">Training Details</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Results"><span class="nav-number">4.</span> <span class="nav-text">Results</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pythpn-Implementation"><span class="nav-number">5.</span> <span class="nav-text">Pythpn Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Comments"><span class="nav-number">6.</span> <span class="nav-text">Comments</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex"><span class="nav-number">1.</span> <span class="nav-text">Alex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-number">1.1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments"><span class="nav-number">1.3.</span> <span class="nav-text">Comments</span></a></li></ol></li></ol></div>
             
 
           </div>
