@@ -88,7 +88,19 @@
 <meta property="og:description" content="In this post, we’ll go into summarizing a lot of the new and important developments in the field of computer vision and convolutional neural networks.  The 9 Deep Learning Papers You Need To Know Abou">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/AlexNet-1.png">
-<meta property="og:updated_time" content="2019-07-08T02:48:51.755Z">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%205.56.55%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%206.28.27%20PM-2628528.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%206.44.05%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.22.57%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.23.55%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.24.54%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.27.01%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.27.52%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.28.06%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.32.44%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.53.49%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/07/DP-Clasical-CNNs/Screen%20Shot%202019-07-08%20at%207.55.07%20PM.png">
+<meta property="og:updated_time" content="2019-07-09T01:09:09.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-Clasical CNNs">
 <meta name="twitter:description" content="In this post, we’ll go into summarizing a lot of the new and important developments in the field of computer vision and convolutional neural networks.  The 9 Deep Learning Papers You Need To Know Abou">
@@ -387,7 +399,13 @@
 <p><strong>Input</strong>: $227 \times 227 \times 3$ images</p>
 <p><strong>1st Convolutional Layers</strong>: 96 kernels with kernel size $11 \times 11$, strides=4, pad=0, activation=”relu”</p>
 <p>$55 \times 55 \times 96$ feature maps</p>
+<blockquote>
+<p> total number of parameters = $(11<em>11</em>3)*96=35K$. </p>
+</blockquote>
 <p>Then $3 \times 3$ <strong>Max Pooling</strong> (strides=2) </p>
+<blockquote>
+<p>bO PARAMETERS.</p>
+</blockquote>
 <p>$27 \times 27 \times 96$ feature maps</p>
 <blockquote>
 <ol>
@@ -878,7 +896,49 @@
 <h2 id="Comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h2><p>The author also proposed several methods to attack the overfitting problem, i.e. data argmentation.</p>
 <p> The authors employ two distinct forms of data augmentation.</p>
 <p>The first form is to generated cropped images and horizontal reflections. For each training image of size $256 \times 256$, multiple patches of size $227 \times 227$ are extracted. Then, we can get 841$227 \times 227$ patches from a single image ($(256-227) \times (256-227)=841$). And for each patch we take a horizontal reflection, resulting in increasing the size of training set by a factor of 1682. <a href="https://stats.stackexchange.com/questions/178184/data-augmentation-step-in-krizhevsky-et-al-paper" target="_blank" rel="noopener">ref</a> </p>
-
+<h1 id="ZFNET"><a href="#ZFNET" class="headerlink" title="ZFNET"></a>ZFNET</h1><h2 id="Architecture-1"><a href="#Architecture-1" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 5.56.55 PM.png" alt="creen Shot 2019-07-08 at 5.56.55 P"></p>
+<h1 id="VGGNet"><a href="#VGGNet" class="headerlink" title="VGGNet"></a>VGGNet</h1><h2 id="Architecture-2"><a href="#Architecture-2" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 6.28.27 PM-2628528.png" alt="creen Shot 2019-07-08 at 6.28.27 PM-262852"></p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 6.44.05 PM.png" alt="creen Shot 2019-07-08 at 6.44.05 P"></p>
+<p>Most memory is in early CONV while most params are in late FC.</p>
+<p>FC7 features generalize well to other tasks</p>
+<h2 id="Comments-1"><a href="#Comments-1" class="headerlink" title="Comments"></a>Comments</h2><ol>
+<li><p>Why use samller filters? ($3\times 3$ conv)</p>
+<p><strong>Stack of three</strong> 3x3 conv (stride 1) layers has same effective receptive field as <strong>one</strong> 7x7 conv layer.</p>
+<p>For one $7\times 7$ layers, the filters range it can see is from 1 to 7.</p>
+<p>But for three layers $3\times 3$, at the first layer: </p>
+<p>first neuron: 1-3, second neuron: 2-4, …, firth neuron: 5-7.</p>
+<p>At the second layer:</p>
+<p>first neuron see first, second and third neurons from the first layer, resulting in seeing neurons: 1-5.</p>
+<p>second neuron see: 2-6; third neuron: 3-7.</p>
+<p>Then in the third layer:</p>
+<p>it sees 1-5, + 2-6, + 3-7 = 1-7. </p>
+</li>
+<li><p>What is the effective receptive field of three 3x3 conv (stride 1) layers?</p>
+<p>It is deeper and has more non-linearities. What is more, fewer parameters: $3 \times (3^2C^2)$ vs $7^2\times C^2$.</p>
+<p>​</p>
+</li>
+</ol>
+<h1 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h1><h2 id="Architecture-3"><a href="#Architecture-3" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.22.57 PM.png" alt="creen Shot 2019-07-08 at 7.22.57 P"></p>
+<p><strong>Naive Inception module</strong></p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.23.55 PM.png" alt="creen Shot 2019-07-08 at 7.23.55 P"></p>
+<p>The problem:</p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.24.54 PM.png" alt="creen Shot 2019-07-08 at 7.24.54 P"></p>
+<p>This is very expensive computation. Furthermore, Pooling layer also preserves feature depth, which means total depth after concatenation can only grow at every layer!</p>
+<p>$1\times 1 \text{convolutions}$</p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.27.01 PM.png" alt="creen Shot 2019-07-08 at 7.27.01 P"></p>
+<p><strong>Inception module with dimension reduction</strong></p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.27.52 PM.png" alt="creen Shot 2019-07-08 at 7.27.52 P"></p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.28.06 PM.png" alt="creen Shot 2019-07-08 at 7.28.06 P"></p>
+<h1 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h1><h2 id="Architecture-4"><a href="#Architecture-4" class="headerlink" title="Architecture"></a>Architecture</h2><p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.32.44 PM.png" alt="creen Shot 2019-07-08 at 7.32.44 P"></p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.53.49 PM.png" alt="creen Shot 2019-07-08 at 7.53.49 P"></p>
+<h2 id="Comments-2"><a href="#Comments-2" class="headerlink" title="Comments"></a>Comments</h2><ol>
+<li><p>What happens when we continue stacking deeper layers on a “plain” convolutional neural network?</p>
+<p><img src="/2019/07/07/DP-Clasical-CNNs/Screen Shot 2019-07-08 at 7.55.07 PM.png" alt="creen Shot 2019-07-08 at 7.55.07 P"></p>
+<p>56-layer model performs worse on both training and test error, according to the worse training loss, we can say that it is not caused by overfitting.</p>
+</li>
+</ol>
+<h1 id="DenseNet"><a href="#DenseNet" class="headerlink" title="DenseNet"></a>DenseNet</h1><p>In <strong>DenseNet</strong>, each layer obtains additional inputs from all preceding layers and passes on its own feature-maps to all subsequent layers. <strong>Concatenation</strong> is used. <strong>Each layer is receiving a “collective knowledge” from all preceding layers</strong>.</p>
+<h1 id="SqueezeNet"><a href="#SqueezeNet" class="headerlink" title="SqueezeNet"></a>SqueezeNet</h1>
       
     </div>
     
@@ -1050,7 +1110,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex"><span class="nav-number">1.</span> <span class="nav-text">Alex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-number">1.1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments"><span class="nav-number">1.3.</span> <span class="nav-text">Comments</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Alex"><span class="nav-number">1.</span> <span class="nav-text">Alex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-number">1.1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Implementation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments"><span class="nav-number">1.3.</span> <span class="nav-text">Comments</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ZFNET"><span class="nav-number">2.</span> <span class="nav-text">ZFNET</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-1"><span class="nav-number">2.1.</span> <span class="nav-text">Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VGGNet"><span class="nav-number">3.</span> <span class="nav-text">VGGNet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-2"><span class="nav-number">3.1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments-1"><span class="nav-number">3.2.</span> <span class="nav-text">Comments</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GoogLeNet"><span class="nav-number">4.</span> <span class="nav-text">GoogLeNet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-3"><span class="nav-number">4.1.</span> <span class="nav-text">Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ResNet"><span class="nav-number">5.</span> <span class="nav-text">ResNet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture-4"><span class="nav-number">5.1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Comments-2"><span class="nav-number">5.2.</span> <span class="nav-text">Comments</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DenseNet"><span class="nav-number">6.</span> <span class="nav-text">DenseNet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SqueezeNet"><span class="nav-number">7.</span> <span class="nav-text">SqueezeNet</span></a></li></ol></div>
             
 
           </div>

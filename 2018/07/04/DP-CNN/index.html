@@ -109,12 +109,17 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20170430204102339.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20170430173715000.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.29.15%20PM.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.32.24%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-15%20at%2011.17.54%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-15%20at%2011.20.42%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-15%20at%2011.32.18%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-15%20at%2011.21.19%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-15%20at%2011.21.39%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen-Shot-2015-11-06-at-12.05.40-PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.38.52%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.41.42%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20170501131714709.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20160528001522947.jpg">
-<meta property="og:updated_time" content="2019-03-02T23:29:31.235Z">
+<meta property="og:updated_time" content="2019-07-15T17:04:56.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-CNN">
 <meta name="twitter:description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？  事实是：每一个卷积核要感受前一层的所有feature_maps   卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图">
@@ -503,10 +508,107 @@
 <h2 id="近邻归一化-Local-Response-Normalization"><a href="#近邻归一化-Local-Response-Normalization" class="headerlink" title="近邻归一化(Local Response Normalization)"></a>近邻归一化(Local Response Normalization)</h2><p><img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-10 at 3.29.15 PM.png" alt="Screen Shot 2018-07-10 at 3.29.15 PM"></p>
 <h2 id="融合层"><a href="#融合层" class="headerlink" title="融合层"></a>融合层</h2><p>融合层可以对切分层进行融合，也可以对不同大小的卷积核学习到的特征进行融合。例如在GoogleLeNet 中，使用多种分辨率的卷积核对目标特征进行学习，通过 <strong>padding</strong> 使得每一个 <strong>feature map</strong> 的长宽都一致，之后再将多个 feature map 在深度上拼接在一起： </p>
 <p>融合的方法有几种，一种是特征矩阵之间的拼接级联，另一种是在特征矩阵进行运算 (+,−,x,max,conv)(+,−,x,max,conv)。</p>
-<h1 id="经典卷积神经网络"><a href="#经典卷积神经网络" class="headerlink" title="经典卷积神经网络"></a>经典卷积神经网络</h1><h2 id="LeNet-5"><a href="#LeNet-5" class="headerlink" title="LeNet-5"></a>LeNet-5</h2><p><img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-10 at 3.32.24 PM.png" alt="Screen Shot 2018-07-10 at 3.32.24 PM"></p>
 <p><a href="https://www.cnblogs.com/denny402/p/5071126.html" target="_blank" rel="noopener">parameters setting</a></p>
-<p><a href="https://blog.csdn.net/u011276025/article/details/76050377" target="_blank" rel="noopener">图像归一化</a></p>
-<h1 id="Tensorflow代码"><a href="#Tensorflow代码" class="headerlink" title="Tensorflow代码"></a>Tensorflow代码</h1><h2 id="卷积层tf-nn-conv2d"><a href="#卷积层tf-nn-conv2d" class="headerlink" title="卷积层tf.nn.conv2d()"></a>卷积层tf.nn.conv2d()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<p><a href="https://blog.csdn.net/u011276025/article/details/76050377" target="_blank" rel="noopener">图像归一化</a> </p>
+<h1 id="CNN-in-NLP"><a href="#CNN-in-NLP" class="headerlink" title="CNN in NLP"></a>CNN in NLP</h1><p>Since CNNs, unlike RNNs, can output only fixed sized vectors, the natural fit for them seem to be in the classification tasks such as <strong>Sentiment Analysis, Spam Detection or Topic Categorization.</strong></p>
+<p>In computer vision tasks, the filters used in CNNs slide over patches of an image whereas in NLP tasks, the filters slide over the sentence matrices, a few words at a time.</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>Instead of image pixels, the input to most NLP tasks are sentences or documents represented as a matrix. Each row of the matrix corresponds to one token, typically a word, but it could be a character. That is, each row is vector that represents a word. Typically, these vectors are <em>word embeddings</em> (low-dimensional representations) like <a href="https://code.google.com/p/word2vec/" target="_blank" rel="noopener">word2vec</a> or <a href="http://nlp.stanford.edu/projects/glove/" target="_blank" rel="noopener">GloVe</a>, but they could also be one-hot vectors that index the word into a vocabulary. For a 10 word sentence using a 100-dimensional embedding we would have a 10×100 matrix as our input. That’s our “image”.</p>
+<h2 id="Fliter"><a href="#Fliter" class="headerlink" title="Fliter"></a>Fliter</h2><p>In vision, our filters slide over local patches of an image, but in NLP we typically use filters that slide over full rows of the matrix (words). Thus, the “width” of our filters is usually the same as the width of the input matrix. The height, or <em>region size</em>, may vary, but sliding windows over 2-5 words at a time is typical.</p>
+<p><img src="/2018/07/04/DP-CNN/Screen Shot 2019-07-15 at 11.17.54 AM.png" alt="creen Shot 2019-07-15 at 11.17.54 A"></p>
+<h2 id="Padding"><a href="#Padding" class="headerlink" title="Padding"></a>Padding</h2><p>We also have zero-padding in nlp, where all elements that would fall outside of the matrix are taken to be zero. By doing this you can apply the filter to every element of your input matrix, and get a larger or equally sized output. Adding zero-padding is also called <strong><em>wide convolution**</em></strong>,<strong> and not using (zero-)padding would be a *</strong>narrow convolution<em>*</em>.</p>
+<h2 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h2><p>The last concept we need to understand are <em>channels</em>. Channels are different “views” of your input data. For example, in image recognition you typically have RGB (red, green, blue) channels. You can apply convolutions across channels, either with different or equal weights. In NLP you could imagine having various channels as well: You could have a separate channels for different word embeddings (<a href="https://code.google.com/p/word2vec/" target="_blank" rel="noopener">word2vec</a> and <a href="http://nlp.stanford.edu/projects/glove/" target="_blank" rel="noopener">GloVe</a> for example), or you could have a channel for the same sentence represented in different languages, or phrased in different ways.</p>
+<p><img src="/2018/07/04/DP-CNN/Screen Shot 2019-07-15 at 11.20.42 AM.png" alt="creen Shot 2019-07-15 at 11.20.42 A"></p>
+<h2 id="Stride-Size"><a href="#Stride-Size" class="headerlink" title="Stride Size"></a>Stride Size</h2><p><img src="/2018/07/04/DP-CNN/Screen Shot 2019-07-15 at 11.32.18 AM.png" alt="creen Shot 2019-07-15 at 11.32.18 A"></p>
+<h2 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h2><p>Why pooling? There are a couple of reasons. One property of pooling is that it provides a fixed size output matrix, which typically is required for classification. For example, if you have 1,000 filters and you apply max pooling to each, you will get a 1000-dimensional output, regardless of the size of your filters, or the size of your input. This allows you to use variable size sentences, and variable size filters, but always get the same output dimensions to feed into a classifier.</p>
+<p>Pooling also reduces the output dimensionality but (hopefully) keeps the most salient information. You can think of each filter as detecting a specific feature, such as detecting if the sentence contains a negation like “not amazing” for example. If this phrase occurs somewhere in the sentence, the result of applying the filter to that region will yield a large value, but a small value in other regions. By performing the max operation you  are keeping information about whether or not the feature appeared in the sentence, but you are losing information about where exactly it appeared. But isn’t this information about locality really useful? Yes, it  is and it’s a bit similar to what a bag of n-grams model is doing. You are losing global information about locality (where in a sentence something happens), but you are keeping local information captured by your filters, like “not amazing” being very different from “amazing not”.</p>
+<p>In imagine recognition, pooling also provides basic invariance to translating (shifting) and rotation. When you are pooling over a region, the output will stay approximately the same even if you shift/rotate the image by a few pixels, because the max operations will pick out the same value regardless.</p>
+<p><img src="/2018/07/04/DP-CNN/Screen Shot 2019-07-15 at 11.21.19 AM.png" alt="creen Shot 2019-07-15 at 11.21.19 A"></p>
+<p><img src="/2018/07/04/DP-CNN/Screen Shot 2019-07-15 at 11.21.39 AM.png" alt="creen Shot 2019-07-15 at 11.21.39 A"></p>
+<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p><a href="http://www.joshuakim.io/understanding-how-convolutional-neural-network-cnn-perform-text-classification-with-word-embeddings/" target="_blank" rel="noopener">link</a> </p>
+<p><img src="/2018/07/04/DP-CNN/Screen-Shot-2015-11-06-at-12.05.40-PM.png" alt="creen-Shot-2015-11-06-at-12.05.40-P"></p>
+<p>llustration of a Convolutional Neural Network (CNN) architecture for sentence classification. Here we depict three filter region sizes: 2, 3 and 4, each of which has 2 filters. Every filter performs convolution on the sentence matrix and generates (variable-length) feature maps. Then 1-max pooling is performed over each map, i.e., the largest number from each feature map is recorded. Thus a univariate feature vector is generated from all six maps, and these 6 features are concatenated to form a feature vector for the penultimate layer. The final softmax layer then receives this feature vector as input and uses it to classify the sentence; here we assume binary classification and hence depict two possible output states. Source: Zhang, Y., &amp; Wallace, B. (2015). A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification.</p>
+<p><strong>Input</strong></p>
+<p>The example is “I like this movie very much!”, there are 6 words here and the exclamation mark is treated like a word – some researchers do this differently and disregard the exclamation mark – in total there are 7 words in the sentence. The authors chose 5 to be the dimension of the word vectors. We let <em>s</em> denote the length of sentence and <em>d</em> denote the dimension of the word vector, hence we now have a sentence matrix of the shape <em>s</em> x <em>d</em>, or 7 x 5.</p>
+<p><strong>Filters</strong></p>
+<p>One of the desirable properties of CNN is that it preserves 2D spatial orientation in computer vision. Texts, like pictures, have an orientation. Instead of 2-dimensional, texts have a one-dimensional structure where words sequence matter. We also recall that all words in the example are each replaced by a 5-dimensional word vector, hence we fix one dimension of the filter to match the word vectors (5) and vary the region size, <em>h</em>. Region size refers to the number of rows – representing word – of the sentence matrix that would be filtered.</p>
+<p>In the figure, #filters are the illustrations of the filters, not what has been filtered out from the sentence matrix by the filter, the next paragraph would make this distinction clearer. Here, the authors chose to use 6 filters – 2 complementary filters to consider (2,3,4) words.</p>
+<p><strong>Featuremaps</strong></p>
+<p>For filters with size being 4, the output featuremap size should be (7-4)/1+1=4. Similarly, we have output featuremaps of 5 and 6 respectively for filter size 3 and 2.</p>
+<p><strong>Maxpooling</strong></p>
+<p>For each featuremap, we perform 1-max pooling and extract the largest number.</p>
+<p><strong>Softmax</strong></p>
+<p>After 1-max pooling, we are certain to have a fixed-length vector of 6 elements ( = number of filters = number of filters per region size (2) x number of region size considered (3)). This fixed length vector can then be fed into a softmax (fully-connected) layer to perform the classification. The error from the classification is then back-propagated back into the following parameters as part of learning:</p>
+<ul>
+<li>The <strong>w</strong> matrices that produced <strong>o</strong></li>
+<li>The bias term that is added to <strong>o</strong> to produce <strong>c</strong></li>
+<li>Word vectors (optional, use validation performance to decide)</li>
+</ul>
+<h2 id="CNN-Applications-in-NLP"><a href="#CNN-Applications-in-NLP" class="headerlink" title="CNN Applications in NLP"></a>CNN Applications in NLP</h2><p>The most natural fit for CNNs seem to be classifications tasks, such as Sentiment Analysis, Spam Detection or Topic Categorization. Convolutions and pooling operations lose information about the local order of words, so that sequence tagging as in PoS Tagging or Entity Extraction is a bit harder to fit into a pure CNN architecture (though not impossible, you can add positional features to the input).</p>
+<h2 id="Pytorch-Implementation"><a href="#Pytorch-Implementation" class="headerlink" title="Pytorch Implementation"></a>Pytorch Implementation</h2><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<p><a href="https://mlwhiz.com/blog/2019/03/09/deeplearning_architectures_text_classification/" target="_blank" rel="noopener">link</a> </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> torch</div>
+<div class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</div>
+<div class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</div>
+<div class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNN_Text</span><span class="params">(nn.Module)</span>:</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        super(CNN_Text, self).__init__()</div>
+<div class="line">        filter_sizes = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>]</div>
+<div class="line">        num_filters = <span class="number">36</span></div>
+<div class="line">        self.embedding = nn.Embedding(max_features, embed_size)</div>
+<div class="line">        self.embedding.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32))</div>
+<div class="line">        self.embedding.weight.requires_grad = <span class="keyword">False</span></div>
+<div class="line">        self.convs1 = nn.ModuleList([nn.Conv2d(<span class="number">1</span>, num_filters, (K, embed_size)) <span class="keyword">for</span> K <span class="keyword">in</span> filter_sizes])</div>
+<div class="line">        self.dropout = nn.Dropout(<span class="number">0.1</span>)</div>
+<div class="line">        self.fc1 = nn.Linear(len(Ks)*num_filters, <span class="number">1</span>)</div>
+<div class="line"></div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></div>
+<div class="line">        x = self.embedding(x)  </div>
+<div class="line">        x = x.unsqueeze(<span class="number">1</span>)  </div>
+<div class="line">        x = [F.relu(conv(x)).squeeze(<span class="number">3</span>) <span class="keyword">for</span> conv <span class="keyword">in</span> self.convs1] </div>
+<div class="line">        x = [F.max_pool1d(i, i.size(<span class="number">2</span>)).squeeze(<span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]  </div>
+<div class="line">        x = torch.cat(x, <span class="number">1</span>)</div>
+<div class="line">        x = self.dropout(x)  </div>
+<div class="line">        logit = self.fc1(x)  </div>
+<div class="line">        <span class="keyword">return</span> logit</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h1 id="Tensorflow代码"><a href="#Tensorflow代码" class="headerlink" title="Tensorflow代码"></a>Tensorflow代码</h1><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<h2 id="卷积层tf-nn-conv2d"><a href="#卷积层tf-nn-conv2d" class="headerlink" title="卷积层tf.nn.conv2d()"></a>卷积层tf.nn.conv2d()</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">tf.nn.conv2d(input, filter, strides, padding, use_cudnn_on_gpu=<span class="keyword">None</span>, data_format=<span class="keyword">None</span>, name=<span class="keyword">None</span>)</div>
 </pre></td></tr></table></figure>
 <p><img src="/2018/07/04/DP-CNN/Screen Shot 2018-07-10 at 3.38.52 PM.png" alt="Screen Shot 2018-07-10 at 3.38.52 PM"></p>
@@ -738,11 +840,14 @@
 <div class="line">print(accuracy_score(Y_data,res_ypred.reshape(<span class="number">-1</span>,<span class="number">1</span>)))</div>
 <div class="line"><span class="comment"># 0.998887033945</span></div>
 </pre></td></tr></table></figure>
+
+</div></div>
 <h1 id="CNN结构扩展"><a href="#CNN结构扩展" class="headerlink" title="CNN结构扩展"></a>CNN结构扩展</h1><h2 id="GAP-Global-Average-Pooling"><a href="#GAP-Global-Average-Pooling" class="headerlink" title="GAP(Global Average Pooling)"></a>GAP(Global Average Pooling)</h2><p><a href="https://blog.csdn.net/yimingsilence/article/details/79227668" target="_blank" rel="noopener">[Ref1]</a> <a href="https://blog.csdn.net/Losteng/article/details/51520555" target="_blank" rel="noopener">[Ref2]</a></p>
 <p>GAP是用来代替全连接层，由于全连接层过多的参数重要到会造成过拟合，所以GAP放弃了对前一层的全连接，使用pooling来降低参数。global average pooling 与 average pooling 的差别就在 “global” 这一个字眼上。global 与 local 在字面上都是用来形容 pooling 窗口区域的。 local 是取 feature map 的一个子区域求平均值，然后滑动这个子区域； global 显然就是对整个 feature map 求平均值了。因此，global average pooling 的最后输出结果仍然是 10 个 feature map，而不是一个，只不过每个 feature map 只剩下一个像素罢了。这个像素就是求得的平均值。</p>
 <p>举个例子</p>
 <p>假如，最后的一层的数据是10个6<em>6的特征图，global average pooling是将每一张特征图计算所有像素点的均值，输出一个数据值，这样10 个特征图就会输出10个数据点，将这些数据点组成一个1</em>10的向量的话，就成为一个特征向量，就可以送入到softmax的分类中计算了</p>
 <p><img src="/2018/07/04/DP-CNN/20160528001522947.jpg" alt="20160528001522947"></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/how-to-build-a-gated-convolutional-neural-network-gcnn-for-natural-language-processing-nlp-5ba3ee730bfb" target="_blank" rel="noopener">Building a convolutional neural network for natural language processing</a></p>
 
       
     </div>
@@ -917,7 +1022,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A"><span class="nav-number">2.</span> <span class="nav-text">A</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN的引入"><span class="nav-number">3.</span> <span class="nav-text">CNN的引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN层次结构"><span class="nav-number">4.</span> <span class="nav-text">CNN层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入层"><span class="nav-number">4.1.</span> <span class="nav-text">输入层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积层"><span class="nav-number">4.2.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部感受野"><span class="nav-number">4.2.1.</span> <span class="nav-text">局部感受野</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#池化层-下采样"><span class="nav-number">4.3.</span> <span class="nav-text">池化层(下采样)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全连接层"><span class="nav-number">4.4.</span> <span class="nav-text">全连接层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出层"><span class="nav-number">4.5.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归一化层-Batch-Normalization"><span class="nav-number">4.6.</span> <span class="nav-text">归一化层(Batch Normalization)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#近邻归一化-Local-Response-Normalization"><span class="nav-number">4.7.</span> <span class="nav-text">近邻归一化(Local Response Normalization)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#融合层"><span class="nav-number">4.8.</span> <span class="nav-text">融合层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#经典卷积神经网络"><span class="nav-number">5.</span> <span class="nav-text">经典卷积神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeNet-5"><span class="nav-number">5.1.</span> <span class="nav-text">LeNet-5</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow代码"><span class="nav-number">6.</span> <span class="nav-text">Tensorflow代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积层tf-nn-conv2d"><span class="nav-number">6.1.</span> <span class="nav-text">卷积层tf.nn.conv2d()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#池化层tf-nn-max-pool"><span class="nav-number">6.2.</span> <span class="nav-text">池化层tf.nn.max_pool()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归一化层tf-nn-batch-normalization"><span class="nav-number">6.3.</span> <span class="nav-text">归一化层tf.nn.batch_normalization()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例"><span class="nav-number">6.4.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN结构扩展"><span class="nav-number">7.</span> <span class="nav-text">CNN结构扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAP-Global-Average-Pooling"><span class="nav-number">7.1.</span> <span class="nav-text">GAP(Global Average Pooling)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-number">1.</span> <span class="nav-text">Q</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A"><span class="nav-number">2.</span> <span class="nav-text">A</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN的引入"><span class="nav-number">3.</span> <span class="nav-text">CNN的引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN层次结构"><span class="nav-number">4.</span> <span class="nav-text">CNN层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入层"><span class="nav-number">4.1.</span> <span class="nav-text">输入层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积层"><span class="nav-number">4.2.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#局部感受野"><span class="nav-number">4.2.1.</span> <span class="nav-text">局部感受野</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#池化层-下采样"><span class="nav-number">4.3.</span> <span class="nav-text">池化层(下采样)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全连接层"><span class="nav-number">4.4.</span> <span class="nav-text">全连接层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出层"><span class="nav-number">4.5.</span> <span class="nav-text">输出层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归一化层-Batch-Normalization"><span class="nav-number">4.6.</span> <span class="nav-text">归一化层(Batch Normalization)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#近邻归一化-Local-Response-Normalization"><span class="nav-number">4.7.</span> <span class="nav-text">近邻归一化(Local Response Normalization)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#融合层"><span class="nav-number">4.8.</span> <span class="nav-text">融合层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN-in-NLP"><span class="nav-number">5.</span> <span class="nav-text">CNN in NLP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">5.1.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fliter"><span class="nav-number">5.2.</span> <span class="nav-text">Fliter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Padding"><span class="nav-number">5.3.</span> <span class="nav-text">Padding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Channel"><span class="nav-number">5.4.</span> <span class="nav-text">Channel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stride-Size"><span class="nav-number">5.5.</span> <span class="nav-text">Stride Size</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pooling"><span class="nav-number">5.6.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Architecture"><span class="nav-number">5.7.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN-Applications-in-NLP"><span class="nav-number">5.8.</span> <span class="nav-text">CNN Applications in NLP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pytorch-Implementation"><span class="nav-number">5.9.</span> <span class="nav-text">Pytorch Implementation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow代码"><span class="nav-number">6.</span> <span class="nav-text">Tensorflow代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积层tf-nn-conv2d"><span class="nav-number">6.1.</span> <span class="nav-text">卷积层tf.nn.conv2d()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#池化层tf-nn-max-pool"><span class="nav-number">6.2.</span> <span class="nav-text">池化层tf.nn.max_pool()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归一化层tf-nn-batch-normalization"><span class="nav-number">6.3.</span> <span class="nav-text">归一化层tf.nn.batch_normalization()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例"><span class="nav-number">6.4.</span> <span class="nav-text">代码示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN结构扩展"><span class="nav-number">7.</span> <span class="nav-text">CNN结构扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GAP-Global-Average-Pooling"><span class="nav-number">7.1.</span> <span class="nav-text">GAP(Global Average Pooling)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
