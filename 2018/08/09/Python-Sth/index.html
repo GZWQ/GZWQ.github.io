@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)  R &amp;amp; W in TXT ref  np.l">
+<meta name="description" content="EasyDict1 2 3 4 from easydict import EasyDict as edict mydict = edict(&amp;#123;&amp;#125;) mydict.foo = 3 print(mydict.foo) # 3  目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mk">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Sth">
 <meta property="og:url" content="http://yoursite.com/2018/08/09/Python-Sth/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)  R &amp;amp; W in TXT ref  np.l">
+<meta property="og:description" content="EasyDict1 2 3 4 from easydict import EasyDict as edict mydict = edict(&amp;#123;&amp;#125;) mydict.foo = 3 print(mydict.foo) # 3  目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mk">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-22T02:23:28.319Z">
+<meta property="og:image" content="http://yoursite.com/2018/08/09/Python-Sth/Screen%20Shot%202019-07-27%20at%208.41.15%20PM.png">
+<meta property="og:updated_time" content="2019-07-28T15:44:51.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Sth">
-<meta name="twitter:description" content="目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mkdir(path)  多级目录生成 1 2 3 path = &apos;./xx/yy/zz/&apos; if not os.path.isdir(path):     os.makedirs(path)  R &amp;amp; W in TXT ref  np.l">
+<meta name="twitter:description" content="EasyDict1 2 3 4 from easydict import EasyDict as edict mydict = edict(&amp;#123;&amp;#125;) mydict.foo = 3 print(mydict.foo) # 3  目录检查目录，并生成一级目录 1 2 3 path = &apos;./xx/&apos; if os.path.isdir(path) == False:     os.mk">
+<meta name="twitter:image" content="http://yoursite.com/2018/08/09/Python-Sth/Screen%20Shot%202019-07-27%20at%208.41.15%20PM.png">
 
 
 
@@ -376,7 +378,16 @@
       
 
       
-        <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>检查目录，并生成一级目录</p>
+        <h2 id="EasyDict"><a href="#EasyDict" class="headerlink" title="EasyDict"></a>EasyDict</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> easydict <span class="keyword">import</span> EasyDict <span class="keyword">as</span> edict</div>
+<div class="line">mydict = edict(&#123;&#125;)</div>
+<div class="line">mydict.foo = <span class="number">3</span></div>
+<div class="line">print(mydict.foo) <span class="comment"># 3</span></div>
+</pre></td></tr></table></figure>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>检查目录，并生成一级目录</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -595,8 +606,121 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">python xx.py -trainFeature 1 -trainInitial 1 -learningRate 0.001 -criticNum 5 -clipRange 0.01</div>
 </pre></td></tr></table></figure>
-<h1 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h1><p><a href="https://towardsdatascience.com/5-quick-and-easy-data-visualizations-in-python-with-code-a2284bae952f" target="_blank" rel="noopener">5 Quick and Easy Data Visualizations in Python with Code</a> </p>
+<h2 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h2><p><a href="https://towardsdatascience.com/5-quick-and-easy-data-visualizations-in-python-with-code-a2284bae952f" target="_blank" rel="noopener">5 Quick and Easy Data Visualizations in Python with Code</a> </p>
 <p><a href="https://mail.google.com/mail/u/0/#inbox/FMfcgxwBVWMvVdMrPPqPgrmqWvZFZxvh" target="_blank" rel="noopener">8 of the best articles on visualizing data</a> </p>
+<h2 id="ElementTree"><a href="#ElementTree" class="headerlink" title="ElementTree"></a>ElementTree</h2><p>！！！！！所有的输入都必须是<strong>字符串</strong>！！！！！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">indent</span><span class="params">(elem, level=<span class="number">0</span>)</span>:</span></div>
+<div class="line">  i = <span class="string">"\n"</span> + level*<span class="string">"  "</span></div>
+<div class="line">  <span class="keyword">if</span> len(elem):</div>
+<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> elem.text <span class="keyword">or</span> <span class="keyword">not</span> elem.text.strip():</div>
+<div class="line">      elem.text = i + <span class="string">"  "</span></div>
+<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> elem.tail <span class="keyword">or</span> <span class="keyword">not</span> elem.tail.strip():</div>
+<div class="line">      elem.tail = i</div>
+<div class="line">    <span class="keyword">for</span> elem <span class="keyword">in</span> elem:</div>
+<div class="line">      indent(elem, level+<span class="number">1</span>)</div>
+<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> elem.tail <span class="keyword">or</span> <span class="keyword">not</span> elem.tail.strip():</div>
+<div class="line">      elem.tail = i</div>
+<div class="line">  <span class="keyword">else</span>:</div>
+<div class="line">    <span class="keyword">if</span> level <span class="keyword">and</span> (<span class="keyword">not</span> elem.tail <span class="keyword">or</span> <span class="keyword">not</span> elem.tail.strip()):</div>
+<div class="line">      elem.tail = i</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createXML</span><span class="params">()</span>:</span></div>
+<div class="line">    root =ET.Element(<span class="string">'annotation'</span>)</div>
+<div class="line">    filename = ET.Element(<span class="string">'filename'</span>)</div>
+<div class="line">    filename.text = <span class="string">'xx'</span></div>
+<div class="line">    root.append(filename)</div>
+<div class="line"></div>
+<div class="line">    folder = ET.Element(<span class="string">'folder'</span>)</div>
+<div class="line">    folder.text = <span class="string">'cad60/'</span></div>
+<div class="line">    root.append(folder)</div>
+<div class="line"></div>
+<div class="line">    object = ET.Element(<span class="string">'object'</span>)</div>
+<div class="line">    root.append(object)</div>
+<div class="line"></div>
+<div class="line">    name = ET.SubElement(object,<span class="string">'name'</span>)</div>
+<div class="line">    name.text = <span class="string">'person'</span></div>
+<div class="line">    action = ET.SubElement(object, <span class="string">'action'</span>)</div>
+<div class="line">    action.text = <span class="string">'12'</span></div>
+<div class="line">    bndbox = ET.SubElement(object,<span class="string">'bndbox'</span>)</div>
+<div class="line">    xmax = ET.SubElement(bndbox,<span class="string">'xmax'</span>)</div>
+<div class="line">    xmax.text = <span class="string">'1'</span></div>
+<div class="line">    xmin = ET.SubElement(bndbox, <span class="string">'xmin'</span>)</div>
+<div class="line">    xmin.text = <span class="string">'2'</span></div>
+<div class="line">    ymax = ET.SubElement(bndbox, <span class="string">'ymax'</span>)</div>
+<div class="line">    ymax.text = <span class="string">'3'</span></div>
+<div class="line">    ymin = ET.SubElement(bndbox,<span class="string">'ymin'</span>)</div>
+<div class="line">    ymin.text = <span class="string">'4'</span></div>
+<div class="line"></div>
+<div class="line">    size = ET.Element(<span class="string">'size'</span>)</div>
+<div class="line">    root.append(size)</div>
+<div class="line">    depth = ET.SubElement(size,<span class="string">'depth'</span>)</div>
+<div class="line">    depth.text = <span class="string">'1'</span></div>
+<div class="line">    height = ET.SubElement(size, <span class="string">'height'</span>)</div>
+<div class="line">    height.text = <span class="string">'2'</span></div>
+<div class="line">    width = ET.SubElement(size, <span class="string">'width'</span>)</div>
+<div class="line">    width.text = <span class="string">'3'</span></div>
+<div class="line"></div>
+<div class="line">    indent(root)</div>
+<div class="line"></div>
+<div class="line">    tree = ET.ElementTree(root)</div>
+<div class="line">    tree.write(<span class="string">'wq.xml'</span>,<span class="string">'utf-8'</span>)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/08/09/Python-Sth/Screen Shot 2019-07-27 at 8.41.15 PM.png" alt="creen Shot 2019-07-27 at 8.41.15 P"></p>
 
       
     </div>
@@ -716,7 +840,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -771,7 +895,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-amp-W-in-TXT"><span class="nav-number">2.</span> <span class="nav-text">R &amp; W in TXT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作"><span class="nav-number">3.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动"><span class="nav-number">3.1.</span> <span class="nav-text">文件移动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Print"><span class="nav-number"></span> <span class="nav-text">Print</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pprint"><span class="nav-number">1.</span> <span class="nav-text">pprint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random"><span class="nav-number">2.</span> <span class="nav-text">Random</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-rand"><span class="nav-number">2.1.</span> <span class="nav-text">np.random.rand()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randn"><span class="nav-number">2.2.</span> <span class="nav-text">np.random.randn()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randint"><span class="nav-number">2.3.</span> <span class="nav-text">np.random.randint()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-choice"><span class="nav-number">2.4.</span> <span class="nav-text">np.random.choice()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">3.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字补0"><span class="nav-number">3.1.</span> <span class="nav-text">数字补0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plt"><span class="nav-number">4.</span> <span class="nav-text">Plt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time"><span class="nav-number">5.</span> <span class="nav-text">Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zip"><span class="nav-number">6.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parser"><span class="nav-number">7.</span> <span class="nav-text">Parser</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matplotlib"><span class="nav-number"></span> <span class="nav-text">Matplotlib</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EasyDict"><span class="nav-number">1.</span> <span class="nav-text">EasyDict</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R-amp-W-in-TXT"><span class="nav-number">3.</span> <span class="nav-text">R &amp; W in TXT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作"><span class="nav-number">4.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件移动"><span class="nav-number">4.1.</span> <span class="nav-text">文件移动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Print"><span class="nav-number"></span> <span class="nav-text">Print</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pprint"><span class="nav-number">1.</span> <span class="nav-text">pprint</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Random"><span class="nav-number">2.</span> <span class="nav-text">Random</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-rand"><span class="nav-number">2.1.</span> <span class="nav-text">np.random.rand()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randn"><span class="nav-number">2.2.</span> <span class="nav-text">np.random.randn()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-randint"><span class="nav-number">2.3.</span> <span class="nav-text">np.random.randint()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#np-random-choice"><span class="nav-number">2.4.</span> <span class="nav-text">np.random.choice()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">3.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字补0"><span class="nav-number">3.1.</span> <span class="nav-text">数字补0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plt"><span class="nav-number">4.</span> <span class="nav-text">Plt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Time"><span class="nav-number">5.</span> <span class="nav-text">Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zip"><span class="nav-number">6.</span> <span class="nav-text">Zip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parser"><span class="nav-number">7.</span> <span class="nav-text">Parser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matplotlib"><span class="nav-number">8.</span> <span class="nav-text">Matplotlib</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ElementTree"><span class="nav-number">9.</span> <span class="nav-text">ElementTree</span></a></li></ol></div>
             
 
           </div>

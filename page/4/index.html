@@ -283,6 +283,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/11/Support-Vector-Machine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/11/Support-Vector-Machine/" itemprop="url">Support Vector Machine</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T12:11:24-05:00">
+                2018-09-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>支持向量机(SVM)是一个用于分类和回归的线性模型，它可以解决线性和非线性问题。</p>
+<p>支持向量机的思想很简单：我们尽量找到一条直线或者一个超平面将数据集分成不同的类。</p>
+<p>在逻辑斯蒂回归中，我们用了sigmoid激活函数将$y=wx+b$的计算结果压缩到$[0,1]$范围内，这样，如果我们的压缩值大于临界值0.5，我们就将该样例分类到正例；否则我们将之分类到负例。在SVM中，我们将临界值设置为-1和+1，即如果$y=wx+b$的计算结果大于1，我们分类至正例；如果$y=wx+b$的计算结果小于-1，我们分类至负例，这样我们就得到了一个区间$[-1,1]$，称之为间隔。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/11/Support-Vector-Machine/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Grid-Search/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -567,14 +715,14 @@
 
       
         
-          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�745-->
+          <h5 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h5><!--�779-->
 <h5 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h5><p>Pre-order ：root， (left)，(right)</p>
-<!--�746-->
+<!--�780-->
 <p>In-order： (left)，root，(right)</p>
-<!--�747-->
+<!--�781-->
 <p>Post-order： (left)，(right)，root</p>
-<!--�748-->
-<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�749-->
+<!--�782-->
+<h5 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h5><!--�783-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/23/Tree/#more" rel="contents">
@@ -1164,7 +1312,16 @@
       
         
           
-            <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>检查目录，并生成一级目录</p>
+            <h2 id="EasyDict"><a href="#EasyDict" class="headerlink" title="EasyDict"></a>EasyDict</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> easydict <span class="keyword">import</span> EasyDict <span class="keyword">as</span> edict</div>
+<div class="line">mydict = edict(&#123;&#125;)</div>
+<div class="line">mydict.foo = <span class="number">3</span></div>
+<div class="line">print(mydict.foo) <span class="comment"># 3</span></div>
+</pre></td></tr></table></figure>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>检查目录，并生成一级目录</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1383,8 +1540,121 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
 </pre></td><td class="code"><pre><div class="line">python xx.py -trainFeature 1 -trainInitial 1 -learningRate 0.001 -criticNum 5 -clipRange 0.01</div>
 </pre></td></tr></table></figure>
-<h1 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h1><p><a href="https://towardsdatascience.com/5-quick-and-easy-data-visualizations-in-python-with-code-a2284bae952f" target="_blank" rel="noopener">5 Quick and Easy Data Visualizations in Python with Code</a> </p>
+<h2 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h2><p><a href="https://towardsdatascience.com/5-quick-and-easy-data-visualizations-in-python-with-code-a2284bae952f" target="_blank" rel="noopener">5 Quick and Easy Data Visualizations in Python with Code</a> </p>
 <p><a href="https://mail.google.com/mail/u/0/#inbox/FMfcgxwBVWMvVdMrPPqPgrmqWvZFZxvh" target="_blank" rel="noopener">8 of the best articles on visualizing data</a> </p>
+<h2 id="ElementTree"><a href="#ElementTree" class="headerlink" title="ElementTree"></a>ElementTree</h2><p>！！！！！所有的输入都必须是<strong>字符串</strong>！！！！！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">indent</span><span class="params">(elem, level=<span class="number">0</span>)</span>:</span></div>
+<div class="line">  i = <span class="string">"\n"</span> + level*<span class="string">"  "</span></div>
+<div class="line">  <span class="keyword">if</span> len(elem):</div>
+<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> elem.text <span class="keyword">or</span> <span class="keyword">not</span> elem.text.strip():</div>
+<div class="line">      elem.text = i + <span class="string">"  "</span></div>
+<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> elem.tail <span class="keyword">or</span> <span class="keyword">not</span> elem.tail.strip():</div>
+<div class="line">      elem.tail = i</div>
+<div class="line">    <span class="keyword">for</span> elem <span class="keyword">in</span> elem:</div>
+<div class="line">      indent(elem, level+<span class="number">1</span>)</div>
+<div class="line">    <span class="keyword">if</span> <span class="keyword">not</span> elem.tail <span class="keyword">or</span> <span class="keyword">not</span> elem.tail.strip():</div>
+<div class="line">      elem.tail = i</div>
+<div class="line">  <span class="keyword">else</span>:</div>
+<div class="line">    <span class="keyword">if</span> level <span class="keyword">and</span> (<span class="keyword">not</span> elem.tail <span class="keyword">or</span> <span class="keyword">not</span> elem.tail.strip()):</div>
+<div class="line">      elem.tail = i</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createXML</span><span class="params">()</span>:</span></div>
+<div class="line">    root =ET.Element(<span class="string">'annotation'</span>)</div>
+<div class="line">    filename = ET.Element(<span class="string">'filename'</span>)</div>
+<div class="line">    filename.text = <span class="string">'xx'</span></div>
+<div class="line">    root.append(filename)</div>
+<div class="line"></div>
+<div class="line">    folder = ET.Element(<span class="string">'folder'</span>)</div>
+<div class="line">    folder.text = <span class="string">'cad60/'</span></div>
+<div class="line">    root.append(folder)</div>
+<div class="line"></div>
+<div class="line">    object = ET.Element(<span class="string">'object'</span>)</div>
+<div class="line">    root.append(object)</div>
+<div class="line"></div>
+<div class="line">    name = ET.SubElement(object,<span class="string">'name'</span>)</div>
+<div class="line">    name.text = <span class="string">'person'</span></div>
+<div class="line">    action = ET.SubElement(object, <span class="string">'action'</span>)</div>
+<div class="line">    action.text = <span class="string">'12'</span></div>
+<div class="line">    bndbox = ET.SubElement(object,<span class="string">'bndbox'</span>)</div>
+<div class="line">    xmax = ET.SubElement(bndbox,<span class="string">'xmax'</span>)</div>
+<div class="line">    xmax.text = <span class="string">'1'</span></div>
+<div class="line">    xmin = ET.SubElement(bndbox, <span class="string">'xmin'</span>)</div>
+<div class="line">    xmin.text = <span class="string">'2'</span></div>
+<div class="line">    ymax = ET.SubElement(bndbox, <span class="string">'ymax'</span>)</div>
+<div class="line">    ymax.text = <span class="string">'3'</span></div>
+<div class="line">    ymin = ET.SubElement(bndbox,<span class="string">'ymin'</span>)</div>
+<div class="line">    ymin.text = <span class="string">'4'</span></div>
+<div class="line"></div>
+<div class="line">    size = ET.Element(<span class="string">'size'</span>)</div>
+<div class="line">    root.append(size)</div>
+<div class="line">    depth = ET.SubElement(size,<span class="string">'depth'</span>)</div>
+<div class="line">    depth.text = <span class="string">'1'</span></div>
+<div class="line">    height = ET.SubElement(size, <span class="string">'height'</span>)</div>
+<div class="line">    height.text = <span class="string">'2'</span></div>
+<div class="line">    width = ET.SubElement(size, <span class="string">'width'</span>)</div>
+<div class="line">    width.text = <span class="string">'3'</span></div>
+<div class="line"></div>
+<div class="line">    indent(root)</div>
+<div class="line"></div>
+<div class="line">    tree = ET.ElementTree(root)</div>
+<div class="line">    tree.write(<span class="string">'wq.xml'</span>,<span class="string">'utf-8'</span>)</div>
+</pre></td></tr></table></figure>
+<p><img src="/2018/08/09/Python-Sth/Screen Shot 2019-07-27 at 8.41.15 PM.png" alt="creen Shot 2019-07-27 at 8.41.15 P"></p>
 
           
         
@@ -2663,152 +2933,6 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/Training-Techiniques/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/03/Training-Techiniques/" itemprop="url">Training Techiniques</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-03T11:47:08-05:00">
-                2018-08-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Techniques for training a Deep Learning model.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/03/Training-Techiniques/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2859,7 +2983,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

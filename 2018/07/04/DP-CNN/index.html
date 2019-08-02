@@ -115,11 +115,12 @@
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-15%20at%2011.21.19%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-15%20at%2011.21.39%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen-Shot-2015-11-06-at-12.05.40-PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202019-07-16%20at%209.20.27%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.38.52%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/Screen%20Shot%202018-07-10%20at%203.41.42%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20170501131714709.png">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/DP-CNN/20160528001522947.jpg">
-<meta property="og:updated_time" content="2019-07-15T17:04:56.701Z">
+<meta property="og:updated_time" content="2019-07-18T01:37:22.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-CNN">
 <meta name="twitter:description" content="Q 比如S2 -&amp;gt; C3，是不是C3的每一个感受野要感受S2的6张map？  事实是：每一个卷积核要感受前一层的所有feature_maps   卷积神经网络(Convolutional Neural Network, CNN)是深度学习技术中极具代表的网络结构之一, CNN相较于传统的图像处理算法的优点之一在于，避免了对图像复杂的前期预处理过程（提取人工特征等），可以直接输入原始图像。 图">
@@ -575,36 +576,257 @@
 <div class="line">27</div>
 <div class="line">28</div>
 <div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+<div class="line">102</div>
+<div class="line">103</div>
+<div class="line">104</div>
+<div class="line">105</div>
+<div class="line">106</div>
+<div class="line">107</div>
+<div class="line">108</div>
+<div class="line">109</div>
+<div class="line">110</div>
+<div class="line">111</div>
+<div class="line">112</div>
+<div class="line">113</div>
+<div class="line">114</div>
+<div class="line">115</div>
+<div class="line">116</div>
+<div class="line">117</div>
+<div class="line">118</div>
+<div class="line">119</div>
+<div class="line">120</div>
+<div class="line">121</div>
+<div class="line">122</div>
+<div class="line">123</div>
+<div class="line">124</div>
+<div class="line">125</div>
+<div class="line">126</div>
+<div class="line">127</div>
+<div class="line">128</div>
+<div class="line">129</div>
+<div class="line">130</div>
+<div class="line">131</div>
+<div class="line">132</div>
+<div class="line">133</div>
+<div class="line">134</div>
+<div class="line">135</div>
+<div class="line">136</div>
+<div class="line">137</div>
+<div class="line">138</div>
+<div class="line">139</div>
 </pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> torch</div>
+<div class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</div>
 <div class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</div>
 <div class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</div>
-<div class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</div>
+<div class="line"><span class="keyword">import</span> torch</div>
+<div class="line"><span class="keyword">from</span> torchtext <span class="keyword">import</span> data</div>
+<div class="line"><span class="keyword">from</span> torchtext <span class="keyword">import</span> datasets</div>
+<div class="line"><span class="keyword">import</span> random</div>
+<div class="line"><span class="keyword">import</span> spacy</div>
 <div class="line"></div>
+<div class="line"><span class="comment"># https://github.com/bentrevett/pytorch-sentiment-analysis/blob/master/4%20-%20Convolutional%20Sentiment%20Analysis.ipynb</span></div>
 <div class="line"></div>
-<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CNN_Text</span><span class="params">(nn.Module)</span>:</span></div>
-<div class="line">    </div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
-<div class="line">        super(CNN_Text, self).__init__()</div>
-<div class="line">        filter_sizes = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>]</div>
-<div class="line">        num_filters = <span class="number">36</span></div>
-<div class="line">        self.embedding = nn.Embedding(max_features, embed_size)</div>
-<div class="line">        self.embedding.weight = nn.Parameter(torch.tensor(embedding_matrix, dtype=torch.float32))</div>
-<div class="line">        self.embedding.weight.requires_grad = <span class="keyword">False</span></div>
-<div class="line">        self.convs1 = nn.ModuleList([nn.Conv2d(<span class="number">1</span>, num_filters, (K, embed_size)) <span class="keyword">for</span> K <span class="keyword">in</span> filter_sizes])</div>
-<div class="line">        self.dropout = nn.Dropout(<span class="number">0.1</span>)</div>
-<div class="line">        self.fc1 = nn.Linear(len(Ks)*num_filters, <span class="number">1</span>)</div>
+<div class="line">SEED = <span class="number">1234</span></div>
 <div class="line"></div>
+<div class="line">torch.manual_seed(SEED)</div>
+<div class="line">torch.backends.cudnn.deterministic = <span class="keyword">True</span></div>
 <div class="line"></div>
-<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></div>
-<div class="line">        x = self.embedding(x)  </div>
-<div class="line">        x = x.unsqueeze(<span class="number">1</span>)  </div>
-<div class="line">        x = [F.relu(conv(x)).squeeze(<span class="number">3</span>) <span class="keyword">for</span> conv <span class="keyword">in</span> self.convs1] </div>
-<div class="line">        x = [F.max_pool1d(i, i.size(<span class="number">2</span>)).squeeze(<span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x]  </div>
-<div class="line">        x = torch.cat(x, <span class="number">1</span>)</div>
-<div class="line">        x = self.dropout(x)  </div>
-<div class="line">        logit = self.fc1(x)  </div>
-<div class="line">        <span class="keyword">return</span> logit</div>
+<div class="line">spacy_en = spacy.load(<span class="string">'en'</span>)</div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tokenizer</span><span class="params">(text)</span>:</span> <span class="comment"># create a tokenizer function</span></div>
+<div class="line">    <span class="keyword">return</span> [tok.text <span class="keyword">for</span> tok <span class="keyword">in</span> spacy_en.tokenizer(text)]</div>
+<div class="line"></div>
+<div class="line">TEXT = data.Field(tokenize = tokenizer)</div>
+<div class="line">LABEL = data.LabelField(dtype = torch.float)</div>
+<div class="line"></div>
+<div class="line">train_data, test_data = datasets.IMDB.splits(TEXT, LABEL)</div>
+<div class="line"></div>
+<div class="line">train_data, valid_data = train_data.split(random_state = random.seed(SEED))</div>
+<div class="line"></div>
+<div class="line">MAX_VOCAB_SIZE = <span class="number">25</span>_000</div>
+<div class="line"></div>
+<div class="line">TEXT.build_vocab(train_data,</div>
+<div class="line">                 max_size = MAX_VOCAB_SIZE,</div>
+<div class="line">                 vectors = <span class="string">"glove.6B.100d"</span>,</div>
+<div class="line">                 unk_init = torch.Tensor.normal_)</div>
+<div class="line"></div>
+<div class="line">LABEL.build_vocab(train_data)</div>
+<div class="line">BATCH_SIZE = <span class="number">64</span></div>
+<div class="line"></div>
+<div class="line">device = torch.device(<span class="string">'cuda'</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">'cpu'</span>)</div>
+<div class="line"></div>
+<div class="line">train_iterator, valid_iterator, test_iterator = data.BucketIterator.splits(</div>
+<div class="line">    (train_data, valid_data, test_data),</div>
+<div class="line">    batch_size = BATCH_SIZE,</div>
+<div class="line">    device = device)</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">count_parameters</span><span class="params">(model)</span>:</span></div>
+<div class="line">    <span class="keyword">return</span> sum(p.numel() <span class="keyword">for</span> p <span class="keyword">in</span> model.parameters() <span class="keyword">if</span> p.requires_grad)</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_accuracy</span><span class="params">(preds, y)</span>:</span></div>
+<div class="line">    <span class="string">"""</span></div>
+<div class="line"><span class="string">    Returns accuracy per batch, i.e. if you get 8/10 right, this returns 0.8, NOT 8</span></div>
+<div class="line"><span class="string">    """</span></div>
+<div class="line">    <span class="comment">#round predictions to the closest integer</span></div>
+<div class="line">    rounded_preds = torch.round(torch.sigmoid(preds))</div>
+<div class="line">    correct = (rounded_preds == y).float() <span class="comment">#convert into float for division</span></div>
+<div class="line">    acc = correct.sum() / len(correct)</div>
+<div class="line">    <span class="keyword">return</span> acc</div>
+<div class="line"></div>
+<div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(model, iterator, optimizer, criterion)</span>:</span></div>
+<div class="line">    epoch_loss = <span class="number">0</span></div>
+<div class="line">    epoch_acc = <span class="number">0</span></div>
+<div class="line">    model.train()</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> iterator:</div>
+<div class="line">        optimizer.zero_grad()</div>
+<div class="line"></div>
+<div class="line">        batch_ = batch.text <span class="comment">#torch.Size([1225, 64])</span></div>
+<div class="line"></div>
+<div class="line">        predictions = model(batch_).squeeze(<span class="number">1</span>)</div>
+<div class="line"></div>
+<div class="line">        loss = criterion(predictions, batch.label)</div>
+<div class="line"></div>
+<div class="line">        acc = binary_accuracy(predictions, batch.label)</div>
+<div class="line"></div>
+<div class="line">        loss.backward()</div>
+<div class="line"></div>
+<div class="line">        optimizer.step()</div>
+<div class="line"></div>
+<div class="line">        epoch_loss += loss.item()</div>
+<div class="line">        epoch_acc += acc.item()</div>
+<div class="line"></div>
+<div class="line">    <span class="keyword">return</span> epoch_loss / len(iterator), epoch_acc / len(iterator)</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextCNN</span><span class="params">(nn.Module)</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,vocab_size, embedding_dim, n_filters, filter_sizes, output_dim, dropout, pad_idx)</span>:</span></div>
+<div class="line">        super(TextCNN,self).__init__()</div>
+<div class="line">        self.embedding = nn.Embedding(vocab_size,embedding_dim,pad_idx)</div>
+<div class="line">        self.conv1 = nn.Conv2d(in_channels=<span class="number">1</span>,out_channels=n_filters,kernel_size=(filter_sizes[<span class="number">0</span>],embedding_dim))</div>
+<div class="line">        self.conv2 = nn.Conv2d(in_channels=<span class="number">1</span>,out_channels=n_filters,kernel_size=(filter_sizes[<span class="number">1</span>],embedding_dim))</div>
+<div class="line">        self.conv3 = nn.Conv2d(in_channels=<span class="number">1</span>,out_channels=n_filters,kernel_size=(filter_sizes[<span class="number">2</span>],embedding_dim))</div>
+<div class="line">        self.fc = nn.Linear(n_filters*len(filter_sizes),output_dim)</div>
+<div class="line">        self.dropout = nn.Dropout(p=dropout)</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, text)</span>:</span></div>
+<div class="line">        <span class="comment">#text.shape = (sent_length,batch_size), sent_length is varing</span></div>
+<div class="line">        text = torch.transpose(text, <span class="number">0</span>, <span class="number">1</span>) <span class="comment">#(batch_size,sent_length)=(64,1225)</span></div>
+<div class="line">        text_embedding = self.embedding(text) <span class="comment"># shape = (batch_size,sent_length,embedding_size)=(64,1225,100)</span></div>
+<div class="line">        </div>
+<div class="line">        <span class="comment"># since we use conv2d, the input should be (batch,channel,height,width)</span></div>
+<div class="line">        text_embedding = torch.unsqueeze(text_embedding,dim=<span class="number">1</span>)</div>
+<div class="line">        </div>
+<div class="line">        <span class="comment">#kernel_size is (?,embedding_dim), so output is (batch,filter_num,??,1)</span></div>
+<div class="line">        conv1 = F.relu(self.conv1(text_embedding)) <span class="comment">#Size([64, 100, 1223, 1])</span></div>
+<div class="line">        conv2 = F.relu(self.conv2(text_embedding)) <span class="comment">#Size([64, 100, 1222, 1])</span></div>
+<div class="line">        conv3 = F.relu(self.conv3(text_embedding)) <span class="comment">#Size([64, 100, 1221, 1])</span></div>
+<div class="line"></div>
+<div class="line">        pooling1 = F.max_pool1d(conv1.squeeze(),conv1.size(<span class="number">2</span>))</div>
+<div class="line">        pooling2 = F.max_pool1d(conv2.squeeze(),conv2.size(<span class="number">2</span>))</div>
+<div class="line">        pooling3 = F.max_pool1d(conv3.squeeze(),conv3.size(<span class="number">2</span>))</div>
+<div class="line"></div>
+<div class="line">        cat = torch.cat((pooling1,pooling2,pooling3),dim=<span class="number">1</span>).squeeze() <span class="comment">#Size([64,300,1,1]-&gt;[64,300])</span></div>
+<div class="line">        dropout = self.dropout(cat)</div>
+<div class="line">        output = self.fc(dropout) <span class="comment">#fully-connected layers can only be (batch_size,dim)</span></div>
+<div class="line">        <span class="keyword">return</span> output</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    INPUT_DIM = len(TEXT.vocab) <span class="comment">#25002</span></div>
+<div class="line">    EMBEDDING_DIM = <span class="number">100</span></div>
+<div class="line">    N_FILTERS = <span class="number">100</span></div>
+<div class="line">    FILTER_SIZES = [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</div>
+<div class="line">    OUTPUT_DIM = <span class="number">1</span></div>
+<div class="line">    DROPOUT = <span class="number">0.5</span></div>
+<div class="line">    PAD_IDX = TEXT.vocab.stoi[TEXT.pad_token]</div>
+<div class="line">    model = TextCNN(INPUT_DIM, EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, OUTPUT_DIM, DROPOUT, PAD_IDX)</div>
+<div class="line">    print(<span class="string">f'The model has <span class="subst">&#123;count_parameters(model):,&#125;</span> trainable parameters'</span>)</div>
+<div class="line">    pretrained_embeddings = TEXT.vocab.vectors</div>
+<div class="line">    model.embedding.weight.data.copy_(pretrained_embeddings)</div>
+<div class="line">    UNK_IDX = TEXT.vocab.stoi[TEXT.unk_token]</div>
+<div class="line">    model.embedding.weight.data[UNK_IDX] = torch.zeros(EMBEDDING_DIM)</div>
+<div class="line">    model.embedding.weight.data[PAD_IDX] = torch.zeros(EMBEDDING_DIM)</div>
+<div class="line">    optimizer = optim.Adam(model.parameters())</div>
+<div class="line">    criterion = nn.BCEWithLogitsLoss()</div>
+<div class="line">    model = model.to(device)</div>
+<div class="line">    criterion = criterion.to(device)</div>
+<div class="line">    N_EPOCHS = <span class="number">5</span></div>
+<div class="line">    best_valid_loss = float(<span class="string">'inf'</span>)</div>
+<div class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(N_EPOCHS):</div>
+<div class="line">        train_loss, train_acc = train(model, train_iterator, optimizer, criterion)</div>
+<div class="line">        print(<span class="string">f'\tTrain Loss: <span class="subst">&#123;train_loss:<span class="number">.3</span>f&#125;</span> | Train Acc: <span class="subst">&#123;train_acc*<span class="number">100</span>:<span class="number">.2</span>f&#125;</span>%'</span>)</div>
 </pre></td></tr></table></figure>
+<p><img src="/2018/07/04/DP-CNN/Screen Shot 2019-07-16 at 9.20.27 PM.png" alt="creen Shot 2019-07-16 at 9.20.27 P"></p>
 
 </div></div>
 <h1 id="Tensorflow代码"><a href="#Tensorflow代码" class="headerlink" title="Tensorflow代码"></a>Tensorflow代码</h1><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
@@ -967,7 +1189,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

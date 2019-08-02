@@ -87,10 +87,19 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Attention in DP and NLP.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-29T16:03:49.469Z">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.06.49%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.11.21%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.12.00%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.19.53%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.23.37%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.23.04%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.37.29%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.51.16%20PM.png">
+<meta property="og:updated_time" content="2019-08-02T22:52:51.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Attention">
 <meta name="twitter:description" content="Attention in DP and NLP.">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.06.49%20PM.png">
 
 
 
@@ -378,6 +387,65 @@
       
         <p>Attention in DP and NLP.</p>
 <a id="more"></a>
+<h1 id="Language-Model"><a href="#Language-Model" class="headerlink" title="Language Model"></a>Language Model</h1><p>Language modeling is the task of predicting what word comes next. More formally, given a sequence of words $x^{(1)}, x^{(2)},…,x^{(t)}, $ compute the probability distribution of the next word $x^{(t+1)}$:</p>
+<script type="math/tex; mode=display">
+P\left(\boldsymbol{x}^{(t+1)} | \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(1)}\right)</script><p>where $x^{t+1}$ can be any word in the vocabulary $V={w_1,…,w_{|V|}}$. A system that does this is called a <strong>Language Model</strong>.</p>
+<p>We can also think of a Language Model as a system that assigns probability to a piece of text. For example, if we have some text $x^{(1)}, x^{(2)},…,x^{(T)}$, then the probability of this text is:</p>
+<script type="math/tex; mode=display">
+\begin{aligned} P\left(\boldsymbol{x}^{(1)}, \ldots, \boldsymbol{x}^{(T)}\right) &=P\left(\boldsymbol{x}^{(1)}\right) \times P\left(\boldsymbol{x}^{(2)} | \boldsymbol{x}^{(1)}\right) \times \cdots \times P\left(\boldsymbol{x}^{(T)} | \boldsymbol{x}^{(T-1)}, \ldots, \boldsymbol{x}^{(1)}\right) \\ &=\prod_{t=1}^{T} P\left(\boldsymbol{x}^{(t)} | \boldsymbol{x}^{(t-1)}, \ldots, \boldsymbol{x}^{(1)}\right) \end{aligned}</script><h2 id="N-gram-Language-Models"><a href="#N-gram-Language-Models" class="headerlink" title="N-gram Language Models"></a>N-gram Language Models</h2><p><strong>Definition:</strong> A n-gram is a chunk of n consecutive words.</p>
+<p><strong>Idea:</strong> Collect statistics about how frequent different n-grams are, and use these to predict next word.</p>
+<p><strong>Assumption:</strong> $x^{t=1}$ depends only on the preceding $n-1$ words.</p>
+<script type="math/tex; mode=display">
+P\left(\boldsymbol{x}^{(t+1)} | \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(1)}\right)=P\left(\boldsymbol{x}^{(t+1)} | \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(t-n+2)}\right) \\
+=\frac{P\left(\boldsymbol{x}^{(t+1)}, \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(t-n+2)}\right)}{P\left(\boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(t-n+2)}\right)}</script><p><strong>Counting:</strong> by counting in some large corpus of text, we get these n-gram and (n-1)-gram probabilities.</p>
+<script type="math/tex; mode=display">
+\approx \frac{\operatorname{count}\left(\boldsymbol{x}^{(t+1)}, \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(t-n+2)}\right)}{\operatorname{count}\left(\boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(t-n+2)}\right)}</script><p><strong>Problems:</strong> </p>
+<ol>
+<li><p>Sparsity Problems with n-gram Language Models</p>
+<p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.06.49 PM.png" alt="creen Shot 2019-08-02 at 5.06.49 P"></p>
+</li>
+<li><p>Storage Problems with n-gram Language Models</p>
+<p>Need to store count for all n-grams you saw in the corpus and increasing n or increasing corpus increases model size!</p>
+</li>
+</ol>
+<h2 id="Neural-Language-Model"><a href="#Neural-Language-Model" class="headerlink" title="Neural Language Model"></a>Neural Language Model</h2><h3 id="A-fixed-window-neural-Language-Model"><a href="#A-fixed-window-neural-Language-Model" class="headerlink" title="A fixed-window neural Language Model"></a>A fixed-window neural Language Model</h3><p>Say we have the sentence: </p>
+<p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.11.21 PM.png" alt="creen Shot 2019-08-02 at 5.11.21 P">  </p>
+<p>Then we use the neural network to build the model</p>
+<p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.12.00 PM.png" alt="creen Shot 2019-08-02 at 5.12.00 P"></p>
+<p><strong>Improvements</strong> over n-gram LM:</p>
+<ol>
+<li>No sparsity problem</li>
+<li>Don’t need to store all observed n-grams</li>
+</ol>
+<p><strong>Remaining problems:</strong></p>
+<ol>
+<li>Fixed window is too small</li>
+<li>Enlarging window enlarges $W$ while Window can never be large enough!</li>
+<li>$ x^{(1)}$and $ x^{(2)}$ are multiplied by completely different weights in $W$. No symmetry in how the inputs are processed.</li>
+</ol>
+<p><strong>We need a neural architecture that can process any length input.</strong></p>
+<h3 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h3><p><strong>Core idea:</strong> Apply the same weights $W$ repeatedly.</p>
+<p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.19.53 PM.png" alt="creen Shot 2019-08-02 at 5.19.53 P"></p>
+<p><strong>RNN Advantages:</strong></p>
+<ol>
+<li>Can process any length input</li>
+<li>Computation for step t can (in theory) use information from many steps back</li>
+<li>Model size doesn’t increase for longer input</li>
+<li>Same weights applied on every timestep, so there is symmetry in how inputs are processed.</li>
+</ol>
+<p><strong>RNN Disadvantages:</strong></p>
+<ol>
+<li>Recurrent computation is slow</li>
+<li>In practice, difficult to access information from many steps back</li>
+</ol>
+<h4 id="Training-a-RNN"><a href="#Training-a-RNN" class="headerlink" title="Training a RNN"></a>Training a RNN</h4><p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.23.37 PM.png" alt="creen Shot 2019-08-02 at 5.23.37 P"></p>
+<p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.23.04 PM.png" alt="creen Shot 2019-08-02 at 5.23.04 P"></p>
+<h2 id="Evaluating-Language-Models"><a href="#Evaluating-Language-Models" class="headerlink" title="Evaluating Language Models"></a>Evaluating Language Models</h2><p>In general, perplexity is a measurement of <strong>how well a probability model predicts a sample</strong>. </p>
+<p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.37.29 PM.png" alt="creen Shot 2019-08-02 at 5.37.29 P"></p>
+<p><img src="/2019/03/18/NLP-Attention/Screen Shot 2019-08-02 at 5.51.16 PM.png" alt="creen Shot 2019-08-02 at 5.51.16 P"></p>
+<blockquote>
+<p>Normalizing by the length is to avoid the pitfall that longer sentecnes have lower perplexity.</p>
+</blockquote>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><h2 id="Random-Reading"><a href="#Random-Reading" class="headerlink" title="Random Reading"></a>Random Reading</h2><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/53682800" target="_blank" rel="noopener">nlp中的Attention注意力机制+Transformer详解</a> </li>
 <li><a href="https://zhuanlan.zhihu.com/p/37601161" target="_blank" rel="noopener">great intriduction</a></li>
@@ -503,7 +571,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -558,7 +626,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">1.</span> <span class="nav-text">References</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Random-Reading"><span class="nav-number">1.1.</span> <span class="nav-text">Random Reading</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Language-Model"><span class="nav-number">1.</span> <span class="nav-text">Language Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#N-gram-Language-Models"><span class="nav-number">1.1.</span> <span class="nav-text">N-gram Language Models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Language-Model"><span class="nav-number">1.2.</span> <span class="nav-text">Neural Language Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-fixed-window-neural-Language-Model"><span class="nav-number">1.2.1.</span> <span class="nav-text">A fixed-window neural Language Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN"><span class="nav-number">1.2.2.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-RNN"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Training a RNN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluating-Language-Models"><span class="nav-number">1.3.</span> <span class="nav-text">Evaluating Language Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Random-Reading"><span class="nav-number">2.1.</span> <span class="nav-text">Random Reading</span></a></li></ol></li></ol></div>
             
 
           </div>
