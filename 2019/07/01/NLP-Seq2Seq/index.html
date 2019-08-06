@@ -87,13 +87,32 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="There’s a whole class of NLP tasks that rely on sequential output, or outputs that are sequences of potentially varying length. For example,  Translation: taking a sentence in one language as input an">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/68747470733a2f2f692e696d6775722e636f6d2f74567448684e702e706e67.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%209.59.19%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.04.18%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.24.32%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.15.39%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.16.44%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.18.38%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.18.54%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.19.21%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.35.49%20PM-5062577.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.39.50%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.43.43%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.44.10%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.44.43%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.46.38%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.48.26%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.50.52%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.51.04%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.52.05%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.52.34%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%2010.52.43%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-07-13%20at%205.50.09%20PM.png">
-<meta property="og:updated_time" content="2019-07-13T22:52:35.910Z">
+<meta property="og:updated_time" content="2019-08-06T15:27:45.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Seq2Seq">
 <meta name="twitter:description" content="There’s a whole class of NLP tasks that rely on sequential output, or outputs that are sequences of potentially varying length. For example,  Translation: taking a sentence in one language as input an">
-<meta name="twitter:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/68747470733a2f2f692e696d6775722e636f6d2f74567448684e702e706e67.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/07/01/NLP-Seq2Seq/Screen%20Shot%202019-08-05%20at%209.59.19%20PM.png">
 
 
 
@@ -387,20 +406,68 @@
 </ul>
 <p>Therefore, in this post, sequence-to-sequence models are introduced, a deep learning-based framework for handling these types of problems.</p>
 <a id="more"></a>
-<h1 id="The-Seq2Seq-Model"><a href="#The-Seq2Seq-Model" class="headerlink" title="The Seq2Seq Model"></a>The Seq2Seq Model</h1><p>At a high level, a sequence-to-sequence model is an end-to-end model made up of two recurrent neural networks:</p>
+<h1 id="The-Seq2Seq-Model"><a href="#The-Seq2Seq-Model" class="headerlink" title="The Seq2Seq Model"></a>The Seq2Seq Model</h1><p>The sequence-to-sequence model is an example of a Conditional Language Model.</p>
 <ul>
-<li>an encoder, which takes the model’s input sequence as input and encodes it into a fixed-size “context vector”, and</li>
-<li>a decoder, which uses the context vector from above as a “seed” from which to generate an output sequence.</li>
+<li><strong>Language Model</strong> because the decoder is predicting the next word of the target sentence y</li>
+<li><strong>Conditional</strong> because its predictions are also conditioned on the source sentence x</li>
 </ul>
-<p><img src="/2019/07/01/NLP-Seq2Seq/68747470733a2f2f692e696d6775722e636f6d2f74567448684e702e706e67.png" alt="8747470733a2f2f692e696d6775722e636f6d2f74567448684e702e706e6"></p>
-<p>When using a single RNN, there is a one-to-one relationship between inputs and outputs. We would quickly run into problems with different sequence orders and lengths that are common during translation. Consider the simple sentence “Je ne suis pas le chat noir” → “I am not the black cat”. Many of the words have a pretty direct translation, like “chat” → “cat”. However the differing grammars cause words to be in different orders, e.g. “chat noir” and “black cat”. There is also the “ne … pas” → “not” construction that makes the two sentences have different lengths.</p>
-<p>With the seq2seq model, by encoding many inputs into one vector, and decoding from one vector into many outputs, we are freed from the constraints of sequence order and length. The encoded sequence is represented by a single vector, a single point in some N dimensional space of sequences. In an ideal case, this point can be considered the “meaning” of the sequence.</p>
-<p>This idea can be extended beyond sequences. Image captioning tasks take an <a href="https://arxiv.org/abs/1411.4555" target="_blank" rel="noopener">image as input, and output a description</a> of the image (img2seq). Some image generation tasks take a <a href="https://arxiv.org/abs/1511.02793" target="_blank" rel="noopener">description as input and output a generated image</a> (seq2img). These models can be referred to more generally as “encoder decoder” networks.</p>
-<h1 id="The-Attention-Mechanism"><a href="#The-Attention-Mechanism" class="headerlink" title="The Attention Mechanism"></a>The Attention Mechanism</h1><p>The fixed-length vector carries the burden of encoding the the entire “meaning” of the input sequence, no matter how long that may be. With all the variance in language, this is a very hard problem. Imagine two nearly identical sentences, twenty words long, with only one word different. Both the encoders and decoders must be nuanced enough to represent that change as a very slightly different point in space.</p>
-<p>Remember that our seqzseq model is made of two parts, an encoder that encodes the input sentence, and a decoder that leverages the information extracted by the decoder to produce the translated sentence. Basically, our input is a sequence of words $x_1,…, x_n$ that we want to translate, and our target sentence is a sequence of words $y_1,…,y_m$.</p>
+<p>NMT directly calculates $P(y | x)$, </p>
+<script type="math/tex; mode=display">
+P(y | x)=P\left(y_{1} | x\right) P\left(y_{2} | y_{1}, x\right) P\left(y_{3} | y_{1}, y_{2}, x\right) \ldots P\left(y_{T} | y_{1}, \ldots, y_{T-1}, x\right)</script><p>Here $P\left(y_{T} | y_{1}, \ldots, y_{T-1}, x\right)$ is the probability of next target word given target words so far and source sentence $x$. </p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 9.59.19 PM.png" alt="creen Shot 2019-08-05 at 9.59.19 P"></p>
+<h2 id="Output-decoding"><a href="#Output-decoding" class="headerlink" title="Output decoding"></a>Output decoding</h2><h3 id="Greedy-decoding"><a href="#Greedy-decoding" class="headerlink" title="Greedy decoding"></a>Greedy decoding</h3><p>When generating next word, we always take the most probable word on next step  and we stop untl the model produces a <code>&lt;END&gt;</code> token.</p>
+<p>But this method has no way to undo decisions.</p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.04.18 PM.png" alt="creen Shot 2019-08-05 at 10.04.18 P"></p>
+<h3 id="Beam-search-decoding"><a href="#Beam-search-decoding" class="headerlink" title="Beam search decoding"></a>Beam search decoding</h3><h4 id="Core-idea"><a href="#Core-idea" class="headerlink" title="Core idea"></a>Core idea</h4><p>On each step of decoder, keep track of the <code>k</code> most probable partial translations (which we call hypotheses). Here <code>k</code>  is the beam size.</p>
+<p>A hypothesis has a <strong>score</strong> which is its log probability:</p>
+<script type="math/tex; mode=display">
+\operatorname{score}\left(y_{1}, \ldots, y_{t}\right)=\log P_{\mathrm{LM}}\left(y_{1}, \ldots, y_{t} | x\right)=\sum_{i=1}^{t} \log P_{\mathrm{LM}}\left(y_{i} | y_{1}, \ldots, y_{i-1}, x\right)</script><ul>
+<li>Scores are all negative, and higher score is better</li>
+<li>We search for high-scoring hypotheses, tracking top k on each step</li>
+</ul>
+<h4 id="Stop-criterion"><a href="#Stop-criterion" class="headerlink" title="Stop criterion"></a>Stop criterion</h4><p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.24.32 PM.png" alt="creen Shot 2019-08-05 at 10.24.32 P"></p>
+<h4 id="Selection-criterion"><a href="#Selection-criterion" class="headerlink" title="Selection criterion"></a>Selection criterion</h4><p>We have our list of completed hypotheses, but How to select top one with highest score?</p>
+<p>Say if we choose the hypothese with highest score, which is computed by:</p>
+<script type="math/tex; mode=display">
+\operatorname{score}\left(y_{1}, \ldots, y_{t}\right)=\log P_{\mathrm{LM}}\left(y_{1}, \ldots, y_{t} | x\right)=\sum_{i=1}^{t} \log P_{\mathrm{LM}}\left(y_{i} | y_{1}, \ldots, y_{i-1}, x\right)</script><p>Then it will tend to choose the shorter sentence, which usually has a higher score.</p>
+<p>In this case, we fix it by normalizing by length:</p>
+<script type="math/tex; mode=display">
+\frac{1}{t} \sum_{i=1}^{t} \log P_{\mathrm{LM}}\left(y_{i} | y_{1}, \ldots, y_{i-1}, x\right)</script><p>and use this to select top one.</p>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><p>Say we set <code>k=2</code>. We start generation with <code>&lt;START&gt;</code> token. Suppose the top two candidates are <code>he</code> and <code>I</code>:</p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.15.39 PM.png" alt="creen Shot 2019-08-05 at 10.15.39 P"></p>
+<p>Then we keep track of the two lines to generate next words:</p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.16.44 PM.png" alt="creen Shot 2019-08-05 at 10.16.44 P"></p>
+<p>The new score is parent’s score plus current probablity. Here we have four candidates, but since our <code>k</code> is 2, we choose top 2 among these 4 candidates.</p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.18.38 PM.png" alt="creen Shot 2019-08-05 at 10.18.38 P"></p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.18.54 PM.png" alt="creen Shot 2019-08-05 at 10.18.54 P"></p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.19.21 PM.png" alt="creen Shot 2019-08-05 at 10.19.21 P"></p>
+<h2 id="Machine-Translation-Evaluation"><a href="#Machine-Translation-Evaluation" class="headerlink" title="Machine Translation Evaluation"></a>Machine Translation Evaluation</h2><p>BLEU (Bilingual Evaluation Understudy) is the one we use for evaluation. BLEU compares the machine-written translation to one or several human-written translation(s), and computes a similarity score based on:</p>
+<ul>
+<li>n-gram precision (usually for 1, 2, 3 and 4-grams)</li>
+<li>Plus a penalty for too-short system translations</li>
+</ul>
+<p>BLEU is useful but imperfect:</p>
+<ul>
+<li>There are many valid ways to translate a sentence</li>
+<li>So a good translation can get a poor BLEU score because it<br>has low n-gram overlap with the human translation </li>
+</ul>
+<h1 id="The-Attention-Mechanism"><a href="#The-Attention-Mechanism" class="headerlink" title="The Attention Mechanism"></a>The Attention Mechanism</h1><h2 id="Problem-in-Seq2Seq"><a href="#Problem-in-Seq2Seq" class="headerlink" title="Problem in Seq2Seq"></a>Problem in Seq2Seq</h2><p>The fixed-length vector carries the burden of encoding the the entire “meaning” of the input sequence, no matter how long that may be. With all the variance in language, this is a very hard problem. </p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.35.49 PM-5062577.png" alt="creen Shot 2019-08-05 at 10.35.49 PM-506257"></p>
+<h2 id="Core-ideas"><a href="#Core-ideas" class="headerlink" title="Core ideas"></a>Core ideas</h2><p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.39.50 PM.png" alt="creen Shot 2019-08-05 at 10.39.50 P"></p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.43.43 PM.png" alt="creen Shot 2019-08-05 at 10.43.43 P"></p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.44.10 PM.png" alt="creen Shot 2019-08-05 at 10.44.10 P"></p>
+<p>In decoder, insted of just use the hidden state at the first step of the decoder, we operate the dot product between the decoder hidden state with the encoder hidden state of each step in encoder. So that we can get several scalar scores. </p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.44.43 PM.png" alt="creen Shot 2019-08-05 at 10.44.43 P"></p>
+<p>Once we have these scores, we use a softmax function to turn the scores into a distribution.</p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.46.38 PM.png" alt="creen Shot 2019-08-05 at 10.46.38 P"></p>
+<p>Once we have the attention output, we use the attention distribution to take a weighted sum of the encoder hidden states.<img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.48.26 PM.png" alt="creen Shot 2019-08-05 at 10.48.26 P"></p>
+<p>Finally Concatenate weighted sum of the encoder hidden states with decoder hidden state, then use to compute $\widehat{y}_{1}$ as before.</p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.50.52 PM.png" alt="creen Shot 2019-08-05 at 10.50.52 P"></p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.51.04 PM.png" alt="creen Shot 2019-08-05 at 10.51.04 P"></p>
+<h2 id="Attention-in-Equations"><a href="#Attention-in-Equations" class="headerlink" title="Attention in Equations"></a>Attention in Equations</h2><p>Remember that our seqzseq model is made of two parts, an encoder that encodes the input sentence, and a decoder that leverages the information extracted by the decoder to produce the translated sentence. Basically, our input is a sequence of words $x_1,…, x_n$ that we want to translate, and our target sentence is a sequence of words $y_1,…,y_m$.</p>
 <ol>
 <li><p>Encoder</p>
-<p>Let $(h_1,., h_n)$ be the hidden vectors representing the input sen- tence. These vectors are the output of a BI-LSTM for instance, ane capture contextual representation of each word in the sentence</p>
+<p>Let $(h_1,., h_n)$ be the hidden vectors representing the input sentence. These vectors are the output of a BI-LSTM for instance, ane capture contextual representation of each word in the sentence</p>
 </li>
 <li><p>Decoder</p>
 <p>We want to compute the hidden states $s_i$ of the decoder using a recursive formula of the form </p>
@@ -414,6 +481,9 @@
    \alpha_{i, j}=\frac{\exp \left(e_{i, j}\right)}{\sum_{k=1}^{n} \exp \left(e_{i, k}\right)}</script><p>   Then, compute the context vector $c_i$ as the weighted average of the hidden vectors from the original sentence</p>
 <script type="math/tex; mode=display">
    c_{i}=\sum_{j=1}^{n} \alpha_{i, j} h_{j}</script><p>   Intuitively, this vector captures the relevant contextual information from the original sentence for the i-th step of the decoder.</p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.52.05 PM.png" alt="creen Shot 2019-08-05 at 10.52.05 P"></p>
+<h2 id="Attention-Variants"><a href="#Attention-Variants" class="headerlink" title="Attention Variants"></a>Attention Variants</h2><p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.52.34 PM.png" alt="creen Shot 2019-08-05 at 10.52.34 P"></p>
+<p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-08-05 at 10.52.43 PM.png" alt="creen Shot 2019-08-05 at 10.52.43 P"></p>
 <h2 id="Conncetion-with-translation-alignment"><a href="#Conncetion-with-translation-alignment" class="headerlink" title="Conncetion with translation alignment"></a>Conncetion with translation alignment</h2><p>The attention-based model learns to assign significance to different parts of the input for each step of the output. In the context of translation, attention can be thought of as “alignment.” Bahdanau et al. argue that the attention scores aij at decoding step i signify the words in the source sentence that align with word i in the target. Noting this, we can use attention scores to build an alignment table – a table mapping words in the source to corresponding words in the target sentence – based on the learned encoder and decoder from our Seq2Seq NMT system.</p>
 <p><img src="/2019/07/01/NLP-Seq2Seq/Screen Shot 2019-07-13 at 5.50.09 PM.png" alt="creen Shot 2019-07-13 at 5.50.09 P"></p>
 <h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><h2 id="Keras"><a href="#Keras" class="headerlink" title="Keras"></a><a href="https://blog.keras.io/a-ten-minute-introduction-to-sequence-to-sequence-learning-in-keras.html" target="_blank" rel="noopener">Keras</a></h2>
@@ -592,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Seq2Seq-Model"><span class="nav-number">1.</span> <span class="nav-text">The Seq2Seq Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Attention-Mechanism"><span class="nav-number">2.</span> <span class="nav-text">The Attention Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Conncetion-with-translation-alignment"><span class="nav-number">2.1.</span> <span class="nav-text">Conncetion with translation alignment</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras"><span class="nav-number">3.1.</span> <span class="nav-text">Keras</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Seq2Seq-Model"><span class="nav-number">1.</span> <span class="nav-text">The Seq2Seq Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Output-decoding"><span class="nav-number">1.1.</span> <span class="nav-text">Output decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Greedy-decoding"><span class="nav-number">1.1.1.</span> <span class="nav-text">Greedy decoding</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beam-search-decoding"><span class="nav-number">1.1.2.</span> <span class="nav-text">Beam search decoding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Core-idea"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">Core idea</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stop-criterion"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Stop criterion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Selection-criterion"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">Selection criterion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Example"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Translation-Evaluation"><span class="nav-number">1.2.</span> <span class="nav-text">Machine Translation Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Attention-Mechanism"><span class="nav-number">2.</span> <span class="nav-text">The Attention Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem-in-Seq2Seq"><span class="nav-number">2.1.</span> <span class="nav-text">Problem in Seq2Seq</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-ideas"><span class="nav-number">2.2.</span> <span class="nav-text">Core ideas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attention-in-Equations"><span class="nav-number">2.3.</span> <span class="nav-text">Attention in Equations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attention-Variants"><span class="nav-number">2.4.</span> <span class="nav-text">Attention Variants</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conncetion-with-translation-alignment"><span class="nav-number">2.5.</span> <span class="nav-text">Conncetion with translation alignment</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Implementation"><span class="nav-number">3.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras"><span class="nav-number">3.1.</span> <span class="nav-text">Keras</span></a></li></ol></li></ol></div>
             
 
           </div>
