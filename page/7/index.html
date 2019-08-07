@@ -425,7 +425,67 @@
 </li>
 <li></li>
 </ol>
-<h2 id="AOC-Area-Under-the-Curve"><a href="#AOC-Area-Under-the-Curve" class="headerlink" title="AOC(Area Under the Curve)"></a>AOC(Area Under the Curve)</h2><p><a href="https://medium.com/@sebastiannorena/some-model-tuning-methods-bfef3e6544f0" target="_blank" rel="noopener">ref1</a> </p>
+<h2 id="Confusion-Matrix"><a href="#Confusion-Matrix" class="headerlink" title="Confusion Matrix"></a>Confusion Matrix</h2><p>A confusion matrix is a technique used for summarizing the performance of a classification algorithm i.e. it has binary outputs. Example for a classification algorithm: Predicting if the patient has cancer. Here, there can only be two outputs i.e. Yes or No.</p>
+<p>A confusion matrix gives us a better idea of what our classification model is predicting right and what types of errors it is making.</p>
+<p>Below is what an Confusion Matrix looks like:</p>
+<p><img src="/2018/06/25/Experiment-Metric/Screen Shot 2019-08-06 at 9.01.39 PM.png" alt="creen Shot 2019-08-06 at 9.01.39 P"></p>
+<p><strong>True Positive:</strong> You predicted positive and your are right.</p>
+<p><strong>True Negative:</strong> You predicted negative and your are right.</p>
+<p><strong>False Positive: (Type 1 Error):</strong> You predicted positive and you are wrong.</p>
+<p><strong>False Negative: (Type 2 Error): </strong>You predicted negative and you are wrong.</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_OpSYGh2-XE6aE3sVAJAHrw.png" alt="_OpSYGh2-XE6aE3sVAJAHr"></p>
+<p><img src="/2018/06/25/Experiment-Metric/1_uR09zTlPgIj5PvMYJZScVg.png" alt="_uR09zTlPgIj5PvMYJZScV"></p>
+<p><strong>Recall</strong></p>
+<script type="math/tex; mode=display">
+\operatorname{Recall}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}</script><p><strong>Precision</strong></p>
+<script type="math/tex; mode=display">
+\text { Precision }=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}}</script><p><strong>F-measure</strong></p>
+<script type="math/tex; mode=display">
+F-\text {measure}=\frac{2 * \text { Recall * Precision }}{\text { Recall }+\text { Precision }}</script><p>accuracy常用于分类，比对两个向量，一个是真实向量，一个是预测向量，预测正确加1，最终sum除以向量长度就是准确率。</p>
+<p>精确率(precision)的公式是katex is not defined,它计算的是所有”正确被检索的item(TP)”占所有”实际被检索到的(TP+FP)”的比例.（在所有找对找错里面，找对的概率）</p>
+<p>召回率(recall)的公式是katex is not defined,它计算的是所有”正确被检索的item(TP)”占所有”应该检索到的item(TP+FN)”的比例。（找到正确的，能覆盖目标的所有的概率）</p>
+<p>假如某个班级有男生80人,女生20人,共计100人.目标是找出所有女生. 现在某人挑选出50个人,其中20人是女生,另外还错误的把30个男生也当作女生挑选出来了. 作为评估者的你需要来评估(evaluation)下他的工作。</p>
+<ul>
+<li>很容易，我们可以得到:他把其中70(20女+50男)人判定正确了,而总人数是100人，所以它的accuracy就是70 %(70 / 100).</li>
+<li>在例子中就是希望知道此君得到的所有人中,正确的人(也就是女生)占有的比例.所以其precision也就是40%(20女生/(20女生+30误判为女生的男生)).</li>
+<li>在例子中就是希望知道此君得到的女生占本班中所有女生的比例,所以其recall也就是100%(20女生/(20女生+ 0 误判为男生的女生))</li>
+</ul>
+<h1 id="AUC-ROC-Curve"><a href="#AUC-ROC-Curve" class="headerlink" title="AUC ROC Curve"></a>AUC ROC Curve</h1><h3 id="What-is-ROC"><a href="#What-is-ROC" class="headerlink" title="What is ROC?"></a>What is ROC?</h3><p>ROC (<em>Receiver Operating Characteristic</em>) Curve tells us about how good the model can distinguish between two things (<em>e.g</em> <em>If a patient has a disease or no</em>). Better models can accurately distinguish between the two. Whereas, a poor model will have difficulties in distinguishing between the two.</p>
+<p>Let’s assume we have a model which predicts whether the patient has a particular disease or no. The model predicts probabilities for each patient (<em>in python we use the“</em> <strong>predict_proba*</strong>” function*). Using these probabilities, we plot the distribution as shown below:</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_HxNvqTl-Pd63niUIbrD4pg.jpeg" alt="_HxNvqTl-Pd63niUIbrD4p"></p>
+<p>Here, the red distribution represents all the patients who do not have the disease and the green distribution represents all the patients who have the disease.</p>
+<p>Now we got to pick a value where we need to set the cut off i.e. a threshold value, above which we will predict everyone as positive (<em>they have the disease</em>) and below which will predict as negative (<em>they do not have the disease</em>). We will set the threshold at “<strong>0.5</strong>” as shown below:</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_qLjMtrdG3qIcuNBALvsYQA.jpeg" alt="_qLjMtrdG3qIcuNBALvsYQ"></p>
+<p>All the positive values above the threshold will be “<strong>True Positives</strong>” and the negative values above the threshold will be “<strong>False Positives</strong>” as they are predicted incorrectly as positives.</p>
+<p>All the negative values below the threshold will be “<strong>True Negatives</strong>” and the positive values below the threshold will be “<strong>False Negative</strong>” as they are predicted incorrectly as negatives.</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_Bwhr9ots47akHbrgssKXrA.jpeg" alt="_Bwhr9ots47akHbrgssKXr"></p>
+<p>Here, we have got a basic idea of the model predicting correct and incorrect values with respect to the threshold set. Before we move on, let’s go through two important terms: <strong>Sensitivity and Specificity.</strong></p>
+<h3 id="What-is-Sensitivity-and-Specificity"><a href="#What-is-Sensitivity-and-Specificity" class="headerlink" title="What is Sensitivity and Specificity?"></a>What is Sensitivity and Specificity?</h3><p>In simple terms, the proportion of patients that were identified correctly to have the disease (<em>i.e. True Positive</em>) upon the total number of patients who actually have the disease is called as Sensitivity or Recall.</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_aLUZ01GaLPwGDI24jb-uUA.png" alt="_aLUZ01GaLPwGDI24jb-uU"></p>
+<p>Similarly, the proportion of patients that were identified correctly to not have the disease (<em>i.e. True Negative</em>) upon the total number of patients who do not have the disease is called as Specificity.</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_mPEFI9HFEF7GKH5HYQRDzA.png" alt="_mPEFI9HFEF7GKH5HYQRDz"></p>
+<h3 id="Trade-off-between-Sensitivity-and-Specificity"><a href="#Trade-off-between-Sensitivity-and-Specificity" class="headerlink" title="Trade-off between Sensitivity and Specificity"></a>Trade-off between Sensitivity and Specificity</h3><p>When we decrease the threshold, we get more positive values thus increasing the sensitivity. Meanwhile, this will decrease the specificity.</p>
+<p>Similarly, when we increase the threshold, we get more negative values thus increasing the specificity and decreasing sensitivity.</p>
+<p>As <strong>Sensitivity</strong> ⬇️ <strong>Specificity</strong> ⬆️</p>
+<p>As <strong>Specificity</strong> ⬇️ <strong>Sensitivity</strong> ⬆️</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_ceB9hobuBUjnPpRKedA-VA.png" alt="_ceB9hobuBUjnPpRKedA-V"></p>
+<p>But, this is not how we graph the ROC curve. To plot ROC curve, instead of Specificity we use (1 — Specificity) and the graph will look something like this:</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_4Ar_wBQ_xWrFUqwwQGV-8A.png" alt="_4Ar_wBQ_xWrFUqwwQGV-8"></p>
+<p>So now, when the sensitivity increases, (1 — specificity) will also increase. This curve is known as the ROC curve.</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_QqZzGJwzYxnHWZ_axq6ynA.png" alt="_QqZzGJwzYxnHWZ_axq6yn"></p>
+<h3 id="Area-Under-the-Curve"><a href="#Area-Under-the-Curve" class="headerlink" title="Area Under the Curve"></a>Area Under the Curve</h3><p>The AUC is the area under the ROC curve. This score gives us a good idea of how well the model performances.</p>
+<p>Let’s take a few examples</p>
+<p><img src="/2018/06/25/Experiment-Metric/1_AgDJbm6d8qr8ESHNv6VvKg.png" alt="_AgDJbm6d8qr8ESHNv6VvK"></p>
+<p><img src="/2018/06/25/Experiment-Metric/1_KNhNw8BsjbIETPF_BH8Qpg.png" alt="_KNhNw8BsjbIETPF_BH8Qp"></p>
+<p>As we see, the first model does quite a good job of distinguishing the positive and the negative values. Therefore, there the AUC score is 0.9 as the area under the ROC curve is large.</p>
+<p>Whereas, if we see the last model, predictions are completely overlapping each other and we get the AUC score of 0.5. This means that the model is performing poorly and it is predictions are almost random.</p>
+<h3 id="Why-do-we-use-1-—-Specificity"><a href="#Why-do-we-use-1-—-Specificity" class="headerlink" title="Why do we use (1 — Specificity)?"></a>Why do we use (1 — Specificity)?</h3><p>Let’s derive what exactly is (1 — Specificity):</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}{\text { Specificity }=\frac{T N}{T N+F P}} \\ {1-\text {Specificity}=1-\frac{T N}{T N+F P}} \\ {1-\text {Specificity}=\frac{T N+F P-T N}{T N+F P}} \\ {1-\text {Specificity}=\frac{F P}{T N+F P}}\end{array}</script><p>As we see above, Specificity gives us the True Negative Rate and (1 — Specificity) gives us the False Positive Rate.</p>
+<p>So the sensitivity can be called as the “<strong>True Positive Rate</strong>” and (1 — Specificity) can be called as the “<strong>False Positive Rate</strong>”.</p>
+<p>So now we are just looking at the positives. As we increase the threshold, we decrease the <em>TPR</em> as well as the <em>FPR</em> and when we decrease the threshold, we are increasing the <em>TPR</em> and <em>FPR</em>.</p>
+<p>Thus, AUC ROC indicates how well the probabilities from the positive classes are separated from the negative classes.</p>
+<p><a href="https://medium.com/@sebastiannorena/some-model-tuning-methods-bfef3e6544f0" target="_blank" rel="noopener">ref1</a> </p>
 <p>AOC是衡量一个模型是否有效的参数，比如：我们使用了grid search来暴力寻找最佳的超参数组合，我们就可以使用AOC来比较不同超参数组合模型的效果，从而选择最佳模型的超参数组合。一般将<code>scoring=’roc_auc’</code>。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
@@ -1845,7 +1905,7 @@ y&=eq2 &\text{if x=2}
         
           <p>本文参考<a href="https://www.yiibai.com/pandas/python_pandas_data_structures.html" target="_blank" rel="noopener">1</a></p>
 <p>pandas导入</p>
-<!--�972-->
+<!--�963-->
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/06/08/ML-Pandas/#more" rel="contents">

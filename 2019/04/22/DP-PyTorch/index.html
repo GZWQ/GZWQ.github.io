@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/22/DP-PyTorch/Screen%20Shot%202019-07-13%20at%2011.37.25%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/22/DP-PyTorch/Screen%20Shot%202019-07-13%20at%2011.40.45%20AM.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/22/DP-PyTorch/Screen%20Shot%202019-05-18%20at%2011.57.01%20AM.png">
-<meta property="og:updated_time" content="2019-08-05T16:37:46.751Z">
+<meta property="og:updated_time" content="2019-08-06T17:18:17.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-PyTorch">
 <meta name="twitter:description" content="Tutorials of PyTorch and some useful tips.">
@@ -1141,7 +1141,8 @@
 <ol>
 <li><p><strong>Input data and groundtruth</strong></p>
 <p>The input data should be in the size <code>(time_steps, batch_size, feature_dim)</code> for the original <code>LSTM</code> function. But if you specify the parameter <code>batch_first</code> in <code>LSTM</code>, then you need to switch the dimentaion to <code>(batch_size, time_steps, feature_dim)</code>. </p>
-<p>As for the groundtruth, it should be a scalar instead of a one-hot label if we are dealing with the classification problem. In this case, we usually use <code>CrossEntropyLoss</code> or <code>NLLLoss</code>.</p>
+<p>As for the groundtruth, it should be a scalar instead of a one-hot label if we are dealing with the classification problem, whose size should be <code>(batch_size,1)</code>. For example, if the batch_size is 1, so one possilbility could be <code>[1]</code> instead of <code>1</code>.</p>
+<p>In this case, we usually use <code>CrossEntropyLoss</code> or <code>NLLLoss</code>.</p>
 </li>
 <li><p><strong>Loss function</strong></p>
 <p>If in the model definition we have a layer called <code>LogSoftmax</code>, then we should use <code>CrossEntropyLoss</code>.</p>
