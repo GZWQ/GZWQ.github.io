@@ -88,7 +88,7 @@
 <meta property="og:description" content="Several metrics to evaluate GAN, including Inception Score. GAN — How to measure GAN performance?">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/02/28/GAN-Metrics/1.png">
-<meta property="og:updated_time" content="2019-08-12T01:32:52.032Z">
+<meta property="og:updated_time" content="2019-08-29T19:21:56.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GAN Metrics">
 <meta name="twitter:description" content="Several metrics to evaluate GAN, including Inception Score. GAN — How to measure GAN performance?">
@@ -474,6 +474,7 @@ D_{K L}(P \| Q)=\mathbb{E}_{x \sim P}\left[\log \frac{P(x)}{Q(x)}\right]</script
 <p>The FID is supposed to improve on the IS by actually <em>comparing</em> the statistics of generated samples to real samples, instead of evaluating generated samples in a vacuum.</p>
 <script type="math/tex; mode=display">
 \text{FID} = ||\mu_r - \mu_g||^2 + \text{Tr} (\Sigma_r + \Sigma_g - 2 (\Sigma_r \Sigma_g)^{1/2}),</script><p>where $X_r \sim \mathcal{N} (\mu_r, \Sigma_r)$ and $X_g \sim \mathcal{N} (\mu_g, \Sigma_g)$ are the 2048-dimensional activations of the Inception-v3 pool3 layer for real and generated samples respectively. <strong>Lower FID is better</strong>, corresponding to more similar real and generated samples as measured by the distance between their activation distributions.</p>
+<p><a href="https://machinelearningmastery.com/how-to-implement-the-frechet-inception-distance-fid-from-scratch/" target="_blank" rel="noopener">implementation</a> </p>
 <h1 id="SSD-Score"><a href="#SSD-Score" class="headerlink" title="SSD-Score"></a>SSD-Score</h1><h2 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h2><p><a href="https://github.com/AliaksandrSiarohin/pose-gan/blob/master/ssd_score/compute_ssd_score.py" target="_blank" rel="noopener">ref1</a> </p>
 
       
