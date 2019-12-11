@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/07/16/NLP-TorchText/スクリーンショット-2018-02-07-10.32.59.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/16/NLP-TorchText/スクリーンショット-2018-02-07-12.19.35.png">
-<meta property="og:updated_time" content="2019-07-17T03:21:28.761Z">
+<meta property="og:updated_time" content="2019-09-07T15:56:54.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-TorchText">
 <meta name="twitter:description" content="If you’ve ever worked on a project for deep learning for NLP, you’ll know how painful and tedious all the preprocessing is. Before you start training your model, you have to:  Read the data from disk">
@@ -391,18 +391,7 @@
 <p><a href="https://github.com/pytorch/text" target="_blank" rel="noopener">Torchtext</a> is a library that makes all the above processing much easier. </p>
 <a id="more"></a>
 <p>In this post, I’ll demonstrate how torchtext can be used to build and train a text classifier from scratch.To make this tutorial realistic, I’m going to use a small sample of data from <a href="https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge" target="_blank" rel="noopener">this Kaggle competition</a>. The data and code are available in <a href="https://github.com/keitakurita/practical-torchtext" target="_blank" rel="noopener">GitHub repo</a>, so feel free to clone it and follow along. Or, if you just want to see the minimal working example, feel free to skip the rest of this tutorial and just read the <a href="https://github.com/keitakurita/practical-torchtext/blob/master/Lesson%201:%20intro%20to%20torchtext%20with%20text%20classification.ipynb" target="_blank" rel="noopener">notebook</a>.</p>
-<h1 id="The-Overview"><a href="#The-Overview" class="headerlink" title="The Overview"></a>The Overview</h1><p>If you’ve ever worked on a project for deep learning for NLP, you’ll know how painful and tedious all the preprocessing is. Before you start training your model, you have to:</p>
-<ol>
-<li>Read the data from disk</li>
-<li>Tokenize the text</li>
-<li>Create a mapping from word to a unique integer</li>
-<li>Convert the text into lists of integers</li>
-<li>Load the data in whatever format your deep learning framework requires</li>
-<li>Pad the text so that all the sequences are the same length, so you can process them in batch</li>
-</ol>
-<p><a href="https://github.com/pytorch/text" target="_blank" rel="noopener">Torchtext</a> is a library that makes all the above processing much easier. Though still relatively new, its convenient functionality – particularly around batching and loading – make it a library worth learning and using.</p>
-<p>In this post, I’ll demonstrate how torchtext can be used to build and train a text classifier from scratch.To make this tutorial realistic, I’m going to use a small sample of data from <a href="https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge" target="_blank" rel="noopener">this Kaggle competition</a>. The data and code are available in <a href="https://github.com/keitakurita/practical-torchtext" target="_blank" rel="noopener">GitHub repo</a>, so feel free to clone it and follow along. Or, if you just want to see the minimal working example, feel free to skip the rest of this tutorial and just read the <a href="https://github.com/keitakurita/practical-torchtext/blob/master/Lesson%201:%20intro%20to%20torchtext%20with%20text%20classification.ipynb" target="_blank" rel="noopener">notebook</a>.</p>
-<h1 id="The-Overview-1"><a href="#The-Overview-1" class="headerlink" title="The Overview"></a>The Overview</h1><p>Torchtext follows the following basic formula for transforming data into working input for your neural network:</p>
+<h1 id="The-Overview"><a href="#The-Overview" class="headerlink" title="The Overview"></a>The Overview</h1><p>Torchtext follows the following basic formula for transforming data into working input for your neural network:</p>
 <p><img src="/2019/07/16/NLP-TorchText/スクリーンショット-2018-02-07-10.32.59.png" alt="クリーンショット-2018-02-07-10.32.5"></p>
 <p>Torchtext takes in <strong>raw data</strong> in the form of text files, csv/tsv files, json files, and directories (as of now) and <strong>converts them to Datasets</strong>. Datasets are simply preprocessed blocks of data read into memory with various fields.</p>
 <p>Torchtext then passes the <strong>Dataset to an Iterator</strong>. Iterators handle <strong>numericalizing, batching, packaging, and moving the data to the GPU</strong>. Basically, it does all the heavy lifting necessary to pass the data to a neural network.</p>
@@ -1015,7 +1004,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Overview"><span class="nav-number">1.</span> <span class="nav-text">The Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Overview-1"><span class="nav-number">2.</span> <span class="nav-text">The Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Declaring-the-Fields"><span class="nav-number">3.</span> <span class="nav-text">Declaring the Fields</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Constructing-the-Dataset"><span class="nav-number">4.</span> <span class="nav-text">Constructing the Dataset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Constructing-the-Iterator"><span class="nav-number">5.</span> <span class="nav-text">Constructing the Iterator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Wrapping-the-Iterator"><span class="nav-number">6.</span> <span class="nav-text">Wrapping the Iterator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Training-the-Model"><span class="nav-number">7.</span> <span class="nav-text">Training the Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">8.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Overview"><span class="nav-number">1.</span> <span class="nav-text">The Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Declaring-the-Fields"><span class="nav-number">2.</span> <span class="nav-text">Declaring the Fields</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Constructing-the-Dataset"><span class="nav-number">3.</span> <span class="nav-text">Constructing the Dataset</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Constructing-the-Iterator"><span class="nav-number">4.</span> <span class="nav-text">Constructing the Iterator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Wrapping-the-Iterator"><span class="nav-number">5.</span> <span class="nav-text">Wrapping the Iterator</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Training-the-Model"><span class="nav-number">6.</span> <span class="nav-text">Training the Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
