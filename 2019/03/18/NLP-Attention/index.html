@@ -87,6 +87,8 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="Attention in DP and NLP.">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/0_hJfCjjx0r0slacNm.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/0_HNv9BMtUF85ticoe.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.06.49%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.11.21%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.12.00%20PM.png">
@@ -95,11 +97,11 @@
 <meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.23.04%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.37.29%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.51.16%20PM.png">
-<meta property="og:updated_time" content="2019-08-06T02:32:55.856Z">
+<meta property="og:updated_time" content="2019-12-17T00:11:08.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Attention">
 <meta name="twitter:description" content="Attention in DP and NLP.">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/18/NLP-Attention/Screen%20Shot%202019-08-02%20at%205.06.49%20PM.png">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/18/NLP-Attention/0_hJfCjjx0r0slacNm.png">
 
 
 
@@ -387,6 +389,30 @@
       
         <p>Attention in DP and NLP.</p>
 <a id="more"></a>
+<h1 id="Attention-in-Seq2seq"><a href="#Attention-in-Seq2seq" class="headerlink" title="Attention in Seq2seq"></a>Attention in Seq2seq</h1><p>Remember that our seq2seq model is made of two parts, an encoder that encodes the input sentence, and a decoder that leverages the information extracted by the decoder to produce the translated sentence. Basically, our input is a sequence of words $x_1, …, x_n$ that we want to translate, and our target sentecne is a sequence of words $y_1,…,y_m$.</p>
+<ol>
+<li><p>Encoder</p>
+<p>Let $(h_1,…,h_n)$ be the hidden vectors representing the input sentence. These vectors are the output of a bi-LSTM for instance, and capture contextual representation of each word in the sentence.</p>
+</li>
+<li><p>Decoder</p>
+<p>We want to computer the hidden states $s_i$ of the decoder using a recursive formula of the form</p>
+<script type="math/tex; mode=display">
+s_i=f(s_{i-1},y_{y-1},c_i)</script><p>where $s_{i-1}$ is the previous hidden vector, $y_{i-1}$ is the generated word at the previous step, and $c_i$ is a context vector that capture the context from the original sentence that is relevant to the time step $i$ of the decoder.</p>
+<p>The  contect vector $c_i$ captures relevant information for the $i$-th decoding time step. For each hidden vector from the original sentence $h_j$, compute a score</p>
+<script type="math/tex; mode=display">
+e_{i,j}=a(s_{i-1},h_j)</script><p>where a is any function with values in $R$, for instance a single layer fully-connceted neural network. Then, we end up with a scalar vaules $e_{i,1},…,e_{i,n}$. Normalize these scores into a vector $\alpha_i=(\alpha_{i,1},…,\alpha_{i,n})$, using a softmax layer.</p>
+<script type="math/tex; mode=display">
+\alpha_{i, j}=\frac{\exp \left(e_{i, j}\right)}{\sum_{k=1}^{n} \exp \left(e_{i, k}\right)}</script><p>Then, compute the context vector $c_i$ as the weighted average of the hidden vectors from the original sentence</p>
+<script type="math/tex; mode=display">
+c_{i}=\sum_{j=1}^{n} \alpha_{i, j} h_{j}</script><p>Intuitively, this vector captures the relevant contextual information from the original sentence for the $i$-th step of the decoder.</p>
+</li>
+</ol>
+<h1 id="Attention-in-General"><a href="#Attention-in-General" class="headerlink" title="Attention in General"></a>Attention in General</h1><p>In essence, I will describe Attention Parameters as a projection of a query for a series of key-value pairs as in the below image:</p>
+<p><img src="/2019/03/18/NLP-Attention/0_hJfCjjx0r0slacNm.png" alt="_hJfCjjx0r0slacN"></p>
+<p>Calculating attention comes primarily in three steps. First, we take the query and each key and compute the similarity between the two to obtain a weight. Frequently used similarity functions include dot product, splice, detector, etc. The second step is typically to use a softmax function to normalize these weights, and finally to weight these weights in conjunction with the corresponding values and obtain the final Attention.</p>
+<p>In current NLP work, the key and value are frequently the same, therefore key=value.</p>
+<p><img src="/2019/03/18/NLP-Attention/0_HNv9BMtUF85ticoe.png" alt="_HNv9BMtUF85tico"></p>
+<h1 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h1><h1 id="Attention-in-GAN"><a href="#Attention-in-GAN" class="headerlink" title="Attention in GAN"></a>Attention in GAN</h1><p><a href="https://medium.com/towards-artificial-intelligence/techniques-in-self-attention-generative-adversarial-networks-22f735b22dfb" target="_blank" rel="noopener">REF1</a> <a href="https://medium.com/@jonathan_hui/gan-self-attention-generative-adversarial-networks-sagan-923fccde790c" target="_blank" rel="noopener">REF2</a> <a href="https://towardsdatascience.com/not-just-another-gan-paper-sagan-96e649f01a6b" target="_blank" rel="noopener">great explanation</a> </p>
 <h1 id="Language-Model"><a href="#Language-Model" class="headerlink" title="Language Model"></a>Language Model</h1><p>Language modeling is the task of predicting what word comes next. More formally, given a sequence of words $x^{(1)}, x^{(2)},…,x^{(t)}, $ compute the probability distribution of the next word $x^{(t+1)}$:</p>
 <script type="math/tex; mode=display">
 P\left(\boldsymbol{x}^{(t+1)} | \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(1)}\right)</script><p>where $x^{t+1}$ can be any word in the vocabulary $V={w_1,…,w_{|V|}}$. A system that does this is called a <strong>Language Model</strong>.</p>
@@ -446,9 +472,13 @@ P\left(\boldsymbol{x}^{(t+1)} | \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(1
 <blockquote>
 <p>Normalizing by the length is to avoid the pitfall that bigger corpus have smaller perplexity.</p>
 </blockquote>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><h2 id="Random-Reading"><a href="#Random-Reading" class="headerlink" title="Random Reading"></a>Random Reading</h2><ol>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/53682800" target="_blank" rel="noopener">nlp中的Attention注意力机制+Transformer详解</a> </li>
 <li><a href="https://zhuanlan.zhihu.com/p/37601161" target="_blank" rel="noopener">great intriduction</a></li>
+<li><a href="https://dzone.com/articles/self-attention-mechanisms-in-natural-language-proc" target="_blank" rel="noopener">good attention introduction</a> </li>
+<li><a href="https://github.com/johnsmithm/multi-heads-attention-image-classification" target="_blank" rel="noopener">multi-heads-attention-image-classification</a> </li>
+<li><a href="http://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">great explanation on self-attention</a> </li>
+<li><a href="https://mlexplained.com/2017/12/29/attention-is-all-you-need-explained/" target="_blank" rel="noopener">self-attention in Pytorch code</a> <a href="https://nlp.seas.harvard.edu/2018/04/03/attention.html" target="_blank" rel="noopener">code2</a> </li>
 </ol>
 
       
@@ -626,7 +656,7 @@ P\left(\boldsymbol{x}^{(t+1)} | \boldsymbol{x}^{(t)}, \ldots, \boldsymbol{x}^{(1
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Language-Model"><span class="nav-number">1.</span> <span class="nav-text">Language Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#N-gram-Language-Models"><span class="nav-number">1.1.</span> <span class="nav-text">N-gram Language Models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Language-Model"><span class="nav-number">1.2.</span> <span class="nav-text">Neural Language Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-fixed-window-neural-Language-Model"><span class="nav-number">1.2.1.</span> <span class="nav-text">A fixed-window neural Language Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN"><span class="nav-number">1.2.2.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-RNN"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Training a RNN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluating-Language-Models"><span class="nav-number">1.3.</span> <span class="nav-text">Evaluating Language Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">2.</span> <span class="nav-text">References</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Random-Reading"><span class="nav-number">2.1.</span> <span class="nav-text">Random Reading</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Attention-in-Seq2seq"><span class="nav-number">1.</span> <span class="nav-text">Attention in Seq2seq</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Attention-in-General"><span class="nav-number">2.</span> <span class="nav-text">Attention in General</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Self-Attention"><span class="nav-number">3.</span> <span class="nav-text">Self-Attention</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Attention-in-GAN"><span class="nav-number">4.</span> <span class="nav-text">Attention in GAN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Language-Model"><span class="nav-number">5.</span> <span class="nav-text">Language Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#N-gram-Language-Models"><span class="nav-number">5.1.</span> <span class="nav-text">N-gram Language Models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Neural-Language-Model"><span class="nav-number">5.2.</span> <span class="nav-text">Neural Language Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-fixed-window-neural-Language-Model"><span class="nav-number">5.2.1.</span> <span class="nav-text">A fixed-window neural Language Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNN"><span class="nav-number">5.2.2.</span> <span class="nav-text">RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-a-RNN"><span class="nav-number">5.2.2.1.</span> <span class="nav-text">Training a RNN</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluating-Language-Models"><span class="nav-number">5.3.</span> <span class="nav-text">Evaluating Language Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
