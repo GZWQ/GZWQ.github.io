@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="Blog of Qing">
 <meta property="og:description" content="This is my study notes for MIT Linear Algebra.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-12-11T17:26:21.983Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-16%20at%206.53.24%20PM.png">
+<meta property="og:updated_time" content="2019-12-17T16:29:18.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-Linear Algebra">
 <meta name="twitter:description" content="This is my study notes for MIT Linear Algebra.">
+<meta name="twitter:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-16%20at%206.53.24%20PM.png">
 
 
 
@@ -376,9 +378,30 @@
       
 
       
-        <p>This is my study notes for <a href="https://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-spring-2010/" target="_blank" rel="noopener">MIT Linear Algebra</a>.</p>
+        <p>This is my study notes for <a href="https://ocw.mit.edu/courses/mathematics/18-06sc-linear-algebra-fall-2011/resource-index/" target="_blank" rel="noopener">MIT Linear Algebra</a>.</p>
 <a id="more"></a>
-
+<h1 id="The-geometry-of-linear-equations"><a href="#The-geometry-of-linear-equations" class="headerlink" title="The geometry of linear equations"></a>The geometry of linear equations</h1><p>The fundamental problem of linear algebra is to solve $n$ linear equations in $n$ unknowns, for example</p>
+<script type="math/tex; mode=display">
+\begin{aligned} 2 x-y &=0 \\-x+2 y &=3 \end{aligned}</script><p>Here, we are going to view this problem in three ways.</p>
+<h2 id="Row-Picture"><a href="#Row-Picture" class="headerlink" title="Row Picture"></a>Row Picture</h2><p>Plot the points that satisfy each equation. The intersection of the plots (if they do intersect) represents the solution to the system of equations. Looking at the following figure we see that the solution to this system of equations is $x=1,y=2$</p>
+<p><img src="/2019/12/11/Math-Linear-Algebra/Screen Shot 2019-12-16 at 6.53.24 PM.png" alt="creen Shot 2019-12-16 at 6.53.24 P"></p>
+<h2 id="Column-Picture"><a href="#Column-Picture" class="headerlink" title="Column Picture"></a>Column Picture</h2><p>In the column picture we rewrite the system of linear equations as a single<br>equation by turning the coefficients in the columns of the system into vectors:</p>
+<script type="math/tex; mode=display">
+x\left[\begin{array}{r}{2} \\ {-1}\end{array}\right]+y\left[\begin{array}{r}{-1} \\ {2}\end{array}\right]=\left[\begin{array}{l}{0} \\ {3}\end{array}\right]</script><p>Given two vectors $c$ and $d$ and scalars $x$ and $y$, then sum $xc+yd$ is called a linear combination of $c$ and $d$. </p>
+<h2 id="Matrix-Picture"><a href="#Matrix-Picture" class="headerlink" title="Matrix Picture"></a>Matrix Picture</h2><p>We can write the system of equations as a single equation by using matrices and vectors:</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{rr}{2} & {-1} \\ {-1} & {2}\end{array}\right]\left[\begin{array}{l}{x} \\ {y}\end{array}\right]=\left[\begin{array}{l}{0} \\ {3}\end{array}\right]</script><p>The matrix $A=\left[\begin{array}{rr}{2} &amp; {-1} \\ {-1} &amp; {2}\end{array}\right]$ is called the coefficient matrix. The vector $x=\left[\begin{array}{l}{x} \\ {y}\end{array}\right]$ is the vector of unknowns. The values on the right hand side of the equations form the vector $b$</p>
+<script type="math/tex; mode=display">
+Ax=b</script><p><strong>Matrix Multiplication</strong></p>
+<p>One method to multiply a matrix $A$ by a vector $x$ is to think of $x$ as the coefficients of a linear combination of the column vectors of the matrix</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}{2} & {5} \\ {1} & {3}\end{array}\right]\left[\begin{array}{l}{1} \\ {2}\end{array}\right]=1\left[\begin{array}{l}{2} \\ {1}\end{array}\right]+2\left[\begin{array}{l}{5} \\ {3}\end{array}\right]=\left[\begin{array}{c}{12} \\ {7}\end{array}\right]</script><p>or if</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}1&2\end{bmatrix}\left[\begin{array}{ll}{2} & {5} \\ {1} & {3}\end{array}\right]=1\begin{bmatrix}2&5\end{bmatrix}+2\begin{bmatrix}1&3\end{bmatrix}</script><h2 id="Linear-Independence"><a href="#Linear-Independence" class="headerlink" title="Linear Independence"></a>Linear Independence</h2><p>Given a matrix $A$, can we solve</p>
+<script type="math/tex; mode=display">
+Ax=b</script><p>for every possible vector $b$? In other words, do the linear combinations of the column vectors fill the $xy$-plane (or space, in the three dimensional case)?</p>
+<p>If the answer is “no”, we say that A is a singular matrix. In this singular<br>case its column vectors are linearly dependent; all linear combinations of those vectors lie on a point or line (in two dimensions) or on a point, line or plane (in three dimensions). The combinations don’t fill the whole space. </p>
+<h1 id="Elimination-with-Matrices"><a href="#Elimination-with-Matrices" class="headerlink" title="Elimination with Matrices"></a>Elimination with Matrices</h1>
       
     </div>
     
@@ -474,8 +497,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -535,6 +567,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-geometry-of-linear-equations"><span class="nav-number">1.</span> <span class="nav-text">The geometry of linear equations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Row-Picture"><span class="nav-number">1.1.</span> <span class="nav-text">Row Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-Picture"><span class="nav-number">1.2.</span> <span class="nav-text">Column Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-Picture"><span class="nav-number">1.3.</span> <span class="nav-text">Matrix Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Independence"><span class="nav-number">1.4.</span> <span class="nav-text">Linear Independence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Elimination-with-Matrices"><span class="nav-number">2.</span> <span class="nav-text">Elimination with Matrices</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
