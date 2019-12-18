@@ -88,7 +88,8 @@
 <meta property="og:description" content="This is my study notes for MIT Linear Algebra.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-16%20at%206.53.24%20PM.png">
-<meta property="og:updated_time" content="2019-12-17T16:29:18.043Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-17%20at%206.28.03%20PM.png">
+<meta property="og:updated_time" content="2019-12-18T00:41:20.126Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-Linear Algebra">
 <meta name="twitter:description" content="This is my study notes for MIT Linear Algebra.">
@@ -401,7 +402,15 @@ Ax=b</script><p><strong>Matrix Multiplication</strong></p>
 <script type="math/tex; mode=display">
 Ax=b</script><p>for every possible vector $b$? In other words, do the linear combinations of the column vectors fill the $xy$-plane (or space, in the three dimensional case)?</p>
 <p>If the answer is “no”, we say that A is a singular matrix. In this singular<br>case its column vectors are linearly dependent; all linear combinations of those vectors lie on a point or line (in two dimensions) or on a point, line or plane (in three dimensions). The combinations don’t fill the whole space. </p>
-<h1 id="Elimination-with-Matrices"><a href="#Elimination-with-Matrices" class="headerlink" title="Elimination with Matrices"></a>Elimination with Matrices</h1>
+<h1 id="Elimination-with-Matrices"><a href="#Elimination-with-Matrices" class="headerlink" title="Elimination with Matrices"></a>Elimination with Matrices</h1><p><img src="/2019/12/11/Math-Linear-Algebra/Screen Shot 2019-12-17 at 6.28.03 PM.png" alt="creen Shot 2019-12-17 at 6.28.03 P"></p>
+<p>Let’s look at the result matrix, i.e., the third one. For the first row,  $\begin{bmatrix}1&amp;2&amp;1\end{bmatrix}$, it is computed by only using the first row of the second matrix, which means the elimination matrix, i.e., the first matrix, has $\begin{bmatrix}1&amp;0&amp;0\end{bmatrix}$ as its first row. It is the same situation with the third row. So we have elimination matrix $\begin{bmatrix}1 &amp; 0 &amp; 0\\ &amp;  &amp; \\ 0&amp;0&amp;1\end{bmatrix}$. As for the second row, we can see that in the second matrix, its first row contributes -3 and its second row contributes 1. But there is no contribution from third row. Therefore, the elimination matrix is $\begin{bmatrix}1 &amp; 0 &amp; 0\\ -3&amp;  1&amp; 0\\ 0&amp;0&amp;1\end{bmatrix}$. </p>
+<h2 id="Inverses"><a href="#Inverses" class="headerlink" title="Inverses"></a>Inverses</h2><p>If $A$ is a square matrix, the most important question you can ask about it is whether it has an inverse $A^{-1}$. If it does, then $ A^{-1}A=I=AA^{-1}$ (This is just a special form of the equation Ax = b). And we say that $A$ is invertible or nonsingular.</p>
+<p>If A is singular – i.e. A does not have an inverse – its determinant is zero and we can find some non-zero vector x for which Ax = 0. For example:</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}{1} & {3} \\ {2} & {6}\end{array}\right]\left[\begin{array}{r}{3} \\ {-1}\end{array}\right]=\left[\begin{array}{l}{0} \\ {0}\end{array}\right]</script><p>We can use the method of elimination to solve two or more linear equations at<br>the same time. Just augment the matrix with the whole identity matrix I:</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll|ll}{1} & {3} & {1} & {0} \\ {2} & {7} & {0} & {1}\end{array}\right] \rightarrow\left[\begin{array}{rr|rr}{1} & {3} & {1} & {0} \\ {0} & {1} & {-2} & {1}\end{array}\right] \rightarrow\left[\begin{array}{rr|rr}{1} & {0} & {7} & {-3} \\ {0} & {1} & {-2} & {1}\end{array}\right]</script><script type="math/tex; mode=display">
+A^{-1}=\left[\begin{array}{rr}{7} & {-3} \\ {-2} & {1}\end{array}\right]</script>
       
     </div>
     
@@ -577,7 +586,7 @@ Ax=b</script><p>for every possible vector $b$? In other words, do the linear com
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-geometry-of-linear-equations"><span class="nav-number">1.</span> <span class="nav-text">The geometry of linear equations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Row-Picture"><span class="nav-number">1.1.</span> <span class="nav-text">Row Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-Picture"><span class="nav-number">1.2.</span> <span class="nav-text">Column Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-Picture"><span class="nav-number">1.3.</span> <span class="nav-text">Matrix Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Independence"><span class="nav-number">1.4.</span> <span class="nav-text">Linear Independence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Elimination-with-Matrices"><span class="nav-number">2.</span> <span class="nav-text">Elimination with Matrices</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-geometry-of-linear-equations"><span class="nav-number">1.</span> <span class="nav-text">The geometry of linear equations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Row-Picture"><span class="nav-number">1.1.</span> <span class="nav-text">Row Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-Picture"><span class="nav-number">1.2.</span> <span class="nav-text">Column Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-Picture"><span class="nav-number">1.3.</span> <span class="nav-text">Matrix Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Independence"><span class="nav-number">1.4.</span> <span class="nav-text">Linear Independence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Elimination-with-Matrices"><span class="nav-number">2.</span> <span class="nav-text">Elimination with Matrices</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inverses"><span class="nav-number">2.1.</span> <span class="nav-text">Inverses</span></a></li></ol></li></ol></div>
             
 
           </div>
