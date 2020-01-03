@@ -89,7 +89,12 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-16%20at%206.53.24%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-17%20at%206.28.03%20PM.png">
-<meta property="og:updated_time" content="2019-12-18T00:41:20.126Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-18%20at%206.44.46%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-18%20at%206.48.06%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-19%20at%209.55.56%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-19%20at%209.56.12%20AM.png">
+<meta property="og:image" content="http://yoursite.com/2019/12/11/Math-Linear-Algebra/Screen%20Shot%202019-12-20%20at%2011.28.04%20AM.png">
+<meta property="og:updated_time" content="2019-12-23T17:12:59.797Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Math-Linear Algebra">
 <meta name="twitter:description" content="This is my study notes for MIT Linear Algebra.">
@@ -410,7 +415,139 @@ Ax=b</script><p>for every possible vector $b$? In other words, do the linear com
 \left[\begin{array}{ll}{1} & {3} \\ {2} & {6}\end{array}\right]\left[\begin{array}{r}{3} \\ {-1}\end{array}\right]=\left[\begin{array}{l}{0} \\ {0}\end{array}\right]</script><p>We can use the method of elimination to solve two or more linear equations at<br>the same time. Just augment the matrix with the whole identity matrix I:</p>
 <script type="math/tex; mode=display">
 \left[\begin{array}{ll|ll}{1} & {3} & {1} & {0} \\ {2} & {7} & {0} & {1}\end{array}\right] \rightarrow\left[\begin{array}{rr|rr}{1} & {3} & {1} & {0} \\ {0} & {1} & {-2} & {1}\end{array}\right] \rightarrow\left[\begin{array}{rr|rr}{1} & {0} & {7} & {-3} \\ {0} & {1} & {-2} & {1}\end{array}\right]</script><script type="math/tex; mode=display">
-A^{-1}=\left[\begin{array}{rr}{7} & {-3} \\ {-2} & {1}\end{array}\right]</script>
+A^{-1}=\left[\begin{array}{rr}{7} & {-3} \\ {-2} & {1}\end{array}\right]</script><blockquote>
+<p>Use GaussJordan elimination on $\begin{bmatrix}U&amp;I\end{bmatrix}$to find the upper triangular $U^{-1}$.</p>
+<script type="math/tex; mode=display">
+U U^{-1}=I\left[\begin{array}{ccc}{1} & {a} & {b} \\ {0} & {1} & {c} \\ {0} & {0} & {1}\end{array}\right]\left[\begin{array}{lll}{x_{1}} & {x_{2}} & {x_{3}} \\ {} & {} & {}\end{array}\right]=\left[\begin{array}{lll}{1} & {0} & {0} \\ {0} & {1} & {0} \\ {0} & {0} & {1}\end{array}\right]</script><p>Solution: Row reduce $\begin{bmatrix}U&amp;I\end{bmatrix}$ to get $\begin{bmatrix}I&amp;U^{-1}\end{bmatrix}$ as follows:</p>
+<script type="math/tex; mode=display">
+</script><script type="math/tex; mode=display">
+\left.\left[\begin{array}{cccccc}{1} & {a} & {b} & {1} & {0} & {0} \\ {0} & {1} & {c} & {0} & {1} & {0} \\ {0} & {0} & {1} & {0} & {0} & {1}\end{array}\right] \longrightarrow \begin{array}{l}{\left(R_{1}=R_{1}-a R_{2}\right)} \\ {R_{2}=R_{2}-c R_{2}}\end{array}\right)\left[\begin{array}{cccccc}{1} & {0} & {b-a c} & {1} & {-a} & {0} \\ {0} & {1} & {} & {0} & {0} & {1} & {-c} \\ {0} & {0} & {1} & {0} & {0} & {1}\end{array}\right]\\
+\left(R_{1}=R_{1}-(b-a c) R_{3}\right)\left[\begin{array}{ccccc}{1} & {0} & {0} & {1} & {-a} & {a c-b} \\ {0} & {1} & {0} & {0} & {1} & {-c} \\ {0} & {0} & {1} & {0} & {0} & {1}\end{array}\right]=\left[\begin{array}{cc}{I} & {L^{-1}}\end{array}\right]</script></blockquote>
+<h2 id="Permutations"><a href="#Permutations" class="headerlink" title="Permutations"></a>Permutations</h2><p>Multiplication by a permutation matrix $P$ swaps the rows of a matrix; when applying the method of elimination we use permutation matrices to move zeros out of pivot positions. Our factorization $A=LU$ then becomes $PA=LU$, where $P$ is a permutation matrix which recorders any number of rows of $A$. Recall that $P^{-1}=P^{T}$, i.e., that $P^{T}P=I$.</p>
+<h1 id="Vector-Space"><a href="#Vector-Space" class="headerlink" title="Vector Space"></a>Vector Space</h1><p>We can add vectors and multiply them by numbers, which means we can discuss linear combinations of vectors. These combinations follow the rules of a vector space.</p>
+<p><strong>Closure</strong></p>
+<p>The collection of vectors with exactly two positive real valued components is not a vector space. The sum of any two vectors in that collection is again in the collection, but multiplying any vector by, say, −5, gives a vector that’s not in the collection. We say that this collection of positive vectors is closed under addition but not under multiplication.<br>If a collection of vectors is closed under linear combinations (i.e. under addition and multiplication by any real numbers), and if multiplication and addition behave in a reasonable way, then we call that collection a vector space.</p>
+<p>A vector space must contain origin, i.e., it has zero vector. Because it should allow multiply by 0, or addition of negative and positive identity vectors.</p>
+<p><strong>A vector space is a collection of vectors which is closed under linear combinations. In other words, for any two vectors v and w in the space and any two real numbers c and d, the vector cv + dw is also in the vector space.</strong></p>
+<p>A plane $P$ containing $\begin{bmatrix}0\\0\\0\end{bmatrix}$ and a line $L$ containing $\begin{bmatrix}0\\0\\0\end{bmatrix}$ are both subspace of $R^3$. The union $P \cup L$ of these two subspaces is generally not a subspace, because the sum of a vector in $P$ and a vector in $L$ is probably not contained in $P \cup L$. The intersection $S \cap T$ of two subspaces $S$ and $T$ is a subspace. To prove this, use the fact that both $S$ and $T$ are closed under linear combinations to show that their intersection is closed under linear combinations.  </p>
+<h2 id="Subspace"><a href="#Subspace" class="headerlink" title="Subspace"></a>Subspace</h2><p>A vector space that is contained inside of another vector space is called a subspace of that space. For example, take any non-zero vector $v$ in $R^2$. Then the set of all vectors $cv$, where $c$ is a real number, forms a subspace of $R^2    $. This collection of vectors describes a line through $\begin{bmatrix}0\\0\end{bmatrix}$ in $R^2$ and is closed under addition.</p>
+<p>A line in $R^2$ that does not pass through the origin is not a subspace of $R^2$. Multiplying any vector on that line by 0 gives the zero vector, whcih does not line on the line. Every subspace must contain the zero vector because vector spaces are closed under multiplication.</p>
+<p>The subspace of $R^2$ are:</p>
+<ol>
+<li>all of $R^2$</li>
+<li>any line through $\begin{bmatrix}0\\0\end{bmatrix}$ and</li>
+<li>the zero vector alone</li>
+</ol>
+<p>The subspace of $R^3$ are:</p>
+<ol>
+<li>all of $R^3$</li>
+<li>any plane through the origin</li>
+<li>any line through the origin, and</li>
+<li>the zero vector alone</li>
+</ol>
+<blockquote>
+<p><img src="/2019/12/11/Math-Linear-Algebra/Screen Shot 2019-12-18 at 6.44.46 PM.png" alt="creen Shot 2019-12-18 at 6.44.46 P"></p>
+<p>First of all, here $M$ is a set containing all symmetric matrices. According to the definition of subspace, as long as the vectors in that set is closed, then it is a space. So, we use two symmetric matrix $A$ and $B$ and prove whether $(A+B)$ and $cA$ are symmetric.</p>
+<p><img src="/2019/12/11/Math-Linear-Algebra/Screen Shot 2019-12-18 at 6.48.06 PM.png" alt="creen Shot 2019-12-18 at 6.48.06 P"></p>
+</blockquote>
+<h2 id="Column-space"><a href="#Column-space" class="headerlink" title="Column space"></a>Column space</h2><p>Given a matrix $A$ with columns in $R^3$, these columns and all their linear combinations form a subspace of $R^3$. This is the column space $C(A)$. If $A=\begin{bmatrix}1&amp;2\\2&amp;3\\4&amp;1\end{bmatrix}$, the column space of $A$ is the plane through the origin in $R^3$ containing $A=\begin{bmatrix}1\\2\\4\end{bmatrix}$ and $A=\begin{bmatrix}2\\3\\1\end{bmatrix}$</p>
+<p>In a nutshell, the column space of a matrix $A$ is the vector space made up of all linear combinations of the columns of $A$. </p>
+<p><strong>Solving $Ax=b$</strong></p>
+<p>Given a matrix $A$, for what vectors $b$ does $Ax=b$ have a solution?</p>
+<script type="math/tex; mode=display">
+\text { Let } A=\left[\begin{array}{lll}{1} & {1} & {2} \\ {2} & {1} & {3} \\ {3} & {1} & {4} \\ {4} & {1} & {5}\end{array}\right]</script><p>Then $Ax = b$ does not have a solution for every choice of b because solving $Ax = b$ is equivalent to solving four linear equations in three unknowns. If there is a solution to $Ax = b$, then $b$ must be a linear combination of the columns of A. <strong>Only three columns cannot fill the entire four dimensional vector space</strong> – some vectors b cannot be expressed as linear combinations of columns of A. </p>
+<p>Big question: what $b$’s allow $Ax=b$ to be solved?</p>
+<p>The system of linear equations $Ax=b$ is solvable exactly when b is a vector in the column space of $A$.</p>
+<p>For our example matrix $A$, what can we say about the column space of $A$? Are the columns of $A$ independent? In other words, does each column contribute something new to the subspace? The third column of $A$ is the sum of the first two columns, so does not add anything to the subspace. The column space of our matrix $A$ is a two dimensional subspace of $R^4$.</p>
+<h2 id="Nullspace-of-Matrix"><a href="#Nullspace-of-Matrix" class="headerlink" title="Nullspace of Matrix"></a>Nullspace of Matrix</h2><p>The nullspace of a matrix $A$ is the collection of all solutions $x=\begin{bmatrix}x_1 \\x_2 \\x_3 \end{bmatrix}$ to the equation $Ax=0$. The column space of the matrix in our example was a subpace of $R^4$. The nullspace of $A$ is a subspace of $R^3$. To see that it’s a vector space, check that any sum or multiple of solutions to $Ax=0$ is a also solution: $A(x_1+x_2)=Ax_1+Ax_2=0+0$ and $A(cx)=cAx=c(0)$.</p>
+<p>In the example,</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}{1} & {1} & {2} \\ {2} & {1} & {3} \\ {3} & {1} & {4} \\ {4} & {1} & {5}\end{array}\right]\left[\begin{array}{l}{x_{1}} \\ {x_{2}} \\ {x_{3}}\end{array}\right]=\left[\begin{array}{l}{0} \\ {0} \\ {0} \\ {0}\end{array}\right]</script><p>the nullspace $N(A)$ consists of all multiples of $\begin{bmatrix}1 \\1 \-1 \end{bmatrix}$. column 1 plus column 2 minus column 3 equals the zero vector. This nullspace is a line in $R^3$.</p>
+<p><strong>Other values of b</strong></p>
+<p>The solutions to the equations:</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}{1} & {1} & {2} \\ {2} & {1} & {3} \\ {3} & {1} & {4} \\ {4} & {1} & {5}\end{array}\right]\left[\begin{array}{l}{x_{1}} \\ {x_{2}} \\ {x_{3}}\end{array}\right]=\left[\begin{array}{l}{1} \\ {2} \\ {3} \\ {4}\end{array}\right]</script><p>do not form a subspace. The zero vector is not a solution to this equation. The set of solutions forms a line in $R^3$ that passes through the points $\begin{bmatrix}1 \\0 \\0 \end{bmatrix}$ and $\begin{bmatrix}0 \-1 \\1 \end{bmatrix}$ but not $\begin{bmatrix}0 \\0 \\0 \end{bmatrix}$</p>
+<blockquote>
+<p><img src="/2019/12/11/Math-Linear-Algebra/Screen Shot 2019-12-19 at 9.55.56 AM.png" alt="creen Shot 2019-12-19 at 9.55.56 A"></p>
+<p><img src="/2019/12/11/Math-Linear-Algebra/Screen Shot 2019-12-19 at 9.56.12 AM.png" alt="creen Shot 2019-12-19 at 9.56.12 A"></p>
+</blockquote>
+<h2 id="computing-the-nullspace"><a href="#computing-the-nullspace" class="headerlink" title="computing the nullspace"></a>computing the nullspace</h2><p>Suppose </p>
+<script type="math/tex; mode=display">
+A=\left[\begin{array}{llll}{1} & {2} & {2} & {2} \\ {2} & {4} & {6} & {8} \\ {3} & {6} & {8} & {10}\end{array}\right]</script><p>Our algorithm for computing the nullspace of this matrix uses the method of elimination, despite the fact that A is not invertible. We don’t need to use an augmented matrix because the right side (the vector b) is 0 in this computation. </p>
+<p>The first step of elimination gives us: </p>
+<script type="math/tex; mode=display">
+A=\left[\begin{array}{llll}{1} & {2} & {2} & {2} \\ {2} & {4} & {6} & {8} \\ {3} & {6} & {8} & {10}\end{array}\right] \quad \longrightarrow \quad\left[\begin{array}{llll}{1} & {2} & {2} & {2} \\ {0} & {0} & {2} & {4} \\ {0} & {0} & {2} & {4}\end{array}\right]</script><p>We don’t find a pivot in the second column, so our next pivot is the 2 in the third column of the second row: </p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{llll}{1} & {2} & {2} & {2} \\ {0} & {0} & {2} & {4} \\ {0} & {0} & {2} & {4}\end{array}\right] \quad \longrightarrow \quad\left[\begin{array}{llll}{1} & {2} & {2} & {2} \\ {0} & {0} & {2} & {4} \\ {0} & {0} & {0} & {0}\end{array}\right]=U</script><p>The matrix U is in echelon (staircase) form. The third row is zero because row 3 was a linear combination of rows 1 and 2; it was eliminated. <strong>The rank of a matrix A equals the number of pivots it has</strong>. In this example, the rank of A (and of U) is 2. </p>
+<p><strong>special solutions</strong></p>
+<p>Once we’ve found U we can use back-substitution to find the solutions x to the equation Ux = 0. In our example, columns 1 and 3 are pivot columns containing pivots, and columns 2 and 4 are free columns. We can assign any value to x2 and x4; we call these free variables. Suppose x2 = 1 and x4 = 0. Then: </p>
+<script type="math/tex; mode=display">
+2x_3+4x_4=0 => x_3=0</script><p>and </p>
+<script type="math/tex; mode=display">
+x_1+2x_2+2x_3+2x_4=0  =>x_1=-2</script><p>so one solution is $x=\begin{bmatrix}-2\\1\\0\\0\end{bmatrix}$. Any multiple of this vector is in the nullspace. </p>
+<p>Letting a different free variable equal 1 and setting the other free variables equal to 0 gives us other vectors in the nullspace. For example:</p>
+<script type="math/tex; mode=display">
+x=\begin{bmatrix}2\\0\\-2\\1\end{bmatrix}</script><p><strong>The rank $r$ of A equals the number of pivot columns, so the number of free columns is $n − r$: the number of columns (variables) minus the number of pivot columns. This equals the number of special solution vectors and the dimension of the nullspace. </strong></p>
+<h2 id="Reduced-row-echelon-form"><a href="#Reduced-row-echelon-form" class="headerlink" title="Reduced row echelon form"></a>Reduced row echelon form</h2><p>By continuing to use the method of elimination we can convert U to a matrix R in reduced row echelon form (rref form), with pivots equal to 1 and zeros above and below the pivots. </p>
+<script type="math/tex; mode=display">
+U=\left[\begin{array}{llll}{1} & {2} & {2} & {2} \\ {0} & {0} & {2} & {4} \\ {0} & {0} & {0} & {0}\end{array}\right] \rightarrow\left[\begin{array}{rrrr}{1} & {2} & {0} & {-2} \\ {0} & {0} & {2} & {4} \\ {0} & {0} & {0} & {0}\end{array}\right] \rightarrow\left[\begin{array}{rrrr}{1} & {2} & {0} & {-2} \\ {0} & {0} & {1} & {2} \\ {0} & {0} & {0} & {0}\end{array}\right]=R</script><p>By exchanging some columns, R can be rewritten with a copy of the identity matrix in the upper left corner, possibly followed by some free columns on the right. If some rows of A are linearly dependent, the lower rows of the matrix R will be filled with zeros: </p>
+<script type="math/tex; mode=display">
+R=\left[\begin{array}{cc}{I} & {F} \\ {0} & {0}\end{array}\right]</script><p>(Here I is an r by r square matrix.) </p>
+<p>If N is a nullspace matrix $N=\begin{bmatrix}-F\\I\end{bmatrix}$ then $RN=0$.  (Here I is an n − r by n − r square matrix and 0 is an m by n − r matrix.) The columns of N are the special solutions.</p>
+<p>In this example, we have $-F=\begin{bmatrix}0&amp;-2\-1&amp;-2\\1&amp;0\\0&amp;1\end{bmatrix}$. So the special solutions to $Ax=0$ are:</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{r}{0} \\ {-1 } \\ {1} \\ {0}\end{array}\right] \text { and }\left[\begin{array}{r}{-2 } \\ {-2} \\ {0} \\ {1}\end{array}\right]</script><h2 id="Solving-Ax-b"><a href="#Solving-Ax-b" class="headerlink" title="Solving Ax=b"></a>Solving Ax=b</h2><h3 id="Solvability-conditions-on-b"><a href="#Solvability-conditions-on-b" class="headerlink" title="Solvability conditions on b"></a>Solvability conditions on b</h3><p>when does $Ax=b$ have solutions and how can we describe those solutions?</p>
+<p>We again use the example:</p>
+<script type="math/tex; mode=display">
+A=\left[\begin{array}{llll}{1} & {2} & {2} & {2} \\ {2} & {4} & {6} & {8} \\ {3} & {6} & {8} & {10}\end{array}\right]</script><p>The third row of A is the sum of its first and second rows, so we know that if Ax = b the third component of b equals the sum of its first and second components. If b does not satisfy b3 = b1 + b2 the system has no solution. If a combination of the rows of A gives the zero row, then the same combination of the entries of b must equal zero. </p>
+<p>One way to find out whether Ax = b is solvable is to use elimination on the augmented matrix. If a row of A is completely eliminated, so is the corresponding entry in b. In our example, row 3 of A is completely eliminated: </p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ccccc}{1} & {2} & {2} & {2} & {b_{1}} \\ {2} & {4} & {6} & {8} & {b_{2}} \\ {3} & {6} & {8} & {10} & {b_{3}}\end{array}\right] \rightarrow \cdots \rightarrow\left[\begin{array}{ccccc}{1} & {2} & {2} & {2} & {b_{1}} \\ {0} & {0} & {2} & {4} & {b_{2}-2 b_{1}} \\ {0} & {0} & {0} & {0} & {b_{3}-b_{2}-b_{1}}\end{array}\right]</script><p>If $Ax=b$ has a solution, then $b_3-b_2-b_1=0$. For example, we could choose $b=\begin{bmatrix}1\\5\\6\end{bmatrix}$. From an earlier lecture, we know that Ax = b is solvable exactly when b is in the column space C(A). We have these two conditions on b; in fact they are equivalent. </p>
+<h3 id="Complete-solution"><a href="#Complete-solution" class="headerlink" title="Complete solution"></a>Complete solution</h3><p>In order to find all solutions to Ax = b we first check that the equation is solvable, then find a particular solution. We get the complete solution of the equation by adding the particular solution to all the vectors in the nullspace. </p>
+<p><strong>A particular solution</strong></p>
+<p>One way to find a particular solution to the equation Ax = b is to set all free variables to zero, then solve for the pivot variables.</p>
+<p>For our example matrix $A$, we let $x_2=x_4=0$ to get the system of equations:</p>
+<script type="math/tex; mode=display">
+\begin{aligned} x_{1}+2 x_{3} &=1 \\ 2 x_{3} &=3 \end{aligned}</script><p>which has the solution $x_3=\frac{3}{2}, x_1=-2$. Our particular solution is:</p>
+<script type="math/tex; mode=display">
+\mathbf{x}_{p}=\left[\begin{array}{r}{-2} \\ {0} \\ {3 / 2} \\ {0}\end{array}\right]</script><p><strong>Combined with the nullspace</strong></p>
+<p>The general solution to $Ax=b$ is given by $X_{complete}=x_p+x_n$, where $x_n$ is a generic vector in the nullspace. To see this, we add $Ax_p=b$ to $Ax_n=0$ and get $A(x_p+x_n)=b$ for every vector in the nullspace.</p>
+<p>We know that the nullspace of $A$ is the collection of all combinations of the special solutions  $\begin{bmatrix}-2\\1\\0\\0\end{bmatrix}$ and $\begin{bmatrix}2\\0\-2\\1\end{bmatrix}$. So the complete solution to the equation $Ax=\begin{bmatrix}1\\5\\6\end{bmatrix}$ is:</p>
+<script type="math/tex; mode=display">
+\mathbf{x}_{\text {complete }}=\left[\begin{array}{r}{-2} \\ {0} \\ {3 / 2} \\ {0}\end{array}\right]+c_1\left[\begin{array}{r}{-2} \\ {1} \\ {0} \\ {0}\end{array}\right]+c_{2}\left[\begin{array}{r}{2} \\ {0} \\ {-2} \\ {1}\end{array}\right]</script><p>where $c_1$ and $c_2$ are real numbers.</p>
+<p>The nullspace of $A$ is a two dimensional subspace of $R^4$, and the solutions to the equation $Ax=b$ form a plane parallel to that through $x_p=\left[\begin{array}{r}{-2} \\ {0} \\ {3 / 2} \\ {0}\end{array}\right]$.</p>
+<h2 id="Rank"><a href="#Rank" class="headerlink" title="Rank"></a>Rank</h2><p>The rank of a matrix equals the number of pivots of that matrix. If $A$ is an $m$ by $n$ matrix of rank $r$, we know that $r\le m$ and $r\le n$.</p>
+<h3 id="Full-column-rank"><a href="#Full-column-rank" class="headerlink" title="Full column rank"></a>Full column rank</h3><p>If $r=n$, then the nullspace has dimension $n-r=0$ and contains only zero vector. There are no free variables or special solutions.</p>
+<p>Since there are going to have zero rows after row reduction, so the combinations of $b$ should be zero too. In this case, $Ax=b$ has a solution and it is unique. Otherwise, there is no solution. </p>
+<p>The row reduced echelon form of the matrix will look like $R=\begin{bmatrix}I\\0\end{bmatrix}$. </p>
+<h3 id="Full-row-rank"><a href="#Full-row-rank" class="headerlink" title="Full row rank"></a>Full row rank</h3><p>If $r=m$, then the reduced matrix $R=\begin{bmatrix}I&amp;F\end{bmatrix}$ has no rows of zeros and so there are no requirements for the entries of $b$ to satisfy. The equation $Ax=b$ is solvable for every $b$. There are $n-m$ free variables, so there are $n-m$ special solutions to $Ax=0$</p>
+<h3 id="Full-row-and-column-rank"><a href="#Full-row-and-column-rank" class="headerlink" title="Full row and column rank"></a>Full row and column rank</h3><p>If $r=m=n$ is the number of pivots of $A$, then $A$ is an invertible square matrix and $R$ is the identity matrix. The nullspace has dimension zero and $Ax=b$ has a unique solution for every $b$.</p>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p><img src="/2019/12/11/Math-Linear-Algebra/Screen Shot 2019-12-20 at 11.28.04 AM.png" alt="creen Shot 2019-12-20 at 11.28.04 A"></p>
+<h1 id="Linear-independence"><a href="#Linear-independence" class="headerlink" title="Linear independence"></a>Linear independence</h1><p>Suppose $A$ is $m$ by $n$ with $m &lt; n$. Then there are non-zero solutions to $Ax=0$. This is a equation with more unknowns than equations. So there will be free variables. A combination of the columns is zero, so the columns of this $A$ are dependent.</p>
+<p>We say vectors $x_1,x_2,…x_n$ are linearly indepent if $c_1x_1+c_2x_2+…+c_nx_n=0$ only when $c_1,c_2,…,c_n$ are all 0. When those vectors are the columns of $A$, the only solution to $Ax=0$ is $x=0$. </p>
+<p>Two vectors are independent if they do not lie on the same line. Three vectors are independent if they do npt lie in the same plane. Thinking of $Ax$ as a linear combination of the column vctors of $A$, we see that the column vectors of $A$ are independent exactly when the nullspace of $A$ contains only the zero vector.</p>
+<blockquote>
+<p>Say we have three vectors in the $x-y$ plane. So each vector is a $\begin{bmatrix}a\\b \end{bmatrix}$. But we have three unknowns, meaning there must be free variables according to the first paragraph.</p>
+</blockquote>
+<p>If the columns of $A$ are independent then all columns are pivot columns, the rank of $A$ is $n$, and there are no free variables. If the columns of $A$ are dependent then the rank of $A$ is less than $n$ and there are free variables.</p>
+<h2 id="Spanning-a-space"><a href="#Spanning-a-space" class="headerlink" title="Spanning a space"></a>Spanning a space</h2><p>Vectors $v_1,v_2,…,v_k$ span a space when the space consists of all combinations of those vectors. For example, the column vectors of $A$ span the column space of $A$. If vectors $v_1,v_2,…,v_k$ span a space $S$, then $S$ is the smalles space containing those vectors.</p>
+<h2 id="Basis-and-dimension"><a href="#Basis-and-dimension" class="headerlink" title="Basis and dimension"></a>Basis and dimension</h2><p>A basis for a vector space is a sequence of vectors $v_1,v_2,…,v_d$ with two properties:</p>
+<ul>
+<li>$v_1,v_2,…,v_d$ are independent</li>
+<li>$v_1,v_2,…,v_d$ span the vector space</li>
+</ul>
+<p><strong>Example $R^3$:</strong></p>
+<p>One basis for $R^3$ is $\left\{\left[\begin{array}{l}{1} \\ {0} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {1} \\ {0}\end{array}\right],\left[\begin{array}{l}{0} \\ {0} \\ {1}\end{array}\right]\right\}$.However, the vectors $\begin{bmatrix}1\\1\\2\end{bmatrix}$, $\begin{bmatrix}2\\2\\5\end{bmatrix}$ and $\begin{bmatrix}3\\3\\8\end{bmatrix}$ do not form a basis for $R^3$ because the third vector is in the space of the first two vectors. In general, for a square matrix, i.e., $n$ vectors in $R^n$, form a basis if they are the column vectors of an invertible matrix.</p>
+<p>The vectors $\begin{bmatrix}1\\1\\2\end{bmatrix}$ and $\begin{bmatrix}2\\2\\5\end{bmatrix}$ span a plane in $R^3$ but they cannot form a basis for $R^3$. However, they form a basis of column space for matrix $\begin{bmatrix}1 ,2,3\\1,2,3\\2,5,8\end{bmatrix}$.</p>
+<p>Given a space, every basis for that space has the same number of vectors; that number is the dimension of the space, So there are exactly $n$ vectors in every basis for $R^n$.</p>
+<h2 id="Bases-pf-a-column-space-and-nullspace"><a href="#Bases-pf-a-column-space-and-nullspace" class="headerlink" title="Bases pf a column space and nullspace"></a>Bases pf a column space and nullspace</h2><p>Suppose:</p>
+<script type="math/tex; mode=display">
+A=\left[\begin{array}{llll}{1} & {2} & {3} & {1} \\ {1} & {1} & {2} & {1} \\ {1} & {2} & {3} & {1}\end{array}\right]</script><p>By definition, the four column vectors of $A$ span the column space of $A$. The third and fourth column vectors are dependent on the first and second, and the first two columns are independent. Therefore, the first two column vectors are the pivot columns. They form a basis for the column space $C(A)$. The matrix has rank 2. </p>
+<script type="math/tex; mode=display">
+\text{rank}(A)=\text{number of pivot columns of }A=\text{dimension of } C(A)</script><p>The column vectors of this $A$ are not independent, so the nullspace $N(A)$ contains more than just zero vectors. Because the third column is the sum of the first two, we know that the vector $\begin{bmatrix}-1\-1\\1\\0\end{bmatrix}$ is in the nullspace. Similarly, $\begin{bmatrix}-1\\0\\0\-1\end{bmatrix}$ is also in $N(A)$. These are the two special solutions to $Ax=0$.</p>
+<script type="math/tex; mode=display">
+\text{dimension of }N(A)=\text{number of free variables}=n-r</script><p>so we know that the dimension of $N(A)$ is 4-2=2. These two special solutions form a basis for the nullspace.</p>
+
       
     </div>
     
@@ -586,7 +723,7 @@ A^{-1}=\left[\begin{array}{rr}{7} & {-3} \\ {-2} & {1}\end{array}\right]</script
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-geometry-of-linear-equations"><span class="nav-number">1.</span> <span class="nav-text">The geometry of linear equations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Row-Picture"><span class="nav-number">1.1.</span> <span class="nav-text">Row Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-Picture"><span class="nav-number">1.2.</span> <span class="nav-text">Column Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-Picture"><span class="nav-number">1.3.</span> <span class="nav-text">Matrix Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Independence"><span class="nav-number">1.4.</span> <span class="nav-text">Linear Independence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Elimination-with-Matrices"><span class="nav-number">2.</span> <span class="nav-text">Elimination with Matrices</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inverses"><span class="nav-number">2.1.</span> <span class="nav-text">Inverses</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-geometry-of-linear-equations"><span class="nav-number">1.</span> <span class="nav-text">The geometry of linear equations</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Row-Picture"><span class="nav-number">1.1.</span> <span class="nav-text">Row Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-Picture"><span class="nav-number">1.2.</span> <span class="nav-text">Column Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Matrix-Picture"><span class="nav-number">1.3.</span> <span class="nav-text">Matrix Picture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Independence"><span class="nav-number">1.4.</span> <span class="nav-text">Linear Independence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Elimination-with-Matrices"><span class="nav-number">2.</span> <span class="nav-text">Elimination with Matrices</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inverses"><span class="nav-number">2.1.</span> <span class="nav-text">Inverses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Permutations"><span class="nav-number">2.2.</span> <span class="nav-text">Permutations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vector-Space"><span class="nav-number">3.</span> <span class="nav-text">Vector Space</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Subspace"><span class="nav-number">3.1.</span> <span class="nav-text">Subspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Column-space"><span class="nav-number">3.2.</span> <span class="nav-text">Column space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nullspace-of-Matrix"><span class="nav-number">3.3.</span> <span class="nav-text">Nullspace of Matrix</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computing-the-nullspace"><span class="nav-number">3.4.</span> <span class="nav-text">computing the nullspace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduced-row-echelon-form"><span class="nav-number">3.5.</span> <span class="nav-text">Reduced row echelon form</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solving-Ax-b"><span class="nav-number">3.6.</span> <span class="nav-text">Solving Ax=b</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Solvability-conditions-on-b"><span class="nav-number">3.6.1.</span> <span class="nav-text">Solvability conditions on b</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Complete-solution"><span class="nav-number">3.6.2.</span> <span class="nav-text">Complete solution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rank"><span class="nav-number">3.7.</span> <span class="nav-text">Rank</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-column-rank"><span class="nav-number">3.7.1.</span> <span class="nav-text">Full column rank</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-row-rank"><span class="nav-number">3.7.2.</span> <span class="nav-text">Full row rank</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-row-and-column-rank"><span class="nav-number">3.7.3.</span> <span class="nav-text">Full row and column rank</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Summary"><span class="nav-number">3.7.4.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linear-independence"><span class="nav-number">4.</span> <span class="nav-text">Linear independence</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spanning-a-space"><span class="nav-number">4.1.</span> <span class="nav-text">Spanning a space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basis-and-dimension"><span class="nav-number">4.2.</span> <span class="nav-text">Basis and dimension</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bases-pf-a-column-space-and-nullspace"><span class="nav-number">4.3.</span> <span class="nav-text">Bases pf a column space and nullspace</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -606,7 +743,7 @@ A^{-1}=\left[\begin{array}{rr}{7} & {-3} \\ {-2} & {1}\end{array}\right]</script
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

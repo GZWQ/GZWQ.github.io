@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/0_Ta3qx5CQsrJloyCA.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/word2vec_weight_matrix_lookup_table.png">
 <meta property="og:image" content="http://yoursite.com/2019/05/29/NLP-Word2Vec/matrix_mult_w_one_hot.png">
-<meta property="og:updated_time" content="2019-06-12T22:03:47.343Z">
+<meta property="og:updated_time" content="2019-12-19T23:51:45.691Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NLP-Word2Vec">
 <meta name="twitter:description" content="Word embedding, i.e., vector representations of a particular word and also called word vectoring, is important in NLP. It is capable of capturing context of a word in a document, semantic and syntacti">
@@ -450,16 +450,17 @@ P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w
 \begin{aligned}
 \frac{\partial}{\partial v_c}logP(o | c)&= \frac{\partial}{\partial v_c}log \frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
 &=\frac{\partial}{\partial v_c}log{\exp \left(u_{o}^{T} v_{c}\right)}-\frac{\partial}{\partial v_c}log {\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
-&=\frac{\partial}{\partial v_c}{ \left(u_{o}^{T} v_{c}\right)} - \frac{1}{\sum_{w \in V}\exp(u_{w}^{T}v_{c})}\frac{\partial}{\partial v_c}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)} \\
-&= u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\frac{\partial}{\partial v_c}\exp \left(u_{w}^{T} v_{c}\right) \\
-&=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\exp \left(u_{w}^{T} v_{c}\right)\frac{\partial}{\partial v_c}(u_w^Tv_c)  \\
-&=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{w \in V}}\exp \left(u_{w}^{T} v_{c}\right)(u_w) \\
+&=\frac{\partial}{\partial v_c}{ \left(u_{o}^{T} v_{c}\right)} - \frac{1}{\sum_{w \in V}\exp(u_{w}^{T}v_{c})}\frac{\partial}{\partial v_c}{\sum_{x \in V} \exp \left(u_{x}^{T} v_{c}\right)} \\
+&= u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{x \in V}}\frac{\partial}{\partial v_c}\exp \left(u_{x}^{T} v_{c}\right) \\
+&=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{x \in V}}\exp \left(u_{x}^{T} v_{c}\right)\frac{\partial}{\partial v_c}(u_x^Tv_c)  \\
+&=u_o - \frac{1}{\sum_{w \in V} \exp \left(u_{w}^{T} v_{c}\right)}{\sum_{x \in V}}\exp \left(u_{x}^{T} v_{c}\right)(u_x) \\
 &=u_o-\sum_{w\in V}P(o|c)u_w
 \end{aligned}
 \end{equation}</script><p>Here $\sum_{w\in V}P(o|center)u_w$ is the expected context word by our trained model, and $u_o$ is our target context, it is like the difference between the target and prediction.</p>
 <p>We can treat $u_0$ as we choose the target row from contect matrix $U$, which is $U^T\cdot y$; as for $u_w$, we can see it as we also choose a row from context matrix, but which row? Actually, it is each row of the matrix and average them. Because $P(o|c)$ is the prediction, which is the output of our model, so we can treat it as $\hat y$. Therefor $\sum_{w\in V}P(o|c)u_w=U^T \cdot \hat y$ , so the gradient for center word vector is:</p>
 <script type="math/tex; mode=display">
-\frac{\partial}{\partial v_c}logP(o | c)= U^T \cdot (\hat y-y)</script><p>Then we need to calculate the derivative for context vector $u_w$:</p>
+\frac{\partial}{\partial v_c}logP(o | c)= U^T \cdot (\hat y-y)</script><p>where $U$ is one of the learned weights.</p>
+<p>Then we need to calculate the derivative for context vector $u_w$:</p>
 <p>if $w=o$, then:</p>
 <script type="math/tex; mode=display">
 \begin{array}{c}{\frac{\partial logP(o | c)}{\partial \boldsymbol{u}_{w}}} \\ {=-\boldsymbol{v}_{c}+\frac{1}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \frac{\partial \sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)}{\partial \boldsymbol{u}_{o}}} \\ {=-\boldsymbol{v}_{c}+\frac{1}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \frac{\partial \exp \left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)}{\partial \boldsymbol{u}_{o}}} \\ {=-\boldsymbol{v}_{c}+\frac{\exp \left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \boldsymbol{v}_{c}} \\ {=(P(O=o | C=c)-1) \boldsymbol{v}_{c}}\end{array}</script><p>if $w \ne o$, </p>
@@ -467,10 +468,11 @@ P(o | c)=\frac{\exp \left(u_{o}^{T} v_{c}\right)}{\sum_{w \in V} \exp \left(u_{w
 \begin{array}{c}{\frac{\partial logP(o | c)}{\partial \boldsymbol{u}_{w}}}\\ {=\frac{\exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)}{\sum_{w=1}^{V} \exp \left(\boldsymbol{u}_{w}^{T} \boldsymbol{v}_{c}\right)} \boldsymbol{v}_{c}} \\ {=P(O=w | C=c) \boldsymbol{v}_{c}}\end{array}</script><p>Similarly, we can combine $P(O=o | C=c)-1$ and $P(O=o | C=c)$ as $\hat y - y$,</p>
 <script type="math/tex; mode=display">
 \frac{\partial \log p(o | c)}{\partial u_{o}}=(\hat y-y) \cdot v_{c}</script><h2 id="Negative-sampling"><a href="#Negative-sampling" class="headerlink" title="Negative sampling"></a>Negative sampling</h2><p>You may have noticed that the skip-gram neural network contains a huge number of weights… For our example with 300 features and a vocab of 10,000 words, that’s 3M weights in the hidden layer and output layer each! Training this on a large dataset would be prohibitive.</p>
+<p>The main idea of negative sampling is to train binary logistic regressions for a true pair (center word and word in its context window) versus several noise pairs (the center word paired with a random word)</p>
 <p>Negative sampling addresses this by having each training sample only modify a small percentage of the weights, rather than all of them. Here’s how it works.</p>
 <p>Assume that $K$ negative samples (words) are drawn from the vocabulary. For simplicity of notation we shall refer to them as $w_1,w_2,..,w_k$ and their outside vectors as $u_1,u_2,…,u_k$. Note that $o \notin \{w_1,w_2,…,w_k\}$. For a center word $c$ and an outside word $o$, the negative sampling loss function is given by:</p>
 <script type="math/tex; mode=display">
-J_{\mathrm{neg}-\text { sample }}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)=-\log \left(\sigma\left(\boldsymbol{u}_{o}^{\top} \boldsymbol{v}_{c}\right)\right)-\sum_{k=1}^{K} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{\top} \boldsymbol{v}_{c}\right)\right)</script><p>for a sample $w_1,…,w_k$, where $\sigma(\cdot)$ is the sigmoid function.</p>
+J_{\mathrm{neg}-\text { sample }}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)=-\log \left(\sigma\left(\boldsymbol{u}_{o}^{\top} \boldsymbol{v}_{c}\right)\right)-\sum_{k=1}^{K} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{\top} \boldsymbol{v}_{c}\right)\right)</script><p>for a sample $w_1,…,w_k$, where $\sigma(\cdot)$ is the sigmoid function. The idea is to maximize probability that real outside word appears, minimize prob. that random words appear around center word.</p>
 <h3 id="Gradient-1"><a href="#Gradient-1" class="headerlink" title="Gradient"></a>Gradient</h3><p><strong>For center word vector $v_c$:</strong></p>
 <script type="math/tex; mode=display">
 \begin{array}{c}{\frac{\partial J_{\text {neg-sample}}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\right)}{\partial \boldsymbol{v}_{c}} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right)} \\ {=\frac{\partial\left(-\log \left(\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right)-\sum_{k=1}^{K} \log \left(\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right)\right)}{\partial \boldsymbol{v}_{c}}} \\ {=-\frac{\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\left(1-\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right)}{\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)} \frac{\partial \boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}}{\partial \boldsymbol{v}_{c}}-\sum_{k=1}^{K} \frac{\partial \log \left(\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right)}{\partial \boldsymbol{v}_{c}}} \\ {=-\left(1-\sigma\left(\boldsymbol{u}_{o}^{T} \boldsymbol{v}_{c}\right)\right) \boldsymbol{u}_{o}+\sum_{k=1}^{K}\left(1-\sigma\left(-\boldsymbol{u}_{k}^{T} \boldsymbol{v}_{c}\right)\right) \boldsymbol{u}_{k}}\end{array}</script><p><strong>For outside target word vector $u_o$:</strong></p>
@@ -864,7 +866,7 @@ J_{\mathrm{neg}-\text { sample }}\left(\boldsymbol{v}_{c}, o, \boldsymbol{U}\rig
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

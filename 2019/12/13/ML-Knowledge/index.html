@@ -97,7 +97,8 @@
 <meta property="og:image" content="http://yoursite.com/2019/12/13/ML-Knowledge/1_rHtqdjFXRw4sdnLU9n_WsQ.png">
 <meta property="og:image" content="http://yoursite.com/2019/12/13/ML-Knowledge/1_XUHA8X_WauSB8anrb6lllA.png">
 <meta property="og:image" content="http://yoursite.com/2019/12/13/ML-Knowledge/1_dgdJ47sNQHxZ5t1uWutflA.png">
-<meta property="og:updated_time" content="2019-12-13T17:08:09.100Z">
+<meta property="og:image" content="http://yoursite.com/2019/12/13/ML-Knowledge/latent_vars.png">
+<meta property="og:updated_time" content="2019-12-18T21:14:18.002Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ML-Knowledge">
 <meta name="twitter:description" content="All kinds of Machine learning methods.">
@@ -424,6 +425,37 @@
 <p>Least squares minimisation is another common method for estimating parameter values for a model in machine learning. It turns out that when the model is assumed to be Gaussian as in the examples above, the MLE estimates are equivalent to the least squares method. For a more in-depth mathematical derivation check out <a href="https://web.archive.org/web/20111202153913/http://www.cs.cmu.edu/~epxing/Class/10701/recitation/recitation3.pdf" target="_blank" rel="noopener">these slides</a>.</p>
 <p>Intuitively we can interpret the connection between the two methods by understanding their objectives. For least squares parameter estimation we want to find the line that minimises the total squared distance between the data points and the regression line (see the figure below). In maximum likelihood estimation we want to maximise the total probability of the data. When a Gaussian distribution is assumed, the maximum probability is found when the data points get closer to the mean value. Since the Gaussian distribution is symmetric, this is equivalent to minimising the distance between the data points and the mean value.</p>
 <p><img src="/2019/12/13/ML-Knowledge/1_dgdJ47sNQHxZ5t1uWutflA.png" alt="_dgdJ47sNQHxZ5t1uWutfl"></p>
+<h1 id="Expectation-Maximization"><a href="#Expectation-Maximization" class="headerlink" title="Expectation Maximization"></a>Expectation Maximization</h1><p><a href="http://bjlkeng.github.io/posts/the-expectation-maximization-algorithm/" target="_blank" rel="noopener">ref1</a> <a href="https://medium.com/analytics-vidhya/expectation-maximization-algorithm-step-by-step-30157192de9f" target="_blank" rel="noopener">ref2</a> </p>
+<p>Although Maximum Likelihood Estimation (MLE) and EM can both find “best-fit” parameters, <em>how</em> they find the models are very different. MLE accumulates all of the data first and then uses that data to construct the most likely model. EM takes a guess at the parameters first — accounting for the missing data — then tweaks the model to fit the guesses and the observed data. The basic steps for the algorithm are:</p>
+<ol>
+<li>An initial guess is made for the model’s parameters and a probability distribution is created. This is sometimes called the “E-Step” for the “<strong>E</strong>xpected” distribution.</li>
+<li>Newly observed data is fed into the model.</li>
+<li>The probability distribution from the E-step is tweaked to include the new data. This is sometimes called the “M-step.”</li>
+<li>Steps 2 through 4 are repeated until stability (i.e. a distribution that doesn’t change from the E-step to the M-step) is reached.</li>
+</ol>
+<p><strong>Latent Variables</strong></p>
+<p>A latent variable model is a type of statistical model that contains two types of variables: <em>observed variables</em> and <em>latent variables</em>. Observed variables are ones that we can measure or record, while latent (sometimes called <em>hidden</em>) variables are ones that we cannot directly observe but rather inferred from the observed variables. One reason why we add latent variables is to model “higher level concepts” in the data, usually these “concepts” are unobserved but easily understood by the modeller. Adding these variables can also simplify our model by reducing the number of parameters we have to estimate.</p>
+<p>Consider the problem of modelling medical symptoms such as blood pressure, heart rate and glucose levels (observed outcomes) and mediating factors such as smoking, diet and exercise (observed “inputs”). We could model all the possible relationships between the mediating factors and observed outcomes but the number of connections grows very quickly. Instead, we can model this problem as having mediating factors causing a non-observable hidden variable such as heart disease, which in turn causes our medical symptoms. This is shown in the next figure (example taken from <em>Machine Learning: A Probabilistic Perspective</em>).</p>
+<p><img src="/2019/12/13/ML-Knowledge/latent_vars.png" alt="atent_var"></p>
+<p><strong>Gaussian Mixture Models</strong></p>
+<p>As an example, suppose we’re trying to understand the prices of houses across the city. The housing price will be heavily dependent on the neighborhood, that is, houses clustered around a neighborhood will be close to the average price of the neighborhood. In this context, it is straight forward to observe the prices at which houses are sold (observed variables) but what is not so clear is how is to observe or estimate the price of a “neighborhood” (the latent variables). A simple model for modelling the neighborhood price is using a Gaussian (or normal) distribution, but which house prices should be used to estimate the average neighborhood price? Should all house prices be used in equal proportion, even those on the edge? What if a house is on the border between two neighborhoods? Can we even define clearly if a house is in one neighborhood or the other? These are all great questions that lead us to a particular type of latent variable model called a <a href="https://en.wikipedia.org/wiki/Mixture_model#Gaussian_mixture_model" target="_blank" rel="noopener">Gaussian mixture model</a>.</p>
+<p>Following along with this housing price example, let’s represent the price of each house as real-valued random variable $x_i$ and the unobserved neighborhood it belongs to as a discrete valued random variable $z_i$. Further, let’s suppose we have $K$ neighborhoods, therefore $z_i$ can be modelled as a categorical distribution with parameter $\pi=[\pi_1,…,\pi_k]$, and the price distribution of the $k^{th}$ neighborhood as a Gaussian $N(\mu_k,\sigma^{2}_{k})$. The density of $x_i$ is given by:</p>
+<script type="math/tex; mode=display">
+\begin{aligned} p\left(x_{i} | \theta\right) &=\sum_{k=1}^{K} p\left(z_{i}=k\right) p\left(x_{i} | z_{i}=k, \mu_{k}, \sigma_{k}^{2}\right) \\ x_{i} | z_{i} & \sim \mathcal{N}\left(\mu_{k}, \sigma_{k}^{2}\right) \\ z_{i} & \sim \text { Categorical }(\pi) \end{aligned}</script><p>where $\theta $ represents the parameters of the Gaussians (all the $\mu_k$, $\sigma^2_k$) and the categorical variables $\pi$. $\pi$ represents the prior mixture weights of the neighborhoods. </p>
+<p>In the Expectation Step, we assume that the values of all the parameters $(\theta=(\mu_k,\sigma^2_k,\pi))$ are fixed and are set to the ones from the previous iteration of the algorithm. We then just need to compute the responsiblity of each cluster to each point. Re-phasing this problem: Assuming you know the locations of each of the $K$ Gaussians $(\mu_k,\sigma_k)$ , and the prior mixture weights of the Gaussians $(\pi_k)$, what is the probability that a given point $x_i$ is drawn from cluster $k$?</p>
+<p>We can write this in terms of probability and use Bayes theorem to find the answer:</p>
+<script type="math/tex; mode=display">
+\begin{aligned} p\left(z_{i}=k | x_{i}, \theta\right) &=\frac{p\left(x_{i} | z_{i}=k, \theta\right) \cdot p\left(z_{i}=k\right)}{\sum_{j=1}^{K} p\left(x_{i} | z_{i}=j, \theta\right) \cdot p\left(z_{i}=j\right)} \\ &=\frac{\mathcal{N}\left(x_{i} | \mu_{k}, \sigma_{k}\right) \cdot \pi_{k}}{\sum_{j=1}^{K} \mathcal{N}\left(x_{i} | \mu_{j}, \sigma_{j}\right) \cdot \pi_{j}} \end{aligned}</script><p>The Maximization Step turns things around and assumes the responsibilities (proxies for the latent variables) are fixed, and now the problem is we want to maximize our (expected complete data log) likelihood function across all the $(\theta=(\mu_k,\sigma^2_k,\pi))$ variables. </p>
+<p>First up, the distribution of the prior mixture weights $\pi$. Assuming you know all the values of the latent variables; then intuitively, we just need to sum up the contribution to each cluster and normalize:</p>
+<script type="math/tex; mode=display">
+\begin{equation*}
+\pi_k = \frac{1}{N} \sum_i r_{ik} \tag{3}
+\end{equation*}</script><p>Next, we need to estimate the Gaussians. Again, since we know the responsibilities of each point to each cluster, we can just use our standard methods for estimating the mean and standard deviation of Gaussians but weighted according to the responsibilities:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\mu_k &= \frac{\sum_i r_{ik}x_i}{\sum_i r_{ik}} \\
+\sigma_k &= \frac{\sum_i r_{ik}(x_i - \mu_k)(x_i - \mu_k)}{\sum_i r_{ik}} \tag{4}
+\end{align*}</script><h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p><a href="https://liam.page/2018/11/08/Expectation-Maximization-Algorithm/" target="_blank" rel="noopener">link</a> </p>
 
       
     </div>
@@ -596,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Maximum-Likelihood-Estimation"><span class="nav-number">1.</span> <span class="nav-text">Maximum Likelihood Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intuitive-explanation"><span class="nav-number">1.1.</span> <span class="nav-text">Intuitive explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Calculating-the-Maximum-Likelihood-Estimates"><span class="nav-number">1.2.</span> <span class="nav-text">Calculating the Maximum Likelihood Estimates</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-log-likelihood"><span class="nav-number">1.2.1.</span> <span class="nav-text">The log likelihood</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">1.3.</span> <span class="nav-text">Conclusion</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Maximum-Likelihood-Estimation"><span class="nav-number">1.</span> <span class="nav-text">Maximum Likelihood Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intuitive-explanation"><span class="nav-number">1.1.</span> <span class="nav-text">Intuitive explanation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Calculating-the-Maximum-Likelihood-Estimates"><span class="nav-number">1.2.</span> <span class="nav-text">Calculating the Maximum Likelihood Estimates</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-log-likelihood"><span class="nav-number">1.2.1.</span> <span class="nav-text">The log likelihood</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">1.3.</span> <span class="nav-text">Conclusion</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Expectation-Maximization"><span class="nav-number">2.</span> <span class="nav-text">Expectation Maximization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Example"><span class="nav-number">2.1.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -616,7 +648,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
