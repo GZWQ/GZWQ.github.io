@@ -138,7 +138,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/Screen%20Shot%202018-11-16%20at%202.33.45%20PM.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/residualnet_34.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/03/Training-Techiniques/2228224-1a6202911b46d1dc.png">
-<meta property="og:updated_time" content="2019-06-24T16:02:12.498Z">
+<meta property="og:updated_time" content="2020-01-10T00:13:53.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Training Techiniques">
 <meta name="twitter:description" content="Techniques for training a Deep Learning model.">
@@ -932,6 +932,11 @@ f(x)=max(0,x)</script><p><img src="/2018/08/03/Training-Techiniques/201710282353
 v_t = \gamma v_{t-1}+\eta \Delta_{\theta}J(\theta)\\
 \theta=\theta-v_t</script><p>The momentum term $\gamma$ tends to be 0.9/0.99.</p>
 <p>Essentially, when using momentum, we push a ball down a hill. The ball accumulates momentum as it rolls downhill, becoming faster and faster on the way (until it reaches its terminal velocity if there is air resistance, i.e. $\gamma &lt;1$). The same thing happens to our parameter updates: <strong>The momentum term increases for dimensions whose gradients point in the same directions and reduces updates for dimensions whose gradients change directions.</strong> As a result, we gain faster convergence and reduced oscillation.</p>
+<blockquote>
+<p>By considering the previous gradient when computing the current gradient, there are two functions.</p>
+<p>First of all, if the previous gradient and current gradient share the same direction, it will result in big steps to update the parameters.</p>
+<p>Secondly, if the two gradients don’t share the same direction, we can prevent the updating step from overshooting. In other words, such low variance can help optimiization reduce the vibration on the vetical direction while moving toward to the convergence point.</p>
+</blockquote>
 <h2 id="Nesterov"><a href="#Nesterov" class="headerlink" title="Nesterov"></a>Nesterov</h2><p>However, a ball that rolls down a hill, blindly following the slope, is highly unsatisfactory. We’d like to have a smarter ball, a ball that has a notion of where it is going so that it knows to slow down before the hill slopes up again.</p>
 <p>Nesterov accelerated gradient (NAG) is a way to give our momentum term this kind of prescience. We know that we will use our momentum term $ \gamma v_{t-1}$ to move the parameters $\theta$. <strong>Computing $\theta- \gamma v_{t-1}$ thus gives us an approximation of the next position of the parameters</strong> (the gradient is missing for the full update), a rough idea where our parameters are going to be. We can now effectively look ahead by calculating the gradient not w.r.t. to our current parameters $\theta$ but w.r.t. the approximate future position of our parameters:</p>
 <script type="math/tex; mode=display">
@@ -1036,6 +1041,10 @@ E\left[g^{2}\right]_{t}=\gamma E\left[g^{2}\right]_{t-1}+(1-\gamma) g_{t}^{2} \\
 <script type="math/tex; mode=display">
 \theta_{t+1}=\theta_{t}-\frac{\eta}{\sqrt{\hat{v}_{t}}+\epsilon} \hat{m}_{t}</script><p>The authors propose default values of 0.9 for $\beta_1$, 0.999 for $\beta_2$ and $10^{-8}$ for $\epsilon$. </p>
 <p>It is worth noting that the next new <code>m</code> should be <code>mt</code> instead of $\hat m_t$.  </p>
+<blockquote>
+<p>Since Adam divide the update by $\sqrt v$, the smallest average gradients will get the larger updates. We can view the coeeficient $\frac{\eta}{\sqrt{\hat{v}_{t}}+\epsilon}$ of $\hat m_t$ as controlling, where for all gradients they share the same learning rate $ \eta $ but greater gradients have smaller $\frac{\eta}{\sqrt{\hat{v}_{t}}+\epsilon}$, which means compared to parameters with smaller gradient, the parameters with bigger gradients have samll updates.</p>
+<p>The parameters with small gradients are in the plateau area of the cost function, and thus the moving process is slow and the training process will be slow. If we could make those parameters in plateau area get larger updates, it will help them move out of plateau quickly.</p>
+</blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
@@ -1151,6 +1160,7 @@ E\left[g^{2}\right]_{t}=\gamma E\left[g^{2}\right]_{t-1}+(1-\gamma) g_{t}^{2} \\
 <p>It’s easy to remember things when the network has a lot of parameters (overfit), but it’s hard to remember things when effectively the network only has so many parameters to work with. Hence, the network must learn to generalize more to get the same performance as remembering things. So, that’s why Dropout will increase the test time performance: it improves generalization and reduce the risk of overfitting. <a href="https://wiseodd.github.io/techblog/2016/06/25/dropout/" target="_blank" rel="noopener">ref</a> </p>
 <p><img src="/2018/08/03/Training-Techiniques/Screen Shot 2019-06-18 at 5.12.22 PM.png" alt="creen Shot 2019-06-18 at 5.12.22 P"></p>
 <p>Therefore, at test time we multiply by dropout probability; Or, at training time, we divide by dropout probability.</p>
+<p>The reason why we don’t apply dropout during testing is that it will make the prediction random and the evaluation will not be accurate.</p>
 <h2 id="Numpy-Implementation"><a href="#Numpy-Implementation" class="headerlink" title="Numpy Implementation"></a>Numpy Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
 <div class="line">2</div>
 <div class="line">3</div>
