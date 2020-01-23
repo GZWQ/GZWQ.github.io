@@ -88,7 +88,9 @@
 <meta property="og:description" content="Instructions of various sofware installation.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/07/04/Software-Installation/Screen%20Shot%202019-04-06%20at%2012.00.31%20PM.png">
-<meta property="og:updated_time" content="2019-05-17T22:53:58.802Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/Software-Installation/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Software-Installation/Screen%20Shot%202020-01-22%20at%205.56.01%20PM.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/04/Software-Installation/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Software-Installation/Screen%20Shot%202020-01-22%20at%206.01.51%20PM.png">
+<meta property="og:updated_time" content="2020-01-23T00:02:00.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Software Installation">
 <meta name="twitter:description" content="Instructions of various sofware installation.">
@@ -477,9 +479,40 @@
 </pre></td><td class="code"><pre><div class="line">import os</div>
 <div class="line">os.chdir("drive/Colab Notebooks")</div>
 </pre></td></tr></table></figure>
-<p>​</p>
 </li>
 </ol>
+<h1 id="Jupyter-Notebook"><a href="#Jupyter-Notebook" class="headerlink" title="Jupyter Notebook"></a>Jupyter Notebook</h1><h2 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h2><p>The useful link <a href="https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/" target="_blank" rel="noopener">1</a> </p>
+<p>Usually a remote server is equipped with GPUs. What we want is to run a notebook from server, but have the graphical interface show up in our local machine’s web browser. The libraries, hardware, and all backend-related stuff depends on your remote machine, but the GUI is seen from your laptop.</p>
+<p><strong>Set-up:</strong> Here, let’s define the local user and host as <code>localuser</code> and <code>localhost</code> respectively. Similarly, let’s define the remote user and remote host as <code>remoteuser</code> and <code>remotehost</code>. Needless to say, make sure that <a href="http://jupyter.readthedocs.io/en/latest/install.html" target="_blank" rel="noopener">Jupyter notebook and all its dependencies</a> are installed in both machines. Here’s a quick diagram of the whole process, I will discuss them one-by-one in the next section:</p>
+<p><img src="/2018/07/04/Software-Installation/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Software-Installation/Screen Shot 2020-01-22 at 5.56.01 PM.png" alt="creen Shot 2020-01-22 at 5.56.01 P"></p>
+<ol>
+<li><p>Run Jupyter Notebook from remote machine</p>
+<p>Log-in to remote machine the usual way we do. Once the console shows, type the following:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">remoteuser@remotehost: jupyter notebook --no-browser --port=XXXX</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>Change XXXX to the port you want. Usually the default is 8888. You can try 8889 or 8890 as well.</p>
+</blockquote>
+</li>
+<li><p>Forward port XXXX to YYYY and listen to it</p>
+<p>In your remote, the notebook is now running at the port <code>XXXX</code> that you specified. What you’ll do next is forward this to port <code>YYYY</code> <em>of your machine</em> so that you can listen and run it from your browser. To achieve this, we write the following command:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">ssh -N -f -L localhost:YYYY:localhost:XXXX remoteuser@remotehost</div>
+</pre></td></tr></table></figure>
+<blockquote>
+<p>ssh -N -f -L localhost:8890:localhost:8888 qwang35@mars.ece.lsu.edu</p>
+</blockquote>
+</li>
+<li><p>Fire up Jupyter Notebook</p>
+<p>To open up the Jupyter notebook from your remote machine, simply start your browser and type the following in your address bar:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div>
+</pre></td><td class="code"><pre><div class="line">localhost:YYYY</div>
+</pre></td></tr></table></figure>
+</li>
+</ol>
+<p>In your first connection, you may be prompted to enter an Access Token as typical to most Jupyter notebooks. Normally, I’d just copy-paste it from my terminal, but to make things easier for you, you can <a href="http://jupyter-notebook.readthedocs.io/en/stable/public_server.html#automatic-password-setup" target="_blank" rel="noopener">set-up your own notebook password</a>.</p>
+<p><img src="/2018/07/04/Software-Installation/Users/daniel/Downloads/Nutstore/Git-PersonalWeb/QingWebsite/website/source/_posts/Software-Installation/Screen Shot 2020-01-22 at 6.01.51 PM.png" alt="creen Shot 2020-01-22 at 6.01.51 P"></p>
 
       
     </div>
@@ -654,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow"><span class="nav-number">1.</span> <span class="nav-text">Tensorflow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gpu"><span class="nav-number">1.3.</span> <span class="nav-text">Gpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dlib"><span class="nav-number">1.4.</span> <span class="nav-text">Dlib</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pytorch"><span class="nav-number">2.</span> <span class="nav-text">Pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Octave"><span class="nav-number">3.</span> <span class="nav-text">Octave</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ffmpeg"><span class="nav-number">4.</span> <span class="nav-text">Ffmpeg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matlab"><span class="nav-number">5.</span> <span class="nav-text">Matlab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda"><span class="nav-number">6.</span> <span class="nav-text">Anaconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动硬盘"><span class="nav-number">7.</span> <span class="nav-text">移动硬盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sh"><span class="nav-number">8.</span> <span class="nav-text">.sh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Colab读文件"><span class="nav-number">9.</span> <span class="nav-text">Colab读文件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow"><span class="nav-number">1.</span> <span class="nav-text">Tensorflow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">1.2.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gpu"><span class="nav-number">1.3.</span> <span class="nav-text">Gpu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dlib"><span class="nav-number">1.4.</span> <span class="nav-text">Dlib</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pytorch"><span class="nav-number">2.</span> <span class="nav-text">Pytorch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-1"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Octave"><span class="nav-number">3.</span> <span class="nav-text">Octave</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ffmpeg"><span class="nav-number">4.</span> <span class="nav-text">Ffmpeg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Matlab"><span class="nav-number">5.</span> <span class="nav-text">Matlab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Anaconda"><span class="nav-number">6.</span> <span class="nav-text">Anaconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移动硬盘"><span class="nav-number">7.</span> <span class="nav-text">移动硬盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sh"><span class="nav-number">8.</span> <span class="nav-text">.sh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Colab读文件"><span class="nav-number">9.</span> <span class="nav-text">Colab读文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jupyter-Notebook"><span class="nav-number">10.</span> <span class="nav-text">Jupyter Notebook</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Server"><span class="nav-number">10.1.</span> <span class="nav-text">Server</span></a></li></ol></li></ol></div>
             
 
           </div>
