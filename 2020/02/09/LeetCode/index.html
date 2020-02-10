@@ -79,26 +79,18 @@
 
 
 
-<meta name="description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
+<meta name="description" content="Input Size V.S. Time Complexity   Dynamic Programming 5 - Longest Palindromic Substring  Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j] means whether substring">
 <meta name="keywords" content="Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Algorithm">
-<meta property="og:url" content="http://yoursite.com/2018/08/21/Algorithm/index.html">
+<meta property="og:title" content="LeetCode">
+<meta property="og:url" content="http://yoursite.com/2020/02/09/LeetCode/index.html">
 <meta property="og:site_name" content="Blog of Qing">
-<meta property="og:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
+<meta property="og:description" content="Input Size V.S. Time Complexity   Dynamic Programming 5 - Longest Palindromic Substring  Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j] means whether substring">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308144724663.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308150247263.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308150707766.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20171205193212203.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308151732132.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308152038851.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/21/Algorithm/Screen%20Shot%202018-09-04%20at%203.39.07%20PM.png">
-<meta property="og:updated_time" content="2018-09-13T14:44:46.826Z">
+<meta property="og:updated_time" content="2020-02-10T23:01:55.508Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Algorithm">
-<meta name="twitter:description" content="Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:  clear(unambiguous), doable(terminate) does what it is supp">
-<meta name="twitter:image" content="http://yoursite.com/2018/08/21/Algorithm/20170308144724663.png">
+<meta name="twitter:title" content="LeetCode">
+<meta name="twitter:description" content="Input Size V.S. Time Complexity   Dynamic Programming 5 - Longest Palindromic Substring  Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j] means whether substring">
 
 
 
@@ -128,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/21/Algorithm/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/02/09/LeetCode/"/>
 
 
 
 
 
-  <title>Algorithm | Blog of Qing</title>
+  <title>LeetCode | Blog of Qing</title>
   
 
 
@@ -295,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/Algorithm/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/09/LeetCode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qing Wong">
@@ -312,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Algorithm</h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode</h1>
         
 
         <div class="post-meta">
@@ -324,8 +316,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-21T15:19:42-05:00">
-                2018-08-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-09T15:55:46-06:00">
+                2020-02-09
               </time>
             
 
@@ -384,132 +376,60 @@
       
 
       
-        <p>Algorithm is a finite list of instrictions (to people) to accomplish something useful (that solves some problems); properties are following:</p>
-<ul>
-<li>clear(unambiguous), doable(terminate)</li>
-<li>does what it is supposed to do</li>
-<li>does not have any redundancy(several steps together caused redundacy, not caused by a single step)</li>
-</ul>
-<a id="more"></a>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><h2 id="Move-all-zeros-to-the-leftmost"><a href="#Move-all-zeros-to-the-leftmost" class="headerlink" title="Move all zeros to the leftmost"></a>Move all zeros to the leftmost</h2><p>Now we want to find an efficient algorithm to move all 0’s in a 0/1-array to the leftmost places which minimizes (say) the number of changes in the array-items.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div>
-<div class="line">2</div>
-</pre></td><td class="code"><pre><div class="line">input : [<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>]</div>
-<div class="line">output : [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]</div>
-</pre></td></tr></table></figure>
-<blockquote>
-<p>use two pointers. One points to the rightmost zero and the other one points to the leftmost one and then swap them.</p>
-</blockquote>
-<h2 id="Path-count"><a href="#Path-count" class="headerlink" title="Path count"></a>Path count</h2><p>How to count #(acyclic-paths between two nodes in a complete digraph of N nodes) - contd. </p>
-<blockquote>
-<ul>
-<li>(1$\to$ n with 1 step) : 1</li>
-<li>(1$\to$ n with 2 steps) : n-2</li>
-<li>(1$\to$ n with 3 steps) : (n-2)(n-3)</li>
-<li>….</li>
-<li>(1$\to$ n with k steps) : (n-2)(n-3)…(n-k) </li>
-<li>(1$\to$ n with (n-1) step) : (n-2)(n-3)…2*1</li>
-</ul>
-<p>$#$$  (1,n-paths) =1+(n-2)+(n-2)(n-3)+…+(n-2)(n-3)2\cdot1 \approx e\cdot (n-2)!$</p>
-</blockquote>
-<h1 id="Shortest-Paths"><a href="#Shortest-Paths" class="headerlink" title="Shortest Paths"></a>Shortest Paths</h1><p>complete acyclic digraph</p>
-<p>$#$links $=(n-1)+(n-2)+…+1= $</p>
-<p>$#$$ (1\to n\  paths)=$</p>
-<p>subpath optimality</p>
-<p>if $  x_1\to x_2\to …\to x_m$ is an optimal $x_1 \to x_m$ path, then $x_i \to x_{i+1}\to …\to x_{j-1}\to x_j$ is optimal. </p>
-<h3 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a><a href="https://blog.csdn.net/qq_35644234/article/details/60870719" target="_blank" rel="noopener">Dijkstra算法</a></h3><p>求从顶点$v_1$到其他各个顶点的最短路径</p>
-<p><img src="/2018/08/21/Algorithm/20170308144724663.png" alt="20170308144724663"></p>
-<ol>
-<li><p>设置dis数组</p>
-<p>数组中的元素值表征$v_1$到其他顶点的距离</p>
-<p>初始化顶点集为：$T=\{ v_1\}$, 路径是：$v_1$</p>
-<p><img src="/2018/08/21/Algorithm/20170308150247263.png" alt="20170308150247263"></p>
-<p>即$dis(v_1,v_1)=0$，$dis(v_1,v_2)=\infin$，$dis(v_1,v_3)=10$，$dis(v_1,v_4)=\infin$，$dis(v_1,v_5)=30$，$dis(v_1,v_6)=100$。</p>
+        <p><a href="https://www.youtube.com/watch?v=eG99FDBeuJo&amp;feature=youtu.be" target="_blank" rel="noopener"> Input Size V.S. Time Complexity </a> </p>
+<h1 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h1><ul>
+<li><p><strong>5 - Longest Palindromic Substring</strong> </p>
+<p>Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j] means whether substring[i,j] is palindromic. </p>
+<p>Secondly, iterate the string, pay attention to the iteratation direction, the update rules is:</p>
+<p>dp[i,i] = True because only one character is palindromic.</p>
+<p>dp[i,j] = True if i+1 == j, i.e., two chars are next to each other and same</p>
+<p>​              True if i+1&lt;j and dp[i+1, j_1] is true and two charaters are same</p>
 </li>
-<li><p>选择一个最短距离</p>
-<p>因为$dis(v_1,v_3)=10$是最短的，所以将$v_3$加入到顶点集中：$T=\{ v_1, v_3\}$</p>
-<p>路径是：$v_1 \to v_3$</p>
-<p>一旦有新的点加入，则我们更新dis数组，$v_3$可以到达的点有：$v_4$。</p>
-<p>$dis(v_1 \to v_3 \to v_4)=10+50=60&lt; \infin $，所以更新$dis[3]=60$</p>
-<p><img src="/2018/08/21/Algorithm/20170308150707766.png" alt="20170308150707766"></p>
+<li><p>62 - Unique Paths</p>
+<p>Collecting apples problem.</p>
 </li>
-<li><p>继续选择一个最短距离</p>
-<p>除去顶点集$\{v_1,v_3\}$中的点，在dis中选择一个距离最小的点：$v_5$，加入顶点集$\{v_1,v_3, v_5\}$。</p>
-<p>路径是：$(v_1 \to t_3\to t_5)$</p>
-<p>更新dis数组，$v_5$可以到达的点是：$v_4$和$v_6$。</p>
-<p>$dis(v_1 \to t_3\to t_5\to t_4 )=30+20=50 &lt; 60$，更新$dis(v_4)=50$</p>
-<p>$dis(v_1 \to t_3\to t_5\to t_6 )=30+60=90 &lt; 100$，更新$dis(v_5)=90$</p>
-<p><img src="/2018/08/21/Algorithm/20171205193212203.png" alt="20171205193212203"></p>
+<li><p><strong>63 - Unique Paths II</strong></p>
+<p>Same to the above problem. The only different is how to initialize the dp.</p>
 </li>
-<li><p>继续选择一个最短距离</p>
-<p>将$v_4$加入顶点集$\{v_1, v_3, v_5,v_4\}$，路径是：$(v_1 \to t_3\to t_5\to t_4)$</p>
-<p>$t_4$可以到达的点：$v_6$</p>
-<p>$dis(v_4 \to v_6)=50+10=60 &lt; 90$，更新</p>
-<p><img src="/2018/08/21/Algorithm/20170308151732132.png" alt="20170308151732132"></p>
+<li><p>64 - Minimum Path Sum</p>
+<p>Collecting apples problem.</p>
 </li>
-<li><p>选择一个最短距离</p>
-<p>将$v_6$加入顶点集$\{v_1, v_3, v_5,v_4, v_6\}$，路径是：$(v_1 \to t_3\to t_5\to t_4 \to v_6)$。</p>
-<p>$v_6$不能到达任何点。</p>
-<p><img src="/2018/08/21/Algorithm/20170308152038851.png" alt="20170308152038851"></p>
+<li><p><strong>91 - Decode Ways</strong></p>
+<p>In essence, it is same as the Q-70 but with more requirements. Create a one dimension array dp, dp[i] denoting the total ways string[0, i]. The updating rule is:</p>
+<p>if current char is not 0, then dp[i] = dp[i-1]</p>
+<p>if current char plus previous char is between 10 and 26, dp[i] += dp[i-2]</p>
+<p><strong>Be careful when the input starts with ‘0’ like “01”.</strong></p>
 </li>
-<li><p>结束</p>
-<p>因为$dis(v_2)=\infin $，则没有任何点可以到达它，所以，算法结束。</p>
+<li><p><strong>96 - Unique Binary Search Trees</strong></p>
+<p>Very tricky. dp[i] means the ways of creating bst if there are i nodes. so if there are i+1 nodes, then we pick any node and as a root, say k, and then nodes &lt; k forms left subtree whiel nodes &gt; k forms the right tree, therefore dp[i+1] = dp[k] * dp[i+1-k] for k from 1 to i+1</p>
 </li>
-</ol>
-<p><img src="/2018/08/21/Algorithm/Screen Shot 2018-09-04 at 3.39.07 PM.png" alt="Screen Shot 2018-09-04 at 3.39.07 PM"></p>
-<ul>
-<li><p>the link (x,y) is processed at most once.</p>
-<blockquote>
-<p>because x is closed at most once, (x,y) is processed when x is closed.</p>
-<p>d(y)=d(x)+c(x,y) if y is not open or closed.</p>
-<p>if d(y)&gt;[d(x)+c(c,y)], d(y)=d(x)+c(x,y)</p>
-<p>everytime d(y) is changed, parent(y)=x</p>
-</blockquote>
+<li><p>53 - Maximum Subarray</p>
+<p>One dimmension dp problem, but remember to return the max(dp) instead of dp[-1].</p>
 </li>
-<li><p>if G has N nodes, max number of links is N(N-1)=O(N^2), so processing all links takes at most O(N^2)</p>
-<p>the max number of acyclic paths from s to other nodes in G is $e(N-1)!$. </p>
-<blockquote>
-<p>When the graph is a complete digraph and because one link is processed at most once.</p>
-</blockquote>
+<li><p>70 - Climbing Stairs</p>
+<p>create a dp array, each element denotes the ways to reach if taking i steps.</p>
 </li>
-<li><p>Time complexity for dijkstra’s algoritm is $O(N^2)$.</p>
-<blockquote>
-<p>Step 1 takes $O(N)$ time for initialization.</p>
-<p>Step 2 takes $O(1)$ time</p>
-<p>Step 3 and Step 4 has two loops:each loop takes $O(N)$ time, so two steps take $O(N^2)$</p>
-<p>SO the overall time complexity is $O(N)+O(1)+O(N^2)=O(N^2)$</p>
-<p>max number of closed nodes is O(N)</p>
-<p>computation to choose $i_{th}$ node for closing:</p>
-<p>$OPEN_1=\{s\}$</p>
-<p>$|OPEN|_2\le N-1$</p>
-<p>$|OPEN|_3\le N-2$</p>
-<p>….</p>
-<p>$|OPEN|_{N-1}\le N-(N-2)=2$</p>
-<p>$|OPEN|_N\le 1$</p>
-<p>$OPEN_i=\{x_i,y_i,y_2,…,y_{N-i}\}$, because $|OPEN|_i$ is at most $N-(i-1)$, and in order to find a shortest path, we need to compare:</p>
-<p>$d(x_i)\le d(y_1)$</p>
-<p>$d(x_i)\le d(y_2)$</p>
-<p>$d(x_i)\le d(y_{N-i})$</p>
-<p>which requires at most $(N-i)$ comparisons </p>
-<p>so $OPEN_2$ requires at  most $N-2$ comparisons in selecting $x_2$</p>
-<p> $OPEN_3$ requires at  most $N-3$ comparisons in selecting $x_3$</p>
-<p>…</p>
-<p> $OPEN_{N-1}$ requires at  most $1$ comparisons in selecting $x_{N-1}$</p>
-<p>SO THE total computation is $1+2+3+…+(N-2)=\frac{N^2-3N+2}{2}$</p>
-<ul>
-<li>The initialization takes $O(N)$ time, where we make $d(x)=\infin$ for each node $x$.</li>
-<li>The sum of all links weights computation is $O(N^2)$</li>
-<li>The path of $s\to x_i$ is computed at most $i-1$, so computation of all paths is $(1+2+..+(N-1))=O(N^2)$. </li>
-<li>Th total number of paths from starting node $s$ is $O(e\cdot (N-2)!)=O((N-2)!)$, ============================================================</li>
-</ul>
-</blockquote>
+<li><p>121 - Best Time to Buy and Sell Stock</p>
+<p>create a temporary variabe cur_min = prices[0]. Iterate the prices, there are only two situations:</p>
+<p>first one: current price is greater than the cur_min, then we can compute the profit.</p>
+<p>second one: current price is lower than the cur_min, then we update the cur_min.</p>
 </li>
-<li><p>Dijkstra Algorithm is not suitable for graph with negative path cost.</p>
+<li><p>198 - House Robber</p>
+<p>create a dp array, each element denotes the <strong>maximum values</strong> you steal when you are in this index.</p>
+</li>
+<li><p>303 - Range Sum Query - Immutable</p>
+<p>Two ways: Dynamic and Statistic.</p>
+<p>Dynamic: sum(nums[i:j+1])</p>
+<p>Statistic: given the arrays, compute the accumulative sum. And then given the index i and j, return accumulative_sum[j]-accumulative_sum[i-1].</p>
+</li>
+<li><p>392 - Is Subsequence</p>
+<p>Maintain two pointer p and q, pointing to the first letter of the two strings and comparing the two letters. If same, move both pointer, otherwise, only move the pointer which points to the longer string.</p>
+</li>
+<li><p>764 - Min Cost Climbing Stairs</p>
+<p>Very similar to Q-198.</p>
 </li>
 </ul>
-<h3 id="Clustering"><a href="#Clustering" class="headerlink" title="Clustering"></a>Clustering</h3><p>We use following formula to measure how close the set of points to each other:</p>
-<script type="math/tex; mode=display">
-\sum_{i,j}||x_i-x_j||^2</script>
+
       
     </div>
     
@@ -539,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/20/Variant-GAN/" rel="next" title="Variant GAN">
-                <i class="fa fa-chevron-left"></i> Variant GAN
+              <a href="/2019/12/13/ML-Knowledge/" rel="next" title="ML-Knowledge">
+                <i class="fa fa-chevron-left"></i> ML-Knowledge
               </a>
             
           </div>
@@ -548,10 +468,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/23/Tree/" rel="prev" title="Tree">
-                Tree <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -683,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-all-zeros-to-the-leftmost"><span class="nav-number">1.1.</span> <span class="nav-text">Move all zeros to the leftmost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-count"><span class="nav-number">1.2.</span> <span class="nav-text">Path count</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Shortest-Paths"><span class="nav-number">2.</span> <span class="nav-text">Shortest Paths</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra算法"><span class="nav-number">2.0.1.</span> <span class="nav-text">Dijkstra算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clustering"><span class="nav-number">2.0.2.</span> <span class="nav-text">Clustering</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-Programming"><span class="nav-number">1.</span> <span class="nav-text">Dynamic Programming</span></a></li></ol></div>
             
 
           </div>

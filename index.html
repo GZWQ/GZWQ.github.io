@@ -283,6 +283,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/09/LeetCode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/09/LeetCode/" itemprop="url">LeetCode</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-09T15:55:46-06:00">
+                2020-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://www.youtube.com/watch?v=eG99FDBeuJo&amp;feature=youtu.be" target="_blank" rel="noopener"> Input Size V.S. Time Complexity </a> </p>
+<h1 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h1><ul>
+<li><p><strong>5 - Longest Palindromic Substring</strong> </p>
+<p>Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j] means whether substring[i,j] is palindromic. </p>
+<p>Secondly, iterate the string, pay attention to the iteratation direction, the update rules is:</p>
+<p>dp[i,i] = True because only one character is palindromic.</p>
+<p>dp[i,j] = True if i+1 == j, i.e., two chars are next to each other and same</p>
+<p>​              True if i+1&lt;j and dp[i+1, j_1] is true and two charaters are same</p>
+</li>
+<li><p>62 - Unique Paths</p>
+<p>Collecting apples problem.</p>
+</li>
+<li><p><strong>63 - Unique Paths II</strong></p>
+<p>Same to the above problem. The only different is how to initialize the dp.</p>
+</li>
+<li><p>64 - Minimum Path Sum</p>
+<p>Collecting apples problem.</p>
+</li>
+<li><p><strong>91 - Decode Ways</strong></p>
+<p>In essence, it is same as the Q-70 but with more requirements. Create a one dimension array dp, dp[i] denoting the total ways string[0, i]. The updating rule is:</p>
+<p>if current char is not 0, then dp[i] = dp[i-1]</p>
+<p>if current char plus previous char is between 10 and 26, dp[i] += dp[i-2]</p>
+<p><strong>Be careful when the input starts with ‘0’ like “01”.</strong></p>
+</li>
+<li><p><strong>96 - Unique Binary Search Trees</strong></p>
+<p>Very tricky. dp[i] means the ways of creating bst if there are i nodes. so if there are i+1 nodes, then we pick any node and as a root, say k, and then nodes &lt; k forms left subtree whiel nodes &gt; k forms the right tree, therefore dp[i+1] = dp[k] * dp[i+1-k] for k from 1 to i+1</p>
+</li>
+<li><p>53 - Maximum Subarray</p>
+<p>One dimmension dp problem, but remember to return the max(dp) instead of dp[-1].</p>
+</li>
+<li><p>70 - Climbing Stairs</p>
+<p>create a dp array, each element denotes the ways to reach if taking i steps.</p>
+</li>
+<li><p>121 - Best Time to Buy and Sell Stock</p>
+<p>create a temporary variabe cur_min = prices[0]. Iterate the prices, there are only two situations:</p>
+<p>first one: current price is greater than the cur_min, then we can compute the profit.</p>
+<p>second one: current price is lower than the cur_min, then we update the cur_min.</p>
+</li>
+<li><p>198 - House Robber</p>
+<p>create a dp array, each element denotes the <strong>maximum values</strong> you steal when you are in this index.</p>
+</li>
+<li><p>303 - Range Sum Query - Immutable</p>
+<p>Two ways: Dynamic and Statistic.</p>
+<p>Dynamic: sum(nums[i:j+1])</p>
+<p>Statistic: given the arrays, compute the accumulative sum. And then given the index i and j, return accumulative_sum[j]-accumulative_sum[i-1].</p>
+</li>
+<li><p>392 - Is Subsequence</p>
+<p>Maintain two pointer p and q, pointing to the first letter of the two strings and comparing the two letters. If same, move both pointer, otherwise, only move the pointer which points to the longer string.</p>
+</li>
+<li><p>764 - Min Cost Climbing Stairs</p>
+<p>Very similar to Q-198.</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/13/ML-Knowledge/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1656,152 +1850,6 @@
 </ol>
 
           
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/DP-PyTorch/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/22/DP-PyTorch/" itemprop="url">DP-PyTorch</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T10:35:06-05:00">
-                2019-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
-                    <span itemprop="name">Deep Learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Tutorials of PyTorch and some useful tips.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/04/22/DP-PyTorch/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
