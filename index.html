@@ -377,6 +377,9 @@
         
           
             <p><a href="https://www.youtube.com/watch?v=eG99FDBeuJo&amp;feature=youtu.be" target="_blank" rel="noopener"> Input Size V.S. Time Complexity </a> </p>
+<ol>
+<li>279 - Perfect Squares</li>
+</ol>
 <h1 id="Dynamic-Programming"><a href="#Dynamic-Programming" class="headerlink" title="Dynamic Programming"></a>Dynamic Programming</h1><ul>
 <li><p><strong>5 - Longest Palindromic Substring</strong> </p>
 <p>Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j] means whether substring[i,j] is palindromic. </p>
@@ -409,18 +412,55 @@
 <li><p>70 - Climbing Stairs</p>
 <p>create a dp array, each element denotes the ways to reach if taking i steps.</p>
 </li>
+<li><p>120 - Triangle</p>
+<p>collecting apples. Just a vertical version.</p>
+</li>
 <li><p>121 - Best Time to Buy and Sell Stock</p>
 <p>create a temporary variabe cur_min = prices[0]. Iterate the prices, there are only two situations:</p>
 <p>first one: current price is greater than the cur_min, then we can compute the profit.</p>
 <p>second one: current price is lower than the cur_min, then we update the cur_min.</p>
 </li>
+<li><p><strong>139 - Word Break</strong></p>
+<p>The input size determines the dp array. The input is a string, so the dp array is one dimension. dp[i] array means whether string[0:i+1] can be formed by wordDict. </p>
+</li>
+<li><p><strong>152 - Maximum Product Subarray</strong></p>
+<p>Very similar to Maximum Sum Subarray. But in product operation, nnegative <em> negative could result in a positive value, which makes it different from the Sum problem. Therefore, we need to create two dp arrays, one for max_ and one for min_. Each time, the dp_max[i] = max(e, dp_max[i-1] \</em> e, dp_min[i-1] * e). Same with dp_min[i].</p>
+</li>
 <li><p>198 - House Robber</p>
 <p>create a dp array, each element denotes the <strong>maximum values</strong> you steal when you are in this index.</p>
+</li>
+<li><p><strong>213 - House Robber II</strong></p>
+<p>The difference is that hourses are arranged in a circle. So we can only rob first house, or only rob las house, or don’t rob both houses. So we can use two dp arrays, one for houses without first house; the other dp array for houses without last house. Pay attention to the initial conditions: i.e., len(houses) = 0|1 </p>
+</li>
+<li><p><strong>221 - Maximal Square</strong> </p>
+<p>create a two-d dp array, dp[i , j] means the the maximum square when point(i,j) is the botton-right point. So the updating rule is when matrix(i,j) is 1, then we need to check dp(i-1,j-1) and the row i and colum j. As for the checking row and column, we can subtitute it with checking dp array. Checking row i equals dp(i,j-1) is 1. The same case with column.</p>
+</li>
+<li><p><strong>279 - Perfect Squares</strong></p>
+<p>A new type of dp problem. Like coin changes. It is hard to thnk of how to iterate the “input array”. Create the dp array, dp[i] is the least number of perfect number to form number i. Then dp[i] = min(dp[i], dp[i-perfect number]+1).</p>
+</li>
+<li><p><strong>300 - Longest Increasing Subsequence</strong></p>
+<p>kind of similar to Q-279. They have very similar way to iterate the input. Instead of just checking the previous number (i-1), we need to check all previous numbers (1,2, …, i-1).</p>
 </li>
 <li><p>303 - Range Sum Query - Immutable</p>
 <p>Two ways: Dynamic and Statistic.</p>
 <p>Dynamic: sum(nums[i:j+1])</p>
 <p>Statistic: given the arrays, compute the accumulative sum. And then given the index i and j, return accumulative_sum[j]-accumulative_sum[i-1].</p>
+</li>
+<li><p><strong>304 - Range Sum Query 2D - Immutable</strong></p>
+<p><img src="/2020/02/09/LeetCode/Screen Shot 2020-02-12 at 12.10.09 PM.png" alt="creen Shot 2020-02-12 at 12.10.09 P"></p>
+<p>When inplementing,  pay attention to two sitautions: if input is None, then just return; if matrix is [[1]] and query is [0,0,0,0], you need to expand the dp array.</p>
+</li>
+<li><p>322 - Coin Change</p>
+<p>classical problem.</p>
+</li>
+<li><p><strong>338 - Counting Bits</strong></p>
+<p>Kind of math problems. It is hard to classify it as dp problem. Actually, we can find that 2, 4, 8, .. are 10, 100, 1000,… which only conatin one ‘1’, we call it base number. Then non-base number = base + off-set. So, the number of 1 of number is = 1 (from base) + 1 from (number - base).</p>
+</li>
+<li><p><strong>343 - Integer Break</strong></p>
+<p>The updating rule is so tricky. </p>
+</li>
+<li><p><strong>368 - Largest Divisible Subset</strong></p>
+<p>The idea is straightford but the implementation needs so much attention.</p>
 </li>
 <li><p>392 - Is Subsequence</p>
 <p>Maintain two pointer p and q, pointing to the first letter of the two strings and comparing the two letters. If same, move both pointer, otherwise, only move the pointer which points to the longer string.</p>
