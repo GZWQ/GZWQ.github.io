@@ -283,6 +283,656 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/Adversarial-AutoEncoder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/08/Adversarial-AutoEncoder/" itemprop="url">Adversarial AutoEncoder</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-08T16:27:54-05:00">
+                2018-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Adversarial-Autoencoder"><a href="#Adversarial-Autoencoder" class="headerlink" title="Adversarial Autoencoder"></a>Adversarial Autoencoder</h1><p><a href="https://duvenaud.github.io/learn-discrete/slides/AdversarialAutoencoders.pdf" target="_blank" rel="noopener">ref1</a> <a href="http://closure11.com/%E5%AF%B9%E6%8A%97%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%9Aadversarial-autoencoders/" target="_blank" rel="noopener">gocha</a> <a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-2-exploring-latent-space-with-adversarial-2d53a6f8a4f9" target="_blank" rel="noopener">good one</a>  </p>
+<h2 id="无监督AAE"><a href="#无监督AAE" class="headerlink" title="无监督AAE"></a>无监督AAE</h2><p>autoencoder中的encoder的输出(潜在码)并不能在某一特定空间均匀分布，而且AE 的 G 只能保证将由 x 生成的 z 还原为 x。如果我们随机生成 1 个 z，经过 AE 的 G 后往往不会得到有效的图像。</p>
+<p>所以我们希望encoder的输出可以服从某一分布，这个分布可以是正态分布，均匀分布等，这样就会使encoder的输出均匀分布在给定的先验分布，使decoder学习到一个先验分布到输入数据的映射(本例中就是学习到MNIST手写体数据的分布)，那么此时只需从这个先验分布采样出 z，就能通过 G 得到有效的图像。</p>
+<p>假设你正在学习一门课程，如果你的老师并没有提供任何资料，你又会如何学习这门课呢？但是考试怎么办呢，难道要自己瞎答吗？这种情况就是类似我们的encoder的输出并不服从某种特定分布，这样decoder就无法学习到一个从任意数字到图片的映射。</p>
+<p>但是如果你有了一个课程指导书，你就可以在考试之前复习这本书，这样就知道了可能的考试内容。类似的，如果我们的encoder输出服从一个已知分布，那么encoder就会将潜在码覆盖整个先验分布。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen-Shot-2016-10-13-at-11.17.21-AM-690x332.png" alt="Screen-Shot-2016-10-13-at-11.17.21-AM-690x332"></p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen Shot 2018-08-08 at 9.33.36 PM.png" alt="Screen Shot 2018-08-08 at 9.33.36 PM"></p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_nnf4UUq9Uuf2l19iCYaNfg.png" alt="1_nnf4UUq9Uuf2l19iCYaNfg"></p>
+<ul>
+<li>$x$是输入</li>
+<li>$q(z|x)$是encoder基于输入$x$的输出</li>
+<li>$z$是潜在码，同时也是一个假输入，从$q(z|x)$中采样得到</li>
+<li>$z’$是采样自想要的分布，作为真实输入</li>
+<li>$p(x|z)$是基于$z$的decoder输入</li>
+<li>$x_$是重构图像</li>
+</ul>
+<p>我们的主要目的是迫使encoder的输出逼近一个先验分布（比如正态分布，gamma分布等）。我们将使用encoder$(q(z|x))$作为生成器，而判别器辨别它的输入是来自于一个先验分布$p(z)$，亦或是来自于encoder的输出$z$，decoder仍然进行图片重构的工作。</p>
+<h3 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h3><p>AAE的训练分成两个部分：重构阶段和正则化阶段。</p>
+<p>训练上述模型，分成两个阶段：一个是对辨别器的训练；另一个是对GAN模型的训练。</p>
+<p>对于分辨器，其输入就是真假latent code，输出real概率</p>
+<p>对于GAN模型，它需要配合分辨器来完成训练。encoder-decoder产生两个输出：一个是latent code，一个是image，但是我们只需要latent code作为分辨器的输入，从而完成GAN模型的训练。</p>
+<h4 id="重构阶段"><a href="#重构阶段" class="headerlink" title="重构阶段"></a>重构阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_DKPl7YOnX-8FJQuHAZop-g.png" alt="1_DKPl7YOnX-8FJQuHAZop-g"></p>
+<p>在该阶段，我们需要训练encoder和decoder来最小化重构误差（输入图片与重构图片间的均方误差）。我们将输入传递给encoder，encoder输出一个潜在码；随后，我们将该潜在码送入decoder从而得到一张重构图像。</p>
+<h4 id="正则化阶段"><a href="#正则化阶段" class="headerlink" title="正则化阶段"></a>正则化阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1__pIXKcCCqJRNmIWTRymJzA.png" alt="1__pIXKcCCqJRNmIWTRymJzA"></p>
+<p>在该阶段，我们训练生成器和辨别器，我们将encod的输出$z$和随机采样$z’$（来自于想要的分布）作为输入来训练辨别器，这样辨别器就会返回1如果输入是$z’$，而返回0如果输入是$z$。接下来，为了迫使encoder的输出$z$逼近我们想要的分布，我们将encoder的输出作为辨别器的输入，连接encoder和辨别器。</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_DoJESN2LvxpxNVYADRJXWw.png" alt="1_DoJESN2LvxpxNVYADRJXWw"></p>
+<p>我们固定辨别器的权重参数，固定输入的目标标签为1，然后我们输入一些图像到encoder，并计算辨别器的输出与目标标签间的差异（使用交叉熵损失函数），这个阶段我们只更新encoder的权重参数，这样促使encoder去学习我们想要的分布，使输出服从这个分布。</p>
+<h3 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h3><h4 id="Encoder构造"><a href="#Encoder构造" class="headerlink" title="Encoder构造"></a>Encoder构造</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_Hud7t2vLY2JIP3SXn4WTDA.png" alt="1_Hud7t2vLY2JIP3SXn4WTDA"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_encoder</span><span class="params">(self)</span>:</span></div>
+<div class="line">    input_img = Input(self.input)</div>
+<div class="line">    h = Flatten()(input_img)</div>
+<div class="line">    h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">    h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">    mean = Dense(<span class="number">2</span>)(h)</div>
+<div class="line">    logvar = Dense(<span class="number">2</span>)(h)</div>
+<div class="line">    z = Lambda(self.sampling, output_shape=(self.latent_dim,))([mean, logvar])</div>
+<div class="line">    encoder = Model(input_img,z)</div>
+<div class="line">    encoder.summary()</div>
+<div class="line">    <span class="keyword">return</span> encoder</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sampling</span><span class="params">(self, args)</span>:</span></div>
+<div class="line">    z_mean, z_log_sigma = args</div>
+<div class="line">    epsilon = K.random_normal(shape=(K.shape(z_mean)[<span class="number">0</span>], self.latent_dim), mean=<span class="number">0.</span>, stddev=<span class="number">1.0</span>)</div>
+<div class="line">    <span class="keyword">return</span> z_mean + K.exp(z_log_sigma / <span class="number">2</span>) * epsilon</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Decoder构造"><a href="#Decoder构造" class="headerlink" title="Decoder构造"></a>Decoder构造</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_0t7JrvUqyzg7AdQGDjZkRw.png" alt="1_0t7JrvUqyzg7AdQGDjZkRw"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_decoder</span><span class="params">(self)</span>:</span> <span class="comment"># ok</span></div>
+<div class="line">    input_code = Input((self.latent_dim,))</div>
+<div class="line">    h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(input_code)</div>
+<div class="line">    h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">    h = Dense(<span class="number">784</span>,activation=<span class="string">'sigmoid'</span>)(h)</div>
+<div class="line">    recon_img = Reshape(self.input)(h)</div>
+<div class="line">    decoder = Model(input_code,recon_img)</div>
+<div class="line">    decoder.summary()</div>
+<div class="line">    <span class="keyword">return</span> decoder</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="Discriminator构造"><a href="#Discriminator构造" class="headerlink" title="Discriminator构造"></a>Discriminator构造</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_Df3_l66beZqsqRe5i6lZRw.png" alt="1_Df3_l66beZqsqRe5i6lZRw"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_discriminator</span><span class="params">(self)</span>:</span> <span class="comment"># ok</span></div>
+<div class="line">    input_code = Input((self.latent_dim,))</div>
+<div class="line">    h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(input_code)</div>
+<div class="line">    h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">    valid = Dense(<span class="number">1</span>)(h)</div>
+<div class="line">    discriminator = Model(input_code,valid)</div>
+<div class="line">    discriminator.summary()</div>
+<div class="line">    <span class="keyword">return</span> discriminator</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h4 id="GAN的构造与编译"><a href="#GAN的构造与编译" class="headerlink" title="GAN的构造与编译"></a>GAN的构造与编译</h4><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+</pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">aae</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        self.input = (<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>)</div>
+<div class="line">        self.latent_dim = <span class="number">2</span></div>
+<div class="line">        optimizer = Adam(lr=<span class="number">0.0002</span>,beta_1=<span class="number">0.5</span>)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Build and compile the discriminator</span></div>
+<div class="line">        self.discriminator = self.make_discriminator()</div>
+<div class="line">        self.discriminator.compile(optimizer=optimizer,</div>
+<div class="line">                                   loss=[<span class="string">'binary_crossentropy'</span>],</div>
+<div class="line">                                   metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Build the encoder / decoder</span></div>
+<div class="line">        self.encoder = self.make_encoder()</div>
+<div class="line">        self.decoder = self.make_decoder()</div>
+<div class="line">        image = Input(self.input)</div>
+<div class="line">        latent_code = self.encoder(image)</div>
+<div class="line">        recon_img = self.decoder(latent_code)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># for the adversarial_autoencoder model, we only train the generator</span></div>
+<div class="line">        self.discriminator.trainable = <span class="keyword">False</span></div>
+<div class="line">        valid = self.discriminator(latent_code)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># The adversarial_autoencoder model  (stacked generator and discriminator)</span></div>
+<div class="line"></div>
+<div class="line">        self.adversarial_autoencoder = Model(image,[recon_img,valid])</div>
+<div class="line">        self.adversarial_autoencoder.compile(loss=[<span class="string">'mae'</span>,<span class="string">'binary_crossentropy'</span>],</div>
+<div class="line">                                             loss_weights=[<span class="number">0.999</span>,<span class="number">0.001</span>],</div>
+<div class="line">                                             optimizer=optimizer)</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+</pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self,epoches=<span class="number">1000</span>,batch_size=<span class="number">100</span>)</span>:</span></div>
+<div class="line"></div>
+<div class="line">    <span class="comment"># Load the dataset</span></div>
+<div class="line">    (X_train, _), (_, _) = mnist.load_data()</div>
+<div class="line">    <span class="comment"># Configure input</span></div>
+<div class="line">    X_train = (X_train.astype(np.float32) - <span class="number">127.5</span>) / <span class="number">127.5</span> <span class="comment"># pixel between [-1,1]</span></div>
+<div class="line">    X_train = np.expand_dims(X_train, axis=<span class="number">3</span>) <span class="comment"># change shape from (60000,28,28) to (60000,28,28,1)</span></div>
+<div class="line">    <span class="comment"># Adversarial ground truths</span></div>
+<div class="line">    valid = np.ones((batch_size, <span class="number">1</span>))</div>
+<div class="line">    fake = np.zeros((batch_size, <span class="number">1</span>))</div>
+<div class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,epoches+<span class="number">1</span>):</div>
+<div class="line">        <span class="comment"># Select a random half batch of images</span></div>
+<div class="line">        idx = np.random.randint(<span class="number">0</span>, X_train.shape[<span class="number">0</span>], batch_size)</div>
+<div class="line">        imgs = X_train[idx]</div>
+<div class="line"></div>
+<div class="line">        latent_fake = self.encoder.predict(imgs)</div>
+<div class="line">        latent_real = np.random.normal(<span class="number">0</span>, <span class="number">1</span>, (batch_size, <span class="number">2</span>))</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># train the discriminator</span></div>
+<div class="line">        d_loss_real = self.discriminator.train_on_batch(latent_real, valid)</div>
+<div class="line">        d_loss_fake = self.discriminator.train_on_batch(latent_fake, fake)</div>
+<div class="line">        d_loss = <span class="number">0.5</span> * np.add(d_loss_real, d_loss_fake)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># train the generator</span></div>
+<div class="line">        g_loss = self.adversarial_autoencoder.train_on_batch(imgs, [imgs, valid])</div>
+<div class="line">        print(<span class="string">"%d [D loss: %f, acc: %.2f%%] [G loss: %f, mse: %f]"</span> % (</div>
+<div class="line">        epoch, d_loss[<span class="number">0</span>], <span class="number">100</span> * d_loss[<span class="number">1</span>], g_loss[<span class="number">0</span>], g_loss[<span class="number">1</span>]))</div>
+</pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    model = aae()</div>
+<div class="line">    model.train()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="监督AAE"><a href="#监督AAE" class="headerlink" title="监督AAE"></a>监督AAE</h2><p><a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-3-disentanglement-of-style-and-content-89262973a4d7" target="_blank" rel="noopener">Disentanglement of style and content</a> </p>
+<p>对于一个写作主题，每一个人写出来的文章都有不同的内容（content）和字体（style）。对于MNIST字体，可以发现它的所有图像都有一样的style，所以我们想要从这个数据集中学习MNIST字体的style。为了更明确content和style的区别，我们有如下图：</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/Screen Shot 2018-08-28 at 11.39.06 AM.png" alt="Screen Shot 2018-08-28 at 11.39.06 AM"></p>
+<p>每个文本都有相同的content “Autoencoder”，但是它们的字体是不一样的，现在我们想要从图片中去区分style（Myriad Pro, MV Boil,…）和content，特征分离是表征学习(<a href="http://www.cl.uni-heidelberg.de/courses/ws14/deepl/BengioETAL12.pdf" target="_blank" rel="noopener">representation learning</a>)的一个重要内容。</p>
+<p>Autoencoder和Adversarial Autoencoder都是无监督学习，因为在训练过程中我们并没有世人任何label信息，但是如果利用图片的label信息则会帮助AAE去提取style信息而不受图片content的影响，这样我们的AAE就变成了一个监督模型。</p>
+<h3 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h3><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_vGU0REkvre1DI7sFLU97_g.png" alt="1_vGU0REkvre1DI7sFLU97_g"></p>
+<p>除了利用latent code作为decoder的输入，我们同时把标签<code>y</code>信息作为另一个输入，decoder利用这两个输入来生成图片。encoder学习图片的style，decoder利用该学习到的style和额外的内容信息<code>y</code>来重构输入图片</p>
+<p>相比较于无监督AAE，唯一的区别就是decoder的输入：</p>
+<ul>
+<li>来自encoder的latent code</li>
+<li>图像标签的独热表示</li>
+</ul>
+<h3 id="训练-1"><a href="#训练-1" class="headerlink" title="训练"></a>训练</h3><h4 id="重构阶段-1"><a href="#重构阶段-1" class="headerlink" title="重构阶段"></a>重构阶段</h4><p>我们将输入图像送入encoder得到输出latent code<code>z</code>，然后将<code>z</code>和图像标签<code>y</code>串接起来成为一个更大的输入送入decoder。我们训练AE使最小化图片重构损失</p>
+<h4 id="正则化阶段-1"><a href="#正则化阶段-1" class="headerlink" title="正则化阶段"></a>正则化阶段</h4><p>与无监督    AAE一样。</p>
+<h3 id="Python实现-1"><a href="#Python实现-1" class="headerlink" title="Python实现"></a>Python实现</h3><h4 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_lzIl05QPdy-aEtVvh-y1LQ.png" alt="1_lzIl05QPdy-aEtVvh-y1LQ"></p>
+<p>MNIST的图像总共有10类，则<code>y</code>的独热向量长度就是10，laten code的长度是2，则decoder的输入长度是（10+2）</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+<div class="line">6</div>
+<div class="line">7</div>
+<div class="line">8</div>
+<div class="line">9</div>
+<div class="line">10</div>
+<div class="line">11</div>
+<div class="line">12</div>
+<div class="line">13</div>
+<div class="line">14</div>
+<div class="line">15</div>
+<div class="line">16</div>
+<div class="line">17</div>
+<div class="line">18</div>
+<div class="line">19</div>
+<div class="line">20</div>
+<div class="line">21</div>
+<div class="line">22</div>
+<div class="line">23</div>
+<div class="line">24</div>
+<div class="line">25</div>
+<div class="line">26</div>
+<div class="line">27</div>
+<div class="line">28</div>
+<div class="line">29</div>
+<div class="line">30</div>
+<div class="line">31</div>
+<div class="line">32</div>
+<div class="line">33</div>
+<div class="line">34</div>
+<div class="line">35</div>
+<div class="line">36</div>
+<div class="line">37</div>
+<div class="line">38</div>
+<div class="line">39</div>
+<div class="line">40</div>
+<div class="line">41</div>
+<div class="line">42</div>
+<div class="line">43</div>
+<div class="line">44</div>
+<div class="line">45</div>
+<div class="line">46</div>
+<div class="line">47</div>
+<div class="line">48</div>
+<div class="line">49</div>
+<div class="line">50</div>
+<div class="line">51</div>
+<div class="line">52</div>
+<div class="line">53</div>
+<div class="line">54</div>
+<div class="line">55</div>
+<div class="line">56</div>
+<div class="line">57</div>
+<div class="line">58</div>
+<div class="line">59</div>
+<div class="line">60</div>
+<div class="line">61</div>
+<div class="line">62</div>
+<div class="line">63</div>
+<div class="line">64</div>
+<div class="line">65</div>
+<div class="line">66</div>
+<div class="line">67</div>
+<div class="line">68</div>
+<div class="line">69</div>
+<div class="line">70</div>
+<div class="line">71</div>
+<div class="line">72</div>
+<div class="line">73</div>
+<div class="line">74</div>
+<div class="line">75</div>
+<div class="line">76</div>
+<div class="line">77</div>
+<div class="line">78</div>
+<div class="line">79</div>
+<div class="line">80</div>
+<div class="line">81</div>
+<div class="line">82</div>
+<div class="line">83</div>
+<div class="line">84</div>
+<div class="line">85</div>
+<div class="line">86</div>
+<div class="line">87</div>
+<div class="line">88</div>
+<div class="line">89</div>
+<div class="line">90</div>
+<div class="line">91</div>
+<div class="line">92</div>
+<div class="line">93</div>
+<div class="line">94</div>
+<div class="line">95</div>
+<div class="line">96</div>
+<div class="line">97</div>
+<div class="line">98</div>
+<div class="line">99</div>
+<div class="line">100</div>
+<div class="line">101</div>
+<div class="line">102</div>
+<div class="line">103</div>
+<div class="line">104</div>
+<div class="line">105</div>
+<div class="line">106</div>
+<div class="line">107</div>
+<div class="line">108</div>
+<div class="line">109</div>
+<div class="line">110</div>
+<div class="line">111</div>
+<div class="line">112</div>
+<div class="line">113</div>
+</pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> keras.datasets <span class="keyword">import</span> mnist</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Input, Dense, Reshape, Flatten, Dropout, multiply</div>
+<div class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> BatchNormalization, Embedding, Lambda,Concatenate</div>
+<div class="line"><span class="keyword">from</span> keras.layers.advanced_activations <span class="keyword">import</span> LeakyReLU</div>
+<div class="line"><span class="keyword">from</span> keras.models <span class="keyword">import</span> Sequential, Model</div>
+<div class="line"><span class="keyword">from</span> keras.optimizers <span class="keyword">import</span> Adam</div>
+<div class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> backend <span class="keyword">as</span> K</div>
+<div class="line"><span class="keyword">import</span> keras</div>
+<div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div>
+<div class="line"><span class="keyword">import</span> os</div>
+<div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div>
+<div class="line"></div>
+<div class="line"><span class="class"><span class="keyword">class</span> <span class="title">aae</span><span class="params">()</span>:</span></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div>
+<div class="line">        self.input = (<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>)</div>
+<div class="line">        self.latent_dim = <span class="number">15</span></div>
+<div class="line">        self.classes = <span class="number">10</span></div>
+<div class="line">        optimizer = Adam(lr=<span class="number">0.0002</span>,beta_1=<span class="number">0.5</span>)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Build and compile the discriminator</span></div>
+<div class="line">        self.discriminator = self.make_discriminator()</div>
+<div class="line">        self.discriminator.compile(optimizer=optimizer,</div>
+<div class="line">                                   loss=[<span class="string">'binary_crossentropy'</span>],</div>
+<div class="line">                                   metrics=[<span class="string">'accuracy'</span>])</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Build the encoder / decoder</span></div>
+<div class="line">        self.encoder = self.make_encoder()</div>
+<div class="line">        self.decoder = self.make_decoder()</div>
+<div class="line">        image = Input(self.input)</div>
+<div class="line">        label = Input((self.classes,))</div>
+<div class="line">        latent_code = self.encoder(image)</div>
+<div class="line">        recon_img = self.decoder([label,latent_code])</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># for the adversarial_autoencoder model, we only train the generator</span></div>
+<div class="line">        self.discriminator.trainable = <span class="keyword">False</span></div>
+<div class="line">        valid = self.discriminator(latent_code)</div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># The adversarial_autoencoder model  (stacked generator and discriminator)</span></div>
+<div class="line"></div>
+<div class="line">        self.adversarial_autoencoder = Model([image,label],[recon_img,valid])</div>
+<div class="line">        self.adversarial_autoencoder.compile(loss=[<span class="string">'mse'</span>,<span class="string">'binary_crossentropy'</span>],</div>
+<div class="line">                                             loss_weights=[<span class="number">0.999</span>,<span class="number">0.001</span>],</div>
+<div class="line">                                             optimizer=optimizer)</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sampling</span><span class="params">(self, args)</span>:</span></div>
+<div class="line">        z_mean, z_log_sigma = args</div>
+<div class="line">        epsilon = K.random_normal(shape=(K.shape(z_mean)[<span class="number">0</span>], self.latent_dim), mean=<span class="number">0.</span>, stddev=<span class="number">1.0</span>)</div>
+<div class="line">        <span class="keyword">return</span> z_mean + K.exp(z_log_sigma / <span class="number">2</span>) * epsilon</div>
+<div class="line"></div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_encoder</span><span class="params">(self)</span>:</span></div>
+<div class="line">        input_img = Input(self.input)</div>
+<div class="line">        h = Flatten()(input_img)</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">        mean = Dense(self.latent_dim)(h)</div>
+<div class="line">        logvar = Dense(self.latent_dim)(h)</div>
+<div class="line">        z = Lambda(self.sampling, output_shape=(self.latent_dim,))([mean, logvar])</div>
+<div class="line">        encoder = Model(input_img,z)</div>
+<div class="line">        encoder.summary()</div>
+<div class="line">        <span class="keyword">return</span> encoder</div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_decoder</span><span class="params">(self)</span>:</span> <span class="comment"># ok</span></div>
+<div class="line">        input_code = Input((self.latent_dim,))</div>
+<div class="line">        input_label = Input((self.classes,))</div>
+<div class="line">        combine_input = Concatenate(axis=<span class="number">-1</span>)([input_label, input_code])</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(combine_input)</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">        h = Dense(<span class="number">784</span>,activation=<span class="string">'sigmoid'</span>)(h)</div>
+<div class="line">        recon_img = Reshape(self.input)(h)</div>
+<div class="line">        decoder = Model([input_label,input_code],recon_img)</div>
+<div class="line">        decoder.summary()</div>
+<div class="line">        <span class="keyword">return</span> decoder</div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">make_discriminator</span><span class="params">(self)</span>:</span> <span class="comment"># ok</span></div>
+<div class="line">        input_code = Input((self.latent_dim,))</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(input_code)</div>
+<div class="line">        h = Dense(<span class="number">1000</span>,activation=<span class="string">'relu'</span>)(h)</div>
+<div class="line">        valid = Dense(<span class="number">1</span>)(h)</div>
+<div class="line">        discriminator = Model(input_code,valid)</div>
+<div class="line">        discriminator.summary()</div>
+<div class="line">        <span class="keyword">return</span> discriminator</div>
+<div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self,epoches=<span class="number">1000</span>,batch_size=<span class="number">100</span>)</span>:</span></div>
+<div class="line"></div>
+<div class="line">        <span class="comment"># Load the dataset</span></div>
+<div class="line">        (X_train, y_train), (_, _) = mnist.load_data()</div>
+<div class="line">        <span class="comment"># Configure input</span></div>
+<div class="line">        X_train = (X_train.astype(np.float32) - <span class="number">127.5</span>) / <span class="number">127.5</span> <span class="comment"># pixel between [-1,1]</span></div>
+<div class="line">        X_train = np.expand_dims(X_train, axis=<span class="number">3</span>) <span class="comment"># change shape from (60000,28,28) to (60000,28,28,1)</span></div>
+<div class="line">        y_train = y_train.reshape(<span class="number">-1</span>, <span class="number">1</span>)</div>
+<div class="line">        <span class="comment"># Adversarial ground truths</span></div>
+<div class="line">        valid = np.ones((batch_size, <span class="number">1</span>))</div>
+<div class="line">        fake = np.zeros((batch_size, <span class="number">1</span>))</div>
+<div class="line">        <span class="keyword">for</span> epoch <span class="keyword">in</span> range(<span class="number">1</span>,epoches+<span class="number">1</span>):</div>
+<div class="line">            <span class="comment"># Select a random half batch of images</span></div>
+<div class="line">            idx = np.random.randint(<span class="number">0</span>, X_train.shape[<span class="number">0</span>], batch_size)</div>
+<div class="line">            imgs = X_train[idx]</div>
+<div class="line">            labels = y_train[idx]</div>
+<div class="line">            labels = keras.utils.to_categorical(labels,self.classes)</div>
+<div class="line"></div>
+<div class="line">            latent_fake = self.encoder.predict(imgs)</div>
+<div class="line">            latent_real = np.random.normal(<span class="number">0</span>, <span class="number">5.</span>, (batch_size, self.latent_dim))</div>
+<div class="line"></div>
+<div class="line">            <span class="comment"># train the discriminator</span></div>
+<div class="line">            d_loss_real = self.discriminator.train_on_batch(latent_real, valid)</div>
+<div class="line">            d_loss_fake = self.discriminator.train_on_batch(latent_fake, fake)</div>
+<div class="line">            d_loss = <span class="number">0.5</span> * np.add(d_loss_real, d_loss_fake)</div>
+<div class="line"></div>
+<div class="line">            <span class="comment"># train the generator</span></div>
+<div class="line">            g_loss = self.adversarial_autoencoder.train_on_batch([imgs,labels], [imgs, valid])</div>
+<div class="line">            print(<span class="string">"%d [D loss: %f, acc: %.2f%%] [G loss: %f, mse: %f]"</span> % (</div>
+<div class="line">            epoch, d_loss[<span class="number">0</span>], <span class="number">100</span> * d_loss[<span class="number">1</span>], g_loss[<span class="number">0</span>], g_loss[<span class="number">1</span>]))</div>
+<div class="line"></div>
+<div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div>
+<div class="line">    model = aae()</div>
+<div class="line">    model.train()</div>
+</pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="GAN分类器"><a href="#GAN分类器" class="headerlink" title="GAN分类器"></a>GAN分类器</h2><p><a href="https://towardsdatascience.com/a-wizards-guide-to-adversarial-autoencoders-part-4-classify-mnist-using-1000-labels-2ca08071f95" target="_blank" rel="noopener">ref</a> </p>
+<p>本节我们将介绍如何利用encoder对MNIST手写体进行分类，并与传统的神经网络分类器(NN)比较，为保证实验公平性，encoder和NN使用相同的结构。</p>
+<p>我们首先介绍传统的NN分类器，如下图所示，</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_OPtU8py5KBpbVUZKylGDPA.png" alt="1_OPtU8py5KBpbVUZKylGDPA"></p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<p>那么我们如何将encoder改造成为一个分类器呢？实际上，encoder分类器不仅能够提升分类准确率，还可以减少数据维度，从图片中分离内容和风格，我们的模型如下：</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_8RuZ8kguLuosOGoDpiSgUQ.png" alt="1_8RuZ8kguLuosOGoDpiSgUQ"></p>
+<p>可以看到，我们增加了额外的discriminator（$D_{cat}$），该分类器以对抗的方式与encoder一起训练，从而迫使encoder产生10维的独热分类向量</p>
+<p>在AAE的基础上对encoder作了修改，此时encoder有两个输出：latent code（z）和classification（y），由于有10个类，则y为10维向量，而z的维度由用户决定。</p>
+<h4 id="图片重构阶段"><a href="#图片重构阶段" class="headerlink" title="图片重构阶段"></a>图片重构阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_onLoFTa8qcFMdgm9ILKDaw.png" alt="1_onLoFTa8qcFMdgm9ILKDaw"></p>
+<p>该阶段我们欲使生成的图片逼近我们的真实图片，所以我们使用MSE（mean squared error）来衡量输入图片与输出图片间的差异。</p>
+<h4 id="正则化阶段-2"><a href="#正则化阶段-2" class="headerlink" title="正则化阶段"></a>正则化阶段</h4><p>该阶段由两个部分组成：$D_{cat}$和$D_{gauss}$的训练</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_HKvMbwaXmDAg12GjgOC39Q.png" alt="1_HKvMbwaXmDAg12GjgOC39Q"></p>
+<p>我们首先训练discriminator <strong>D_cat</strong>来辨别真实的分类标签$y^{‘}$和encoder生成的分类标签$y$。为此，我们将图片作为encoder的输入取产生$y$和$z$，然后将生成的$y$和真实的$y^{‘}$用于discriminator的训练。最后，我们固定分辨器的参数，并设置目标为1，训练encoder来欺骗分辨器。</p>
+<p><img src="/2018/08/08/Adversarial-AutoEncoder/1_qMGBvI2q14lNKGMrx_gMnw.png" alt="1_qMGBvI2q14lNKGMrx_gMnw"></p>
+<p>同样的，为了生成具有高斯分布的latent code（z），我们还需要训练分辨器$D_{gauss}$。</p>
+<h4 id="半监督分类器阶段"><a href="#半监督分类器阶段" class="headerlink" title="半监督分类器阶段"></a>半监督分类器阶段</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_ZS7wa7H8tHUDWkuqGZJT2Q.png" alt="1_ZS7wa7H8tHUDWkuqGZJT2Q"></p>
+<p>最终我们训练encoder来对手写体数字进行分类，目的是最小化生成的分类标签与真实的标签的交叉熵。</p>
+<h3 id="Python实现-2"><a href="#Python实现-2" class="headerlink" title="Python实现"></a>Python实现</h3><h4 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_qufKKgKUPUGvYKWsmqiv5w.png" alt="1_qufKKgKUPUGvYKWsmqiv5w"></p>
+<p>在原始encoder的基础上，只需要需改encoder的输出维度，增加对分类标签的输出</p>
+<h4 id="Decoder-1"><a href="#Decoder-1" class="headerlink" title="Decoder"></a>Decoder</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_nRF013A75pCdlgOT48w0MA.png" alt="1_nRF013A75pCdlgOT48w0MA"></p>
+<h4 id="Discriminator"><a href="#Discriminator" class="headerlink" title="Discriminator"></a>Discriminator</h4><p><img src="/2018/08/08/Adversarial-AutoEncoder/1_jzDB_IJhVL74Zb0NU03Uew.png" alt="1_jzDB_IJhVL74Zb0NU03Uew"></p>
+<p>我们需要两个分辨器，它们除了输入维度不同，其他是一样的</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+<h2 id="CVAE-GAN"><a href="#CVAE-GAN" class="headerlink" title="CVAE-GAN"></a>CVAE-GAN</h2><p><a href="https://www.jiqizhixin.com/articles/2018-06-12-5" target="_blank" rel="noopener">REF1</a> </p>
+<p>《 CVAE-GAN: Fine-Grained Image Generation through Asymmetric Training》</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+
+</div></div>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/Linear-Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1873,169 +2523,6 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/Books/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/16/Books/" itemprop="url">Books</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T01:08:10-05:00">
-                2018-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Books/" itemprop="url" rel="index">
-                    <span itemprop="name">Books</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Productivity"><a href="#Productivity" class="headerlink" title="Productivity"></a>Productivity</h1><h2 id="Feynman-Technique"><a href="#Feynman-Technique" class="headerlink" title="Feynman Technique"></a>Feynman Technique</h2><ul>
-<li><a href="https://fs.blog/2012/04/feynman-technique/" target="_blank" rel="noopener">The Feynman Technique: The Best Way to Learn Anything</a> </li>
-<li><a href="https://curiosity.com/topics/learn-anything-in-four-steps-with-the-feynman-technique-curiosity/" target="_blank" rel="noopener">Learn Anything in Four Steps With the Feynman Technique</a> </li>
-</ul>
-<h1 id="Habits"><a href="#Habits" class="headerlink" title="Habits"></a>Habits</h1><ol>
-<li>The single most important change you can make in your working habits is to switch to creative work first, reactive work second. This means blocking off a large chunk of time every day for creative work on your own priorities, with the phone and e-mail off.</li>
-<li>Notice when you seem to have the most energy during the day, and dedicate those valuable periods to your most important creative work. Never book a meeting during this time if you can help it. And don’t waste any of it on administrative work!</li>
-</ol>
-<h1 id="Logic"><a href="#Logic" class="headerlink" title="Logic"></a>Logic</h1><p><a href="https://www.zhihu.com/question/19599216" target="_blank" rel="noopener">ref</a> </p>
-<p>A4纸横放，每张纸写一个主题，1页写4至6行，每行8字到12字，一张纸控制在2分钟之内，每天写10页，即每天用10-20分钟的时间写笔记。</p>
-<ul>
-<li>写标题和正文时，别思考太多，想到的事，不论是什么，先写下来。</li>
-<li>严格坚持每页1分钟，一想到就立刻写下来，这会让你不拖延。</li>
-<li>随身准备好A4纸和纸板，在任何地方都可以写，或者把A4纸折成三折</li>
-<li>可以把写好的笔记，4-6行的内容做为正文，继续深入下去</li>
-<li>对于，同一个标题可以用不同的角度来写很多页，处理问题和视野都能扩展开来</li>
-</ul>
-<h1 id="Read"><a href="#Read" class="headerlink" title="Read"></a>Read</h1><ul>
-<li>《放学后》- 东野圭吾</li>
-</ul>
-<h1 id="Art"><a href="#Art" class="headerlink" title="Art"></a>Art</h1><h2 id="Evening-Silence"><a href="#Evening-Silence" class="headerlink" title="Evening Silence"></a>Evening Silence</h2><p><img src="/2018/07/16/Books/IMG_4517.JPG" alt="MG_451"></p>
-<p><img src="/2018/07/16/Books/IMG_4520.JPG" alt="MG_452"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2108,7 +2595,7 @@ x_i=\frac{x_i-\mu_i}{s_i}</script><p>where $\mu_i$ is the average of all the val
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

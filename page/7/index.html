@@ -283,6 +283,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/28/DP-DEEP-LEARNING/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qing Wong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Blog of Qing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/28/DP-DEEP-LEARNING/" itemprop="url">DP-DEEP LEARNING</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-28T11:43:03-05:00">
+                2018-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
+                    <span itemprop="name">Differential Privacy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Deep learning is the process of learning nonlinear features and functions from complex data. Deep learning has been shown to outperform traditional techniques for speech recognition, image recognition, and face detection. Deep learning aims to extract complex features from high-dimensional data and use them to build a model that relates inputs to outputs (e.g., classes). Deep learning architectures are usually constructed as multi-layer networks so that more abstract features are computed as nonlinear functions of lower-level features.</p>
+<p>Privacy in deep learning consists of three aspects: privacy of the data used for learning a model or as input to an existing model, privacy of the model, and privacy of the model’s output.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/28/DP-DEEP-LEARNING/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/26/ML-Python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1122,9 +1269,11 @@
 <p><strong>False Negative: (Type 2 Error): </strong>You predicted negative and you are wrong.</p>
 <p><img src="/2018/06/25/Experiment-Metric/1_OpSYGh2-XE6aE3sVAJAHrw.png" alt="_OpSYGh2-XE6aE3sVAJAHr"></p>
 <p><img src="/2018/06/25/Experiment-Metric/1_uR09zTlPgIj5PvMYJZScVg.png" alt="_uR09zTlPgIj5PvMYJZScV"></p>
-<p><strong>Recall</strong></p>
+<p><strong>Recall</strong> </p>
+<p><strong>Among the data with label 1, what is the percentage of them predicted as 1?</strong></p>
 <script type="math/tex; mode=display">
-\operatorname{Recall}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}</script><p><strong>Precision</strong></p>
+\operatorname{Recall}=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}</script><p><strong>Precision</strong> </p>
+<p><strong>Among the data predicted as 1, what is the percenatge of correctness?</strong> </p>
 <script type="math/tex; mode=display">
 \text { Precision }=\frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}}</script><p><strong>F-measure</strong></p>
 <script type="math/tex; mode=display">
@@ -1137,7 +1286,7 @@ F-\text {measure}=\frac{2 * \text { Recall * Precision }}{\text { Recall }+\text
 <li>在例子中就是希望知道此君得到的所有人中,正确的人(也就是女生)占有的比例.所以其precision也就是40%(20女生/(20女生+30误判为女生的男生)).</li>
 <li>在例子中就是希望知道此君得到的女生占本班中所有女生的比例,所以其recall也就是100%(20女生/(20女生+ 0 误判为男生的女生))</li>
 </ul>
-<h1 id="AUC-ROC-Curve"><a href="#AUC-ROC-Curve" class="headerlink" title="AUC ROC Curve"></a>AUC ROC Curve</h1><h3 id="What-is-ROC"><a href="#What-is-ROC" class="headerlink" title="What is ROC?"></a>What is ROC?</h3><p>ROC (<em>Receiver Operating Characteristic</em>) Curve tells us about how good the model can distinguish between two things (<em>e.g</em> <em>If a patient has a disease or no</em>). Better models can accurately distinguish between the two. Whereas, a poor model will have difficulties in distinguishing between the two.</p>
+<h2 id="AUC-ROC-Curve"><a href="#AUC-ROC-Curve" class="headerlink" title="AUC ROC Curve"></a>AUC ROC Curve</h2><h3 id="What-is-ROC"><a href="#What-is-ROC" class="headerlink" title="What is ROC?"></a>What is ROC?</h3><p>ROC (<em>Receiver Operating Characteristic</em>) Curve tells us about how good the model can distinguish between two things (<em>e.g</em> <em>If a patient has a disease or no</em>). Better models can accurately distinguish between the two. Whereas, a poor model will have difficulties in distinguishing between the two.</p>
 <p>Let’s assume we have a model which predicts whether the patient has a particular disease or no. The model predicts probabilities for each patient (<em>in python we use the“</em> <strong>predict_proba*</strong>” function*). Using these probabilities, we plot the distribution as shown below:</p>
 <p><img src="/2018/06/25/Experiment-Metric/1_HxNvqTl-Pd63niUIbrD4pg.jpeg" alt="_HxNvqTl-Pd63niUIbrD4p"></p>
 <p>Here, the red distribution represents all the patients who do not have the disease and the green distribution represents all the patients who have the disease.</p>
@@ -1631,152 +1780,6 @@ F-\text {measure}=\frac{2 * \text { Recall * Precision }}{\text { Recall }+\text
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/11/DP-MachineLearning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qing Wong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Blog of Qing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/11/DP-MachineLearning/" itemprop="url">DP-MachineLearning</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-11T11:05:56-05:00">
-                2018-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Differential-Privacy/" itemprop="url" rel="index">
-                    <span itemprop="name">Differential Privacy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h1><ol>
-<li><a href="https://arxiv.org/pdf/1606.05053.pdf" target="_blank" rel="noopener">2016-Nguyen</a> introduces gradient descent with local dp.</li>
-<li></li>
-</ol>
-<p>[2016-Nguyen] Collecting and Analyzing Data from Smart Device Users with Local Differential Privacy</p>
-
-          
         
       
     </div>
@@ -2367,7 +2370,7 @@ F-\text {measure}=\frac{2 * \text { Recall * Precision }}{\text { Recall }+\text
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
