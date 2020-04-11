@@ -88,7 +88,7 @@
 <meta property="og:description" content="Input Size V.S. Time Complexity    279 - Perfect Squares  Dynamic Programming 5 - Longest Palindromic Substring  Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j]">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2020/02/09/LeetCode/Screen%20Shot%202020-02-12%20at%2012.10.09%20PM.png">
-<meta property="og:updated_time" content="2020-03-22T00:44:48.223Z">
+<meta property="og:updated_time" content="2020-03-27T23:18:32.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode">
 <meta name="twitter:description" content="Input Size V.S. Time Complexity    279 - Perfect Squares  Dynamic Programming 5 - Longest Palindromic Substring  Two dimensions dp problem. First of all, create a $n \times n$ dp array, where dp[i,j]">
@@ -595,8 +595,73 @@
 <li><p>​</p>
 </li>
 </ul>
-<h1 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h1><ul>
-<li>​</li>
+<h1 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div>
+<div class="line">2</div>
+<div class="line">3</div>
+<div class="line">4</div>
+<div class="line">5</div>
+</pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> Consider when the input <span class="keyword">is</span> <span class="keyword">None</span></div>
+<div class="line"><span class="number">2.</span> When using recursive method to process tree problem, the step <span class="keyword">is</span>:</div>
+<div class="line">    - how to stop the loop</div>
+<div class="line">    - recursive the process</div>
+<div class="line"><span class="number">3.</span> max int = float(<span class="string">'inf'</span>) / float(<span class="string">'-inf'</span>) / sys.maxsize</div>
+</pre></td></tr></table></figure>
+<ul>
+<li><p><strong>104 - Maximum Depth of Binary Tree</strong></p>
+<p>First consider NONE case.</p>
+</li>
+<li><p><strong><u><em>110 - Balanced Binary Tree</em></u></strong></p>
+<p>We need to ensure the current left and right tree is balanced, which means height dif is at most 1. At the same time, for left and right tree respectively, their left and right tree should also be balanced.</p>
+<p>The aim of code is to compute the height of current node. But during the computation, we also need to keep trace whether the dif is greater than 1.</p>
+</li>
+<li><p><strong>111 - Minimum Depth of Binary Tree</strong></p>
+<p>Basic problem  - compute the path length, but when the root has only left tree but not right tree, the length should be 2 insted of 1.</p>
+</li>
+<li><p><strong>226 - Invert Binary Tree</strong></p>
+<p>For each node, switch its left and right. For the given exmaple, by switching the last layer, we have (3,1,9,6). Then go to upper layer and switch, we have (9,6,3,1)</p>
+</li>
+<li><p><strong>236 - Lowest Common Ancestor of a Binary Search Tree</strong></p>
+<p>Because it is a binary search tree, so we can know the position of p, q by comparing the value with root. Definitely we need to use recursion, the end condition is: when p, q are in the different sides of root, then return root. If root is one of p and q, return root. otherwise, recursive.</p>
+</li>
+<li><p><strong>404 - Sum of Left Leaves</strong></p>
+<p>Split the problem into the subproblem: the sum of left leaves = value in left tree+ value in right tree. The stop condition is the current node has a left leave. But we still need to consider its right tree.</p>
+</li>
+<li><p><strong><u>347 - Path Sum III</u></strong></p>
+<p>So tricky.</p>
+</li>
+<li><p><strong>530 - Minimum Absolute Difference in BST</strong></p>
+<p>traverse the tree and get all values. Then compare.</p>
+</li>
+<li><p><strong><u>538 - Convert BST to Greater Tree</u></strong> </p>
+<p>Right-most traverse. But harder.</p>
+</li>
+<li><p><strong><u>543 - Diameter of Binary Tree</u></strong></p>
+<p>​</p>
+</li>
+<li><p><strong><u>563 - Binary Tree Tilt</u></strong></p>
+<p>So confused with the traversing. For each node, you need to get the sum of left and sum of right first, then you compute the dif. So, we need to traverse first, then process the root node.</p>
+</li>
+<li><p><strong>669 - Trim a Binary Search Tree</strong></p>
+<p>DON’T ignore that it is a BST.</p>
+</li>
+<li><p><strong>671 - Second Minimum Node In a Binary Tree</strong></p>
+<p>It is very tricky to get straight with the left, right tree subproblem.</p>
+</li>
+<li><p><u><strong><em>687 - Longest Univalue Path</em></strong></u></p>
+<p>Path finding problem. There is a trap: for example, for a tree with all value being same, the longest univalue path is not the all_nodes-1, it should remove some subtree. </p>
+<p>|      |      |      |  1   |      |      |      |<br>| :—: | :—: | :—: | :—: | :—: | :—: | :—: |<br>|      |  1   |      |      |      |  1   |      |<br>|  1   |      |  1   |      |  1   |      |  1   |</p>
+<p>For the above example, the longest is 4.</p>
+<p>For the answer, you can use both sides; but when you compute the each side, you can only use one side</p>
+</li>
+<li><p><strong>993 - Cousins in Binary Tree</strong></p>
+<p>The traverse of tree. When you do traversing, it will not stop even you find the target. So in this case, you can use the self.target and update it when condition is satisfied.</p>
+</li>
+<li><p><strong>1022 - Sum of Root To Leaf Binary Numbers</strong></p>
+<p>The traverse of tree. A little bit of tricky.</p>
+</li>
+<li><p>​</p>
+<p>​</p>
+</li>
 </ul>
 
       
