@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Deep Learning,Graph Convolutional Networks," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="Graph Convolutional Networks (GCNs) is one type of neural networks designed to work directly on graphs and leverage their structural information. In this post, I will introduce how information is prop">
+<meta name="keywords" content="Deep Learning,Graph Convolutional Networks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DP-Graph Convolutional Networks">
 <meta property="og:url" content="http://yoursite.com/2020/05/24/DP-Graph-Convolutional-Networks/index.html">
 <meta property="og:site_name" content="Blog of Qing">
+<meta property="og:description" content="Graph Convolutional Networks (GCNs) is one type of neural networks designed to work directly on graphs and leverage their structural information. In this post, I will introduce how information is prop">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-05-25T01:51:05.738Z">
+<meta property="og:updated_time" content="2020-05-25T17:56:04.670Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DP-Graph Convolutional Networks">
+<meta name="twitter:description" content="Graph Convolutional Networks (GCNs) is one type of neural networks designed to work directly on graphs and leverage their structural information. In this post, I will introduce how information is prop">
 
 
 
@@ -333,6 +337,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -360,7 +386,23 @@
       
 
       
-        
+        <p>Graph Convolutional Networks (GCNs) is one type of neural networks designed to work directly on graphs and leverage their structural information. In this post, I will introduce how information is propagated through the hidden layers of a GCN. </p>
+<a id="more"></a>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><p>A graph convolutional network is a network that operates on graph. Given a graph $G=(V,E)$, a GCN takes as input:</p>
+<ul>
+<li>an input feature matrix $X$ with size $N \times F^0$, where $N$ is the number of nodes and $F^0$ is the number of input features for each node, and</li>
+<li>an $N \times N$ matrix representation of the graph structuure such as the adjacency matrix $A$.</li>
+</ul>
+<p>A hidden layer in the GCN can thus be written as $H^i = f(H^{i-1},A)$, where $H^0=X$ and $f$ is a propagation. Each layer $H^i$ corresponds to an $N \times F^i$ feature matrix where each row is a feature representation of a node. At each layer, these features are aggregated to form the next layer’s features using the propagation rule $f$. In this way, features become increasingly more abstract at each consecutive layer. In this framework, variants of GCN differ only in the choice of propagation rule $f$.</p>
+<h2 id="A-simple-propagation-rule"><a href="#A-simple-propagation-rule" class="headerlink" title="A simple propagation rule"></a>A simple propagation rule</h2><p>One of the simplest possible propagation rule is:</p>
+<script type="math/tex; mode=display">
+f(H^i, A)=\sigma(AH^iW^i)</script><p>where $W^i$ is the weight matrix for layer $i$ and $\sigma$ is a non-linear activation function such as the ReLU function. Despite its simplicity this model is already quite powerful.</p>
+<p>But first, let us address two limitations of this simple model: multiplication with $A$ means that, for every node, we sum up all the feature vectors of all neighboring nodes but not the node itself (unless there are self-loops in the graph). We can “fix” this by enforcing self-loops in the graph: we simply add the identity matrix to $A$.</p>
+<p>The second major limitation is that $A$ is typically not normalized and therefore the multiplication with $A$ will completely change the scale of the feature vectors (we can understand that by looking at the eigenvalues of $A$). Normalizing $A$ such that all rows sum to one, i.e. $ D^{−1}A $ , where $D$ is the diagonal node degree matrix, gets rid of this problem. Multiplying with $D^{−1}A$ now corresponds to taking the average of neighboring node features. In practice, dynamics get more interesting when we use a symmetric normalization, i.e. $D^{−1/2}AD^{−1/2}$ (as this no longer amounts to mere averaging of neighboring nodes). Combining these two tricks, we essentially arrive at the propagation rule:</p>
+<script type="math/tex; mode=display">
+f\left(H^{(l)}, A\right)=\sigma\left(\hat{D}^{-\frac{1}{2}} \hat{A} \hat{D}^{-\frac{1}{2}} H^{(l)} W^{(l)}\right)</script><p>with $\hat A=A+I$, where $I$ is the identity matrix and $\hat D$ is the diagonal node degree matrix of $\hat A$.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://towardsdatascience.com/how-to-do-deep-learning-on-graphs-with-graph-convolutional-networks-7d2250723780" target="_blank" rel="noopener">How to do Deep Learning on Graphs with Graph Convolutional Networks</a> </p>
+
       
     </div>
     
@@ -374,6 +416,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/Graph-Convolutional-Networks/" rel="tag"># Graph Convolutional Networks</a>
+          
+        </div>
       
 
       
@@ -444,8 +494,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -482,7 +541,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -505,6 +564,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Definition"><span class="nav-number">1.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#A-simple-propagation-rule"><span class="nav-number">1.1.</span> <span class="nav-text">A simple propagation rule</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1016,6 +1091,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
