@@ -3,25 +3,11 @@
   
     
     <entry>
-      <title>ML-Interview</title>
-      <link href="/2020/02/13/ML-Interview/"/>
-      <url>/2020/02/13/ML-Interview/</url>
-      <content type="html"><![CDATA[<p><a href="https://medium.com/machine-learning-101/chapter-0-what-is-machine-learning-ad136361c618" target="_blank" rel="noopener">Machine Learning 101</a> </p><h1 id="Metrices"><a href="#Metrices" class="headerlink" title="Metrices"></a>Metrices</h1><h2 id="Manhattan-Distance"><a href="#Manhattan-Distance" class="headerlink" title="Manhattan Distance"></a>Manhattan Distance</h2><p>The distance between two points is the sum of absolute differences of their coordinates. </p><p><img src="/2020/02/13/ML-Interview/Screen Shot 2020-02-13 at 12.07.52 PM.png" alt="creen Shot 2020-02-13 at 12.07.52 P"></p><p>Pros:</p><ol><li>Measurement unit independent</li><li>马式距离的特性有：平移不变性、旋转不变性、尺度不变性、不受量纲影响、考虑了模式分布</li></ol><h2 id="Eucliidean-Distance"><a href="#Eucliidean-Distance" class="headerlink" title="Eucliidean Distance"></a>Eucliidean Distance</h2><p>It is the straight-line distance between two points.</p><p><img src="/2020/02/13/ML-Interview/Screen Shot 2020-02-13 at 12.08.56 PM.png" alt="creen Shot 2020-02-13 at 12.08.56 P"></p><p>欧式距离的特性有：平移不变性、旋转不变性</p><h2 id="F1-Score"><a href="#F1-Score" class="headerlink" title="F1 Score"></a>F1 Score</h2><h1 id="Entropy"><a href="#Entropy" class="headerlink" title="Entropy"></a>Entropy</h1><p><img src="/2020/02/13/ML-Interview/Screen Shot 2020-02-13 at 11.37.43 AM.png" alt="creen Shot 2020-02-13 at 11.37.43 A"></p><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold"><p>Correct. The definition of conditional entropy is as following:</p><script type="math/tex; mode=display">H(Y|X) = \sum_{x \in X} P(x)H(Y|x)</script><p>By plugging the probability into the formula, we have:</p><script type="math/tex; mode=display">\begin{equation}H(Y | X)=-\left[\frac{1}{4} *\left(\frac{4}{5} \log _{2} \frac{4}{5}+\frac{1}{5} \log _{2} \frac{1}{5}\right)+\frac{3}{4} *\left(\frac{3}{4} \log _{2} \frac{3}{4}+\frac{1}{4} \log _{2} \frac{1}{4}\right)\right] \approx 0.7889 b i t\end{equation}</script></div></div><h1 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h1><h1 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h1><h1 id="Linear-Discriminant-Analysis"><a href="#Linear-Discriminant-Analysis" class="headerlink" title="Linear Discriminant Analysis"></a>Linear Discriminant Analysis</h1><p>It is a binary classifier by projecting M dimensions data into M-1 dimensions.</p><h1 id="Conditional-Random-Field"><a href="#Conditional-Random-Field" class="headerlink" title="Conditional Random Field"></a>Conditional Random Field</h1><h1 id="H-M-M"><a href="#H-M-M" class="headerlink" title="H M M"></a>H M M</h1>]]></content>
+      <title>DP-Graph Convolutional Networks</title>
+      <link href="/2020/05/24/DP-Graph-Convolutional-Networks/"/>
+      <url>/2020/05/24/DP-Graph-Convolutional-Networks/</url>
+      <content type="html"><![CDATA[]]></content>
       
-      <categories>
-          
-          <category> Machine Learning </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Machine Learning </tag>
-            
-            <tag> Interview </tag>
-            
-        </tags>
       
     </entry>
     
@@ -358,9 +344,9 @@
             
             <tag> Deep Learning </tag>
             
-            <tag> Computer Vision </tag>
-            
             <tag> Object Segmentation </tag>
+            
+            <tag> Computer Vision </tag>
             
         </tags>
       
