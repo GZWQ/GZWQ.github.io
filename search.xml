@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>Bilinear Interpolation</title>
+      <link href="/2020/08/22/Bilinear-Interpolation/"/>
+      <url>/2020/08/22/Bilinear-Interpolation/</url>
+      <content type="html"><![CDATA[<p>Introduction to Bilinear Interpolation.</p><a id="more"></a><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol><li><a href="https://www.cnblogs.com/yssongest/p/5303151.html" target="_blank" rel="noopener">Great post</a> </li><li>​</li></ol>]]></content>
+      
+      <categories>
+          
+          <category> Math </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Math </tag>
+            
+            <tag> Bilinear Interpolation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Meta-Learning</title>
       <link href="/2020/08/01/Meta-Learning/"/>
       <url>/2020/08/01/Meta-Learning/</url>
@@ -379,9 +402,9 @@
             
             <tag> Deep Learning </tag>
             
-            <tag> Computer Vision </tag>
-            
             <tag> Object Segmentation </tag>
+            
+            <tag> Computer Vision </tag>
             
         </tags>
       
